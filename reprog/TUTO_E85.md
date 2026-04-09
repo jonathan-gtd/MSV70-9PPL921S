@@ -396,13 +396,13 @@ Le MSV70 dispose de **cinq copies** du facteur d'échelle injecteur réparties d
 
 Oublier l'une de ces cinq copies peut provoquer des incohérences ou déclencher un DTC de monitoring injection.
 
-| Paramètre | Adresse bin | Module | Formule | Raw STOCK | Rôle |
-|---|---|---|---|---|---|
-| `c_fac_mff_ti_stnd_1` | 0x44AC0 | Calcul principal | 0.000006 × X | **56567** | Groupe cyl. 1–3 |
-| `c_fac_mff_ti_stnd_2` | 0x44AC2 | Calcul principal | 0.000006 × X | **56567** | Groupe cyl. 4–6 |
-| `c_fac_mff_ti_stnd[0]` | 0x45AAC | Phasage SOI/EOI | 0.000012 × X | **28284** | Timing injection |
-| `c_fac_mff_ti_stnd[1]` | 0x45AAE | Phasage SOI/EOI | 0.000012 × X | **28284** | Timing injection |
-| `c_fac_mff_ti_stnd_mon` | 0x4958C | Canal monitoring | 0.000006 × X | **56567** | Surveillance/DTC |
+| Paramètre | Adresse bin | Module | Formule | Raw stock | Valeur stock | Raw objectif (E85) | Objectif E85 | Rôle |
+|---|---|---|---|---|---|---|---|---|
+| `c_fac_mff_ti_stnd_1` | 0x44AC0 | Calcul principal | 0.000006 × X | 56 567 | **0.3394 ms/mg** | **82 022** | **0.4921 ms/mg** | Groupe cyl. 1–3 |
+| `c_fac_mff_ti_stnd_2` | 0x44AC2 | Calcul principal | 0.000006 × X | 56 567 | **0.3394 ms/mg** | **82 022** | **0.4921 ms/mg** | Groupe cyl. 4–6 |
+| `c_fac_mff_ti_stnd[0]` | 0x45AAC | Phasage SOI/EOI | 0.000012 × X | 28 284 | **0.3394 ms/mg** | **41 011** | **0.4921 ms/mg** | Timing injection |
+| `c_fac_mff_ti_stnd[1]` | 0x45AAE | Phasage SOI/EOI | 0.000012 × X | 28 284 | **0.3394 ms/mg** | **41 011** | **0.4921 ms/mg** | Timing injection |
+| `c_fac_mff_ti_stnd_mon` | 0x4958C | Canal monitoring | 0.000006 × X | 56 567 | **0.3394 ms/mg** | **82 022** | **0.4921 ms/mg** | Surveillance/DTC |
 
 > Toutes les 5 copies donnent la même valeur physique : **0.3394 ms/mg** stock. Les `c_fac_mff_ti_stnd[0]`/`c_fac_mff_ti_stnd[1]` ont un raw deux fois plus petit car leur équation a un coefficient double (×0.000012 vs ×0.000006).
 
@@ -708,14 +708,14 @@ La séparation `ip_lamb_bas_3` / `ip_lamb_bas_4` répond à une logique précise
 
 Selon le mode de fonctionnement, l'ECU sélectionne l'une des tables suivantes :
 
-| Paramètre | Adresse | Description XDF | Rôle réel |
-|---|---|---|---|
-| `ip_lamb_bas_1` | 0x4B64C | Bankselective basic lambda setpoint, unthrottled mode, **low engine speed or not part load** | Banc 1 — ralenti / hors charge partielle |
-| `ip_lamb_bas_2` | 0x4B6CC | Bankselective basic lambda setpoint, unthrottled mode, **low engine speed or not part load** | Banc 2 — ralenti / hors charge partielle |
-| `ip_lamb_bas_3` | 0x4B74C | Basic lambda setpoint, unthrottled mode, **high engine speed and part load, knock control enabled** | Charge partielle haute, avec knock control actif |
-| `ip_lamb_bas_4` | 0x4B7CC | Basic lambda setpoint, unthrottled mode, **high engine speed and part load fulfilled or knock control disabled** | Charge partielle haute, knock control désactivé |
-| `ip_lamb_bas_thr_1` / `ip_lamb_bas_thr_2` | 0x4B84C / 0x4B8CC | Throttled mode equivalent | Mode papillon/dégradé |
-| **`ip_lamb_fl__n`** | **0x436A2** | **Lambda full load enrichment** | **Pleine charge (WOT) — C'est LA table WOT.** |
+| Paramètre | Adresse | Description XDF | Valeur stock | Objectif E85 | Rôle réel |
+|---|---|---|---|---|---|
+| `ip_lamb_bas_1` | 0x4B64C | Bankselective basic lambda setpoint, unthrottled mode, **low engine speed or not part load** | 0.992–0.998 | **inchangé** | Banc 1 — ralenti / hors charge partielle |
+| `ip_lamb_bas_2` | 0x4B6CC | Bankselective basic lambda setpoint, unthrottled mode, **low engine speed or not part load** | 0.992–0.998 | **inchangé** | Banc 2 — ralenti / hors charge partielle |
+| `ip_lamb_bas_3` | 0x4B74C | Basic lambda setpoint, unthrottled mode, **high engine speed and part load, knock control enabled** | 0.997 | **inchangé** | Charge partielle haute, avec knock control actif |
+| `ip_lamb_bas_4` | 0x4B7CC | Basic lambda setpoint, unthrottled mode, **high engine speed and part load fulfilled or knock control disabled** | 0.997 | **NE PAS TOUCHER** | Charge partielle haute, knock control désactivé |
+| `ip_lamb_bas_thr_1` / `ip_lamb_bas_thr_2` | 0x4B84C / 0x4B8CC | Throttled mode equivalent | 0.997 | **inchangé** | Mode papillon/dégradé |
+| **`ip_lamb_fl__n`** | **0x436A2** | **Lambda full load enrichment** | **0.920** (0.871 à 6500 rpm) | **laisser stock** (ou 0.940–0.950 optionnel) | **Pleine charge (WOT) — C'est LA table WOT.** |
 
 > **`ip_lamb_bas_4`** (charge partielle haute, knock control désactivé) est souvent confondue avec la table WOT — c'est une erreur courante. La vraie table d'enrichissement pleine charge est **`ip_lamb_fl__n`**, une courbe 1×12 f(RPM), décrite explicitement dans le XDF comme « Lambda full load enrichment ».
 
@@ -1045,27 +1045,27 @@ Intervalle de remplacement : 20 000 km (vs 30 000 km essence)
 
 ### Tableau de Toutes les Modifications (330i N52B30, injecteurs 13537531634)
 
-| # | Paramètre | Adresse bin | Valeur STOCK (physique) | Valeur E85 cible | Unité |
-|---|---|---|---|---|---|
-| 1 | `c_fac_mff_ti_stnd_1` | 0x44AC0 | **0.3394 ms/(mg/stk)** (raw 56567, eq=6e-6×X) | **E85 : 0.4921** (raw 82 022) — open loop toujours riche | ms/(mg/stk) |
-| 2 | `c_fac_mff_ti_stnd_2` | 0x44AC2 | **0.3394** (identique à `c_fac_mff_ti_stnd_1`) | **même valeur que `c_fac_mff_ti_stnd_1`** | ms/(mg/stk) |
-| 3 | `c_fac_mff_ti_stnd[0]` | 0x45AAC | **0.1697 ms/mg** (raw 28284, = `c_fac_mff_ti_stnd_1` ÷ 2) | **E85 : 0.2460** (raw 41 011) — même logique, raw ÷2 | ms/mg |
-| 4 | `c_fac_mff_ti_stnd[1]` | 0x45AAE | **0.1697** (identique à `c_fac_mff_ti_stnd[0]`) | **même valeur que `c_fac_mff_ti_stnd[0]`** | ms/mg |
-| 5 | `c_fac_mff_ti_stnd_mon` | 0x4958C | **0.3394** (identique à `c_fac_mff_ti_stnd_1` — canal monitoring) | **même valeur que `c_fac_mff_ti_stnd_1`** | ms/(mg/stk) |
-| 6 | `c_tco_n_mff_cst` | 0x44F2F | **17.25 °C** (raw 87, eq=0.75×X−48) | **25 °C** (raw 97) | °C |
-| 7 | `ip_mff_cst_opm_1` | 0x437DC (données) | **3×8 [TCO: −30/−20/−10/0/17/30/60/90 °C × RPM: 80/320/920] — voir valeurs §9.1** | **×1.35 à ×2.20 colonne par colonne** | mg/stk |
-| 8 | `ip_mff_cst_opm_2` | 0x4380C (données) | **3×8 même axes — valeurs ~50% plus élevées qu'opm_1 à froid (mode papillonné) — voir valeurs §9.1** | **×1.35 à ×2.20 colonne par colonne** | mg/stk |
-| 9 | `ip_fac_lamb_wup` | 0x42764 (données) | **1.000 partout** (raw 128, eq=0.007813×X) — 6×6 [MAF: 65/100/200/300/400/500 mg/stk × RPM: 704/1216/1760/2016/2496/3008] | **1.03–1.08** sur basses charges / bas régimes | — |
-| 10 | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC (données) | **8×8 [TCO: −30/−15/0/15/35/65/85/115 °C × RPM: 608/896/1216/1600/2208/3008/4192/5600] — voir valeurs §9.2** | **×1.25 global** | — |
-| 11 | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C (données) | **8×8 mêmes axes — valeurs ~4–6× supérieures à opm_1 en zone froide (mode papillonné) — voir §9.2** | **×1.25 global** | — |
-| 12 | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC (données) | **8×8 [TCO: −30→+115°C × RPM: 608→5600] — voir valeurs §9.2** | **×1.25 global** | — |
-| 13 | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C (données) | **8×8 mêmes axes — valeurs ~3× supérieures à opm_1 à froid — voir §9.2** | **×1.25 global** | — |
-| 14 | `ip_iga_bas_max_knk__n__maf` | 0x4323A (données) | **8×8 [MAF: 0.55→2.25 mg/stk × RPM: 608→7008] — voir §3.1** | **+2° à +5° en haute charge** | °CRK |
-| 15 | `ip_iga_st_bas_opm_1` | 0x43586 (données) | **6×8 [TCO: −30→+90°C × RPM cranking: 80→920 tr/min]** — PAS une table de roulage | **optionnel : +1°/+2° zone froide** | °CRK |
-| 16 | `ip_iga_st_bas_opm_2` | 0x435B6 (données) | **6×8 mêmes axes** (mode papillonné) | **optionnel : +1°/+2° zone froide** | °CRK |
-| 17 | `ip_lamb_fl__n` | 0x436A2 (données) | **λ 0.871–0.920 selon RPM** (1×12, f(RPM 608→6496)) — voir §4 | Stock déjà à 0.920 : **laisser** ou dé-enrichir à 0.94-0.95 (optionnel) | λ |
-| — | ~~`ip_fac_ti_temp_cor`~~ | ~~0x459EE~~ | ~~correction température carburant, pas film mural~~ | **NE PAS MODIFIER** | — |
-| — | ~~`ip_lamb_bas_4`~~ | ~~0x4B7CC~~ | ~~charge partielle haute (knock disabled)~~ | **NE PAS MODIFIER comme table WOT** | — |
+| # | Paramètre | Adresse bin | Raw stock | Valeur stock | Raw objectif | Objectif | Unité |
+|---|---|---|---|---|---|---|---|
+| 1 | `c_fac_mff_ti_stnd_1` | 0x44AC0 | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg |
+| 2 | `c_fac_mff_ti_stnd_2` | 0x44AC2 | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg |
+| 3 | `c_fac_mff_ti_stnd[0]` | 0x45AAC | 28 284 | **0.3394** | **41 011** | **0.4921** | ms/mg |
+| 4 | `c_fac_mff_ti_stnd[1]` | 0x45AAE | 28 284 | **0.3394** | **41 011** | **0.4921** | ms/mg |
+| 5 | `c_fac_mff_ti_stnd_mon` | 0x4958C | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg |
+| 6 | `c_tco_n_mff_cst` | 0x44F2F | 87 | **17.25** | **97** | **25.00** | °C |
+| 7 | `ip_mff_cst_opm_1` | 0x437DC | table 3×8 | voir §9.1 | table 3×8 | **×1.35 à ×2.00** par colonne (E70) | mg/stk |
+| 8 | `ip_mff_cst_opm_2` | 0x4380C | table 3×8 | voir §9.1 | table 3×8 | **×1.35 à ×2.00** par colonne (E70) | mg/stk |
+| 9 | `ip_fac_lamb_wup` | 0x42764 | 128 partout | **1.000** partout | — | **1.03–1.08** basses charges/bas régimes | — |
+| 10 | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
+| 11 | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
+| 12 | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
+| 13 | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
+| 14 | `ip_iga_bas_max_knk__n__maf` | 0x4323A | table 8×8 | voir §3.1 | table 8×8 | **+0° à +2.5°** haute charge (E60) | °CRK |
+| 15 | `ip_iga_st_bas_opm_1` | 0x43586 | table 6×8 | cranking only | table 6×8 | **optionnel +1°/+2°** zone froide | °CRK |
+| 16 | `ip_iga_st_bas_opm_2` | 0x435B6 | table 6×8 | cranking only | table 6×8 | **optionnel +1°/+2°** zone froide | °CRK |
+| 17 | `ip_lamb_fl__n` | 0x436A2 | courbe 1×12 | **0.920** (0.871 à 6500 rpm) | courbe 1×12 | **laisser stock** (ou 0.940–0.950 optionnel) | λ |
+| — | ~~`ip_fac_ti_temp_cor`~~ | ~~0x459EE~~ | — | ~~correction fuel temp~~ | — | **NE PAS MODIFIER** | — |
+| — | ~~`ip_lamb_bas_4`~~ | ~~0x4B7CC~~ | — | ~~charge partielle haute~~ | — | **NE PAS MODIFIER comme WOT** | — |
 
 ### 9.1 — Valeurs stock complètes : tables de cranking (`ip_mff_cst_opm_1` / `ip_mff_cst_opm_2`)
 
