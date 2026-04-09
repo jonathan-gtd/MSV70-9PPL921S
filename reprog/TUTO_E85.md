@@ -24,8 +24,8 @@ Avant d'entrer dans le détail de chaque section, voici l'ensemble des paramètr
 | 3 | `ip_mff_cst_opm_1` `ip_mff_cst_opm_2` | §2 — Démarrage froid | **Exception à la règle "E85 partout" :** le cranking est boucle ouverte mais trop riche = noyage moteur (le carburant liquide étouffe la bougie). On calibre pour E70 réel — ni trop, ni trop peu. L'enrichissement E85 du facteur injecteur ne s'applique pas ici : ces tables pilotent la dose directement, indépendamment de `c_fac_mff_ti_stnd`. |
 | 4 | `ip_fac_lamb_wup` | §2 — Démarrage froid | Facteur multiplicateur sur la consigne lambda après démarrage. Stock : 1.000 partout. **Ses axes sont X = MAF (65–500 mg/stk), Y = RPM (704–3008 tr/min)** — ce n'est pas une table température moteur, c'est une table charge×régime. Elle permet d'enrichir les zones basse charge / bas régime où la sonde lambda n'est pas encore opérationnelle. L'enrichissement en fonction de la TCO n'existe pas dans cette table — il est géré par `ip_mff_cst_opm_*` (cranking) et la boucle lambda (chauffe). |
 | 5 | `ip_ti_tco_pos_slow_wf_opm_1` / `ip_ti_tco_pos_slow_wf_opm_2` + `ip_ti_tco_pos_fast_wf_opm_1` / `ip_ti_tco_pos_fast_wf_opm_2` | §5 — Film mural | Le film mural s'applique lors des transitions de charge (tip-in) — une zone de boucle ouverte transitoire. Calibré pour **E85 (×1.25)** : si le carburant réel est E70, on sur-compense légèrement le film → mélange légèrement riche sur tip-in → safe. Sous-compenser serait lean transitoire → risque de claquement ou raté. **⚠️ `ip_fac_ti_temp_cor` n'est PAS le film mural** — ne pas le modifier. |
-| 6 | `ip_iga_bas_max_knk__n__maf` (+ `ip_iga_min_n_maf_opm_1/_2`) | §3 — Avance | L'avance est calibrée pour **E60 (plancher légal hivernal, ~101 RON)** — le pire carburant que vous pouvez légalement avoir à la pompe. Raison : si on cale l'avance sur E70 ou E85 et que la station délivre du E60 en hiver, on risque le cliquetis. En calibrant sur E60, on est safe quelle que soit la saison. Gain de puissance légèrement réduit (+2.5° max vs +4.5° pour E70), mais zéro risque moteur. **⚠️ Ne PAS modifier `ip_iga_st_bas_opm_1` / `ip_iga_st_bas_opm_2` pour gagner en puissance — cranking uniquement.** |
-| 7 | `ip_lamb_bas_1/2/3` | §4 — Lambda | Optionnel en conduite normale : si `c_fac_mff_ti_stnd` est correctement calibré, la boucle fermée gère lambda automatiquement. À ajuster de ±0.02 seulement si les LTFT dérivent de façon persistante après stabilisation. |
+| 6 | `ip_iga_bas_max_knk__n__maf` (+ `ip_iga_min_n_maf_opm_1` / `ip_iga_min_n_maf_opm_2`) | §3 — Avance | L'avance est calibrée pour **E60 (plancher légal hivernal, ~101 RON)** — le pire carburant que vous pouvez légalement avoir à la pompe. Raison : si on cale l'avance sur E70 ou E85 et que la station délivre du E60 en hiver, on risque le cliquetis. En calibrant sur E60, on est safe quelle que soit la saison. Gain de puissance légèrement réduit (+2.5° max vs +4.5° pour E70), mais zéro risque moteur. **⚠️ Ne PAS modifier `ip_iga_st_bas_opm_1` / `ip_iga_st_bas_opm_2` pour gagner en puissance — cranking uniquement.** |
+| 7 | `ip_lamb_bas_1` / `ip_lamb_bas_2` / `ip_lamb_bas_3` | §4 — Lambda | Optionnel en conduite normale : si `c_fac_mff_ti_stnd` est correctement calibré, la boucle fermée gère lambda automatiquement. À ajuster de ±0.02 seulement si les LTFT dérivent de façon persistante après stabilisation. |
 | 8 | `ip_lamb_fl__n` | §4 — Lambda WOT | **Vraie table de richesse pleine charge** (1×12 f(RPM)). Stock déjà à λ 0.920 (et 0.871 à 6500 rpm) — l'enrichissement WOT essence est **déjà présent**. Sur E85, on peut soit laisser tel quel, soit dé-enrichir légèrement (0.94-0.95) puisque la chaleur de vaporisation E85 protège mécaniquement contre la détonation. **⚠️ `ip_lamb_bas_4` n'est PAS la table WOT** (c'est une table de charge partielle haute, knock-disabled) — ne pas la modifier comme « lambda WOT ». |
 | 9 | `c_t_ti_dly_fl_1` `c_t_ti_dly_fl_2` | §7 — Complémentaires | Délai entre détection de pleine charge et application de l'enrichissement WOT. À réduire à 0 ms pour que la richesse cible soit appliquée instantanément lors d'une accélération franche sur E85. |
 | 10 | `c_iga_ini` | §7 — Complémentaires | Avance d'allumage initiale lors du cranking. Si le démarrage reste difficile après ajustement des tables cranking, +1° à +2° ici facilite l'inflammation du mélange E85 froid. |
@@ -392,7 +392,7 @@ Le MSV70 dispose de **cinq copies** du facteur d'échelle injecteur réparties d
 
 1. **Calcul principal** (`c_fac_mff_ti_stnd_1` et `c_fac_mff_ti_stnd_2`) : le module central qui calcule le TI cycle par cycle pour les deux bancs (cylindres 1–3 et 4–6). C'est le facteur « actif » qui pilote réellement les injecteurs.
 2. **Phasage SOI/EOI** (`c_fac_mff_ti_stnd[0]` et `c_fac_mff_ti_stnd[1]`) : le module qui calcule les angles Start Of Injection et End Of Injection. Pour positionner correctement la fin d'injection par rapport au cycle moteur, il a besoin du débit injecteur — même valeur physique, mais avec une équation à coefficient double (×0.000012 vs ×0.000006), d'où un raw deux fois plus petit.
-3. **Canal de monitoring** (`c_fac_mff_ti_stnd_mon`) : le module de surveillance système qui vérifie en permanence la cohérence injection. Il compare sa propre estimation de débit avec celle du calcul principal. Si les deux divergent au-delà d'un seuil → DTC injection. Si vous ne mettez pas `_mon` à jour, ce comparateur lève un code erreur même si les injecteurs fonctionnent parfaitement.
+3. **Canal de monitoring** (`c_fac_mff_ti_stnd_mon`) : le module de surveillance système qui vérifie en permanence la cohérence injection. Il compare sa propre estimation de débit avec celle du calcul principal. Si les deux divergent au-delà d'un seuil → DTC injection. Si vous ne mettez pas `c_fac_mff_ti_stnd_mon` à jour, ce comparateur lève un code erreur même si les injecteurs fonctionnent parfaitement.
 
 Oublier l'une de ces cinq copies peut provoquer des incohérences ou déclencher un DTC de monitoring injection.
 
@@ -417,7 +417,7 @@ Facteur_injection = (14.7 / AFR_blend) × 0.94
                     ↑ ratio AFR       ↑ correction densité éthanol/essence
 ```
 
-| Teneur éthanol | AFR stœchio | Facteur | `c_fac_mff_ti_stnd_1`/`_2`/`_mon` raw | `c_fac_mff_ti_stnd[0]`/`[1]` raw |
+| Teneur éthanol | AFR stœchio | Facteur | `c_fac_mff_ti_stnd_1` / `c_fac_mff_ti_stnd_2` / `c_fac_mff_ti_stnd_mon` raw | `c_fac_mff_ti_stnd[0]` / `c_fac_mff_ti_stnd[1]` raw |
 |---|---|---|---|---|
 | E65 (65%) | 10.41:1 | **×1.33** | **75 234** | **37 617** |
 | E70 (70%) | 10.18:1 | **×1.36** | **76 931** | **38 466** |
@@ -1157,8 +1157,8 @@ TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
   ✅ ip_fac_lamb_wup (charge×RPM, PAS une table TCO) → 1.03–1.08 basses charges
 
 ÉTAPE 3 — IMPORTANT (confort de conduite) :
-  ✅ ip_ti_tco_pos_slow_wf_opm_1/_2 → ×1.25 global (film mural lent — calibré E85, safe en open loop transitoire)
-  ✅ ip_ti_tco_pos_fast_wf_opm_1/_2 → ×1.25 global (film mural rapide — même logique)
+  ✅ ip_ti_tco_pos_slow_wf_opm_1 / ip_ti_tco_pos_slow_wf_opm_2 → ×1.25 global (film mural lent — calibré E85, safe en open loop transitoire)
+  ✅ ip_ti_tco_pos_fast_wf_opm_1 / ip_ti_tco_pos_fast_wf_opm_2 → ×1.25 global (film mural rapide — même logique)
   ⚠️ NE PAS toucher ip_fac_ti_temp_cor (c'est une correction fuel temp, pas wall film)
 
 ÉTAPE 4 — PERFORMANCE (après validation des étapes 1–3) :
