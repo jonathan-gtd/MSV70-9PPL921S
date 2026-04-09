@@ -1069,25 +1069,57 @@ Intervalle de remplacement : 20 000 km (vs 30 000 km essence)
 
 ### 9.1 — Valeurs stock complètes : tables de cranking (`ip_mff_cst_opm_1` / `ip_mff_cst_opm_2`)
 
-> Équation : `valeur_physique = 0.021195 × raw_u16be`. Source : bin VB67774.
+> Équation : `valeur_physique = 0.021195 × raw_u16be`. Source : bin VB67774. Unité : mg/stk.
+
+> **Stratégie :** cranking calibré E70 (exception à la règle E85). Facteurs appliqués colonne par colonne selon la température.
+
+**Facteurs multiplicateurs E70 par colonne TCO :**
+```
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+Facteur  :  ×2.00   ×1.80   ×1.65  ×1.55  ×1.35  ×1.20  ×1.10  ×1.05
+```
+
+---
 
 **`ip_mff_cst_opm_1` @ 0x437DC** (mode normal / Valvetronic actif) :
+
+STOCK :
 ```
-Axes X (TCO °C) : -30.0  -20.2   -9.8   0.0   17.2   30.0   60.0   90.0
-RPM  80 tr/min  : 447.7  350.6  261.3  189.3  102.2   71.4   56.2   49.6
-RPM 320 tr/min  : 320.3  260.7  202.1  152.1   87.9   61.3   46.5   39.1
-RPM 920 tr/min  : 194.4  175.1  146.0  112.9   68.4   48.6   36.5   33.0
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  :  447.7   350.6   261.3  189.3  102.2   71.4   56.2   49.6
+RPM 320  :  320.3   260.7   202.1  152.1   87.9   61.3   46.5   39.1
+RPM 920  :  194.4   175.1   146.0  112.9   68.4   48.6   36.5   33.0
 ```
+
+OBJECTIF E70 :
+```
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  :  895.4   631.1   431.1  293.4  138.0   85.7   61.8   52.1
+RPM 320  :  640.6   469.3   333.5  235.8  118.7   73.6   51.2   41.1
+RPM 920  :  388.8   315.2   240.9  175.0   92.3   58.3   40.2   34.7
+```
+
+---
 
 **`ip_mff_cst_opm_2` @ 0x4380C** (mode papillonné / Valvetronic désactivé) :
+
+STOCK :
 ```
-Axes X (TCO °C) : -30.0  -20.2   -9.8   0.0   17.2   30.0   60.0   90.0
-RPM  80 tr/min  : 731.1  527.0  362.8  245.0  138.2  102.1   67.8   49.6
-RPM 320 tr/min  : 546.2  415.6  297.0  201.8  106.4   82.3   57.0   39.1
-RPM 920 tr/min  : 363.0  281.4  215.8  159.0   84.1   65.8   47.0   34.5
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  :  731.1   527.0   362.8  245.0  138.2  102.1   67.8   49.6
+RPM 320  :  546.2   415.6   297.0  201.8  106.4   82.3   57.0   39.1
+RPM 920  :  363.0   281.4   215.8  159.0   84.1   65.8   47.0   34.5
 ```
 
-> **À noter :** opm_2 a des valeurs nettement plus élevées à froid (jusqu'à ×1.9 vs opm_1 à −30°C). Les deux tables sont actives selon le mode de fonctionnement du Valvetronic. Appliquer les mêmes facteurs multiplicatifs (×1.35 à ×2.20) aux deux tables.
+OBJECTIF E70 :
+```
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  : 1462.2   948.6   598.6  379.8  186.6  122.5   74.6   52.1
+RPM 320  : 1092.4   748.1   490.1  312.8  143.6   98.8   62.7   41.1
+RPM 920  :  726.0   506.5   356.1  246.5  113.5   79.0   51.7   36.2
+```
+
+> **À noter :** opm_2 a des valeurs nettement plus élevées à froid (jusqu'à ×2.0 vs opm_1 à −30°C) — les mêmes facteurs multiplicatifs s'appliquent aux deux tables.
 
 ### 9.2 — Valeurs stock complètes : tables de film mural (`ip_ti_tco_pos_*_wf_opm_*`)
 
