@@ -1045,27 +1045,34 @@ Intervalle de remplacement : 20 000 km (vs 30 000 km essence)
 
 ### Tableau de Toutes les Modifications (330i N52B30, injecteurs 13537531634)
 
-| # | Paramètre | Adresse bin | Raw stock | Valeur stock | Raw objectif | Objectif | Unité |
-|---|---|---|---|---|---|---|---|
-| 1 | `c_fac_mff_ti_stnd_1` | 0x44AC0 | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg |
-| 2 | `c_fac_mff_ti_stnd_2` | 0x44AC2 | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg |
-| 3 | `c_fac_mff_ti_stnd[0]` | 0x45AAC | 28 284 | **0.3394** | **41 011** | **0.4921** | ms/mg |
-| 4 | `c_fac_mff_ti_stnd[1]` | 0x45AAE | 28 284 | **0.3394** | **41 011** | **0.4921** | ms/mg |
-| 5 | `c_fac_mff_ti_stnd_mon` | 0x4958C | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg |
-| 6 | `c_tco_n_mff_cst` | 0x44F2F | 87 | **17.25** | **97** | **25.00** | °C |
-| 7 | `ip_mff_cst_opm_1` | 0x437DC | table 3×8 | voir §9.1 | table 3×8 | **×1.35 à ×2.00** par colonne (E70) | mg/stk |
-| 8 | `ip_mff_cst_opm_2` | 0x4380C | table 3×8 | voir §9.1 | table 3×8 | **×1.35 à ×2.00** par colonne (E70) | mg/stk |
-| 9 | `ip_fac_lamb_wup` | 0x42764 | 128 partout | **1.000** partout | — | **1.03–1.08** basses charges/bas régimes | — |
-| 10 | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
-| 11 | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
-| 12 | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
-| 13 | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | table 8×8 | voir §9.2 | table 8×8 | **×1.25 global** | — |
-| 14 | `ip_iga_bas_max_knk__n__maf` | 0x4323A | table 8×8 | voir §3.1 | table 8×8 | **+0° à +2.5°** haute charge (E60) | °CRK |
-| 15 | `ip_iga_st_bas_opm_1` | 0x43586 | table 6×8 | cranking only | table 6×8 | **optionnel +1°/+2°** zone froide | °CRK |
-| 16 | `ip_iga_st_bas_opm_2` | 0x435B6 | table 6×8 | cranking only | table 6×8 | **optionnel +1°/+2°** zone froide | °CRK |
-| 17 | `ip_lamb_fl__n` | 0x436A2 | courbe 1×12 | **0.920** (0.871 à 6500 rpm) | courbe 1×12 | **laisser stock** (ou 0.940–0.950 optionnel) | λ |
-| — | ~~`ip_fac_ti_temp_cor`~~ | ~~0x459EE~~ | — | ~~correction fuel temp~~ | — | **NE PAS MODIFIER** | — |
-| — | ~~`ip_lamb_bas_4`~~ | ~~0x4B7CC~~ | — | ~~charge partielle haute~~ | — | **NE PAS MODIFIER comme WOT** | — |
+| # | Paramètre | Adresse bin | Raw stock | Valeur stock | Raw objectif | Objectif | Unité | Stratégie |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `c_fac_mff_ti_stnd_1` | 0x44AC0 | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg | E85 — open loop toujours riche |
+| 2 | `c_fac_mff_ti_stnd_2` | 0x44AC2 | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg | E85 — idem banc 2 |
+| 3 | `c_fac_mff_ti_stnd[0]` | 0x45AAC | 28 284 | **0.3394** | **41 011** | **0.4921** | ms/mg | E85 — SOI/EOI, raw ÷2 |
+| 4 | `c_fac_mff_ti_stnd[1]` | 0x45AAE | 28 284 | **0.3394** | **41 011** | **0.4921** | ms/mg | E85 — SOI/EOI, raw ÷2 |
+| 5 | `c_fac_mff_ti_stnd_mon` | 0x4958C | 56 567 | **0.3394** | **82 022** | **0.4921** | ms/mg | E85 — monitoring DTC |
+| 6 | `c_tco_n_mff_cst` | 0x44F2F | 87 | **17.25 °C** | **97** | **25.00 °C** | °C | Seuil cranking étendu |
+| 7 | `ip_mff_cst_opm_1` | 0x437DC | table 3×8 | voir §9.1 | table 3×8 | voir §9.1 | mg/stk | E70 — cranking exception noyage |
+| 8 | `ip_mff_cst_opm_2` | 0x4380C | table 3×8 | voir §9.1 | table 3×8 | voir §9.1 | mg/stk | E70 — idem mode papillon |
+| 9 | `ip_fac_lamb_wup` | 0x42764 | 128 partout | **1.000** partout | — | **1.03–1.08** (basses charges) | — | Warm-up post-démarrage |
+| 10 | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | table 8×8 | voir §9.2 | table 8×8 | voir §9.2 (×1.25) | — | E85 — film lent tip-in safe |
+| 11 | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | table 8×8 | voir §9.2 | table 8×8 | voir §9.2 (×1.25) | — | E85 — film lent mode papillon |
+| 12 | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | table 8×8 | voir §9.2 | table 8×8 | voir §9.2 (×1.25) | — | E85 — film rapide tip-in safe |
+| 13 | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | table 8×8 | voir §9.2 | table 8×8 | voir §9.2 (×1.25) | — | E85 — film rapide mode papillon |
+| 14 | `ip_iga_bas_max_knk__n__maf` | 0x4323A | table 8×8 | voir §3.1 | table 8×8 | voir §3.1 (+0° à +2.5°) | °CRK | E60 — plafond knock pire octane |
+| 15 | `ip_iga_st_bas_opm_1` | 0x43586 | table 6×8 | cranking only | table 6×8 | **optionnel** +1°/+2° zone froide | °CRK | Cranking uniquement |
+| 16 | `ip_iga_st_bas_opm_2` | 0x435B6 | table 6×8 | cranking only | table 6×8 | **optionnel** +1°/+2° zone froide | °CRK | Cranking mode papillon |
+| 17 | `ip_lamb_fl__n` | 0x436A2 | courbe 1×12 | **0.920** (0.871 @ 6500 rpm) | courbe 1×12 | **laisser stock** | λ | WOT déjà riche — ne pas toucher |
+| 18 | `ip_lamb_bas_1` | 0x4B64C | — | **0.992–0.998** | — | **inchangé** | λ | Boucle fermée corrige |
+| 19 | `ip_lamb_bas_2` | 0x4B6CC | — | **0.992–0.998** | — | **inchangé** | λ | Boucle fermée corrige |
+| 20 | `ip_lamb_bas_3` | 0x4B74C | — | **0.997** | — | **inchangé** | λ | Boucle fermée corrige |
+| 21 | `c_t_ti_dly_fl_1` | — | non extrait | — | — | **0 ms** | ms | Enrichissement WOT instantané |
+| 22 | `c_t_ti_dly_fl_2` | — | non extrait | — | — | **0 ms** | ms | Enrichissement WOT instantané |
+| 23 | `c_iga_ini` | — | non extrait | — | — | **stock +1° à +2°** si démarrage difficile | °CRK | Optionnel — allumage cranking |
+| — | ~~`ip_fac_ti_temp_cor`~~ | ~~0x459EE~~ | — | ~~correction fuel temp~~ | — | **NE PAS MODIFIER** | — | Ce n'est pas le film mural |
+| — | ~~`ip_lamb_bas_4`~~ | ~~0x4B7CC~~ | — | ~~0.997~~ | — | **NE PAS MODIFIER** | — | Pas la table WOT |
+| — | ~~`ip_ti_add_dly`~~ | ~~0x45A2E~~ | — | ~~1.74 ms @ 0V / 0.10 ms @ 24.9V~~ | — | **NE PAS MODIFIER** | ms | Deadtime injecteur — inchangé |
 
 ### 9.1 — Valeurs stock complètes : tables de cranking (`ip_mff_cst_opm_1` / `ip_mff_cst_opm_2`)
 
