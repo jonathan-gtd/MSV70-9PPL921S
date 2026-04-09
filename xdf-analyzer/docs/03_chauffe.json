@@ -1,0 +1,308 @@
+{
+  "id": "CHAUFFE",
+  "label": "03 — Enrichissement Chauffe — Warm-Up (CRITIQUE)",
+  "description": "La phase de 'warm-up' commence après le premier allumage et dure jusqu'à ce que le moteur atteigne ~80°C. Pendant cette phase, la boucle fermée lambda est partiellement active mais instable, et l'éthanol s'évapore encore difficilement (surtout sous 40°C). Sur N52B30 stock (bin VB67774), ip_fac_lamb_wup est à 1.0001 partout — aucun enrichissement warm-up n'est prévu sur essence. Pour E85, il faut créer cet enrichissement progressif de 1.05 à 1.45.",
+  "subcategories": [
+    {
+      "xdf_category": "AUX_Engine_speed_limitation_controller",
+      "label": "Facteur d'injection warm-up (ip_fac_ti_tco_wup_opm)",
+      "role": "Tables 2D de facteur multiplicateur sur le temps d'injection pendant la phase de chauffe, en fonction de la température moteur TCO. Ce facteur est appliqué directement sur TI — indépendamment des corrections lambda. Sur E85 : c'est ici que se joue la driveability entre 0°C et 70°C. Les paramètres ip_vff_* et c_vb_efp_* de ce module concernent le feed-forward tension pompe et la pompe à carburant électrique — non liés à l'éthanol.",
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "ip_fac_ti_tco_wup_opm_1": {
+          "doc": "Facteur multiplicateur sur TI pendant la phase de chauffe f(TCO) [sans unité]. Axe X : TCO de −30°C à +90°C. Stock N52B30 : ~1.000 partout.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "OUI",
+          "e85_action": "Créer profil progressif : 1.40 à −30°C, 1.35 à −10°C, 1.25 à 0°C, 1.15 à 20°C, 1.08 à 40°C, 1.02 à 60°C, 1.00 à 80°C+.",
+          "e85_factor": "×1.02 à ×1.40",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_ti_tco_wup_opm_2"
+          ]
+        },
+        "ip_fac_ti_tco_wup_opm_2": {
+          "doc": "Facteur multiplicateur sur TI warm-up mode opération 2 f(TCO) [sans unité]. Mettre à jour identiquement à opm_1.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "OUI",
+          "e85_action": "Même profil que ip_fac_ti_tco_wup_opm_1.",
+          "e85_factor": "×1.02 à ×1.40",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_ti_tco_wup_opm_1"
+          ]
+        },
+        "ip_ti_tco_wup_opm_1": {
+          "doc": "Masse carburant absolue warm-up mode 1 f(TCO, RPM) [mg/stk]. Valeurs absolues de masse injectée pendant la chauffe. Complète ip_fac_ti_tco_wup_opm_1.",
+          "type_doc": "TABLE 3D",
+          "modification_e85": "OUI",
+          "e85_action": "Augmenter de ×1.15 à ×1.35 pour TCO < 50°C.",
+          "e85_factor": "×1.15 à ×1.35",
+          "warning": false,
+          "dependencies": [
+            "ip_ti_tco_wup_opm_2"
+          ]
+        },
+        "ip_ti_tco_wup_opm_2": {
+          "doc": "Masse carburant absolue warm-up mode 2 f(TCO, RPM) [mg/stk]. Mettre à jour conjointement avec opm_1.",
+          "type_doc": "TABLE 3D",
+          "modification_e85": "OUI",
+          "e85_action": "Même modification que ip_ti_tco_wup_opm_1.",
+          "e85_factor": "×1.15 à ×1.35",
+          "warning": false,
+          "dependencies": [
+            "ip_ti_tco_wup_opm_1"
+          ]
+        },
+        "ip_ti_wup_opm_1": {
+          "doc": "Valeur absolue de la durée d'injection warm-up mode 1 f(TCO) [ms]. Table directe de TI (par opposition au facteur multiplicateur). Complément de ip_ti_tco_wup_opm_1.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "OUI",
+          "e85_action": "Augmenter de ×1.20 à ×1.35 pour TCO < 50°C, cohérent avec ip_fac_ti_tco_wup_opm_1.",
+          "e85_factor": "×1.20 à ×1.35",
+          "warning": false,
+          "dependencies": [
+            "ip_ti_wup_opm_2"
+          ]
+        },
+        "ip_ti_wup_opm_2": {
+          "doc": "Valeur absolue durée d'injection warm-up mode 2 f(TCO) [ms]. Mettre à jour conjointement avec opm_1.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "OUI",
+          "e85_action": "Même modification que ip_ti_wup_opm_1.",
+          "e85_factor": "×1.20 à ×1.35",
+          "warning": false,
+          "dependencies": [
+            "ip_ti_wup_opm_1"
+          ]
+        },
+        "ip_fac_ti_vo_wup": {
+          "doc": "Facteur de correction sur TI warm-up selon tension batterie [sans unité]. Corrige le débit injecteur en fonction des variations de tension de l'alimentation. Paramètre constructeur.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "ip_t_efp_ast_max": {
+          "doc": "Durée maximale de la phase after-start pour la pompe à carburant électrique [s]. Temps pendant lequel la pompe tourne en mode after-start.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_t_efp": {
+          "doc": "Durée de fonctionnement de la pompe à carburant électrique après coupure contact [s]. Paramètre de commande pompe, non lié à l'éthanol.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_t_efp_prev": {
+          "doc": "Durée de pré-amorçage de la pompe à carburant avant démarrage [s]. Temporisation de mise en pression avant cranking.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_vb_efp_ref": {
+          "doc": "Tension batterie de référence pour la commande de la pompe à carburant électrique [V]. Valeur constructeur de calibration tension.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "ip_vff_add_amp": {
+          "doc": "Amplitude du feed-forward additif sur la pompe à carburant électrique f(conditions). Correction anticipatrice de tension pompe.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "ip_vff_add_tam": {
+          "doc": "Constante de temps du feed-forward additif pompe carburant [s]. Paramètre de dynamique de la correction anticipatrice.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "ip_vff_efp_fl": {
+          "doc": "Feed-forward pleine charge pour la pompe à carburant électrique. Commande anticipatrice en WOT.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "ip_vff_vepu_ftl": {
+          "doc": "Feed-forward pompe carburant selon la variation du signal VEPU (tension efficace pompe) [V]. Paramètre interne de régulation pompe.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "ip_vff_vepu_ftl_dif": {
+          "doc": "Feed-forward différentiel pompe selon VEPU [V]. Terme dérivé de la correction anticipatrice.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "id_ti_wup_1_opm_av": {
+          "doc": "Indice de sélection du mode warm-up disponible. Signal interne de monitoring.",
+          "type_doc": "SIGNAL",
+          "modification_e85": "NON"
+        },
+        "id_ti_wup_1_opm_req": {
+          "doc": "Indice de sélection du mode warm-up requis. Signal interne de commande.",
+          "type_doc": "SIGNAL",
+          "modification_e85": "NON"
+        }
+      },
+      "tuning_impact": "critical",
+      "flex_fuel_sensitive": true,
+      "tags": [
+        "e85"
+      ]
+    },
+    {
+      "xdf_category": "INJ_Catalyst_enrichment_function",
+      "label": "Facteur warm-up lambda et tables lambda de base (ip_fac_lamb_wup + ip_lamb_bas)",
+      "role": "ip_fac_lamb_wup : facteur d'enrichissement post-démarrage appliqué sur la consigne lambda (3D f(TCO, RPM)). Valeur stock N52B30 : 1.0001 partout — aucun enrichissement warm-up configuré en usine sur essence. Pour E85 : créer un profil progressif de 1.45 (très froid) à 1.05 (moteur tiède). ip_lamb_bas_1/2/3/4 : tables de consigne lambda de base f(charge, RPM) selon le mode opération.",
+      "undocumented_params_default": "À_VÉRIFIER",
+      "parameters": {
+        "ip_fac_lamb_wup": {
+          "doc": "Facteur multiplicateur warm-up sur consigne lambda f(TCO, RPM) [sans unité]. Stock N52B30 : 1.0001 partout (raw≈47). Actif seulement pendant la montée en température.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "OUI",
+          "e85_action": "Créer profil : 1.45 à TCO < −10°C, 1.35 à 0°C, 1.25 à 20°C, 1.15 à 40°C, 1.08 à 60°C, 1.02 à 70°C, 1.00 à 80°C+.",
+          "stock_raw": 47,
+          "stock_physical": "1.0001",
+          "e85_factor": "×1.02 à ×1.45",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_lamb_wup_is"
+          ]
+        },
+        "ip_fac_lamb_wup_is": {
+          "doc": "Facteur warm-up lambda en mode IS (idle/start) f(TCO, RPM) [sans unité]. Complément de ip_fac_lamb_wup pour les régimes bas.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "OUI",
+          "e85_action": "Même profil que ip_fac_lamb_wup.",
+          "e85_factor": "×1.02 à ×1.45",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_lamb_wup"
+          ]
+        },
+        "ip_lamb_bas_1": {
+          "doc": "Consigne lambda de base mode opération 1 f(charge mg/stk, RPM) [λ]. Stock : 0.997 partout (raw≈47, équation 0.021195×raw). Lambda stœchiométrique.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON",
+          "e85_action": "NE PAS MODIFIER en première intention. La boucle fermée lambda gère automatiquement la richesse sur E85 si c_fac_mff_ti_stnd est correct (les capteurs LSU mesurent λ relatif, pas absolu). Modifier de −0.01 à −0.02 uniquement si le LTFT dérive de façon persistante (>+10%) après convergence complète (200+ km). Voir doc 06 pour les limites FSD qui doivent être élargies avant toute adaptation.",
+          "stock_raw": 47,
+          "stock_physical": "0.997 λ",
+          "warning": false
+        },
+        "ip_lamb_bas_2": {
+          "doc": "Consigne lambda de base mode opération 2 f(charge, RPM) [λ]. Stock : 0.997 partout.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON",
+          "e85_action": "Même logique que ip_lamb_bas_1. Modifier uniquement si LTFT persistant >+10% après convergence complète.",
+          "stock_raw": 47,
+          "stock_physical": "0.997 λ",
+          "warning": false
+        },
+        "ip_lamb_bas_3": {
+          "doc": "Consigne lambda de base mode opération 3 f(charge, RPM) [λ]. Stock : 0.997 partout.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON",
+          "e85_action": "Même logique que ip_lamb_bas_1. Modifier uniquement si LTFT persistant >+10% après convergence complète.",
+          "stock_raw": 47,
+          "stock_physical": "0.997 λ",
+          "warning": false
+        },
+        "ip_lamb_bas_4": {
+          "doc": "Consigne lambda de base mode opération 4 — pleine charge / WOT f(charge, RPM) [λ]. Stock : 0.997 partout. Mode actif en zone haute charge.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "OUI",
+          "e85_action": "Réduire à 0.92–0.95 en zone haute charge (>200 mg/stk) et haut régime (>3000 RPM) pour enrichissement protecteur WOT.",
+          "stock_raw": 47,
+          "stock_physical": "0.997 λ",
+          "warning": false
+        },
+        "ip_lamb_bas_thr_1": {
+          "doc": "Consigne lambda mode 1 avec correction TPS [λ]. Variante de ip_lamb_bas_1 pour les transitions rapides de papillon.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_bas_thr_2": {
+          "doc": "Consigne lambda mode 2 avec correction TPS [λ].",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_bas_wup_cor_opm_1": {
+          "doc": "Correction de la consigne lambda de base pendant warm-up mode 1 [λ]. Correction additionnelle transitoire pendant la montée en température.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_bas_wup_cor_opm_2": {
+          "doc": "Correction de la consigne lambda de base pendant warm-up mode 2 [λ].",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_hom_afl": {
+          "doc": "Lambda cible en mode homogène AFL (After Full Load) [λ]. Richesse cible en sortie de pleine charge.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_afl_1": {
+          "doc": "Lambda cible AFL mode opération 1 [λ].",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "id_idx_opm_lamb_bas": {
+          "doc": "Indice de sélection du mode opération pour les tables lambda de base. Signal interne.",
+          "type_doc": "SIGNAL",
+          "modification_e85": "NON"
+        },
+        "id_idx_opm_lamb_bas_wup_cor": {
+          "doc": "Indice de sélection de la correction warm-up lambda. Signal interne.",
+          "type_doc": "SIGNAL",
+          "modification_e85": "NON"
+        },
+        "c_lamb_bas_ofs_cat_diag": {
+          "doc": "Offset lambda appliqué pendant le diagnostic catalyseur [λ]. Valeur stock ~4.0 = inactif en conditions normales.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        }
+      },
+      "tuning_impact": "critical",
+      "flex_fuel_sensitive": true,
+      "tags": [
+        "e85",
+        "warm_up"
+      ]
+    },
+    {
+      "xdf_category": "INJ_Conversion_MFF_to_TI",
+      "label": "Lambda warm-up avec air secondaire (ip_lamb_sawup)",
+      "role": "ip_lamb_sawup : consigne lambda pendant la phase de warm-up avec air secondaire actif (SAP). Sur N52B30 sans pompe à air secondaire active, ce paramètre a un impact limité.",
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "ip_lamb_sawup": {
+          "doc": "Consigne lambda pendant warm-up avec air secondaire actif f(TCO, RPM) [λ]. Sur N52B30 sans SAP active : impact faible. Vérifier la cohérence avec ip_fac_lamb_wup.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_sawup_is": {
+          "doc": "Lambda sawup en mode IS (idle/start) [λ]. Complément pour les régimes bas.",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_add_sawup_opm_1": {
+          "doc": "Correction additionnelle lambda sawup mode opération 1 [λ].",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "ip_lamb_add_sawup_opm_2": {
+          "doc": "Correction additionnelle lambda sawup mode opération 2 [λ].",
+          "type_doc": "CARTOGRAPHIE 3D",
+          "modification_e85": "NON"
+        },
+        "c_lamb_sp_sa_eol": {
+          "doc": "Consigne lambda SAP fin de vie (EOL). Valeur de référence constructeur.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "lc_sa_swi_cmb": {
+          "doc": "Switch activation mode air secondaire combiné. Bit de commande constructeur.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        }
+      },
+      "tuning_impact": "medium",
+      "flex_fuel_sensitive": true,
+      "tags": [
+        "e85"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "id": "LAMBDA_RICHESSE",
+  "label": "06 — Lambda, Richesse WOT et Limites Correction",
+  "description": "Ces paramètres définissent les cibles de richesse et les limites de correction autorisées au système lambda. Sur E85 correctement calibré (étapes 01–05 faites), le moteur fonctionne en boucle fermée autour de lambda=1. Ces réglages servent à (1) protéger le moteur en pleine charge avec un léger enrichissement, (2) s'assurer que les limites de correction lambda (FSD) sont assez larges pour absorber l'apprentissage initial E85.",
+  "subcategories": [
+    {
+      "xdf_category": "AGGR_VVTI_adaption",
+      "label": "Lambda cible pleine charge f(RPM) — ip_lamb_fl__n",
+      "role": "ip_lamb_fl__n : lambda cible en mode full load (WOT) en fonction du régime. Stock N52B30 : ~0.997 (stœchiométrique). Pour E85 : réduire à 0.92–0.95 aux hauts régimes (>4000 RPM) pour un enrichissement protecteur. Les paramètres c_t_dly_* et K_VNS* de ce module concernent les délais MMV et VANOS — non liés à l'éthanol.",
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "ip_lamb_fl__n": {
+          "doc": "Lambda cible full load (WOT) f(RPM) [λ]. Valeur de richesse ciblée par le calculateur en pleine charge. Stock N52B30 : ~0.997 (stœchiométrique).",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "OUI",
+          "e85_action": "Réduire à 0.95–0.97 entre 2000–3000 RPM, 0.92–0.94 entre 4000–6500 RPM pour enrichissement protecteur WOT.",
+          "stock_physical": "0.997 λ",
+          "warning": false
+        },
+        "c_t_dly_cl_mmv": {
+          "doc": "Délai avant entrée en boucle fermée après commutation MMV (Variable Intake Manifold) [s]. Évite les oscillations lambda lors du changement de géométrie admission à ~4500 RPM.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_t_dly_cl_mmv_ready": {
+          "doc": "Délai de validation 'prêt boucle fermée' après commutation MMV [s].",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_t_dly_cl_mmv_ready_2": {
+          "doc": "Délai 2 de validation boucle fermée après commutation MMV [s].",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_t_dly_purge_diagcps": {
+          "doc": "Délai avant démarrage du diagnostic de purge canister [s]. Évite les faux DTC pendant la phase initiale de purge.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        }
+      },
+      "tuning_impact": "high",
+      "flex_fuel_sensitive": true,
+      "tags": [
+        "e85",
+        "performance",
+        "safety"
+      ]
+    },
+    {
+      "xdf_category": "EGCP_ACQ_compensation_WRAF_ls",
+      "label": "Limites de correction lambda FSD — ip_fac_lamb_max/min_fsd",
+      "role": "FSD = Full Scale Deflection. Ces tables définissent les limites haute et basse des corrections lambda autorisées par le système WRAF. IMPORTANT pour E85 : pendant la phase d'apprentissage initiale (premiers 50–100 km), le système lambda doit pouvoir atteindre des corrections importantes (STFT jusqu'à +25%). Les CW_DEAVANOS / CW_EAVNSKT / S_VNS* de ce module sont des paramètres de configuration VANOS — non liés à l'éthanol.",
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "ip_fac_lamb_max_fsd_1": {
+          "doc": "Limite haute de correction WRAF (FSD max) mode 1 f(conditions) [λ]. Plafond de correction lambda autorisée. Stock max : ~1.15.",
+          "type_doc": "TABLE",
+          "modification_e85": "OUI",
+          "e85_action": "Augmenter à 1.20–1.25 pour autoriser la correction complète pendant la convergence LTFT initiale (premiers 100–200 km sur E85).",
+          "stock_physical": "~1.15 λ",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_lamb_max_fsd_2"
+          ]
+        },
+        "ip_fac_lamb_max_fsd_2": {
+          "doc": "Limite haute de correction WRAF (FSD max) mode 2 [λ]. Même logique que mode 1. Mettre à jour conjointement.",
+          "type_doc": "TABLE",
+          "modification_e85": "OUI",
+          "e85_action": "Augmenter à 1.20–1.25, même logique que mode 1.",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_lamb_max_fsd_1"
+          ]
+        },
+        "ip_fac_lamb_min_fsd_1": {
+          "doc": "Limite basse de correction WRAF (FSD min) mode 1 [λ]. Plancher de correction lambda autorisée. Stock min : ~0.84.",
+          "type_doc": "TABLE",
+          "modification_e85": "NON",
+          "stock_physical": "~0.84 λ",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_lamb_min_fsd_2"
+          ]
+        },
+        "ip_fac_lamb_min_fsd_2": {
+          "doc": "Limite basse de correction WRAF (FSD min) mode 2 [λ]. Même logique que mode 1.",
+          "type_doc": "TABLE",
+          "modification_e85": "NON",
+          "warning": false,
+          "dependencies": [
+            "ip_fac_lamb_min_fsd_1"
+          ]
+        },
+        "c_amp_min_fsd": {
+          "doc": "Amplitude minimale du FSD [λ]. Largeur minimale de la fenêtre de correction lambda autorisée.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_fac_cp_fsd": {
+          "doc": "Facteur de correction du FSD lors de la purge canister [sans unité]. Ajustement des limites FSD pendant la purge active.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_maf_min_fsd": {
+          "doc": "Débit MAF minimum pour activation de l'adaptation FSD [kg/h]. En dessous de ce débit, le FSD ne s'adapte pas.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_maf_min_mff_ad_add_fsd": {
+          "doc": "MAF minimum pour activation de la correction MFF additive FSD [kg/h]. Condition d'activation de la correction additive.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_n_min_fsd": {
+          "doc": "Régime minimum pour activation de l'adaptation FSD [RPM]. En dessous, le FSD ne s'adapte pas.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_n_min_mff_ad_add_fsd": {
+          "doc": "Régime minimum pour la correction MFF additive FSD [RPM].",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "id_stop_dec_fsd__toil_max": {
+          "doc": "Condition d'arrêt de décrémentation FSD selon température huile maximale. Protection contre la sur-correction en surchauffe.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "id_stop_inc_fsd__tco_st": {
+          "doc": "Condition d'arrêt d'incrémentation FSD selon TCO au démarrage. Protection contre la sur-correction au démarrage froid.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "K_SPRZG_AN": {
+          "doc": "Constante d'allumage du saut WRAF. Paramètre interne de la logique de saut de consigne lambda.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "K_NWSEGOFFS": {
+          "doc": "Offset de segment WRAF. Décalage interne de la segmentation du signal WRAF.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        }
+      },
+      "tuning_impact": "high",
+      "flex_fuel_sensitive": true,
+      "tags": [
+        "e85"
+      ]
+    },
+    {
+      "xdf_category": "INJ_Application_incidences_for_catalyst_enrichment_function",
+      "label": "Conditions lambda individuel par cylindre",
+      "role": "Paramètres définissant les conditions d'activation du contrôle lambda individuel par cylindre. Sur E85 correctement calibré, ces conditions n'ont pas besoin d'être modifiées.",
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "ip_maf_max_cyl_lam": {
+          "doc": "MAF maximum pour activation du contrôle lambda individuel par cylindre f(RPM) [kg/h].",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "ip_maf_min_cyl_lam": {
+          "doc": "MAF minimum pour activation du contrôle lambda individuel par cylindre f(RPM) [kg/h].",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON"
+        },
+        "c_n_max_cyl_lam": {
+          "doc": "Régime maximum pour activation du contrôle lambda individuel par cylindre [RPM].",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "c_toil_min_cyl_lam": {
+          "doc": "Température huile minimum pour activation du contrôle lambda individuel [°C]. Actif seulement moteur chaud.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        },
+        "lc_cdn_lscl_cyl_lam": {
+          "doc": "Flag de condition pour le contrôle lambda individuel par cylindre. Bit de commande.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON"
+        }
+      },
+      "tuning_impact": "low",
+      "flex_fuel_sensitive": true,
+      "tags": [
+        "e85"
+      ]
+    }
+  ]
+}

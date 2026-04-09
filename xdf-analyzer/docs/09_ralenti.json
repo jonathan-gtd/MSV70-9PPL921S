@@ -1,0 +1,106 @@
+{
+  "id": "RALENTI",
+  "label": "09 — Régime de Ralenti (Idle Speed)",
+  "description": "Paramètres définissant le régime cible au ralenti (idle speed setpoint) en fonction de la température du liquide de refroidissement, de la boîte, de la climatisation et de l'huile moteur. Ces courbes contrôlent la qualité du ralenti à froid et la stabilité après chauffe. Sur E85, un ralenti légèrement plus élevé à froid améliore la stabilité pendant la montée en température (l'éthanol brûle moins bien froid).",
+  "subcategories": [
+    {
+      "xdf_category": "EGTR_Det_forced_lambda_stim",
+      "label": "Régime ralenti cible f(TCO) — ip_n_sp_is / ip_acin_n_sp_is / ip_dri_n_sp_is",
+      "role": "Tables du régime de ralenti nominal en fonction de la température du liquide de refroidissement (TCO). ip_n_sp_is : ralenti de base (MT, sans clim, sans Drive). ip_acin_n_sp_is : ralenti avec climatisation activée. ip_dri_n_sp_is : ralenti AT avec rapport D engagé. ip_n_sp_is_toil_mt/at : ralenti minimum en fonction de la température huile (protection moteur froid). Les paramètres ip_dri_n_sp_ch, ip_n_sp_ch, c_n_sp_lgrd_is, c_n_sp_lgrd_is_lih et les séquences PSTE/ARS sont des paramètres internes de la stratégie de chauffage catalyseur — non pertinents pour un usage normal.",
+      "tags": [
+        "idle",
+        "cold_start",
+        "warm_up"
+      ],
+      "tuning_impact": "medium",
+      "flex_fuel_sensitive": true,
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "ip_n_sp_is": {
+          "doc": "Régime de ralenti nominal f(TCO) — MT, sans charge [RPM]. 8 points. Stock 9PPL921S : −30°C→1120, −20°C→1040, −10°C→960, +10°C→840, +30°C→670, +60°C→660, +90°C→660, +105°C→660 RPM. Sur E85 : envisager +50 à +100 RPM entre −30°C et +30°C pour stabiliser le ralenti à froid (l'éthanol brûle moins bien froid).",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON",
+          "tags": [
+            "idle",
+            "cold_start",
+            "e85"
+          ],
+          "stock_physical": "660–1120 RPM f(TCO)",
+          "warning": false,
+          "e85_action": "Non requis si les corrections injection (docs 01–05) sont correctement calibrées. En option : +50–100 RPM entre −30°C et +30°C si le ralenti est instable au démarrage froid sur E85."
+        },
+        "ip_acin_n_sp_is": {
+          "doc": "Régime de ralenti avec climatisation activée f(TCO) [RPM]. 8 points. Stock 9PPL921S : −30°C→1120, −10°C→960, +30°C→720, +90°C→720 RPM. Légèrement plus élevé que ip_n_sp_is pour compenser la charge compresseur de clim.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON",
+          "tags": [
+            "idle"
+          ],
+          "stock_physical": "720–1120 RPM f(TCO)",
+          "warning": false
+        },
+        "ip_dri_n_sp_is": {
+          "doc": "Régime de ralenti AT avec rapport D engagé f(TCO) [RPM]. 8 points. Stock : −30°C→1050, +30°C→670, +90°C→660 RPM. Légèrement plus bas que le ralenti MT à froid car le convertisseur absorbe une partie de la charge.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON",
+          "tags": [
+            "idle"
+          ],
+          "stock_physical": "660–1050 RPM f(TCO)",
+          "warning": false
+        },
+        "ip_n_sp_is_toil_mt": {
+          "doc": "Régime de ralenti minimum f(TOIL) — MT [RPM]. 4 points. Stock : 840 RPM constant quelle que soit la température huile. Protège le moteur d'un ralenti trop bas avec huile froide et visqueuse.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON",
+          "tags": [
+            "idle",
+            "safety"
+          ],
+          "stock_physical": "840 RPM constant",
+          "warning": false
+        },
+        "ip_n_sp_is_toil_at": {
+          "doc": "Régime de ralenti minimum f(TOIL) — AT [RPM]. Stock : 840 RPM constant.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON",
+          "tags": [
+            "idle",
+            "safety"
+          ],
+          "stock_physical": "840 RPM constant",
+          "warning": false
+        },
+        "ip_n_sp_is_lih": {
+          "doc": "Régime de ralenti en mode dégradé (limp home) f(TCO) [RPM]. Stock : 1100 RPM constant. Ne pas modifier — utilisé uniquement en cas de défaut capteur critique.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON",
+          "tags": [
+            "idle",
+            "safety"
+          ],
+          "stock_physical": "1100 RPM constant",
+          "warning": false
+        },
+        "c_n_sp_heat_mt": {
+          "doc": "Régime de ralenti lors d'une demande de chauffage habitacle — MT [RPM]. Stock raw=600 (eq=X → probablement 600 RPM ou unité interne). Augmente le régime pour améliorer le chauffage. Ne pas modifier.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON",
+          "tags": [
+            "idle"
+          ],
+          "warning": false
+        },
+        "c_n_sp_heat_at": {
+          "doc": "Régime de ralenti lors d'une demande de chauffage habitacle — AT [RPM]. Stock raw=600.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "NON",
+          "tags": [
+            "idle"
+          ],
+          "warning": false
+        }
+      }
+    }
+  ]
+}
