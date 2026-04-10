@@ -386,7 +386,7 @@ Deux directions opposées du même phénomène :
 - Pression de travail nominale (lue dans le bin, `c_fup_nom` @0x44B0C) : **5.0 bar** (5000 hPa, raw=60301). Les facteurs d'échelle E85 (×1.33-1.45) sont définis en « standard conditions » = pression rail stock, donc cette valeur ne change rien aux calculs.
 - Ces injecteurs sont les mêmes pour les 330i des générations E46/E9x N52
 
-### ✏️ Les 5 copies du facteur d'échelle — toutes à modifier ensemble
+### Les 5 copies du facteur d'échelle — toutes à modifier ensemble
 
 Le MSV70 dispose de **cinq copies** du facteur d'échelle injecteur réparties dans trois modules logiciels distincts. Pourquoi cinq ? Parce que trois sous-systèmes indépendants du firmware ont chacun besoin de connaître le débit injecteur :
 
@@ -396,6 +396,7 @@ Le MSV70 dispose de **cinq copies** du facteur d'échelle injecteur réparties d
 
 Oublier l'une de ces cinq copies peut provoquer des incohérences ou déclencher un DTC de monitoring injection.
 
+✏️
 | Paramètre | Adresse bin | Module | Formule | Raw stock | Valeur stock | Raw objectif (E85) | Objectif E85 | Rôle |
 |---|---|---|---|---|---|---|---|---|
 | `c_fac_mff_ti_stnd_1` | 0x44AC0 | Calcul principal | 0.000006 × X | 56 567 | **0.3394 ms/mg** | **82 022** | **0.4921 ms/mg** | Groupe cyl. 1–3 |
@@ -491,7 +492,7 @@ L'E85 résiste à l'évaporation à basse température :
 - Éthanol pur : point d'ébullition 78°C, la vaporisation est très limitée à 0°C
 - **À 0°C, l'E85 reste essentiellement liquide** → le moteur a besoin d'une quantité bien plus grande de carburant liquide pour créer la vapeur nécessaire à l'allumage
 
-### ✏️ 2.1 — Table de cranking : `ip_mff_cst_opm_1` et `ip_mff_cst_opm_2`
+### 2.1 — Table de cranking : `ip_mff_cst_opm_1` et `ip_mff_cst_opm_2`
 
 Ces tables définissent la dose de carburant injectée pendant le cranking (moteur en démarrage), en **mg/stk**, en fonction de la température de liquide de refroidissement (axe X) et du régime de cranking (axe Y).
 
@@ -505,6 +506,7 @@ Facteur  :  ×2.00   ×1.80   ×1.65  ×1.55  ×1.35  ×1.20  ×1.10  ×1.05
 
 > Sur E70, les 30% d'essence améliorent sensiblement la volatilité à froid — les facteurs sont légèrement inférieurs à un E85 pur.
 
+✏️
 **`ip_mff_cst_opm_1` @ 0x437DC** (mode normal / Valvetronic actif) :
 
 STOCK :
@@ -543,10 +545,11 @@ RPM 920  :  726.0   506.5   356.1  246.5  113.5   79.0   51.7   36.2
 
 > opm_2 a des valeurs nettement plus élevées à froid (jusqu'à ×2.0 vs opm_1 à −30°C) — les mêmes facteurs multiplicatifs s'appliquent aux deux tables.
 
-### ✏️ 2.2 — Seuil de température de cranking : `c_tco_n_mff_cst`
+### 2.2 — Seuil de température de cranking : `c_tco_n_mff_cst`
 
 Seuil en-dessous duquel les enrichissements de cranking s'appliquent. Sur E85, l'éthanol a encore besoin d'aide jusqu'à ~30°C là où l'essence démarre sans enrichissement.
 
+✏️
 | | Raw | Valeur |
 |---|---|---|
 | **AVANT (stock)** | 87 | **17.25 °C** |
@@ -554,12 +557,13 @@ Seuil en-dessous duquel les enrichissements de cranking s'appliquent. Sur E85, l
 
 > Adresse : 0x44F2F — formule `0.75 × X − 48`
 
-### ✏️ 2.3 — Facteur de warm-up lambda : `ip_fac_lamb_wup`
+### 2.3 — Facteur de warm-up lambda : `ip_fac_lamb_wup`
 
 Table 6×6 qui multiplie la consigne lambda post-démarrage. Axes : X = MAF (65–500 mg/stk), Y = RPM (704–3008 tr/min) — pas d'axe TCO. Enrichit les basses charges pendant la phase où la sonde lambda n'est pas encore chaude.
 
 > Adresse : 0x42764
 
+✏️
 AVANT (stock) :
 ```
 MAF →           65    100    200    300    400    500 mg/stk
@@ -630,6 +634,7 @@ Le MSV70 gère l'allumage par **modèle de couple** (torque model). Il n'y a pas
 | `ip_fac_eff_iga_opm_1` / `ip_fac_eff_iga_opm_2` | 0x4A5D4 | 16×16, X=couple %, Y=RPM | Facteur d'efficacité avance pour le modèle de couple | Faible/Modérée |
 | `ip_iga_st_bas_opm_1` / `ip_iga_st_bas_opm_2` | 0x43586 / 0x435B6 | 6×8, X=TCO, Y=RPM cranking | Avance uniquement pendant la phase de démarrage (cranking) — axes TCO et RPM 80–920 tr/min uniquement | Optionnel (démarrage froid) |
 
+✏️
 **Valeurs STOCK de `ip_iga_bas_max_knk__n__maf` (°CRK avant PMH) — extraites du bin VB67774 :**
 
 ```
@@ -646,7 +651,7 @@ Le MSV70 gère l'allumage par **modèle de couple** (torque model). Il n'y a pas
 
 C'est cette carto qui fixe le plafond au-delà duquel le knock control est censé reculer l'avance. En augmentant ces valeurs en haute charge (colonnes de droite) de +2° à +5°, vous laissez le modèle de couple MSV70 demander davantage d'avance tant qu'il ne détecte pas de cliquetis — ce qui est précisément ce que permet l'E85.
 
-### ✏️ 3.2 — Procédure d'augmentation d'avance pour E85
+### 3.2 — Procédure d'augmentation d'avance pour E85
 
 **RÈGLE D'OR : Progressivité absolue. Un seul degré de trop = cliquetis = casse moteur.**
 
@@ -791,9 +796,10 @@ Le stock est déjà à λ 0.920 en WOT, ce qui est **assez riche**. Sur E85 pur,
 
 **Option A — Garder `ip_lamb_fl__n` stock.** Le λ 0.920 stock injecte ~9% de carburant en plus qu'à stœchio. Sur E85, cette richesse protège toujours — aucun problème de fiabilité.
 
-**✏️ Option B — Dé-enrichir légèrement pour gagner un peu de puissance.**
+**Option B — Dé-enrichir légèrement pour gagner un peu de puissance.**
 Sur E85, λ 0.94–0.96 en WOT est un bon compromis (plus proche de stoechio = couple maxi, mais encore assez riche pour une marge de sécurité). Modification proposée sur `ip_lamb_fl__n` :
 
+✏️
 ```
 RPM    : 608   992   1216   1600   2016   2496   3008   3520   4128   4800   5504   6496
 Stock  : 0.920 0.920 0.913  0.920  0.920  0.920  0.920  0.920  0.920  0.920  0.901  0.871
@@ -866,10 +872,11 @@ Le MSV70 implémente ce modèle complet avec **deux composantes** (lente et rapi
 
 Toutes ces tables existent aussi en version `_opm_2` (mode papillonné). Sur N52 Valvetronic, c'est `_opm_1` qui est actif la majorité du temps.
 
-### ✏️ Valeurs STOCK et OBJECTIF E85 — les 4 tables de film mural positif
+### Valeurs STOCK et OBJECTIF E85 — les 4 tables de film mural positif
 
 > Axes communs : X = TCO (°C), Y = RPM. Objectif E85 = stock × 1.25 (arrondi à la décimale).
 
+✏️
 **`ip_ti_tco_pos_slow_wf_opm_1` @ 0x4CBFC** (film lent, mode normal) — équation `0.100 × raw_u16be` :
 
 STOCK :
@@ -1053,10 +1060,11 @@ Courbe 1×8 f(tension batterie VB, 0–24.9V). Propriété électrique de l'inje
 
 Si vous changez d'injecteurs : recalculer avec les caractéristiques deadtime des nouveaux injecteurs (courbe f(VB) fournie par le fabricant).
 
-### ✏️ 7.2 — Délai pleine charge (`c_t_ti_dly_fl_1` et `c_t_ti_dly_fl_2`)
+### 7.2 — Délai pleine charge (`c_t_ti_dly_fl_1` et `c_t_ti_dly_fl_2`)
 
 Délai entre détection de pleine charge et application de l'enrichissement WOT. Sur E85, l'enrichissement doit être immédiat.
 
+✏️
 | | Valeur |
 |---|---|
 | **AVANT (stock)** | à extraire du bin |
@@ -1064,10 +1072,11 @@ Délai entre détection de pleine charge et application de l'enrichissement WOT.
 
 > Adresses à localiser dans le bin — non extraites à ce jour.
 
-### ✏️ 7.3 — Avance d'allumage au démarrage (`c_iga_ini`)
+### 7.3 — Avance d'allumage au démarrage (`c_iga_ini`)
 
 Avance initiale au cranking. Sur E85 froid, un allumage légèrement plus avancé facilite la combustion. Optionnel — à tester seulement si le démarrage reste difficile après calibration §2.
 
+✏️
 | | Raw | Valeur |
 |---|---|---|
 | **AVANT (stock)** | à extraire | à extraire |
