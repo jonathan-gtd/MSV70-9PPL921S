@@ -423,15 +423,15 @@ Facteur_injection = (14.7 / AFR_blend) × 0.94
 | **E85 (85%) ← CIBLE INJECTEUR** | **9.55:1** | **×1.45** | **1.473** | **47 407** |
 
 > **Pourquoi E85 comme cible du facteur injecteur alors que le carburant réel est E70 ?**
-> En boucle fermée, le LTFT corrige automatiquement l'excès de richesse : avec du E70 réel, le LTFT se stabilise à environ −6% — largement dans les ±25% de capacité, aucun problème.
+> En boucle fermée, le LTFT corrige automatiquement l'excès de richesse : avec du E70 réel, le LTFT se stabilise à environ −6% — dans la plage −8%/+12% du MSV70, aucun problème.
 > En boucle ouverte (WOT, transitions), aucune correction n'intervient. En calibrant sur E85, on garantit qu'on est toujours du côté riche en open loop, quelle que soit la teneur réelle de la pompe (E60 à E85). C'est le choix sécuritaire pour une carto de rue.
 
-> La LTFT (adaptation long terme) peut absorber −8%/+12%. Si vous ne savez pas exactement quel titre vous avez, commencez avec E70 (raw 44 581) — les STFT vous diront si vous montez ou descendez.
+> Si vous ne savez pas exactement quel titre vous avez, commencez avec E70 (raw 44 581) — les STFT vous diront si vous montez ou descendez.
 
 ### Formule pour injecteurs remplacés
 
 ```
-ip_mff_cor_nouveau = ip_mff_cor_STOCK × Facteur_Ethanol × (Débit_stock / Débit_nouveaux) / (c_fac_stock / c_fac_stock)
+ip_mff_cor_nouveau = ip_mff_cor_STOCK × Facteur_Ethanol × (Débit_stock / Débit_nouveaux)
                    = 1.016 × Facteur_Ethanol × (Débit_stock / Débit_nouveaux)
 
 Exemple — injecteurs N54 (débit ~30% supérieur aux N52 stock) sur E70 :
