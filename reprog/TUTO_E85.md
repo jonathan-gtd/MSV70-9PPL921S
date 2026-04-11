@@ -9,7 +9,7 @@
 > - **Avance → E60** : pire octane légal français = zéro risque de cliquetis en toutes conditions
 > - **Film mural → E85 (×1.25)** : tip-in riche = safe
 > - **Carburant réel moyen attendu :** E70 (70% éthanol) — moyenne annuelle pondérée France  
-> **Version :** 3.5 — Données réelles extraites du bin + descriptions XDF — 2026-04-10 — §13 complété avec valeurs stock vérifiées (13.1–13.9) + correction LTFT réel −8%/+12%
+> **Version :** 3.7 — 2026-04-11 — §9 récapitulatif complet avant/après (toutes tables) · §13 verdicts paramètres secondaires (LTFT en premier) · §16 transition E85↔SP95
 
 ---
 
@@ -1256,55 +1256,254 @@ Intervalle de remplacement : 20 000 km (vs 30 000 km essence)
 
 ---
 
-## 📊 9. Résumé des Modifications — Valeurs Concrètes
+## 📊 9. RÉCAPITULATIF GÉNÉRAL — Toutes les Valeurs Avant / Après
 
-> **Source des valeurs stock** : toutes les valeurs ci-dessous sont extraites directement de `VB67774_921S_Full.bin` (bin stock du véhicule cible, N52B30 330i, MSV70 9PPL921S). Les équations de conversion sont lues dans le XDF `BMW_Siemens_MSV70_9PPL921S_2560K.xdf`. Les adresses sont des adresses mémoire (offset dans le bin = adresse − 0x40000).
+> **Source :** valeurs extraites de `VB67774_921S_Full.bin` + équations du XDF `BMW_Siemens_MSV70_9PPL921S_2560K.xdf`. Toutes les adresses bin = adresse XDF − 0x40000.
 
-### Tableau de Toutes les Modifications (330i N52B30, injecteurs 13537531634)
+### Ordre d'application
 
-| # | Paramètre | Adresse bin | Raw stock | Valeur stock | Raw objectif | Objectif | Unité | Stratégie |
-|---|---|---|---|---|---|---|---|---|
-| 1 | `ip_mff_cor_opm_1_1` | 0x4E3D4 | 32 770 | **1.016** | **47 407** | **1.473** | — | E85 — multiplicateur injection opm1 banc1 (12×16 flat) |
-| 2 | `ip_mff_cor_opm_1_2` | 0x4E554 | 32 770 | **1.016** | **47 407** | **1.473** | — | E85 — idem opm1 banc2 (12×16 flat) |
-| 3 | `ip_mff_cor_opm_2_1` | 0x4E6D4 | 32 770 | **1.016** | **47 407** | **1.473** | — | E85 — idem opm2 banc1 (10×12 flat) |
-| 4 | `ip_mff_cor_opm_2_2` | 0x4E7C4 | 32 770 | **1.016** | **47 407** | **1.473** | — | E85 — idem opm2 banc2 (10×12 flat) |
-| 6 | `c_tco_n_mff_cst` | 0x44F2F | 87 | **17.25 °C** | **97** | **25.00 °C** | °C | Seuil cranking étendu |
-| 7 | `ip_mff_cst_opm_1` | 0x437DC | table 3×8 | voir §2.1 | table 3×8 | voir §2.1 | mg/stk | E70 — cranking exception noyage |
-| 8 | `ip_mff_cst_opm_2` | 0x4380C | table 3×8 | voir §2.1 | table 3×8 | voir §2.1 | mg/stk | E70 — idem mode papillon |
-| 9 | `ip_fac_lamb_wup` | 0x42764 | 128 partout | **1.000** partout | — | **1.03–1.08** (basses charges) | — | Warm-up post-démarrage |
-| 10 | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | table 8×8 | voir §5 | table 8×8 | voir §5 (×1.25) | — | E85 — film lent tip-in safe |
-| 11 | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | table 8×8 | voir §5 | table 8×8 | voir §5 (×1.25) | — | E85 — film lent mode papillon |
-| 12 | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | table 8×8 | voir §5 | table 8×8 | voir §5 (×1.25) | — | E85 — film rapide tip-in safe |
-| 13 | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | table 8×8 | voir §5 | table 8×8 | voir §5 (×1.25) | — | E85 — film rapide mode papillon |
-| 14 | `ip_iga_bas_max_knk__n__maf` | 0x4323A | table 8×8 | voir §3.1 | table 8×8 | voir §3.2 (objectif E60) | °CRK | E60 — plafond knock pire octane |
-| 15 | `ip_iga_st_bas_opm_1` | 0x43586 | table 6×8 | cranking only | table 6×8 | **optionnel** +1°/+2° zone froide | °CRK | Cranking uniquement |
-| 16 | `ip_iga_st_bas_opm_2` | 0x435B6 | table 6×8 | cranking only | table 6×8 | **optionnel** +1°/+2° zone froide | °CRK | Cranking mode papillon |
-| 17 | `ip_lamb_fl__n` | 0x436A2 | courbe 1×12 | **0.920** (0.871 @ 6500 rpm) | courbe 1×12 | **laisser stock** | λ | WOT déjà riche — stock suffisant |
-| 18 | `c_t_ti_dly_fl_1` | — | non extrait | — | — | **0 ms** | ms | Enrichissement WOT instantané |
-| 22 | `c_t_ti_dly_fl_2` | — | non extrait | — | — | **0 ms** | ms | Enrichissement WOT instantané |
-| 23 | `c_iga_ini` | — | non extrait | — | — | **stock +1° à +2°** si démarrage difficile | °CRK | Optionnel — allumage cranking |
+| Étape | Paramètre(s) | Obligatoire ? |
+|---|---|---|
+| **1** | `ip_mff_cor_opm_*` (×4) + `c_tco_n_mff_cst` | **OUI — base de tout** |
+| **2** | `ip_mff_cst_opm_1/2` + `ip_fac_lamb_wup` | **OUI — démarrage froid** |
+| **3** | `ip_ti_tco_pos_slow/fast_wf_opm_1/2` (×4) | Important — tip-in sans trou |
+| **4** | `ip_iga_bas_max_knk__n__maf` | Important — gain puissance |
+| **5** | `c_t_ti_dly_fl_1/2` + `ip_lamb_fl__n` (opt.) | Finition |
 
-### Ordre de Priorité d'Application
+---
+
+### ① Scalaires / paramètres à valeur unique
+
+| # | Paramètre | Adresse | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|---|---|
+| 1 | `ip_mff_cor_opm_1_1` (12×16 flat) | 0x4E3D4 | 32 770 | 1.016 | **47 407** | **1.473** |
+| 2 | `ip_mff_cor_opm_1_2` (12×16 flat) | 0x4E554 | 32 770 | 1.016 | **47 407** | **1.473** |
+| 3 | `ip_mff_cor_opm_2_1` (10×12 flat) | 0x4E6D4 | 32 770 | 1.016 | **47 407** | **1.473** |
+| 4 | `ip_mff_cor_opm_2_2` (10×12 flat) | 0x4E7C4 | 32 770 | 1.016 | **47 407** | **1.473** |
+| 5 | `c_tco_n_mff_cst` | 0x44F2F | 87 | 17.25 °C | **97** | **25.00 °C** |
+| 6 | `c_t_ti_dly_fl_1` | — | (à lire) | — | — | **0 ms** |
+| 7 | `c_t_ti_dly_fl_2` | — | (à lire) | — | — | **0 ms** |
+| 8 | `c_iga_ini` *(optionnel)* | — | (à lire) | — | — | **stock +1° à +2°** si démarrage > 5 tours |
+
+> Pour les 4 maps `ip_mff_cor_opm_*` : TunerPro → Ctrl+A → saisir raw **47 407** → répéter ×4. `c_fac_mff_ti_stnd` reste inchangé (overflow XDF empêche d'y encoder 0.491).
+
+---
+
+### ② ip_fac_lamb_wup — Warm-up post-démarrage @ 0x42764 (6×6, MAF × RPM)
+
+> Stock = 1.000 partout. Enrichit les basses charges pendant que la sonde monte en température.
 
 ```
-ÉTAPE 1 — OBLIGATOIRE :
-  ✅ ip_mff_cor_opm_1_1, ip_mff_cor_opm_1_2, ip_mff_cor_opm_2_1, ip_mff_cor_opm_2_2 → raw 47 407 (phys 1.473, ×1.45 E85 — open loop toujours riche)
-  ✅ c_tco_n_mff_cst → 25°C (raw 97)
+AVANT (stock) :
+MAF →           65    100    200    300    400    500 mg/stk
+ 704 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+1216 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+1760 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+2016 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+2496 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+3008 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
 
-ÉTAPE 2 — TRÈS IMPORTANT (démarrage) :
-  ✅ ip_mff_cst_opm_1 et ip_mff_cst_opm_2 → × 1.35 à × 2.20 selon température
-  ✅ ip_fac_lamb_wup (charge×RPM, PAS une table TCO) → 1.03–1.08 basses charges
+APRÈS (E85) :
+MAF →           65    100    200    300    400    500 mg/stk
+ 704 rpm :    1.08   1.08   1.05   1.03   1.00   1.00
+1216 rpm :    1.08   1.07   1.05   1.03   1.00   1.00
+1760 rpm :    1.07   1.06   1.04   1.03   1.00   1.00
+2016 rpm :    1.06   1.05   1.04   1.03   1.00   1.00
+2496 rpm :    1.05   1.05   1.03   1.03   1.00   1.00
+3008 rpm :    1.03   1.03   1.03   1.00   1.00   1.00
+```
 
-ÉTAPE 3 — IMPORTANT (confort de conduite) :
-  ✅ ip_ti_tco_pos_slow_wf_opm_1 / ip_ti_tco_pos_slow_wf_opm_2 → ×1.25 global (film mural lent — calibré E85, safe en open loop transitoire)
-  ✅ ip_ti_tco_pos_fast_wf_opm_1 / ip_ti_tco_pos_fast_wf_opm_2 → ×1.25 global (film mural rapide — même logique)
+---
 
-ÉTAPE 4 — PERFORMANCE (après validation des étapes 1–3) :
-  ✅ ip_iga_bas_max_knk__n__maf → +2° à +5° en haute charge (plafond MBT) — voir objectif E60 en §3.2
-  ✅ ip_lamb_fl__n WOT → laisser stock (déjà 0.920) ou dé-enrichir à 0.94-0.95
+### ③ ip_mff_cst_opm_1 — Cranking Valvetronic @ 0x437DC (3×8, mg/stk, cible E70)
 
-ÉTAPE 5 — FINITION :
-  ✅ c_t_ti_dly_fl_1 / c_t_ti_dly_fl_2 → 0 ms (enrichissement WOT instantané)
+```
+AVANT (stock) :
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  :  447.7   350.6   261.3  189.3  102.2   71.4   56.2   49.6
+RPM 320  :  320.3   260.7   202.1  152.1   87.9   61.3   46.5   39.1
+RPM 920  :  194.4   175.1   146.0  112.9   68.4   48.6   36.5   33.0
+
+APRÈS (E70 — facteurs ×1.35 à ×2.00 selon TCO) :
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  :  895.4   631.1   431.1  293.4  138.0   85.7   61.8   52.1
+RPM 320  :  640.6   469.3   333.5  235.8  118.7   73.6   51.2   41.1
+RPM 920  :  388.8   315.2   240.9  175.0   92.3   58.3   40.2   34.7
+```
+
+---
+
+### ④ ip_mff_cst_opm_2 — Cranking papillonné @ 0x4380C (3×8, mg/stk, cible E70)
+
+```
+AVANT (stock) :
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  :  731.1   527.0   362.8  245.0  138.2  102.1   67.8   49.6
+RPM 320  :  546.2   415.6   297.0  201.8  106.4   82.3   57.0   39.1
+RPM 920  :  363.0   281.4   215.8  159.0   84.1   65.8   47.0   34.5
+
+APRÈS (E70 — mêmes facteurs) :
+TCO (°C) :  -30.0   -20.2    -9.8    0.0   17.2   30.0   60.0   90.0
+RPM  80  : 1462.2   948.6   598.6  379.8  186.6  122.5   74.6   52.1
+RPM 320  : 1092.4   748.1   490.1  312.8  143.6   98.8   62.7   41.1
+RPM 920  :  726.0   506.5   356.1  246.5  113.5   79.0   51.7   36.2
+```
+
+---
+
+### ⑤ ip_iga_bas_max_knk__n__maf — Avance plafond knock @ 0x4323A (8×8, °CRK avant PMH)
+
+> Cible E60 (101 RON — pire carburant légal hivernal). Progressivité obligatoire : un palier à la fois, 50 km entre chaque.
+
+```
+AVANT (stock) :
+            MAF →  0.55   0.64   1.02   1.31   1.55   1.78   2.01   2.25 mg/stk
+ 608 rpm :        +10.50  +9.38  +1.88  -7.12 -12.00 -13.88 -15.00 -15.00
+1504 rpm :        +16.88 +15.38  +9.75  +5.25  -1.12  -6.00  -8.62  -9.38
+2016 rpm :        +21.75 +20.62 +15.38 +10.12  +6.00  +3.00   0.00  -2.25
+3008 rpm :        +25.88 +26.25 +21.00 +15.75 +10.50  +7.12  +4.88  +4.12
+4000 rpm :        +35.62 +34.88 +28.88 +20.62 +15.75 +12.75 +11.62  +7.12
+4992 rpm :        +38.62 +38.25 +33.00 +23.25 +20.25 +16.50 +13.12 +12.00
+6016 rpm :        +43.12 +39.75 +33.38 +23.25 +19.88 +18.00 +15.38 +13.50
+7008 rpm :        +43.50 +39.38 +33.38 +24.00 +20.62 +19.12 +17.62 +16.88
+
+APRÈS (objectif E60 = stock + incréments) :
+            MAF →  0.55   0.64   1.02   1.31   1.55   1.78   2.01   2.25 mg/stk
+ 608 rpm :        +10.50  +9.38  +1.88  -7.12 -12.00 -13.88 -15.00 -15.00
+1504 rpm :        +16.88 +15.38  +9.75  +5.25  -0.62  -5.50  -8.12  -8.88
+2016 rpm :        +21.75 +20.62 +15.38 +10.62  +7.00  +4.00  +1.00  -1.25
+3008 rpm :        +25.88 +26.25 +21.50 +16.75 +12.00  +8.62  +6.88  +6.12
+4000 rpm :        +35.62 +34.88 +29.38 +21.62 +17.25 +14.75 +13.62  +9.12
+4992 rpm :        +38.62 +38.25 +33.50 +24.25 +21.75 +18.50 +15.62 +14.50
+6016 rpm :        +43.12 +39.75 +33.88 +24.25 +21.88 +20.00 +17.88 +16.00
+7008 rpm :        +43.50 +39.38 +33.88 +25.00 +22.62 +21.12 +20.12 +19.38
+```
+
+---
+
+### ⑥ ip_lamb_fl__n — Lambda WOT @ 0x436A2 (1×12, f(RPM)) — OPTIONNEL
+
+```
+RPM    : 608   992   1216   1600   2016   2496   3008   3520   4128   4800   5504   6496
+
+Stock  : 0.920 0.920 0.913  0.920  0.920  0.920  0.920  0.920  0.920  0.920  0.901  0.871
+
+Option A (recommandée) : LAISSER STOCK — déjà λ 0.920 en WOT, aucune modification
+
+Option B (optionnelle — dé-enrichissement léger pour la puissance) :
+E85 B  : 0.950 0.950 0.945  0.950  0.950  0.945  0.945  0.940  0.935  0.930  0.920  0.900
+```
+
+---
+
+### ⑦ ip_ti_tco_pos_slow_wf_opm_1 — Film lent Valvetronic @ 0x4CBFC (8×8, TCO × RPM)
+
+```
+AVANT (stock) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :   36.0   36.0   32.0   26.0   18.0    8.0    4.0    2.0
+ 896 rpm :   38.0   38.0   34.0   28.0   20.0   10.0    6.0    2.0
+1216 rpm :   40.0   40.0   36.0   30.0   22.0   12.0    8.0    4.0
+1600 rpm :   42.0   42.0   38.0   32.0   24.0   14.0   10.0    6.0
+2208 rpm :   46.0   46.0   42.0   36.0   28.0   18.0   14.0   10.0
+3008 rpm :   50.0   50.0   46.0   40.0   32.0   22.0   18.0   14.0
+4192 rpm :   54.0   54.0   50.0   44.0   36.0   26.0   22.0   18.0
+5600 rpm :   58.0   58.0   54.0   48.0   40.0   30.0   26.0   22.0
+
+APRÈS (×1.25) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :   45.0   45.0   40.0   32.5   22.5   10.0    5.0    2.5
+ 896 rpm :   47.5   47.5   42.5   35.0   25.0   12.5    7.5    2.5
+1216 rpm :   50.0   50.0   45.0   37.5   27.5   15.0   10.0    5.0
+1600 rpm :   52.5   52.5   47.5   40.0   30.0   17.5   12.5    7.5
+2208 rpm :   57.5   57.5   52.5   45.0   35.0   22.5   17.5   12.5
+3008 rpm :   62.5   62.5   57.5   50.0   40.0   27.5   22.5   17.5
+4192 rpm :   67.5   67.5   62.5   55.0   45.0   32.5   27.5   22.5
+5600 rpm :   72.5   72.5   67.5   60.0   50.0   37.5   32.5   27.5
+```
+
+---
+
+### ⑧ ip_ti_tco_pos_slow_wf_opm_2 — Film lent papillonné @ 0x4CC7C (8×8)
+
+```
+AVANT (stock) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :  224.7  180.1  134.1  114.0   90.0   26.0   20.0   20.0
+ 896 rpm :  224.7  180.1  132.7  113.5   88.5   28.0   20.0   20.0
+1216 rpm :  224.7  180.1  132.9  107.0   81.0   28.0   20.0   20.0
+1600 rpm :  224.7  180.1  133.5   76.5   57.1   30.0   20.0   18.0
+2208 rpm :  224.7  180.3  134.6   76.7   57.6   32.0   22.0   18.0
+3008 rpm :  224.7  185.4  144.7  105.0   78.5   36.0   26.0   26.0
+4192 rpm :  234.9  194.5  155.0  127.7   96.6   52.3   37.8   33.6
+5600 rpm :  259.4  215.5  172.3  142.7  112.5   69.8   52.9   50.7
+
+APRÈS (×1.25) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :  280.9  225.1  167.6  142.5  112.5   32.5   25.0   25.0
+ 896 rpm :  280.9  225.1  165.9  141.9  110.6   35.0   25.0   25.0
+1216 rpm :  280.9  225.1  166.1  133.8  101.3   35.0   25.0   25.0
+1600 rpm :  280.9  225.1  166.9   95.6   71.4   37.5   25.0   22.5
+2208 rpm :  280.9  225.4  168.3   95.9   72.0   40.0   27.5   22.5
+3008 rpm :  280.9  231.8  180.9  131.3   98.1   45.0   32.5   32.5
+4192 rpm :  293.6  243.1  193.8  159.6  120.8   65.4   47.3   42.0
+5600 rpm :  324.3  269.4  215.4  178.4  140.6   87.3   66.1   63.4
+```
+
+---
+
+### ⑨ ip_ti_tco_pos_fast_wf_opm_1 — Film rapide Valvetronic @ 0x443FC (8×8)
+
+```
+AVANT (stock) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :   22.0   20.5   18.5   15.0   11.0    7.5    6.0    4.5
+ 896 rpm :   23.5   21.5   19.5   16.0   12.0    8.0    6.5    5.0
+1216 rpm :   25.5   23.0   21.0   17.5   13.5    9.0    7.0    5.5
+1600 rpm :   28.0   25.5   23.0   19.5   15.5   10.5    8.0    6.5
+2208 rpm :   32.5   29.5   26.5   23.0   18.5   13.0   10.5    9.0
+3008 rpm :   39.0   35.5   32.0   28.0   23.0   17.0   14.0   12.5
+4192 rpm :   52.5   47.5   43.0   38.0   32.0   25.0   21.5   19.5
+5600 rpm :   72.5   66.5   60.0   53.5   45.5   37.0   33.0   31.0
+
+APRÈS (×1.25) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :   27.5   25.6   23.1   18.8   13.8    9.4    7.5    5.6
+ 896 rpm :   29.4   26.9   24.4   20.0   15.0   10.0    8.1    6.3
+1216 rpm :   31.9   28.8   26.3   21.9   16.9   11.3    8.8    6.9
+1600 rpm :   35.0   31.9   28.8   24.4   19.4   13.1   10.0    8.1
+2208 rpm :   40.6   36.9   33.1   28.8   23.1   16.3   13.1   11.3
+3008 rpm :   48.8   44.4   40.0   35.0   28.8   21.3   17.5   15.6
+4192 rpm :   65.6   59.4   53.8   47.5   40.0   31.3   26.9   24.4
+5600 rpm :   90.6   83.1   75.0   66.9   56.9   46.3   41.3   38.8
+```
+
+---
+
+### ⑩ ip_ti_tco_pos_fast_wf_opm_2 — Film rapide papillonné @ 0x4443C (8×8)
+
+```
+AVANT (stock) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :   80.0   66.0   46.5   42.0   24.5   12.0   10.0   10.0
+ 896 rpm :   80.0   66.0   46.0   41.0   26.0   14.5   11.5   11.5
+1216 rpm :   80.0   66.0   47.0   37.0   25.5   16.5   13.0   13.0
+1600 rpm :   80.0   66.0   48.0   34.5   25.0   19.0   14.5   14.5
+2208 rpm :   80.0   66.0   50.5   35.0   27.5   22.0   16.0   16.0
+3008 rpm :   81.5   68.5   52.5   42.5   33.0   26.5   17.0   17.0
+4192 rpm :   88.0   73.0   57.0   49.0   40.0   30.5   23.0   20.5
+5600 rpm :   94.0   78.5   61.5   54.5   47.5   34.5   28.5   26.0
+
+APRÈS (×1.25) :
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
+ 608 rpm :  100.0   82.5   58.1   52.5   30.6   15.0   12.5   12.5
+ 896 rpm :  100.0   82.5   57.5   51.3   32.5   18.1   14.4   14.4
+1216 rpm :  100.0   82.5   58.8   46.3   31.9   20.6   16.3   16.3
+1600 rpm :  100.0   82.5   60.0   43.1   31.3   23.8   18.1   18.1
+2208 rpm :  100.0   82.5   63.1   43.8   34.4   27.5   20.0   20.0
+3008 rpm :  101.9   85.6   65.6   53.1   41.3   33.1   21.3   21.3
+4192 rpm :  110.0   91.3   71.3   61.3   50.0   38.1   28.8   25.6
+5600 rpm :  117.5   98.1   76.9   68.1   59.4   43.1   35.6   32.5
 ```
 
 ---
@@ -1452,15 +1651,76 @@ PRÉPARATION PRATIQUE :
 
 ---
 
-## 📚 13. Paramètres E85 NON couverts par ce tuto (à investiguer)
+## 🔍 13. Paramètres Secondaires — Verdicts et Valeurs Stock
 
-Ce tuto couvre les modifications **essentielles et validées** pour une carto E85 de base sur MSV70 N52B30. Plusieurs sous-systèmes du MSV70 ont aussi un impact sur le comportement E85 mais ne sont pas traités ici en détail, soit parce qu'ils sont complexes, soit parce qu'ils dépassent le scope d'une conversion grand public, soit parce que leur impact réel reste à valider sur banc.
-
-Les données ci-dessous sont **extraites du bin stock** `VB67774_921S_Full.bin` via le XDF `BMW_Siemens_MSV70_9PPL921S_2560K.xdf`. Les valeurs stock sont vérifiées.
+Pour chaque paramètre, un verdict clair indique l'action à prendre. Toutes les valeurs sont extraites de `VB67774_921S_Full.bin`.
 
 ---
 
-### 13.1 — Enrichissement transitoire pleine charge
+### 13.1 — Limites LTFT/STFT — `c_fac_max_*_rng_lam_ad` / `c_fac_min_*_rng_lam_ad`
+
+> **⚠️ À lire en premier — corrige l'idée reçue du "±25%"**
+
+**Valeurs réelles lues dans le bin :**
+
+| Paramètre | Adresse | Valeur stock | Description |
+|---|---|---|---|
+| `c_fac_max_h_rng_lam_ad` | 0x47F4C | **+12.0 %** | Limite haute LTFT — haute charge |
+| `c_fac_max_l_rng_lam_ad` | 0x47F4E | **+12.0 %** | Limite haute LTFT — basse charge |
+| `c_fac_min_h_rng_lam_ad` | 0x47F50 | **92.0 %** | Limite basse (100%−92% = **−8%**) — haute charge |
+| `c_fac_min_l_rng_lam_ad` | 0x47F52 | **92.0 %** | Limite basse — basse charge |
+| `c_lam_mv_dyw_dly` | 0x44B3E | **7.7 %** | Fenêtre dynamique STFT |
+
+Le **±25% souvent cité est faux** sur ce bin MSV70. Les vraies limites sont asymétriques :
+
+| Trim | Valeur réelle |
+|---|---|
+| LTFT max positif | **+12 %** |
+| LTFT max négatif | **−8 %** |
+| STFT fenêtre dynamique | **±7.7 %** |
+
+L'asymétrie (−8%/+12%) est intentionnelle : le MSV70 tolère mieux un mélange légèrement riche qu'un mélange pauvre.
+
+**Implications pour la conversion :**
+- `ip_mff_cor_opm` calibré E85 (raw 47 407) + carburant réel E70 → LTFT ≈ **−6 à −8%** → dans les limites, acceptable
+- `ip_mff_cor_opm` calibré E85 + E60 hivernal → LTFT cible ≈ **−13%** → dépasse le plafond → ECU ne compense pas complètement → mélange légèrement riche persistant (acceptable mais pas parfait)
+
+**Verdict : ne pas modifier.** Si LTFT plafonne à −8% en permanence : affiner `ip_mff_cor_opm` vers E70 (raw 44 581) selon le titre réel de vos stations.
+
+---
+
+### 13.2 — Warm-up lambda au ralenti : `ip_fac_lamb_wup_is`
+
+**Paramètre :** `ip_fac_lamb_wup_is` @ 0x42788 — facteur warm-up spécifique au **ralenti** (idle speed)
+
+| Structure | Axe X | Axe Y |
+|---|---|---|
+| 3×4, uint8, ×0.007813 | MAF : 65/100/200/300 mg/stk | RPM : 704/1216/1760 tr/min |
+
+**Valeurs stock :**
+```
+MAF (mg/stk) →  65.0  100.0  200.0  300.0
+ 704 rpm :       1.00   1.00   1.00   1.00
+1216 rpm :       1.00   1.00   1.00   1.00
+1760 rpm :       1.00   1.00   1.00   1.00
+```
+
+**Distinction avec `ip_fac_lamb_wup` (§2.3) :** la table §2.3 couvre toute la phase de chauffe (tous régimes). `ip_fac_lamb_wup_is` est uniquement actif au **ralenti** pendant le warm-up.
+
+**Modification suggérée (si ralenti instable après correction cranking) :**
+```
+MAF (mg/stk) →  65.0  100.0  200.0  300.0
+ 704 rpm :       1.05   1.03   1.00   1.00
+1216 rpm :       1.03   1.02   1.00   1.00
+1760 rpm :       1.00   1.00   1.00   1.00
+```
+> Encode en uint8 : 1.05 = raw 134, 1.03 = raw 132, 1.02 = raw 131.
+
+**Verdict : modifier uniquement si** ralenti instable pendant warm-up malgré `ip_mff_cst_opm_*` et `ip_fac_lamb_wup` corrects.
+
+---
+
+### 13.3 — Enrichissement transitoire pleine charge
 
 **Paramètres identifiés dans le bin :**
 
@@ -1490,169 +1750,71 @@ tous RPM :        0.000  0.049  0.098  0.147  0.197  0.393  0.688  0.983
 
 Ces tables pilotent l'enrichissement temporaire lors d'un appel de couple brutal (kickdown). La `KF_FTRANSVL` est un multiplicateur sur la masse carburant calculée : à charge normalisée ~0.5, le facteur est ~0.39 stock — ce qui signifie que le transitoire n'applique que ~40% de l'enrichissement maximum en zone intermédiaire.
 
-Sur E85, si vous constatez des **trous d'accélération brefs uniquement lors de kickdown** (et non lors d'une accélération progressive), c'est l'indice que ces tables manquent d'enrichissement transitoire. Augmenter les cellules de mi-charge de `KF_FTRANSVL` de +10 à +20% dans la zone 0.393–0.786 peut corriger ce symptôme. **Le film mural (§5) couvre déjà une partie de ce phénomène** — diagnostiquer d'abord lequel des deux est en cause avant de modifier `KF_FTRANSVL`.
+Sur E85, si vous constatez des **trous d'accélération brefs uniquement lors de kickdown** (et non lors d'une accélération progressive), c'est l'indice que ces tables manquent d'enrichissement transitoire. Augmenter les cellules de mi-charge de `KF_FTRANSVL` de +10 à +20% dans la zone 0.393–0.786 peut corriger ce symptôme.
+
+**Verdict : ne pas modifier en première intention.** Le film mural §5 couvre la majorité des transitoires — diagnostiquer §5 d'abord. Intervenir sur `KF_FTRANSVL` uniquement si les trous persistent après validation §5 et exclusivement sur kickdown brutal.
 
 ---
 
-### 13.2 — Warm-up lambda au ralenti
+### 13.4 — Stratégie de chauffe catalyseur : `ip_fac_eff_iga_ch_cold_opm_1`
 
-**Paramètre :** `ip_fac_lamb_wup_is` @ 0x42788 — **i**dle **s**peed warm-up lambda factor
-
-| Structure | Axe X | Axe Y | Unité |
-|---|---|---|---|
-| 3×4, uint8, ×0.007813 | MAF : 65 / 100 / 200 / 300 mg/stk | RPM : 704 / 1216 / 1760 tr/min | facteur (-) |
-
-**Valeurs stock :**
-```
-MAF (mg/stk) →  65.0  100.0  200.0  300.0
- 704 rpm :       1.00   1.00   1.00   1.00
-1216 rpm :       1.00   1.00   1.00   1.00
-1760 rpm :       1.00   1.00   1.00   1.00
-```
-> Stock : 1.000 partout — aucun enrichissement spécifique au ralenti pendant le warm-up.
-
-**Distinction avec `ip_fac_lamb_wup` (§2.3) :**
-
-- `ip_fac_lamb_wup` : facteur warm-up général, actif pendant toute la phase de chauffe, axé sur MAF × RPM tout régime
-- `ip_fac_lamb_wup_is` : uniquement actif au **ralenti** (idle speed) pendant le warm-up — zone basse charge, bas régime
-
-**Impact E85 :**
-
-Sur E85 froid (<10°C), le ralenti peut être instable les 30 premières secondes après démarrage : oscillations RPM, hésitations. Si `ip_mff_cst_opm_*` (cranking, §2.1) est déjà bien calibré et que le problème persiste en maintien de ralenti (pas au démarrage lui-même), c'est ici qu'intervenir.
-
-**Modification suggérée :**
-```
-MAF (mg/stk) →  65.0  100.0  200.0  300.0
- 704 rpm :       1.05   1.03   1.00   1.00   ← enrichir basse charge ralenti froid
-1216 rpm :       1.03   1.02   1.00   1.00   ← légèrement
-1760 rpm :       1.00   1.00   1.00   1.00   ← ne pas toucher
-```
-> Encode en uint8 : valeur = target / 0.007813 → 1.05 = raw 134, 1.03 = raw 132, 1.02 = raw 131.
-
-**Condition d'intervention :** uniquement si ralenti instable pendant warm-up après correction du cranking. Ne pas modifier si `ip_fac_lamb_wup` est déjà enrichi.
-
----
-
-### 13.3 — Stratégie de chauffe catalyseur (cold start retard)
-
-**Paramètres identifiés :**
-
-| Paramètre | Adresse | Structure | Description XDF |
-|---|---|---|---|
-| `ip_fac_eff_iga_ch_cold_opm_1` | 0x4A444 | 10×10, uint8, ×0.044 | Factor for catalyst heating cold engine — mode normal |
-| `ip_fac_eff_iga_ch_cold_opm_2` | 0x4A4A8 | 10×10, uint8, ×0.044 | Factor for catalyst heating cold engine — mode papillonné |
-| `ip_lamb_sawup` | 0x4BBDC | 8×8, uint16, ×0.000977 | Basic lambda correction for rich catalyst heating |
-| `ip_lamb_sawup_is` | 0x4BC5C | 8×8, uint16, ×0.000977 | Idem au ralenti (idle speed) |
-
-**Valeurs stock `ip_fac_eff_iga_ch_cold_opm_1`** — axe X (TPS 10–65%), axe Y (RPM 704–5888) :
-```
-        TPS% →  10.0  15.0  20.0  25.0  30.0  35.0  40.0  45.0  50.0  65.0
- 704 rpm :       5.98  6.95  6.51  6.51  5.98  5.50  4.58  4.49  4.36  4.40
- 896 rpm :       5.98  7.30  6.86  6.69  6.25  5.54  4.93  4.58  4.49  4.49
-1056 rpm :       6.12  7.48  7.48  6.25  5.76  5.24  5.02  4.88  4.62  4.62
-1216 rpm :       6.20  7.48  7.26  5.98  5.50  5.02  4.80  4.80  4.75  4.75
-1504 rpm :       5.28  7.35  6.25  5.50  5.24  4.75  4.75  4.75  4.53  4.75
-1760 rpm :       4.22  7.00  5.63  4.88  4.71  4.75  4.80  4.80  4.80  4.88
-2016 rpm :       3.83  5.94  4.44  4.14  3.92  4.53  4.58  4.80  4.80  4.66
-2304 rpm :       3.39  4.71  3.08  3.30  2.99  3.65  4.31  4.58  4.80  4.40
-2848 rpm :       3.30  4.14  2.82  3.30  3.78  4.40  4.71  5.10  5.37  5.06
-5888 rpm :       5.76  4.84  4.53  4.88  4.84  5.72  6.03  5.02  4.40  4.75
-```
-> Ces valeurs sont des **facteurs de retard d'allumage** (en degrés × 0.044) appliqués spécifiquement pendant la phase de chauffe catalyseur. Le retard maximum atteint ~7.5° (raw 170 × 0.044), ce qui génère des EGT élevées — c'est voulu pour chauffer rapidement le catalyseur froid.
-
-**Valeurs stock `ip_lamb_sawup`** — plage ~0.935 à 1.008 :
-> Lambda cible légèrement riche à froid pour la chauffe catalyseur. Avec pompe à air secondaire (SAP), ces valeurs sont actives et poussent le catalyseur à monter en température rapidement.
-
-**Impact E85 :**
-
-L'éthanol brûle à une température de combustion légèrement plus basse que l'essence (chaleur de vaporisation élevée, meilleur refroidissement chambre). Résultat : les EGT de démarrage sur E85 sont ~30–50°C inférieures. La stratégie de retard d'allumage est moins efficace car elle génère moins de chaleur dans l'échappement.
-
-**Conséquences pratiques :**
-- Le catalyseur met légèrement plus longtemps à atteindre sa température de light-off (~350°C)
-- DTC P0420/P0430 (efficacité catalyseur) peuvent apparaître temporairement les premiers 500 km
-- Ces DTC disparaissent habituellement une fois les adaptations recalculées
-
-**Ne pas modifier `ip_fac_eff_iga_ch_cold_opm_*` en première intention.** Intervenir uniquement si P0420/P0430 persistent au-delà de 500 km après effacement des adaptations via ISTA.
-
----
-
-### 13.4 — Protection température échappement (EGT)
-
-**Paramètre :** `c_teg_max_iga` @ 0x44F54
-
-| Valeur stock | Unité | Description XDF |
+| Paramètre | Adresse | Structure |
 |---|---|---|
-| **865 °C** | °C | Maximum allowable exhaust gas temperature for spark retard control |
+| `ip_fac_eff_iga_ch_cold_opm_1` | 0x4A444 | 10×10, uint8, ×0.044, f(TPS × RPM) |
+| `ip_fac_eff_iga_ch_cold_opm_2` | 0x4A4A8 | 10×10, uint8, ×0.044 |
 
-Au-delà de ce seuil, le MSV70 retire automatiquement l'avance à l'allumage pour protéger le catalyseur et les turbines (sur turbo) / soupapes (sur N52).
+Facteurs de retard d'allumage (~4–7.5°) appliqués pendant la chauffe catalyseur pour générer des EGT élevées et accélérer le light-off. L'éthanol brûle à une température légèrement plus basse → EGT démarrage E85 ~30–50°C inférieures → catalyseur met un peu plus longtemps à monter en température.
 
-**Sur E85, l'EGT est typiquement 30–50 °C plus basse à puissance équivalente**, grâce à la chaleur de vaporisation élevée de l'éthanol qui refroidit la chambre de combustion. Conséquence directe :
+**Conséquences pratiques :** DTC P0420/P0430 peuvent apparaître les 200–500 premiers km → normaux, disparaissent après stabilisation des LTFT.
+
+**Verdict : ne pas modifier.** Si P0420/P0430 persistent > 500 km : effacer adaptations ISTA + 200 km supplémentaires.
+
+---
+
+### 13.5 — Protection EGT : `c_teg_max_iga`
+
+| Paramètre | Adresse | Valeur stock |
+|---|---|---|
+| `c_teg_max_iga` | 0x44F54 | **865 °C** |
+
+Sur E85, l'EGT WOT est ~30–50°C inférieure → protection se déclenche beaucoup moins souvent. Cette marge thermique justifie les +2.5° d'avance de la stratégie E60-safe (§3).
 
 | Situation | Essence | E85 |
 |---|---|---|
 | EGT WOT 6500 rpm | ~800–850°C | ~750–800°C |
-| Déclenchement protection | Fréquent à haute charge | Rare |
-| Marge disponible pour +avance | Réduite | Augmentée |
+| Déclenchement protection | Fréquent haute charge | Rare |
 
-**Ne pas modifier ce seuil.** Il est calibré pour protéger le moteur en cas de panne sonde lambda ou de carburant hors spec. Le réduire n'apporte rien sur E85 ; l'augmenter est dangereux.
-
-**Information utile pour §3 (avance) :** la marge EGT plus large sur E85 justifie physiquement les +2.5° d'avance de la stratégie E60-safe — non seulement l'octane le permet, mais l'EGT inférieur laisse de la marge thermique.
+**Verdict : ne pas modifier.** Protège contre pannes sonde lambda ou carburant hors spec. Augmenter ce seuil est dangereux.
 
 ---
 
-### 13.5 — Film mural induit par Valvetronic (spécifique N52)
+### 13.6 — Film mural Valvetronic (N52) : `ip_fac_ti_maf_sp_wf_pos_opm_1`
 
-**Paramètres identifiés :**
-
-| Paramètre | Adresse | Structure | Description XDF |
-|---|---|---|---|
-| `ip_fac_ti_maf_sp_wf_pos_opm_1` | 0x42C5A | 1×8, uint8, ×0.007813 | Correction TCO pour film mural déclenché par ↑MAF setpoint (Valvetronic levée croissante) |
-| `ip_fac_ti_maf_sp_wf_pos_opm_2` | 0x42C62 | 1×8, uint8, ×0.007813 | Idem mode papillonné |
-| `ip_fac_ti_maf_sp_wf_neg_opm_1` | 0x42C4A | 1×8, uint8, ×0.007813 | Correction TCO pour film mural déclenché par ↓MAF setpoint (Valvetronic levée décroissante) |
-| `ip_fac_ti_maf_sp_wf_neg_opm_2` | 0x42C52 | 1×8, uint8, ×0.007813 | Idem mode papillonné |
-| `ip_crlc_pos_maf_sp_wf_opm_1` | 0x4234C | 8×3, uint16, ×0.000015 | Constante de corrélation film mural MAF-SP déclenché — positif |
-| `ip_crlc_pos_maf_sp_wf_opm_2` | 0x4237C | 8×3, uint16, ×0.000015 | Idem mode papillonné |
-| `ip_ti_cor_tps_mod_wf` | 0x4C93C | 8×8, uint16, ×0.004 ms | Temps d'injection film mural pour changement de levée en mode TPS |
-| `ip_fac_tps_mod_wf` | 0x42CF4 | scalaire | Pondération film mural déclenché par changement levée en TPS-mode |
-
-**Valeurs stock extraites du bin :**
-
-`ip_fac_ti_maf_sp_wf_pos_opm_1` — axe X (TCO : -30 à 115°C) :
-```
-TCO (°C) →  -30.0  -15.0    0.0   15.0   35.3   65.3   84.8  114.8
-facteur :    0.414  0.399  0.383  0.359  0.313  0.234  0.211  0.195
-```
-
-`ip_fac_ti_maf_sp_wf_neg_opm_1` — même axe X :
-```
-TCO (°C) →  -30.0  -15.0    0.0   15.0   35.3   65.3   84.8  114.8
-facteur :    0.406  0.399  0.375  0.344  0.274  0.125  0.047  0.008
-```
-> Le facteur négatif (levée décroissante) tombe quasi à zéro à chaud (0.008 @ 115°C) — normal car à chaud le film mural sur collecteur est minimal.
-
-`ip_fac_tps_mod_wf` = **−2.0** (scalaire) — ce scalaire négatif indique que la pondération du film mural en mode TPS est inactive ou inversée par design.
-
-**Physique du phénomène (spécifique N52 Valvetronic) :**
-
-Sur un moteur conventionnel, le film mural se constitue lors des variations du papillon. Sur le N52, c'est la levée Valvetronic qui joue ce rôle : chaque changement de levée modifie le débit d'air d'admission, ce qui crée une variation de MAF setpoint (`MAF_SP`). Le MSV70 a une compensation spécifique pour ce phénomène — distincte du film mural TCO/RPM couvert en §5.
-
-**Impact E85 :**
-
-L'éthanol a une chaleur de vaporisation ~2.7× supérieure à l'essence. Le film mural sur les parois du collecteur s'évapore plus lentement sur E85, surtout à froid. La correction Valvetronic de `ip_fac_ti_maf_sp_wf_pos_opm_1` devrait théoriquement être augmentée de ~15–25% aux températures froides (TCO < 15°C) pour compenser le film plus persistant.
-
-**Symptôme d'inadéquation :** couple instable lors de changements rapides de pédale (pas en tip-in brusque, mais en modulation douce de la charge) — spécifiquement les 5 premières minutes de conduite sur E85 froid.
-
-**À ne modifier qu'après** avoir validé et stabilisé les tables de film mural TCO/RPM de §5.
-
----
-
-### 13.6 — Coupure d'injection en décélération (Schubabschaltung / fuel cutoff)
-
-**Paramètre :** `id_maf_n_min_fcut_fast` @ 0x41E1C
-
-| Structure | Axe X (RPM) | Axe Y (MAF mg/stk) |
+| Paramètre | Adresse | Structure |
 |---|---|---|
-| 4×4, uint8 (booléen) | 1200 / 2400 / 3600 / 4800 | 100 / 125 / 225 / 375 |
+| `ip_fac_ti_maf_sp_wf_pos_opm_1` | 0x42C5A | 1×8, uint8, ×0.007813, f(TCO) |
+| `ip_fac_ti_maf_sp_wf_neg_opm_1` | 0x42C4A | 1×8, uint8, ×0.007813 |
+
+**Valeurs stock :**
+```
+TCO (°C) →  -30.0  -15.0    0.0   15.0   35.3   65.3   84.8  114.8
+pos :        0.414  0.399  0.383  0.359  0.313  0.234  0.211  0.195
+neg :        0.406  0.399  0.375  0.344  0.274  0.125  0.047  0.008
+```
+
+Sur N52, c'est la levée Valvetronic (pas le papillon) qui crée les variations de MAF setpoint. Le MSV70 a une compensation spécifique pour le film mural induit par ces changements de levée — distincte du film mural TCO/RPM de §5.
+
+**Symptôme d'inadéquation :** couple instable lors de modulations douces de la pédale (pas de tip-in brusque), spécifiquement les 5 premières minutes à froid.
+
+**Verdict : ne pas modifier en première intention.** Valider d'abord §5. Si symptôme persiste après validation §5 : +15 à +25% sur TCO < 15°C de `ip_fac_ti_maf_sp_wf_pos_opm_1`.
+
+---
+
+### 13.7 — Coupure injection décélération : `id_maf_n_min_fcut_fast`
+
+| Paramètre | Adresse | Structure |
+|---|---|---|
+| `id_maf_n_min_fcut_fast` | 0x41E1C | 4×4, uint8 booléen, f(RPM × MAF) |
 
 **Valeurs stock :**
 ```
@@ -1662,60 +1824,16 @@ L'éthanol a une chaleur de vaporisation ~2.7× supérieure à l'essence. Le fil
 3600 rpm :      0     0     1     1
 4800 rpm :      0     1     1     1
 ```
-> `1` = fuel cutoff rapide activé dans cette zone. Le cutoff est actif au-dessus de ~3600 rpm à charge significative (>225 mg/stk), ou à partir de 2400 rpm à très haute charge (>375 mg/stk).
 
-**Impact E85 :** aucune modification nécessaire. Le cutoff décélération fonctionne identiquement sur E85 — la coupure d'injection est indépendante du type de carburant.
-
-**Information utile :** lors de la reprise après un cutoff, l'allumage du mélange E85 est légèrement plus lent qu'avec l'essence (surtout à froid). Si vous constatez des à-coups à la reprise après décélération, vérifier d'abord `ip_fac_lamb_wup` et le cranking plutôt que le cutoff lui-même.
+**Verdict : ne pas modifier.** Cutoff indépendant du type de carburant. Si à-coups à la reprise après décélération : vérifier `ip_fac_lamb_wup` et le cranking, pas le cutoff.
 
 ---
 
-### 13.7 — Limites de fuel trims (STFT/LTFT clamps)
+### 13.8 — Phasage injection EOI : `ip_eoi_1_bas`
 
-**Paramètres localisés dans le bin :**
-
-| Paramètre | Adresse | Valeur stock | Description |
-|---|---|---|---|
-| `c_fac_max_h_rng_lam_ad` | 0x47F4C | **+12.0 %** | Limite haute de l'adaptation lambda — zone haute charge |
-| `c_fac_max_l_rng_lam_ad` | 0x47F4E | **+12.0 %** | Limite haute de l'adaptation lambda — zone basse charge |
-| `c_fac_min_h_rng_lam_ad` | 0x47F50 | **92.0 %** | Limite basse (100%−92% = −8%) — zone haute charge |
-| `c_fac_min_l_rng_lam_ad` | 0x47F52 | **92.0 %** | Limite basse — zone basse charge |
-| `c_lam_mv_dyw_dly` | 0x44B3E | **7.7 %** | Seuil dynamique lambda (STFT window) |
-
-**Correction de la valeur ±25 % souvent citée :**
-
-Le tuto mentionnait que « le LTFT peut absorber ±25 % » — **c'est inexact sur ce bin MSV70.** Les paramètres réels lus dans le bin sont :
-
-| Trim | Valeur réelle (bin stock) | Note |
+| Paramètre | Adresse | Structure |
 |---|---|---|
-| LTFT limite positive | **+12 %** | `c_fac_max_*_rng_lam_ad` |
-| LTFT limite négative | **−8 %** | 100% − 92% = −8% |
-| STFT fenêtre dynamique | **±7.7 %** | `c_lam_mv_dyw_dly` |
-
-> La plage asymétrique (−8% / +12%) est intentionnelle : le MSV70 est plus tolérant à un mélange trop riche (LTFT positif = ECU réduit l'injection) qu'à un mélange trop pauvre.
-
-**Zones d'activation de l'adaptation LTFT :**
-
-| Zone | RPM | MAF seuil |
-|---|---|---|
-| Basse charge | 1056–3296 rpm | < 5.5 mg/stk |
-| Haute charge | 2016–6016 rpm | < 55 mg/stk |
-
-**Implication pour la conversion E85 :**
-
-Avec `ip_mff_cor_opm` calibré pour E85 (raw 47 407, phys 1.473, effectif ×1.45) mais un carburant réel E70, l'ECU doit réduire l'injection de ~7% en boucle fermée → LTFT attendu : **−7 à −8%**. Cela rentre exactement dans la limite de −8% — on est à la limite du plafond. Si vous avez du E60 hivernal (calibration E85 alors que vous avez E60), le LTFT devrait se caler à **−12 à −13%**, ce qui dépasse le plafond → l'ECU ne pourra pas compenser complètement → mélange légèrement riche persistant en boucle fermée (acceptable, mais pas parfait).
-
-**Conclusion pratique :** si vos LTFT plafonnent en négatif à −8% de manière permanente, c'est que votre facteur ip_mff_cor est trop élevé pour le carburant réel en station. Affiner `ip_mff_cor_opm` (toutes les 4 maps) selon le titre éthanol réel (§1).
-
----
-
-### 13.8 — Phasage injection EOI
-
-**Paramètre :** `ip_eoi_1_bas` @ 0x4E914 — End Of Injection angle (premier injecteur)
-
-| Structure | Axe X (durée injection) | Axe Y (RPM) | Unité Z |
-|---|---|---|---|
-| 8×6, uint16, ×0.375 | 0.4 / 2.0 / 3.7 / 6.0 / 12.8 / 14.0 ms | 512 / 704 / 992 / 1504 / 2016 / 3008 / 4512 / 6496 rpm | °CRK (degrees crankshaft) |
+| `ip_eoi_1_bas` | 0x4E914 | 8×6, uint16, ×0.375, f(TI × RPM), °CRK |
 
 **Valeurs stock (°CRK après PMH) :**
 ```
@@ -1730,53 +1848,33 @@ Avec `ip_mff_cor_opm` calibré pour E85 (raw 47 407, phys 1.473, effectif ×1.45
 6496 rpm :          225.8  230.3  225.4  205.5   97.5   70.5
 ```
 
-**Physique de l'EOI sur port injection N52 :**
+Sur E85, la durée d'injection augmente de +45% → injection commence plus tôt pour le même angle EOI → reste dans la fenêtre acceptable pour les injecteurs stock sur toute la plage de TI concernée.
 
-L'angle EOI définit précisément *quand* l'injection se termine par rapport au PMH. Sur port injection, l'optimum est d'avoir fini l'injection avant que la soupape d'admission s'ouvre (~140–160°CRK après PMH d'allumage, soit ~200–220° après PMH d'admission). Les valeurs stock autour de 200–240°CRK correspondent à cette fenêtre optimale aux régimes normaux.
-
-Aux longues durées d'injection (12.8–14.0 ms — cas WOT), l'EOI tombe à ~66–100°CRK : l'injection finit beaucoup plus tôt, parfois avec soupape d'admission déjà ouverte — c'est inévitable à haute charge car l'injection doit commencer très tôt pour finir à temps.
-
-**Impact E85 (+45% de durée d'injection) :**
-
-Sur E85, la durée d'injection augmente de ~45%. Pour le même angle EOI, l'injection démarre ~45% plus tôt. À bas régime et faible charge, cela reste dans la fenêtre acceptable (soupape fermée). À haute charge (longues TI), l'injection peut finir encore plus tardivement — mais le MSV70 gère cela automatiquement via la même table EOI sans modification.
-
-**En pratique :** la table `ip_eoi_1_bas` n'a pas besoin d'être modifiée pour E85 sur injecteurs stock. Si les injecteurs sont remplacés par des injecteurs à plus haut débit (durées d'injection réduites), la table devient pertinente — c'est une modification avancée hors scope de ce tuto.
+**Verdict : ne pas modifier avec les injecteurs stock.** Si injecteurs haute débit remplacés (TI réduite) : recalculer EOI — modification avancée hors scope.
 
 ---
 
-### 13.9 — Pression de rail / `ip_fup_cor`
+### 13.9 — Pression de rail : `c_fup_nom` / `ip_fup_cor`
 
-**Paramètres :**
+| Paramètre | Adresse | Valeur stock |
+|---|---|---|
+| `c_fup_nom` | 0x44B0C | **5000 hPa (5.0 bar)** |
+| `ip_fup_cor` | 0x4AF44 | Table 6×6, f(débit L/h) |
 
-| Paramètre | Adresse | Valeur stock | Unité |
-|---|---|---|---|
-| `c_fup_nom` | 0x44B0C | **5000 hPa** (5.0 bar) | hPa |
-| `ip_fup_cor` | 0x4AF44 | Table 6×6 | hPa (correction) |
-
-**Valeurs stock `ip_fup_cor`** — axe X (débit L/h : 50 à 140), axe Y (tension batterie : 0 à 5V) :
+**Valeurs stock `ip_fup_cor` :**
 ```
         débit (L/h) →    50     80    100    110    120    140
 toutes tensions :      +0.06  -17.0  -34.0  -46.0  -63.0  -101.0 hPa
 ```
-> Toutes les lignes de tension sont identiques — la tension batterie n'influe pas sur la correction de pression rail dans ce bin. Seul le débit compte.
 
-**Interprétation :**
+En WOT E85 (~130 L/h requis), chute de pression interpolée ≈ −80 hPa → pression effective ~4920 hPa. Pompe stock dans les limites si en bon état (test ≥ 2.0 L/30 sec).
 
-À fort débit (140 L/h), la pompe stock génère une chute de pression de −101 hPa (−1.01 bar) par rapport à la pression nominale. La pression rail effective serait alors : 5000 − 101 = **4899 hPa (4.9 bar)** — soit une chute de ~2%. C'est acceptable avec l'essence.
-
-**Sur E85 (+30% de débit) :**
-
-En WOT prolongé sur E85, le débit requis est ~130 L/h (vs ~100 L/h essence). La correction `ip_fup_cor` à 130 L/h interpolée est environ −80 hPa → pression effective ~4920 hPa. La pompe stock reste dans les limites.
-
-Cependant, si la pompe est en fin de vie (>150 000 km ou débit <2.0 L/30s au test), la chute réelle peut dépasser ces valeurs calculées :
-
-| Symptôme | Cause probable | Solution |
+| Symptôme | Cause | Solution |
 |---|---|---|
-| Perte de couple progressive sur accélération longue (>10 sec WOT) | Chute de pression rail | Remplacer pompe (→ N54 swap ou Walbro 255) |
-| STFT riche en WOT (lambda amont < 0.90 log) | Pression trop haute (rare) | Vérifier régulateur pression |
+| Perte de couple progressive WOT > 10 sec | Chute pression rail | Remplacer pompe (N54 swap ou Walbro 255) |
 | DTC P0087 (fuel pressure low) | Pompe insuffisante | Remplacement pompe obligatoire |
 
-**La correction `ip_fup_cor` est une table de lecture seule pour diagnostic — ne pas modifier.** Si la pression rail s'effondre sur E85, la solution est mécanique (pompe à plus grand débit), pas logicielle.
+**Verdict : ne pas modifier.** Si problème de pression : solution mécanique (pompe), pas logicielle.
 
 ---
 
@@ -1915,6 +2013,61 @@ Un capteur flex-fuel mesure en temps réel le titre en éthanol du carburant et 
 
 ---
 
+## 🔄 16. Transition E85 ↔ SP95 — Ordre des Opérations
+
+> **Règle absolue : flasher d'abord, faire le plein ensuite.** L'inverse expose le moteur à une calibration complètement désadaptée.
+
+---
+
+### SP95 → E85 (première conversion)
+
+| Étape | Action | Pourquoi |
+|---|---|---|
+| **1** | **Flash le bin E85** (moteur froid, chez vous) | Calibration correcte avant tout |
+| **2** | **Reset LTFT** via INPA ou NCS | Repartir à zéro — les LTFT essence (~0%) biaiseraient la lecture E85 |
+| **3** | **Trajet chez vous → station** (quelques km, conduite douce < 3000 rpm) | Sur SP95 + calibration E85 → STFT −20 à −25% (trop riche) → safe sur quelques km |
+| **4** | **Plein E85** | Dès le premier démarrage après : calibration cohérente |
+| **5** | **Lire STFT** au ralenti chaud | Doit se situer à ±10% → LTFT converge en 15 min |
+
+---
+
+### E85 → SP95 (si vous repassez à l'essence)
+
+| Étape | Action | Pourquoi |
+|---|---|---|
+| **1** | **Roulez jusqu'à quasi-vide** (~5L restants) | Minimiser le résidu E85 dans le tank |
+| **2** | **Flash le bin stock** chez vous | Calibration correcte avant tout |
+| **3** | **Reset LTFT** | Repartir à zéro |
+| **4** | **Trajet chez vous → station** (conduite très douce, < 30% charge) | Sur E85 résiduel + calibration stock → STFT +20 à +25% (trop pauvre) → acceptable si court |
+| **5** | **Plein SP95** | Quelques litres suffisent à diluer le résidu E85 |
+
+---
+
+### Ce qui se passe pendant le trajet station
+
+**SP95 + calibration E85 (trop riche) :**
+- STFT plonge à −20 à −25% → ECU réduit l'injection au maximum
+- Catalyseur légèrement enrichi → sans conséquence sur quelques km à charge légère
+- Ne pas dépasser 50% de charge sur ce trajet
+
+**E85 résiduel + calibration stock (trop pauvre) :**
+- STFT monte à +20 à +25% → ECU essaie de compenser
+- LTFT peut atteindre +12% (limite MSV70) mais pas plus → mélange légèrement pauvre résiduel
+- Conduite très douce obligatoire — pas d'accélération franche
+
+---
+
+### Ce qu'il ne faut PAS faire
+
+| Scénario interdit | Risque |
+|---|---|
+| Faire le plein d'abord, flasher ensuite | Des dizaines de km avec LTFT saturé — lean (E85 sur stock) ou riche (SP95 sur E85 calibration) |
+| Ajouter 20L de bidon SP95 pour « diluer » un réservoir E85 | Avec 40L E85 + 20L SP95 = E57 → mélange intermédiaire, calibration incohérente |
+| Rouler longtemps avec calibration E85 + SP95 | STFT −25%, LTFT −8% (limite) → riche persistant → encrassement bougies, conso excessive |
+| Rouler longtemps avec calibration stock + E85 | STFT +25%, LTFT +12% (limite) → pauvre persistant → risque détonation en charge |
+
+---
+
 ## 🎯 Conclusion
 
 ### Résumé de la Stratégie
@@ -1936,4 +2089,4 @@ Un capteur flex-fuel mesure en temps réel le titre en éthanol du carburant et 
 
 ---
 
-*Dernière mise à jour : 2026-04-11 | Version : 3.6 — Enrichissement E85 via ip_mff_cor_opm (raw 47 407) — c_fac_mff_ti_stnd NE PAS MODIFIER (overflow XDF), LTFT réel −8%/+12% — N52B30 + 13537531634*
+*Dernière mise à jour : 2026-04-11 | Version : 3.7 — §9 récapitulatif complet avant/après · §13 verdicts secondaires · §16 transition E85↔SP95 — N52B30 + 13537531634*
