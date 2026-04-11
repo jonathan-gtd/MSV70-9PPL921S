@@ -15,22 +15,40 @@
 
 ## 📌 Résumé des Paramètres Impactés par la Conversion E85
 
-Avant d'entrer dans le détail de chaque section, voici l'ensemble des paramètres du bin MSV70 qui doivent être modifiés — ou surveillés — lors d'une conversion E85, avec la raison physique de chaque impact.
+Tous les paramètres du bin MSV70 concernés par la conversion — à modifier, surveiller, ou laisser en l'état.
 
-| # | Paramètre(s) | Section | Pourquoi c'est impacté |
-|---|---|---|---|
-| 1 | `ip_mff_cor_opm_1_1` `ip_mff_cor_opm_1_2` `ip_mff_cor_opm_2_1` `ip_mff_cor_opm_2_2` | §1 — Injecteurs [✏️](#pencil-injecteurs) | Maps de correction multiplicative d'injection, calibrées à **×1.45 (E85, raw 47 407, phys 1.473)** sur toutes les cellules. `c_fac_mff_ti_stnd` reste au stock — les copies `_1/_2/_mon` ne peuvent pas encoder 0.491 (max physique = 0.393 avec leur équation ×0.000006). En boucle ouverte (WOT), aucune correction lambda n'intervient : ip_mff_cor garantit systématiquement la richesse E85. En boucle fermée, le LTFT compense le titre réel. **4 maps à modifier simultanément.** |
-| 2 | `c_tco_n_mff_cst` | §2 — Démarrage froid [✏️](#pencil-tco) | Seuil en-dessous duquel les enrichissements de cranking s'activent. Stock : 17 °C. À relever à 25 °C car l'éthanol a besoin d'enrichissement à des températures ambiantes que l'essence gère sans aide. |
-| 3 | `ip_mff_cst_opm_1` `ip_mff_cst_opm_2` | §2 — Démarrage froid [✏️](#pencil-cranking) | **Exception à la règle "E85 partout" :** le cranking est boucle ouverte mais trop riche = noyage moteur (le carburant liquide étouffe la bougie). On calibre pour E70 réel — ni trop, ni trop peu. L'enrichissement E85 de `ip_mff_cor_opm` ne s'applique pas ici : ces tables pilotent la dose directement en boucle ouverte cranking. |
-| 4 | `ip_fac_lamb_wup` | §2 — Démarrage froid [✏️](#pencil-wup) | Facteur multiplicateur sur la consigne lambda après démarrage. Stock : 1.000 partout. **Ses axes sont X = MAF (65–500 mg/stk), Y = RPM (704–3008 tr/min)** — ce n'est pas une table température moteur, c'est une table charge×régime. Elle permet d'enrichir les zones basse charge / bas régime où la sonde lambda n'est pas encore opérationnelle. L'enrichissement en fonction de la TCO n'existe pas dans cette table — il est géré par `ip_mff_cst_opm_*` (cranking) et la boucle lambda (chauffe). |
-| 5 | `ip_iga_bas_max_knk__n__maf` (+ `ip_iga_min_n_maf_opm_1` / `ip_iga_min_n_maf_opm_2`) | §3 — Avance [✏️](#pencil-avance) | L'avance est calibrée pour **E60 (plancher légal hivernal, ~101 RON)** — le pire carburant que vous pouvez légalement avoir à la pompe. Raison : si on cale l'avance sur E70 ou E85 et que la station délivre du E60 en hiver, on risque le cliquetis. En calibrant sur E60, on est safe quelle que soit la saison. Gain de puissance légèrement réduit (+2.5° max vs +4.5° pour E70), mais zéro risque moteur. |
-| 6 | `ip_ti_tco_pos_slow_wf_opm_1` / `ip_ti_tco_pos_slow_wf_opm_2` + `ip_ti_tco_pos_fast_wf_opm_1` / `ip_ti_tco_pos_fast_wf_opm_2` | §5 — Film mural [✏️](#pencil-film) | Le film mural s'applique lors des transitions de charge (tip-in) — une zone de boucle ouverte transitoire. Calibré pour **E85 (×1.25)** : si le carburant réel est E70, on sur-compense légèrement le film → mélange légèrement riche sur tip-in → safe. Sous-compenser serait lean transitoire → risque de claquement ou raté. |
-| 7 | `c_t_ti_dly_fl_1` `c_t_ti_dly_fl_2` | §7 — Complémentaires [✏️](#pencil-dly) | Délai entre détection de pleine charge et application de l'enrichissement WOT. À réduire à 0 ms pour que la richesse cible soit appliquée instantanément lors d'une accélération franche sur E85. |
-| — | — | — | **— Optionnels —** |
-| 8 | `ip_lamb_fl__n` | §4 — Lambda WOT [✏️](#pencil-lambda-wot) | **Vraie table de richesse pleine charge** (1×12 f(RPM)). Stock déjà à λ 0.920 (et 0.871 à 6500 rpm) — l'enrichissement WOT essence est **déjà présent**. Sur E85, on peut soit laisser tel quel, soit dé-enrichir légèrement (0.94-0.95) puisque la chaleur de vaporisation E85 protège mécaniquement contre la détonation. |
-| 9 | `c_iga_ini` | §7 — Complémentaires [✏️](#pencil-iga) | Avance d'allumage initiale lors du cranking. Si le démarrage reste difficile après ajustement des tables cranking, +1° à +2° ici facilite l'inflammation du mélange E85 froid. |
-
-> **Paramètres non modifiés (mais à surveiller) :** `ip_ti_min` et `c_ti_add_as` (temps mort injecteur) → inchangés si les injecteurs stock sont conservés. EVAP/purge canister (`ip_crlc_mff_buf_cp`) → la boucle fermée compense automatiquement les vapeurs éthanol ; intervenir seulement si les STFT oscillent de plus de ±15 % lors des purges.
+| Statut | Paramètre(s) | Adresse XDF | Section | Action / Raison |
+|---|---|---|---|---|
+| **✅ MODIFIER** | `ip_mff_cor_opm_1_1` | 0x4E3D4 | §1 | 32 770 → **47 407** (phys 1.016 → 1.473, ×1.45 E85). Flat, toutes cellules. |
+| **✅ MODIFIER** | `ip_mff_cor_opm_1_2` | 0x4E554 | §1 | Idem — banc 2, mode Valvetronic. |
+| **✅ MODIFIER** | `ip_mff_cor_opm_2_1` | 0x4E6D4 | §1 | Idem — banc 1, mode papillonné (fallback panne). |
+| **✅ MODIFIER** | `ip_mff_cor_opm_2_2` | 0x4E7C4 | §1 | Idem — banc 2, mode papillonné. |
+| **✅ MODIFIER** | `c_tco_n_mff_cst` | 0x44F2F | §2.2 | 87 → **97** (17.25 °C → 25.00 °C). Seuil activation cranking. |
+| **✅ MODIFIER** | `ip_mff_cst_opm_1` | 0x437DC | §2.1 | Table 3×8 : ×1.35–2.00 selon TCO. Cranking E70 — exception noyage. |
+| **✅ MODIFIER** | `ip_mff_cst_opm_2` | 0x4380C | §2.1 | Idem — mode papillonné. Mêmes facteurs. |
+| **✅ MODIFIER** | `ip_fac_lamb_wup` | 0x42764 | §2.3 | Table 6×6 (MAF × RPM) : 1.000 → **1.03–1.08** basses charges. Warm-up post-démarrage. |
+| **✅ MODIFIER** | `ip_iga_bas_max_knk__n__maf` | 0x4323A | §3 | Table 8×8 : +0 à +2.5° selon zone MAF/RPM. Plafond knock E60-safe. |
+| **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | §5 | Table 8×8 : stock ×**1.25**. Film lent tip-in — Valvetronic. |
+| **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §5 | Table 8×8 : stock ×**1.25**. Film lent — mode papillonné. |
+| **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §5 | Table 8×8 : stock ×**1.25**. Film rapide tip-in — Valvetronic. |
+| **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §5 | Table 8×8 : stock ×**1.25**. Film rapide — mode papillonné. |
+| **✅ MODIFIER** | `c_t_ti_dly_fl_1` | — | §7.2 | → **0 ms**. Enrichissement WOT sans délai. |
+| **✅ MODIFIER** | `c_t_ti_dly_fl_2` | — | §7.2 | → **0 ms**. Idem. |
+| ⬜ OPTIONNEL | `ip_lamb_fl__n` | 0x436A2 | §4 | Courbe 1×12 : stock λ 0.920 suffisant. Dé-enrichir à 0.940–0.950 pour +puissance. |
+| ⬜ OPTIONNEL | `c_iga_ini` | — | §7.3 | Stock +1° à +2° seulement si démarrage > 5 tours malgré §2 calibré. |
+| ⬜ OPTIONNEL | `ip_fac_lamb_wup_is` | 0x42788 | §13.2 | Table 3×4 (MAF × RPM ralenti) : 1.000 → 1.02–1.05 si ralenti instable après cranking OK. |
+| ⬜ OPTIONNEL | `KF_FTRANSVL` | 0x5C5EE | §13.3 | Table 8×8 : +10–20% zone 0.393–0.786 si trou exclusivement en kickdown brutal (après validation §5). |
+| ⬜ OPTIONNEL | `ip_fac_ti_maf_sp_wf_pos_opm_1` | 0x42C5A | §13.6 | 1×8 f(TCO) : +15–25% à TCO < 15°C si couple instable en modulation douce (après §5 validé). |
+| ⛔ NE PAS MODIFIER | `c_fac_mff_ti_stnd` (×5 copies) | — | §0 | Overflow XDF : max encodable 0.393 ms/mg < cible 0.491. Utiliser `ip_mff_cor_opm_*` à la place. |
+| ⛔ NE PAS MODIFIER | `ip_fac_eff_iga_ch_cold_opm_1/2` | 0x4A444 / 0x4A4A8 | §13.4 | Retard chauffe catalyseur. EGT E85 légèrement plus basse → DTC P0420 temporaires normaux. |
+| ⛔ NE PAS MODIFIER | `c_teg_max_iga` | 0x44F54 | §13.5 | Seuil EGT à 865 °C. E85 produit moins d'EGT → protection rarement déclenchée, seuil OK. |
+| ⛔ NE PAS MODIFIER | `id_maf_n_min_fcut_fast` | 0x41E1C | §13.7 | Cutoff décélération indépendant du carburant. |
+| ⛔ NE PAS MODIFIER | `ip_eoi_1_bas` | 0x4E914 | §13.8 | Phasage EOI : +45% TI E85 reste dans fenêtre acceptable sur injecteurs stock. |
+| ⛔ NE PAS MODIFIER | `ip_fup_cor` | 0x4AF44 | §13.9 | Correction pression rail : diagnostic uniquement. Problème → pompe (mécanique). |
+| 👁 SURVEILLER | `c_fac_max/min_*_rng_lam_ad` | 0x47F4C–52 | §13.1 | Limites LTFT réelles : **−8% / +12%** (pas ±25%). Plafond −8% permanent → affiner `ip_mff_cor_opm_*`. |
+| 👁 SURVEILLER | `c_fup_nom` | 0x44B0C | §13.9 | Pression rail nominale 5000 hPa. Si DTC P0087 ou perte couple WOT : tester pompe (≥ 2 L/30 s). |
+| 👁 SURVEILLER | `ip_ti_add_dly` (deadtime) | — | §7.1 | Temps mort injecteur f(tension). Inchangé si injecteurs stock. Recalculer si remplacement. |
+| 👁 SURVEILLER | EVAP canister (`ip_crlc_mff_buf_cp`) | — | §6 | Vapeurs éthanol plus riches → STFT pendant purge. Intervenir seulement si STFT > ±15% en continu. |
 
 ---
 
