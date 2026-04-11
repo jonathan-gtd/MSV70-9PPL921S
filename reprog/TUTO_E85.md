@@ -381,7 +381,6 @@ Deux directions opposées du même phénomène :
 2. Sélectionner toutes les cellules (Ctrl+A)
 3. Saisir le raw : **47 407** (phys 1.473, ×1.45 E85)
 4. Répéter pour les 4 maps
-5. `c_fac_mff_ti_stnd` : **ne pas toucher** (toutes copies restent au stock)
 
 <a id="pencil-injecteurs"></a>
 ✏️ **Avant / Après :**
@@ -1069,13 +1068,6 @@ Le modèle de film mural du MSV70 combine plusieurs paramètres qui interagissen
 
 **Explication :** Le système EVAP purge les vapeurs du réservoir dans le collecteur. Sur E85, ces vapeurs contiennent plus d'éthanol → enrichissements transitoires lors des purges. La boucle fermée MSV70 corrige automatiquement si l'écart reste raisonnable.
 
-**Tables concernées :**
-
-| Paramètre | Rôle | Modification |
-|---|---|---|
-| `ip_crlc_mff_buf_cp` | Buffer MFF purge canister | **Ne pas modifier** — observer STFT d'abord |
-| `ip_maf_kgh_pred_cor_map_tia` | Correction masse air purge | **Ne pas modifier** en première intention |
-
 **Procédure :** Aucune modification en première intention. Observer les STFT pendant la purge (charge partielle, ~50 km/h).
 
 **Vérification :**
@@ -1093,13 +1085,7 @@ Le modèle de film mural du MSV70 combine plusieurs paramètres qui interagissen
 
 ### 7.1 — Temps mort injecteur : `ip_ti_add_dly`
 
-**Tables concernées :**
-
-| Paramètre | Structure | Axes | Modification |
-|---|---|---|---|
-| `ip_ti_add_dly` | Courbe 1×8 | X = tension batterie (0–24.9V) | **Ne pas modifier** sur injecteurs stock |
-
-> Propriété électrique de l'injecteur — indépendante du carburant. Si changement d'injecteurs : recalculer avec les caractéristiques deadtime du fabricant (courbe f(VB)).
+> `ip_ti_add_dly` (courbe 1×8, f(tension batterie)) — propriété électrique de l'injecteur, indépendante du carburant. Si changement d'injecteurs : recalculer avec les caractéristiques deadtime du fabricant.
 
 ---
 
@@ -1252,7 +1238,6 @@ Intervalle de remplacement : 20 000 km (vs 30 000 km essence)
 | 2 | `ip_mff_cor_opm_1_2` | 0x4E554 | 32 770 | **1.016** | **47 407** | **1.473** | — | E85 — idem opm1 banc2 (12×16 flat) |
 | 3 | `ip_mff_cor_opm_2_1` | 0x4E6D4 | 32 770 | **1.016** | **47 407** | **1.473** | — | E85 — idem opm2 banc1 (10×12 flat) |
 | 4 | `ip_mff_cor_opm_2_2` | 0x4E7C4 | 32 770 | **1.016** | **47 407** | **1.473** | — | E85 — idem opm2 banc2 (10×12 flat) |
-| — | `c_fac_mff_ti_stnd_*` (×5) | — | stock | **0.3394** | **stock** | **0.3394** | ms/mg | **NE PAS MODIFIER** — copies _1/_2/_mon ne peuvent pas encoder 0.491 (overflow XDF) |
 | 6 | `c_tco_n_mff_cst` | 0x44F2F | 87 | **17.25 °C** | **97** | **25.00 °C** | °C | Seuil cranking étendu |
 | 7 | `ip_mff_cst_opm_1` | 0x437DC | table 3×8 | voir §2.1 | table 3×8 | voir §2.1 | mg/stk | E70 — cranking exception noyage |
 | 8 | `ip_mff_cst_opm_2` | 0x4380C | table 3×8 | voir §2.1 | table 3×8 | voir §2.1 | mg/stk | E70 — idem mode papillon |
@@ -1274,7 +1259,6 @@ Intervalle de remplacement : 20 000 km (vs 30 000 km essence)
 ```
 ÉTAPE 1 — OBLIGATOIRE :
   ✅ ip_mff_cor_opm_1_1, ip_mff_cor_opm_1_2, ip_mff_cor_opm_2_1, ip_mff_cor_opm_2_2 → raw 47 407 (phys 1.473, ×1.45 E85 — open loop toujours riche)
-     c_fac_mff_ti_stnd reste au stock (toutes copies — NE PAS MODIFIER)
   ✅ c_tco_n_mff_cst → 25°C (raw 97)
 
 ÉTAPE 2 — TRÈS IMPORTANT (démarrage) :
@@ -1323,7 +1307,6 @@ Baseline à enregistrer (sur essence, avant le plein E70) :
 
 **Modifications :**
 - `ip_mff_cor_opm_1_1`, `ip_mff_cor_opm_1_2`, `ip_mff_cor_opm_2_1`, `ip_mff_cor_opm_2_2` → **raw 47 407 (phys 1.473, ×1.45 E85 — open loop safe)**
-- `c_fac_mff_ti_stnd` : **NE PAS MODIFIER** — reste au stock sur toutes les copies
 - c_tco_n_mff_cst → 25°C
 
 **Test immédiat :**
