@@ -4,10 +4,11 @@ Référence de calibration pour le calculateur **Siemens MSV70** (BMW N52B30, SW
 
 ## Structure
 
-| Dossier | Contenu |
+| Dossier / Fichier | Contenu |
 |---|---|
-| [`xdf-analyzer/`](xdf-analyzer/) | Outil Python — analyse et export d'un fichier XDF TunerPro |
-| [`reprog/`](reprog/) | Documentation et tutoriels pour la reprogrammation ECU |
+| [`xdf-analyzer/`](xdf-analyzer/) | Outils Python — analyse XDF, lecture BIN, serveur MCP |
+| [`reprog/`](reprog/) | Documentation et tutoriels de reprogrammation ECU |
+| [`.mcp.json`](.mcp.json) | Config MCP pour Claude Code (chargée automatiquement) |
 
 ## Véhicule cible
 
@@ -18,6 +19,10 @@ Référence de calibration pour le calculateur **Siemens MSV70** (BMW N52B30, SW
 | Calculateur | Siemens MSV70 — SW 9PPL921S |
 | Injecteurs | Bosch EV14 — BMW 13 53 7531634 |
 | Pression rail | 5.0 bar (`c_fup_nom` = 5000 hPa @ 0x44B0C) |
+
+## MCP Server
+
+Le serveur MCP expose les outils ECU directement dans Claude. Voir [`xdf-analyzer/README.md`](xdf-analyzer/README.md) pour l'installation et la configuration.
 
 ## Avertissement
 

@@ -1,16 +1,60 @@
 # XDF Analyzer — MSV70
 
-Extrait et corrèle les paramètres d'un fichier XDF TunerPro avec la documentation JSON.
+Outils Python pour analyser les paramètres ECU d'un fichier XDF TunerPro, lire les valeurs depuis un BIN, et exposer tout ça via un serveur MCP (Model Context Protocol).
 
-## Usage
+## Installation
 
 ```bash
 cd xdf-analyzer
-python3 main.py
+pip install -r requirements.txt
 ```
 
-**Prérequis :** Python 3.6+ — bibliothèques standard uniquement (pas de `pip install`).  
-**Sortie :** résumé console + export CSV horodaté dans `exports/`.
+## Usage CLI
+
+```bash
+python main.py
+```
+
+Sortie : résumé console + export CSV horodaté dans `exports/`.
+
+## Serveur MCP
+
+Le serveur MCP permet d'interroger le calculateur directement depuis Claude.
+
+```bash
+python mcp_server.py
+```
+
+### Outils exposés
+
+| Outil | Description |
+|---|---|
+| `list_params` | Liste les paramètres XDF avec filtres (search, catégorie, type, E85) |
+| `get_param_info` | Définition complète d'un paramètre (métadonnées + documentation) |
+| `read_bin_value` | Lit la valeur décodée d'un paramètre dans un fichier BIN |
+| `compare_bins` | Compare un paramètre entre deux BIN et liste les différences |
+| `diff_all_changed_params` | Scan tous les paramètres modifiés entre deux BIN |
+| `list_bin_files` | Liste les fichiers BIN disponibles avec taille et existence |
+
+### Configuration Claude Code
+
+Le fichier `.mcp.json` à la racine du repo configure le serveur automatiquement pour Claude Code CLI.
+
+### Configuration Claude Desktop
+
+Ajouter ce bloc dans `%APPDATA%\Claude\claude_desktop_config.json` (Windows) ou `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) :
+
+```json
+{
+  "mcpServers": {
+    "msv70-xdf-analyzer": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "cwd": "C:/chemin/vers/MSV70-9PPL921S/xdf-analyzer"
+    }
+  }
+}
+```
 
 ## Structure
 
@@ -19,36 +63,38 @@ data/
   Full/
     BMW_Siemens_MSV70_9PPL921S_2560K.xdf   ← Définitions TunerPro full (2560 Ko, BASEOFFSET=0x40000)
     VB67774_921S_Full.bin                  ← Dump ECU voiture (2 Mo)
-    VB67774_921S_Full_E85.bin             ← Bin E85 modifié (2 Mo)
+    VB67774_921S_Full_E85.bin              ← Bin E85 modifié (2 Mo)
 
   Partial/
-    BMW_Siemens_MSV70_9PPL921S_128K.xdf   ← Définitions TunerPro partial (BASEOFFSET=0)
-    S7581293_Partial.bin                  ← Stock référence 0BN1S (123 Ko, 0x40000–0x5EBD0)
-    VB67774_921S_Partial.bin             ← Dump ECU partiel (123 Ko)
-    VB67774_921S_Partial_E85.bin         ← Bin E85 partiel (123 Ko)
+    BMW_Siemens_MSV70_9PPL921S_128K.xdf    ← Définitions TunerPro partial (BASEOFFSET=0)
+    S7581293_Partial.bin                   ← Stock référence 0BN1S (123 Ko)
+    VB67774_921S_Partial.bin               ← Dump ECU partiel (123 Ko)
+    VB67774_921S_Partial_E85.bin           ← Bin E85 partiel (123 Ko)
 
 docs/
-  01_injecteurs.json                     ← Scaling injecteurs
-  02_demarrage_froid.json                ← Cranking, after-start, seuils TCO
-  03_chauffe.json                        ← Warm-up lambda, enrichissements post-démarrage
-  04_allumage.json                       ← Tables avance, knock control
-  05_film_mural.json                     ← Wall film (slow/fast), corrections Valvetronic
-  06_lambda_richesse.json                ← Tables lambda (bas_1-4, WOT ip_lamb_fl__n)
-  07_adaptations_evap.json               ← Purge canister, EVAP, corrections STFT/LTFT
-  08_limiteurs.json                      ← RPM protection, VMAX, protections thermiques
-  09_ralenti.json                        ← Régulation ralenti, cibles régime
+  01_injecteurs.json                       ← Scaling injecteurs
+  02_demarrage_froid.json                  ← Cranking, after-start, seuils TCO
+  03_chauffe.json                          ← Warm-up lambda, enrichissements post-démarrage
+  04_allumage.json                         ← Tables avance, knock control
+  05_film_mural.json                       ← Wall film (slow/fast), corrections Valvetronic
+  06_lambda_richesse.json                  ← Tables lambda (bas_1-4, WOT ip_lamb_fl__n)
+  07_adaptations_evap.json                 ← Purge canister, EVAP, corrections STFT/LTFT
+  08_limiteurs.json                        ← RPM protection, VMAX, protections thermiques
+  09_ralenti.json                          ← Régulation ralenti, cibles régime
 
-exports/                                 ← Sorties CSV (générées par main.py)
+exports/                                   ← Sorties CSV (générées par main.py, ignorées par git)
 ```
 
 ## Modules
 
 | Fichier | Rôle |
 |---|---|
-| `main.py` | Point d'entrée — orchestre les 3 étapes |
+| `main.py` | Point d'entrée CLI — orchestre parse + enrich + export |
 | `xdf_parser.py` | Parse le fichier XDF (adresses, équations, axes) |
-| `doc_manager.py` | Charge les JSON et enrichit chaque paramètre |
+| `doc_manager.py` | Charge les JSON docs et enrichit chaque paramètre |
+| `bin_reader.py` | Lit et décode les valeurs depuis un fichier BIN |
 | `exporter.py` | Génère le CSV et affiche le résumé console |
+| `mcp_server.py` | Serveur MCP — expose les outils ECU à Claude |
 
 ## Notes de calibration E85 — MSV70 N52B30
 

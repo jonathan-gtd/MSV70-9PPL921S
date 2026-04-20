@@ -2,8 +2,7 @@
   "mcpServers": {
     "msv70-xdf-analyzer": {
       "command": "python",
-      "args": ["xdf-analyzer/mcp_server.py"],
-      "cwd": "${workspaceFolder}"
+      "args": ["xdf-analyzer/mcp_server.py"]
     }
   }
 }

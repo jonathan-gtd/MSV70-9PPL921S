@@ -3,7 +3,11 @@ import os
 
 class XDFParser:
     def __init__(self, xdf_filename):
-        self.xdf_path = os.path.join("data", xdf_filename)
+        # Accept absolute paths as-is; otherwise resolve relative to data/
+        if os.path.isabs(xdf_filename):
+            self.xdf_path = xdf_filename
+        else:
+            self.xdf_path = os.path.join("data", xdf_filename)
         if not os.path.exists(self.xdf_path):
             raise FileNotFoundError(f"Fichier XDF introuvable : {self.xdf_path}")
             
