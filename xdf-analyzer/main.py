@@ -16,8 +16,8 @@ def main():
         print(f"❌ {e}")
         return
 
-    # 2. Enrichissement via le DocManager (dossier docs/ — charge ethanol/ et base/ récursivement)
-    doc_manager = DocManager("docs")
+    # 2. Enrichissement via le DocManager (dossier knowledge/ — charge les JSON récursivement)
+    doc_manager = DocManager("knowledge")
     for p in all_params:
         doc_manager.enrich_param(p)
 

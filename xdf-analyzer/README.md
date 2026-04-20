@@ -71,7 +71,7 @@ data/
     VB67774_921S_Partial.bin               ← Dump ECU partiel (123 Ko)
     VB67774_921S_Partial_E85.bin           ← Bin E85 partiel (123 Ko)
 
-docs/
+knowledge/
   01_injecteurs.json                       ← Scaling injecteurs
   02_demarrage_froid.json                  ← Cranking, after-start, seuils TCO
   03_chauffe.json                          ← Warm-up lambda, enrichissements post-démarrage

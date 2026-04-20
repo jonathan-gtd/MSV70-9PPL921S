@@ -2,7 +2,7 @@ import os
 import json
 
 class DocManager:
-    def __init__(self, docs_path="docs"):
+    def __init__(self, docs_path="knowledge"):
         self.docs_path = docs_path
         self.doc_map = {}  # Clé: xdf_category
         self._load_all_docs()
@@ -12,7 +12,7 @@ class DocManager:
             os.makedirs(self.docs_path)
             return
 
-        # Walk recursively: charge docs/ethanol/ et docs/base/ (et docs/ directement si besoin)
+        # Walk recursively: charge tous les JSON dans knowledge/ et ses sous-dossiers
         for root, dirs, files in os.walk(self.docs_path):
             # Trier pour un chargement déterministe (ethanol/ en priorité sur base/)
             dirs.sort()
