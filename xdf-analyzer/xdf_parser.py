@@ -60,10 +60,11 @@ class XDFParser:
         rows, cols = 1, 1
         z_eq = "X"
         z_unit = ""
+        lsb_first = False  # MSV70 = Motorola/big-endian; overridden by mmedmodflag bit0 if present
 
         # Données Z (Valeurs)
         z_axis = el.find("XDFAXIS[@id='z']") if kind == "TABLE" else el
-        
+
         if z_axis is not None:
             emb = z_axis.find("EMBEDDEDDATA")
             if emb is not None:
@@ -72,6 +73,9 @@ class XDFParser:
                     rows = int(emb.attrib.get("mmedrowcount", "1"))
                     cols = int(emb.attrib.get("mmedcolcount", "1"))
                 z_bits = emb.attrib.get("mmedelementsizebits", "?")
+                modflag = emb.attrib.get("mmedmodflag")
+                if modflag is not None:
+                    lsb_first = bool(int(modflag, 0) & 0x01)
             z_unit = z_axis.find("units").text if z_axis.find("units") is not None else ""
             if kind == "TABLE":
                 z_n = z_axis.find("min")
@@ -122,6 +126,7 @@ class XDFParser:
             "xdf_addr": xdf_addr,
             "bin_addr": _bin_addr(xdf_addr),
             "bin_dtype": _bits_to_type(z_bits),
+            "lsb_first": lsb_first,
             "z_eq": z_eq,
             "z_unit": z_unit,
             "z_min": z_min,

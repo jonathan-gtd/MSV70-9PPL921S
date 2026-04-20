@@ -46,14 +46,15 @@ def read_param_values(bin_path: str, param: dict) -> dict:
     except ValueError:
         return {"error": f"Invalid BIN address: {bin_addr_str}"}
 
-    rows     = int(param.get("rows", 1))
-    cols     = int(param.get("cols", 1))
-    dtype    = param.get("bin_dtype", "uint8")
-    z_eq     = param.get("z_eq", "X")
-    z_unit   = param.get("z_unit", "")
-    count    = rows * cols
+    rows      = int(param.get("rows", 1))
+    cols      = int(param.get("cols", 1))
+    dtype     = param.get("bin_dtype", "uint8")
+    lsb_first = param.get("lsb_first", False)
+    z_eq      = param.get("z_eq", "X")
+    z_unit    = param.get("z_unit", "")
+    count     = rows * cols
 
-    fmt = _dtype_fmt(dtype)
+    fmt = _dtype_fmt(dtype, lsb_first)
     elem_size = struct.calcsize(fmt)
 
     try:
