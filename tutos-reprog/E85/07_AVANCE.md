@@ -143,6 +143,40 @@ Sur E85 pur, le knock control intervient **beaucoup moins souvent** qu'avec l'es
 
 ## Récapitulatif — Valeurs Avant / Après
 
+### ④ ip_iga_st_bas_opm_1 — Avance cranking Valvetronic @ 0x43586 (6×8, °CRK avant PMH)
+
+> Axes : X = TCO (°C), Y = RPM cranking. Équation : 0.375 × raw − 35.625. **Identique stock et E85 bin de référence** — modifier seulement si démarrage froid difficile (ajouter +1° sur colonnes froides).
+
+```
+STOCK (= E85 bin de référence — inchangé) :
+TCO (°C) →  -30.0  -20.3   -9.8    0.0   +9.8  +30.0  +60.0  +90.0
+  80 rpm :    7.88   6.75   5.25   4.13   2.63   0.75  -1.88  -5.63
+ 160 rpm :    8.63   7.50   6.00   4.88   3.38   1.50  -1.13  -4.88
+ 320 rpm :    9.75   8.63   6.75   5.63   3.75   1.88  -0.38  -4.13
+ 460 rpm :   10.50   9.38   7.50   5.63   3.75   1.50  -0.38  -3.38
+ 640 rpm :   12.00  10.50   8.25   5.25   3.38   0.75  -0.38  -2.63
+ 920 rpm :   14.63  12.75   9.38   4.88   2.25  -0.38  -0.75  -2.63
+```
+
+---
+
+### ④ ip_iga_st_bas_opm_2 — Avance cranking papillonné @ 0x435B6 (6×8, °CRK avant PMH)
+
+> Même axes et équation. **Identique stock et E85 bin de référence.**
+
+```
+STOCK (= E85 bin de référence — inchangé) :
+TCO (°C) →  -30.0  -20.3   -9.8    0.0   +9.8  +30.0  +60.0  +90.0
+  80 rpm :    6.75   6.38   6.00   5.63   3.00   1.50   0.00  -2.63
+ 160 rpm :    7.50   7.13   6.75   6.38   3.38   1.88   0.75  -1.88
+ 320 rpm :    9.00   8.25   7.88   7.13   3.38   1.88   0.75  -0.38
+ 460 rpm :   10.13   9.00   8.25   7.13   3.38   1.88   0.75  -0.75
+ 640 rpm :   11.25   9.75   8.63   7.13   2.63   1.50   0.75  -0.75
+ 920 rpm :   12.00  10.13   8.63   6.38   1.50   0.38   0.00  -0.38
+```
+
+---
+
 ### ⑤ ip_iga_bas_max_knk__n__maf — Avance plafond knock @ 0x4323A (8×8, °CRK avant PMH)
 
 > Cible E60 (101 RON — pire carburant légal hivernal). Progressivité obligatoire : un palier à la fois, 50 km entre chaque.

@@ -118,9 +118,9 @@ Exemple — injecteurs N54 (débit ~30% supérieur aux N52 stock) sur E70 :
 | 3 | `ip_mff_cor_opm_2_1` (10×12 flat) | 0x4E6D4 | 32 770 | 1.016 | **47 407** | **1.473** |
 | 4 | `ip_mff_cor_opm_2_2` (10×12 flat) | 0x4E7C4 | 32 770 | 1.016 | **47 407** | **1.473** |
 | 5 | `c_tco_n_mff_cst` | 0x44F2F | 87 | 17.25 °C | **97** | **25.00 °C** |
-| 6 | `c_t_ti_dly_fl_1` | — | (à lire) | — | — | **0 ms** |
-| 7 | `c_t_ti_dly_fl_2` | — | (à lire) | — | — | **0 ms** |
-| 8 | `c_iga_ini` *(optionnel)* | — | (à lire) | — | — | **stock +1° à +2°** si démarrage > 5 tours |
+| 6 | `c_t_ti_dly_fl_1` | 0x44EC4 | 20 | 0.200 s | **0** | **0.000 s** |
+| 7 | `c_t_ti_dly_fl_2` | 0x44EC6 | 20 | 0.200 s | **0** | **0.000 s** |
+| 8 | `c_iga_ini` *(optionnel)* | 0x44B2A | 111 | 6.0 °CRK | **111** | **6.0 °CRK (inchangé)** — modifier +1° à +2° si démarrage > 5 tours |
 
 > Pour les 4 maps `ip_mff_cor_opm_*` : TunerPro → Ctrl+A → saisir raw **47 407** → répéter ×4. `c_fac_mff_ti_stnd` reste inchangé (overflow XDF empêche d'y encoder 0.491).
 
