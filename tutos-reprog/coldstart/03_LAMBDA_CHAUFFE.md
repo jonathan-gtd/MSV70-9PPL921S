@@ -10,33 +10,42 @@ Sur essence stock N52B30 : `ip_fac_lamb_wup` = **1.0001 partout** (raw ≈ 47). 
 
 ## ip_fac_lamb_wup
 
-**Type :** CARTOGRAPHIE 3D  
-**Axes :** X = TCO (°C), Y = RPM  
-**Unité :** sans unité (facteur sur consigne lambda)  
-**Stock :** 1.0001 partout (raw ≈ 47, équation ×0.021195)
+**Adresse :** 0x42764  
+**Type :** CARTOGRAPHIE 6×6  
+**Axes :** X = MAF (mg/stk), Y = RPM  
+**Unité :** facteur multiplicateur sur consigne lambda  
+**Stock :** 1.000 partout
 
-Ce facteur décale la consigne lambda vers le riche pendant la montée en température. Un facteur de 1.25 signifie que le calculateur vise λ = 0.997 × 1.25 ≈ λ 0.80 (mélange 25% plus riche que stœchiométrique).
+Actif uniquement pendant la phase warm-up. Enrichit les basses charges (faible MAF) où l'éthanol s'évapore mal, sans toucher la pleine charge.
 
-**Profil E85 recommandé :**
+```
+STOCK :
+MAF →           65    100    200    300    400    500 mg/stk
+ 704 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+1216 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+1760 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+2016 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+2496 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
+3008 rpm :    1.000  1.000  1.000  1.000  1.000  1.000
 
-| TCO | Facteur | λ résultant |
-|-----|---------|-------------|
-| < −10°C | 1.45 | ~0.72 |
-| 0°C | 1.35 | ~0.74 |
-| 20°C | 1.25 | ~0.80 |
-| 40°C | 1.15 | ~0.87 |
-| 60°C | 1.08 | ~0.92 |
-| 70°C | 1.02 | ~0.98 |
-| ≥ 80°C | 1.00 | ~1.00 |
+OBJECTIF E85 :
+MAF →           65    100    200    300    400    500 mg/stk
+ 704 rpm :    1.08   1.08   1.05   1.03   1.00   1.00
+1216 rpm :    1.08   1.07   1.05   1.03   1.00   1.00
+1760 rpm :    1.07   1.06   1.04   1.03   1.00   1.00
+2016 rpm :    1.06   1.05   1.04   1.03   1.00   1.00
+2496 rpm :    1.05   1.05   1.03   1.03   1.00   1.00
+3008 rpm :    1.03   1.03   1.03   1.00   1.00   1.00
+```
 
-> Encoder les valeurs en uint8 : facteur = raw × 0.021195. Exemples : 1.45 → raw 68, 1.25 → raw 59, 1.08 → raw 51, 1.00 → raw 47.
+Vérification 30 s après démarrage : STFT entre −10% et +15% (normal, sonde en montée). Après 2 min warm-up : STFT −5% à +5%.
 
 ---
 
 ## ip_fac_lamb_wup_is
 
 **Type :** CARTOGRAPHIE 3D  
-**Axes :** X = TCO (°C), Y = RPM  
+**Axes :** X = MAF (mg/stk), Y = RPM  
 **Unité :** sans unité  
 **Stock :** 1.0001 partout
 

@@ -26,7 +26,7 @@ xdf-analyzer/    ← Moteur d'analyse : parser XDF, lecture BIN, export CSV
 
 tutos-reprog/         ← Documentation et tutoriels de reprogrammation
   E85/              ← Conversion éthanol — 26 fichiers (voir 00_SOMMAIRE.md)
-  warmup/           ← Phase de chauffe — cranking, injection, lambda, ralenti
+  coldstart/           ← Injection et lambda pendant la phase de chauffe
   rpm-protection/   ← Modification du coupe-circuit RPM
   vmax/             ← Suppression du bridage 250 km/h
   FLASH_ECU.md      ← Procédure hardware/software pour lire et flasher l'ECU
