@@ -74,9 +74,11 @@ Les quatre tables `ip_lamb_bas_1/2/3/4` définissent la consigne lambda par zone
 | `ip_lamb_bas_1` | Charge partielle, mode 1 | 0.997 λ | Non en première intention |
 | `ip_lamb_bas_2` | Charge partielle, mode 2 | 0.997 λ | Non |
 | `ip_lamb_bas_3` | Charge partielle, mode 3 | 0.997 λ | Non |
-| `ip_lamb_bas_4` | WOT / haute charge | 0.997 λ | Optionnel — réduire à 0.92–0.95 en zone >200 mg/stk |
+| `ip_lamb_bas_4` | WOT / haute charge | 0.997 λ | Optionnel — réduire à **0.92–0.95 λ** en zone > 200 mg/stk et > 3000 RPM |
 
-`ip_lamb_bas_1/2/3` ne nécessitent pas de modification sur E85 : la boucle fermée lambda converge automatiquement si le facteur MFF (`c_fac_mff_ti_stnd`) est correct. Ne modifier que si LTFT > +10% après 200+ km de convergence.
+`ip_lamb_bas_1/2/3` : ne pas modifier. La boucle fermée lambda converge automatiquement si `c_fac_mff_ti_stnd` est correct. Toucher uniquement si LTFT > +10% après 200+ km de convergence.
+
+`ip_lamb_bas_4` : la réduction à 0.92–0.95 en WOT est un enrichissement protecteur basse température cylindre, possible sur E85 grâce à son indice d'octane élevé. Ne pas descendre sous 0.90.
 
 ---
 

@@ -1,77 +1,40 @@
-# §1 — Principes : Architecture du warm-up MSV70
+# §1 — Principes : Phase de chauffe MSV70
 
-## Les 4 phases de démarrage
+## Qu'est-ce que la phase warm-up
 
-Le MSV70 distingue quatre phases distinctes entre la mise en route et l'atteinte de la température de fonctionnement (~80°C TCO).
+Après le premier allumage et la stabilisation du ralenti (~5 s), le MSV70 entre en phase **warm-up** : la TCO monte de sa valeur de départ jusqu'à ~80°C. Pendant cette phase, la boucle lambda fermée est partiellement instable car la sonde amont n'a pas encore atteint sa température de fonctionnement (~300°C).
 
-```
-Contact + démarreur
-        │
-        ▼
-┌───────────────┐
-│   CRANKING    │  démarreur tourne, aucun allumage encore
-│               │  paramètres : ip_mff_cst_opm_1/2
-│               │  durée : ~0.3 à 1.5 s selon TCO
-└───────┬───────┘
-        │ premier allumage
-        ▼
-┌───────────────┐
-│  AFTER-START  │  régime monte de 0 → ~800 RPM
-│               │  paramètres : ip_mff_lgrd_ast
-│               │  durée : ~2 à 5 s
-└───────┬───────┘
-        │ ralenti stable
-        ▼
-┌───────────────┐
-│   WARM-UP     │  TCO monte de démarrage → ~80°C
-│               │  paramètres : ip_fac_ti_tco_wup, ip_fac_lamb_wup,
-│               │               ip_n_sp_is, ip_n_max_*__tco
-│               │  durée : 3 à 15 min selon TCO initiale
-└───────┬───────┘
-        │ TCO ≥ ~80°C
-        ▼
-┌───────────────┐
-│     CHAUD     │  boucle fermée lambda stable, corrections annulées
-└───────────────┘
-```
+Le calculateur applique des corrections spécifiques pour compenser :
+- l'évaporation difficile de l'éthanol entre 0°C et 70°C (point d'ébullition 78°C)
+- l'instabilité de la régulation lambda pendant la montée en température
 
 ---
 
-## Ce que le calculateur cherche à faire
+## Paramètres actifs pendant le warm-up
 
-**Pendant le cranking** : injecter suffisamment de carburant pour créer un mélange combustible malgré l'éthanol quasi-liquide à froid (point d'ébullition éthanol = 78°C, contre ~35°C pour l'essence).
-
-**Pendant le warm-up** : trois objectifs simultanés et partiellement contradictoires :
-1. Chauffer le catalyseur rapidement (émissions — retarder l'allumage dégrade le rendement thermique → chaleur aux gaz → cat chaud en ~25 s)
-2. Maintenir un ralenti stable (confort — l'éthanol brûle moins bien froid)
-3. Ne pas endommager le moteur (protection — limiter le RPM tant que l'huile n'a pas circulé)
-
----
-
-## Seuils de température clés
-
-| Seuil | Valeur stock | Signification |
+| Groupe | Paramètres | Rôle |
 |---|---|---|
-| `c_tco_n_mff_cst` | 17.25°C (raw 87) | En dessous → tables cranking enrichies actives |
-| TCO ≈ 80°C | fixe (physique) | Boucle fermée lambda devient stable |
-| ip_n_max_2__tco à −30°C | 5400 RPM | Limite RPM absolue à très froid |
-| ip_n_max_2__tco à 90°C | 7020 RPM | Limite RPM à chaud (= limiteur permanent) |
+| Facteur TI | `ip_fac_ti_tco_wup_opm_1/2` | Multiplicateur sur temps d'injection f(TCO) |
+| Masse absolue TI | `ip_ti_tco_wup_opm_1/2` | Masse carburant absolue f(TCO, RPM) |
+| Facteur lambda | `ip_fac_lamb_wup` | Multiplicateur sur consigne λ f(TCO, RPM) |
+| Facteur lambda IS | `ip_fac_lamb_wup_is` | Même facteur, actif spécifiquement au ralenti |
 
 ---
 
-## Ce qui change avec l'E85
+## Pourquoi les tables sont vides sur le N52B30 stock
 
-Sur essence, le N52B30 stock (bin VB67774) a :
-- `ip_fac_lamb_wup` = **1.0001 partout** — aucun enrichissement warm-up configuré
-- `ip_fac_ti_tco_wup_opm_1/2` = **~1.000 partout** — pas de correction injection warm-up
+Sur le bin VB67774 (essence) :
+- `ip_fac_ti_tco_wup_opm_1/2` = **~1.000 partout**
+- `ip_fac_lamb_wup` = **1.0001 partout** (raw ≈ 47)
 
-BMW n'a pas eu besoin de configurer ces tables pour l'essence car la boucle lambda fermée converge rapidement. Sur E85, l'éthanol ne s'évapore pas à froid : **toutes ces tables doivent être remplies de zéro**.
+BMW n'a pas eu besoin de configurer ces tables pour l'essence : la boucle fermée lambda converge rapidement dès que la sonde est active. Sur E85, l'éthanol ne s'évapore pas à froid — **les tables doivent être construites de zéro**.
 
 ---
 
-## Ordre de modification recommandé
+## Fin de la phase warm-up
 
-1. [Cranking](02_CRANKING.md) — `ip_mff_cst_opm_1/2`, `c_tco_n_mff_cst`, `ip_mff_lgrd_ast`
-2. [Injection chauffe](03_INJECTION_CHAUFFE.md) — `ip_fac_ti_tco_wup_opm_1/2`
-3. [Lambda chauffe](04_LAMBDA_CHAUFFE.md) — `ip_fac_lamb_wup`, `ip_fac_lamb_wup_is`
-4. [Ralenti](05_RALENTI.md) — `ip_n_sp_is` (optionnel si les 3 étapes précédentes sont correctes)
+La phase warm-up se termine quand TCO atteint ~80°C. À ce point :
+- `ip_fac_ti_tco_wup_opm` doit retourner à **1.000**
+- `ip_fac_lamb_wup` doit retourner à **1.000**
+
+Si ces valeurs ne retombent pas à 1.000 à 80°C, le moteur fonctionnera riche en permanence une fois chaud — ce qui se manifeste par un STFT fortement négatif (< −10%).
