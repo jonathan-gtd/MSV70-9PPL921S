@@ -2,9 +2,9 @@
 import os
 import sys
 
-# Ensure imports resolve correctly regardless of working directory
-_HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, _HERE)
+_HERE     = os.path.dirname(os.path.abspath(__file__))
+_ANALYZER = os.path.normpath(os.path.join(_HERE, "..", "xdf-analyzer"))
+sys.path.insert(0, _ANALYZER)
 
 from mcp.server.fastmcp import FastMCP
 from xdf_parser import XDFParser
@@ -13,9 +13,9 @@ from bin_reader import read_param_values, compare_params
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 
-DATA_FULL    = os.path.join(_HERE, "data", "Full")
-DATA_PARTIAL = os.path.join(_HERE, "data", "Partial")
-DOCS_PATH    = os.path.join(_HERE, "knowledge")
+DATA_FULL    = os.path.join(_ANALYZER, "data", "Full")
+DATA_PARTIAL = os.path.join(_ANALYZER, "data", "Partial")
+DOCS_PATH    = os.path.join(_ANALYZER, "knowledge")
 
 XDF_FULL    = os.path.join(DATA_FULL,    "BMW_Siemens_MSV70_9PPL921S_2560K.xdf")
 XDF_PARTIAL = os.path.join(DATA_PARTIAL, "BMW_Siemens_MSV70_9PPL921S_128K.xdf")
