@@ -7,6 +7,7 @@ Documentation et tutoriels pour la reprogrammation du calculateur **Siemens MSV7
 | Document | Contenu |
 |---|---|
 | [TUTO E85](E85/00_SOMMAIRE.md) | Conversion éthanol complète — 26 fichiers thématiques |
+| [TUTO Warm-Up](warmup/00_SOMMAIRE.md) | Calibration de la phase de chauffe — cranking, injection, lambda, ralenti |
 | [TUTO RPM Protection](rpm-protection/TUTO_RPM_Protection.md) | Modification du coupe-circuit RPM et protection à froid f(TCO) |
 | [TUTO VMAX](vmax/TUTO_VMAX.md) | Suppression ou ajustement du bridage 250 km/h |
 | [FLASH ECU](FLASH_ECU.md) | Matériel, dump BIN, TunerPro, checksum, flash, vérification |

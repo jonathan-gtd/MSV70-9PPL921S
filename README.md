@@ -6,7 +6,7 @@ Référence de calibration pour le calculateur **Siemens MSV70** (BMW N52B30, SW
 
 | Objectif | Aller à |
 |---|---|
-| Convertir en E85 | [`tutos-reprog/E85/`](tutos-reprog/E85/) — commencer par [`23_PRINCIPES.md`](tutos-reprog/E85/23_PRINCIPES.md) |
+| Convertir en E85 | [`tutos-reprog/E85/`](tutos-reprog/E85/00_SOMMAIRE.md) — commencer par [`01_PRINCIPES.md`](tutos-reprog/E85/01_PRINCIPES.md) |
 | Flasher l'ECU | [`tutos-reprog/FLASH_ECU.md`](tutos-reprog/FLASH_ECU.md) |
 | Lever le bridage RPM | [`tutos-reprog/rpm-protection/`](tutos-reprog/rpm-protection/TUTO_RPM_Protection.md) |
 | Lever le bridage VMAX | [`tutos-reprog/vmax/`](tutos-reprog/vmax/TUTO_VMAX.md) |
@@ -24,12 +24,13 @@ xdf-analyzer/    ← Moteur d'analyse : parser XDF, lecture BIN, export CSV
   knowledge/     ← Base de connaissance paramètres ECU (JSON)
   *.py           ← Parser, BIN reader, exporteur
 
-tutos-reprog/    ← Documentation et tutoriels de reprogrammation
-  E85/           ← Conversion éthanol — 26 fichiers thématiques
-  FLASH_ECU.md   ← Procédure hardware/software pour lire et flasher l'ECU
-  LEXIQUE.md     ← Glossaire Siemens/Bosch (préfixes, sigles, structures)
-  TUTO_RPM_Protection.md
-  TUTO_VMAX.md
+tutos-reprog/         ← Documentation et tutoriels de reprogrammation
+  E85/              ← Conversion éthanol — 26 fichiers (voir 00_SOMMAIRE.md)
+  warmup/           ← Phase de chauffe — cranking, injection, lambda, ralenti
+  rpm-protection/   ← Modification du coupe-circuit RPM
+  vmax/             ← Suppression du bridage 250 km/h
+  FLASH_ECU.md      ← Procédure hardware/software pour lire et flasher l'ECU
+  LEXIQUE.md        ← Glossaire Siemens/Bosch (préfixes, sigles, structures)
 ```
 
 ## Véhicule cible
