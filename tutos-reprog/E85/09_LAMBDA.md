@@ -11,15 +11,14 @@
 |---|---|
 | Adresse | (voir XDF) |
 | Structure | Table |
-| Équation | (λ, facteur) |
 
 **Rôle :** Limite haute de la correction STFT instantanée autorisée par le système WRAF (Wide Range Air Fuel). Si le STFT monte au-delà de ce plafond, l'ECU considère la sonde hors de sa plage opérationnelle et peut lever un DTC → voyant moteur. Sur E85 en break-in (0–500 km), le STFT peut atteindre +18 à +22% pendant la convergence — au-delà du plafond stock de 1.15. Élargir pendant le rodage, resserrer une fois stabilisé.
 
 **Avant / Après :**
 
-| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (> 500 km) |
+| Phase | ◀ Stock | ✏️ Break-in (0–500 km) | ✏️ Stabilisé (> 500 km) |
 |---|---|---|---|
-| `ip_fac_lamb_max_fsd_1` | **~1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+| `ip_fac_lamb_max_fsd_1` | ~1.15 (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
 
 **Vérification :**
 
@@ -37,15 +36,14 @@
 |---|---|
 | Adresse | (voir XDF) |
 | Structure | Table |
-| Équation | (λ, facteur) |
 
 **Rôle :** Copie du plafond WRAF pour le mode 2. Même logique qu'ip_fac_lamb_max_fsd_1. Les deux modes doivent être cohérents — si mode 1 est élargi et mode 2 reste stock, le voyant peut s'allumer lors des commutations de mode de régulation lambda.
 
 **Avant / Après :**
 
-| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (> 500 km) |
+| Phase | ◀ Stock | ✏️ Break-in (0–500 km) | ✏️ Stabilisé (> 500 km) |
 |---|---|---|---|
-| `ip_fac_lamb_max_fsd_2` | **~1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+| `ip_fac_lamb_max_fsd_2` | ~1.15 (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
 
 **Vérification :**
 
@@ -62,15 +60,14 @@
 |---|---|
 | Adresse | (voir XDF) |
 | Structure | Constante scalaire |
-| Équation | (λ) |
 
 **Rôle :** Valeur maximale d'accumulation de l'intégrateur LTFT (long term fuel trim). C'est la limite absolue du long terme — si l'adaptation atteint ce plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Sur E85 en break-in, le LTFT peut vouloir s'accumuler jusqu'à +25% pendant les premiers 200 km pendant que le calculateur apprend le nouveau carburant. Resserrer après stabilisation.
 
 **Avant / Après :**
 
-| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (> 500 km) |
+| Phase | ◀ Stock | ✏️ Break-in (0–500 km) | ✏️ Stabilisé (> 500 km) |
 |---|---|---|---|
-| `c_lamb_delta_i_max_lam_adj` | **~0.15–0.20 λ** (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
+| `c_lamb_delta_i_max_lam_adj` | ~0.15–0.20 λ (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
 
 **Vérification :**
 
@@ -107,23 +104,23 @@ Voyant MIL allumé pendant break-in :
 |---|---|
 | Adresse | 0x436A2 |
 | Structure | Courbe 1×12 |
-| Équation | (λ) |
 | Axe | X = RPM (608–6496 tr/min) |
 
 **Rôle :** Consigne de richesse ciblée par le calculateur en mode pleine charge (WOT). Stock N52B30 : déjà enrichi à λ 0.920 en WOT (descend à 0.871 à 6500 RPM). Sur E85, cette richesse protège le moteur — rien d'obligatoire à modifier. Option B : dé-enrichir légèrement (λ 0.940–0.950) pour gagner un peu de puissance en exploitant la chaleur de vaporisation de l'éthanol (qui refroidit naturellement la chambre).
 
-**Avant / Après :**
+**◀ Stock (λ)**
 
-```
-RPM    :  608   992  1216  1600  2016  2496  3008  3520  4128  4800  5504  6496
+| RPM | 608 | 992 | 1216 | 1600 | 2016 | 2496 | 3008 | 3520 | 4128 | 4800 | 5504 | 6496 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| λ | 0.920 | 0.920 | 0.913 | 0.920 | 0.920 | 0.920 | 0.920 | 0.920 | 0.920 | 0.920 | 0.901 | 0.871 |
 
-Stock  : 0.920 0.920 0.913 0.920 0.920 0.920 0.920 0.920 0.920 0.920 0.901 0.871
+Option A (recommandée) : **laisser stock** — λ 0.920 WOT déjà présent, E85 ne nécessite pas d'enrichissement supplémentaire.
 
-Option A (recommandée) : LAISSER STOCK — λ 0.920 WOT déjà présent
+**✏️ Option B — dé-enrichissement léger (gain puissance)**
 
-Option B (dé-enrichissement léger, puissance) :
-E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
-```
+| RPM | 608 | 992 | 1216 | 1600 | 2016 | 2496 | 3008 | 3520 | 4128 | 4800 | 5504 | 6496 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| λ | **0.950** | **0.950** | **0.945** | **0.950** | **0.950** | **0.945** | **0.945** | **0.940** | **0.935** | **0.930** | **0.920** | **0.900** |
 
 > Conserver les cellules 5504 et 6496 rpm à λ bas (0.900–0.920) : protection thermique soupapes à très haut régime.
 

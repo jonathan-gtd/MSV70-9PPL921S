@@ -11,13 +11,12 @@
 |---|---|
 | Adresse | (voir XDF) |
 | Structure | Courbe ou map f(conditions) |
-| Équation | (voir XDF) |
 
 **Rôle :** Limite le débit d'air maximum autorisé à travers la vanne de purge canister (CPS). Sur essence, ce débit est calibré pour une densité de vapeurs d'hydrocarbures standard. Sur E85, les vapeurs d'éthanol sont plus denses et ont un pouvoir calorifique inférieur — un débit identique à l'essence enrichit davantage le mélange et peut créer des oscillations STFT importantes lors des purges. Réduire de 10–15% si les STFT oscillent de façon prononcée lors des purges.
 
 **Avant / Après :**
 
-| | ◀ Valeur stock | ▶ Valeur E85 |
+| | ◀ Valeur stock | ✏️ E85 |
 |---|---|---|
 | `ip_flow_max_cps` | Valeur d'usine | **Stock − 10 à 15%** si STFT oscillent > ±15% lors purge |
 | `ip_flow_max_cps` | Valeur d'usine | **Inchangé** si STFT stable lors purge |
@@ -38,13 +37,12 @@
 |---|---|
 | Adresse | (voir XDF) |
 | Structure | Courbe ou map f(conditions) |
-| Équation | (voir XDF) |
 
 **Rôle :** Débit nominal de la purge canister (valeur courante utilisée en conditions normales, en dessous du maximum). Agit en tandem avec ip_flow_max_cps — réduire les deux si les oscillations STFT persistent. Sur E85, réduire de 15% si le STFT oscille de plus de ±10% de façon systématique lors des purges.
 
 **Avant / Après :**
 
-| | ◀ Valeur stock | ▶ Valeur E85 |
+| | ◀ Valeur stock | ✏️ E85 |
 |---|---|---|
 | `ip_flow_cps` | Valeur d'usine | **Stock − 15%** si STFT > ±10% lors purge |
 | `ip_flow_cps` | Valeur d'usine | **Inchangé** si STFT stable lors purge |
