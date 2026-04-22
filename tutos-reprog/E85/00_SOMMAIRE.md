@@ -70,8 +70,9 @@ Améliorent le comportement mais non bloquantes pour un premier essai.
 
 À consulter selon le comportement observé. Ne pas modifier en aveugle.
 
-- **[10 — Warm-up lambda](10_WARMUP_LAMBDA.md)** — Ralenti instable chaud
-  - [① `ip_fac_lamb_wup_is` — Facteur warm-up lambda](10_WARMUP_LAMBDA.md#p1)
+- **[10 — Warm-up lambda](10_WARMUP_LAMBDA.md)** — Enrichissement warm-up tous régimes et ralenti
+  - [① `ip_fac_lamb_wup_is` — Facteur warm-up lambda, ralenti](10_WARMUP_LAMBDA.md#p1)
+  - [② `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes](10_WARMUP_LAMBDA.md#p2)
 
 - **[11 — Avance cranking](11_AVANCE_CRANKING.md)** — Démarrage difficile malgré §05 correct
   - [① `c_iga_ini` — Avance initiale cranking](11_AVANCE_CRANKING.md#p1)
