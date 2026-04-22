@@ -1,182 +1,131 @@
-# §7 — Consigne Lambda WOT (Richesse Cible)
+# §7 — Lambda, richesse WOT et limites correction
 
-> 💡 Le N52B30 est **déjà enrichi à λ 0.920 en WOT** (stock). Sur E85, rien d'obligatoire. En option, dé-enrichir légèrement (0.940–0.950) pour gagner un peu de puissance.
+> Sur E85 correctement calibré, le moteur fonctionne en boucle fermée autour de lambda=1. Ces paramètres servent à (1) protéger le moteur en pleine charge avec un léger enrichissement WOT, (2) élargir les plages de correction pendant la phase d'apprentissage initiale pour éviter les DTC voyant moteur.
 
-### 📋 Tables à modifier
+---
 
-| Paramètre | Adresse | Structure | Modification |
-|---|---|---|---|
-| `ip_lamb_fl__n` | 0x436A2 | Courbe 1×12, f(RPM) | **Optionnel** — stock λ 0.920 ou monter à 0.940–0.950 |
+## ① `ip_lamb_fl__n` — Lambda cible pleine charge f(RPM) — OPTIONNEL
 
-### 🔨 Procédure
-
-| Option | Action |
+| Champ | Valeur |
 |---|---|
-| **A — Recommandée** | Ne rien modifier — stock λ 0.920 suffisant et sécurisé |
-| **B — Optionnelle** | Cellules 608–4800 rpm → 0.940–0.950 / conserver 5504 et 6496 rpm bas (protection soupapes) |
+| Adresse | 0x436A2 |
+| Structure | Courbe 1×12 |
+| Équation | (λ) |
+| Axe | X = RPM (608–6496 tr/min) |
 
-**Valeurs STOCK `ip_lamb_fl__n` @0x436A2 :**
+**Rôle :** Consigne de richesse ciblée par le calculateur en mode pleine charge (WOT). Stock N52B30 : déjà enrichi à λ 0.920 en WOT (descend à 0.871 à 6500 RPM). Sur E85, cette richesse protège le moteur — rien d'obligatoire à modifier. Option B : dé-enrichir légèrement (λ 0.940–0.950) pour gagner un peu de puissance en exploitant la chaleur de vaporisation de l'éthanol (qui refroidit naturellement la chambre).
 
-```
-RPM  : 608   992   1216   1600   2016   2496   3008   3520   4128   4800   5504   6496
-λ    : 0.920 0.920 0.913  0.920  0.920  0.920  0.920  0.920  0.920  0.920  0.901  0.871
-```
-
-> **Conclusion :** Le N52B30 stock est **déjà enrichi à lambda ≈ 0.920 en pleine charge** (et descend à 0.871 à 6500 rpm). Il n'y a **rien à faire** pour « ajouter » de la richesse WOT — elle est déjà présente.
-
-### Comprendre Lambda sur l'E85
+**Avant / Après :**
 
 ```
-Lambda = 1.00 sur E85 ≠ Lambda = 1.00 sur essence
+RPM    :  608   992  1216  1600  2016  2496  3008  3520  4128  4800  5504  6496
 
-Sur essence :  Lambda 1.00 → AFR 14.7:1 → stœchiométrique
-Sur E85 :      Lambda 1.00 → AFR 9.8:1  → stœchiométrique E85
+Stock  : 0.920 0.920 0.913 0.920 0.920 0.920 0.920 0.920 0.920 0.920 0.901 0.871
 
-Le calculateur gère cela AUTOMATIQUEMENT si :
-  1. ip_mff_cor_opm est correctement scalé (×1.33 à ×1.45 selon votre titre éthanol)
-  2. La sonde lambda lit correctement (lambda reste relative, pas absolue)
-  3. La boucle fermée se régule sur la sonde lambda
+Option A (recommandée) : LAISSER STOCK — λ 0.920 WOT déjà présent
+
+Option B (dé-enrichissement léger, puissance) :
+E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
 ```
 
-Le système de boucle fermée se corrige automatiquement si `ip_mff_cor_opm` est correctement calibré.
+> Conserver les cellules 5504 et 6496 rpm à λ bas (0.900–0.920) : protection thermique soupapes à très haut régime.
 
-### Quand (et comment) modifier le lambda WOT sur E85
+**Vérification :**
 
-Le stock est déjà à λ 0.920 en WOT, ce qui est **assez riche**. Sur E85 pur, la chaleur de vaporisation élevée (~840 kJ/kg vs 305 kJ/kg essence) refroidit fortement la chambre et protège mécaniquement contre la détonation. Vous avez donc deux options :
-
-**Option A — Garder `ip_lamb_fl__n` stock.** Le λ 0.920 stock injecte ~9% de carburant en plus qu'à stœchio. Sur E85, cette richesse protège toujours — aucun problème de fiabilité.
-
-**Option B — Dé-enrichir légèrement pour gagner un peu de puissance.**
-Sur E85, λ 0.94–0.96 en WOT est un bon compromis (plus proche de stoechio = couple maxi, mais encore assez riche pour une marge de sécurité). Modification proposée sur `ip_lamb_fl__n` :
-
-<a id="pencil-lambda-wot"></a>
-
-### ✏️ Avant / Après (option B — dé-enrichissement WOT)
-
-```
-RPM    : 608   992   1216   1600   2016   2496   3008   3520   4128   4800   5504   6496
-Stock  : 0.920 0.920 0.913  0.920  0.920  0.920  0.920  0.920  0.920  0.920  0.901  0.871
-E85    : 0.950 0.950 0.945  0.950  0.950  0.945  0.945  0.940  0.935  0.930  0.920  0.900
-```
-
-> Conserver les cellules 5504 et 6496 rpm à une valeur basse (0.900–0.920) : protection thermique des soupapes d'échappement à très haut régime.
-
-### ✅ Vérification
-
-| Signal | ✅ Cible | ⚠️ Si hors cible |
+| Signal | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| Lambda WOT (sonde large bande) | **0.90 – 0.95** | — |
-| LTFT roulage | **±5%** | > +10% → `ip_mff_cor_opm_*` trop petit |
-| | | < −10% → `ip_mff_cor_opm_*` trop grand |
+| Lambda WOT (sonde large bande) | 0.90–0.95 | Hors plage → ajuster ip_lamb_fl__n |
+| LTFT roulage | ±5% | > +10% → ip_mff_cor_opm_* trop petit / < −10% → trop grand |
 
 ---
 
-## Élargissement des plages sonde lambda — Prévention DTC (voyant moteur)
+## ② `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF instantanée, mode 1 (anti-DTC)
 
-Sur E85, même avec une calibration correcte, les premiers 100–300 km de rodage provoquent des corrections STFT/LTFT importantes pendant que l'ECU converge. Si les plages autorisées sont trop étroites, l'ECU déclare une adaptation hors limite → **voyant moteur allumé**, même si le moteur tourne parfaitement.
+| Champ | Valeur |
+|---|---|
+| Adresse | (voir XDF) |
+| Structure | Table |
+| Équation | (λ, facteur) |
 
-**Deux paramètres forment ensemble la plage opérationnelle effective de la sonde lambda :**
+**Rôle :** Limite haute de la correction STFT instantanée autorisée par le système WRAF (Wide Range Air Fuel). Si le STFT monte au-delà de ce plafond, l'ECU considère la sonde hors de sa plage opérationnelle et peut lever un DTC → voyant moteur. Sur E85 en break-in (0–500 km), le STFT peut atteindre +18 à +22% pendant la convergence — au-delà du plafond stock de 1.15. Élargir pendant le rodage, resserrer une fois stabilisé.
 
-1. `ip_fac_lamb_max_fsd_1/2` — plafond de correction WRAF instantanée (STFT)
-2. `c_lamb_delta_i_max_lam_adj` — plafond d'accumulation LTFT
+**Avant / Après :**
 
-### Pourquoi ça déclenche un DTC sur E85
-
-```
-Scénario break-in E85 :
-  → STFT monte à +18% pendant convergence
-  → ip_fac_lamb_max_fsd stock = 1.15 (±15%)
-  → STFT dépasse le plafond de la table FSD
-  → ECU déclare "lambda adaptation at limit"
-  → MIL s'allume (voyant orange)
-  → Même résultat si LTFT accumule > 0.20 λ
-```
-
----
-
-### ① `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF mode 1 (prévention DTC)
-
-**Type :** Table  
-**Rôle :** Limite haute de la correction STFT instantanée autorisée par le système WRAF (Wide Range Air Fuel). Si le STFT monte au-delà de ce plafond, l'ECU considère que la sonde est hors de sa plage opérationnelle et peut lever un DTC (voyant moteur). Sur E85 en break-in, le STFT peut atteindre +18 à +22% pendant la convergence — au-delà du plafond stock de 1.15.
-
-| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (>500 km) |
+| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (> 500 km) |
 |---|---|---|---|
 | `ip_fac_lamb_max_fsd_1` | **~1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
 
-> Modifier en même temps que ip_fac_lamb_max_fsd_2.
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Voyant moteur dans les 500 premiers km | Absent | Allumé → FSD trop serré, élargir à 1.30 |
+| STFT boucle fermée | ±15% max | > ±20% continu → calibration injecteurs à revoir |
 
 ---
 
-### ② `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF mode 2 (prévention DTC)
+## ③ `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF instantanée, mode 2 (anti-DTC)
 
-**Type :** Table  
-**Rôle :** Copie du plafond WRAF pour le mode 2. Même logique qu'ip_fac_lamb_max_fsd_1. Les deux modes doivent être cohérents — si mode 1 est élargi et mode 2 reste stock, le voyant peut s'allumer lors des commutations de mode.
+| Champ | Valeur |
+|---|---|
+| Adresse | (voir XDF) |
+| Structure | Table |
+| Équation | (λ, facteur) |
 
-| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (>500 km) |
+**Rôle :** Copie du plafond WRAF pour le mode 2. Même logique qu'ip_fac_lamb_max_fsd_1. Les deux modes doivent être cohérents — si mode 1 est élargi et mode 2 reste stock, le voyant peut s'allumer lors des commutations de mode de régulation lambda.
+
+**Avant / Après :**
+
+| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (> 500 km) |
 |---|---|---|---|
 | `ip_fac_lamb_max_fsd_2` | **~1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
 
-> Même valeur que mode 1 — modifier simultanément.
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Voyant moteur intermittent | Absent | Intermittent → mode 2 non modifié, commutation déclenche DTC |
 
 ---
 
-### ③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (prévention DTC)
+## ④ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (anti-DTC)
 
-**Type :** Constante  
-**Rôle :** Valeur maximale d'accumulation de l'intégrateur LTFT. C'est la limite absolue du long terme — si l'adaptation atteint ce plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Sur E85 break-in, l'LTFT peut vouloir s'accumuler jusqu'à +25% pendant les premiers 200 km.
+| Champ | Valeur |
+|---|---|
+| Adresse | (voir XDF) |
+| Structure | Constante scalaire |
+| Équation | (λ) |
 
-| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (>500 km) |
+**Rôle :** Valeur maximale d'accumulation de l'intégrateur LTFT (long term fuel trim). C'est la limite absolue du long terme — si l'adaptation atteint ce plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Sur E85 en break-in, le LTFT peut vouloir s'accumuler jusqu'à +25% pendant les premiers 200 km pendant que le calculateur apprend le nouveau carburant. Resserrer après stabilisation.
+
+**Avant / Après :**
+
+| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (> 500 km) |
 |---|---|---|---|
 | `c_lamb_delta_i_max_lam_adj` | **~0.15–0.20 λ** (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
 
-> Remonter à 1.20 une fois les LTFT stables à ±5% — ça suffit pour gérer les variations de titre éthanol entre stations (E60 à E85).
+**Vérification :**
 
-### Procédure recommandée
-
-```
-1. Avant premier flash E85 : monter FSD à 1.25, LTFT max à 0.25 λ
-2. Rouler 300–500 km en cycle varié (ville + route)
-3. Lire LTFT avec ISTA ou scanner OBD : cible ±5%
-4. Si LTFT stable → resserrer FSD à 1.20, LTFT max à 0.20 λ
-5. Reflasher — les valeurs serrées évitent les faux DTC futurs
-```
-
-### ✅ Vérification
-
-| Signal | ✅ Sans DTC | ⚠️ Risque DTC |
+| Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| STFT (boucle fermée) | **±15%** | > ±20% avec FSD stock |
-| LTFT après 500 km | **±5%** | > ±10% avec LTFT max stock |
-| Voyant MIL | Éteint | Allumé si FSD/LTFT atteints |
+| LTFT après 500 km | ±5% | > ±10% → calibration injecteurs à affiner |
+| Voyant "adaptation" | Absent | Allumé → LTFT max trop serré, élargir |
 
 ---
 
-### Corrections LTFT persistants
-
-Si les LTFT restent décalés après stabilisation :
-- **LTFT > +10%** : mélange trop pauvre → `ip_mff_cor_opm_*` trop petit, augmenter
-- **LTFT < −10%** : mélange trop riche → `ip_mff_cor_opm_*` trop grand, réduire
-
-Dans les deux cas, la correction se fait sur le facteur injecteur, pas sur les consignes lambda.
-
----
-
-
----
-
-## Récapitulatif — Valeurs Avant / Après
-
-### ⑥ ip_lamb_fl__n — Lambda WOT @ 0x436A2 (1×12, f(RPM)) — OPTIONNEL
+## Note — Procédure complète prévention DTC break-in
 
 ```
-RPM    : 608   992   1216   1600   2016   2496   3008   3520   4128   4800   5504   6496
+Avant premier flash E85 :
+  1. Monter ip_fac_lamb_max_fsd_1/2 à 1.25–1.30
+  2. Monter c_lamb_delta_i_max_lam_adj à 0.25–0.30 λ
 
-Stock  : 0.920 0.920 0.913  0.920  0.920  0.920  0.920  0.920  0.920  0.920  0.901  0.871
+Après 300–500 km :
+  3. Lire LTFT avec ISTA ou scanner OBD → cible ±5%
+  4. Si stable → resserrer : FSD à 1.20, LTFT max à 0.20 λ
+  5. Reflasher — valeurs serrées évitent les faux DTC futurs
 
-Option A (recommandée) : LAISSER STOCK — déjà λ 0.920 en WOT, aucune modification
-
-Option B (optionnelle — dé-enrichissement léger pour la puissance) :
-E85 B  : 0.950 0.950 0.945  0.950  0.950  0.945  0.945  0.940  0.935  0.930  0.920  0.900
+Voyant MIL allumé pendant break-in :
+  → DTC "fuel trim" → FSD/LTFT trop serrés → élargir et reflasher
+  → NE PAS effacer le DTC sans reflasher : il revient immédiatement
 ```
-
----
