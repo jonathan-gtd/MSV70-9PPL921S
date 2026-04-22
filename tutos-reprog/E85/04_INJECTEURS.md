@@ -198,52 +198,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 ---
 
 <a id="p8"></a>
-## ⑧ Duty cycle injecteur — saturation haut régime (surveillance)
-
-| Champ | Valeur |
-|---|---|
-| Paramètre calculé | Non encodé dans le bin |
-| Formule | `DC (%) = TI_ms / T_cycle_ms × 100` |
-| Limite safe | **85%** |
-
-**Rôle :** Le duty cycle est le ratio temps d'ouverture / temps disponible par cycle moteur. Au-delà de 85%, l'injecteur entre en saturation : le débit plafonne, le mélange devient pauvre de façon non compensable. Sur E85, le TI est ×1.45 plus long qu'à l'essence → le risque apparaît plus tôt à haut régime. La saturation est silencieuse (boucle ouverte WOT = pas de sonde lambda active) et directement destructrice.
-
-**Avant / Après — temps disponible par régime :**
-
-| RPM | T_cycle | TI max safe (85%) |
-|---|---|---|
-| 4000 RPM | 30.0 ms | 25.5 ms |
-| 5500 RPM | 21.8 ms | 18.5 ms |
-| 6500 RPM | 18.5 ms | **15.7 ms** |
-
-**Avant / Après — duty cycle estimé @ 6500 RPM WOT :**
-
-| Condition | ◀ Stock essence | ▶ E85, injecteurs stock | ▶ E85, puissance augmentée |
-|---|---|---|---|
-| TI estimé | ~8–10 ms | ~12–14 ms | > 15 ms |
-| Duty cycle | ~43–54% | ~65–76% | **> 81%** |
-| Statut | Confortable | Dans les limites, marge faible | Zone critique |
-
-**Vérification :**
-
-| PID OBD | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Injection Time (Ti) | < 15.7 ms @ 6500 RPM | > 15 ms → injecteurs de remplacement nécessaires avant WOT |
-| Duty Cycle calculé | < 85% à tous régimes | Proche 85% → ne pas augmenter la puissance sans nouveaux injecteurs |
-
-**Formule pour nouveaux injecteurs :**
-
-```
-Facteur_nouveau = 1.016 × Facteur_E85 × (Débit_stock / Débit_nouveaux)
-
-Exemple — injecteurs N54 (débit ~30% supérieur) sur E70 :
-  = 1.016 × 1.36 × (1 / 1.30) ≈ 1.063
-```
-
----
-
-<a id="p9"></a>
-## ⑨ `ip_ti_min` — Dead time injecteur f(tension batterie)
+## ⑧ `ip_ti_min` — Dead time injecteur f(tension batterie)
 
 | Champ | Valeur |
 |---|---|

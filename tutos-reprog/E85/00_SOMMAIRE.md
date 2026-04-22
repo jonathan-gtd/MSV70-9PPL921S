@@ -26,8 +26,7 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
   - [⑤ `c_t_ti_dly_fl_1` — Délai WOT MT, copie 1](04_INJECTEURS.md#p5)
   - [⑥ `c_t_ti_dly_fl_2` — Délai WOT MT, copie 2](04_INJECTEURS.md#p6)
   - [⑦ `c_tco_n_mff_cst` — Seuil TCO cranking enrichi](04_INJECTEURS.md#p7)
-  - [⑧ Duty cycle — saturation haut régime (surveillance)](04_INJECTEURS.md#p8)
-  - [⑨ `ip_ti_min` — Dead time f(tension batterie)](04_INJECTEURS.md#p9)
+  - [⑧ `ip_ti_min` — Dead time f(tension batterie)](04_INJECTEURS.md#p8)
 
 - **[05 — Démarrage froid](05_DEMARRAGE_FROID.md)** — Cranking et after-start sur éthanol
   - [① `ip_mff_cst_opm_1` — Cranking Valvetronic](05_DEMARRAGE_FROID.md#p1)
@@ -98,6 +97,12 @@ Améliorent le comportement mais non bloquantes pour un premier essai.
   - [① `ip_fac_eff_iga_ch_cold_opm_1` — Retard allumage chauffe cat, Valvetronic](15_CHAUFFE_CAT.md#p1)
   - [② `ip_fac_eff_iga_ch_cold_opm_2` — Retard allumage chauffe cat, papillonné (GD)](15_CHAUFFE_CAT.md#p2)
 
+- **[16 — Surveillance](16_SURVEILLANCE.md)** — Indicateurs OBD à lire pendant la mise au point
+  - [① Duty cycle injecteur — saturation haut régime](16_SURVEILLANCE.md#p1)
+  - [② STFT / LTFT — convergence de l'adaptation](16_SURVEILLANCE.md#p2)
+  - [③ Lambda WOT — richesse pleine charge](16_SURVEILLANCE.md#p3)
+  - [④ Retrait d'avance knock control](16_SURVEILLANCE.md#p4)
+
 ---
 
 ## Validation
@@ -106,9 +111,9 @@ Améliorent le comportement mais non bloquantes pour un premier essai.
 
 | # | Fichier | Contenu |
 |---|---|---|
-| 16 | [Résumé](16_RESUME.md) | Tableau complet : modifier / surveiller / ne pas toucher |
-| 17 | [Plan de test](17_PLAN_TEST.md) | Protocole de validation en 5 phases |
-| 18 | [Diagnostic](18_DIAGNOSTIC.md) | Symptôme → cause → solution |
-| 19 | [Avertissements](19_AVERTISSEMENTS.md) | Surveillance STFT/LTFT, pompe, filtre, bougies, hiver |
-| 20 | [Vérification](20_VERIFICATION.md) | Niveaux de confiance par section |
-| 21 | [Conclusion](21_CONCLUSION.md) | Avertissement légal et responsabilité |
+| 17 | [Résumé](17_RESUME.md) | Tableau complet : modifier / surveiller / ne pas toucher |
+| 18 | [Plan de test](18_PLAN_TEST.md) | Protocole de validation en 5 phases |
+| 19 | [Diagnostic](19_DIAGNOSTIC.md) | Symptôme → cause → solution |
+| 20 | [Avertissements](20_AVERTISSEMENTS.md) | Surveillance STFT/LTFT, pompe, filtre, bougies, hiver |
+| 21 | [Vérification](21_VERIFICATION.md) | Niveaux de confiance par section |
+| 22 | [Conclusion](22_CONCLUSION.md) | Avertissement légal et responsabilité |
