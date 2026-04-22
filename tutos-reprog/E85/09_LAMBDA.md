@@ -1,9 +1,10 @@
-# §7 — Lambda, richesse WOT et limites correction
+﻿# §7 — Lambda, richesse WOT et limites correction
 
 > Sur E85 correctement calibré, le moteur fonctionne en boucle fermée autour de lambda=1. Ces paramètres servent à (1) protéger le moteur en pleine charge avec un léger enrichissement WOT, (2) élargir les plages de correction pendant la phase d'apprentissage initiale pour éviter les DTC voyant moteur.
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_lamb_fl__n` — Lambda cible pleine charge f(RPM) — OPTIONNEL
 
 | Champ | Valeur |
@@ -39,6 +40,7 @@ E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
 
 ---
 
+<a id="p2"></a>
 ## ② `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF instantanée, mode 1 (anti-DTC)
 
 | Champ | Valeur |
@@ -64,6 +66,7 @@ E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
 
 ---
 
+<a id="p3"></a>
 ## ③ `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF instantanée, mode 2 (anti-DTC)
 
 | Champ | Valeur |
@@ -88,6 +91,7 @@ E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
 
 ---
 
+<a id="p4"></a>
 ## ④ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (anti-DTC)
 
 | Champ | Valeur |

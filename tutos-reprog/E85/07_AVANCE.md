@@ -1,4 +1,4 @@
-# §5 — Avance à l'allumage
+﻿# §5 — Avance à l'allumage
 
 > L'éthanol a un indice d'octane de 104–108 RON (vs 95 SP95) — il résiste mieux à la détonation et permet d'augmenter l'avance. Calibration **E60 (101 RON)** = pire carburant légal hivernal : zéro risque quelle que soit la saison. Gain : **+5 à +12% de puissance**. Règle absolue : progressivité. Un seul degré de trop = cliquetis = casse moteur.
 
@@ -11,6 +11,7 @@
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_iga_bas_max_knk__n__maf` — Plafond avance anti-cliquetis f(MAF × RPM)
 
 | Champ | Valeur |
@@ -68,6 +69,7 @@ APRÈS (objectif E60 — stock + incréments) :
 
 ---
 
+<a id="p2"></a>
 ## ② `ip_iga_st_bas_opm_1` — Avance cranking, mode Valvetronic
 
 | Champ | Valeur |
@@ -108,6 +110,7 @@ TCO (°C) →  -30.0  -20.3   -9.8    0.0   +9.8  +30.0  +60.0  +90.0
 
 ---
 
+<a id="p3"></a>
 ## ③ `ip_iga_st_bas_opm_2` — Avance cranking, mode papillonné (GD)
 
 | Champ | Valeur |

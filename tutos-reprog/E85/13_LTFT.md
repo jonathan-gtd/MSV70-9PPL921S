@@ -1,9 +1,10 @@
-# §12 — Limites LTFT / STFT
+﻿# §12 — Limites LTFT / STFT
 
 > **Les vraies limites MSV70 sur ce bin sont −8% / +12% — asymétriques.** Ne pas modifier. Si le LTFT plafonne en permanence : affiner le facteur injecteur (ip_mff_cor_opm_*) plutôt que d'élargir ces limites.
 
 ---
 
+<a id="p1"></a>
 ## ① `c_fac_max_h_rng_lam_ad` — Limite haute LTFT, haute charge
 
 | Champ | Valeur |
@@ -29,6 +30,7 @@
 
 ---
 
+<a id="p2"></a>
 ## ② `c_fac_max_l_rng_lam_ad` — Limite haute LTFT, basse charge
 
 | Champ | Valeur |
@@ -54,6 +56,7 @@
 
 ---
 
+<a id="p3"></a>
 ## ③ `c_fac_min_h_rng_lam_ad` — Limite basse LTFT, haute charge
 
 | Champ | Valeur |
@@ -79,6 +82,7 @@
 
 ---
 
+<a id="p4"></a>
 ## ④ `c_fac_min_l_rng_lam_ad` — Limite basse LTFT, basse charge
 
 | Champ | Valeur |
@@ -103,6 +107,7 @@
 
 ---
 
+<a id="p5"></a>
 ## ⑤ `c_lam_mv_dyw_dly` — Fenêtre dynamique STFT
 
 | Champ | Valeur |

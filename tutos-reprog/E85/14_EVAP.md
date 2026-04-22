@@ -1,9 +1,10 @@
-# §14 — Purge Canister EVAP
+﻿# §14 — Purge Canister EVAP
 
 > Les vapeurs E85 sont plus riches en éthanol et plus denses que les vapeurs essence — lors des cycles de purge canister, elles enrichissent temporairement le mélange. La boucle fermée corrige automatiquement. Deux paramètres peuvent être ajustés si les oscillations STFT lors de la purge sont excessives.
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_flow_max_cps` — Débit maximal de purge canister
 
 | Champ | Valeur |
@@ -30,6 +31,7 @@
 
 ---
 
+<a id="p2"></a>
 ## ② `ip_flow_cps` — Débit nominal de purge canister
 
 | Champ | Valeur |

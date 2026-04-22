@@ -1,4 +1,4 @@
-# §2 — Mise à l'échelle des injecteurs
+﻿# §2 — Mise à l'échelle des injecteurs
 
 > Sur E85, l'AFR stœchiométrique passe de 14.7:1 (essence) à 9.55:1 → **+45% de masse carburant** à injecter à chaque cycle. Le MSV70 N52 utilise 4 maps multiplicatrices (`ip_mff_cor_opm_*`) pour scaler l'injection selon le mode de fonctionnement. Le facteur `c_fac_mff_ti_stnd` (conversion MFF→TI) est géré séparément par le knowledge `/01_injecteurs.json` et ne se modifie pas via TunerPro sur ce bin (overflow XDF).
 
@@ -22,6 +22,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_mff_cor_opm_1_1` — Multiplicateur injection Valvetronic, mode 1
 
 | Champ | Valeur |
@@ -46,6 +47,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 ---
 
+<a id="p2"></a>
 ## ② `ip_mff_cor_opm_1_2` — Multiplicateur injection Valvetronic, mode 2
 
 | Champ | Valeur |
@@ -70,6 +72,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 ---
 
+<a id="p3"></a>
 ## ③ `ip_mff_cor_opm_2_1` — Multiplicateur injection papillonné (GD), mode 1
 
 | Champ | Valeur |
@@ -94,6 +97,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 ---
 
+<a id="p4"></a>
 ## ④ `ip_mff_cor_opm_2_2` — Multiplicateur injection papillonné (GD), mode 2
 
 | Champ | Valeur |
@@ -118,6 +122,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 ---
 
+<a id="p5"></a>
 ## ⑤ `ip_ti_min` — Dead time injecteur f(tension batterie)
 
 | Champ | Valeur |
@@ -152,6 +157,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 ---
 
+<a id="p6"></a>
 ## ⑥ Duty cycle injecteur — saturation haut régime (surveillance)
 
 | Champ | Valeur |
@@ -196,6 +202,7 @@ Exemple — injecteurs N54 (débit ~30% supérieur) sur E70 :
 
 ---
 
+<a id="p7"></a>
 ## ⑦ `c_tco_n_mff_cst` — Seuil TCO activation cranking enrichi
 
 | Champ | Valeur |
@@ -223,6 +230,7 @@ Exemple — injecteurs N54 (débit ~30% supérieur) sur E70 :
 
 ---
 
+<a id="p8"></a>
 ## ⑧ `c_t_ti_dly_fl_1` — Délai enrichissement WOT, boîte manuelle, copie 1
 
 | Champ | Valeur |
@@ -249,6 +257,7 @@ Exemple — injecteurs N54 (débit ~30% supérieur) sur E70 :
 
 ---
 
+<a id="p9"></a>
 ## ⑨ `c_t_ti_dly_fl_2` — Délai enrichissement WOT, boîte manuelle, copie 2
 
 | Champ | Valeur |

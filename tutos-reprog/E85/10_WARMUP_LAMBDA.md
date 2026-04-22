@@ -1,9 +1,10 @@
-# §8 — Warm-up lambda au ralenti
+﻿# §8 — Warm-up lambda au ralenti
 
 > Facteur d'enrichissement lambda spécifique au ralenti pendant la phase de chauffe. Distinct de `ip_fac_lamb_wup` (coldstart) qui couvre tous les régimes. Modification optionnelle — intervenir uniquement si le ralenti est instable pendant le warm-up malgré les tables cranking et chauffe corrects.
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_fac_lamb_wup_is` — Facteur warm-up lambda, ralenti uniquement
 
 | Champ | Valeur |

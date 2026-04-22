@@ -1,9 +1,10 @@
-# §6 — Délai enrichissement WOT
+﻿# §6 — Délai enrichissement WOT
 
 > Sur E85, l'enrichissement pleine charge est critique pour protéger le moteur. Le MSV70 applique un délai de 200 ms entre la détection de l'état WOT et l'injection de ce surplus. Ce délai crée un bref lean en boucle ouverte à chaque accélération franche — à éliminer. Quatre copies existent : deux pour les boîtes manuelles (MT), deux pour les automatiques (AT). Modifier uniquement les copies correspondant à la boîte du véhicule.
 
 ---
 
+<a id="p1"></a>
 ## ① `c_t_ti_dly_fl_1` — Délai WOT boîte manuelle, copie 1
 
 | Champ | Valeur |
@@ -28,6 +29,7 @@
 
 ---
 
+<a id="p2"></a>
 ## ② `c_t_ti_dly_fl_2` — Délai WOT boîte manuelle, copie 2
 
 | Champ | Valeur |
@@ -52,6 +54,7 @@
 
 ---
 
+<a id="p3"></a>
 ## ③ `c_t_ti_dly_fl_at_1` — Délai WOT boîte automatique, copie 1
 
 | Champ | Valeur |
@@ -76,6 +79,7 @@
 
 ---
 
+<a id="p4"></a>
 ## ④ `c_t_ti_dly_fl_at_2` — Délai WOT boîte automatique, copie 2
 
 | Champ | Valeur |

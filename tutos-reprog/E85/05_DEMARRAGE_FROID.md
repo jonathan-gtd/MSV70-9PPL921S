@@ -1,4 +1,4 @@
-# §5 — Démarrage à froid (Cranking)
+﻿# §5 — Démarrage à froid (Cranking)
 
 > L'éthanol s'évapore difficilement sous 25°C (ébullition à 78°C vs −40°C pour l'essence). Le moteur a besoin de **×1.35 à ×2.00 de masse carburant** au cranking selon la température. Trois paramètres à modifier : les deux tables de cranking + le seuil TCO. Un quatrième paramètre (after-start) gère la phase immédiatement post-démarrage.
 
@@ -9,6 +9,7 @@
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_mff_cst_opm_1` — Masse carburant cranking, mode Valvetronic
 
 | Champ | Valeur |
@@ -52,6 +53,7 @@ RPM 920  :  388.8   315.2   240.9  175.0   92.3   58.3   40.2   34.7
 
 ---
 
+<a id="p2"></a>
 ## ② `ip_mff_cst_opm_2` — Masse carburant cranking, mode papillonné (GD)
 
 | Champ | Valeur |
@@ -88,6 +90,7 @@ RPM 920  :  726.0   506.5   356.1  246.5  113.5   79.0   51.7   36.2
 
 ---
 
+<a id="p3"></a>
 ## ③ `c_tco_n_mff_cst` — Seuil TCO activation cranking enrichi
 
 | Champ | Valeur |
@@ -121,6 +124,7 @@ Autres valeurs possibles selon la rigueur hivernale :
 
 ---
 
+<a id="p4"></a>
 ## ④ `ip_mff_lgrd_ast` — Enrichissement after-start (phase post-démarrage)
 
 | Champ | Valeur |

@@ -1,4 +1,4 @@
-# §4 — Film mural (Wall Film Correction)
+﻿# §4 — Film mural (Wall Film Correction)
 
 > Le film de carburant sur les parois du collecteur est **~25–35% plus épais sur E85** (éthanol s'évapore moins vite, viscosité plus élevée à froid). En accélération, ce film absorbe du carburant — la chambre reçoit moins que prévu → lean transitoire. Les 4 tables positives doivent être multipliées par ×1.25. Les tables négatives (décélération) ne sont pas modifiées en première intention.
 
@@ -19,6 +19,7 @@
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_ti_tco_pos_slow_wf_opm_1` — Film lent positif, Valvetronic
 
 | Champ | Valeur |
@@ -65,6 +66,7 @@ TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
 
 ---
 
+<a id="p2"></a>
 ## ② `ip_ti_tco_pos_slow_wf_opm_2` — Film lent positif, papillonné (GD)
 
 | Champ | Valeur |
@@ -111,6 +113,7 @@ TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
 
 ---
 
+<a id="p3"></a>
 ## ③ `ip_ti_tco_pos_fast_wf_opm_1` — Film rapide positif, Valvetronic
 
 | Champ | Valeur |
@@ -157,6 +160,7 @@ TCO (°C) →  -30.0  -15.0    0.0   15.0   35.2   65.2   84.8  114.8
 
 ---
 
+<a id="p4"></a>
 ## ④ `ip_ti_tco_pos_fast_wf_opm_2` — Film rapide positif, papillonné (GD)
 
 | Champ | Valeur |

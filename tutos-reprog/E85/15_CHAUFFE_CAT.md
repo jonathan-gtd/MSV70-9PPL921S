@@ -1,9 +1,10 @@
-# §17 — Stratégie de chauffe catalyseur
+﻿# §17 — Stratégie de chauffe catalyseur
 
 > Paramètres de retard d'allumage appliqués au démarrage froid pour générer des EGT élevées et accélérer le light-off catalyseur. Sur E85, la combustion est plus froide (~30–50°C de moins en EGT) → le catalyseur met un peu plus longtemps à monter en température. **Ne pas modifier si les catalyseurs sont présents.** Les valeurs sont identiques entre le bin stock et le bin E85 de référence.
 
 ---
 
+<a id="p1"></a>
 ## ① `ip_fac_eff_iga_ch_cold_opm_1` — Retard allumage chauffe catalyseur, Valvetronic
 
 | Champ | Valeur |
@@ -43,6 +44,7 @@ SI CATALYSEURS RETIRÉS → toutes cellules raw 0 (0.000 °CRK retard)
 
 ---
 
+<a id="p2"></a>
 ## ② `ip_fac_eff_iga_ch_cold_opm_2` — Retard allumage chauffe catalyseur, papillonné (GD)
 
 | Champ | Valeur |

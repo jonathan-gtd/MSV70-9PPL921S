@@ -1,9 +1,10 @@
-# §9 — Avance à l'allumage au cranking
+﻿# §9 — Avance à l'allumage au cranking
 
 > Paramètre optionnel. Sur E85 correctement calibré (§5 — `ip_mff_cst_opm_*`), le démarrage doit être inférieur à 3 tours sans toucher l'avance de cranking. N'intervenir ici qu'en dernier recours si le démarrage reste difficile malgré la calibration cranking correcte.
 
 ---
 
+<a id="p1"></a>
 ## ① `c_iga_ini` — Avance initiale cranking — OPTIONNEL
 
 | Champ | Valeur |

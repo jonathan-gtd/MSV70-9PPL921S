@@ -1,9 +1,10 @@
-# §10 — Enrichissement transitoire pleine charge
+﻿# §10 — Enrichissement transitoire pleine charge
 
 > Paramètres pilotant l'enrichissement lors d'un appel de couple brutal (kickdown). **Ne pas modifier en première intention.** Le film mural (§4) couvre la majorité des transitoires — diagnostiquer §4 en premier. Intervenir ici uniquement si des trous d'accélération persistent exclusivement lors de kickdown brutal, après validation §4.
 
 ---
 
+<a id="p1"></a>
 ## ① `KF_FTRANSVL` — Facteur de transition pleine charge f(charge × RPM)
 
 | Champ | Valeur |
@@ -37,6 +38,7 @@ tous RPM :        0.000  0.049  0.098  0.147  0.217  0.432  0.757  0.983
 
 ---
 
+<a id="p2"></a>
 ## ② `KL_STEND_TRANS` — Facteur de démarrage de transition
 
 | Champ | Valeur |
@@ -61,6 +63,7 @@ tous RPM :        0.000  0.049  0.098  0.147  0.217  0.432  0.757  0.983
 
 ---
 
+<a id="p3"></a>
 ## ③ `KL_FUPSRF_TRANS` — Correction surface pression carburant transitoire
 
 | Champ | Valeur |
@@ -85,6 +88,7 @@ tous RPM :        0.000  0.049  0.098  0.147  0.217  0.432  0.757  0.983
 
 ---
 
+<a id="p4"></a>
 ## ④ `KL_PIRG_TRANS` — Pression résiduelle gaz brûlés en transitoire
 
 | Champ | Valeur |
