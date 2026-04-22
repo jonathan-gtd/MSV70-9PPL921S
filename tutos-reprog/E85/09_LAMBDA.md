@@ -1,47 +1,11 @@
-﻿# §7 — Lambda, richesse WOT et limites correction
+# §7 — Lambda, richesse WOT et limites correction
 
-> Sur E85 correctement calibré, le moteur fonctionne en boucle fermée autour de lambda=1. Ces paramètres servent à (1) protéger le moteur en pleine charge avec un léger enrichissement WOT, (2) élargir les plages de correction pendant la phase d'apprentissage initiale pour éviter les DTC voyant moteur.
+> Sur E85 correctement calibré, le moteur fonctionne en boucle fermée autour de lambda=1. Ces paramètres servent à (1) élargir les plages de correction pendant la phase d'apprentissage initiale pour éviter les DTC voyant moteur — **obligatoire avant le premier flash**, (2) protéger le moteur en pleine charge avec un léger enrichissement WOT — optionnel.
 
 ---
 
 <a id="p1"></a>
-## ① `ip_lamb_fl__n` — Lambda cible pleine charge f(RPM) — OPTIONNEL
-
-| Champ | Valeur |
-|---|---|
-| Adresse | 0x436A2 |
-| Structure | Courbe 1×12 |
-| Équation | (λ) |
-| Axe | X = RPM (608–6496 tr/min) |
-
-**Rôle :** Consigne de richesse ciblée par le calculateur en mode pleine charge (WOT). Stock N52B30 : déjà enrichi à λ 0.920 en WOT (descend à 0.871 à 6500 RPM). Sur E85, cette richesse protège le moteur — rien d'obligatoire à modifier. Option B : dé-enrichir légèrement (λ 0.940–0.950) pour gagner un peu de puissance en exploitant la chaleur de vaporisation de l'éthanol (qui refroidit naturellement la chambre).
-
-**Avant / Après :**
-
-```
-RPM    :  608   992  1216  1600  2016  2496  3008  3520  4128  4800  5504  6496
-
-Stock  : 0.920 0.920 0.913 0.920 0.920 0.920 0.920 0.920 0.920 0.920 0.901 0.871
-
-Option A (recommandée) : LAISSER STOCK — λ 0.920 WOT déjà présent
-
-Option B (dé-enrichissement léger, puissance) :
-E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
-```
-
-> Conserver les cellules 5504 et 6496 rpm à λ bas (0.900–0.920) : protection thermique soupapes à très haut régime.
-
-**Vérification :**
-
-| Signal | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Lambda WOT (sonde large bande) | 0.90–0.95 | Hors plage → ajuster ip_lamb_fl__n |
-| LTFT roulage | ±5% | > +10% → ip_mff_cor_opm_* trop petit / < −10% → trop grand |
-
----
-
-<a id="p2"></a>
-## ② `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF instantanée, mode 1 (anti-DTC)
+## ① `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF instantanée, mode 1 (anti-DTC)
 
 | Champ | Valeur |
 |---|---|
@@ -66,8 +30,8 @@ E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
 
 ---
 
-<a id="p3"></a>
-## ③ `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF instantanée, mode 2 (anti-DTC)
+<a id="p2"></a>
+## ② `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF instantanée, mode 2 (anti-DTC)
 
 | Champ | Valeur |
 |---|---|
@@ -91,8 +55,8 @@ E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
 
 ---
 
-<a id="p4"></a>
-## ④ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (anti-DTC)
+<a id="p3"></a>
+## ③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (anti-DTC)
 
 | Champ | Valeur |
 |---|---|
@@ -133,3 +97,39 @@ Voyant MIL allumé pendant break-in :
   → DTC "fuel trim" → FSD/LTFT trop serrés → élargir et reflasher
   → NE PAS effacer le DTC sans reflasher : il revient immédiatement
 ```
+
+---
+
+<a id="p4"></a>
+## ④ `ip_lamb_fl__n` — Lambda cible pleine charge f(RPM) — OPTIONNEL
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x436A2 |
+| Structure | Courbe 1×12 |
+| Équation | (λ) |
+| Axe | X = RPM (608–6496 tr/min) |
+
+**Rôle :** Consigne de richesse ciblée par le calculateur en mode pleine charge (WOT). Stock N52B30 : déjà enrichi à λ 0.920 en WOT (descend à 0.871 à 6500 RPM). Sur E85, cette richesse protège le moteur — rien d'obligatoire à modifier. Option B : dé-enrichir légèrement (λ 0.940–0.950) pour gagner un peu de puissance en exploitant la chaleur de vaporisation de l'éthanol (qui refroidit naturellement la chambre).
+
+**Avant / Après :**
+
+```
+RPM    :  608   992  1216  1600  2016  2496  3008  3520  4128  4800  5504  6496
+
+Stock  : 0.920 0.920 0.913 0.920 0.920 0.920 0.920 0.920 0.920 0.920 0.901 0.871
+
+Option A (recommandée) : LAISSER STOCK — λ 0.920 WOT déjà présent
+
+Option B (dé-enrichissement léger, puissance) :
+E85    : 0.950 0.950 0.945 0.950 0.950 0.945 0.945 0.940 0.935 0.930 0.920 0.900
+```
+
+> Conserver les cellules 5504 et 6496 rpm à λ bas (0.900–0.920) : protection thermique soupapes à très haut régime.
+
+**Vérification :**
+
+| Signal | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Lambda WOT (sonde large bande) | 0.90–0.95 | Hors plage → ajuster ip_lamb_fl__n |
+| LTFT roulage | ±5% | > +10% → ip_mff_cor_opm_* trop petit / < −10% → trop grand |

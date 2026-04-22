@@ -1,4 +1,4 @@
-﻿# §2 — Mise à l'échelle des injecteurs
+# §2 — Mise à l'échelle des injecteurs
 
 > Sur E85, l'AFR stœchiométrique passe de 14.7:1 (essence) à 9.55:1 → **+45% de masse carburant** à injecter à chaque cycle. Le MSV70 N52 utilise 4 maps multiplicatrices (`ip_mff_cor_opm_*`) pour scaler l'injection selon le mode de fonctionnement. Le facteur `c_fac_mff_ti_stnd` (conversion MFF→TI) est géré séparément par le knowledge `/01_injecteurs.json` et ne se modifie pas via TunerPro sur ce bin (overflow XDF).
 
@@ -123,42 +123,89 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 ---
 
 <a id="p5"></a>
-## ⑤ `ip_ti_min` — Dead time injecteur f(tension batterie)
+## ⑤ `c_t_ti_dly_fl_1` — Délai enrichissement WOT, boîte manuelle, copie 1
 
 | Champ | Valeur |
 |---|---|
-| Adresse | (voir XDF — courbe 1D) |
-| Structure | Courbe 1D f(Ubatt) |
-| Équation | Directe (ms) |
+| Adresse | 0x44EC4 |
+| Structure | Constante scalaire |
+| Équation | `0.010 × raw` (secondes) |
 
-**Rôle :** Dead time électromécanique — délai entre la commande d'ouverture et l'ouverture réelle de l'aiguille. Ce délai dépend de la tension batterie : moins de tension = plus de temps pour magnétiser la bobine. Le MSV70 ajoute ce délai à chaque TI calculé : `TI_total = TI_calculé + dead_time(Ubatt)`. Sur les injecteurs stock Bosch EV14 13537531634, la table est calibrée d'usine. Recalibration obligatoire si les injecteurs sont remplacés.
+**Rôle :** Délai entre la détection de l'état pleine charge (full load flag) et l'application effective de l'enrichissement WOT sur le temps d'injection. Sur essence, 200 ms évite des enrichissements intempestifs lors de brèves sollicitations pédale. Sur E85, où l'enrichissement WOT est critique pour la protection moteur, ce délai crée un lean bref en boucle ouverte à chaque accélération franche — à éliminer.
 
 **Avant / Après :**
 
-| Tension batterie | ◀ Stock (Bosch EV14 13537531634) | ▶ E85, injecteurs stock | ▶ Nouveaux injecteurs |
-|---|---|---|---|
-| 7V   | ~1.20 ms | **Identique** | Datasheet constructeur |
-| 8V   | ~1.00 ms | **Identique** | Datasheet constructeur |
-| 9V   | ~0.85 ms | **Identique** | Datasheet constructeur |
-| 10V  | ~0.72 ms | **Identique** | Datasheet constructeur |
-| 11V  | ~0.62 ms | **Identique** | Datasheet constructeur |
-| 12V  | ~0.55 ms | **Identique** | Datasheet constructeur |
-| 13V  | ~0.50 ms | **Identique** | Datasheet constructeur |
-| 14V  | ~0.46 ms | **Identique** | Datasheet constructeur |
-| 14.4V | ~0.43 ms | **Identique** | Datasheet constructeur |
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `c_t_ti_dly_fl_1` | 20 | **0.200 s (200 ms)** | **0** | **0.000 s** |
 
 **Vérification :**
 
-| Symptôme | Cause probable | Action |
+| Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| STFT très riche dès démarrage | Dead time trop long (trop d'injection) | Réduire dead time nouveaux injecteurs |
-| STFT très pauvre dès démarrage | Dead time trop court (pas assez d'injection) | Augmenter dead time nouveaux injecteurs |
-| STFT instable au ralenti uniquement | Dead time incorrect à 14V | Vérifier point de la courbe à tension alternateur |
+| Accélération franche WOT | Enrichissement immédiat, aucun délai perceptible | Trou de richesse → vérifier les 2 copies mises à zéro |
+
+> Détails complets dans [§6 — Délai WOT](08_DELAI_WOT.md)
 
 ---
 
 <a id="p6"></a>
-## ⑥ Duty cycle injecteur — saturation haut régime (surveillance)
+## ⑥ `c_t_ti_dly_fl_2` — Délai enrichissement WOT, boîte manuelle, copie 2
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x44EC6 |
+| Structure | Constante scalaire |
+| Équation | `0.010 × raw` (secondes) |
+
+**Rôle :** Deuxième copie du délai WOT MT. L'ECU utilise ces deux copies dans des contextes d'exécution différents. Si c_t_ti_dly_fl_1 est mis à zéro mais que _2 reste à 20, l'enrichissement peut encore être retardé selon la situation moteur. Les deux doivent être à zéro.
+
+**Avant / Après :**
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `c_t_ti_dly_fl_2` | 20 | **0.200 s (200 ms)** | **0** | **0.000 s** |
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| WOT répété | Richesse WOT immédiate à chaque sollicitation | Délai intermittent → _2 non modifié |
+
+> Détails complets dans [§6 — Délai WOT](08_DELAI_WOT.md)
+
+---
+
+<a id="p7"></a>
+## ⑦ `c_tco_n_mff_cst` — Seuil TCO activation cranking enrichi
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x44F2F |
+| Structure | Constante scalaire |
+| Équation | `0.75 × raw − 48` (°C) |
+
+**Rôle :** Température de liquide de refroidissement en dessous de laquelle les tables de cranking enrichies (ip_mff_cst_opm_*) s'appliquent. L'éthanol s'évapore difficilement sous 25°C (point d'ébullition 78°C vs −40°C pour l'essence). Sans ce seuil relevé, le moteur démarre en mode cranking stock (sous-enrichi) dès que TCO > 17°C → calage ou démarrage difficile par temps frais.
+
+**Avant / Après :**
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `c_tco_n_mff_cst` | 87 | **17.25 °C** | **97** | **25.00 °C** |
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Démarrage par temps frais (15–25°C) | < 3 tours, moteur stable | Calage → seuil encore trop bas, passer à raw 103 (30°C) |
+| Démarrage moteur chaud (TCO > 80°C) | Démarrage immédiat, STFT stable | STFT riche → seuil trop haut, réduire |
+
+> Détails complets dans [§5 — Démarrage à froid](05_DEMARRAGE_FROID.md)
+
+---
+
+<a id="p8"></a>
+## ⑧ Duty cycle injecteur — saturation haut régime (surveillance)
 
 | Champ | Valeur |
 |---|---|
@@ -202,85 +249,38 @@ Exemple — injecteurs N54 (débit ~30% supérieur) sur E70 :
 
 ---
 
-<a id="p7"></a>
-## ⑦ `c_tco_n_mff_cst` — Seuil TCO activation cranking enrichi
-
-| Champ | Valeur |
-|---|---|
-| Adresse | 0x44F2F |
-| Structure | Constante scalaire |
-| Équation | `0.75 × raw − 48` (°C) |
-
-**Rôle :** Température de liquide de refroidissement en dessous de laquelle les tables de cranking enrichies (ip_mff_cst_opm_*) s'appliquent. L'éthanol s'évapore difficilement sous 25°C (point d'ébullition 78°C vs −40°C pour l'essence). Sans ce seuil relevé, le moteur démarre en mode cranking stock (sous-enrichi) dès que TCO > 17°C → calage ou démarrage difficile par temps frais.
-
-**Avant / Après :**
-
-| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
-|---|---|---|---|---|
-| `c_tco_n_mff_cst` | 87 | **17.25 °C** | **97** | **25.00 °C** |
-
-**Vérification :**
-
-| Condition | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Démarrage par temps frais (15–25°C) | < 3 tours, moteur stable | Calage → seuil encore trop bas, passer à raw 103 (30°C) |
-| Démarrage moteur chaud (TCO > 80°C) | Démarrage immédiat, STFT stable | STFT riche → seuil trop haut, réduire |
-
-> Détails complets dans [§5 — Démarrage à froid](05_DEMARRAGE_FROID.md)
-
----
-
-<a id="p8"></a>
-## ⑧ `c_t_ti_dly_fl_1` — Délai enrichissement WOT, boîte manuelle, copie 1
-
-| Champ | Valeur |
-|---|---|
-| Adresse | 0x44EC4 |
-| Structure | Constante scalaire |
-| Équation | `0.010 × raw` (secondes) |
-
-**Rôle :** Délai entre la détection de l'état pleine charge (full load flag) et l'application effective de l'enrichissement WOT sur le temps d'injection. Sur essence, 200 ms évite des enrichissements intempestifs lors de brèves sollicitations pédale. Sur E85, où l'enrichissement WOT est critique pour la protection moteur, ce délai crée un lean bref en boucle ouverte à chaque accélération franche — à éliminer.
-
-**Avant / Après :**
-
-| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
-|---|---|---|---|---|
-| `c_t_ti_dly_fl_1` | 20 | **0.200 s (200 ms)** | **0** | **0.000 s** |
-
-**Vérification :**
-
-| Condition | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Accélération franche WOT | Enrichissement immédiat, aucun délai perceptible | Trou de richesse → vérifier les 2 copies mises à zéro |
-
-> Détails complets dans [§6 — Délai WOT](08_DELAI_WOT.md)
-
----
-
 <a id="p9"></a>
-## ⑨ `c_t_ti_dly_fl_2` — Délai enrichissement WOT, boîte manuelle, copie 2
+## ⑨ `ip_ti_min` — Dead time injecteur f(tension batterie)
 
 | Champ | Valeur |
 |---|---|
-| Adresse | 0x44EC6 |
-| Structure | Constante scalaire |
-| Équation | `0.010 × raw` (secondes) |
+| Adresse | (voir XDF — courbe 1D) |
+| Structure | Courbe 1D f(Ubatt) |
+| Équation | Directe (ms) |
 
-**Rôle :** Deuxième copie du délai WOT MT. L'ECU utilise ces deux copies dans des contextes d'exécution différents. Si c_t_ti_dly_fl_1 est mis à zéro mais que _2 reste à 20, l'enrichissement peut encore être retardé selon la situation moteur. Les deux doivent être à zéro.
+**Rôle :** Dead time électromécanique — délai entre la commande d'ouverture et l'ouverture réelle de l'aiguille. Ce délai dépend de la tension batterie : moins de tension = plus de temps pour magnétiser la bobine. Le MSV70 ajoute ce délai à chaque TI calculé : `TI_total = TI_calculé + dead_time(Ubatt)`. Sur les injecteurs stock Bosch EV14 13537531634, la table est calibrée d'usine. **Avec injecteurs stock : ne pas modifier.** Recalibration nécessaire uniquement si les injecteurs sont remplacés.
 
 **Avant / Après :**
 
-| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
-|---|---|---|---|---|
-| `c_t_ti_dly_fl_2` | 20 | **0.200 s (200 ms)** | **0** | **0.000 s** |
+| Tension batterie | ◀ Stock (Bosch EV14 13537531634) | ▶ E85, injecteurs stock | ▶ Nouveaux injecteurs |
+|---|---|---|---|
+| 7V   | ~1.20 ms | **Identique** | Datasheet constructeur |
+| 8V   | ~1.00 ms | **Identique** | Datasheet constructeur |
+| 9V   | ~0.85 ms | **Identique** | Datasheet constructeur |
+| 10V  | ~0.72 ms | **Identique** | Datasheet constructeur |
+| 11V  | ~0.62 ms | **Identique** | Datasheet constructeur |
+| 12V  | ~0.55 ms | **Identique** | Datasheet constructeur |
+| 13V  | ~0.50 ms | **Identique** | Datasheet constructeur |
+| 14V  | ~0.46 ms | **Identique** | Datasheet constructeur |
+| 14.4V | ~0.43 ms | **Identique** | Datasheet constructeur |
 
 **Vérification :**
 
-| Condition | ✅ Cible | ⚠️ Action |
+| Symptôme | Cause probable | Action |
 |---|---|---|
-| WOT répété | Richesse WOT immédiate à chaque sollicitation | Délai intermittent → _2 non modifié |
-
-> Détails complets dans [§6 — Délai WOT](08_DELAI_WOT.md)
+| STFT très riche dès démarrage | Dead time trop long (trop d'injection) | Réduire dead time nouveaux injecteurs |
+| STFT très pauvre dès démarrage | Dead time trop court (pas assez d'injection) | Augmenter dead time nouveaux injecteurs |
+| STFT instable au ralenti uniquement | Dead time incorrect à 14V | Vérifier point de la courbe à tension alternateur |
 
 ---
 

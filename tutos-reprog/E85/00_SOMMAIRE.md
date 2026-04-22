@@ -23,11 +23,11 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
   - [② `ip_mff_cor_opm_1_2` — Multiplicateur Valvetronic, mode 2](04_INJECTEURS.md#p2)
   - [③ `ip_mff_cor_opm_2_1` — Multiplicateur papillonné (GD), mode 1](04_INJECTEURS.md#p3)
   - [④ `ip_mff_cor_opm_2_2` — Multiplicateur papillonné (GD), mode 2](04_INJECTEURS.md#p4)
-  - [⑤ `ip_ti_min` — Dead time f(tension batterie)](04_INJECTEURS.md#p5)
-  - [⑥ Duty cycle — saturation haut régime](04_INJECTEURS.md#p6)
+  - [⑤ `c_t_ti_dly_fl_1` — Délai WOT MT, copie 1](04_INJECTEURS.md#p5)
+  - [⑥ `c_t_ti_dly_fl_2` — Délai WOT MT, copie 2](04_INJECTEURS.md#p6)
   - [⑦ `c_tco_n_mff_cst` — Seuil TCO cranking enrichi](04_INJECTEURS.md#p7)
-  - [⑧ `c_t_ti_dly_fl_1` — Délai WOT MT, copie 1](04_INJECTEURS.md#p8)
-  - [⑨ `c_t_ti_dly_fl_2` — Délai WOT MT, copie 2](04_INJECTEURS.md#p9)
+  - [⑧ Duty cycle — saturation haut régime (surveillance)](04_INJECTEURS.md#p8)
+  - [⑨ `ip_ti_min` — Dead time f(tension batterie)](04_INJECTEURS.md#p9)
 
 - **[05 — Démarrage froid](05_DEMARRAGE_FROID.md)** — Cranking et after-start sur éthanol
   - [① `ip_mff_cst_opm_1` — Cranking Valvetronic](05_DEMARRAGE_FROID.md#p1)
@@ -58,11 +58,11 @@ Améliorent le comportement mais non bloquantes pour un premier essai.
   - [③ `c_t_ti_dly_fl_at_1` — AT, copie 1](08_DELAI_WOT.md#p3)
   - [④ `c_t_ti_dly_fl_at_2` — AT, copie 2](08_DELAI_WOT.md#p4)
 
-- **[09 — Lambda WOT](09_LAMBDA.md)** — Richesse pleine charge et prévention DTC
-  - [① `ip_lamb_fl__n` — Lambda cible WOT f(RPM)](09_LAMBDA.md#p1)
-  - [② `ip_fac_lamb_max_fsd_1` — Plafond WRAF, mode 1 (anti-DTC)](09_LAMBDA.md#p2)
-  - [③ `ip_fac_lamb_max_fsd_2` — Plafond WRAF, mode 2 (anti-DTC)](09_LAMBDA.md#p3)
-  - [④ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (anti-DTC)](09_LAMBDA.md#p4)
+- **[09 — Lambda WOT](09_LAMBDA.md)** — Prévention DTC et richesse pleine charge
+  - [① `ip_fac_lamb_max_fsd_1` — Plafond WRAF, mode 1 (anti-DTC)](09_LAMBDA.md#p1)
+  - [② `ip_fac_lamb_max_fsd_2` — Plafond WRAF, mode 2 (anti-DTC)](09_LAMBDA.md#p2)
+  - [③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (anti-DTC)](09_LAMBDA.md#p3)
+  - [④ `ip_lamb_fl__n` — Lambda cible WOT f(RPM) — OPTIONNEL](09_LAMBDA.md#p4)
 
 ---
 
@@ -71,8 +71,8 @@ Améliorent le comportement mais non bloquantes pour un premier essai.
 À consulter selon le comportement observé. Ne pas modifier en aveugle.
 
 - **[10 — Warm-up lambda](10_WARMUP_LAMBDA.md)** — Enrichissement warm-up tous régimes et ralenti
-  - [① `ip_fac_lamb_wup_is` — Facteur warm-up lambda, ralenti](10_WARMUP_LAMBDA.md#p1)
-  - [② `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes](10_WARMUP_LAMBDA.md#p2)
+  - [① `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes](10_WARMUP_LAMBDA.md#p1)
+  - [② `ip_fac_lamb_wup_is` — Facteur warm-up lambda, ralenti](10_WARMUP_LAMBDA.md#p2)
 
 - **[11 — Avance cranking](11_AVANCE_CRANKING.md)** — Démarrage difficile malgré §05 correct
   - [① `c_iga_ini` — Avance initiale cranking](11_AVANCE_CRANKING.md#p1)
