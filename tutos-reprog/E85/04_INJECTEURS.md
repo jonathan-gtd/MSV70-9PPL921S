@@ -275,35 +275,6 @@ Exemple — injecteurs N54 (débit ~30% supérieur) sur E70 :
 
 ---
 
-## ⑩ `c_iga_ini` — Avance à l'allumage initiale, cranking — OPTIONNEL
-
-| Champ | Valeur |
-|---|---|
-| Adresse | 0x44B2A |
-| Structure | Constante scalaire |
-| Équation | `0.375 × raw − 35.625` (°CRK avant PMH) |
-
-**Rôle :** Avance initiale appliquée au premier cycle d'allumage pendant le cranking. Stock = 6.0°CRK. Sur E85 correctement calibré (§5 — ip_mff_cst_opm_*), le démarrage doit être inférieur à 3 tours sans toucher cette valeur. Ne modifier qu'en dernier recours si le démarrage reste difficile malgré les tables cranking correctes — et progressivement (+1° puis +2° max).
-
-**Avant / Après :**
-
-| Scénario | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
-|---|---|---|---|---|
-| Recommandé — inchangé | 111 | 6.0 °CRK | **111** | **6.0 °CRK** |
-| Option +1° (démarrage > 5 tours) | 111 | 6.0 °CRK | **114** | **6.75 °CRK** |
-| Option +2° (démarrage > 8 tours) | 111 | 6.0 °CRK | **116** | **7.88 °CRK** |
-
-**Vérification :**
-
-| Condition | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Démarrage froid (TCO < 10°C) | < 3 tours | > 5 tours → vérifier §5 en priorité avant de toucher c_iga_ini |
-| Démarrage chaud (TCO > 80°C) | Immédiat (1 tour) | Calage → problème d'injecteurs ou de sonde, pas d'avance |
-
-> Détails complets dans [§9 — Avance cranking](11_AVANCE_CRANKING.md)
-
----
-
 ## Note — Test au ralenti et sécurité STFT
 
 > **Question fréquente :** peut-on laisser tourner le moteur au ralenti avec une richesse très pauvre le temps de vérifier les STFT ?
