@@ -273,6 +273,81 @@
       }
     },
     {
+      "xdf_category": "INJR_Battery_Voltage_Compensation",
+      "label": "Compensation tension batterie — ip_ti_min (dead time vs Ubatt)",
+      "role": "ip_ti_min est la table de durée minimale d'ouverture injecteur en fonction de la tension batterie. Elle représente le 'dead time' électromécanique réel : le délai entre la commande électrique et l'ouverture effective de l'aiguille d'injection. Ce délai varie avec la tension disponible — plus la tension est basse, plus il faut de temps pour magnétiser la bobine et vaincre le ressort de rappel. Le MSV70 intègre ce dead time dans chaque calcul de TI : le calculateur commande l'injecteur pendant TI_total = TI_calculé + dead_time(Ubatt). Sur les injecteurs stock N52B30 (Bosch EV14 13537531634), cette table est correctement calibrée d'usine — ne pas modifier. CRITIQUE : si les injecteurs sont remplacés (ex. N54, N20, injsecteurs aftermarket), cette table doit être recalibrée avec les dead times du nouvel injecteur. Un dead time erroné produit un mélange riche constant (dead time trop élevé) ou pauvre constant (dead time trop faible), non-corrigeable par les fuel trims seuls.",
+      "tuning_impact": "critical",
+      "flex_fuel_sensitive": false,
+      "tags": ["injector", "dead_time", "battery_voltage"],
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "ip_ti_min": {
+          "doc": "Durée minimale d'ouverture injecteur (dead time électromécanique) f(tension batterie Ubatt) [ms]. Table 1D f(V). Stock Bosch EV14 13537531634 — valeurs typiques mesurées sur banc.",
+          "type_doc": "COURBE 2D",
+          "modification_e85": "NON — injecteurs stock 13537531634",
+          "e85_action": "Ne pas modifier avec les injecteurs stock. Recalibrer OBLIGATOIREMENT si les injecteurs sont remplacés : utiliser les données constructeur du nouvel injecteur ou mesure sur banc d'injection.",
+          "stock_physical_typical": {
+            "7V":   "~1.20 ms",
+            "8V":   "~1.00 ms",
+            "9V":   "~0.85 ms",
+            "10V":  "~0.72 ms",
+            "11V":  "~0.62 ms",
+            "12V":  "~0.55 ms",
+            "13V":  "~0.50 ms",
+            "14V":  "~0.46 ms",
+            "14.4V":"~0.43 ms",
+            "15V":  "~0.41 ms"
+          },
+          "e85_values": "Identiques au stock si injecteurs 13537531634 conservés — aucune modification E85",
+          "before_after_summary": {
+            "stock_injecteurs_stock":   "Valeurs d'usine — aucune modification",
+            "e85_injecteurs_stock":     "Valeurs d'usine — aucune modification",
+            "e85_nouveaux_injecteurs":  "Recalibrer selon datasheet constructeur du nouvel injecteur"
+          },
+          "warning": true,
+          "warning_detail": "Oublier cette table lors d'un changement d'injecteurs = mélange très riche au ralenti si dead_time trop long, ou pauvre si trop court. Symptôme : STFT instable dès le démarrage, calage, ralenti chaotique. Non corrigeable par les trims seuls.",
+          "dependencies": ["c_fac_mff_ti_stnd_1", "c_fac_mff_ti_stnd_2", "c_ti_add_as[0]"]
+        }
+      }
+    },
+    {
+      "xdf_category": "INJR_Duty_Cycle_Saturation",
+      "label": "Duty cycle injecteur et saturation haut régime — SURVEILLANCE E85",
+      "role": "Le duty cycle (DC) est le ratio temps d'ouverture / temps disponible par cycle moteur. La limite safe est 85% : au-delà, l'injecteur ne peut plus se fermer correctement entre deux injections (refroidissement, mise en pression). En saturation, le débit carburant plafonne → mélange pauvre non-compensable, non-détectable (boucle ouverte WOT), directement destructeur. Sur E85, le TI est ×1.35 à ×1.45 plus long qu'à l'essence à masse d'air égale — le risque de saturation augmente donc mécaniquement à haut régime. Sur N52B30 stock (injecteurs ~295 cc/min @ 5 bar), le DC estimé à 6500 RPM WOT sur E85 est ~72-80% — dans les limites mais sans marge. Toute augmentation de puissance (calage VANOS agressif, préparation) fait basculer en zone critique.",
+      "tuning_impact": "critical",
+      "flex_fuel_sensitive": true,
+      "tags": ["injector", "duty_cycle", "high_rpm", "e85", "safety"],
+      "undocumented_params_default": "NON",
+      "parameters": {
+        "duty_cycle_formule": {
+          "doc": "Paramètre calculé — non encodé dans le bin. Formule : DC (%) = TI_ms / T_cycle_ms × 100. T_cycle_ms = (60 000 / RPM) × 2. Limite constructeur : 85%.",
+          "type_doc": "CALCUL",
+          "modification_e85": "SURVEILLANCE",
+          "reference_values": {
+            "T_cycle_4000RPM": "30.0 ms → TI max safe = 25.5 ms",
+            "T_cycle_5500RPM": "21.8 ms → TI max safe = 18.5 ms",
+            "T_cycle_6500RPM": "18.5 ms → TI max safe = 15.7 ms"
+          },
+          "before_after_summary": {
+            "stock_essence_6500RPM": "TI estimé ~8-10 ms → DC ~43-54% — large marge",
+            "e85_6500RPM_stock_inj":  "TI estimé ~12-14 ms → DC ~65-76% — dans limites, marge faible",
+            "e85_6500RPM_puissance_augmentee": "TI estimé >15 ms → DC >81% — zone critique, injecteurs de remplacement nécessaires"
+          },
+          "e85_action": "Vérifier le duty cycle via logs OBD (PID 'Injection Time' ou 'Ti'). Si DC > 85% au-delà de 5000 RPM : injecteurs de remplacement indispensables avant tout roulage WOT.",
+          "warning": true,
+          "warning_detail": "La saturation injecteur sur E85 à WOT est silencieuse : aucune sonde ne la détecte directement. Le moteur part pauvre sans signe avant-coureur. Conséquence directe : détonation, fonte pistons."
+        },
+        "ip_ti_max": {
+          "doc": "Durée maximale absolue d'injection autorisée par le calculateur [ms]. Plafond logiciel avant la limite mécanique de duty cycle. Si TI_calculé dépasse ip_ti_max, le calculateur clamp à cette valeur → enrichissement plafonné.",
+          "type_doc": "CONSTANTE ou COURBE 2D",
+          "modification_e85": "NON",
+          "e85_action": "Ne pas modifier. Surveiller que le TI E85 n'atteint pas ce plafond. Si ip_ti_max est atteint avant le DC 85%, c'est cette limite qui sature en premier.",
+          "stock_physical": "Valeur constructeur — vérifier dans le bin avec TunerPro",
+          "warning": false
+        }
+      }
+    },
+    {
       "xdf_category": "DIA_Immobilizer_signal_diagnosis",
       "label": "c_fac_mff_ti_stnd_mon — Copie canal monitoring (5e copie)",
       "role": "Cinquième copie du facteur MFF→TI, utilisée exclusivement par le canal de monitoring indépendant du MSV70. Adresse bin 0x04958C. Même équation que _1/_2 (0.000006×raw). Ce canal recalcule en parallèle la durée d'injection théorique et la compare au canal principal — si les deux divergent, un DTC de cohérence injection est levé.",

@@ -150,6 +150,58 @@
       ]
     },
     {
+      "xdf_category": "LAMBDA_DTC_Prevention",
+      "label": "Prévention DTC — Élargissement plages sonde lambda (FSD + LTFT)",
+      "role": "Sur E85, pendant les 100–300 premiers km, le système d'adaptation lambda doit absorber un décalage important (≈+30 à +45% de carburant supplémentaire si calibration incomplète, ou ±10% même sur calibration correcte pendant la convergence). Si les plages de correction autorisées (FSD) et les limites d'accumulation LTFT sont trop étroites, l'ECU déclare une défaillance d'adaptation → DTC allumage voyant moteur (MIL). Les deux paramètres clés à élargir sont ip_fac_lamb_max_fsd (plafond de correction instantanée WRAF) et c_lamb_delta_i_max_lam_adj (plafond d'accumulation LTFT). Ces deux paramètres forment la plage opérationnelle effective de la sonde lambda du point de vue du calculateur. Sans cet élargissement, le voyant moteur s'allume systématiquement dans les premières semaines de roulage E85, même avec une calibration correcte.",
+      "undocumented_params_default": "NON",
+      "tuning_impact": "high",
+      "flex_fuel_sensitive": true,
+      "tags": ["e85", "dtc", "lambda", "ltft", "mil"],
+      "parameters": {
+        "ip_fac_lamb_max_fsd_1_dtc": {
+          "doc": "Limite haute de correction WRAF instantanée (FSD max) — contexte DTC. Si la correction STFT dépasse ce plafond, l'ECU considère la sonde hors de sa plage opérationnelle et peut lever un DTC d'adaptation. Stock : ~1.15 (±15%). Sur E85 break-in : monter à 1.25–1.30 pour absorber la convergence initiale sans allumer le voyant.",
+          "type_doc": "TABLE",
+          "modification_e85": "OUI",
+          "stock_physical": "~1.15 λ (±15%)",
+          "e85_break_in_physical": "1.25–1.30 λ (±25–30%)",
+          "e85_stabilise_physical": "1.20 λ (±20%) — peut être resserré après 500 km",
+          "before_after_summary": {
+            "stock":       "~1.15 — correction max ±15%",
+            "e85_break_in":"1.25–1.30 — correction max ±25-30% (évite DTC pendant convergence)",
+            "e85_stable":  "1.20 — correctif maintenu pour flexibilité carburant (E60→E85)"
+          },
+          "warning": false,
+          "dependencies": ["ip_fac_lamb_max_fsd_2", "c_lamb_delta_i_max_lam_adj"]
+        },
+        "ip_fac_lamb_max_fsd_2_dtc": {
+          "doc": "Limite haute de correction WRAF mode 2 — même logique que mode 1. Mettre à jour en même temps.",
+          "type_doc": "TABLE",
+          "modification_e85": "OUI",
+          "stock_physical": "~1.15 λ",
+          "e85_break_in_physical": "1.25–1.30 λ",
+          "before_after_summary": {
+            "stock":       "~1.15",
+            "e85_break_in":"1.25–1.30"
+          },
+          "warning": false
+        },
+        "c_lamb_delta_i_max_lam_adj_dtc": {
+          "doc": "Plafond d'accumulation de l'intégrateur LTFT [λ]. C'est la limite absolue du long terme — si l'adaptation atteint ce plafond, le calculateur ne peut plus corriger et lève un DTC 'adaptation at limit'. Stock : ~0.15–0.20 λ (≈15–20%). Sur E85 break-in, élargir à 0.25–0.30 λ (25–30%) pour que l'apprentissage converge sans déclencher le voyant.",
+          "type_doc": "CONSTANTE",
+          "modification_e85": "OUI",
+          "stock_physical": "~0.15–0.20 λ",
+          "e85_break_in_physical": "0.25–0.30 λ",
+          "before_after_summary": {
+            "stock":       "~0.15–0.20 λ — limite d'accumulation LTFT",
+            "e85_break_in":"0.25–0.30 λ — permet convergence complète sans DTC",
+            "e85_stable":  "0.20 λ — peut être resserré après 500 km si LTFT stable"
+          },
+          "warning": false,
+          "dependencies": ["ip_fac_lamb_max_fsd_1", "ip_fac_lamb_max_fsd_2"]
+        }
+      }
+    },
+    {
       "xdf_category": "INJ_Application_incidences_for_catalyst_enrichment_function",
       "label": "Conditions lambda individuel par cylindre",
       "role": "Paramètres définissant les conditions d'activation du contrôle lambda individuel par cylindre. Sur E85 correctement calibré, ces conditions n'ont pas besoin d'être modifiées.",

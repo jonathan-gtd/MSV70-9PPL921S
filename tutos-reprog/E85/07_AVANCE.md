@@ -160,7 +160,7 @@ TCO (°C) →  -30.0  -20.3   -9.8    0.0   +9.8  +30.0  +60.0  +90.0
 
 ---
 
-### ④ ip_iga_st_bas_opm_2 — Avance cranking papillonné @ 0x435B6 (6×8, °CRK avant PMH)
+### ⑤ ip_iga_st_bas_opm_2 — Avance cranking papillonné @ 0x435B6 (6×8, °CRK avant PMH)
 
 > Même axes et équation. **Identique stock et E85 bin de référence.**
 
@@ -177,7 +177,7 @@ TCO (°C) →  -30.0  -20.3   -9.8    0.0   +9.8  +30.0  +60.0  +90.0
 
 ---
 
-### ⑤ ip_iga_bas_max_knk__n__maf — Avance plafond knock @ 0x4323A (8×8, °CRK avant PMH)
+### ⑥ ip_iga_bas_max_knk__n__maf — Avance plafond knock @ 0x4323A (8×8, °CRK avant PMH)
 
 > Cible E60 (101 RON — pire carburant légal hivernal). Progressivité obligatoire : un palier à la fois, 50 km entre chaque.
 

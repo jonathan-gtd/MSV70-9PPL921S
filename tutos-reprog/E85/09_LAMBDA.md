@@ -69,6 +69,63 @@ E85    : 0.950 0.950 0.945  0.950  0.950  0.945  0.945  0.940  0.935  0.930  0.9
 | LTFT roulage | **±5%** | > +10% → `ip_mff_cor_opm_*` trop petit |
 | | | < −10% → `ip_mff_cor_opm_*` trop grand |
 
+---
+
+## Élargissement des plages sonde lambda — Prévention DTC (voyant moteur)
+
+Sur E85, même avec une calibration correcte, les premiers 100–300 km de rodage provoquent des corrections STFT/LTFT importantes pendant que l'ECU converge. Si les plages autorisées sont trop étroites, l'ECU déclare une adaptation hors limite → **voyant moteur allumé**, même si le moteur tourne parfaitement.
+
+**Deux paramètres forment ensemble la plage opérationnelle effective de la sonde lambda :**
+
+1. `ip_fac_lamb_max_fsd_1/2` — plafond de correction WRAF instantanée (STFT)
+2. `c_lamb_delta_i_max_lam_adj` — plafond d'accumulation LTFT
+
+### Pourquoi ça déclenche un DTC sur E85
+
+```
+Scénario break-in E85 :
+  → STFT monte à +18% pendant convergence
+  → ip_fac_lamb_max_fsd stock = 1.15 (±15%)
+  → STFT dépasse le plafond de la table FSD
+  → ECU déclare "lambda adaptation at limit"
+  → MIL s'allume (voyant orange)
+  → Même résultat si LTFT accumule > 0.20 λ
+```
+
+### ✏️ Avant / Après — `ip_fac_lamb_max_fsd_1` et `ip_fac_lamb_max_fsd_2`
+
+| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (>500 km) |
+|---|---|---|---|
+| `ip_fac_lamb_max_fsd_1/2` | ~**1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+
+> Remonter à 1.20 une fois les LTFT stables à ±5% — ça suffit pour gérer les variations de titre éthanol entre stations (E60 à E85).
+
+### ✏️ Avant / Après — `c_lamb_delta_i_max_lam_adj`
+
+| Phase | ◀ Stock | ▶ E85 Break-in | ▶ E85 Stabilisé |
+|---|---|---|---|
+| Plafond LTFT intégral | **~0.15–0.20 λ** (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
+
+### Procédure recommandée
+
+```
+1. Avant premier flash E85 : monter FSD à 1.25, LTFT max à 0.25 λ
+2. Rouler 300–500 km en cycle varié (ville + route)
+3. Lire LTFT avec ISTA ou scanner OBD : cible ±5%
+4. Si LTFT stable → resserrer FSD à 1.20, LTFT max à 0.20 λ
+5. Reflasher — les valeurs serrées évitent les faux DTC futurs
+```
+
+### ✅ Vérification
+
+| Signal | ✅ Sans DTC | ⚠️ Risque DTC |
+|---|---|---|
+| STFT (boucle fermée) | **±15%** | > ±20% avec FSD stock |
+| LTFT après 500 km | **±5%** | > ±10% avec LTFT max stock |
+| Voyant MIL | Éteint | Allumé si FSD/LTFT atteints |
+
+---
+
 ### Corrections LTFT persistants
 
 Si les LTFT restent décalés après stabilisation :
