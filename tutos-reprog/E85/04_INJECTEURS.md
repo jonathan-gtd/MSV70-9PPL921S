@@ -169,20 +169,112 @@ Exemple — injecteurs N54 (débit ~30% supérieur aux N52 stock) sur E70 :
 
 ---
 
-## Récapitulatif — Valeurs Avant / Après
+## Sections par paramètre — Avant / Après
 
-### ① Scalaires / paramètres à valeur unique
+---
 
-| # | Paramètre | Adresse | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
-|---|---|---|---|---|---|---|
-| 1 | `ip_mff_cor_opm_1_1` (12×16 flat) | 0x4E3D4 | 32 770 | 1.016 | **47 407** | **1.473** |
-| 2 | `ip_mff_cor_opm_1_2` (12×16 flat) | 0x4E554 | 32 770 | 1.016 | **47 407** | **1.473** |
-| 3 | `ip_mff_cor_opm_2_1` (10×12 flat) | 0x4E6D4 | 32 770 | 1.016 | **47 407** | **1.473** |
-| 4 | `ip_mff_cor_opm_2_2` (10×12 flat) | 0x4E7C4 | 32 770 | 1.016 | **47 407** | **1.473** |
-| 5 | `c_tco_n_mff_cst` | 0x44F2F | 87 | 17.25 °C | **97** | **25.00 °C** |
-| 6 | `c_t_ti_dly_fl_1` | 0x44EC4 | 20 | 0.200 s | **0** | **0.000 s** |
-| 7 | `c_t_ti_dly_fl_2` | 0x44EC6 | 20 | 0.200 s | **0** | **0.000 s** |
-| 8 | `c_iga_ini` *(optionnel)* | 0x44B2A | 111 | 6.0 °CRK | **111** | **6.0 °CRK (inchangé)** — modifier +1° à +2° si démarrage > 5 tours |
+### ① `ip_mff_cor_opm_1_1` — Multiplicateur injection Valvetronic mode 1 @ 0x4E3D4
 
-> Pour les 4 maps `ip_mff_cor_opm_*` : TunerPro → Ctrl+A → saisir raw **47 407** → répéter ×4. `c_fac_mff_ti_stnd` reste inchangé (overflow XDF empêche d'y encoder 0.491).
+**Structure :** map 12×16, toutes cellules identiques (flat)  
+**Équation :** `0.031250 × raw − 1.000`  
+**Rôle :** Facteur multiplicateur de la masse carburant calculée, mode Valvetronic, première séquence d'injection. Sur essence ≈ 1.0. Sur E85 doit être ×1.45 pour compenser l'AFR plus bas (9.55 vs 14.7).
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `ip_mff_cor_opm_1_1` | 32 770 | 1.016 | **47 407** | **1.473** |
+
+> TunerPro : Ctrl+A → saisir raw 47 407 (toutes cellules flat)
+
+---
+
+### ② `ip_mff_cor_opm_1_2` — Multiplicateur injection Valvetronic mode 2 @ 0x4E554
+
+**Structure :** map 12×16, flat  
+**Rôle :** Copie du facteur pour le mode d'injection 2 en Valvetronic. Si cette map diverge d'opm_1_1, l'injection devient asymétrique selon les conditions de charge → comportement instable, STFT oscillant.
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `ip_mff_cor_opm_1_2` | 32 770 | 1.016 | **47 407** | **1.473** |
+
+> Même valeur qu'opm_1_1 — modifier les deux simultanément.
+
+---
+
+### ③ `ip_mff_cor_opm_2_1` — Multiplicateur injection papillonné (GD) mode 1 @ 0x4E6D4
+
+**Structure :** map 10×12, flat  
+**Rôle :** Facteur pour le mode papillonné (Gedrosselt) — actif quand le Valvetronic est désactivé (démarrage froid, mode dégradé). **Point critique N52 :** si seules les maps opm_1_* sont modifiées et opm_2_* restent stock, le moteur injecte selon les valeurs essence dès que le Valvetronic se désactive → lean brutal non anticipé.
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `ip_mff_cor_opm_2_1` | 32 770 | 1.016 | **47 407** | **1.473** |
+
+> Même cible que les maps Valvetronic — la structure 10×12 diffère mais toutes les cellules sont flat.
+
+---
+
+### ④ `ip_mff_cor_opm_2_2` — Multiplicateur injection papillonné (GD) mode 2 @ 0x4E7C4
+
+**Structure :** map 10×12, flat  
+**Rôle :** Copie du facteur papillonné pour le mode 2. Les 4 maps (opm_1_1, opm_1_2, opm_2_1, opm_2_2) couvrent ensemble tous les modes de fonctionnement du N52 — toutes doivent avoir la même valeur E85.
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `ip_mff_cor_opm_2_2` | 32 770 | 1.016 | **47 407** | **1.473** |
+
+> **Vérification des 4 maps :** STFT ralenti chaud (TCO > 80°C) cible ±5%. Si STFT > +15% → raw trop faible. Si STFT < −15% → raw trop élevé.
+
+---
+
+### ⑤ `c_tco_n_mff_cst` — Seuil TCO activation cranking enrichi @ 0x44F2F
+
+**Équation :** `0.75 × raw − 48`  
+**Rôle :** Température de liquide de refroidissement en dessous de laquelle les tables de cranking enrichies s'appliquent. L'éthanol s'évapore difficilement sous 25°C (ébullition à 78°C vs −40°C essence) — sans ce seuil relevé, le moteur démarre en mélange pauvre par temps frais.
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `c_tco_n_mff_cst` | 87 | 17.25 °C | **97** | **25.00 °C** |
+
+> Détails complets dans [§5 — Démarrage à froid](05_DEMARRAGE_FROID.md)
+
+---
+
+### ⑥ `c_t_ti_dly_fl_1` — Délai enrichissement WOT (MT, copie 1) @ 0x44EC4
+
+**Équation :** `0.010 × raw` (secondes)  
+**Rôle :** Délai entre la détection pleine charge et l'application de l'enrichissement WOT. Stock 200 ms — conçu pour éviter des enrichissements transitoires intempestifs sur essence. Sur E85, ce délai crée un bref lean en boucle ouverte à chaque appui franc → à éliminer.
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `c_t_ti_dly_fl_1` | 20 | 0.200 s | **0** | **0.000 s** |
+
+> Détails complets dans [§6 — Délai WOT](08_DELAI_WOT.md)
+
+---
+
+### ⑦ `c_t_ti_dly_fl_2` — Délai enrichissement WOT (MT, copie 2) @ 0x44EC6
+
+**Équation :** `0.010 × raw` (secondes)  
+**Rôle :** Copie du délai WOT — même logique que c_t_ti_dly_fl_1. Les deux copies doivent être mises à zéro ensemble : si l'une reste à 20, l'ECU peut utiliser l'ancienne valeur selon le contexte d'exécution.
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `c_t_ti_dly_fl_2` | 20 | 0.200 s | **0** | **0.000 s** |
+
+> Détails complets dans [§6 — Délai WOT](08_DELAI_WOT.md)
+
+---
+
+### ⑧ `c_iga_ini` — Avance initiale cranking @ 0x44B2A — OPTIONNEL
+
+**Équation :** `0.375 × raw − 35.625` (°CRK avant PMH)  
+**Rôle :** Avance appliquée lors du premier cycle d'allumage au cranking. Stock = 6.0°CRK. Sur E85 correctement calibré (§5), le démarrage doit être < 3 tours sans toucher cette valeur. Ne modifier qu'en dernier recours si démarrage > 5 tours malgré ip_mff_cst_opm_* corrects.
+
+| | ◀ Raw stock | ◀ Valeur stock | ▶ Raw E85 | ▶ Valeur E85 |
+|---|---|---|---|---|
+| `c_iga_ini` (inchangé) | 111 | 6.0 °CRK | **111** | **6.0 °CRK** |
+| `c_iga_ini` (option +1°) | 111 | 6.0 °CRK | **114** | **6.75 °CRK** |
+| `c_iga_ini` (option +2°) | 111 | 6.0 °CRK | **116** | **7.88 °CRK** |
+
+> Détails complets dans [§9 — Avance cranking](11_AVANCE_CRANKING.md)
 

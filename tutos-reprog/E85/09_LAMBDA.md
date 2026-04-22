@@ -92,19 +92,44 @@ Scénario break-in E85 :
   → Même résultat si LTFT accumule > 0.20 λ
 ```
 
-### ✏️ Avant / Après — `ip_fac_lamb_max_fsd_1` et `ip_fac_lamb_max_fsd_2`
+---
+
+### ① `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF mode 1 (prévention DTC)
+
+**Type :** Table  
+**Rôle :** Limite haute de la correction STFT instantanée autorisée par le système WRAF (Wide Range Air Fuel). Si le STFT monte au-delà de ce plafond, l'ECU considère que la sonde est hors de sa plage opérationnelle et peut lever un DTC (voyant moteur). Sur E85 en break-in, le STFT peut atteindre +18 à +22% pendant la convergence — au-delà du plafond stock de 1.15.
 
 | Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (>500 km) |
 |---|---|---|---|
-| `ip_fac_lamb_max_fsd_1/2` | ~**1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+| `ip_fac_lamb_max_fsd_1` | **~1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+
+> Modifier en même temps que ip_fac_lamb_max_fsd_2.
+
+---
+
+### ② `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF mode 2 (prévention DTC)
+
+**Type :** Table  
+**Rôle :** Copie du plafond WRAF pour le mode 2. Même logique qu'ip_fac_lamb_max_fsd_1. Les deux modes doivent être cohérents — si mode 1 est élargi et mode 2 reste stock, le voyant peut s'allumer lors des commutations de mode.
+
+| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (>500 km) |
+|---|---|---|---|
+| `ip_fac_lamb_max_fsd_2` | **~1.15** (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+
+> Même valeur que mode 1 — modifier simultanément.
+
+---
+
+### ③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (prévention DTC)
+
+**Type :** Constante  
+**Rôle :** Valeur maximale d'accumulation de l'intégrateur LTFT. C'est la limite absolue du long terme — si l'adaptation atteint ce plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Sur E85 break-in, l'LTFT peut vouloir s'accumuler jusqu'à +25% pendant les premiers 200 km.
+
+| Phase | ◀ Stock | ▶ E85 Break-in (0–500 km) | ▶ E85 Stabilisé (>500 km) |
+|---|---|---|---|
+| `c_lamb_delta_i_max_lam_adj` | **~0.15–0.20 λ** (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
 
 > Remonter à 1.20 une fois les LTFT stables à ±5% — ça suffit pour gérer les variations de titre éthanol entre stations (E60 à E85).
-
-### ✏️ Avant / Après — `c_lamb_delta_i_max_lam_adj`
-
-| Phase | ◀ Stock | ▶ E85 Break-in | ▶ E85 Stabilisé |
-|---|---|---|---|
-| Plafond LTFT intégral | **~0.15–0.20 λ** (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
 
 ### Procédure recommandée
 

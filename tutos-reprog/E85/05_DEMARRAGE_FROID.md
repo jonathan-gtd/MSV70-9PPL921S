@@ -81,3 +81,34 @@ L'éthanol nécessite un enrichissement cranking jusqu'à ~25°C contre ~17°C p
 - Ne jamais appuyer sur la pédale avant démarrage — le MSV70 désactive l'enrichissement cranking si la pédale est enfoncée (Full Load Cutoff)
 - Batterie en bon état obligatoire — l'E85 froid exige plus de tours, une batterie faible rend le démarrage impossible
 - Bougies neuves, gap 0.65–0.70 mm (vs 0.75–0.80 mm stock)
+
+---
+
+## ip_mff_lgrd_ast — Enrichissement after-start (phase post-démarrage)
+
+| Paramètre | Adresse | Structure | Équation | Axe |
+|---|---|---|---|---|
+| `ip_mff_lgrd_ast` | (voir XDF) | Courbe 1D | 0.021195 × raw | f(RPM démarreur, 0–800 RPM) |
+
+**Rôle :** Masse de carburant additionnelle injectée pendant la phase "after-start" — les premières secondes après que le moteur a pris vie mais avant que le régime soit stabilisé (typiquement 0–800 RPM en montée). C'est différent du cranking (moteur non démarré) et du warm-up (moteur stabilisé). Sur E85, cette zone est critique : si l'enrichissement after-start est insuffisant, le moteur cale après avoir démarré (il "prend" mais s'arrête immédiatement).
+
+**Facteur E85 :** Appliquer le même facteur que les tables cranking selon la TCO de démarrage — typiquement ×1.35 à ×1.65 selon la température. La logique est identique : l'éthanol s'évapore moins bien, il faut plus de masse pour maintenir la combustion pendant la montée en régime.
+
+### ✏️ Avant / Après — `ip_mff_lgrd_ast`
+
+| Condition | ◀ Valeur stock | ▶ Valeur E85 | Facteur |
+|---|---|---|---|
+| TCO ≤ 0°C | Valeur stock | **Stock × 1.55–1.65** | Forte vaporisation déficiente |
+| TCO 0–17°C | Valeur stock | **Stock × 1.35–1.45** | Vaporisation partielle |
+| TCO 17–30°C | Valeur stock | **Stock × 1.20–1.30** | Légèrement insuffisant |
+| TCO > 30°C | Valeur stock | **Stock × 1.10–1.15** | Quasi normal |
+| TCO > 60°C | Valeur stock | **Stock (inchangé)** | Vaporisation correcte |
+
+> Symptôme d'after-start insuffisant : démarrage réussi (moteur "part") puis calage dans les 2 premières secondes. Distinct d'un cranking insuffisant (moteur ne démarre pas du tout).
+
+### ✅ Vérification
+
+| Critère | ✅ OK | ⚠️ Si raté |
+|---|---|---|
+| Démarrage froid < 5°C | Moteur stable dès 1 s après démarrage | Cale dans les 3 s → ip_mff_lgrd_ast +15% sur colonnes froides |
+| Montée régime après démarrage | 0 → 800 RPM lisse | Chute transitoire → facteur insuffisant |
