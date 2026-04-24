@@ -1,15 +1,15 @@
-_STATUS_FASTA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values ​​(throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_FASTA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values ​​(throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_FASTA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values ​​(unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
-_STATUS_FASTA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values ​​(unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+﻿_STATUS_FASTA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_FASTA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_FASTA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+_STATUS_FASTA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
 _STATUS_FASTA_KRANN	JOB_L	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
 _STATUS_FASTA_KRANN	JOB_S	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
 _STATUS_FASTA_TECU	JOB_L	0x23 Auslesen der DME-Temperaturstatistik	0x23 Reading the DME temperature statistics	0x23 Lecture des statistiques de température du DME
 _STATUS_FASTA_TECU	JOB_S	0x23 Auslesen der DME-Temperaturstatistik	0x23 Reading the DME temperature statistics	0x23 Lecture des statistiques de température du DME
-_STATUS_INPA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values ​​(throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_INPA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values ​​(throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_INPA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values ​​(unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
-_STATUS_INPA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values ​​(unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+_STATUS_INPA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_INPA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_INPA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+_STATUS_INPA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
 _STATUS_INPA_KRANN	JOB_L	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
 _STATUS_INPA_KRANN	JOB_S	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
 _STATUS_OBD_MODE_01	JOB_L	0x0101 _STATUS_OBD_MODE_01	0x0101 _STATUS_OBD_MODE_01	0x0101 _STATUS_OBD_MODE_01
@@ -80,8 +80,8 @@ INFO	JOB_L	Info about SGBD	Information about SGBD	Informations sur le SGBD
 INFO	JOB_S	Info about SGBD	Information about SGBD	Informations sur le SGBD
 INNENTEMP_LESEN	JOB_L	0x301001 INNENTEMP_LESEN	0x301001 INDOORS TEMP_READ	0x301001 TEMPÉRATURE INTÉRIEURE_LECTURE
 INNENTEMP_LESEN	JOB_S	0x301001 INNENTEMP_LESEN	0x301001 INDOORS TEMP_READ	0x301001 TEMPÉRATURE INTÉRIEURE_LECTURE
-KRAFTSTOFFVERBRAUCH_LESEN	JOB_L	Auslesen der Daten Referenz	Reading the data reference	Lecture des données de référence
-KRAFTSTOFFVERBRAUCH_LESEN	JOB_S	Auslesen der Daten Referenz	Reading the data reference	Lecture des données de référence
+KRAFTSTOFFVERBRAUCH_LESEN	JOB_L	Auslesen der Daten Referenz	Read fuel consumption	Lecture des données de référence
+KRAFTSTOFFVERBRAUCH_LESEN	JOB_S	Auslesen der Daten Referenz	Read fuel consumption	Lecture des données de référence
 LESEN_SYSTEMCHECK_SLS	JOB_L	Status Systemdiagnose SLS	System diagnostic status SLS	État du diagnostic système SLS
 LESEN_SYSTEMCHECK_SLS	JOB_S	Status Systemdiagnose SLS	System diagnostic status SLS	État du diagnostic système SLS
 LESEN_SYSTEMCHECK_TEVSYS	JOB_L	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
@@ -118,10 +118,10 @@ START_SYSTEMCHECK_SEK_LUFT	JOB_L	SLS Funktionstest	SLS Functional Test	Test fonc
 START_SYSTEMCHECK_SEK_LUFT	JOB_S	SLS Funktionstest	SLS Functional Test	Test fonctionnel SLS
 START_SYSTEMCHECK_TEV_FUNC	JOB_L	Systemcheck TEV Functionalcheck starten	Start system check TEV Functional check	Démarrage du contrôle système Contrôle fonctionnel TEV
 START_SYSTEMCHECK_TEV_FUNC	JOB_S	Systemcheck TEV Functionalcheck starten	Start system check TEV Functional check	Démarrage du contrôle système Contrôle fonctionnel TEV
-START_SYSTEMCHECK_VVT_ANSCHLAG	JOB_L	Anstoßen Diagnose 'VVT-Anschläge lernen'	Initiating diagnosis 'learning VVT attacks'	Diagnostic initial des « attaques VVT d'apprentissage »
-START_SYSTEMCHECK_VVT_ANSCHLAG	JOB_S	Anstoßen Diagnose 'VVT-Anschläge lernen'	Initiating diagnosis 'learning VVT attacks'	Diagnostic initial des « attaques VVT d'apprentissage »
-START_SYSTEMCHECK_VVT_SOLLWERT	JOB_L	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT ​​activé via CAN
-START_SYSTEMCHECK_VVT_SOLLWERT	JOB_S	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT ​​activé via CAN
+START_SYSTEMCHECK_VVT_ANSCHLAG	JOB_L	Anstoßen Diagnose 'VVT-Anschläge lernen'	Initiating diagnosis 'learning VVT mechanical stops'	Diagnostic initial des « attaques VVT d'apprentissage »
+START_SYSTEMCHECK_VVT_ANSCHLAG	JOB_S	Anstoßen Diagnose 'VVT-Anschläge lernen'	Initiating diagnosis 'learning VVT mechanical stops'	Diagnostic initial des « attaques VVT d'apprentissage »
+START_SYSTEMCHECK_VVT_SOLLWERT	JOB_L	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT activé via CAN
+START_SYSTEMCHECK_VVT_SOLLWERT	JOB_S	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT activé via CAN
 STAT_ABGASKLAPPE_ANSTEUERUNG_WERT	RES_L	Bedingung Abgasklappe mit Resonator	Condition: Exhaust flap with resonator	État : Clapet d'échappement avec résonateur
 STAT_ABGASKLAPPE_ANSTEUERUNG_WERT	RES_S			
 STAT_ABGASKLAPPE_EIN_WERT	RES_L	Bedingung Abgasklappe mit Resonator	Condition: Exhaust flap with resonator	État : Clapet d'échappement avec résonateur
@@ -152,9 +152,9 @@ STAT_BEHEIZTER_THERMOSTAT_PWM_WERT	RES_L	Beheizter Thermostat PWM	Heated thermos
 STAT_BEHEIZTER_THERMOSTAT_PWM_WERT	RES_S			
 STAT_BERECHNETE_LAST_WERT	RES_L	Berechneter Lastwert	Calculated load value	valeur de charge calculée
 STAT_BERECHNETE_LAST_WERT	RES_S			
-STAT_BERECHNETER_GANG_WERT	RES_L	Ganginformation	Gait information	Informations sur la démarche
+STAT_BERECHNETER_GANG_WERT	RES_L	Ganginformation	Gear information	Informations sur la démarche
 STAT_BERECHNETER_GANG_WERT	RES_S			
-STAT_BETRIEBSSTUNDENZAEHLER_WERT	RES_L	Ergebnis	Result	Résultat
+STAT_BETRIEBSSTUNDENZAEHLER_WERT	RES_L	Ergebnis	Operating hours counter	Résultat
 STAT_BETRIEBSSTUNDENZAEHLER_WERT	RES_S			
 STAT_BREMSDRUCK_WERT	RES_L	Brake pressure	Brake pressure	Pression de freinage
 STAT_BREMSDRUCK_WERT	RES_S	BrkPress	BrkPress	BrkPress
@@ -200,17 +200,17 @@ STAT_DREHZAHL_MAXIMAL_BEI_ZUENDAUSSETZER_WERT	RES_L	Maximale Drehzahl bei Zünda
 STAT_DREHZAHL_MAXIMAL_BEI_ZUENDAUSSETZER_WERT	RES_S			
 STAT_DREHZAHL_MINIMAL_BEI_ZUENDAUSSETZER_WERT	RES_L	Minimale Drehzahl bei Zündaussetzern	Minimum engine speed during misfires	Régime moteur minimal en cas de ratés d'allumage
 STAT_DREHZAHL_MINIMAL_BEI_ZUENDAUSSETZER_WERT	RES_S			
-STAT_DREHZAHLGRADIENT_WERT	RES_L	Drehzahlgradient	Speed ​​gradient	gradient de vitesse
+STAT_DREHZAHLGRADIENT_WERT	RES_L	Drehzahlgradient	Speed gradient	gradient de vitesse
 STAT_DREHZAHLGRADIENT_WERT	RES_S			
 STAT_DROSSELKLAPPE_NOTLAUF_WERT	RES_L	Status Drosselklappe Notlauf	Throttle valve status: Emergency mode	État du papillon des gaz : Mode d’urgence
 STAT_DROSSELKLAPPE_NOTLAUF_WERT	RES_S			
 STAT_DROSSELKLAPPE_SENSOR1_WERT	RES_L	Throttle sensor 1	Throttle sensor 1	Capteur d'accélérateur 1
 STAT_DROSSELKLAPPE_SENSOR1_WERT	RES_S	ThrSens1	ThrSens1	ThrSens1
 STAT_DROSSELKLAPPENWINKEL_SOLL_WERT	RES_L	Throttle pos. target	Throttle position target	Cible de la position du papillon des gaz
-STAT_DROSSELKLAPPENWINKEL_SOLL_WERT	RES_S	ThrottlePosTgt	ThrottlePost	Poste d'accélérateur
+STAT_DROSSELKLAPPENWINKEL_SOLL_WERT	RES_S	ThrottlePosTgt	ThrottlePosTgt	Poste d'accélérateur
 STAT_DROSSELKLAPPENWINKEL_WERT	RES_L	Throttle pos.	Throttle position	Position du papillon des gaz
 STAT_DROSSELKLAPPENWINKEL_WERT	RES_S	ThrottlePos	Throttle Position	Position du papillon des gaz
-STAT_E_BOXLUEFTER_EIN_WERT	RES_L	E-Box-Lüfter Ein	E-Box fan One	Ventilateur E-Box Un
+STAT_E_BOXLUEFTER_EIN_WERT	RES_L	E-Box-Lüfter Ein	E-Box fan ON	Ventilateur E-Box Un
 STAT_E_BOXLUEFTER_EIN_WERT	RES_S			
 STAT_E_LUEFTER_PWM_SOLL_WERT	RES_L	Sollwert E-Lüfter als PWM Wert	Target value of electric fan as PWM value	Valeur cible du ventilateur électrique sous forme de valeur PWM
 STAT_E_LUEFTER_PWM_SOLL_WERT	RES_S			
@@ -252,9 +252,9 @@ STAT_FUNKENBRENNDAUER_ZYL5_WERT	RES_L	Spark burn duration Cylinder 5	Spark burn 
 STAT_FUNKENBRENNDAUER_ZYL5_WERT	RES_S	SprkDur5	SprkDur5	SprkDur5
 STAT_FUNKENBRENNDAUER_ZYL6_WERT	RES_L	Spark burn duration Cylinder 6	Spark burn duration Cylinder 6	Durée de combustion par étincelles Cylindre 6
 STAT_FUNKENBRENNDAUER_ZYL6_WERT	RES_S	SprkDur6	SprkDur6	SprkDur6
-STAT_GEBERRAD_ADAPTION_VSA_WERT	RES_L	vsa_adp_fl	vsa_adp_fl	vsa_adp_fl
+STAT_GEBERRAD_ADAPTION_VSA_WERT	RES_L	vsa_adp_fl	Encoder wheel adaptation VSA	vsa_adp_fl
 STAT_GEBERRAD_ADAPTION_VSA_WERT	RES_S			
-STAT_GEBERRAD_ADAPTION_VSE_WERT	RES_L	vse_adp_fl	vse_adp_fl	vse_adp_fl
+STAT_GEBERRAD_ADAPTION_VSE_WERT	RES_L	vse_adp_fl	Encoder wheel adaptation VSE	vse_adp_fl
 STAT_GEBERRAD_ADAPTION_VSE_WERT	RES_S			
 STAT_GENERATOR_CHIPVERSION_WERT	RES_L	Chipversion Generator 1	Chip version Generator 1	Générateur de puces version 1
 STAT_GENERATOR_CHIPVERSION_WERT	RES_S			
@@ -268,7 +268,7 @@ STAT_GENERATOR_SPANNUNG_BSD_SOLL_WERT	RES_L	Generator Sollspannung über BSD	Gen
 STAT_GENERATOR_SPANNUNG_BSD_SOLL_WERT	RES_S			
 STAT_GENERATOR_SPANNUNG_SOLL_WERT	RES_L	Generator Sollspannung	Generator target voltage	tension cible du générateur
 STAT_GENERATOR_SPANNUNG_SOLL_WERT	RES_S			
-STAT_GENERATOR_STROM_WERT	RES_L	Generatorstrom	Generator power	Énergie du générateur
+STAT_GENERATOR_STROM_WERT	RES_L	Generatorstrom	Generator current	Énergie du générateur
 STAT_GENERATOR_STROM_WERT	RES_S			
 STAT_GENERATOR_TYP_WERT	RES_L	Kennung Generatortyp Generator 1	Identifier Generator type Generator 1	Générateur d'identifiants type Générateur 1
 STAT_GENERATOR_TYP_WERT	RES_S			
@@ -290,7 +290,7 @@ STAT_KL87_SPANNUNG_WERT	RES_L	Kl.87 Spannung / Versorgung DME	Terminal 87 Voltag
 STAT_KL87_SPANNUNG_WERT	RES_S			
 STAT_KLIMA_EIN	RES_L	Bedingung für Kompressoreinschalten	Condition for switching on the compressor	Condition de mise en marche du compresseur
 STAT_KLIMA_EIN	RES_S			
-STAT_KLIMAKOMPRESSORRELAIS_EIN	RES_L	Klimakompressorrelais Ein	Air conditioning compressor relay One	Relais de compresseur de climatisation Un
+STAT_KLIMAKOMPRESSORRELAIS_EIN	RES_L	Klimakompressorrelais Ein	Air conditioning compressor relay ON	Relais de compresseur de climatisation Un
 STAT_KLIMAKOMPRESSORRELAIS_EIN	RES_S			
 STAT_KLOPFSIGNAL_ZYL1_RELATIV_WERT	RES_L	Knock sensor signal Cylinder 1 relativ	Knock sensor signal Cylinder 1 relative	Signal du capteur de cliquetis relatif au cylindre 1
 STAT_KLOPFSIGNAL_ZYL1_RELATIV_WERT	RES_S			
@@ -336,7 +336,7 @@ STAT_KUPPLUNGSSCHALTER_BETAETIGT_WERT	RES_L	Kupplungsschalter Status	Clutch swit
 STAT_KUPPLUNGSSCHALTER_BETAETIGT_WERT	RES_S			
 STAT_KUPPLUNGSSCHALTER_VORHANDEN_WERT	RES_L	Schalter Kupplung	clutch switch	interrupteur d'embrayage
 STAT_KUPPLUNGSSCHALTER_VORHANDEN_WERT	RES_S			
-STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT	RES_L	fofstat	fofstat	fofstat
+STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT	RES_L	fofstat	Crankshaft adaptation completed	fofstat
 STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT	RES_S			
 STAT_LADEDRUCK_WERT	RES_L	Boost pressure	Boost pressure	Pression de suralimentation
 STAT_LADEDRUCK_WERT	RES_S			
@@ -406,13 +406,13 @@ STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL5_WERT	RES_L	Segmentadaption Laufunruhe Cyl. 
 STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL5_WERT	RES_S			
 STAT_LAUFUNRUHE_SEGMENTZEIT_WERT	RES_L	Laufunruhe Segmentzeit	Running unevenness Segment time	Irrégularité de la course Temps du segment
 STAT_LAUFUNRUHE_SEGMENTZEIT_WERT	RES_S			
-STAT_LAUFUNRUHE_ZYL1_WERT	RES_L	lutskzyl[0]	lutskzyl[0]	lutskzyl[0]
+STAT_LAUFUNRUHE_ZYL1_WERT	RES_L	lutskzyl[0]	Running roughness cylinder 1	lutskzyl[0]
 STAT_LAUFUNRUHE_ZYL1_WERT	RES_S			
-STAT_LAUFUNRUHE_ZYL2_WERT	RES_L	lutskzyl[3]	lutskzyl[3]	lutskzyl[3]
+STAT_LAUFUNRUHE_ZYL2_WERT	RES_L	lutskzyl[3]	Running roughness cylinder 2	lutskzyl[3]
 STAT_LAUFUNRUHE_ZYL2_WERT	RES_S			
-STAT_LAUFUNRUHE_ZYL3_WERT	RES_L	lutskzyl[1]	lutskzyl[1]	lutskzyl[1]
+STAT_LAUFUNRUHE_ZYL3_WERT	RES_L	lutskzyl[1]	Running roughness cylinder 3	lutskzyl[1]
 STAT_LAUFUNRUHE_ZYL3_WERT	RES_S			
-STAT_LAUFUNRUHE_ZYL4_WERT	RES_L	lutskzyl[2]	lutskzyl[2]	lutskzyl[2]
+STAT_LAUFUNRUHE_ZYL4_WERT	RES_L	lutskzyl[2]	Running roughness cylinder 4	lutskzyl[2]
 STAT_LAUFUNRUHE_ZYL4_WERT	RES_S			
 STAT_LAUFUNRUHE_ZYL5_WERT	RES_L	[1] Laufunruhe Cylinder 5	[1] Running roughness Cylinder 5	[1] Rugosité de fonctionnement Cylindre 5
 STAT_LAUFUNRUHE_ZYL5_WERT	RES_S			
@@ -492,23 +492,23 @@ STAT_OELSTAND_LANGZEIT_MITTEL_WERT	RES_L	Ölstand Mittelwert Langzeit	Oil level 
 STAT_OELSTAND_LANGZEIT_MITTEL_WERT	RES_S			
 STAT_OELTEMPERATUR_WERT	RES_L	Motor oil temp.	Motor oil temp.	Température de l'huile moteur
 STAT_OELTEMPERATUR_WERT	RES_S	OilTemp	OilTemperature	Température de l'huile
-STAT_PEDALWERTGEBER1_WERT	RES_L	Sauerstoffspeichervermögen KAT	Oxygen storage capacity KAT	Capacité de stockage d'oxygène KAT
+STAT_PEDALWERTGEBER1_WERT	RES_L	Sauerstoffspeichervermögen KAT	Accelerator pedal sensor 1	Capacité de stockage d'oxygène KAT
 STAT_PEDALWERTGEBER1_WERT	RES_S			
 STAT_POSITION_NOCKENWELLE_AUSLASS_WERT	RES_L	Camshaft pos exhaust	Camshaft position exhaust	Échappement de la position de l'arbre à cames
-STAT_POSITION_NOCKENWELLE_AUSLASS_WERT	RES_S	CamPosExh	CampOsExh	CampOsExh
-STAT_POSITION_NOCKENWELLE_EINLASS_WERT	RES_L	Camshaft pos. intake	Camshaft positive intake	Admission positive par arbre à cames
-STAT_POSITION_NOCKENWELLE_EINLASS_WERT	RES_S	CamPosInt	CampoInt	CampoInt
+STAT_POSITION_NOCKENWELLE_AUSLASS_WERT	RES_S	CamPosExh	CamPosExh	CampOsExh
+STAT_POSITION_NOCKENWELLE_EINLASS_WERT	RES_L	Camshaft pos. intake	Camshaft position intake	Admission positive par arbre à cames
+STAT_POSITION_NOCKENWELLE_EINLASS_WERT	RES_S	CamPosInt	CamPosInt	CampoInt
 STAT_PUMPENSTROM_BEI_DMTL_PUMPENPRUEFUNG_WERT	RES_L	Pumpenstrom Tankdiagnose	Pump current tank diagnostics	Diagnostic du réservoir de la pompe
 STAT_PUMPENSTROM_BEI_DMTL_PUMPENPRUEFUNG_WERT	RES_S			
 STAT_PWG1_SPANNUNG_WERT	RES_L	Pedal 1 Position Voltage	Pedal 1 Position Voltage	Tension de la pédale 1
 STAT_PWG1_SPANNUNG_WERT	RES_S	Pedal1_pos	Pedal1_pos	Pédale1_pos
-STAT_PWG1_VERSORGUNGSSPANNUNG_WERT	RES_L	Versorgung Fahrwertgeber 1	Power supply for vehicle speed sensor 1	Alimentation pour capteur de vitesse du véhicule 1
+STAT_PWG1_VERSORGUNGSSPANNUNG_WERT	RES_L	Versorgung Fahrwertgeber 1	Power supply for accelerator pedal sensor 1	Alimentation pour capteur de vitesse du véhicule 1
 STAT_PWG1_VERSORGUNGSSPANNUNG_WERT	RES_S			
 STAT_PWG1_WERT	RES_L	linearized APP1	linearized APP1	APP1 linéarisé
 STAT_PWG1_WERT	RES_S			
 STAT_PWG2_SPANNUNG_WERT	RES_L	Pedal 2 Position Voltage	Pedal 2 Position Voltage	Tension de la pédale à 2 positions
 STAT_PWG2_SPANNUNG_WERT	RES_S	Pedal2_pos	Pedal2_pos	Pédale2_pos
-STAT_PWG2_VERSORGUNGSSPANNUNG_WERT	RES_L	Versorgung Fahrwertgeber 2	Power supply for the vehicle speed sensor 2	Alimentation électrique du capteur de vitesse du véhicule 2
+STAT_PWG2_VERSORGUNGSSPANNUNG_WERT	RES_L	Versorgung Fahrwertgeber 2	Power supply for accelerator pedal sensor 2	Alimentation électrique du capteur de vitesse du véhicule 2
 STAT_PWG2_VERSORGUNGSSPANNUNG_WERT	RES_S			
 STAT_PWG2_WERT	RES_L	linearized APP2	linearized APP2	APP2 linéarisé
 STAT_PWG2_WERT	RES_S			
@@ -599,7 +599,7 @@ STAT_TEV_PWM_WERT	RES_S	TankVlvPWM	TankVlvPWM	TankVlvPWM
 STAT_UBAT_WERT	RES_L	Battery voltage	Battery voltage	Tension de la batterie
 STAT_UBATT_AD_WANDLER_WERT	RES_L	Batteriespannung vom AD-Wandler DME	Battery voltage from the AD converter DME	Tension de la batterie provenant du convertisseur AD DME
 STAT_UBATT_AD_WANDLER_WERT	RES_S			
-STAT_UBATT_IBS_WERT	RES_L	value von ubatt_w	value of ubatt_w	valeur de ubatt_w
+STAT_UBATT_IBS_WERT	RES_L	value von ubatt_w	Battery voltage (IBS)	valeur de ubatt_w
 STAT_UBATT_IBS_WERT	RES_S			
 STAT_UBATT_WERT	RES_L	Battery voltage	Battery voltage	Tension de la batterie
 STAT_UBATT_WERT	RES_S			
@@ -608,7 +608,7 @@ STAT_UMGEBUNGSDRUCK_SPANNUNG_WERT	RES_L	Atmospheric pressure sensor voltage	Atmo
 STAT_UMGEBUNGSDRUCK_SPANNUNG_WERT	RES_S			
 STAT_UMGEBUNGSDRUCK_WERT	RES_L	Atmospheric pressure	Atmospheric pressure	Pression atmosphérique
 STAT_UMGEBUNGSDRUCK_WERT	RES_S			
-STAT_UMGEBUNGSTEMPERATUR_WERT	RES_L	Result	Result	Résultat
+STAT_UMGEBUNGSTEMPERATUR_WERT	RES_L	Result	Ambient temperature	Résultat
 STAT_UMGEBUNGSTEMPERATUR_WERT	RES_S			
 STAT_VANOS_AUSLASS_PWM_WERT	RES_L	Outlet VANOS PWM	VANOS PWM Outlet	Sortie VANOS PWM
 STAT_VANOS_AUSLASS_PWM_WERT	RES_S	OutletVAN_PWM	OutletVAN_PWM	Sortie VAN_PWM
@@ -636,7 +636,7 @@ STAT_WEG_SEIT_SERVICE_WERT	RES_L	KM reading since last service	KM reading since 
 STAT_WEG_SEIT_SERVICE_WERT	RES_S	KMReading	KMReading	KMReading
 STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT	RES_L	Sollwert Einlassspreizung	Target value inlet spread	Étendue de la valeur cible
 STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT	RES_S			
-STAT_VVT_ENDSTUFENTEMPERATUR_WERT	RES_L	VVT-Endstufentemperatur from Modell	VVT output stage temperature from model	température de l'étage de sortie VVT ​​d'après le modèle
+STAT_VVT_ENDSTUFENTEMPERATUR_WERT	RES_L	VVT-Endstufentemperatur from Modell	VVT output stage temperature from model	température de l'étage de sortie VVT d'après le modèle
 STAT_VVT_ENDSTUFENTEMPERATUR_WERT	RES_S			
 STAT_VVT_ENTLASTUNGSRELAIS_EIN_WERT	RES_L			
 STAT_VVT_ENTLASTUNGSRELAIS_EIN_WERT	RES_S			
@@ -650,7 +650,7 @@ STAT_VVT_LAGEREGLER_SOLL_WERT	RES_L	Sollwert für Lageregler vom Tester	Target v
 STAT_VVT_LAGEREGLER_SOLL_WERT	RES_S			
 STAT_VVT_LAGEREGLER_SOLL_VON_TESTER_WERT	RES_L	Sollwert Einlassspreizung	Target value inlet spread	Étendue de la valeur cible
 STAT_VVT_LAGEREGLER_SOLL_VON_TESTER_WERT	RES_S			
-STAT_VVT_MOTORSTROM_WERT	RES_L	Strom für VVT-Motor	Power for VVT motor	Alimentation pour moteur VVT
+STAT_VVT_MOTORSTROM_WERT	RES_L	Strom für VVT-Motor	Current for VVT actuator	Alimentation pour moteur VVT
 STAT_VVT_MOTORSTROM_WERT	RES_S			
 STAT_VVT_MOTORTEMPERATUR_WERT	RES_L	VVT Motortemperatur	VVT engine temperature	température du moteur VVT
 STAT_VVT_MOTORTEMPERATUR_WERT	RES_S			
@@ -666,7 +666,7 @@ STAT_VVT_VERSORGUNGSSPANNUNG_ROH_WERT	RES_L
 STAT_VVT_VERSORGUNGSSPANNUNG_ROH_WERT	RES_S			
 STAT_VVT_VERSORGUNGSSPANNUNG_WERT	RES_L			
 STAT_VVT_VERSORGUNGSSPANNUNG_WERT	RES_S			
-STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT	RES_L	Mechanischer Verstellbereich VVT from Lernroutine	Mechanical adjustment range VVT ​​from learning routine	Plage de réglage mécanique VVT ​​issue de la routine d'apprentissage
+STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT	RES_L	Mechanischer Verstellbereich VVT from Lernroutine	Mechanical adjustment range VVT from learning routine	Plage de réglage mécanique VVT issue de la routine d'apprentissage
 STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT	RES_S			
 STAT_VVT_WINKEL_AUSWAHL_WERT	RES_L			
 STAT_VVT_WINKEL_AUSWAHL_WERT	RES_S			
@@ -788,8 +788,8 @@ STATUS_FASTA_COMMON	JOB_L	Messwerteblock lesen	Read measured value block	bloc de
 STATUS_FASTA_COMMON	JOB_S	Messwerteblock lesen	Read measured value block	bloc de lecture de la valeur mesurée
 STATUS_FASTA2	JOB_L	Auslesen FASTA-Messwertblock 2	Reading FASTA measured value block 2	Lecture du bloc 2 de la valeur mesurée FASTA
 STATUS_FASTA2	JOB_S	Auslesen FASTA-Messwertblock 2	Reading FASTA measured value block 2	Lecture du bloc 2 de la valeur mesurée FASTA
-STATUS_FGR	JOB_L	PWG	PWG	PWG
-STATUS_FGR	JOB_S	PWG	PWG	PWG
+STATUS_FGR	JOB_L	PWG	Cruise control	PWG
+STATUS_FGR	JOB_S	PWG	Cruise control	PWG
 STATUS_FGRL	JOB_L	$30 F2 01 Status der Stellgliedansteuerung FGR Lampe	$30 F2 01 Actuator control status FGR lamp	Voyant FGR d'état de la commande de l'actionneur 30 $ F2 01
 STATUS_FGRL	JOB_S	$30 F2 01 Status der Stellgliedansteuerung FGR Lampe	$30 F2 01 Actuator control status FGR lamp	Voyant FGR d'état de la commande de l'actionneur 30 $ F2 01
 STATUS_FUNKTIONS	JOB_L	Status Schaltzustaende	Status Switching states	États de commutation d'état
@@ -834,8 +834,8 @@ STATUS_KOREL	JOB_L	$30 D7 01 Status der Stellgliedansteuerung KOmpressorRELais	$
 STATUS_KOREL	JOB_S	$30 D7 01 Status der Stellgliedansteuerung KOmpressorRELais	$30 D7 01 Actuator control status Compressor relay	30 D7 01 État de la commande de l'actionneur Relais du compresseur
 STATUS_KRAFTSTOFFDRUCK	JOB_L	Kraftstoffdruck	Fuel pressure	Pression du carburant
 STATUS_KRAFTSTOFFDRUCK	JOB_S	Kraftstoffdruck	Fuel pressure	Pression du carburant
-STATUS_KRANN	JOB_L	0x33E3 STATUS_KRANN	0x33E3 STATUS_CRANE	0x33E3 STATUT_GRANE
-STATUS_KRANN	JOB_S	0x33E3 STATUS_KRANN	0x33E3 STATUS_CRANE	0x33E3 STATUT_GRANE
+STATUS_KRANN	JOB_L	0x33E3 STATUS_KRANN	0x33E3 STATUS_KRANN	0x33E3 STATUT_GRANE
+STATUS_KRANN	JOB_S	0x33E3 STATUS_KRANN	0x33E3 STATUS_KRANN	0x33E3 STATUT_GRANE
 STATUS_KTEST_MOTORDREHZAHL	JOB_L	Engine RPM auslesen	Read engine RPM	Lire le régime moteur
 STATUS_KTEST_MOTORDREHZAHL	JOB_S	Engine RPM auslesen	Read engine RPM	Lire le régime moteur
 STATUS_KUEHLMITTELTEMPERATUR	JOB_L	Coolant temperature	Coolant temperature	température du liquide de refroidissement
@@ -898,12 +898,12 @@ STATUS_MESSWERTBLOCK_ADC	JOB_L	0x2CF0 STATUS_MESSWERTBLOCK_ADC	0x2CF0 STATUS_MES
 STATUS_MESSWERTBLOCK_ADC	JOB_S	0x2CF0 STATUS_MESSWERTBLOCK_ADC	0x2CF0 STATUS_MESSWERTBLOCK_ADC	0x2CF0 STATUS_MESSWERTBLOCK_ADC
 STATUS_MESSWERTBLOCK_LESEN	JOB_L	Lesen eines Messwertblockes	Reading a measured value block	Lecture d'un bloc de valeur mesurée
 STATUS_MESSWERTBLOCK_LESEN	JOB_S	Lesen eines Messwertblockes	Reading a measured value block	Lecture d'un bloc de valeur mesurée
-STATUS_MESSWERTE_KD	JOB_L	$2C F0 02 DDLI Messwerte nach Wunsch VS-22	$2C F0 02 DDLI Measurement values ​​as desired VS-22	$2C F0 02 DDLI Valeurs de mesure souhaitées VS-22
-STATUS_MESSWERTE_KD	JOB_S	$2C F0 02 DDLI Messwerte nach Wunsch VS-22	$2C F0 02 DDLI Measurement values ​​as desired VS-22	$2C F0 02 DDLI Valeurs de mesure souhaitées VS-22
-STATUS_MESSWERTE_LRP	JOB_L	Messwerte Laufruhepruefung auslesen	Read out measured values ​​from the smooth running test	Lire les valeurs mesurées du test de fonctionnement régulier
-STATUS_MESSWERTE_LRP	JOB_S	Messwerte Laufruhepruefung auslesen	Read out measured values ​​from the smooth running test	Lire les valeurs mesurées du test de fonctionnement régulier
-STATUS_MESSWERTE_NL	JOB_L	$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22	$2C F0 02 DDLI Measured values ​​Knock on request VS-22	$2C F0 02 DDLI Valeurs mesurées Frapper sur demande VS-22
-STATUS_MESSWERTE_NL	JOB_S	$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22	$2C F0 02 DDLI Measured values ​​Knock on request VS-22	$2C F0 02 DDLI Valeurs mesurées Frapper sur demande VS-22
+STATUS_MESSWERTE_KD	JOB_L	$2C F0 02 DDLI Messwerte nach Wunsch VS-22	$2C F0 02 DDLI Measurement values as desired VS-22	$2C F0 02 DDLI Valeurs de mesure souhaitées VS-22
+STATUS_MESSWERTE_KD	JOB_S	$2C F0 02 DDLI Messwerte nach Wunsch VS-22	$2C F0 02 DDLI Measurement values as desired VS-22	$2C F0 02 DDLI Valeurs de mesure souhaitées VS-22
+STATUS_MESSWERTE_LRP	JOB_L	Messwerte Laufruhepruefung auslesen	Read out measured values from the smooth running test	Lire les valeurs mesurées du test de fonctionnement régulier
+STATUS_MESSWERTE_LRP	JOB_S	Messwerte Laufruhepruefung auslesen	Read out measured values from the smooth running test	Lire les valeurs mesurées du test de fonctionnement régulier
+STATUS_MESSWERTE_NL	JOB_L	$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22	$2C F0 02 DDLI Measured values Knock on request VS-22	$2C F0 02 DDLI Valeurs mesurées Frapper sur demande VS-22
+STATUS_MESSWERTE_NL	JOB_S	$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22	$2C F0 02 DDLI Measured values Knock on request VS-22	$2C F0 02 DDLI Valeurs mesurées Frapper sur demande VS-22
 STATUS_MESSWERTE_VANOS	JOB_L	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUT_MESURES_VANOS
 STATUS_MESSWERTE_VANOS	JOB_S	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUT_MESURES_VANOS
 STATUS_MIL	JOB_L	0x30D401 STATUS_MIL	0x30D401 STATUS_MIL	0x30D401 STATUT_MIL
@@ -926,10 +926,10 @@ STATUS_ODS	JOB_L	0x300501 STATUS_ODS	0x300501 STATUS_ODS	0x300501 STATUT_ODS
 STATUS_ODS	JOB_S	0x300501 STATUS_ODS	0x300501 STATUS_ODS	0x300501 STATUT_ODS
 STATUS_OEL	JOB_L	0x300E01 STATUS_OEL	0x300E01 STATUS_OIL	0x300E01 STATUT_HUILE
 STATUS_OEL	JOB_S	0x300E01 STATUS_OEL	0x300E01 STATUS_OIL	0x300E01 STATUT_HUILE
-STATUS_OELTEMPERATUR	JOB_L	LADELUFTtemperatur	CHARGING AIR TEMPERATURE	TEMPÉRATURE DE L'AIR DE CHARGEMENT
-STATUS_OELTEMPERATUR	JOB_S	LADELUFTtemperatur	CHARGING AIR TEMPERATURE	TEMPÉRATURE DE L'AIR DE CHARGEMENT
-STATUS_PWG	JOB_L	PWG	PWG	PWG
-STATUS_PWG	JOB_S	PWG	PWG	PWG
+STATUS_OELTEMPERATUR	JOB_L	LADELUFTtemperatur	Oil temperature	TEMPÉRATURE DE L'AIR DE CHARGEMENT
+STATUS_OELTEMPERATUR	JOB_S	LADELUFTtemperatur	Oil temperature	TEMPÉRATURE DE L'AIR DE CHARGEMENT
+STATUS_PWG	JOB_L	PWG	Accelerator pedal	PWG
+STATUS_PWG	JOB_S	PWG	Accelerator pedal	PWG
 STATUS_PWG_POTI_SPANNUNG	JOB_L	Pedal sensor voltage	Pedal sensor voltage	tension du capteur de pédale
 STATUS_PWG_POTI_SPANNUNG	JOB_S	Pedal sensor voltage	Pedal sensor voltage	tension du capteur de pédale
 STATUS_PWG2	JOB_L	0x302901 STATUS_PWG2	0x302901 STATUS_PWG2	0x302901 STATUT_PWG2
@@ -968,8 +968,8 @@ STATUS_SYSTEMCHECK_L_SONDE_WERTE	JOB_L	Status und Messwerte	Status and measured 
 STATUS_SYSTEMCHECK_L_SONDE_WERTE	JOB_S	Status und Messwerte	Status and measured values	État et valeurs mesurées
 STATUS_SYSTEMCHECK_LLERH_WERT	JOB_L	aktuelle Drehzahl N	current speed N	vitesse actuelle N
 STATUS_SYSTEMCHECK_LLERH_WERT	JOB_S	aktuelle Drehzahl N	current speed N	vitesse actuelle N
-STATUS_SYSTEMCHECK_PM_INFO_1	JOB_L	$22 40 22 Bytefeld 1 Batterie Powermanagement lesen	$22 40 22 Byte field 1 Battery Power Management Read	22 $ ​​40 22 Champ d'octets 1 Gestion de l'alimentation de la batterie Lecture
-STATUS_SYSTEMCHECK_PM_INFO_1	JOB_S	$22 40 22 Bytefeld 1 Batterie Powermanagement lesen	$22 40 22 Byte field 1 Battery Power Management Read	22 $ ​​40 22 Champ d'octets 1 Gestion de l'alimentation de la batterie Lecture
+STATUS_SYSTEMCHECK_PM_INFO_1	JOB_L	$22 40 22 Bytefeld 1 Batterie Powermanagement lesen	$22 40 22 Byte field 1 Battery Power Management Read	22 $ 40 22 Champ d'octets 1 Gestion de l'alimentation de la batterie Lecture
+STATUS_SYSTEMCHECK_PM_INFO_1	JOB_S	$22 40 22 Bytefeld 1 Batterie Powermanagement lesen	$22 40 22 Byte field 1 Battery Power Management Read	22 $ 40 22 Champ d'octets 1 Gestion de l'alimentation de la batterie Lecture
 STATUS_SYSTEMCHECK_PM_INFO_2	JOB_L	$22 40 23 Bytefeld 2 Batterie Powermanagement lesen	$22 40 23 Byte field 2 Battery Power Management Read	22 40 23 $ Champ d'octets 2 Gestion de l'alimentation de la batterie Lecture
 STATUS_SYSTEMCHECK_PM_INFO_2	JOB_S	$22 40 23 Bytefeld 2 Batterie Powermanagement lesen	$22 40 23 Byte field 2 Battery Power Management Read	22 40 23 $ Champ d'octets 2 Gestion de l'alimentation de la batterie Lecture
 STATUS_SYSTEMCHECK_SEK_LAMBDA_WERT	JOB_L	Status und Luftmassen	Status and air masses	État et masses d'air
@@ -984,8 +984,8 @@ STATUS_SYSTEMCHECK_TEV_FUNC	JOB_L	Status Systemtest TEV	Status System Test TEV	T
 STATUS_SYSTEMCHECK_TEV_FUNC	JOB_S	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
 STATUS_SYSTEMCHECK_TEV_WERT	JOB_L	Status und Messströme	Status and measurement currents	Courants d'état et de mesure
 STATUS_SYSTEMCHECK_TEV_WERT	JOB_S	Status und Messströme	Status and measurement currents	Courants d'état et de mesure
-STATUS_SYSTEMCHECK_VVT_ANSCHLAG	JOB_L	Diagnosestatus 'VVT-Anschläge lernen'	Diagnostic status 'Learning VVT attacks'	État du diagnostic : « Apprentissage des attaques VVT »
-STATUS_SYSTEMCHECK_VVT_ANSCHLAG	JOB_S	Diagnosestatus 'VVT-Anschläge lernen'	Diagnostic status 'Learning VVT attacks'	État du diagnostic : « Apprentissage des attaques VVT »
+STATUS_SYSTEMCHECK_VVT_ANSCHLAG	JOB_L	Diagnosestatus 'VVT-Anschläge lernen'	Diagnostic status 'Learning VVT mechanical stops'	État du diagnostic : « Apprentissage des attaques VVT »
+STATUS_SYSTEMCHECK_VVT_ANSCHLAG	JOB_S	Diagnosestatus 'VVT-Anschläge lernen'	Diagnostic status 'Learning VVT mechanical stops'	État du diagnostic : « Apprentissage des attaques VVT »
 STATUS_TEV	JOB_L	MUL-Signal TEV-Bank1	MUL signal TEV bank 1	Signal MUL TEV banc 1
 STATUS_TEV	JOB_S	MUL-Signal TEV-Bank1	MUL signal TEV bank 1	Signal MUL TEV banc 1
 STATUS_TEVSYS	JOB_L	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
@@ -1004,8 +1004,8 @@ STATUS_UGEN	JOB_L	0x303201 STATUS_UGEN	0x303201 STATUS_UGEN	0x303201 STATUT_UGEN
 STATUS_UGEN	JOB_S	0x303201 STATUS_UGEN	0x303201 STATUS_UGEN	0x303201 STATUT_UGEN
 STATUS_UKL15	JOB_L	0x301B01 STATUS_UKL15	0x301B01 STATUS_UKL15	0x301B01 STATUT_UKL15
 STATUS_UKL15	JOB_S	0x301B01 STATUS_UKL15	0x301B01 STATUS_UKL15	0x301B01 STATUT_UKL15
-STATUS_UMGEBUNGSDRUCK	JOB_L	UWTEXT	UWTEXT	UWTEXT
-STATUS_UMGEBUNGSDRUCK	JOB_S	UWTEXT	UWTEXT	UWTEXT
+STATUS_UMGEBUNGSDRUCK	JOB_L	UWTEXT	Atmospheric pressure	UWTEXT
+STATUS_UMGEBUNGSDRUCK	JOB_S	UWTEXT	Atmospheric pressure	UWTEXT
 STATUS_UMGEBUNGSTEMPERATUR	JOB_L	Messwert selectiv lesen	Selectively read measured value	lire sélectivement la valeur mesurée
 STATUS_UMGEBUNGSTEMPERATUR	JOB_S	Messwert selectiv lesen	Selectively read measured value	lire sélectivement la valeur mesurée
 STATUS_UVLSS	JOB_L	0x302001 STATUS_UVLSS	0x302001 STATUS_UVLSS	0x302001 STATUT_UVLSS
@@ -1020,8 +1020,8 @@ STATUS_ZUENDWINKEL	JOB_L	Ignition angle auslesen	Read ignition angle	Lire l'angl
 STATUS_ZUENDWINKEL	JOB_S	Ignition angle auslesen	Read ignition angle	Lire l'angle d'allumage
 STOP_SYSTEMCHECK_TEV_FUNC	JOB_L	Systemcheck TEV Functionalcheck starten	Start system check TEV Functional check	Démarrage du contrôle système Contrôle fonctionnel TEV
 STOP_SYSTEMCHECK_TEV_FUNC	JOB_S	Systemcheck TEV Functionalcheck starten	Start system check TEV Functional check	Démarrage du contrôle système Contrôle fonctionnel TEV
-STOP_SYSTEMCHECK_VVT_SOLLWERT	JOB_L	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT ​​activé via CAN
-STOP_SYSTEMCHECK_VVT_SOLLWERT	JOB_S	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT ​​activé via CAN
+STOP_SYSTEMCHECK_VVT_SOLLWERT	JOB_L	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT activé via CAN
+STOP_SYSTEMCHECK_VVT_SOLLWERT	JOB_S	$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben	$31 FE System diagnostics VVT control enabled via CAN	31 $ Diagnostic du système FE Contrôle VVT activé via CAN
 TEST_SYSTEMCHECK_DMTL	JOB_L	Systemcheck Tankentlueftungssystem Leckdiagnose starten	System check fuel tank venting system: Start leak diagnosis	Vérification du système de ventilation du réservoir de carburant : Démarrer le diagnostic des fuites
 TEST_SYSTEMCHECK_DMTL	JOB_S	Systemcheck Tankentlueftungssystem Leckdiagnose starten	System check fuel tank venting system: Start leak diagnosis	Vérification du système de ventilation du réservoir de carburant : Démarrer le diagnostic des fuites
 TEV_SYSTEM	JOB_L	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
