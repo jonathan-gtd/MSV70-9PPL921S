@@ -23,10 +23,7 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
   - [② `ip_mff_cor_opm_1_2` — Multiplicateur Valvetronic, mode 2](04_INJECTEURS.md#p2)
   - [③ `ip_mff_cor_opm_2_1` — Multiplicateur papillonné (GD), mode 1](04_INJECTEURS.md#p3)
   - [④ `ip_mff_cor_opm_2_2` — Multiplicateur papillonné (GD), mode 2](04_INJECTEURS.md#p4)
-  - [⑤ `c_t_ti_dly_fl_1` — Délai WOT MT, copie 1](04_INJECTEURS.md#p5)
-  - [⑥ `c_t_ti_dly_fl_2` — Délai WOT MT, copie 2](04_INJECTEURS.md#p6)
-  - [⑦ `c_tco_n_mff_cst` — Seuil TCO cranking enrichi](04_INJECTEURS.md#p7)
-  - [⑧ `ip_ti_min` — Dead time f(tension batterie)](04_INJECTEURS.md#p8)
+  - [⑤ `ip_ti_min` — Dead time f(tension batterie)](04_INJECTEURS.md#p5)
 
 - **[05 — Démarrage froid](05_DEMARRAGE_FROID.md)** — Cranking et after-start sur éthanol
   - [① `ip_mff_cst_opm_1` — Cranking Valvetronic](05_DEMARRAGE_FROID.md#p1)

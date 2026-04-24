@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "msv70-xdf-analyzer": {
-      "command": "python",
+      "command": "C:\\Python312\\python.exe",
       "args": ["mcp-claude/mcp_server.py"]
     }
   }
