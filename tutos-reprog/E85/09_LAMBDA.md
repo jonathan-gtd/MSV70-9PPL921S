@@ -16,7 +16,7 @@
 
 **Avant / Après :**
 
-| Phase | ◀ Stock | ✏️ Break-in (0–500 km) | ✏️ Stabilisé (> 500 km) |
+| Phase | ◀ Avant — Stock | ✅ Après — Break-in (0–500 km) | ✅ Après — Stabilisé (> 500 km) |
 |---|---|---|---|
 | `ip_fac_lamb_max_fsd_1` | ~1.15 (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
 
@@ -41,7 +41,7 @@
 
 **Avant / Après :**
 
-| Phase | ◀ Stock | ✏️ Break-in (0–500 km) | ✏️ Stabilisé (> 500 km) |
+| Phase | ◀ Avant — Stock | ✅ Après — Break-in (0–500 km) | ✅ Après — Stabilisé (> 500 km) |
 |---|---|---|---|
 | `ip_fac_lamb_max_fsd_2` | ~1.15 (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
 
@@ -65,7 +65,7 @@
 
 **Avant / Après :**
 
-| Phase | ◀ Stock | ✏️ Break-in (0–500 km) | ✏️ Stabilisé (> 500 km) |
+| Phase | ◀ Avant — Stock | ✅ Après — Break-in (0–500 km) | ✅ Après — Stabilisé (> 500 km) |
 |---|---|---|---|
 | `c_lamb_delta_i_max_lam_adj` | ~0.15–0.20 λ (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
 
@@ -108,17 +108,17 @@ Voyant MIL allumé pendant break-in :
 
 **Rôle :** Consigne de richesse ciblée par le calculateur en mode pleine charge (WOT). Stock N52B30 : déjà enrichi à λ 0.920 en WOT (descend à 0.871 à 6500 RPM). Sur E85, cette richesse protège le moteur — rien d'obligatoire à modifier. Option B : dé-enrichir légèrement (λ 0.940–0.950) pour gagner un peu de puissance en exploitant la chaleur de vaporisation de l'éthanol (qui refroidit naturellement la chambre).
 
-**◀ Stock (λ)**
+**◀ Avant — Stock (λ)**
 
-| RPM | 608 | 992 | 1216 | 1600 | 2016 | 2496 | 3008 | 3520 | 4128 | 4800 | 5504 | 6496 |
+| RPM (tr/min) | 608 | 992 | 1216 | 1600 | 2016 | 2496 | 3008 | 3520 | 4128 | 4800 | 5504 | 6496 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | λ | 0.920 | 0.920 | 0.913 | 0.920 | 0.920 | 0.920 | 0.920 | 0.920 | 0.920 | 0.920 | 0.901 | 0.871 |
 
 Option A (recommandée) : **laisser stock** — λ 0.920 WOT déjà présent, E85 ne nécessite pas d'enrichissement supplémentaire.
 
-**✏️ Option B — dé-enrichissement léger (gain puissance)**
+**✅ Après — Option B : dé-enrichissement léger (gain puissance)**
 
-| RPM | 608 | 992 | 1216 | 1600 | 2016 | 2496 | 3008 | 3520 | 4128 | 4800 | 5504 | 6496 |
+| RPM (tr/min) | 608 | 992 | 1216 | 1600 | 2016 | 2496 | 3008 | 3520 | 4128 | 4800 | 5504 | 6496 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | λ | **0.950** | **0.950** | **0.945** | **0.950** | **0.950** | **0.945** | **0.945** | **0.940** | **0.935** | **0.930** | **0.920** | **0.900** |
 

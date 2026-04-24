@@ -10,24 +10,23 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x5C5EE |
-| Structure | Map 8×8 |
-| Axes | X = charge normalisée (0.0–0.983), Y = RPM (0–6500) |
+| Structure | Courbe 1×8 (uniforme sur tous les RPM) |
+| Axes | X = charge normalisée (0.0–0.983) |
 
 **Rôle :** Multiplicateur sur la masse carburant calculée lors d'une transition vers la pleine charge. À charge normalisée ~0.5, le facteur stock est ~0.39 — l'enrichissement transitoire n'est appliqué qu'à ~40% en zone intermédiaire. Sur E85, si le facteur est insuffisant, le mélange est lean de façon transitoire lors des kickdowns. La table est uniforme sur tous les régimes (toutes les lignes RPM ont les mêmes valeurs).
 
 **Avant / Après :**
 
-**◀ Stock**
-
-| charge | 0.000 | 0.098 | 0.197 | 0.295 | 0.393 | 0.492 | 0.786 | 0.983 |
-|---|---|---|---|---|---|---|---|---|
-| tous RPM | 0.000 | 0.049 | 0.098 | 0.147 | 0.197 | 0.393 | 0.688 | 0.983 |
-
-**✏️ E85 (si trous kickdown — augmenter zone 0.393–0.786 de +10 à +20%)**
-
-| charge | 0.000 | 0.098 | 0.197 | 0.295 | 0.393 | 0.492 | 0.786 | 0.983 |
-|---|---|---|---|---|---|---|---|---|
-| tous RPM | 0.000 | 0.049 | 0.098 | 0.147 | **0.217** | **0.432** | **0.757** | 0.983 |
+| | ◀ Avant — Stock | ✅ Après — E85 (si trous kickdown) |
+|---|---|---|
+| charge 0.000 | 0.000 | 0.000 |
+| charge 0.098 | 0.049 | 0.049 |
+| charge 0.197 | 0.098 | 0.098 |
+| charge 0.295 | 0.147 | 0.147 |
+| charge 0.393 | 0.197 | **0.217** |
+| charge 0.492 | 0.393 | **0.432** |
+| charge 0.786 | 0.688 | **0.757** |
+| charge 0.983 | 0.983 | 0.983 |
 
 **Vérification :**
 
@@ -50,7 +49,7 @@
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Avant — Stock | ✅ Après — E85 |
 |---|---|---|
 | `KL_STEND_TRANS` (4 pts) | **0.983 (constant)** | **Ne pas modifier** |
 
@@ -74,7 +73,7 @@
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Avant — Stock | ✅ Après — E85 |
 |---|---|---|
 | `KL_FUPSRF_TRANS` (8 pts) | **0.1092 %/hPa (constant)** | **Ne pas modifier** |
 
@@ -98,7 +97,7 @@
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Avant — Stock | ✅ Après — E85 |
 |---|---|---|
 | `KL_PIRG_TRANS` (8 pts) | **100.0 hPa (constant)** | **Ne pas modifier** |
 

@@ -34,7 +34,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Avant — Stock | ✅ Après — E85 |
 |---|---|---|
 | `ip_mff_cor_opm_1_1` | 1.016 | **1.473** |
 
@@ -58,7 +58,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Avant — Stock | ✅ Après — E85 |
 |---|---|---|
 | `ip_mff_cor_opm_1_2` | 1.016 | **1.473** |
 
@@ -82,7 +82,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Avant — Stock | ✅ Après — E85 |
 |---|---|---|
 | `ip_mff_cor_opm_2_1` | 1.016 | **1.473** |
 
@@ -106,7 +106,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Avant — Stock | ✅ Après — E85 |
 |---|---|---|
 | `ip_mff_cor_opm_2_2` | 1.016 | **1.473** |
 
@@ -130,7 +130,7 @@ Facteur   = (14.7 / AFR_blend) × 0.94
 
 **Avant / Après :**
 
-| Tension batterie | ◀ Stock (Bosch EV14 13537531634) | ▶ E85, injecteurs stock | ▶ Nouveaux injecteurs |
+| Tension batterie | ◀ Avant — Stock (Bosch EV14 13537531634) | ✅ Après — E85, injecteurs stock | ▶ Nouveaux injecteurs |
 |---|---|---|---|
 | 7V   | ~1.20 ms | **Identique** | Datasheet constructeur |
 | 8V   | ~1.00 ms | **Identique** | Datasheet constructeur |
