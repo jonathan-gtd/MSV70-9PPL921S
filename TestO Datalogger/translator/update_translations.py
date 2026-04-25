@@ -41,13 +41,13 @@ def main():
 
         entry = table[key]
 
-        if typ == "RES_L" and entry.get("L"):
+        if typ in ("RES_L", "JOB_L") and entry.get("L"):
             new_val = entry["L"]
             if new_val != current_val:
                 lines[i] = f"{key}\t{typ}\t{new_val}{eol}"
                 updated_l += 1
 
-        elif typ == "RES_S" and entry.get("S"):
+        elif typ in ("RES_S", "JOB_S") and entry.get("S"):
             new_val = entry["S"]
             if new_val != current_val:
                 lines[i] = f"{key}\t{typ}\t{new_val}{eol}"

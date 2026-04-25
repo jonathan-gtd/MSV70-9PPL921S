@@ -71,6 +71,160 @@
     "job" : "E85",
     "result" : "STAT_KRAFTSTOFFDRUCK_WERT"
    }
+  ],
+  "PERF" : [
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_MOTORDREHZAHL_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LASTWERT_RELATIV_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LADEDRUCK_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_ZUENDWINKEL_ZYL1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_KLOPFWERT_ZYL1_SPANNUNG_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_KLOPFWERT_ZYL2_SPANNUNG_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_KLOPFWERT_ZYL3_SPANNUNG_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_KLOPFWERT_ZYL4_SPANNUNG_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_KLOPFWERT_ZYL5_SPANNUNG_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_KLOPFWERT_ZYL6_SPANNUNG_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LAUFUNRUHE_ZYL1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LAUFUNRUHE_ZYL2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LAUFUNRUHE_ZYL3_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LAUFUNRUHE_ZYL4_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LAUFUNRUHE_ZYL5_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "PERF",
+    "result" : "STAT_LAUFUNRUHE_ZYL6_WERT"
+   }
+  ],
+  "LAMBDA" : [
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_MOTORDREHZAHL_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_FAHRERWUNSCH_PEDAL_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_LAMBDA_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_LAMBDA_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_LAMBDA_BANK1_SOLL_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_LAMBDA_BANK2_SOLL_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_INTEGRATOR_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_INTEGRATOR_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_ADAPTION_ADDITIV_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_ADAPTION_ADDITIV_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "LAMBDA",
+    "result" : "STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT"
+   }
   ]
  }
 }

@@ -123,11 +123,6 @@
             "c_fac_mff_ti_stnd_mon"
           ]
         },
-        "ip_ti_min": {
-          "doc": "Durée minimale absolue d'ouverture injecteur [ms] f(tension batterie). Limite mécanique basse en dessous de laquelle l'injecteur ne peut pas ouvrir correctement. Ne pas modifier sur injecteurs stock.",
-          "type_doc": "COURBE 2D",
-          "modification_e85": "NON"
-        },
         "c_t_auth_ti_min_afl": {
           "doc": "Délai d'autorisation injection minimale en mode AFL [s]. Temporisation constructeur avant d'autoriser TI_MIN.",
           "type_doc": "CONSTANTE",
@@ -269,44 +264,6 @@
           "stock_raw": 0,
           "stock_physical": "0 ms",
           "warning": false
-        }
-      }
-    },
-    {
-      "xdf_category": "INJR_Battery_Voltage_Compensation",
-      "label": "Compensation tension batterie — ip_ti_min (dead time vs Ubatt)",
-      "role": "ip_ti_min est la table de durée minimale d'ouverture injecteur en fonction de la tension batterie. Elle représente le 'dead time' électromécanique réel : le délai entre la commande électrique et l'ouverture effective de l'aiguille d'injection. Ce délai varie avec la tension disponible — plus la tension est basse, plus il faut de temps pour magnétiser la bobine et vaincre le ressort de rappel. Le MSV70 intègre ce dead time dans chaque calcul de TI : le calculateur commande l'injecteur pendant TI_total = TI_calculé + dead_time(Ubatt). Sur les injecteurs stock N52B30 (Bosch EV14 13537531634), cette table est correctement calibrée d'usine — ne pas modifier. CRITIQUE : si les injecteurs sont remplacés (ex. N54, N20, injsecteurs aftermarket), cette table doit être recalibrée avec les dead times du nouvel injecteur. Un dead time erroné produit un mélange riche constant (dead time trop élevé) ou pauvre constant (dead time trop faible), non-corrigeable par les fuel trims seuls.",
-      "tuning_impact": "critical",
-      "flex_fuel_sensitive": false,
-      "tags": ["injector", "dead_time", "battery_voltage"],
-      "undocumented_params_default": "NON",
-      "parameters": {
-        "ip_ti_min": {
-          "doc": "Durée minimale d'ouverture injecteur (dead time électromécanique) f(tension batterie Ubatt) [ms]. Table 1D f(V). Stock Bosch EV14 13537531634 — valeurs typiques mesurées sur banc.",
-          "type_doc": "COURBE 2D",
-          "modification_e85": "NON — injecteurs stock 13537531634",
-          "e85_action": "Ne pas modifier avec les injecteurs stock. Recalibrer OBLIGATOIREMENT si les injecteurs sont remplacés : utiliser les données constructeur du nouvel injecteur ou mesure sur banc d'injection.",
-          "stock_physical_typical": {
-            "7V":   "~1.20 ms",
-            "8V":   "~1.00 ms",
-            "9V":   "~0.85 ms",
-            "10V":  "~0.72 ms",
-            "11V":  "~0.62 ms",
-            "12V":  "~0.55 ms",
-            "13V":  "~0.50 ms",
-            "14V":  "~0.46 ms",
-            "14.4V":"~0.43 ms",
-            "15V":  "~0.41 ms"
-          },
-          "e85_values": "Identiques au stock si injecteurs 13537531634 conservés — aucune modification E85",
-          "before_after_summary": {
-            "stock_injecteurs_stock":   "Valeurs d'usine — aucune modification",
-            "e85_injecteurs_stock":     "Valeurs d'usine — aucune modification",
-            "e85_nouveaux_injecteurs":  "Recalibrer selon datasheet constructeur du nouvel injecteur"
-          },
-          "warning": true,
-          "warning_detail": "Oublier cette table lors d'un changement d'injecteurs = mélange très riche au ralenti si dead_time trop long, ou pauvre si trop court. Symptôme : STFT instable dès le démarrage, calage, ralenti chaotique. Non corrigeable par les trims seuls.",
-          "dependencies": ["c_fac_mff_ti_stnd_1", "c_fac_mff_ti_stnd_2", "c_ti_add_as[0]"]
         }
       }
     },

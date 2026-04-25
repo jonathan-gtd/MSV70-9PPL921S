@@ -1,1854 +1,2830 @@
 {
-  "STAT_WASSERPUMPENLEISTUNG_BSD_WERT": {
-    "L": "Water pump power via BSD",
-    "S": "WPmpPwrBSD"
-  },
-  "STAT_0X4415_WERT": {
-    "L": "Permittivity correction offset",
-    "S": "PermOff"
-  },
-  "STAT_0X460D_WERT": {
-    "L": "Cutoff correction value",
-    "S": "CutoffCorr"
-  },
-  "STAT_BATTERIELAST_WERT": {
-    "L": "Battery load",
-    "S": "BattLoad"
-  },
-  "STAT_DISAKLAPPEN_POSITION_WERT": {
-    "L": "DISA flap current position",
-    "S": "DISAPos"
-  },
-  "STAT_E_LUEFTER_PWM_SOLL_WERT": {
-    "L": "Electric fan PWM target",
-    "S": "EFanPWMTgt"
-  },
-  "STAT_0X4614_WERT": {
-    "L": "Auslastungsgrad Generator 1",
-    "S": "GenLoad1"
-  },
-  "STAT_SONDENSPANNUNG_VORKAT_BANK1_MIT_OFFSET_WERT": {
-    "L": "Voltage Lambdasonde before cat. Bank 1 mit Offsetkorrektur",
-    "S": "LSVltB1Off"
-  },
-  "STAT_SONDENSPANNUNG_VORKAT_BANK2_MIT_OFFSET_WERT": {
-    "L": "Voltage Lambdasonde before cat. Bank 2 mit Offsetkorrektur",
-    "S": "LSVltB2Off"
-  },
-  "STAT_FAHRERWUNSCH_PEDAL_WERT": {
-    "L": "Accelerator pedal (WOT=100%)",
-    "S": "Pedal %"
-  },
-  "STAT_LASTWERT_BERECHNET_WERT": {
-    "L": "Calculated load value",
-    "S": "CalcLoad"
-  },
-  "STAT_LAMBDA_INTEGRATOR_GRUPPE1_WERT": {
-    "L": "Lambda integrator group 1",
-    "S": "STFTGrp1"
-  },
-  "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE1_WERT": {
-    "L": "LTFT mul.+add. group 1",
-    "S": "LTFTGrp1"
-  },
-  "STAT_LAMBDA_INTEGRATOR_GRUPPE2_WERT": {
-    "L": "Lambda integrator group 2",
-    "S": "STFTGrp2"
-  },
-  "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE2_WERT": {
-    "L": "LTFT mul.+add. group 2",
-    "S": "LTFTGrp2"
-  },
-  "STAT_LASTWERT_RELATIV_WERT": {
-    "L": "Relative load",
-    "S": "RelLoad"
-  },
-  "STAT_0X5814_WERT": {
-    "L": "Pedal value",
-    "S": "Pedal"
-  },
-  "STAT_0X5827_WERT": {
-    "L": "Lambda heating pre-cat Bank 1",
-    "S": "LSHeatVK1"
-  },
-  "STAT_0X5828_WERT": {
-    "L": "Lambda heating pre-cat Bank 2",
-    "S": "LSHeatVK2"
-  },
-  "STAT_0X5829_WERT": {
-    "L": "Lambda heating post-cat Bank 1",
-    "S": "LSHeatNK1"
-  },
-  "STAT_0X582A_WERT": {
-    "L": "Lambda heating post-cat Bank 2",
-    "S": "LSHeatNK2"
-  },
-  "STAT_0X5840_WERT": {
-    "L": "Throttle angle emergency air position",
-    "S": "CPULdRst"
-  },
-  "STAT_0X5855_WERT": {
-    "L": "Mean value Bank 1",
-    "S": "MeanValB1"
-  },
-  "STAT_0X5856_WERT": {
-    "L": "Mean value Bank 2",
-    "S": "MeanValB2"
-  },
-  "STAT_E_LUEFTER_TASTVERHAELTNIS_WERT": {
-    "L": "Electric fan duty cycle",
-    "S": "EFanDutyCy"
-  },
-  "STAT_0X5880_WERT": {
-    "L": "Tastverhaeltnis GLF System",
-    "S": "AirFlapDC"
-  },
-  "STAT_0X5899_WERT": {
-    "L": "Istwert DISA-Position",
-    "S": "DISAPosAct"
-  },
-  "STAT_VVT_SOLLWINKEL_WERT": {
-    "L": "VVT target angle",
-    "S": "VVTTgtAng"
-  },
-  "STAT_0X58A1_WERT": {
-    "L": "Ausgegeben duty cycle",
-    "S": "VVTDCOut"
-  },
-  "STAT_PEDALWERTGEBER1_WERT": {
-    "L": "Accelerator pedal sensor 1 [%]",
-    "S": "APP1"
-  },
-  "STAT_0X58B9_WERT": {
-    "L": "Pedal value monitoring",
-    "S": "PedalMon"
-  },
-  "STAT_MOMENTENANFORDERUNG_VON_MSR_RELATIV_WERT": {
-    "L": "Relative torque request from MSR via CAN",
-    "S": "MSRTqReq"
-  },
-  "STAT_LAST_MAXIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT": {
-    "L": "Max. relative load at misfire",
-    "S": "MaxLdMisf"
-  },
-  "STAT_LAST_MINIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT": {
-    "L": "Min. relative load at misfire",
-    "S": "MinLdMisf"
-  },
-  "STAT_WASSERPUMPE_LEISTUNGSREDUZIERT_WERT": {
-    "L": "Water pump power reduced",
-    "S": "WPmpRedPwr"
-  },
-  "STAT_PWG1_WERT": {
-    "L": "linearized APP1",
-    "S": "APP1Lin"
-  },
-  "STAT_PWG2_WERT": {
-    "L": "linearized APP2",
-    "S": "APP2Lin"
-  },
-  "STAT_FAHRERWUNSCH_PEDAL_ROH_WERT": {
-    "L": "Fahrpedalwert",
-    "S": "AccPedRaw"
-  },
-  "STAT_BERECHNETE_LAST_WERT": {
-    "L": "Calculated load value 2",
-    "S": "CalcLoad2"
-  },
-  "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK1_WERT": {
-    "L": "Lambda heating PWM before cat. Bank 1",
-    "S": "LSHtVK1"
-  },
-  "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK1_WERT": {
-    "L": "normierte Heizleistung der Lambdasonde hinter Kat",
-    "S": "LSHtNK1"
-  },
-  "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK2_WERT": {
-    "L": "Lambda heating PWM before cat. Bank 2",
-    "S": "LSHtVK2"
-  },
-  "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK2_WERT": {
-    "L": "Lambda heating PWM hinter Katalysator Bank 2",
-    "S": "LSHtNK2"
-  },
-  "STAT_DISA1_PWM_WERT": {
-    "L": "DISA1 PWM (large/upper flap)",
-    "S": "DISA1PWM"
-  },
-  "STAT_DISA2_PWM_WERT": {
-    "L": "DISA2 PWM (small/lower flap)",
-    "S": "DISA2PWM"
-  },
-  "STAT_BEHEIZTER_THERMOSTAT_PWM_WERT": {
-    "L": "Heated thermostat PWM",
-    "S": "HtdTstatPWM"
-  },
-  "STAT_0X5A76_WERT": {
-    "L": "Purge valve adaptation opening point",
-    "S": "TEVAdapt"
-  },
-  "STAT_TEV_PWM_WERT": {
-    "L": "Tank valve PWM",
-    "S": "TankVlvPWM"
-  },
-  "STAT_E_LUEFTER_PWM_WERT": {
-    "L": "Electric fan PWM [%]",
-    "S": "EFanPWM"
-  },
-  "STAT_VANOS_EINLASS_PWM_WERT": {
-    "L": "Inlet VANOS PWM",
-    "S": "InletVANOS"
-  },
-  "STAT_VANOS_AUSLASS_PWM_WERT": {
-    "L": "Outlet VANOS PWM",
-    "S": "OutletVANOS"
-  },
-  "STAT_INTEGRATOR_BANK1_WERT": {
-    "L": "Short-term fuel trim Bank 1",
-    "S": "STFT B1"
-  },
-  "STAT_INTEGRATOR_BANK2_WERT": {
-    "L": "Short-term fuel trim Bank 2",
-    "S": "STFT B2"
-  },
-  "STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT": {
-    "L": "LTFT multiplicative Bank 1",
-    "S": "LTFT mul. B1"
-  },
-  "STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT": {
-    "L": "LTFT multiplicative Bank 2",
-    "S": "LTFT mul. B2"
-  },
-  "STAT_0X5A89_WERT": {
-    "L": "LTFT multiplicative high load Bank 1",
-    "S": "MixAdHiB1"
-  },
-  "STAT_0X5A8A_WERT": {
-    "L": "LTFT multiplicative high load Bank 2",
-    "S": "MixAdHiB2"
-  },
-  "STAT_0X5A8B_WERT": {
-    "L": "LTFT multiplicative low load Bank 1",
-    "S": "MixAdLoB1"
-  },
-  "STAT_0X5A8C_WERT": {
-    "L": "LTFT multiplicative low load Bank 2",
-    "S": "MixAdLoB2"
-  },
-  "STAT_KRAFTSTOFFPUMPE_PWM_WERT": {
-    "L": "Fuel pump PWM",
-    "S": "FuelPmpPWM"
-  },
-  "STAT_VVT_WINKEL_AUSWAHL_WERT": {
-    "L": "VVT selected actual angle",
-    "S": "VVTSelAng"
-  },
-  "STAT_0X5AE0_WERT": {
-    "L": "Status-Byte für sicherheitsrelevante Informationen bezüglich atypischem Reset",
-    "S": "TM1"
-  },
-  "STAT_0X5AE1_WERT": {
-    "L": "98°C =< Kühlmitteltemperatur =< 112°C",
-    "S": "TM2"
-  },
-  "STAT_0X5AE2_WERT": {
-    "L": "Reset Information - Reset-group-ID of the last reset reason",
-    "S": "TM3"
-  },
-  "STAT_0X5AE3_WERT": {
-    "L": "Reset Information - Reset-ID of the last reset",
-    "S": "TM4"
-  },
-  "STAT_0X5AE4_WERT": {
-    "L": "Reset Information - User defined value of the last reset reason",
-    "S": "TM5"
-  },
-  "STAT_0X5AE5_WERT": {
-    "L": "Fahrstrecke bei Reset",
-    "S": "TO1"
-  },
-  "STAT_0X5AE6_WERT": {
-    "L": "Betriebsstundenzähler bei Reset",
-    "S": "TO2"
-  },
-  "STAT_0X5AE7_WERT": {
-    "L": "Maximale CPU-Last bei Reseterkennung",
-    "S": "TO3"
-  },
-  "STAT_0X5AE8_WERT": {
-    "L": "Geschwindigkeit bei maximaler CPU-Last bei Reseterkennung",
-    "S": "TO4"
-  },
-  "STAT_0X5AE9_WERT": {
-    "L": "Sicherheitsinformationen",
-    "S": "TO5"
-  },
-  "STAT_0X5AEA_WERT": {
-    "L": "Anzahl von atypischen Warm-Resets seit letzter Power-Up-Phase (BSW)",
-    "S": "WarmRstCnt"
-  },
-  "STAT_0X5AEB_WERT": {
-    "L": "Coolant temp < 98°C",
-    "S": "CoolTmpLo"
-  },
-  "STAT_0X5AEC_WERT": {
-    "L": "98°C =< Kuehlmitteltemperatur =< 112°C",
-    "S": "CoolTmpMd"
-  },
-  "STAT_0X5AED_WERT": {
-    "L": "113°C =< Kuehlmitteltemperatur =< 120°C",
-    "S": "CoolTmpHi"
-  },
-  "STAT_0X5AEE_WERT": {
-    "L": "121°C =< Kuehlmitteltemperatur =< 125°C",
-    "S": "CoolTmpVH"
-  },
-  "STAT_0X5AEF_WERT": {
-    "L": "Kuehlmitteltemperatur > 125°C",
-    "S": "CoolTmpCr"
-  },
-  "STAT_0X5AF0_WERT": {
-    "L": "Motor oil temp. < 80°C",
-    "S": "OilTmpLo"
-  },
-  "STAT_0X5AF1_WERT": {
-    "L": "80°C =< Motoroeltemperatur =< 110°C",
-    "S": "OilTmpMd"
-  },
-  "STAT_0X5AF2_WERT": {
-    "L": "110°C =< Motoroeltemperatur =< 135°C",
-    "S": "OilTmpHi"
-  },
-  "STAT_0X5AF3_WERT": {
-    "L": "135°C =< Motoroeltemperatur =< 150°C",
-    "S": "OilTmpVH"
-  },
-  "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL5_WERT": {
-    "L": "Segmentadaption Laufunruhe Cyl. 5",
-    "S": "RghAdpC5"
-  },
-  "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL3_WERT": {
-    "L": "Segmentadaption Laufunruhe Cyl. 3",
-    "S": "RghAdpC3"
-  },
-  "STAT_WASSERPUMPE_DREHZAHL_WERT": {
-    "L": "Waterpump RPM",
-    "S": "WaterPmpRPM"
-  },
-  "STAT_WASSERPUMPE_DREHZAHL_SOLL_WERT": {
-    "L": "BSS Waterpump target RPM",
-    "S": "BSS_Target_RPM"
-  },
-  "STAT_OELSTAND_LANGZEIT_MITTEL_WERT": {
-    "L": "Oil level long-term mean",
-    "S": "OilLvlLT"
-  },
-  "STAT_FUELLSTAND_MOTOROEL_KURZZEIT_WERT": {
-    "L": "Oil level short-term",
-    "S": "OilLvlShrt"
-  },
-  "STAT_KRAFTSTOFFVERBRAUCH_SEIT_SERVICE_WERT": {
-    "L": "Kraftstoff-Verbrauch seit letztem Service",
-    "S": "FuelSnSrv"
-  },
-  "STAT_OELSENSOR_NIVEAU_ROH_WERT": {
-    "L": "Oil sensor level raw value",
-    "S": "OilSnsLvRaw"
-  },
-  "STAT_OELSENSOR_QUALITAET_ROH_WERT": {
-    "L": "Oil sensor quality raw value",
-    "S": "OilSnsQRaw"
-  },
-  "STAT_OELSENSOR_TEMPERATUR_ROH_WERT": {
-    "L": "Oil sensor temperature raw value",
-    "S": "OilSnsTRaw"
-  },
-  "STAT_OELSENSOR_NIVEAU_WERT": {
-    "L": "Oil sensor level",
-    "S": "OilSnsLvl"
-  },
-  "STAT_OELSENSOR_QUALITAET_WERT": {
-    "L": "Oil sensor quality",
-    "S": "OilSnsQual"
-  },
-  "STAT_0X440B_WERT": {
-    "L": "Länderfaktor 1 codiert",
-    "S": "CntryFac1C"
-  },
-  "STAT_0X440C_WERT": {
-    "L": "Länderfaktor 2 codiert",
-    "S": "CntryFac2C"
-  },
-  "STAT_0X440D_WERT": {
-    "L": "Länderfaktor 1",
-    "S": "CntryFac1"
-  },
-  "STAT_0X440E_WERT": {
-    "L": "Länderfaktor 2",
-    "S": "CntryFac2"
-  },
-  "STAT_0X440F_WERT": {
-    "L": "Kurzmittelwert-Niveau für den Tester",
-    "S": "ShrtMeanLv"
-  },
-  "STAT_0X4412_WERT": {
-    "L": "Öl-Alter in Monate",
-    "S": "OilAgeMnth"
-  },
-  "STAT_0X4413_WERT": {
-    "L": "aufbereitete Permittivität bei letztem Ölwechsel",
-    "S": "PermitLstOC"
-  },
-  "STAT_0X4414_WERT": {
-    "L": "Permittivität für Bewertung aufbereitet (extrapoliert)",
-    "S": "PermitEval"
-  },
-  "STAT_0X4416_WERT": {
-    "L": "zugeteilte Bonuskraftstoffmenge",
-    "S": "BonusFuel"
-  },
-  "STAT_0X4417_WERT": {
-    "L": "zugeteilter Permittivitätsbonus",
-    "S": "OilQuality"
-  },
-  "STAT_GENERATOR_STROM_WERT": {
-    "L": "Generatorstrom",
-    "S": "GenCurr"
-  },
-  "STAT_GENERATOR_CHIPVERSION_WERT": {
-    "L": "Chipversion Generator 1",
-    "S": "GenChipVer"
-  },
-  "STAT_GENERATOR_REGLERVERSION_WERT": {
-    "L": "Reglerversion Generator 1",
-    "S": "GenRegVer"
-  },
-  "STAT_GENERATOR_HERSTELLERCODE_WERT": {
-    "L": "Herstellercode Generator 1",
-    "S": "GenMfgCode"
-  },
-  "STAT_GENERATOR_TYP_WERT": {
-    "L": "Kennung Generatortyp Generator 1",
-    "S": "GenType"
-  },
-  "STAT_UBATT_IBS_WERT": {
-    "L": "value von ubatt_w",
-    "S": "BattVltIBS"
-  },
-  "STAT_0X460E_WERT": {
-    "L": "Abstand zur Startfähigkeit",
-    "S": "Val460E"
-  },
-  "STAT_LAMBDA_BANK1_SOLL_WERT": {
-    "L": "Lambda target Bank 1",
-    "S": "Lambda B1 tgt"
-  },
-  "STAT_LAMBDA_BANK2_SOLL_WERT": {
-    "L": "Lambda target Bank 2",
-    "S": "Lambda B2 tgt"
-  },
-  "STAT_KLIMA_EIN": {
-    "L": "Condition for switching on the compressor",
-    "S": "ACOn"
-  },
-  "STAT_0X5816_WERT": {
-    "L": "Lambda target",
-    "S": "LBD_Tgt"
-  },
-  "STAT_DREHMOMENTEINGRIFF_CAN_WERT": {
-    "L": "Torque intervention via CAN",
-    "S": "TqIntrvCAN"
-  },
-  "STAT_0X582C_WERT": {
-    "L": "Lambda corrected",
-    "S": "LBD_Corr"
-  },
-  "STAT_0X582D_WERT": {
-    "L": "Lambda voltage correction pre-cat",
-    "S": "LBD_Volt_corr"
-  },
-  "STAT_0X582E_WERT": {
-    "L": "Lambdaamplitude nach Filterung",
-    "S": "Val582E"
-  },
-  "STAT_0X582F_WERT": {
-    "L": "EGT post-cat (model)",
-    "S": "EGT_post_cat"
-  },
-  "STAT_0X5830_WERT": {
-    "L": "Mittelwert der normierten Signalamplitude der Lambdasonde before cat. Bank 1",
-    "S": "Val5830"
-  },
-  "STAT_0X5831_WERT": {
-    "L": "Mittelwert der normierten Signalamplitude der Lambdasonde before cat. Bank 2",
-    "S": "Val5831"
-  },
-  "STAT_0X583D_WERT": {
-    "L": "Usage time",
-    "S": "UsageTime"
-  },
-  "STAT_0X5851_WERT": {
-    "L": "Voltage Ansauglufttemperatur",
-    "S": "Val5851"
-  },
-  "STAT_0X5865_WERT": {
-    "L": "Ölstand Mittelwert Langzeit",
-    "S": "Val5865"
-  },
-  "STAT_0X5866_WERT": {
-    "L": "Füllstand Motoröl",
-    "S": "Val5866"
-  },
-  "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL1_WERT": {
-    "L": "Quiescent consumers status part 1",
-    "S": "StdConsP1"
-  },
-  "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL2_WERT": {
-    "L": "Quiescent consumers status part 2",
-    "S": "StdConsP2"
-  },
-  "STAT_0X586A_WERT": {
-    "L": "Batteriespannung von IBS gemessen",
-    "S": "Val586A"
-  },
-  "STAT_ZAEHLER_ERKENNUNG_SCHLECHTE_STRASSE_WERT": {
-    "L": "Rough road detection counter",
-    "S": "RoughRdCnt"
-  },
-  "STAT_LAMBDA_SOLLWERT_GRUPPE1_WERT": {
-    "L": "Lambda target group 1",
-    "S": "LamTgtGp1"
-  },
-  "STAT_LAMBDA_SOLLWERT_GRUPPE2_WERT": {
-    "L": "Lambda target group 2",
-    "S": "LamTgtGp2"
-  },
-  "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT": {
-    "L": "Lambda shift feedback ctrl 1",
-    "S": "LamShftB1"
-  },
-  "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT": {
-    "L": "Lambda shift feedback ctrl 2",
-    "S": "LamShftB2"
-  },
-  "STAT_BERECHNETER_GANG_WERT": {
-    "L": "Ganginformation",
-    "S": "CalcGear"
-  },
-  "STAT_LAMBDA_ISTWERT_GRUPPE1_WERT": {
-    "L": "Lambda value group 1",
-    "S": "Lam grp1"
-  },
-  "STAT_LAMBDA_ISTWERT_GRUPPE2_WERT": {
-    "L": "Lambda value group 2",
-    "S": "Lam grp2"
-  },
-  "STAT_0X58A9_WERT": {
-    "L": "SLS-Status über CAN",
-    "S": "Val58A9"
-  },
-  "STAT_0X58AA_WERT": {
-    "L": "Korrekturfaktor höhe",
-    "S": "Val58AA"
-  },
-  "STAT_DK_ADAPTIONSSCHRITT_WERT": {
-    "L": "Throttle adaptation step",
-    "S": "ThrtAdpStp"
-  },
-  "STAT_0X58CE_WERT": {
-    "L": "Motortemperatur-Referenzwert from Modell",
-    "S": "Val58CE"
-  },
-  "STAT_0X58DB_WERT": {
-    "L": "Modelltemperatur im Kat",
-    "S": "Val58DB"
-  },
-  "STAT_0X58DC_WERT": {
-    "L": "Modelltemperatur im Kat Bank 2",
-    "S": "Val58DC"
-  },
-  "STAT_0X58E0_WERT": {
-    "L": "Abgleich DK-Modell (Faktor)",
-    "S": "Val58E0"
-  },
-  "STAT_0X58E2_WERT": {
-    "L": "Abgleich EV-Modell (Faktor)",
-    "S": "Val58E2"
-  },
-  "STAT_0X58EA_WERT": {
-    "L": "empf. Istdrehzahl von BSS-Wasserpumpe",
-    "S": "Val58EA"
-  },
-  "STAT_WASSERPUMPE_DREHZAHL_SOLL_IST_DIFFERENZ_WERT": {
-    "L": "Wasserpumpe Drehzahl Soll-Ist-Differenz",
-    "S": "WPmpRPMDev"
-  },
-  "STAT_0X58FA_WERT": {
-    "L": "Beladungsgrad Aktivkohlefilter TEV- Funktionstest",
-    "S": "Val58FA"
-  },
-  "STAT_ANSAUGLUFTTEMPERATUR_SPANNUNG_WERT": {
-    "L": "Voltage Ansauglufttemperatur",
-    "S": "IATVolt"
-  },
-  "STAT_KLOPFSIGNAL_ZYL1_RELATIV_WERT": {
-    "L": "Knock sensor signal Cylinder 1 relativ",
-    "S": "KnkRelC1"
-  },
-  "STAT_KLOPFSIGNAL_ZYL6_RELATIV_WERT": {
-    "L": "Knock sensor signal Cylinder 6 relativ",
-    "S": "KnkRelC6"
-  },
-  "STAT_LAMBDA_BANK1_WERT": {
-    "L": "Lambda pre-cat Bank 1",
-    "S": "Lambda B1"
-  },
-  "STAT_LAMBDA_BANK2_WERT": {
-    "L": "Lambda pre-cat Bank 2",
-    "S": "Lambda B2"
-  },
-  "STAT_0X5A87_WERT": {
-    "L": "Adaptionswert Trimregelung Bank 1",
-    "S": "Val5A87"
-  },
-  "STAT_0X5A88_WERT": {
-    "L": "Adaptionswert Trimregelung Bank 2",
-    "S": "Val5A88"
-  },
-  "STAT_0X5A91_WERT": {
-    "L": "Katalysatordiagnosewert Bank1",
-    "S": "Val5A91"
-  },
-  "STAT_0X5A92_WERT": {
-    "L": "Katalysatordiagnosewert Bank2",
-    "S": "Val5A92"
-  },
-  "STAT_0X5AC0_WERT": {
-    "L": "Verbrauch mit Regler",
-    "S": "Val5AC0"
-  },
-  "STAT_0X5AC1_WERT": {
-    "L": "Reset Status Software-Register",
-    "S": "Val5AC1"
-  },
-  "STAT_0X5AC2_WERT": {
-    "L": "Reset Information",
-    "S": "Val5AC2"
-  },
-  "STAT_0X5AC3_WERT": {
-    "L": "Schalthäufigkeitszähler Drosselklappe Enteisungsfunktion",
-    "S": "Val5AC3"
-  },
-  "STAT_LAMBDAREGELUNG_ZUSTAND_BANK1_WERT": {
-    "L": "Lambda control state Bank 1",
-    "S": "LamCtlStB1"
-  },
-  "STAT_LAMBDAREGELUNG_ZUSTAND_BANK2_WERT": {
-    "L": "Lambda control state Bank 2",
-    "S": "LamCtlStB2"
-  },
-  "STAT_MOTOR_STATUS_WERT": {
-    "L": "Engine coordinator state",
-    "S": "EngStatus"
-  },
-  "STAT_0X5837_WERT": {
-    "L": "Solldruck Hochdrucksystem",
-    "S": "Val5837"
-  },
-  "STAT_0X5838_WERT": {
-    "L": "Relative torque for misfire detection",
-    "S": "RelTrqMisDet"
-  },
-  "STAT_DROSSELKLAPPE_NOTLAUF_WERT": {
-    "L": "Throttle limp mode status",
-    "S": "ThrtLimp"
-  },
-  "STAT_FGR_WERT": {
-    "L": "Cruise control raw status",
-    "S": "CruiseCtrl"
-  },
-  "STAT_MOTORSTEUERUNG_WERT": {
-    "L": "Engine control status",
-    "S": "EngCtrl"
-  },
-  "STAT_0X587D_WERT": {
-    "L": "Winkel Excenterwelle raw value Führungssensor",
-    "S": "Val587D"
-  },
-  "STAT_0X587E_WERT": {
-    "L": "Winkel Excenterwelle raw value Referenzsensor",
-    "S": "Val587E"
-  },
-  "STAT_0X5894_WERT": {
-    "L": "Verstellbereich VVT-Führungssensor",
-    "S": "Val5894"
-  },
-  "STAT_0X5895_WERT": {
-    "L": "Verstellbereich VVT-Referenzsensor",
-    "S": "Val5895"
-  },
-  "STAT_0X589E_WERT": {
-    "L": "VVT Angle target",
-    "S": "VVTAngleTgt"
-  },
-  "STAT_0X58D9_WERT": {
-    "L": "Massenstrom Abgas vor Hauptkat",
-    "S": "Val58D9"
-  },
-  "STAT_0X58DA_WERT": {
-    "L": "Massenstrom Abgas vor Hauptkat Bank2",
-    "S": "Val58DA"
-  },
-  "STAT_0X58E4": {
-    "L": "Internal value 0x58E4",
-    "S": "Val58E4"
-  },
-  "STAT_DME_LOSNUMMER_WERT": {
-    "L": "DME - Losnummer",
-    "S": "DMELotNo"
-  },
-  "STAT_SONDENHEIZUNG_NACHKAT_BANK1_WERT": {
-    "L": "Status LS Heizung hinter Katalysator Bank 1",
-    "S": "LSHtStatNK1"
-  },
-  "STAT_SONDENHEIZUNG_NACHKAT_BANK2_WERT": {
-    "L": "Status LS Heizung hinter Katalysator Bank 2",
-    "S": "LSHtStatNK2"
-  },
-  "STAT_SONDENHEIZUNG_VORKAT_BANK1_WERT": {
-    "L": "Status LS Heizung before cat. Bank 1",
-    "S": "LSHtStatVK1"
-  },
-  "STAT_SONDENHEIZUNG_VORKAT_BANK2_WERT": {
-    "L": "Status LS Heizung before cat. Bank 2",
-    "S": "LSHtStatVK2"
-  },
-  "STAT_TASTE_FGR_EIN_WERT": {
-    "L": "Status Taste FGR",
-    "S": "CruiseBtn"
-  },
-  "STAT_SLS_DIAGNOSE_WERT": {
-    "L": "Status Diagnose TEV",
-    "S": "SLSDiag"
-  },
-  "STAT_TEV_DIAGNOSE_WERT": {
-    "L": "Function status counter DM-TL for tester output from last driving cycle [0-n]",
-    "S": "TEVDiag"
-  },
-  "STAT_DMTL_DIAGNOSE_WERT": {
-    "L": "Status Diagnose Lambdasonden",
-    "S": "DMTLDiag"
-  },
-  "STAT_LS_DIAGNOSE_WERT": {
-    "L": "Funktionsstatus LLRNS bei Anforderung Systemcheck",
-    "S": "LSDiag"
-  },
-  "STAT_0X5AA5_WERT": {
-    "L": "Status Diagnose Sekundärluft",
-    "S": "Val5AA5"
-  },
-  "STAT_0X5AA6_WERT": {
-    "L": "Status Diagnose VVT Anschläge lernen",
-    "S": "Val5AA6"
-  },
-  "STAT_0X4618_WERT": {
-    "L": "Kopie Drehzahlschwelle für LR-Funktion Generator 1 aktiv",
-    "S": "Val4618"
-  },
-  "STAT_SONDENBEREITSCHAFT_VORKAT_BANK1": {
-    "L": "Bedingung Sonde betriebsbereit vor Kat",
-    "S": "LSRdyVK1"
-  },
-  "STAT_SONDENBEREITSCHAFT_VORKAT_BANK2": {
-    "L": "Status Lambdasonde betriebsbereit before cat. Bank 2",
-    "S": "LSRdyVK2"
-  },
-  "STAT_KUPPLUNGSSCHALTER_BETAETIGT_WERT": {
-    "L": "Kupplungsschalter Status",
-    "S": "ClutchAct"
-  },
-  "STAT_KUPPLUNGSSCHALTER_VORHANDEN_WERT": {
-    "L": "Schalter Kupplung",
-    "S": "ClutchPrs"
-  },
-  "STAT_SPORTTASTER_BETAETIGT_WERT": {
-    "L": "Sporttaster aktiv",
-    "S": "SptBtnAct"
-  },
-  "STAT_SEKUNDAERLUFTPUMPE_WERT": {
-    "L": "Secondary air pump active [0/1]",
-    "S": "SecAirPmp"
-  },
-  "STAT_STARTRELAIS_UEBER_CAN_WERT": {
-    "L": "Schalter Klemme 50 von CAN",
-    "S": "StrtRelCAN"
-  },
-  "STAT_LEERLAUF_AKTIV": {
-    "L": "Bedingung Leerlaufregelung",
-    "S": "IdleActv"
-  },
-  "STAT_0X58C9_WERT": {
-    "L": "vvtmode",
-    "S": "Val58C9"
-  },
-  "STAT_STATUS_KLOPFEN_WERT": {
-    "L": "Status Klopfen",
-    "S": "KnockStat"
-  },
-  "STAT_KLIMAKOMPRESSORRELAIS_EIN": {
-    "L": "Klimakompressorrelais Ein",
-    "S": "ACRelay"
-  },
-  "STAT_VVT_ENTLASTUNGSRELAIS_EIN_WERT": {
-    "L": "VVT relief relay active",
-    "S": "VVTRelay"
-  },
-  "STAT_READINESS_SONDE_NACHKAT_BANK1_WERT": {
-    "L": "Status LS hinter Katalysator Bank 1",
-    "S": "RdyNK1"
-  },
-  "STAT_READINESS_SONDE_NACHKAT_BANK2_WERT": {
-    "L": "Status LS hinter Katalysator Bank 2",
-    "S": "RdyNK2"
-  },
-  "STAT_BREMSLICHTSCHALTER_EIN_WERT": {
-    "L": "Rohwert Bremskontakt nicht entprellt",
-    "S": "BrkSwRaw"
-  },
-  "STAT_BREMSLICHTTESTSCHALTER_EIN_WERT": {
-    "L": "Rohwert redundanter Bremskontakt nicht entprellt",
-    "S": "BrkTstSw"
-  },
-  "STAT_OELDRUCKSCHALTER_EIN_WERT": {
-    "L": "Output signal oil pressure switch [0/1]",
-    "S": "OilPrsSw"
-  },
-  "STAT_E_BOXLUEFTER_EIN_WERT": {
-    "L": "E-Box fan ON [0/1]",
-    "S": "EBoxFan"
-  },
-  "STAT_0X5A64_WERT": {
-    "L": "Internal value 0x5A64",
-    "S": "Val5A64"
-  },
-  "STAT_ABGASKLAPPE_EIN_WERT": {
-    "L": "Bedingung Abgasklappe mit Resonator",
-    "S": "ExhVlvOn"
-  },
-  "STAT_DMTL_PUMPE_EIN_WERT": {
-    "L": "Bedingung DMTL-Pumpenmotor an",
-    "S": "DMTLPump"
-  },
-  "STAT_DMTL_VENTIL_EIN_WERT": {
-    "L": "Bedingung DMTL-Magnetventil an",
-    "S": "DMTLValve"
-  },
-  "STAT_DMTL_HEIZUNG_EIN_WERT": {
-    "L": "Bedingung Heizung DM-TL Portansteuerung",
-    "S": "DMTLHeat"
-  },
-  "STAT_MIL_EIN_WERT": {
-    "L": "DSM Mil Anforderungsstatus (1 = kontinuierlich, 2 blinkend)",
-    "S": "MILOn"
-  },
-  "STAT_LAMPE_FGR_EIN_WERT": {
-    "L": "Status of the CrCtl lamp (sent via CAN) [0/1]",
-    "S": "CruiseLamp"
-  },
-  "STAT_CHECK_ENGINE_LAMPE_EIN_WERT": {
-    "L": "Lampe Check Engine Ein",
-    "S": "CEL"
-  },
-  "STAT_SOUNDKLAPPE_PWM_WERT": {
-    "L": "Soundklappe Zustand",
-    "S": "SndFlapPWM"
-  },
-  "STAT_0X5A73_WERT": {
-    "L": "Internal value 0x5A73",
-    "S": "Val5A73"
-  },
-  "STAT_SEKUNDAERLUFT_VENTIL_PWM_WERT": {
-    "L": "Secondary air valve [0/1]",
-    "S": "SecAirVPWM"
-  },
-  "STAT_ABGASKLAPPE_ANSTEUERUNG_WERT": {
-    "L": "Bedingung Abgasklappe mit Resonator",
-    "S": "ExhVlvCtrl"
-  },
-  "STAT_0X5A97_WERT": {
-    "L": "Bedingung EVANOS im Anschlag beim letzten Abstellen",
-    "S": "Val5A97"
-  },
-  "STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT": {
-    "L": "Crankshaft adaptation done",
-    "S": "CrkAdpDone"
-  },
-  "STAT_VARIANTE_SEKUNDAERLUFTPUMPE_WERT": {
-    "L": "Secondary air pump variant",
-    "S": "SecAirVar"
-  },
-  "STAT_STARTRELAIS_AKTIV_WERT": {
-    "L": "Auto-start relay active",
-    "S": "StrtRelay"
-  },
-  "STAT_WASSERPUMPE_STROM_WERT": {
-    "L": "Current from waterpump",
-    "S": "CurrWP"
-  },
-  "STAT_0X4612_WERT": {
-    "L": "Erregerstrom Generator 1",
-    "S": "Val4612"
-  },
-  "STAT_0X4615_WERT": {
-    "L": "Kopie begrenzter Erregerstrom Generator 1",
-    "S": "Val4615"
-  },
-  "STAT_VVT_MOTORSTROM_WERT": {
-    "L": "Current for VVT actuator [A]",
-    "S": "VVTMotCurr"
-  },
-  "STAT_0X58ED_WERT": {
-    "L": "Voltage DK Poti 1 am unteren Anschlag",
-    "S": "Val58ED"
-  },
-  "RESULTNAME": {
-    "L": "INFO",
-    "S": ""
-  },
-  "STAT_VVT_EXCENTER_WERT": {
-    "L": "VVT-Excenter Istwert",
-    "S": "VVTExcAct"
-  },
-  "STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT": {
-    "L": "Mechanischer Verstellbereich VVT from Lernroutine",
-    "S": "VVTRngLearn"
-  },
-  "STAT_VVT_LAGEREGLER_SOLL_VON_TESTER_WERT": {
-    "L": "Sollwert Einlassspreizung",
-    "S": "VVTPosCtTst"
-  },
-  "STAT_0X4617_WERT": {
-    "L": "gefiltertes Generatormoment absolut",
-    "S": "Val4617"
-  },
-  "STAT_MOMENTANFORDERUNG_KUPPLUNG_WERT": {
-    "L": "Torque request from clutch",
-    "S": "TqReqCltch"
-  },
-  "STAT_DREHMOMENTABFALL_BEIM_GANGWECHSEL_WERT": {
-    "L": "Torque drop on gear change",
-    "S": "TqDropGear"
-  },
-  "STAT_0X58C8_WERT": {
-    "L": "geforderte Drehmomentänderung von der LLR (I-Anteil)",
-    "S": "Val58C8"
-  },
-  "STAT_0X58CA_WERT": {
-    "L": "PD-Anteil langsam Leerlaufregelung",
-    "S": "Val58CA"
-  },
-  "STAT_0X58CB_WERT": {
-    "L": "PD-Anteil schnell Leerlaufregelung",
-    "S": "Val58CB"
-  },
-  "STAT_0X58CC_WERT": {
-    "L": "Verlustmoment Überwachung",
-    "S": "Val58CC"
-  },
-  "STAT_0X58CD_WERT": {
-    "L": "Berechnete Wicklungstemperatur der Sekundärluftpumpe",
-    "S": "Val58CD"
-  },
-  "STAT_MOTORMOMENT_SOLL_WERT": {
-    "L": "Engine torque target",
-    "S": "EngTrqTgt"
-  },
-  "STAT_MOTORMOMENT_IST_WERT": {
-    "L": "Engine torque",
-    "S": "EngTrq"
-  },
-  "STAT_MOTORMOMENT_AKTUELL_WERT": {
-    "L": "engine torque output",
-    "S": "EngTqAct"
-  },
-  "STAT_0X58D4_WERT": {
-    "L": "Startbedingung Kraftschluss erfüllt",
-    "S": "Val58D4"
-  },
-  "STAT_0X58D6_WERT": {
-    "L": "Transition Time O2Sensor Lean2Rich (Sensor2)",
-    "S": "Val58D6"
-  },
-  "STAT_GENERATOR_SPANNUNG_BSD_SOLL_WERT": {
-    "L": "Generator target voltage via BSD [V]",
-    "S": "GenVltBSD"
-  },
-  "STAT_KL87_SPANNUNG_WERT": {
-    "L": "Kl.87 Spannung / Versorgung DME",
-    "S": "KL87Volt"
-  },
-  "STAT_UBATT_WERT": {
-    "L": "Battery voltage",
-    "S": "BattVolt"
-  },
-  "STAT_UBATT_AD_WANDLER_WERT": {
-    "L": "Batteriespannung vom AD-Wandler DME",
-    "S": "BattVltADC"
-  },
-  "STAT_0X4613_WERT": {
-    "L": "Kopierter value von zum Generator gesendeter Sollspannung Generator 1",
-    "S": "Val4613"
-  },
-  "STAT_0X5815_WERT": {
-    "L": "Batteriespannung",
-    "S": "Val5815"
-  },
-  "STAT_0X583C_WERT": {
-    "L": "Voltage Kl. 87",
-    "S": "Val583C"
-  },
-  "STAT_STEUERGERAETE_INNENTEMPERATUR_ROH_WERT": {
-    "L": "Control unit temperature raw value [V]",
-    "S": "ECUTmpRaw"
-  },
-  "STAT_0X5843_WERT": {
-    "L": "Korrekturwert der Lambdasondespannung before cat. Bank 2",
-    "S": "Val5843"
-  },
-  "STAT_0X5845_WERT": {
-    "L": "Lambda voltage pre-cat Bank1",
-    "S": "LBD_Volt_precat_1"
-  },
-  "STAT_0X5846_WERT": {
-    "L": "Voltage Pedalwertgeber 1",
-    "S": "Val5846"
-  },
-  "STAT_0X5847_WERT": {
-    "L": "Voltage Pedalwertgeber 2",
-    "S": "Val5847"
-  },
-  "STAT_0X5848_WERT": {
-    "L": "Lambda voltage pre-cat Bank2",
-    "S": "LBD_Volt_precat_2"
-  },
-  "STAT_0X5849_WERT": {
-    "L": "Lambda voltage post-cat Bank1",
-    "S": "LBD_Volt_postcat_1"
-  },
-  "STAT_KL15_SPANNUNG_ROH_WERT": {
-    "L": "Voltage Kl. 15 Rohwert",
-    "S": "KL15VltRaw"
-  },
-  "STAT_0X584B_WERT": {
-    "L": "Lambda voltage post-cat Bank1",
-    "S": "LBD_Volt_postcat_2"
-  },
-  "STAT_0X584C_WERT": {
-    "L": "Voltage Drosselklappe Potentiometer 2",
-    "S": "Val584C"
-  },
-  "STAT_0X584E_WERT": {
-    "L": "Voltage Drosselklappe Potentiometer 1",
-    "S": "Val584E"
-  },
-  "STAT_0X584F_WERT": {
-    "L": "Erkennung Bordnetzinstabilität",
-    "S": "Val584F"
-  },
-  "STAT_0X5850_WERT": {
-    "L": "Voltage Motortemperatur",
-    "S": "Val5850"
-  },
-  "STAT_0X5852_WERT": {
-    "L": "Kühlmitteltemperatur Kühlerausgang Rohwert",
-    "S": "Val5852"
-  },
-  "STAT_0X5853_WERT": {
-    "L": "Voltage Kl.87 Rohwert",
-    "S": "Val5853"
-  },
-  "STAT_0X5854_WERT": {
-    "L": "Batterietemperatur vom IBS",
-    "S": "Val5854"
-  },
-  "STAT_0X5870_WERT": {
-    "L": "Voltage DME Umgebungsdruck",
-    "S": "Val5870"
-  },
-  "STAT_0X5874_WERT": {
-    "L": "ADC-Spannung Pumpenstrom Tankdiagnose",
-    "S": "Val5874"
-  },
-  "STAT_0X5883_WERT": {
-    "L": "Voltage Klopfwerte Cylinder 1",
-    "S": "Val5883"
-  },
-  "STAT_0X5885_WERT": {
-    "L": "Voltage Klopfwerte Cylinder 3",
-    "S": "Val5885"
-  },
-  "STAT_0X5886_WERT": {
-    "L": "[3] Referenzpegel Klopfregelung, 16bit",
-    "S": "Val5886"
-  },
-  "STAT_0X5888_WERT": {
-    "L": "Voltage Klopfwerte Cylinder 4",
-    "S": "Val5888"
-  },
-  "STAT_GENERATOR_SPANNUNG_SOLL_WERT": {
-    "L": "Generator Sollspannung",
-    "S": "GenVltTgt"
-  },
-  "STAT_SPANNUNGSOFFSET_SIGNALPFAD1_WERT": {
-    "L": "Voltagesoffset Signalpfad CJ120 1",
-    "S": "VltOffSP1"
-  },
-  "STAT_SPANNUNGSOFFSET_SIGNALPFAD2_WERT": {
-    "L": "Voltagesoffset Signalpfad CJ120 2",
-    "S": "VltOffSP2"
-  },
-  "STAT_VVT_SPANNUNGSVERSORGUNG_WERT": {
-    "L": "VVT Spannungsversorgung",
-    "S": "VVTPwrVlt"
-  },
-  "STAT_VVT_SENSORVERSORGUNGSSPANNUNG_WERT": {
-    "L": "VVT sensor supply voltage",
-    "S": "VVTSnsVlt"
-  },
-  "STAT_SPORTSCHALTER_SPANNUNG_WERT": {
-    "L": "Voltage Sportschalter",
-    "S": "SptSwVolt"
-  },
-  "STAT_WASSERPUMPE_SPANNUNG_WERT": {
-    "L": "empf. Spannung von BSS-Wasserpumpe",
-    "S": "WPmpVolt"
-  },
-  "STAT_0X58F5_WERT": {
-    "L": "Eingangssignal Rückführregler 1",
-    "S": "Val58F5"
-  },
-  "STAT_0X58F6_WERT": {
-    "L": "Eingangssignal Rückführregler 2",
-    "S": "Val58F6"
-  },
-  "STAT_PWG1_VERSORGUNGSSPANNUNG_WERT": {
-    "L": "Versorgung Fahrwertgeber 1",
-    "S": "APP1SupVlt"
-  },
-  "STAT_PWG2_VERSORGUNGSSPANNUNG_WERT": {
-    "L": "Versorgung Fahrwertgeber 2",
-    "S": "APP2SupVlt"
-  },
-  "STAT_VVT_VERSORGUNGSSPANNUNG_ROH_WERT": {
-    "L": "VVT supply voltage raw value",
-    "S": "VVTVltRaw"
-  },
-  "STAT_VVT_VERSORGUNGSSPANNUNG_WERT": {
-    "L": "VVT supply voltage",
-    "S": "VVTVolt"
-  },
-  "STAT_PWG1_SPANNUNG_WERT": {
-    "L": "Pedal 1 Position Voltage",
-    "S": "Pedal1_pos"
-  },
-  "STAT_PWG2_SPANNUNG_WERT": {
-    "L": "Pedal 2 Position Voltage",
-    "S": "Pedal2_pos"
-  },
-  "STAT_DK1_SPANNUNG_WERT": {
-    "L": "Throttle 1 pos. voltage",
-    "S": "Thr1PosVolt"
-  },
-  "STAT_DK2_SPANNUNG_WERT": {
-    "L": "Throttle 2 pos. voltage",
-    "S": "Thr2PosVolt"
-  },
-  "STAT_KUEHLMITTELTEMPERATUR_SPANNUNG_WERT": {
-    "L": "Voltage Motortemperatur",
-    "S": "CoolTmpVlt"
-  },
-  "STAT_KUEHLERAUSLASSTEMPERATUR_SPANNUNG_WERT": {
-    "L": "Voltage, coolant temperature, radiator outlet [V]",
-    "S": "RadOutVlt"
-  },
-  "STAT_UMGEBUNGSDRUCK_SPANNUNG_WERT": {
-    "L": "Atmospheric pressure sensor voltage",
-    "S": "AtmPresVlt"
-  },
-  "STAT_LUFTMASSE_SPANNUNG_WERT": {
-    "L": "Air mass sensor voltage",
-    "S": "MAFVolt"
-  },
-  "STAT_SEKUNDAERLUFT_SPANNUNG_WERT": {
-    "L": "Voltage secondary air [V]",
-    "S": "SecAirVlt"
-  },
-  "STAT_STEUERGERAETE_INNENTEMPERATUR_SPANNUNG_WERT": {
-    "L": "Voltage SG-Innentemperatur",
-    "S": "ECUTmpVlt"
-  },
-  "STAT_0X5A0F_WERT": {
-    "L": "Voltage Kl.15",
-    "S": "Val5A0F"
-  },
-  "STAT_KL15_SPANNUNG_WERT": {
-    "L": "Lastsignal SPG",
-    "S": "KL15Volt"
-  },
-  "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT": {
-    "L": "Lambda probe voltage pre-cat Bank 1",
-    "S": "Lam-V B1"
-  },
-  "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT": {
-    "L": "Lambda probe voltage pre-cat Bank 2",
-    "S": "Lam-V B2"
-  },
-  "STAT_SONDENSPANNUNG_NACHKAT_BANK1_WERT": {
-    "L": "Lambda probe voltage post-cat Bank 1",
-    "S": "Lam-V NK1"
-  },
-  "STAT_SONDENSPANNUNG_NACHKAT_BANK2_WERT": {
-    "L": "Lambda probe voltage post-cat Bank 2",
-    "S": "Lam-V NK2"
-  },
-  "STAT_DMTL_SPANNUNG_WERT": {
-    "L": "Voltage Pumpenstrom Tankdiagnose",
-    "S": "DMTLVolt"
-  },
-  "STAT_KLOPFWERT_ZYL1_SPANNUNG_WERT": {
-    "L": "Knock voltage Cylinder 1",
-    "S": "KnockVoltCyl1"
-  },
-  "STAT_KLOPFWERT_ZYL2_SPANNUNG_WERT": {
-    "L": "Knock voltage Cylinder 2",
-    "S": "KnockVoltCyl2"
-  },
-  "STAT_KLOPFWERT_ZYL3_SPANNUNG_WERT": {
-    "L": "Knock voltage Cylinder 3",
-    "S": "KnockVoltCyl3"
-  },
-  "STAT_KLOPFWERT_ZYL4_SPANNUNG_WERT": {
-    "L": "Knock voltage Cylinder 4",
-    "S": "KnockVoltCyl4"
-  },
-  "STAT_KLOPFWERT_ZYL5_SPANNUNG_WERT": {
-    "L": "Knock voltage Cylinder 5",
-    "S": "KnockVoltCyl5"
-  },
-  "STAT_KLOPFWERT_ZYL6_SPANNUNG_WERT": {
-    "L": "Knock voltage Cylinder 6",
-    "S": "KnockVoltCyl6"
-  },
-  "STAT_KLOPFSIGNAL_ZYL1_WERT": {
-    "L": "Knock sensor signal Cylinder 1",
-    "S": "KnkSigC1"
-  },
-  "STAT_KLOPFSIGNAL_ZYL6_WERT": {
-    "L": "Knock sensor signal Cylinder 6",
-    "S": "KnkSigC6"
-  },
-  "STAT_SAUGROHRDRUCK_SPANNUNG_WERT": {
-    "L": "Intake manifold pressure voltage",
-    "S": "MAPVolt"
-  },
-  "STAT_BREMSDRUCK_WERT": {
-    "L": "Brake pressure",
-    "S": "BrkPress"
-  },
-  "STAT_0X58FB_WERT": {
-    "L": "Zähler Drehzahlerhöhungen TEV- Funktionstest",
-    "S": "Val58FB"
-  },
-  "STAT_LUFTMASSE_GRAMM_PRO_SEKUNDE_WERT": {
-    "L": "relative Air mass (calc. load value) nach SAE J1979",
-    "S": "MAFgps"
-  },
-  "STAT_BETRIEBSSTUNDENZAEHLER_WERT": {
-    "L": "Ergebnis",
-    "S": "OpHours"
-  },
-  "STAT_0X4201_WERT": {
-    "L": "Athmosperic pressure",
-    "S": "AtmPress"
-  },
-  "STAT_SAUGROHRDRUCK_WERT": {
-    "L": "Intake manifold pressure",
-    "S": "MAP"
-  },
-  "STAT_LADEDRUCK_WERT": {
-    "L": "Boost pressure",
-    "S": "BoostPrs"
-  },
-  "STAT_0X5834_WERT": {
-    "L": "Athmospecic press",
-    "S": "AtmPress"
-  },
-  "STAT_0X5A26_WERT": {
-    "L": "Saugrohrdruck",
-    "S": "Val5A26"
-  },
-  "STAT_0X5801_WERT": {
-    "L": "Athmosperic pressure",
-    "S": "Val5801"
-  },
-  "STAT_KRAFTSTOFFDRUCK_WERT": {
-    "L": "Fuel pressure",
-    "S": "Fuel pres."
-  },
-  "STAT_SAUGROHRDRUCK_2_WERT": {
-    "L": "Saugrohrdruck",
-    "S": "MAP2"
-  },
-  "STAT_LUFTMASSE_WERT": {
-    "L": "Air mass",
-    "S": "AirMass"
-  },
-  "STAT_0X5812_WERT": {
-    "L": "Air mass gemessen",
-    "S": "Val5812"
-  },
-  "STAT_TANKENTLUEFTUNG_DURCHFLUSS_SOLL_WERT": {
-    "L": "Tank ventilation air flow target in intake manifold",
-    "S": "TankVentAFT"
-  },
-  "STAT_LUFTMASSE_MITTLERE_MINIMALE_WERT": {
-    "L": "Mittlere Diagnosewert minimale Air mass",
-    "S": "MAFMeanMin"
-  },
-  "STAT_DIFFERENZ_MAX_MIN_SAF_WERT": {
-    "L": "Differenz zwischen Maximum und Minimum SAF",
-    "S": "SAFMaxMin"
-  },
-  "STAT_0X58E1_WERT": {
-    "L": "Abgleich DK-Modell (Offset)",
-    "S": "Val58E1"
-  },
-  "STAT_0X58E3_WERT": {
-    "L": "Abgleich EV-Modell (Offset)",
-    "S": "Val58E3"
-  },
-  "STAT_LUFTMASSE_SEKUNDAERLUFT_WERT": {
-    "L": "Secondary air mass flow",
-    "S": "SecAirMas"
-  },
-  "STAT_WEG_SEIT_SERVICE_WERT": {
-    "L": "KM reading since last service",
-    "S": "KMSinSrvc"
-  },
-  "STAT_0X4410_WERT": {
-    "L": "Restweg from Permittivität abgeleitet",
-    "S": "RemPermitv"
-  },
-  "STAT_0X4411_WERT": {
-    "L": "Restweg from Kraftstoffverbrauch abgeleitet",
-    "S": "RemFuelCns"
-  },
-  "STAT_KILOMETERSTAND_WERT": {
-    "L": "Odometer reading",
-    "S": "Odometer2"
-  },
-  "STAT_0X5867_WERT": {
-    "L": "Kilometer reading",
-    "S": "Val5867"
-  },
-  "STAT_FAHRSTRECKE_MIL_AN_WERT": {
-    "L": "Odometer for kilometers driven with MIL ON [km]",
-    "S": "DistMILOn"
-  },
-  "STAT_GESCHWINDIGKEIT_2_WERT": {
-    "L": "Speed",
-    "S": "Speed"
-  },
-  "STAT_GESCHWINDIGKEIT_WERT": {
-    "L": "Vehicle Speed",
-    "S": "Speed"
-  },
-  "STAT_KRAFTSTOFFTANK_FUELLSTAND_WERT": {
-    "L": "Tank filling status",
-    "S": "TankStatus"
-  },
-  "STAT_KRAFTSTOFF_ANFORDERUNG_AN_PUMPE_WERT": {
-    "L": "EKP-Sollvolumenstrom",
-    "S": "FuelPmpReq"
-  },
-  "STAT_0X5859_WERT": {
-    "L": "DMTL Strom Referenzleck",
-    "S": "Val5859"
-  },
-  "STAT_0X585A_WERT": {
-    "L": "DMTL Strom Grobleck",
-    "S": "Val585A"
-  },
-  "STAT_0X585B_WERT": {
-    "L": "Pumpenstrom am Ende der Feinstleckmessung",
-    "S": "Val585B"
-  },
-  "STAT_PUMPENSTROM_BEI_DMTL_PUMPENPRUEFUNG_WERT": {
-    "L": "Pumpenstrom Tankdiagnose",
-    "S": "DMTLPmpCur"
-  },
-  "STAT_LUFTMASSE_PRO_HUB_WERT": {
-    "L": "Air mass per Cylinder",
-    "S": "MAFperStk"
-  },
-  "STAT_ABWEICHUNG_DK_POTI1_WERT": {
-    "L": "Throttle potentiometer 1 deviation",
-    "S": "ThrtDev1"
-  },
-  "STAT_ABWEICHUNG_DK_POTI2_WERT": {
-    "L": "Throttle potentiometer 2 deviation",
-    "S": "ThrtDev2"
-  },
-  "STAT_0X58BC_WERT": {
-    "L": "Relative air filling",
-    "S": "Val58BC"
-  },
-  "STAT_0X58BD_WERT": {
-    "L": "relativer Füllstand Kraftstofftank",
-    "S": "Val58BD"
-  },
-  "STAT_ADAPTION_ADDITIV_BANK1_WERT": {
-    "L": "LTFT additive Bank 1",
-    "S": "LTFT add. B1"
-  },
-  "STAT_ADAPTION_ADDITIV_BANK2_WERT": {
-    "L": "LTFT additive Bank 2",
-    "S": "LTFT add. B2"
-  },
-  "STAT_0X5A8D_WERT": {
-    "L": "LTFT additive idle Bank 1",
-    "S": "Val5A8D"
-  },
-  "STAT_0X5A8E_WERT": {
-    "L": "LTFT additive idle Bank 2",
-    "S": "Val5A8E"
-  },
-  "STAT_ZEIT_MOTOR_STEHT_WERT": {
-    "L": "Abstellzeit",
-    "S": "EngOffTm"
-  },
-  "STAT_0X5825_WERT": {
-    "L": "Abstellzeit",
-    "S": "Val5825"
-  },
-  "STAT_ZEIT_MIT_RUHESTROM_80_200_WERT": {
-    "L": "Zeit mit Ruhestrom 80 - 200 mA",
-    "S": "IdleCur80"
-  },
-  "STAT_ZEIT_MIT_RUHESTROM_200_1000_WERT": {
-    "L": "Zeit mit Ruhestrom 200 - 1000 mA",
-    "S": "IdleCur200"
-  },
-  "STAT_ZEIT_MIT_RUHESTROM_GROESER_1000_WERT": {
-    "L": "Time with quiescent current greater than 1000 mA [min]",
-    "S": "IdleCur1k"
-  },
-  "STAT_MOTORABSTELLZEIT_WERT": {
-    "L": "Engine shutdown time",
-    "S": "EngOffTm2"
-  },
-  "STAT_FUNKENBRENNDAUER_ZYL1_WERT": {
-    "L": "Spark burn duration Cylinder 1",
-    "S": "SprkDur1"
-  },
-  "STAT_FUNKENBRENNDAUER_ZYL5_WERT": {
-    "L": "Spark burn duration Cylinder 5",
-    "S": "SprkDur5"
-  },
-  "STAT_FUNKENBRENNDAUER_ZYL3_WERT": {
-    "L": "Spark burn duration Cylinder 3",
-    "S": "SprkDur3"
-  },
-  "STAT_FUNKENBRENNDAUER_ZYL6_WERT": {
-    "L": "Spark burn duration Cylinder 6",
-    "S": "SprkDur6"
-  },
-  "STAT_FUNKENBRENNDAUER_ZYL2_WERT": {
-    "L": "Spark burn duration Cylinder 2",
-    "S": "SprkDur2"
-  },
-  "STAT_FUNKENBRENNDAUER_ZYL4_WERT": {
-    "L": "Spark burn duration Cylinder 4",
-    "S": "SprkDur4"
-  },
-  "STAT_EINSPRITZZEIT_ZYL1_WERT": {
-    "L": "Injection time Cylinder 1",
-    "S": "InjTmCyl1"
-  },
-  "STAT_EINSPRITZZEIT_ZYL2_WERT": {
-    "L": "Injection time Cylinder 2",
-    "S": "InjTmCyl2"
-  },
-  "STAT_EINSPRITZZEIT_ZYL3_WERT": {
-    "L": "Injection time Cylinder 3",
-    "S": "InjTmCyl3"
-  },
-  "STAT_EINSPRITZZEIT_ZYL4_WERT": {
-    "L": "Injection time Cylinder 4",
-    "S": "InjTmCyl4"
-  },
-  "STAT_EINSPRITZZEIT_ZYL5_WERT": {
-    "L": "Injection time Cylinder 5",
-    "S": "InjTmCyl5"
-  },
-  "STAT_EINSPRITZZEIT_ZYL6_WERT": {
-    "L": "Injection time Cylinder 6",
-    "S": "InjTmCyl6"
-  },
-  "STAT_0X585C_WERT": {
-    "L": "Widerstand Lambdasonde hinter Katalysator Bank 1",
-    "S": "Val585C"
-  },
-  "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_WERT": {
-    "L": "Widerstand Lambdasonde hinter Katalysator Bank 2",
-    "S": "LSResNK2"
-  },
-  "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT1_UNTERES_BYTE_WERT": {
-    "L": "unteres Byte Widerstand Lambdasonde hinter Katalysator Bank 1",
-    "S": "LSResNK1Lo"
-  },
-  "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_UNTERES_BYTE_WERT": {
-    "L": "unteres Byte Widerstand Lambdasonde hinter Katalysator Bank 2",
-    "S": "LSResNK2Lo"
-  },
-  "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_WERT": {
-    "L": "Widerstand Lambdasonde before cat. Bank 1",
-    "S": "LSResVK1"
-  },
-  "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_WERT": {
-    "L": "Widerstand Lambdasonde before cat. Bank 2",
-    "S": "LSResVK2"
-  },
-  "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_UNTERES_BYTE_WERT": {
-    "L": "untere Byte Widerstand Lambdasonde before cat. Bank 1",
-    "S": "LSResVK1Lo"
-  },
-  "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_UNTERES_BYTE_WERT": {
-    "L": "untere Byte Widerstand Lambdasonde before cat. Bank 2",
-    "S": "LSResVK2Lo"
-  },
-  "STAT_MOTORDREHZAHL_WERT": {
-    "L": "RPM",
-    "S": "RPM"
-  },
-  "STAT_LEERLAUFDREHZAHL_SOLL_WERT": {
-    "L": "Idle target RPM",
-    "S": "Idle tgt RPM"
-  },
-  "STAT_N_AUFLOESUNG_WERT": {
-    "L": "RPM",
-    "S": "RPM"
-  },
-  "STAT_MOTORDREHZAHL_N32_WERT": {
-    "L": "Engine RPM",
-    "S": "RPMN32"
-  },
-  "STAT_0X5819_WERT": {
-    "L": "Motor RPM",
-    "S": "MotorRPM"
-  },
-  "STAT_0X583E_WERT": {
-    "L": "Sollwert Drosselklappenwinkel der Notluftposition",
-    "S": "Val583E"
-  },
-  "STAT_0X58B8_WERT": {
-    "L": "Drehzahl Überwachung",
-    "S": "Val58B8"
-  },
-  "STAT_0X58C0_WERT": {
-    "L": "Abgasmassenstrom ohne Kraftstoffanteil Bank2",
-    "S": "Val58C0"
-  },
-  "STAT_LEERLAUF_SOLLDREHZAHLABWEICHUNG_WERT": {
-    "L": "Idle target RPM deviation monitor",
-    "S": "IdleRPMDev"
-  },
-  "STAT_DREHZAHL_MAXIMAL_BEI_ZUENDAUSSETZER_WERT": {
-    "L": "Maximum engine speed during misfires [rpm]",
-    "S": "MaxRPMMisf"
-  },
-  "STAT_DREHZAHL_MINIMAL_BEI_ZUENDAUSSETZER_WERT": {
-    "L": "Minimum engine speed during misfires [rpm]",
-    "S": "MinRPMMisf"
-  },
-  "STAT_DREHZAHLGRADIENT_WERT": {
-    "L": "Drehzahlgradient",
-    "S": "RPMGrad"
-  },
-  "STAT_0X4616_WERT": {
-    "L": "Kopie Generator 1 LR Vorgabe auf Bus gelegt",
-    "S": "Val4616"
-  },
-  "STAT_0X5800_WERT": {
-    "L": "Zeit nach Start",
-    "S": "TmAftrSrt"
-  },
-  "STAT_ZEIT_SEIT_STARTENDE_WERT": {
-    "L": "Zeit seit Startende",
-    "S": "TmSinStart"
-  },
-  "STAT_ZEIT_DMTL_LECKMESSUNG_WERT": {
-    "L": "aktuelle Zeit Leckmessung",
-    "S": "DMTLLkTm"
-  },
-  "STAT_VVT_EXCENTER_SOLL_WERT": {
-    "L": "VVT-Excenter Sollwert",
-    "S": "VVTExcTgt"
-  },
-  "STAT_VVT_LAGEREGLER_SOLL_WERT": {
-    "L": "Target value for position controller from the tester [°]",
-    "S": "VVTPosCtTgt"
-  },
-  "STAT_VVT_ISTWINKEL_WERT": {
-    "L": "VVT actual angle",
-    "S": "VVTActAng"
-  },
-  "STAT_VVT_SENSORDIFFERENZ_WERT": {
-    "L": "VVT sensor difference",
-    "S": "VVTSnsDif"
-  },
-  "STAT_ANSAUGLUFTTEMPERATUR_WERT": {
-    "L": "Air intake temperature",
-    "S": "IATemp"
-  },
-  "STAT_UMGEBUNGSTEMPERATUR_WERT": {
-    "L": "Result",
-    "S": "AmbTemp"
-  },
-  "STAT_KUEHLMITTELTEMPERATUR_WERT": {
-    "L": "Coolant temperature",
-    "S": "Coolant"
-  },
-  "STAT_0X4301_WERT": {
-    "L": "Kühlerauslasstemperatur",
-    "S": "CoolOutTmp"
-  },
-  "STAT_WASSERPUMPE_ELEKTRONIK_TEMPERATUR_WERT": {
-    "L": "empf. Temperatur von BSS-Wasserpumpe",
-    "S": "WPmpElcTmp"
-  },
-  "STAT_OELTEMPERATUR_WERT": {
-    "L": "Oil temperature",
-    "S": "Oil temp"
-  },
-  "STAT_OELSENSOR_TEMPERATUR_WERT": {
-    "L": "Oil sensor temperature [°C]",
-    "S": "OilSnsTmp"
-  },
-  "STAT_GENERATOR_ELEKTRONIKTEMPERATUR_WERT": {
-    "L": "Chip temperature of the controller (BSD, LIN, SGR - resolution 1 °C) [°C]",
-    "S": "GenChipTmp"
-  },
-  "STAT_0X4806_WERT": {
-    "L": "Steuergeräte-Innentemperatur",
-    "S": "ECUIntTmp2"
-  },
-  "STAT_0X5805_WERT": {
-    "L": "Kühlmitteltemperatur OBD",
-    "S": "CoolTmpOBD"
-  },
-  "STAT_ANSAUGLUFTTEMPERATUR_LAW_WERT": {
-    "L": "Ansauglufttemperatur",
-    "S": "IAT_LAW"
-  },
-  "STAT_0X5817_WERT": {
-    "L": "Athmosperic pressure",
-    "S": "AtmPress"
-  },
-  "STAT_0X581E_WERT": {
-    "L": "Ansauglufttemperatur",
-    "S": "IATMeas"
-  },
-  "STAT_0X581F_WERT": {
-    "L": "Kilometerstand bei der Erkennung Ölniveau am Minimum",
-    "S": "CoolTmpMes"
-  },
-  "STAT_0X5820_WERT": {
-    "L": "Kühlmitteltemperatur Kühlerausgang",
-    "S": "RadOutMes"
-  },
-  "STAT_0X5821_WERT": {
-    "L": "DME Temp",
-    "S": "DMETemp"
-  },
-  "STAT_0X5822_WERT": {
-    "L": "Motor oil temp.",
-    "S": "MotOilTemp"
-  },
-  "STAT_0X5824_WERT": {
-    "L": "environment temperature",
-    "S": "AmbTmpMes"
-  },
-  "STAT_0X5833_WERT": {
-    "L": "Lambda corrected Bank2",
-    "S": "LBD_Corr_bank2"
-  },
-  "STAT_0X583A_WERT": {
-    "L": "Ansaugluft-Temperatur bei Start",
-    "S": "IATatSrt"
-  },
-  "STAT_MOTORTEMPERATUR_BEIM_START_WERT": {
-    "L": "Motortemperatur beim Start",
-    "S": "EngTmpSrt"
-  },
-  "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT1_WERT": {
-    "L": "Lambda ceramic temp pre-cat Bank 1",
-    "S": "LSCermVK1"
-  },
-  "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT2_WERT": {
-    "L": "Lambda ceramic temp pre-cat Bank 2",
-    "S": "LSCermVK2"
-  },
-  "STAT_0X5896_WERT": {
-    "L": "EGT post-cat Bank 1 (calc from model)",
-    "S": "EGTPostCatBk1"
-  },
-  "STAT_0X5897_WERT": {
-    "L": "EGT post-cat Bank 2 (calc from model)",
-    "S": "EGTPostCatBk2"
-  },
-  "STAT_VVT_MOTORTEMPERATUR_WERT": {
-    "L": "VVT Motortemperatur",
-    "S": "VVTMotTmp"
-  },
-  "STAT_VVT_ENDSTUFENTEMPERATUR_WERT": {
-    "L": "VVT-Endstufentemperatur from Modell",
-    "S": "VVTStageTmp"
-  },
-  "STAT_0X58EC_WERT": {
-    "L": "Momentenpfad",
-    "S": "WPmpElcTmp"
-  },
-  "STAT_KUEHLERAUSLASSTEMPERATUR_WERT": {
-    "L": "Coolant temperature (sensor value) after low-pass filtering [°C]",
-    "S": "RadOutTmp"
-  },
-  "STAT_STEUERGERAETE_INNENTEMPERATUR_WERT": {
-    "L": "Control unit internal temperature [°C]",
-    "S": "ECUIntTmp"
-  },
-  "STAT_ANSAUGLUFTTEMPERATUR1_ROH_WERT": {
-    "L": "Air intake temperature raw value 1",
-    "S": "IATRaw1"
-  },
-  "STAT_KUEHLWASSERTEMPERATUR_ROH_WERT": {
-    "L": "Raw value cooling water temperature [°C]",
-    "S": "CoolTmpRaw"
-  },
-  "STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT": {
-    "L": "Sollwert Einlassspreizung",
-    "S": "VVTInSpTgt"
-  },
-  "STAT_POSITION_NOCKENWELLE_EINLASS_WERT": {
-    "L": "Camshaft pos. intake",
-    "S": "CamInPos"
-  },
-  "STAT_POSITION_NOCKENWELLE_AUSLASS_WERT": {
-    "L": "Camshaft pos exhaust",
-    "S": "CamExPos"
-  },
-  "STAT_NW_EINLASSSPREIZUNG_WERT": {
-    "L": "Camshaft inlet spread",
-    "S": "CamInSprd"
-  },
-  "STAT_NW_AUSLASSSPREIZUNG_WERT": {
-    "L": "Camshaft outlet spread",
-    "S": "CamExSprd"
-  },
-  "STAT_NW_NORMSPREIZUNG_AUSLASS_WERT": {
-    "L": "Normspreizung Auslass",
-    "S": "CamExNorm"
-  },
-  "STAT_NW_NORMSPREIZUNG_EINLASS_WERT": {
-    "L": "Normspreizung Einlass",
-    "S": "CamInNorm"
-  },
-  "STAT_ZUENDZEITPUNKT_ZYL1_WERT": {
-    "L": "Ignition angle Cyl1",
-    "S": "IgnTimC1"
-  },
-  "STAT_0X581A_WERT": {
-    "L": "Nockenwelle Einlass",
-    "S": "CamInOBD"
-  },
-  "STAT_0X581B_WERT": {
-    "L": "Sollwinkel Nockenwelle Einlass öffnet",
-    "S": "CamInTgtOBD"
-  },
-  "STAT_0X581C_WERT": {
-    "L": "Nockenwelle Auslass",
-    "S": "CamExOBD"
-  },
-  "STAT_0X581D_WERT": {
-    "L": "Nockenwelle Auslass Sollwert",
-    "S": "CamExTgtOBD"
-  },
-  "STAT_ZUENDWINKEL_ZYL1_WERT": {
-    "L": "Ignition angle Cyl.1",
-    "S": "IgnAnglC1"
-  },
-  "STAT_NW_AUSLASS_SOLL_WERT": {
-    "L": "Outlet Camshaft Target",
-    "S": "CamExTgt"
-  },
-  "STAT_GEBERRAD_ADAPTION_VSA_WERT": {
-    "L": "vsa_adp_fl",
-    "S": "WhlAdpVSA"
-  },
-  "STAT_GEBERRAD_ADAPTION_VSE_WERT": {
-    "L": "vse_adp_fl",
-    "S": "WhlAdpVSE"
-  },
-  "STAT_DROSSELKLAPPENWINKEL_WERT": {
-    "L": "Throttle pos.",
-    "S": "ThrottlePos"
-  },
-  "STAT_DROSSELKLAPPENWINKEL_SOLL_WERT": {
-    "L": "Throttle pos. target",
-    "S": "ThrtPosTgt"
-  },
-  "STAT_DROSSELKLAPPE_SENSOR1_WERT": {
-    "L": "Throttle sensor 1",
-    "S": "ThrSens1"
-  },
-  "STAT_0X583F_WERT": {
-    "L": "Throttle pos. target",
-    "S": "ThrPosTgt"
-  },
-  "STAT_0X5858_WERT": {
-    "L": "Drosselklappenwinkel bezogen auf unteren Anschlag",
-    "S": "ThrtActOBD"
-  },
-  "STAT_DK_WINKEL_SOLL_WERT": {
-    "L": "Drosselklappe Sollwert",
-    "S": "ThrtAngTgt"
-  },
-  "STAT_LAUFUNRUHE_SEGMENTZEIT_WERT": {
-    "L": "Laufunruhe Segmentzeit",
-    "S": "RunRghSeg"
-  },
-  "STAT_LAUFUNRUHE_ZYL1_WERT": {
-    "L": "lutskzyl[0]",
-    "S": "RunRghC1"
-  },
-  "STAT_LAUFUNRUHE_ZYL2_WERT": {
-    "L": "lutskzyl[3]",
-    "S": "RunRghC2"
-  },
-  "STAT_LAUFUNRUHE_ZYL3_WERT": {
-    "L": "lutskzyl[1]",
-    "S": "RunRghC3"
-  },
-  "STAT_LAUFUNRUHE_ZYL4_WERT": {
-    "L": "lutskzyl[2]",
-    "S": "RunRghC4"
-  },
-  "STAT_LAUFUNRUHE_ZYL5_WERT": {
-    "L": "[1] Laufunruhe Cylinder 5",
-    "S": "RunRghC5"
-  },
-  "STAT_LAUFUNRUHE_ZYL6_WERT": {
-    "L": "[3] Laufunruhe Cylinder 6",
-    "S": "RunRghC6"
-  }
+ "STAT_WASSERPUMPENLEISTUNG_BSD_WERT": {
+  "L": "Water pump power via BSD",
+  "S": "WPmpPwrBSD"
+ },
+ "STAT_0X4415_WERT": {
+  "L": "Permittivity correction offset",
+  "S": "PermOff"
+ },
+ "STAT_0X460D_WERT": {
+  "L": "Cutoff correction value",
+  "S": "CutoffCorr"
+ },
+ "STAT_BATTERIELAST_WERT": {
+  "L": "Battery load",
+  "S": "BattLoad"
+ },
+ "STAT_DISAKLAPPEN_POSITION_WERT": {
+  "L": "DISA flap current position",
+  "S": "DISAPos"
+ },
+ "STAT_E_LUEFTER_PWM_SOLL_WERT": {
+  "L": "Electric fan PWM target",
+  "S": "EFanPWMTgt"
+ },
+ "STAT_0X4614_WERT": {
+  "L": "Auslastungsgrad Generator 1",
+  "S": "GenLoad1"
+ },
+ "STAT_SONDENSPANNUNG_VORKAT_BANK1_MIT_OFFSET_WERT": {
+  "L": "Voltage Lambdasonde before cat. Bank 1 mit Offsetkorrektur",
+  "S": "LSVltB1Off"
+ },
+ "STAT_SONDENSPANNUNG_VORKAT_BANK2_MIT_OFFSET_WERT": {
+  "L": "Voltage Lambdasonde before cat. Bank 2 mit Offsetkorrektur",
+  "S": "LSVltB2Off"
+ },
+ "STAT_FAHRERWUNSCH_PEDAL_WERT": {
+  "L": "Accelerator pedal (WOT=100%)",
+  "S": "Pedal %"
+ },
+ "STAT_LASTWERT_BERECHNET_WERT": {
+  "L": "Calculated load value",
+  "S": "CalcLoad"
+ },
+ "STAT_LAMBDA_INTEGRATOR_GRUPPE1_WERT": {
+  "L": "Lambda integrator group 1",
+  "S": "STFTGrp1"
+ },
+ "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE1_WERT": {
+  "L": "LTFT mul.+add. group 1",
+  "S": "LTFTGrp1"
+ },
+ "STAT_LAMBDA_INTEGRATOR_GRUPPE2_WERT": {
+  "L": "Lambda integrator group 2",
+  "S": "STFTGrp2"
+ },
+ "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE2_WERT": {
+  "L": "LTFT mul.+add. group 2",
+  "S": "LTFTGrp2"
+ },
+ "STAT_LASTWERT_RELATIV_WERT": {
+  "L": "Relative load",
+  "S": "RelLoad"
+ },
+ "STAT_0X5814_WERT": {
+  "L": "Pedal value",
+  "S": "Pedal"
+ },
+ "STAT_0X5827_WERT": {
+  "L": "Lambda heating pre-cat Bank 1",
+  "S": "LSHeatVK1"
+ },
+ "STAT_0X5828_WERT": {
+  "L": "Lambda heating pre-cat Bank 2",
+  "S": "LSHeatVK2"
+ },
+ "STAT_0X5829_WERT": {
+  "L": "Lambda heating post-cat Bank 1",
+  "S": "LSHeatNK1"
+ },
+ "STAT_0X582A_WERT": {
+  "L": "Lambda heating post-cat Bank 2",
+  "S": "LSHeatNK2"
+ },
+ "STAT_0X5840_WERT": {
+  "L": "Throttle angle emergency air position",
+  "S": "CPULdRst"
+ },
+ "STAT_0X5855_WERT": {
+  "L": "Mean value Bank 1",
+  "S": "MeanValB1"
+ },
+ "STAT_0X5856_WERT": {
+  "L": "Mean value Bank 2",
+  "S": "MeanValB2"
+ },
+ "STAT_E_LUEFTER_TASTVERHAELTNIS_WERT": {
+  "L": "Electric fan duty cycle",
+  "S": "EFanDutyCy"
+ },
+ "STAT_0X5880_WERT": {
+  "L": "Tastverhaeltnis GLF System",
+  "S": "AirFlapDC"
+ },
+ "STAT_0X5899_WERT": {
+  "L": "Istwert DISA-Position",
+  "S": "DISAPosAct"
+ },
+ "STAT_VVT_SOLLWINKEL_WERT": {
+  "L": "VVT target angle",
+  "S": "VVTTgtAng"
+ },
+ "STAT_0X58A1_WERT": {
+  "L": "Ausgegeben duty cycle",
+  "S": "VVTDCOut"
+ },
+ "STAT_PEDALWERTGEBER1_WERT": {
+  "L": "Accelerator pedal sensor 1 [%]",
+  "S": "APP1"
+ },
+ "STAT_0X58B9_WERT": {
+  "L": "Pedal value monitoring",
+  "S": "PedalMon"
+ },
+ "STAT_MOMENTENANFORDERUNG_VON_MSR_RELATIV_WERT": {
+  "L": "Relative torque request from MSR via CAN",
+  "S": "MSRTqReq"
+ },
+ "STAT_LAST_MAXIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT": {
+  "L": "Max. relative load at misfire",
+  "S": "MaxLdMisf"
+ },
+ "STAT_LAST_MINIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT": {
+  "L": "Min. relative load at misfire",
+  "S": "MinLdMisf"
+ },
+ "STAT_WASSERPUMPE_LEISTUNGSREDUZIERT_WERT": {
+  "L": "Water pump power reduced",
+  "S": "WPmpRedPwr"
+ },
+ "STAT_PWG1_WERT": {
+  "L": "linearized APP1",
+  "S": "APP1Lin"
+ },
+ "STAT_PWG2_WERT": {
+  "L": "linearized APP2",
+  "S": "APP2Lin"
+ },
+ "STAT_FAHRERWUNSCH_PEDAL_ROH_WERT": {
+  "L": "Fahrpedalwert",
+  "S": "AccPedRaw"
+ },
+ "STAT_BERECHNETE_LAST_WERT": {
+  "L": "Calculated load value 2",
+  "S": "CalcLoad2"
+ },
+ "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK1_WERT": {
+  "L": "Lambda heating PWM before cat. Bank 1",
+  "S": "LSHtVK1"
+ },
+ "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK1_WERT": {
+  "L": "normierte Heizleistung der Lambdasonde hinter Kat",
+  "S": "LSHtNK1"
+ },
+ "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK2_WERT": {
+  "L": "Lambda heating PWM before cat. Bank 2",
+  "S": "LSHtVK2"
+ },
+ "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK2_WERT": {
+  "L": "Lambda heating PWM hinter Katalysator Bank 2",
+  "S": "LSHtNK2"
+ },
+ "STAT_DISA1_PWM_WERT": {
+  "L": "DISA1 PWM (large/upper flap)",
+  "S": "DISA1PWM"
+ },
+ "STAT_DISA2_PWM_WERT": {
+  "L": "DISA2 PWM (small/lower flap)",
+  "S": "DISA2PWM"
+ },
+ "STAT_BEHEIZTER_THERMOSTAT_PWM_WERT": {
+  "L": "Heated thermostat PWM",
+  "S": "HtdTstatPWM"
+ },
+ "STAT_0X5A76_WERT": {
+  "L": "Purge valve adaptation opening point",
+  "S": "TEVAdapt"
+ },
+ "STAT_TEV_PWM_WERT": {
+  "L": "Tank valve PWM",
+  "S": "TankVlvPWM"
+ },
+ "STAT_E_LUEFTER_PWM_WERT": {
+  "L": "Electric fan PWM [%]",
+  "S": "EFanPWM"
+ },
+ "STAT_VANOS_EINLASS_PWM_WERT": {
+  "L": "Inlet VANOS PWM",
+  "S": "InletVANOS"
+ },
+ "STAT_VANOS_AUSLASS_PWM_WERT": {
+  "L": "Outlet VANOS PWM",
+  "S": "OutletVANOS"
+ },
+ "STAT_INTEGRATOR_BANK1_WERT": {
+  "L": "Short-term fuel trim Bank 1",
+  "S": "STFT B1"
+ },
+ "STAT_INTEGRATOR_BANK2_WERT": {
+  "L": "Short-term fuel trim Bank 2",
+  "S": "STFT B2"
+ },
+ "STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT": {
+  "L": "LTFT multiplicative Bank 1",
+  "S": "LTFT mul. B1"
+ },
+ "STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT": {
+  "L": "LTFT multiplicative Bank 2",
+  "S": "LTFT mul. B2"
+ },
+ "STAT_0X5A89_WERT": {
+  "L": "LTFT multiplicative high load Bank 1",
+  "S": "MixAdHiB1"
+ },
+ "STAT_0X5A8A_WERT": {
+  "L": "LTFT multiplicative high load Bank 2",
+  "S": "MixAdHiB2"
+ },
+ "STAT_0X5A8B_WERT": {
+  "L": "LTFT multiplicative low load Bank 1",
+  "S": "MixAdLoB1"
+ },
+ "STAT_0X5A8C_WERT": {
+  "L": "LTFT multiplicative low load Bank 2",
+  "S": "MixAdLoB2"
+ },
+ "STAT_KRAFTSTOFFPUMPE_PWM_WERT": {
+  "L": "Fuel pump PWM",
+  "S": "FuelPmpPWM"
+ },
+ "STAT_VVT_WINKEL_AUSWAHL_WERT": {
+  "L": "VVT selected actual angle",
+  "S": "VVTSelAng"
+ },
+ "STAT_0X5AE0_WERT": {
+  "L": "Status-Byte für sicherheitsrelevante Informationen bezüglich atypischem Reset",
+  "S": "TM1"
+ },
+ "STAT_0X5AE1_WERT": {
+  "L": "98°C =< Kühlmitteltemperatur =< 112°C",
+  "S": "TM2"
+ },
+ "STAT_0X5AE2_WERT": {
+  "L": "Reset Information - Reset-group-ID of the last reset reason",
+  "S": "TM3"
+ },
+ "STAT_0X5AE3_WERT": {
+  "L": "Reset Information - Reset-ID of the last reset",
+  "S": "TM4"
+ },
+ "STAT_0X5AE4_WERT": {
+  "L": "Reset Information - User defined value of the last reset reason",
+  "S": "TM5"
+ },
+ "STAT_0X5AE5_WERT": {
+  "L": "Fahrstrecke bei Reset",
+  "S": "TO1"
+ },
+ "STAT_0X5AE6_WERT": {
+  "L": "Betriebsstundenzähler bei Reset",
+  "S": "TO2"
+ },
+ "STAT_0X5AE7_WERT": {
+  "L": "Maximale CPU-Last bei Reseterkennung",
+  "S": "TO3"
+ },
+ "STAT_0X5AE8_WERT": {
+  "L": "Geschwindigkeit bei maximaler CPU-Last bei Reseterkennung",
+  "S": "TO4"
+ },
+ "STAT_0X5AE9_WERT": {
+  "L": "Sicherheitsinformationen",
+  "S": "TO5"
+ },
+ "STAT_0X5AEA_WERT": {
+  "L": "Anzahl von atypischen Warm-Resets seit letzter Power-Up-Phase (BSW)",
+  "S": "WarmRstCnt"
+ },
+ "STAT_0X5AEB_WERT": {
+  "L": "Coolant temp < 98°C",
+  "S": "CoolTmpLo"
+ },
+ "STAT_0X5AEC_WERT": {
+  "L": "98°C =< Kuehlmitteltemperatur =< 112°C",
+  "S": "CoolTmpMd"
+ },
+ "STAT_0X5AED_WERT": {
+  "L": "113°C =< Kuehlmitteltemperatur =< 120°C",
+  "S": "CoolTmpHi"
+ },
+ "STAT_0X5AEE_WERT": {
+  "L": "121°C =< Kuehlmitteltemperatur =< 125°C",
+  "S": "CoolTmpVH"
+ },
+ "STAT_0X5AEF_WERT": {
+  "L": "Kuehlmitteltemperatur > 125°C",
+  "S": "CoolTmpCr"
+ },
+ "STAT_0X5AF0_WERT": {
+  "L": "Motor oil temp. < 80°C",
+  "S": "OilTmpLo"
+ },
+ "STAT_0X5AF1_WERT": {
+  "L": "80°C =< Motoroeltemperatur =< 110°C",
+  "S": "OilTmpMd"
+ },
+ "STAT_0X5AF2_WERT": {
+  "L": "110°C =< Motoroeltemperatur =< 135°C",
+  "S": "OilTmpHi"
+ },
+ "STAT_0X5AF3_WERT": {
+  "L": "135°C =< Motoroeltemperatur =< 150°C",
+  "S": "OilTmpVH"
+ },
+ "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL5_WERT": {
+  "L": "Segmentadaption Laufunruhe Cyl. 5",
+  "S": "RghAdpC5"
+ },
+ "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL3_WERT": {
+  "L": "Segmentadaption Laufunruhe Cyl. 3",
+  "S": "RghAdpC3"
+ },
+ "STAT_WASSERPUMPE_DREHZAHL_WERT": {
+  "L": "Waterpump RPM",
+  "S": "WaterPmpRPM"
+ },
+ "STAT_WASSERPUMPE_DREHZAHL_SOLL_WERT": {
+  "L": "BSS Waterpump target RPM",
+  "S": "BSS_Target_RPM"
+ },
+ "STAT_OELSTAND_LANGZEIT_MITTEL_WERT": {
+  "L": "Oil level long-term mean",
+  "S": "OilLvlLT"
+ },
+ "STAT_FUELLSTAND_MOTOROEL_KURZZEIT_WERT": {
+  "L": "Oil level short-term",
+  "S": "OilLvlShrt"
+ },
+ "STAT_KRAFTSTOFFVERBRAUCH_SEIT_SERVICE_WERT": {
+  "L": "Kraftstoff-Verbrauch seit letztem Service",
+  "S": "FuelSnSrv"
+ },
+ "STAT_OELSENSOR_NIVEAU_ROH_WERT": {
+  "L": "Oil sensor level raw value",
+  "S": "OilSnsLvRaw"
+ },
+ "STAT_OELSENSOR_QUALITAET_ROH_WERT": {
+  "L": "Oil sensor quality raw value",
+  "S": "OilSnsQRaw"
+ },
+ "STAT_OELSENSOR_TEMPERATUR_ROH_WERT": {
+  "L": "Oil sensor temperature raw value",
+  "S": "OilSnsTRaw"
+ },
+ "STAT_OELSENSOR_NIVEAU_WERT": {
+  "L": "Oil sensor level",
+  "S": "OilSnsLvl"
+ },
+ "STAT_OELSENSOR_QUALITAET_WERT": {
+  "L": "Oil sensor quality",
+  "S": "OilSnsQual"
+ },
+ "STAT_0X440B_WERT": {
+  "L": "Länderfaktor 1 codiert",
+  "S": "CntryFac1C"
+ },
+ "STAT_0X440C_WERT": {
+  "L": "Länderfaktor 2 codiert",
+  "S": "CntryFac2C"
+ },
+ "STAT_0X440D_WERT": {
+  "L": "Länderfaktor 1",
+  "S": "CntryFac1"
+ },
+ "STAT_0X440E_WERT": {
+  "L": "Länderfaktor 2",
+  "S": "CntryFac2"
+ },
+ "STAT_0X440F_WERT": {
+  "L": "Kurzmittelwert-Niveau für den Tester",
+  "S": "ShrtMeanLv"
+ },
+ "STAT_0X4412_WERT": {
+  "L": "Öl-Alter in Monate",
+  "S": "OilAgeMnth"
+ },
+ "STAT_0X4413_WERT": {
+  "L": "aufbereitete Permittivität bei letztem Ölwechsel",
+  "S": "PermitLstOC"
+ },
+ "STAT_0X4414_WERT": {
+  "L": "Permittivität für Bewertung aufbereitet (extrapoliert)",
+  "S": "PermitEval"
+ },
+ "STAT_0X4416_WERT": {
+  "L": "zugeteilte Bonuskraftstoffmenge",
+  "S": "BonusFuel"
+ },
+ "STAT_0X4417_WERT": {
+  "L": "zugeteilter Permittivitätsbonus",
+  "S": "OilQuality"
+ },
+ "STAT_GENERATOR_STROM_WERT": {
+  "L": "Generatorstrom",
+  "S": "GenCurr"
+ },
+ "STAT_GENERATOR_CHIPVERSION_WERT": {
+  "L": "Chipversion Generator 1",
+  "S": "GenChipVer"
+ },
+ "STAT_GENERATOR_REGLERVERSION_WERT": {
+  "L": "Reglerversion Generator 1",
+  "S": "GenRegVer"
+ },
+ "STAT_GENERATOR_HERSTELLERCODE_WERT": {
+  "L": "Herstellercode Generator 1",
+  "S": "GenMfgCode"
+ },
+ "STAT_GENERATOR_TYP_WERT": {
+  "L": "Kennung Generatortyp Generator 1",
+  "S": "GenType"
+ },
+ "STAT_UBATT_IBS_WERT": {
+  "L": "value von ubatt_w",
+  "S": "BattVltIBS"
+ },
+ "STAT_0X460E_WERT": {
+  "L": "Abstand zur Startfähigkeit",
+  "S": "Val460E"
+ },
+ "STAT_LAMBDA_BANK1_SOLL_WERT": {
+  "L": "Lambda target Bank 1",
+  "S": "Lambda B1 tgt"
+ },
+ "STAT_LAMBDA_BANK2_SOLL_WERT": {
+  "L": "Lambda target Bank 2",
+  "S": "Lambda B2 tgt"
+ },
+ "STAT_KLIMA_EIN": {
+  "L": "Condition for switching on the compressor",
+  "S": "ACOn"
+ },
+ "STAT_0X5816_WERT": {
+  "L": "Lambda target",
+  "S": "LBD_Tgt"
+ },
+ "STAT_DREHMOMENTEINGRIFF_CAN_WERT": {
+  "L": "Torque intervention via CAN",
+  "S": "TqIntrvCAN"
+ },
+ "STAT_0X582C_WERT": {
+  "L": "Lambda corrected",
+  "S": "LBD_Corr"
+ },
+ "STAT_0X582D_WERT": {
+  "L": "Lambda voltage correction pre-cat",
+  "S": "LBD_Volt_corr"
+ },
+ "STAT_0X582E_WERT": {
+  "L": "Lambdaamplitude nach Filterung",
+  "S": "Val582E"
+ },
+ "STAT_0X582F_WERT": {
+  "L": "EGT post-cat (model)",
+  "S": "EGT_post_cat"
+ },
+ "STAT_0X5830_WERT": {
+  "L": "Mittelwert der normierten Signalamplitude der Lambdasonde before cat. Bank 1",
+  "S": "Val5830"
+ },
+ "STAT_0X5831_WERT": {
+  "L": "Mittelwert der normierten Signalamplitude der Lambdasonde before cat. Bank 2",
+  "S": "Val5831"
+ },
+ "STAT_0X583D_WERT": {
+  "L": "Usage time",
+  "S": "UsageTime"
+ },
+ "STAT_0X5851_WERT": {
+  "L": "Voltage Ansauglufttemperatur",
+  "S": "Val5851"
+ },
+ "STAT_0X5865_WERT": {
+  "L": "Ölstand Mittelwert Langzeit",
+  "S": "Val5865"
+ },
+ "STAT_0X5866_WERT": {
+  "L": "Füllstand Motoröl",
+  "S": "Val5866"
+ },
+ "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL1_WERT": {
+  "L": "Quiescent consumers status part 1",
+  "S": "StdConsP1"
+ },
+ "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL2_WERT": {
+  "L": "Quiescent consumers status part 2",
+  "S": "StdConsP2"
+ },
+ "STAT_0X586A_WERT": {
+  "L": "Batteriespannung von IBS gemessen",
+  "S": "Val586A"
+ },
+ "STAT_ZAEHLER_ERKENNUNG_SCHLECHTE_STRASSE_WERT": {
+  "L": "Rough road detection counter",
+  "S": "RoughRdCnt"
+ },
+ "STAT_LAMBDA_SOLLWERT_GRUPPE1_WERT": {
+  "L": "Lambda target group 1",
+  "S": "LamTgtGp1"
+ },
+ "STAT_LAMBDA_SOLLWERT_GRUPPE2_WERT": {
+  "L": "Lambda target group 2",
+  "S": "LamTgtGp2"
+ },
+ "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT": {
+  "L": "Lambda shift feedback ctrl 1",
+  "S": "LamShftB1"
+ },
+ "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT": {
+  "L": "Lambda shift feedback ctrl 2",
+  "S": "LamShftB2"
+ },
+ "STAT_BERECHNETER_GANG_WERT": {
+  "L": "Ganginformation",
+  "S": "CalcGear"
+ },
+ "STAT_LAMBDA_ISTWERT_GRUPPE1_WERT": {
+  "L": "Lambda value group 1",
+  "S": "Lam grp1"
+ },
+ "STAT_LAMBDA_ISTWERT_GRUPPE2_WERT": {
+  "L": "Lambda value group 2",
+  "S": "Lam grp2"
+ },
+ "STAT_0X58A9_WERT": {
+  "L": "SLS-Status über CAN",
+  "S": "Val58A9"
+ },
+ "STAT_0X58AA_WERT": {
+  "L": "Korrekturfaktor höhe",
+  "S": "Val58AA"
+ },
+ "STAT_DK_ADAPTIONSSCHRITT_WERT": {
+  "L": "Throttle adaptation step",
+  "S": "ThrtAdpStp"
+ },
+ "STAT_0X58CE_WERT": {
+  "L": "Motortemperatur-Referenzwert from Modell",
+  "S": "Val58CE"
+ },
+ "STAT_0X58DB_WERT": {
+  "L": "Modelltemperatur im Kat",
+  "S": "Val58DB"
+ },
+ "STAT_0X58DC_WERT": {
+  "L": "Modelltemperatur im Kat Bank 2",
+  "S": "Val58DC"
+ },
+ "STAT_0X58E0_WERT": {
+  "L": "Abgleich DK-Modell (Faktor)",
+  "S": "Val58E0"
+ },
+ "STAT_0X58E2_WERT": {
+  "L": "Abgleich EV-Modell (Faktor)",
+  "S": "Val58E2"
+ },
+ "STAT_0X58EA_WERT": {
+  "L": "empf. Istdrehzahl von BSS-Wasserpumpe",
+  "S": "Val58EA"
+ },
+ "STAT_WASSERPUMPE_DREHZAHL_SOLL_IST_DIFFERENZ_WERT": {
+  "L": "Wasserpumpe Drehzahl Soll-Ist-Differenz",
+  "S": "WPmpRPMDev"
+ },
+ "STAT_0X58FA_WERT": {
+  "L": "Beladungsgrad Aktivkohlefilter TEV- Funktionstest",
+  "S": "Val58FA"
+ },
+ "STAT_ANSAUGLUFTTEMPERATUR_SPANNUNG_WERT": {
+  "L": "Voltage Ansauglufttemperatur",
+  "S": "IATVolt"
+ },
+ "STAT_KLOPFSIGNAL_ZYL1_RELATIV_WERT": {
+  "L": "Knock sensor signal Cylinder 1 relativ",
+  "S": "KnkRelC1"
+ },
+ "STAT_KLOPFSIGNAL_ZYL6_RELATIV_WERT": {
+  "L": "Knock sensor signal Cylinder 6 relativ",
+  "S": "KnkRelC6"
+ },
+ "STAT_LAMBDA_BANK1_WERT": {
+  "L": "Lambda pre-cat Bank 1",
+  "S": "Lambda B1"
+ },
+ "STAT_LAMBDA_BANK2_WERT": {
+  "L": "Lambda pre-cat Bank 2",
+  "S": "Lambda B2"
+ },
+ "STAT_0X5A87_WERT": {
+  "L": "Adaptionswert Trimregelung Bank 1",
+  "S": "Val5A87"
+ },
+ "STAT_0X5A88_WERT": {
+  "L": "Adaptionswert Trimregelung Bank 2",
+  "S": "Val5A88"
+ },
+ "STAT_0X5A91_WERT": {
+  "L": "Katalysatordiagnosewert Bank1",
+  "S": "Val5A91"
+ },
+ "STAT_0X5A92_WERT": {
+  "L": "Katalysatordiagnosewert Bank2",
+  "S": "Val5A92"
+ },
+ "STAT_0X5AC0_WERT": {
+  "L": "Verbrauch mit Regler",
+  "S": "Val5AC0"
+ },
+ "STAT_0X5AC1_WERT": {
+  "L": "Reset Status Software-Register",
+  "S": "Val5AC1"
+ },
+ "STAT_0X5AC2_WERT": {
+  "L": "Reset Information",
+  "S": "Val5AC2"
+ },
+ "STAT_0X5AC3_WERT": {
+  "L": "Schalthäufigkeitszähler Drosselklappe Enteisungsfunktion",
+  "S": "Val5AC3"
+ },
+ "STAT_LAMBDAREGELUNG_ZUSTAND_BANK1_WERT": {
+  "L": "Lambda control state Bank 1",
+  "S": "LamCtlStB1"
+ },
+ "STAT_LAMBDAREGELUNG_ZUSTAND_BANK2_WERT": {
+  "L": "Lambda control state Bank 2",
+  "S": "LamCtlStB2"
+ },
+ "STAT_MOTOR_STATUS_WERT": {
+  "L": "Engine coordinator state",
+  "S": "EngStatus"
+ },
+ "STAT_0X5837_WERT": {
+  "L": "Solldruck Hochdrucksystem",
+  "S": "Val5837"
+ },
+ "STAT_0X5838_WERT": {
+  "L": "Relative torque for misfire detection",
+  "S": "RelTrqMisDet"
+ },
+ "STAT_DROSSELKLAPPE_NOTLAUF_WERT": {
+  "L": "Throttle limp mode status",
+  "S": "ThrtLimp"
+ },
+ "STAT_FGR_WERT": {
+  "L": "Cruise control raw status",
+  "S": "CruiseCtrl"
+ },
+ "STAT_MOTORSTEUERUNG_WERT": {
+  "L": "Engine control status",
+  "S": "EngCtrl"
+ },
+ "STAT_0X587D_WERT": {
+  "L": "Winkel Excenterwelle raw value Führungssensor",
+  "S": "Val587D"
+ },
+ "STAT_0X587E_WERT": {
+  "L": "Winkel Excenterwelle raw value Referenzsensor",
+  "S": "Val587E"
+ },
+ "STAT_0X5894_WERT": {
+  "L": "Verstellbereich VVT-Führungssensor",
+  "S": "Val5894"
+ },
+ "STAT_0X5895_WERT": {
+  "L": "Verstellbereich VVT-Referenzsensor",
+  "S": "Val5895"
+ },
+ "STAT_0X589E_WERT": {
+  "L": "VVT Angle target",
+  "S": "VVTAngleTgt"
+ },
+ "STAT_0X58D9_WERT": {
+  "L": "Massenstrom Abgas vor Hauptkat",
+  "S": "Val58D9"
+ },
+ "STAT_0X58DA_WERT": {
+  "L": "Massenstrom Abgas vor Hauptkat Bank2",
+  "S": "Val58DA"
+ },
+ "STAT_0X58E4": {
+  "L": "Internal value 0x58E4",
+  "S": "Val58E4"
+ },
+ "STAT_DME_LOSNUMMER_WERT": {
+  "L": "DME - Losnummer",
+  "S": "DMELotNo"
+ },
+ "STAT_SONDENHEIZUNG_NACHKAT_BANK1_WERT": {
+  "L": "Status LS Heizung hinter Katalysator Bank 1",
+  "S": "LSHtStatNK1"
+ },
+ "STAT_SONDENHEIZUNG_NACHKAT_BANK2_WERT": {
+  "L": "Status LS Heizung hinter Katalysator Bank 2",
+  "S": "LSHtStatNK2"
+ },
+ "STAT_SONDENHEIZUNG_VORKAT_BANK1_WERT": {
+  "L": "Status LS Heizung before cat. Bank 1",
+  "S": "LSHtStatVK1"
+ },
+ "STAT_SONDENHEIZUNG_VORKAT_BANK2_WERT": {
+  "L": "Status LS Heizung before cat. Bank 2",
+  "S": "LSHtStatVK2"
+ },
+ "STAT_TASTE_FGR_EIN_WERT": {
+  "L": "Status Taste FGR",
+  "S": "CruiseBtn"
+ },
+ "STAT_SLS_DIAGNOSE_WERT": {
+  "L": "Status Diagnose TEV",
+  "S": "SLSDiag"
+ },
+ "STAT_TEV_DIAGNOSE_WERT": {
+  "L": "Function status counter DM-TL for tester output from last driving cycle [0-n]",
+  "S": "TEVDiag"
+ },
+ "STAT_DMTL_DIAGNOSE_WERT": {
+  "L": "Status Diagnose Lambdasonden",
+  "S": "DMTLDiag"
+ },
+ "STAT_LS_DIAGNOSE_WERT": {
+  "L": "Funktionsstatus LLRNS bei Anforderung Systemcheck",
+  "S": "LSDiag"
+ },
+ "STAT_0X5AA5_WERT": {
+  "L": "Status Diagnose Sekundärluft",
+  "S": "Val5AA5"
+ },
+ "STAT_0X5AA6_WERT": {
+  "L": "Status Diagnose VVT Anschläge lernen",
+  "S": "Val5AA6"
+ },
+ "STAT_0X4618_WERT": {
+  "L": "Kopie Drehzahlschwelle für LR-Funktion Generator 1 aktiv",
+  "S": "Val4618"
+ },
+ "STAT_SONDENBEREITSCHAFT_VORKAT_BANK1": {
+  "L": "Bedingung Sonde betriebsbereit vor Kat",
+  "S": "LSRdyVK1"
+ },
+ "STAT_SONDENBEREITSCHAFT_VORKAT_BANK2": {
+  "L": "Status Lambdasonde betriebsbereit before cat. Bank 2",
+  "S": "LSRdyVK2"
+ },
+ "STAT_KUPPLUNGSSCHALTER_BETAETIGT_WERT": {
+  "L": "Kupplungsschalter Status",
+  "S": "ClutchAct"
+ },
+ "STAT_KUPPLUNGSSCHALTER_VORHANDEN_WERT": {
+  "L": "Schalter Kupplung",
+  "S": "ClutchPrs"
+ },
+ "STAT_SPORTTASTER_BETAETIGT_WERT": {
+  "L": "Sporttaster aktiv",
+  "S": "SptBtnAct"
+ },
+ "STAT_SEKUNDAERLUFTPUMPE_WERT": {
+  "L": "Secondary air pump active [0/1]",
+  "S": "SecAirPmp"
+ },
+ "STAT_STARTRELAIS_UEBER_CAN_WERT": {
+  "L": "Schalter Klemme 50 von CAN",
+  "S": "StrtRelCAN"
+ },
+ "STAT_LEERLAUF_AKTIV": {
+  "L": "Bedingung Leerlaufregelung",
+  "S": "IdleActv"
+ },
+ "STAT_0X58C9_WERT": {
+  "L": "vvtmode",
+  "S": "Val58C9"
+ },
+ "STAT_STATUS_KLOPFEN_WERT": {
+  "L": "Status Klopfen",
+  "S": "KnockStat"
+ },
+ "STAT_KLIMAKOMPRESSORRELAIS_EIN": {
+  "L": "Klimakompressorrelais Ein",
+  "S": "ACRelay"
+ },
+ "STAT_VVT_ENTLASTUNGSRELAIS_EIN_WERT": {
+  "L": "VVT relief relay active",
+  "S": "VVTRelay"
+ },
+ "STAT_READINESS_SONDE_NACHKAT_BANK1_WERT": {
+  "L": "Status LS hinter Katalysator Bank 1",
+  "S": "RdyNK1"
+ },
+ "STAT_READINESS_SONDE_NACHKAT_BANK2_WERT": {
+  "L": "Status LS hinter Katalysator Bank 2",
+  "S": "RdyNK2"
+ },
+ "STAT_BREMSLICHTSCHALTER_EIN_WERT": {
+  "L": "Rohwert Bremskontakt nicht entprellt",
+  "S": "BrkSwRaw"
+ },
+ "STAT_BREMSLICHTTESTSCHALTER_EIN_WERT": {
+  "L": "Rohwert redundanter Bremskontakt nicht entprellt",
+  "S": "BrkTstSw"
+ },
+ "STAT_OELDRUCKSCHALTER_EIN_WERT": {
+  "L": "Output signal oil pressure switch [0/1]",
+  "S": "OilPrsSw"
+ },
+ "STAT_E_BOXLUEFTER_EIN_WERT": {
+  "L": "E-Box fan ON [0/1]",
+  "S": "EBoxFan"
+ },
+ "STAT_0X5A64_WERT": {
+  "L": "Internal value 0x5A64",
+  "S": "Val5A64"
+ },
+ "STAT_ABGASKLAPPE_EIN_WERT": {
+  "L": "Bedingung Abgasklappe mit Resonator",
+  "S": "ExhVlvOn"
+ },
+ "STAT_DMTL_PUMPE_EIN_WERT": {
+  "L": "Bedingung DMTL-Pumpenmotor an",
+  "S": "DMTLPump"
+ },
+ "STAT_DMTL_VENTIL_EIN_WERT": {
+  "L": "Bedingung DMTL-Magnetventil an",
+  "S": "DMTLValve"
+ },
+ "STAT_DMTL_HEIZUNG_EIN_WERT": {
+  "L": "Bedingung Heizung DM-TL Portansteuerung",
+  "S": "DMTLHeat"
+ },
+ "STAT_MIL_EIN_WERT": {
+  "L": "DSM Mil Anforderungsstatus (1 = kontinuierlich, 2 blinkend)",
+  "S": "MILOn"
+ },
+ "STAT_LAMPE_FGR_EIN_WERT": {
+  "L": "Status of the CrCtl lamp (sent via CAN) [0/1]",
+  "S": "CruiseLamp"
+ },
+ "STAT_CHECK_ENGINE_LAMPE_EIN_WERT": {
+  "L": "Lampe Check Engine Ein",
+  "S": "CEL"
+ },
+ "STAT_SOUNDKLAPPE_PWM_WERT": {
+  "L": "Soundklappe Zustand",
+  "S": "SndFlapPWM"
+ },
+ "STAT_0X5A73_WERT": {
+  "L": "Internal value 0x5A73",
+  "S": "Val5A73"
+ },
+ "STAT_SEKUNDAERLUFT_VENTIL_PWM_WERT": {
+  "L": "Secondary air valve [0/1]",
+  "S": "SecAirVPWM"
+ },
+ "STAT_ABGASKLAPPE_ANSTEUERUNG_WERT": {
+  "L": "Bedingung Abgasklappe mit Resonator",
+  "S": "ExhVlvCtrl"
+ },
+ "STAT_0X5A97_WERT": {
+  "L": "Bedingung EVANOS im Anschlag beim letzten Abstellen",
+  "S": "Val5A97"
+ },
+ "STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT": {
+  "L": "Crankshaft adaptation done",
+  "S": "CrkAdpDone"
+ },
+ "STAT_VARIANTE_SEKUNDAERLUFTPUMPE_WERT": {
+  "L": "Secondary air pump variant",
+  "S": "SecAirVar"
+ },
+ "STAT_STARTRELAIS_AKTIV_WERT": {
+  "L": "Auto-start relay active",
+  "S": "StrtRelay"
+ },
+ "STAT_WASSERPUMPE_STROM_WERT": {
+  "L": "Current from waterpump",
+  "S": "CurrWP"
+ },
+ "STAT_0X4612_WERT": {
+  "L": "Erregerstrom Generator 1",
+  "S": "Val4612"
+ },
+ "STAT_0X4615_WERT": {
+  "L": "Kopie begrenzter Erregerstrom Generator 1",
+  "S": "Val4615"
+ },
+ "STAT_VVT_MOTORSTROM_WERT": {
+  "L": "Current for VVT actuator [A]",
+  "S": "VVTMotCurr"
+ },
+ "STAT_0X58ED_WERT": {
+  "L": "Voltage DK Poti 1 am unteren Anschlag",
+  "S": "Val58ED"
+ },
+ "RESULTNAME": {
+  "L": "INFO",
+  "S": ""
+ },
+ "STAT_VVT_EXCENTER_WERT": {
+  "L": "VVT-Excenter Istwert",
+  "S": "VVTExcAct"
+ },
+ "STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT": {
+  "L": "Mechanischer Verstellbereich VVT from Lernroutine",
+  "S": "VVTRngLearn"
+ },
+ "STAT_VVT_LAGEREGLER_SOLL_VON_TESTER_WERT": {
+  "L": "Sollwert Einlassspreizung",
+  "S": "VVTPosCtTst"
+ },
+ "STAT_0X4617_WERT": {
+  "L": "gefiltertes Generatormoment absolut",
+  "S": "Val4617"
+ },
+ "STAT_MOMENTANFORDERUNG_KUPPLUNG_WERT": {
+  "L": "Torque request from clutch",
+  "S": "TqReqCltch"
+ },
+ "STAT_DREHMOMENTABFALL_BEIM_GANGWECHSEL_WERT": {
+  "L": "Torque drop on gear change",
+  "S": "TqDropGear"
+ },
+ "STAT_0X58C8_WERT": {
+  "L": "geforderte Drehmomentänderung von der LLR (I-Anteil)",
+  "S": "Val58C8"
+ },
+ "STAT_0X58CA_WERT": {
+  "L": "PD-Anteil langsam Leerlaufregelung",
+  "S": "Val58CA"
+ },
+ "STAT_0X58CB_WERT": {
+  "L": "PD-Anteil schnell Leerlaufregelung",
+  "S": "Val58CB"
+ },
+ "STAT_0X58CC_WERT": {
+  "L": "Verlustmoment Überwachung",
+  "S": "Val58CC"
+ },
+ "STAT_0X58CD_WERT": {
+  "L": "Berechnete Wicklungstemperatur der Sekundärluftpumpe",
+  "S": "Val58CD"
+ },
+ "STAT_MOTORMOMENT_SOLL_WERT": {
+  "L": "Engine torque target",
+  "S": "EngTrqTgt"
+ },
+ "STAT_MOTORMOMENT_IST_WERT": {
+  "L": "Engine torque",
+  "S": "EngTrq"
+ },
+ "STAT_MOTORMOMENT_AKTUELL_WERT": {
+  "L": "engine torque output",
+  "S": "EngTqAct"
+ },
+ "STAT_0X58D4_WERT": {
+  "L": "Startbedingung Kraftschluss erfüllt",
+  "S": "Val58D4"
+ },
+ "STAT_0X58D6_WERT": {
+  "L": "Transition Time O2Sensor Lean2Rich (Sensor2)",
+  "S": "Val58D6"
+ },
+ "STAT_GENERATOR_SPANNUNG_BSD_SOLL_WERT": {
+  "L": "Generator target voltage via BSD [V]",
+  "S": "GenVltBSD"
+ },
+ "STAT_KL87_SPANNUNG_WERT": {
+  "L": "Kl.87 Spannung / Versorgung DME",
+  "S": "KL87Volt"
+ },
+ "STAT_UBATT_WERT": {
+  "L": "Battery voltage",
+  "S": "BattVolt"
+ },
+ "STAT_UBATT_AD_WANDLER_WERT": {
+  "L": "Batteriespannung vom AD-Wandler DME",
+  "S": "BattVltADC"
+ },
+ "STAT_0X4613_WERT": {
+  "L": "Kopierter value von zum Generator gesendeter Sollspannung Generator 1",
+  "S": "Val4613"
+ },
+ "STAT_0X5815_WERT": {
+  "L": "Batteriespannung",
+  "S": "Val5815"
+ },
+ "STAT_0X583C_WERT": {
+  "L": "Voltage Kl. 87",
+  "S": "Val583C"
+ },
+ "STAT_STEUERGERAETE_INNENTEMPERATUR_ROH_WERT": {
+  "L": "Control unit temperature raw value [V]",
+  "S": "ECUTmpRaw"
+ },
+ "STAT_0X5843_WERT": {
+  "L": "Korrekturwert der Lambdasondespannung before cat. Bank 2",
+  "S": "Val5843"
+ },
+ "STAT_0X5845_WERT": {
+  "L": "Lambda voltage pre-cat Bank1",
+  "S": "LBD_Volt_precat_1"
+ },
+ "STAT_0X5846_WERT": {
+  "L": "Voltage Pedalwertgeber 1",
+  "S": "Val5846"
+ },
+ "STAT_0X5847_WERT": {
+  "L": "Voltage Pedalwertgeber 2",
+  "S": "Val5847"
+ },
+ "STAT_0X5848_WERT": {
+  "L": "Lambda voltage pre-cat Bank2",
+  "S": "LBD_Volt_precat_2"
+ },
+ "STAT_0X5849_WERT": {
+  "L": "Lambda voltage post-cat Bank1",
+  "S": "LBD_Volt_postcat_1"
+ },
+ "STAT_KL15_SPANNUNG_ROH_WERT": {
+  "L": "Voltage Kl. 15 Rohwert",
+  "S": "KL15VltRaw"
+ },
+ "STAT_0X584B_WERT": {
+  "L": "Lambda voltage post-cat Bank1",
+  "S": "LBD_Volt_postcat_2"
+ },
+ "STAT_0X584C_WERT": {
+  "L": "Voltage Drosselklappe Potentiometer 2",
+  "S": "Val584C"
+ },
+ "STAT_0X584E_WERT": {
+  "L": "Voltage Drosselklappe Potentiometer 1",
+  "S": "Val584E"
+ },
+ "STAT_0X584F_WERT": {
+  "L": "Erkennung Bordnetzinstabilität",
+  "S": "Val584F"
+ },
+ "STAT_0X5850_WERT": {
+  "L": "Voltage Motortemperatur",
+  "S": "Val5850"
+ },
+ "STAT_0X5852_WERT": {
+  "L": "Kühlmitteltemperatur Kühlerausgang Rohwert",
+  "S": "Val5852"
+ },
+ "STAT_0X5853_WERT": {
+  "L": "Voltage Kl.87 Rohwert",
+  "S": "Val5853"
+ },
+ "STAT_0X5854_WERT": {
+  "L": "Batterietemperatur vom IBS",
+  "S": "Val5854"
+ },
+ "STAT_0X5870_WERT": {
+  "L": "Voltage DME Umgebungsdruck",
+  "S": "Val5870"
+ },
+ "STAT_0X5874_WERT": {
+  "L": "ADC-Spannung Pumpenstrom Tankdiagnose",
+  "S": "Val5874"
+ },
+ "STAT_0X5883_WERT": {
+  "L": "Voltage Klopfwerte Cylinder 1",
+  "S": "Val5883"
+ },
+ "STAT_0X5885_WERT": {
+  "L": "Voltage Klopfwerte Cylinder 3",
+  "S": "Val5885"
+ },
+ "STAT_0X5886_WERT": {
+  "L": "[3] Referenzpegel Klopfregelung, 16bit",
+  "S": "Val5886"
+ },
+ "STAT_0X5888_WERT": {
+  "L": "Voltage Klopfwerte Cylinder 4",
+  "S": "Val5888"
+ },
+ "STAT_GENERATOR_SPANNUNG_SOLL_WERT": {
+  "L": "Generator Sollspannung",
+  "S": "GenVltTgt"
+ },
+ "STAT_SPANNUNGSOFFSET_SIGNALPFAD1_WERT": {
+  "L": "Voltagesoffset Signalpfad CJ120 1",
+  "S": "VltOffSP1"
+ },
+ "STAT_SPANNUNGSOFFSET_SIGNALPFAD2_WERT": {
+  "L": "Voltagesoffset Signalpfad CJ120 2",
+  "S": "VltOffSP2"
+ },
+ "STAT_VVT_SPANNUNGSVERSORGUNG_WERT": {
+  "L": "VVT Spannungsversorgung",
+  "S": "VVTPwrVlt"
+ },
+ "STAT_VVT_SENSORVERSORGUNGSSPANNUNG_WERT": {
+  "L": "VVT sensor supply voltage",
+  "S": "VVTSnsVlt"
+ },
+ "STAT_SPORTSCHALTER_SPANNUNG_WERT": {
+  "L": "Voltage Sportschalter",
+  "S": "SptSwVolt"
+ },
+ "STAT_WASSERPUMPE_SPANNUNG_WERT": {
+  "L": "empf. Spannung von BSS-Wasserpumpe",
+  "S": "WPmpVolt"
+ },
+ "STAT_0X58F5_WERT": {
+  "L": "Eingangssignal Rückführregler 1",
+  "S": "Val58F5"
+ },
+ "STAT_0X58F6_WERT": {
+  "L": "Eingangssignal Rückführregler 2",
+  "S": "Val58F6"
+ },
+ "STAT_PWG1_VERSORGUNGSSPANNUNG_WERT": {
+  "L": "Versorgung Fahrwertgeber 1",
+  "S": "APP1SupVlt"
+ },
+ "STAT_PWG2_VERSORGUNGSSPANNUNG_WERT": {
+  "L": "Versorgung Fahrwertgeber 2",
+  "S": "APP2SupVlt"
+ },
+ "STAT_VVT_VERSORGUNGSSPANNUNG_ROH_WERT": {
+  "L": "VVT supply voltage raw value",
+  "S": "VVTVltRaw"
+ },
+ "STAT_VVT_VERSORGUNGSSPANNUNG_WERT": {
+  "L": "VVT supply voltage",
+  "S": "VVTVolt"
+ },
+ "STAT_PWG1_SPANNUNG_WERT": {
+  "L": "Pedal 1 Position Voltage",
+  "S": "Pedal1_pos"
+ },
+ "STAT_PWG2_SPANNUNG_WERT": {
+  "L": "Pedal 2 Position Voltage",
+  "S": "Pedal2_pos"
+ },
+ "STAT_DK1_SPANNUNG_WERT": {
+  "L": "Throttle 1 pos. voltage",
+  "S": "Thr1PosVolt"
+ },
+ "STAT_DK2_SPANNUNG_WERT": {
+  "L": "Throttle 2 pos. voltage",
+  "S": "Thr2PosVolt"
+ },
+ "STAT_KUEHLMITTELTEMPERATUR_SPANNUNG_WERT": {
+  "L": "Voltage Motortemperatur",
+  "S": "CoolTmpVlt"
+ },
+ "STAT_KUEHLERAUSLASSTEMPERATUR_SPANNUNG_WERT": {
+  "L": "Voltage, coolant temperature, radiator outlet [V]",
+  "S": "RadOutVlt"
+ },
+ "STAT_UMGEBUNGSDRUCK_SPANNUNG_WERT": {
+  "L": "Atmospheric pressure sensor voltage",
+  "S": "AtmPresVlt"
+ },
+ "STAT_LUFTMASSE_SPANNUNG_WERT": {
+  "L": "Air mass sensor voltage",
+  "S": "MAFVolt"
+ },
+ "STAT_SEKUNDAERLUFT_SPANNUNG_WERT": {
+  "L": "Voltage secondary air [V]",
+  "S": "SecAirVlt"
+ },
+ "STAT_STEUERGERAETE_INNENTEMPERATUR_SPANNUNG_WERT": {
+  "L": "Voltage SG-Innentemperatur",
+  "S": "ECUTmpVlt"
+ },
+ "STAT_0X5A0F_WERT": {
+  "L": "Voltage Kl.15",
+  "S": "Val5A0F"
+ },
+ "STAT_KL15_SPANNUNG_WERT": {
+  "L": "Lastsignal SPG",
+  "S": "KL15Volt"
+ },
+ "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT": {
+  "L": "Lambda probe voltage pre-cat Bank 1",
+  "S": "Lam-V B1"
+ },
+ "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT": {
+  "L": "Lambda probe voltage pre-cat Bank 2",
+  "S": "Lam-V B2"
+ },
+ "STAT_SONDENSPANNUNG_NACHKAT_BANK1_WERT": {
+  "L": "Lambda probe voltage post-cat Bank 1",
+  "S": "Lam-V NK1"
+ },
+ "STAT_SONDENSPANNUNG_NACHKAT_BANK2_WERT": {
+  "L": "Lambda probe voltage post-cat Bank 2",
+  "S": "Lam-V NK2"
+ },
+ "STAT_DMTL_SPANNUNG_WERT": {
+  "L": "Voltage Pumpenstrom Tankdiagnose",
+  "S": "DMTLVolt"
+ },
+ "STAT_KLOPFWERT_ZYL1_SPANNUNG_WERT": {
+  "L": "Knock voltage Cylinder 1",
+  "S": "KnockVoltCyl1"
+ },
+ "STAT_KLOPFWERT_ZYL2_SPANNUNG_WERT": {
+  "L": "Knock voltage Cylinder 2",
+  "S": "KnockVoltCyl2"
+ },
+ "STAT_KLOPFWERT_ZYL3_SPANNUNG_WERT": {
+  "L": "Knock voltage Cylinder 3",
+  "S": "KnockVoltCyl3"
+ },
+ "STAT_KLOPFWERT_ZYL4_SPANNUNG_WERT": {
+  "L": "Knock voltage Cylinder 4",
+  "S": "KnockVoltCyl4"
+ },
+ "STAT_KLOPFWERT_ZYL5_SPANNUNG_WERT": {
+  "L": "Knock voltage Cylinder 5",
+  "S": "KnockVoltCyl5"
+ },
+ "STAT_KLOPFWERT_ZYL6_SPANNUNG_WERT": {
+  "L": "Knock voltage Cylinder 6",
+  "S": "KnockVoltCyl6"
+ },
+ "STAT_KLOPFSIGNAL_ZYL1_WERT": {
+  "L": "Knock sensor signal Cylinder 1",
+  "S": "KnkSigC1"
+ },
+ "STAT_KLOPFSIGNAL_ZYL6_WERT": {
+  "L": "Knock sensor signal Cylinder 6",
+  "S": "KnkSigC6"
+ },
+ "STAT_SAUGROHRDRUCK_SPANNUNG_WERT": {
+  "L": "Intake manifold pressure voltage",
+  "S": "MAPVolt"
+ },
+ "STAT_BREMSDRUCK_WERT": {
+  "L": "Brake pressure",
+  "S": "BrkPress"
+ },
+ "STAT_0X58FB_WERT": {
+  "L": "Zähler Drehzahlerhöhungen TEV- Funktionstest",
+  "S": "Val58FB"
+ },
+ "STAT_LUFTMASSE_GRAMM_PRO_SEKUNDE_WERT": {
+  "L": "relative Air mass (calc. load value) nach SAE J1979",
+  "S": "MAFgps"
+ },
+ "STAT_BETRIEBSSTUNDENZAEHLER_WERT": {
+  "L": "Ergebnis",
+  "S": "OpHours"
+ },
+ "STAT_0X4201_WERT": {
+  "L": "Athmosperic pressure",
+  "S": "AtmPress"
+ },
+ "STAT_SAUGROHRDRUCK_WERT": {
+  "L": "Intake manifold pressure",
+  "S": "MAP"
+ },
+ "STAT_LADEDRUCK_WERT": {
+  "L": "Boost pressure",
+  "S": "BoostPrs"
+ },
+ "STAT_0X5834_WERT": {
+  "L": "Athmospecic press",
+  "S": "AtmPress"
+ },
+ "STAT_0X5A26_WERT": {
+  "L": "Saugrohrdruck",
+  "S": "Val5A26"
+ },
+ "STAT_0X5801_WERT": {
+  "L": "Athmosperic pressure",
+  "S": "Atmo press"
+ },
+ "STAT_KRAFTSTOFFDRUCK_WERT": {
+  "L": "Fuel pressure",
+  "S": "Fuel pres."
+ },
+ "STAT_SAUGROHRDRUCK_2_WERT": {
+  "L": "Saugrohrdruck",
+  "S": "MAP2"
+ },
+ "STAT_LUFTMASSE_WERT": {
+  "L": "Air mass",
+  "S": "AirMass"
+ },
+ "STAT_0X5812_WERT": {
+  "L": "Air mass",
+  "S": "AirMass"
+ },
+ "STAT_TANKENTLUEFTUNG_DURCHFLUSS_SOLL_WERT": {
+  "L": "Tank ventilation air flow target in intake manifold",
+  "S": "TankVentAFT"
+ },
+ "STAT_LUFTMASSE_MITTLERE_MINIMALE_WERT": {
+  "L": "Mittlere Diagnosewert minimale Air mass",
+  "S": "MAFMeanMin"
+ },
+ "STAT_DIFFERENZ_MAX_MIN_SAF_WERT": {
+  "L": "Differenz zwischen Maximum und Minimum SAF",
+  "S": "SAFMaxMin"
+ },
+ "STAT_0X58E1_WERT": {
+  "L": "Abgleich DK-Modell (Offset)",
+  "S": "Val58E1"
+ },
+ "STAT_0X58E3_WERT": {
+  "L": "Abgleich EV-Modell (Offset)",
+  "S": "Val58E3"
+ },
+ "STAT_LUFTMASSE_SEKUNDAERLUFT_WERT": {
+  "L": "Secondary air mass flow",
+  "S": "SecAirMas"
+ },
+ "STAT_WEG_SEIT_SERVICE_WERT": {
+  "L": "KM reading since last service",
+  "S": "KMSinSrvc"
+ },
+ "STAT_0X4410_WERT": {
+  "L": "Restweg from Permittivität abgeleitet",
+  "S": "RemPermitv"
+ },
+ "STAT_0X4411_WERT": {
+  "L": "Restweg from Kraftstoffverbrauch abgeleitet",
+  "S": "RemFuelCns"
+ },
+ "STAT_KILOMETERSTAND_WERT": {
+  "L": "Odometer reading",
+  "S": "Odometer2"
+ },
+ "STAT_0X5867_WERT": {
+  "L": "Kilometer reading",
+  "S": "Val5867"
+ },
+ "STAT_FAHRSTRECKE_MIL_AN_WERT": {
+  "L": "Odometer for kilometers driven with MIL ON [km]",
+  "S": "DistMILOn"
+ },
+ "STAT_GESCHWINDIGKEIT_2_WERT": {
+  "L": "Speed",
+  "S": "Speed"
+ },
+ "STAT_GESCHWINDIGKEIT_WERT": {
+  "L": "Vehicle Speed",
+  "S": "Speed"
+ },
+ "STAT_KRAFTSTOFFTANK_FUELLSTAND_WERT": {
+  "L": "Tank filling status",
+  "S": "TankStatus"
+ },
+ "STAT_KRAFTSTOFF_ANFORDERUNG_AN_PUMPE_WERT": {
+  "L": "EKP-Sollvolumenstrom",
+  "S": "FuelPmpReq"
+ },
+ "STAT_0X5859_WERT": {
+  "L": "DMTL Strom Referenzleck",
+  "S": "Val5859"
+ },
+ "STAT_0X585A_WERT": {
+  "L": "DMTL Strom Grobleck",
+  "S": "Val585A"
+ },
+ "STAT_0X585B_WERT": {
+  "L": "Pumpenstrom am Ende der Feinstleckmessung",
+  "S": "Val585B"
+ },
+ "STAT_PUMPENSTROM_BEI_DMTL_PUMPENPRUEFUNG_WERT": {
+  "L": "Pumpenstrom Tankdiagnose",
+  "S": "DMTLPmpCur"
+ },
+ "STAT_LUFTMASSE_PRO_HUB_WERT": {
+  "L": "Air mass per Cylinder",
+  "S": "MAFperStk"
+ },
+ "STAT_ABWEICHUNG_DK_POTI1_WERT": {
+  "L": "Throttle potentiometer 1 deviation",
+  "S": "ThrtDev1"
+ },
+ "STAT_ABWEICHUNG_DK_POTI2_WERT": {
+  "L": "Throttle potentiometer 2 deviation",
+  "S": "ThrtDev2"
+ },
+ "STAT_0X58BC_WERT": {
+  "L": "Relative air filling",
+  "S": "Val58BC"
+ },
+ "STAT_0X58BD_WERT": {
+  "L": "relativer Füllstand Kraftstofftank",
+  "S": "Val58BD"
+ },
+ "STAT_ADAPTION_ADDITIV_BANK1_WERT": {
+  "L": "LTFT additive Bank 1",
+  "S": "LTFT add. B1"
+ },
+ "STAT_ADAPTION_ADDITIV_BANK2_WERT": {
+  "L": "LTFT additive Bank 2",
+  "S": "LTFT add. B2"
+ },
+ "STAT_0X5A8D_WERT": {
+  "L": "LTFT additive idle Bank 1",
+  "S": "Val5A8D"
+ },
+ "STAT_0X5A8E_WERT": {
+  "L": "LTFT additive idle Bank 2",
+  "S": "Val5A8E"
+ },
+ "STAT_ZEIT_MOTOR_STEHT_WERT": {
+  "L": "Abstellzeit",
+  "S": "EngOffTm"
+ },
+ "STAT_0X5825_WERT": {
+  "L": "Abstellzeit",
+  "S": "Val5825"
+ },
+ "STAT_ZEIT_MIT_RUHESTROM_80_200_WERT": {
+  "L": "Zeit mit Ruhestrom 80 - 200 mA",
+  "S": "IdleCur80"
+ },
+ "STAT_ZEIT_MIT_RUHESTROM_200_1000_WERT": {
+  "L": "Zeit mit Ruhestrom 200 - 1000 mA",
+  "S": "IdleCur200"
+ },
+ "STAT_ZEIT_MIT_RUHESTROM_GROESER_1000_WERT": {
+  "L": "Time with quiescent current greater than 1000 mA [min]",
+  "S": "IdleCur1k"
+ },
+ "STAT_MOTORABSTELLZEIT_WERT": {
+  "L": "Engine shutdown time",
+  "S": "EngOffTm2"
+ },
+ "STAT_FUNKENBRENNDAUER_ZYL1_WERT": {
+  "L": "Spark burn duration Cylinder 1",
+  "S": "SprkDur1"
+ },
+ "STAT_FUNKENBRENNDAUER_ZYL5_WERT": {
+  "L": "Spark burn duration Cylinder 5",
+  "S": "SprkDur5"
+ },
+ "STAT_FUNKENBRENNDAUER_ZYL3_WERT": {
+  "L": "Spark burn duration Cylinder 3",
+  "S": "SprkDur3"
+ },
+ "STAT_FUNKENBRENNDAUER_ZYL6_WERT": {
+  "L": "Spark burn duration Cylinder 6",
+  "S": "SprkDur6"
+ },
+ "STAT_FUNKENBRENNDAUER_ZYL2_WERT": {
+  "L": "Spark burn duration Cylinder 2",
+  "S": "SprkDur2"
+ },
+ "STAT_FUNKENBRENNDAUER_ZYL4_WERT": {
+  "L": "Spark burn duration Cylinder 4",
+  "S": "SprkDur4"
+ },
+ "STAT_EINSPRITZZEIT_ZYL1_WERT": {
+  "L": "Injection time Cylinder 1",
+  "S": "InjTmCyl1"
+ },
+ "STAT_EINSPRITZZEIT_ZYL2_WERT": {
+  "L": "Injection time Cylinder 2",
+  "S": "InjTmCyl2"
+ },
+ "STAT_EINSPRITZZEIT_ZYL3_WERT": {
+  "L": "Injection time Cylinder 3",
+  "S": "InjTmCyl3"
+ },
+ "STAT_EINSPRITZZEIT_ZYL4_WERT": {
+  "L": "Injection time Cylinder 4",
+  "S": "InjTmCyl4"
+ },
+ "STAT_EINSPRITZZEIT_ZYL5_WERT": {
+  "L": "Injection time Cylinder 5",
+  "S": "InjTmCyl5"
+ },
+ "STAT_EINSPRITZZEIT_ZYL6_WERT": {
+  "L": "Injection time Cylinder 6",
+  "S": "InjTmCyl6"
+ },
+ "STAT_0X585C_WERT": {
+  "L": "Widerstand Lambdasonde hinter Katalysator Bank 1",
+  "S": "Val585C"
+ },
+ "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_WERT": {
+  "L": "Widerstand Lambdasonde hinter Katalysator Bank 2",
+  "S": "LSResNK2"
+ },
+ "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT1_UNTERES_BYTE_WERT": {
+  "L": "unteres Byte Widerstand Lambdasonde hinter Katalysator Bank 1",
+  "S": "LSResNK1Lo"
+ },
+ "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_UNTERES_BYTE_WERT": {
+  "L": "unteres Byte Widerstand Lambdasonde hinter Katalysator Bank 2",
+  "S": "LSResNK2Lo"
+ },
+ "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_WERT": {
+  "L": "Widerstand Lambdasonde before cat. Bank 1",
+  "S": "LSResVK1"
+ },
+ "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_WERT": {
+  "L": "Widerstand Lambdasonde before cat. Bank 2",
+  "S": "LSResVK2"
+ },
+ "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_UNTERES_BYTE_WERT": {
+  "L": "untere Byte Widerstand Lambdasonde before cat. Bank 1",
+  "S": "LSResVK1Lo"
+ },
+ "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_UNTERES_BYTE_WERT": {
+  "L": "untere Byte Widerstand Lambdasonde before cat. Bank 2",
+  "S": "LSResVK2Lo"
+ },
+ "STAT_MOTORDREHZAHL_WERT": {
+  "L": "RPM",
+  "S": "RPM"
+ },
+ "STAT_LEERLAUFDREHZAHL_SOLL_WERT": {
+  "L": "Idle target RPM",
+  "S": "Idle tgt RPM"
+ },
+ "STAT_N_AUFLOESUNG_WERT": {
+  "L": "RPM",
+  "S": "RPM"
+ },
+ "STAT_MOTORDREHZAHL_N32_WERT": {
+  "L": "Engine RPM",
+  "S": "RPMN32"
+ },
+ "STAT_0X5819_WERT": {
+  "L": "Motor RPM",
+  "S": "MotorRPM"
+ },
+ "STAT_0X583E_WERT": {
+  "L": "Sollwert Drosselklappenwinkel der Notluftposition",
+  "S": "Val583E"
+ },
+ "STAT_0X58B8_WERT": {
+  "L": "Drehzahl Überwachung",
+  "S": "Val58B8"
+ },
+ "STAT_0X58C0_WERT": {
+  "L": "Abgasmassenstrom ohne Kraftstoffanteil Bank2",
+  "S": "Val58C0"
+ },
+ "STAT_LEERLAUF_SOLLDREHZAHLABWEICHUNG_WERT": {
+  "L": "Idle target RPM deviation monitor",
+  "S": "IdleRPMDev"
+ },
+ "STAT_DREHZAHL_MAXIMAL_BEI_ZUENDAUSSETZER_WERT": {
+  "L": "Maximum engine speed during misfires [rpm]",
+  "S": "MaxRPMMisf"
+ },
+ "STAT_DREHZAHL_MINIMAL_BEI_ZUENDAUSSETZER_WERT": {
+  "L": "Minimum engine speed during misfires [rpm]",
+  "S": "MinRPMMisf"
+ },
+ "STAT_DREHZAHLGRADIENT_WERT": {
+  "L": "Drehzahlgradient",
+  "S": "RPMGrad"
+ },
+ "STAT_0X4616_WERT": {
+  "L": "Kopie Generator 1 LR Vorgabe auf Bus gelegt",
+  "S": "Val4616"
+ },
+ "STAT_0X5800_WERT": {
+  "L": "Zeit nach Start",
+  "S": "TmAftrSrt"
+ },
+ "STAT_ZEIT_SEIT_STARTENDE_WERT": {
+  "L": "Zeit seit Startende",
+  "S": "TmSinStart"
+ },
+ "STAT_ZEIT_DMTL_LECKMESSUNG_WERT": {
+  "L": "aktuelle Zeit Leckmessung",
+  "S": "DMTLLkTm"
+ },
+ "STAT_VVT_EXCENTER_SOLL_WERT": {
+  "L": "VVT-Excenter Sollwert",
+  "S": "VVTExcTgt"
+ },
+ "STAT_VVT_LAGEREGLER_SOLL_WERT": {
+  "L": "Target value for position controller from the tester [°]",
+  "S": "VVTPosCtTgt"
+ },
+ "STAT_VVT_ISTWINKEL_WERT": {
+  "L": "VVT actual angle",
+  "S": "VVTActAng"
+ },
+ "STAT_VVT_SENSORDIFFERENZ_WERT": {
+  "L": "VVT sensor difference",
+  "S": "VVTSnsDif"
+ },
+ "STAT_ANSAUGLUFTTEMPERATUR_WERT": {
+  "L": "Air intake temperature",
+  "S": "IATemp"
+ },
+ "STAT_UMGEBUNGSTEMPERATUR_WERT": {
+  "L": "Result",
+  "S": "AmbTemp"
+ },
+ "STAT_KUEHLMITTELTEMPERATUR_WERT": {
+  "L": "Coolant temperature",
+  "S": "Coolant"
+ },
+ "STAT_0X4301_WERT": {
+  "L": "Kühlerauslasstemperatur",
+  "S": "CoolOutTmp"
+ },
+ "STAT_WASSERPUMPE_ELEKTRONIK_TEMPERATUR_WERT": {
+  "L": "empf. Temperatur von BSS-Wasserpumpe",
+  "S": "WPmpElcTmp"
+ },
+ "STAT_OELTEMPERATUR_WERT": {
+  "L": "Oil temperature",
+  "S": "Oil temp"
+ },
+ "STAT_OELSENSOR_TEMPERATUR_WERT": {
+  "L": "Oil sensor temperature [°C]",
+  "S": "OilSnsTmp"
+ },
+ "STAT_GENERATOR_ELEKTRONIKTEMPERATUR_WERT": {
+  "L": "Chip temperature of the controller (BSD, LIN, SGR - resolution 1 °C) [°C]",
+  "S": "GenChipTmp"
+ },
+ "STAT_0X4806_WERT": {
+  "L": "Steuergeräte-Innentemperatur",
+  "S": "ECUIntTmp2"
+ },
+ "STAT_0X5805_WERT": {
+  "L": "Kühlmitteltemperatur OBD",
+  "S": "CoolTmpOBD"
+ },
+ "STAT_ANSAUGLUFTTEMPERATUR_LAW_WERT": {
+  "L": "Ansauglufttemperatur",
+  "S": "IAT_LAW"
+ },
+ "STAT_0X5817_WERT": {
+  "L": "Athmosperic pressure",
+  "S": "AtmPress"
+ },
+ "STAT_0X581E_WERT": {
+  "L": "Ansauglufttemperatur",
+  "S": "IATMeas"
+ },
+ "STAT_0X581F_WERT": {
+  "L": "Kilometerstand bei der Erkennung Ölniveau am Minimum",
+  "S": "CoolTmpMes"
+ },
+ "STAT_0X5820_WERT": {
+  "L": "Kühlmitteltemperatur Kühlerausgang",
+  "S": "RadOutMes"
+ },
+ "STAT_0X5821_WERT": {
+  "L": "DME Temp",
+  "S": "DMETemp"
+ },
+ "STAT_0X5822_WERT": {
+  "L": "Motor oil temp.",
+  "S": "MotOilTemp"
+ },
+ "STAT_0X5824_WERT": {
+  "L": "environment temperature",
+  "S": "AmbTmpMes"
+ },
+ "STAT_0X5833_WERT": {
+  "L": "Lambda corrected Bank2",
+  "S": "LBD_Corr_bank2"
+ },
+ "STAT_0X583A_WERT": {
+  "L": "Ansaugluft-Temperatur bei Start",
+  "S": "IATatSrt"
+ },
+ "STAT_MOTORTEMPERATUR_BEIM_START_WERT": {
+  "L": "Motortemperatur beim Start",
+  "S": "EngTmpSrt"
+ },
+ "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT1_WERT": {
+  "L": "Lambda ceramic temp pre-cat Bank 1",
+  "S": "LSCermVK1"
+ },
+ "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT2_WERT": {
+  "L": "Lambda ceramic temp pre-cat Bank 2",
+  "S": "LSCermVK2"
+ },
+ "STAT_0X5896_WERT": {
+  "L": "EGT post-cat Bank 1 (calc from model)",
+  "S": "EGTPostCatBk1"
+ },
+ "STAT_0X5897_WERT": {
+  "L": "EGT post-cat Bank 2 (calc from model)",
+  "S": "EGTPostCatBk2"
+ },
+ "STAT_VVT_MOTORTEMPERATUR_WERT": {
+  "L": "VVT Motortemperatur",
+  "S": "VVTMotTmp"
+ },
+ "STAT_VVT_ENDSTUFENTEMPERATUR_WERT": {
+  "L": "VVT-Endstufentemperatur from Modell",
+  "S": "VVTStageTmp"
+ },
+ "STAT_0X58EC_WERT": {
+  "L": "Momentenpfad",
+  "S": "WPmpElcTmp"
+ },
+ "STAT_KUEHLERAUSLASSTEMPERATUR_WERT": {
+  "L": "Coolant temperature (sensor value) after low-pass filtering [°C]",
+  "S": "RadOutTmp"
+ },
+ "STAT_STEUERGERAETE_INNENTEMPERATUR_WERT": {
+  "L": "Control unit internal temperature [°C]",
+  "S": "ECUIntTmp"
+ },
+ "STAT_ANSAUGLUFTTEMPERATUR1_ROH_WERT": {
+  "L": "Air intake temperature raw value 1",
+  "S": "IATRaw1"
+ },
+ "STAT_KUEHLWASSERTEMPERATUR_ROH_WERT": {
+  "L": "Raw value cooling water temperature [°C]",
+  "S": "CoolTmpRaw"
+ },
+ "STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT": {
+  "L": "Sollwert Einlassspreizung",
+  "S": "VVTInSpTgt"
+ },
+ "STAT_POSITION_NOCKENWELLE_EINLASS_WERT": {
+  "L": "Camshaft pos. intake",
+  "S": "CamInPos"
+ },
+ "STAT_POSITION_NOCKENWELLE_AUSLASS_WERT": {
+  "L": "Camshaft pos exhaust",
+  "S": "CamExPos"
+ },
+ "STAT_NW_EINLASSSPREIZUNG_WERT": {
+  "L": "Camshaft inlet spread",
+  "S": "CamInSprd"
+ },
+ "STAT_NW_AUSLASSSPREIZUNG_WERT": {
+  "L": "Camshaft outlet spread",
+  "S": "CamExSprd"
+ },
+ "STAT_NW_NORMSPREIZUNG_AUSLASS_WERT": {
+  "L": "Normspreizung Auslass",
+  "S": "CamExNorm"
+ },
+ "STAT_NW_NORMSPREIZUNG_EINLASS_WERT": {
+  "L": "Normspreizung Einlass",
+  "S": "CamInNorm"
+ },
+ "STAT_ZUENDZEITPUNKT_ZYL1_WERT": {
+  "L": "Ignition angle Cyl1",
+  "S": "IgnTimC1"
+ },
+ "STAT_0X581A_WERT": {
+  "L": "Nockenwelle Einlass",
+  "S": "CamInOBD"
+ },
+ "STAT_0X581B_WERT": {
+  "L": "Sollwinkel Nockenwelle Einlass öffnet",
+  "S": "CamInTgtOBD"
+ },
+ "STAT_0X581C_WERT": {
+  "L": "Nockenwelle Auslass",
+  "S": "CamExOBD"
+ },
+ "STAT_0X581D_WERT": {
+  "L": "Nockenwelle Auslass Sollwert",
+  "S": "CamExTgtOBD"
+ },
+ "STAT_ZUENDWINKEL_ZYL1_WERT": {
+  "L": "Ignition angle Cyl.1",
+  "S": "IgnAnglC1"
+ },
+ "STAT_NW_AUSLASS_SOLL_WERT": {
+  "L": "Outlet Camshaft Target",
+  "S": "CamExTgt"
+ },
+ "STAT_GEBERRAD_ADAPTION_VSA_WERT": {
+  "L": "vsa_adp_fl",
+  "S": "WhlAdpVSA"
+ },
+ "STAT_GEBERRAD_ADAPTION_VSE_WERT": {
+  "L": "vse_adp_fl",
+  "S": "WhlAdpVSE"
+ },
+ "STAT_DROSSELKLAPPENWINKEL_WERT": {
+  "L": "Throttle pos.",
+  "S": "ThrottlePos"
+ },
+ "STAT_DROSSELKLAPPENWINKEL_SOLL_WERT": {
+  "L": "Throttle pos. target",
+  "S": "ThrtPosTgt"
+ },
+ "STAT_DROSSELKLAPPE_SENSOR1_WERT": {
+  "L": "Throttle sensor 1",
+  "S": "ThrSens1"
+ },
+ "STAT_0X583F_WERT": {
+  "L": "Throttle pos. target",
+  "S": "ThrPosTgt"
+ },
+ "STAT_0X5858_WERT": {
+  "L": "Drosselklappenwinkel bezogen auf unteren Anschlag",
+  "S": "ThrtActOBD"
+ },
+ "STAT_DK_WINKEL_SOLL_WERT": {
+  "L": "Drosselklappe Sollwert",
+  "S": "ThrtAngTgt"
+ },
+ "STAT_LAUFUNRUHE_SEGMENTZEIT_WERT": {
+  "L": "Laufunruhe Segmentzeit",
+  "S": "RunRghSeg"
+ },
+ "STAT_LAUFUNRUHE_ZYL1_WERT": {
+  "L": "lutskzyl[0]",
+  "S": "RunRghC1"
+ },
+ "STAT_LAUFUNRUHE_ZYL2_WERT": {
+  "L": "lutskzyl[3]",
+  "S": "RunRghC2"
+ },
+ "STAT_LAUFUNRUHE_ZYL3_WERT": {
+  "L": "lutskzyl[1]",
+  "S": "RunRghC3"
+ },
+ "STAT_LAUFUNRUHE_ZYL4_WERT": {
+  "L": "lutskzyl[2]",
+  "S": "RunRghC4"
+ },
+ "STAT_LAUFUNRUHE_ZYL5_WERT": {
+  "L": "[1] Laufunruhe Cylinder 5",
+  "S": "RunRghC5"
+ },
+ "STAT_LAUFUNRUHE_ZYL6_WERT": {
+  "L": "[3] Laufunruhe Cylinder 6",
+  "S": "RunRghC6"
+ },
+ "﻿_STATUS_FASTA_EISYGD": {
+  "L": "Control and read Eisy adaptation values (throttled)"
+ },
+ "_STATUS_FASTA_EISYGD": {
+  "S": "Control and read Eisy adaptation values (throttled)"
+ },
+ "_STATUS_FASTA_EISYUGD": {
+  "L": "Control and read Eisy adaptation values (unthrottled)",
+  "S": "Control and read Eisy adaptation values (unthrottled)"
+ },
+ "_STATUS_FASTA_KRANN": {
+  "L": "Control and read crane adaptation values",
+  "S": "Control and read crane adaptation values"
+ },
+ "_STATUS_FASTA_TECU": {
+  "L": "Reading the DME temperature statistics",
+  "S": "Reading the DME temperature statistics"
+ },
+ "_STATUS_INPA_EISYGD": {
+  "L": "Control and read Eisy adaptation values (throttled)",
+  "S": "Control and read Eisy adaptation values (throttled)"
+ },
+ "_STATUS_INPA_EISYUGD": {
+  "L": "Control and read Eisy adaptation values (unthrottled)",
+  "S": "Control and read Eisy adaptation values (unthrottled)"
+ },
+ "_STATUS_INPA_KRANN": {
+  "L": "Control and read crane adaptation values",
+  "S": "Control and read crane adaptation values"
+ },
+ "_STATUS_OBD_MODE_01": {
+  "L": "OBD mode 01 - Current powertrain data",
+  "S": "OBD mode 01 - Current powertrain data"
+ },
+ "_STATUS_OBD_MODE_03": {
+  "L": "OBD mode 03 - Stored emission-related DTCs",
+  "S": "OBD mode 03 - Stored emission-related DTCs"
+ },
+ "_STATUS_OBD_MODE_07": {
+  "L": "OBD mode 07 - Pending emission-related DTCs",
+  "S": "OBD mode 07 - Pending emission-related DTCs"
+ },
+ "AIF_LESEN": {
+  "L": "Reading the user information field",
+  "S": "Reading the user information field"
+ },
+ "AUTHENTISIERUNG_START": {
+  "L": "Verify authentication",
+  "S": "Verify authentication"
+ },
+ "AUTHENTISIERUNG_ZUFALLSZAHL_LESEN": {
+  "L": "Authentication: Read random number of the SG",
+  "S": "Authentication: Read random number of the SG"
+ },
+ "C_AEI_LESEN": {
+  "L": "Read the change index of the coding data",
+  "S": "Read the change index of the coding data"
+ },
+ "C_C_LESEN": {
+  "L": "Read encoding data",
+  "S": "Read encoding data"
+ },
+ "C_CI_LESEN": {
+  "L": "Read the coding index",
+  "S": "Read the coding index"
+ },
+ "C_FG_LESEN": {
+  "L": "Read chassis number",
+  "S": "Read chassis number"
+ },
+ "CBS_DATEN_LESEN": {
+  "L": "Reading CBS data (for CBS versions 1-3)",
+  "S": "Reading CBS data (for CBS versions 1-3)"
+ },
+ "CBS_INFO": {
+  "L": "CBS version",
+  "S": "CBS version"
+ },
+ "COD_AEIND_LESEN": {
+  "L": "Read the change index of the coding data",
+  "S": "Read the change index of the coding data"
+ },
+ "DATEN_REFERENZ_LESEN": {
+  "L": "Reading the data reference",
+  "S": "Reading the data reference"
+ },
+ "DIAGNOSEPROTOKOLL_LESEN": {
+  "L": "Diagnostic protocols",
+  "S": "Diagnostic protocols"
+ },
+ "DME_STARTWERT_ABGLEICH": {
+  "L": "Copies the ISN to both rolling codes.",
+  "S": "Copies the ISN to both rolling codes."
+ },
+ "EWS_EMPFANG": {
+  "L": "Read EWS reception status",
+  "S": "Read EWS reception status"
+ },
+ "EWS_STARTWERT": {
+  "L": "Read EWS reception status",
+  "S": "Read EWS reception status"
+ },
+ "EWS_STARTWERTPROGRAMMIERUNG": {
+  "L": "EWS initial value",
+  "S": "EWS initial value"
+ },
+ "EWS_STARTWERTRUECKSETZUNG": {
+  "L": "EWS initial value",
+  "S": "EWS initial value"
+ },
+ "FLASH_BLOCKLAENGE_LESEN": {
+  "L": "Reading the maximum block length during flashing",
+  "S": "Reading the maximum block length during flashing"
+ },
+ "FLASH_PARAMETER_LESEN": {
+  "L": "Returns the SG-specific flash parameters",
+  "S": "Returns the SG-specific flash parameters"
+ },
+ "FLASH_PROGRAMMIER_STATUS_LESEN": {
+  "L": "Read the programming status of the SG",
+  "S": "Read the programming status of the SG"
+ },
+ "FLASH_ZEITEN_LESEN": {
+  "L": "Reading the flash erase time, signature test time,",
+  "S": "Reading the flash erase time, signature test time,"
+ },
+ "FS_HEX_LESEN": {
+  "L": "Read fault memory as hex dump",
+  "S": "Read fault memory as hex dump"
+ },
+ "FS_LESEN": {
+  "L": "Read fault codes",
+  "S": "Read fault codes"
+ },
+ "FS_LESEN_DETAIL": {
+  "L": "Read error memory (one error / all details)",
+  "S": "Read error memory (one error / all details)"
+ },
+ "FS_LESEN_FREEZE_FRAME": {
+  "L": "Read fault memory with SAE values, environmental and P-code",
+  "S": "Read fault memory with SAE values, environmental and P-code"
+ },
+ "FS_LESEN_HEX": {
+  "L": "Read fault memory as hex dump",
+  "S": "Read fault memory as hex dump"
+ },
+ "FS_LESEN_TEXT": {
+  "L": "Read fault codes",
+  "S": "Read fault codes"
+ },
+ "HARDWARE_REFERENZ_LESEN": {
+  "L": "Reading the hardware reference",
+  "S": "Reading the hardware reference"
+ },
+ "HS_LESEN": {
+  "L": "Read history snapshot",
+  "S": "Read history snapshot"
+ },
+ "INFO": {
+  "L": "Information about SGBD",
+  "S": "Information about SGBD"
+ },
+ "INNENTEMP_LESEN": {
+  "L": "Read interior temperature",
+  "S": "Read interior temperature"
+ },
+ "KRAFTSTOFFVERBRAUCH_LESEN": {
+  "L": "Read fuel consumption",
+  "S": "Read fuel consumption"
+ },
+ "LESEN_SYSTEMCHECK_SLS": {
+  "L": "System diagnostic status SLS",
+  "S": "System diagnostic status SLS"
+ },
+ "LESEN_SYSTEMCHECK_TEVSYS": {
+  "L": "Status System Test TEV",
+  "S": "Status System Test TEV"
+ },
+ "MESSWERTBLOCK_LESEN": {
+  "L": "READ MEASURING VALUE BLOCK",
+  "S": "READ MEASURING VALUE BLOCK"
+ },
+ "PHYSIKALISCHE_HW_NR_LESEN": {
+  "L": "Reading the physical hardware number",
+  "S": "Reading the physical hardware number"
+ },
+ "PRUEFCODE_LESEN": {
+  "L": "Read test code data in hexadecimal format",
+  "S": "Read test code data in hexadecimal format"
+ },
+ "PRUEFSTEMPEL_LESEN": {
+  "L": "Reading the test stamp",
+  "S": "Reading the test stamp"
+ },
+ "SERIENNUMMER_LESEN": {
+  "L": "Read manufacturer serial number",
+  "S": "Read manufacturer serial number"
+ },
+ "SPEICHER_LESEN": {
+  "L": "Read bytes via direct addressing",
+  "S": "Read bytes via direct addressing"
+ },
+ "SPEICHER_LESEN_ASCII": {
+  "L": "Read memory (ASCII format)",
+  "S": "Read memory (ASCII format)"
+ },
+ "START_SYSTEMCHECK_DMTL": {
+  "L": "System check fuel tank venting system: Start leak diagnosis",
+  "S": "System check fuel tank venting system: Start leak diagnosis"
+ },
+ "START_SYSTEMCHECK_DMTL_ECOS": {
+  "L": "System check fuel tank venting system: Start leak diagnosis",
+  "S": "System check fuel tank venting system: Start leak diagnosis"
+ },
+ "START_SYSTEMCHECK_EVAUSBL": {
+  "L": "START_SYSTEMCHECK_EVAUSBL",
+  "S": "START_SYSTEMCHECK_EVAUSBL"
+ },
+ "START_SYSTEMCHECK_L_REGELUNG_AUS": {
+  "L": "START_SYSTEMCHECK_L_REGELUNG_AUS",
+  "S": "START_SYSTEMCHECK_L_REGELUNG_AUS"
+ },
+ "START_SYSTEMCHECK_L_SONDE": {
+  "L": "START_SYSTEMCHECK_L_SONDE",
+  "S": "START_SYSTEMCHECK_L_SONDE"
+ },
+ "START_SYSTEMCHECK_LLERH": {
+  "L": "Control diagnostic function idle speed increase (absolute)",
+  "S": "Control diagnostic function idle speed increase (absolute)"
+ },
+ "START_SYSTEMCHECK_PM_MESSEMODE": {
+  "L": "$31 F6 system diagnosis battery sensor reset",
+  "S": "$31 F6 system diagnosis battery sensor reset"
+ },
+ "START_SYSTEMCHECK_SEK_LUFT": {
+  "L": "SLS Functional Test",
+  "S": "SLS Functional Test"
+ },
+ "START_SYSTEMCHECK_TEV_FUNC": {
+  "L": "Start system check TEV Functional check",
+  "S": "Start system check TEV Functional check"
+ },
+ "START_SYSTEMCHECK_VVT_ANSCHLAG": {
+  "L": "Initiating diagnosis 'learning VVT mechanical stops'",
+  "S": "Initiating diagnosis 'learning VVT mechanical stops'"
+ },
+ "START_SYSTEMCHECK_VVT_SOLLWERT": {
+  "L": "$31 FE System diagnostics VVT control enabled via CAN",
+  "S": "$31 FE System diagnostics VVT control enabled via CAN"
+ },
+ "STAT_UBAT_WERT": {
+  "L": "Battery voltage"
+ },
+ "STAT_UBATT2_WERT": {
+  "L": "Battery voltage"
+ },
+ "STAT_UMGEBUNGSDRUCK_WERT": {
+  "L": "Atmospheric pressure",
+  "S": "Patm"
+ },
+ "STATUS_ADAPTION_DK": {
+  "L": "Read throttle valve adaptation values",
+  "S": "Read throttle valve adaptation values"
+ },
+ "STATUS_ADAPTION_GEMISCH": {
+  "L": "Read out mixture adaptation values",
+  "S": "Read out mixture adaptation values"
+ },
+ "STATUS_ADC_ULS1": {
+  "L": "Lambda sensor differential voltage 1",
+  "S": "Lambda sensor differential voltage 1"
+ },
+ "STATUS_ADC_ULS2": {
+  "L": "Lambda sensor differential voltage 2",
+  "S": "Lambda sensor differential voltage 2"
+ },
+ "STATUS_ADD": {
+  "L": "Additive adaptation value",
+  "S": "Additive adaptation value"
+ },
+ "STATUS_ADD_2": {
+  "L": "Additive adaptation value Bank2",
+  "S": "Additive adaptation value Bank2"
+ },
+ "STATUS_AGK": {
+  "L": "$30 D9 01 Actuator Control Status Exhaust Flap",
+  "S": "$30 D9 01 Actuator Control Status Exhaust Flap"
+ },
+ "STATUS_AN_LUFTTEMPERATUR": {
+  "L": "Air intake temperature",
+  "S": "Air intake temperature"
+ },
+ "STATUS_AN_LUFTTEMPERATUR_1": {
+  "L": "Air intake temperature",
+  "S": "Air intake temperature"
+ },
+ "STATUS_AN_LUFTTEMPERATUR_2": {
+  "L": "Air intake temperature",
+  "S": "Air intake temperature"
+ },
+ "STATUS_ANALOG": {
+  "L": "Periodically read analog measurement value",
+  "S": "Periodically read analog measurement value"
+ },
+ "STATUS_ANSAUGLUFTTEMPERATUR": {
+  "L": "Air intake temperature",
+  "S": "Air intake temperature"
+ },
+ "STATUS_ANWS": {
+  "L": "0x30EE01 STATUS_ANWS",
+  "S": "0x30EE01 STATUS_ANWS"
+ },
+ "STATUS_BETRIEBSSTUNDENZAEHLER": {
+  "L": "Usage hours",
+  "S": "Usage hours"
+ },
+ "STATUS_BLS": {
+  "L": "Read brake light switch",
+  "S": "Read brake light switch"
+ },
+ "STATUS_BLTS": {
+  "L": "Read brake light test switch",
+  "S": "Read brake light test switch"
+ },
+ "STATUS_CO": {
+  "L": "Reading the LL-CO value",
+  "S": "Reading the LL-CO value"
+ },
+ "STATUS_CO_ABGLEICH": {
+  "L": "Reading the LL-CO value",
+  "S": "Reading the LL-CO value"
+ },
+ "STATUS_DFMONITOR": {
+  "L": "Read battery charge level",
+  "S": "Read battery charge level"
+ },
+ "STATUS_DIGITAL_0": {
+  "L": "Digital status register 0",
+  "S": "Digital status register 0"
+ },
+ "STATUS_DIGITAL_1": {
+  "L": "Digital status register 1",
+  "S": "Digital status register 1"
+ },
+ "STATUS_DIGITAL_3": {
+  "L": "Status bit compressor relay",
+  "S": "Status bit compressor relay"
+ },
+ "STATUS_DIGITAL_4": {
+  "L": "Status bit Idle",
+  "S": "Status bit Idle"
+ },
+ "STATUS_DISA": {
+  "L": "Read DISA variable intake flap",
+  "S": "Read DISA variable intake flap"
+ },
+ "STATUS_DISA2": {
+  "L": "DISA2 status",
+  "S": "DISA2 status"
+ },
+ "STATUS_DKP_WINKEL": {
+  "L": "Read throttle valve angle",
+  "S": "Read throttle valve angle"
+ },
+ "STATUS_DKP_VOLT": {
+  "L": "Read throttle valve angle",
+  "S": "Read throttle valve angle"
+ },
+ "STATUS_DMTL": {
+  "L": "Status System Test DMTL",
+  "S": "Status System Test DMTL"
+ },
+ "STATUS_DMTL_HEIZUNG": {
+  "L": "Read DMTL heater status",
+  "S": "Read DMTL heater status"
+ },
+ "STATUS_DMTL_P": {
+  "L": "Read DMTL pump",
+  "S": "Read DMTL pump"
+ },
+ "STATUS_DMTL_V": {
+  "L": "Read DMTL valve",
+  "S": "Read DMTL valve"
+ },
+ "STATUS_DROSSELKLAPPE": {
+  "L": "Reading the throttle valve angle",
+  "S": "Reading the throttle valve angle"
+ },
+ "STATUS_E_LUEFTER": {
+  "L": "Read electric cooling fan",
+  "S": "Read electric cooling fan"
+ },
+ "STATUS_EBL": {
+  "L": "Read E-box fan",
+  "S": "Read E-box fan"
+ },
+ "STATUS_EISYGD": {
+  "L": "Read Eisy adaptation (throttled)",
+  "S": "Read Eisy adaptation (throttled)"
+ },
+ "STATUS_EISYUGD": {
+  "L": "Read Eisy adaptation (unthrottled)",
+  "S": "Read Eisy adaptation (unthrottled)"
+ },
+ "STATUS_EKP": {
+  "L": "Read electric fuel pump",
+  "S": "Read electric fuel pump"
+ },
+ "STATUS_EML": {
+  "L": "Read engine power management",
+  "S": "Read engine power management"
+ },
+ "STATUS_ENWS": {
+  "L": "0x30ED01 STATUS_ENWS",
+  "S": "0x30ED01 STATUS_ENWS"
+ },
+ "STATUS_EV1": {
+  "L": "Read fuel injector 1",
+  "S": "Read fuel injector 1"
+ },
+ "STATUS_EV2": {
+  "L": "Read fuel injector 2",
+  "S": "Read fuel injector 2"
+ },
+ "STATUS_EV3": {
+  "L": "Read fuel injector 3",
+  "S": "Read fuel injector 3"
+ },
+ "STATUS_EV4": {
+  "L": "Read fuel injector 4",
+  "S": "Read fuel injector 4"
+ },
+ "STATUS_EV5": {
+  "L": "Read fuel injector 5",
+  "S": "Read fuel injector 5"
+ },
+ "STATUS_EV6": {
+  "L": "Read fuel injector 6",
+  "S": "Read fuel injector 6"
+ },
+ "STATUS_EWAP": {
+  "L": "Read electric water pump",
+  "S": "Read electric water pump"
+ },
+ "STATUS_EWS_LOCK": {
+  "L": "Status bit LV_LOCK_IMOB = 1 blocks ignition and injection.",
+  "S": "Status bit LV_LOCK_IMOB = 1 blocks ignition and injection."
+ },
+ "STATUS_FASTA_BIN": {
+  "L": "Read measured value block",
+  "S": "Read measured value block"
+ },
+ "STATUS_FASTA_COMMON": {
+  "L": "Read measured value block",
+  "S": "Read measured value block"
+ },
+ "STATUS_FASTA2": {
+  "L": "Reading FASTA measured value block 2",
+  "S": "Reading FASTA measured value block 2"
+ },
+ "STATUS_FGR": {
+  "L": "Cruise control",
+  "S": "Cruise control"
+ },
+ "STATUS_FGRL": {
+  "L": "$30 F2 01 Actuator control status FGR lamp",
+  "S": "$30 F2 01 Actuator control status FGR lamp"
+ },
+ "STATUS_FUNKTIONS": {
+  "L": "Status Switching states",
+  "S": "Status Switching states"
+ },
+ "STATUS_FWV1": {
+  "L": "Read coolant flow valve 1",
+  "S": "Read coolant flow valve 1"
+ },
+ "STATUS_FWV2": {
+  "L": "Read coolant flow valve 2",
+  "S": "Read coolant flow valve 2"
+ },
+ "STATUS_GEBERRAD_ADAPTION": {
+  "L": "Encoder wheel adaptation",
+  "S": "Encoder wheel adaptation"
+ },
+ "STATUS_GESCHWINDIGKEIT": {
+  "L": "Read speed",
+  "S": "Read speed"
+ },
+ "STATUS_GLF": {
+  "L": "0x30DE01 STATUS_GLF",
+  "S": "0x30DE01 STATUS_GLF"
+ },
+ "STATUS_HFMS": {
+  "L": "Read hot film mass airflow sensor",
+  "S": "Read hot film mass airflow sensor"
+ },
+ "STATUS_INT": {
+  "L": "Read lambda control factor",
+  "S": "Read lambda control factor"
+ },
+ "STATUS_INT_2": {
+  "L": "INT signal Bank 2",
+  "S": "INT signal Bank 2"
+ },
+ "STATUS_KALT_MOTORDREHZAHL_N10": {
+  "L": "Read engine RPM",
+  "S": "Read engine RPM"
+ },
+ "STATUS_KALT_MOTORDREHZAHL_N40": {
+  "L": "Read engine RPM",
+  "S": "Read engine RPM"
+ },
+ "STATUS_KALT_MOTORTEMPERATUR": {
+  "L": "Read engine temperature",
+  "S": "Read engine temperature"
+ },
+ "STATUS_KB1": {
+  "L": "Read knock bank 1",
+  "S": "Read knock bank 1"
+ },
+ "STATUS_KB2": {
+  "L": "Read knock bank 2",
+  "S": "Read knock bank 2"
+ },
+ "STATUS_KFT": {
+  "L": "Read fuel temperature",
+  "S": "Read fuel temperature"
+ },
+ "STATUS_KGEH": {
+  "L": "Read crankcase",
+  "S": "Read crankcase"
+ },
+ "STATUS_KILOMETERSTAND": {
+  "L": "Kilometer reading",
+  "S": "Kilometer reading"
+ },
+ "STATUS_KL15_SPANNUNG": {
+  "L": "Read load signal voltage",
+  "S": "Read load signal voltage"
+ },
+ "STATUS_KLOPFEN": {
+  "L": "Reading the status: Knock detected 0/1",
+  "S": "Reading the status: Knock detected 0/1"
+ },
+ "STATUS_KOREL": {
+  "L": "$30 D7 01 Actuator control status Compressor relay",
+  "S": "$30 D7 01 Actuator control status Compressor relay"
+ },
+ "STATUS_KRAFTSTOFFDRUCK": {
+  "L": "Fuel pressure",
+  "S": "Fuel pressure"
+ },
+ "STATUS_KRANN": {
+  "L": "0x33E3 STATUS_KRANN",
+  "S": "0x33E3 STATUS_KRANN"
+ },
+ "STATUS_KTEST_MOTORDREHZAHL": {
+  "L": "Read engine RPM",
+  "S": "Read engine RPM"
+ },
+ "STATUS_KUEHLMITTELTEMPERATUR": {
+  "L": "Coolant temperature",
+  "S": "Coolant temperature"
+ },
+ "STATUS_KUP": {
+  "L": "Read clutch switch STATUS_KUP NO_CON no prerequisites",
+  "S": "Read clutch switch STATUS_KUP NO_CON no prerequisites"
+ },
+ "STATUS_KVA": {
+  "L": "0x21C1 STATUS_KVA",
+  "S": "0x21C1 STATUS_KVA"
+ },
+ "STATUS_L_SONDE": {
+  "L": "Lambda sensor differential voltage 1",
+  "S": "Lambda sensor differential voltage 1"
+ },
+ "STATUS_L_SONDE_2": {
+  "L": "Lambda sensor differential voltage 2",
+  "S": "Lambda sensor differential voltage 2"
+ },
+ "STATUS_L_SONDE_2_H": {
+  "L": "Read the voltage of the lambda sensor before the catalytic converter (sensor 2).",
+  "S": "Read the voltage of the lambda sensor before the catalytic converter (sensor 2)."
+ },
+ "STATUS_L_SONDE_H": {
+  "L": "Read out the voltage of the lambda sensor after the catalytic converter",
+  "S": "Read out the voltage of the lambda sensor after the catalytic converter"
+ },
+ "STATUS_L_SONDE_HEIZUNG_H_1": {
+  "L": "Reading the controller status of the probe heater",
+  "S": "Reading the controller status of the probe heater"
+ },
+ "STATUS_L_SONDE_HEIZUNG_H_2": {
+  "L": "Reading the controller status of the probe heater",
+  "S": "Reading the controller status of the probe heater"
+ },
+ "STATUS_L_SONDE_HEIZUNG_V_1": {
+  "L": "Reading the controller status of the probe heater",
+  "S": "Reading the controller status of the probe heater"
+ },
+ "STATUS_L_SONDE_HEIZUNG_V_2": {
+  "L": "Reading the controller status of the probe heater",
+  "S": "Reading the controller status of the probe heater"
+ },
+ "STATUS_LADEDRUCK": {
+  "L": "Boost pressure",
+  "S": "Boost pressure"
+ },
+ "STATUS_LAMBDA_INTEGRATOR_1": {
+  "L": "Read lambda control factor",
+  "S": "Read lambda control factor"
+ },
+ "STATUS_LAMBDA_INTEGRATOR_2": {
+  "L": "INT signal Bank 2",
+  "S": "INT signal Bank 2"
+ },
+ "STATUS_LAMBDA_MUL_1": {
+  "L": "Multiplicative reading of the mixture adaptation",
+  "S": "Multiplicative reading of the mixture adaptation"
+ },
+ "STATUS_LAMBDA_MUL_2": {
+  "L": "MUL signal Bank 2",
+  "S": "MUL signal Bank 2"
+ },
+ "STATUS_LEISTUNGSSTUFE": {
+  "L": "Reading the coding: Upper/Lower power level",
+  "S": "Reading the coding: Upper/Lower power level"
+ },
+ "STATUS_LL_ABGLEICH": {
+  "L": "LL_Comparison",
+  "S": "LL_Comparison"
+ },
+ "STATUS_LMM_MASSE": {
+  "L": "Read air volume",
+  "S": "Read air volume"
+ },
+ "STATUS_LRP": {
+  "L": "Read out smooth running test",
+  "S": "Read out smooth running test"
+ },
+ "STATUS_LS_NKAT_SIGNAL_2": {
+  "L": "Read the voltage of the lambda sensor before the catalytic converter (sensor 2).",
+  "S": "Read the voltage of the lambda sensor before the catalytic converter (sensor 2)."
+ },
+ "STATUS_LS_VKAT_SIGNAL_1": {
+  "L": "Lambda sensor differential voltage 1",
+  "S": "Lambda sensor differential voltage 1"
+ },
+ "STATUS_LS_VKAT_SIGNAL_2": {
+  "L": "Read the voltage of the lambda sensor before the catalytic converter (sensor 2).",
+  "S": "Read the voltage of the lambda sensor before the catalytic converter (sensor 2)."
+ },
+ "STATUS_LSH1": {
+  "L": "Read lambda probe heater 1",
+  "S": "Read lambda probe heater 1"
+ },
+ "STATUS_LSH2": {
+  "L": "Read lambda probe heater 2",
+  "S": "Read lambda probe heater 2"
+ },
+ "STATUS_LSH3": {
+  "L": "Read lambda probe heater 3",
+  "S": "Read lambda probe heater 3"
+ },
+ "STATUS_LSH4": {
+  "L": "Read lambda probe heater 4",
+  "S": "Read lambda probe heater 4"
+ },
+ "STATUS_LUFTMASSE": {
+  "L": "Air mass",
+  "S": "Air mass"
+ },
+ "STATUS_MESSWERTBLOCK_ADC": {
+  "L": "Read ADC measured value block",
+  "S": "Read ADC measured value block"
+ },
+ "STATUS_MESSWERTBLOCK_LESEN": {
+  "L": "Reading a measured value block",
+  "S": "Reading a measured value block"
+ },
+ "STATUS_MESSWERTE_KD": {
+  "L": "$2C F0 02 DDLI Measurement values as desired VS-22",
+  "S": "$2C F0 02 DDLI Measurement values as desired VS-22"
+ },
+ "STATUS_MESSWERTE_LRP": {
+  "L": "Read out measured values from the smooth running test",
+  "S": "Read out measured values from the smooth running test"
+ },
+ "STATUS_MESSWERTE_NL": {
+  "L": "$2C F0 02 DDLI Measured values Knock on request VS-22",
+  "S": "$2C F0 02 DDLI Measured values Knock on request VS-22"
+ },
+ "STATUS_MESSWERTE_VANOS": {
+  "L": "0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS",
+  "S": "0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS"
+ },
+ "STATUS_MIL": {
+  "L": "Read MIL (check engine light)",
+  "S": "Read MIL (check engine light)"
+ },
+ "STATUS_MOTORDREHZAHL": {
+  "L": "Read engine RPM",
+  "S": "Read engine RPM"
+ },
+ "STATUS_MOTORLAUFUNRUHE": {
+  "L": "5A30, 5A31, 5A32, 5A33, 5A99, 5845 Engine running roughness",
+  "S": "5A30, 5A31, 5A32, 5A33, 5A99, 5845 Engine running roughness"
+ },
+ "STATUS_MOTORTEMPERATUR": {
+  "L": "Read engine temperature",
+  "S": "Read engine temperature"
+ },
+ "STATUS_MUL": {
+  "L": "Multiplicative reading of the mixture adaptation",
+  "S": "Multiplicative reading of the mixture adaptation"
+ },
+ "STATUS_MUL_2": {
+  "L": "MUL signal Bank 2",
+  "S": "MUL signal Bank 2"
+ },
+ "STATUS_NOCKENWELLE_ADAPTION": {
+  "L": "Camshaft adaptation",
+  "S": "Camshaft adaptation"
+ },
+ "STATUS_OBD": {
+  "L": "$21 05 Monitoring Functions and Status Bits",
+  "S": "$21 05 Monitoring Functions and Status Bits"
+ },
+ "STATUS_ODS": {
+  "L": "Read oil pressure switch",
+  "S": "Read oil pressure switch"
+ },
+ "STATUS_OEL": {
+  "L": "Read oil status",
+  "S": "Read oil status"
+ },
+ "STATUS_OELTEMPERATUR": {
+  "L": "Oil temperature",
+  "S": "Oil temperature"
+ },
+ "STATUS_PWG": {
+  "L": "Accelerator pedal",
+  "S": "Accelerator pedal"
+ },
+ "STATUS_PWG_POTI_SPANNUNG": {
+  "L": "Pedal sensor voltage",
+  "S": "Pedal sensor voltage"
+ },
+ "STATUS_PWG2": {
+  "L": "Read accelerator pedal sensor 2",
+  "S": "Read accelerator pedal sensor 2"
+ },
+ "STATUS_RBMMODE9": {
+  "L": "Ring buffer measurement mode 9",
+  "S": "Ring buffer measurement mode 9"
+ },
+ "STATUS_RBMMS1": {
+  "L": "Ring buffer measurement selection 1",
+  "S": "Ring buffer measurement selection 1"
+ },
+ "STATUS_RBMMS2": {
+  "L": "Ring buffer measurement selection 2",
+  "S": "Ring buffer measurement selection 2"
+ },
+ "STATUS_READINESS": {
+  "L": "Reading Readiness System Checks",
+  "S": "Reading Readiness System Checks"
+ },
+ "STATUS_SDF1": {
+  "L": "0x301801 STATUS_SDF1",
+  "S": "0x301801 STATUS_SDF1"
+ },
+ "STATUS_SLP": {
+  "L": "Read secondary air pump",
+  "S": "Read secondary air pump"
+ },
+ "STATUS_SLS": {
+  "L": "System diagnostic status SLS",
+  "S": "System diagnostic status SLS"
+ },
+ "STATUS_SLV": {
+  "L": "Read secondary air valve",
+  "S": "Read secondary air valve"
+ },
+ "STATUS_SOK": {
+  "L": "Read catalyst oxygen sensor",
+  "S": "Read catalyst oxygen sensor"
+ },
+ "STATUS_SPT": {
+  "L": "Read sport switch",
+  "S": "Read sport switch"
+ },
+ "STATUS_SR": {
+  "L": "Read secondary air relay",
+  "S": "Read secondary air relay"
+ },
+ "STATUS_SYSTEMCHECK_DMTL": {
+  "L": "Status System Test DMTL",
+  "S": "Status System Test DMTL"
+ },
+ "STATUS_SYSTEMCHECK_DMTL_WERT": {
+  "L": "Status and measurement currents",
+  "S": "Status and measurement currents"
+ },
+ "STATUS_SYSTEMCHECK_EVAUSBL": {
+  "L": "EV actuator system check",
+  "S": "EV actuator system check"
+ },
+ "STATUS_SYSTEMCHECK_L_SONDE": {
+  "L": "Lambda sensor system check",
+  "S": "Lambda sensor system check"
+ },
+ "STATUS_SYSTEMCHECK_L_SONDE_WERTE": {
+  "L": "Status and measured values",
+  "S": "Status and measured values"
+ },
+ "STATUS_SYSTEMCHECK_LLERH_WERT": {
+  "L": "Current speed N",
+  "S": "Current speed N"
+ },
+ "STATUS_SYSTEMCHECK_PM_INFO_1": {
+  "L": "$22 40 22 Byte field 1 Battery Power Management Read",
+  "S": "$22 40 22 Byte field 1 Battery Power Management Read"
+ },
+ "STATUS_SYSTEMCHECK_PM_INFO_2": {
+  "L": "$22 40 23 Byte field 2 Battery Power Management Read",
+  "S": "$22 40 23 Byte field 2 Battery Power Management Read"
+ },
+ "STATUS_SYSTEMCHECK_SEK_LAMBDA_WERT": {
+  "L": "Status and air masses",
+  "S": "Status and air masses"
+ },
+ "STATUS_SYSTEMCHECK_SEK_LUFT": {
+  "L": "System diagnostic status SLS",
+  "S": "System diagnostic status SLS"
+ },
+ "STATUS_SYSTEMCHECK_SEK_LUFT_WERT": {
+  "L": "Status and air masses",
+  "S": "Status and air masses"
+ },
+ "STATUS_SYSTEMCHECK_TEV": {
+  "L": "TEV system check",
+  "S": "TEV system check"
+ },
+ "STATUS_SYSTEMCHECK_TEV_FUNC": {
+  "L": "Status System Test TEV",
+  "S": "Status System Test TEV"
+ },
+ "STATUS_SYSTEMCHECK_TEV_WERT": {
+  "L": "Status and measurement currents",
+  "S": "Status and measurement currents"
+ },
+ "STATUS_SYSTEMCHECK_VVT_ANSCHLAG": {
+  "L": "Diagnostic status 'Learning VVT mechanical stops'",
+  "S": "Diagnostic status 'Learning VVT mechanical stops'"
+ },
+ "STATUS_TEV": {
+  "L": "MUL signal TEV bank 1",
+  "S": "MUL signal TEV bank 1"
+ },
+ "STATUS_TEVSYS": {
+  "L": "Status System Test TEV",
+  "S": "Status System Test TEV"
+ },
+ "STATUS_TKA": {
+  "L": "Read tank control output",
+  "S": "Read tank control output"
+ },
+ "STATUS_TTEMP": {
+  "L": "Read throttle temperature",
+  "S": "Read throttle temperature"
+ },
+ "STATUS_UBAT": {
+  "L": "Read battery voltage",
+  "S": "Read battery voltage"
+ },
+ "STATUS_UBATT": {
+  "L": "Battery voltage",
+  "S": "Battery voltage"
+ },
+ "STATUS_UDF": {
+  "L": "0x301701 STATUS_UDF",
+  "S": "0x301701 STATUS_UDF"
+ },
+ "STATUS_UGEN": {
+  "L": "Read generator voltage",
+  "S": "Read generator voltage"
+ },
+ "STATUS_UKL15": {
+  "L": "Read terminal 15 voltage (ignition)",
+  "S": "Read terminal 15 voltage (ignition)"
+ },
+ "STATUS_UMGEBUNGSDRUCK": {
+  "L": "Atmospheric pressure",
+  "S": "Atmospheric pressure"
+ },
+ "STATUS_UMGEBUNGSTEMPERATUR": {
+  "L": "Selectively read measured value",
+  "S": "Selectively read measured value"
+ },
+ "STATUS_UVLSS": {
+  "L": "0x302001 STATUS_UVLSS",
+  "S": "0x302001 STATUS_UVLSS"
+ },
+ "STATUS_VVT": {
+  "L": "Reading VVT measured values",
+  "S": "Reading VVT measured values"
+ },
+ "STATUS_VVTR": {
+  "L": "Read VVT relay",
+  "S": "Read VVT relay"
+ },
+ "STATUS_ZEIT_EINSPRITZ": {
+  "L": "Reading the injection time of cylinder 1",
+  "S": "Reading the injection time of cylinder 1"
+ },
+ "STATUS_ZUENDWINKEL": {
+  "L": "Read ignition angle",
+  "S": "Read ignition angle"
+ },
+ "STOP_SYSTEMCHECK_TEV_FUNC": {
+  "L": "Start system check TEV Functional check",
+  "S": "Start system check TEV Functional check"
+ },
+ "STOP_SYSTEMCHECK_VVT_SOLLWERT": {
+  "L": "$31 FE System diagnostics VVT control enabled via CAN",
+  "S": "$31 FE System diagnostics VVT control enabled via CAN"
+ },
+ "TEST_SYSTEMCHECK_DMTL": {
+  "L": "System check fuel tank venting system: Start leak diagnosis",
+  "S": "System check fuel tank venting system: Start leak diagnosis"
+ },
+ "TEV_SYSTEM": {
+  "L": "Status System Test TEV",
+  "S": "Status System Test TEV"
+ },
+ "ZIF_BACKUP_LESEN": {
+  "L": "Reading the backup of the supplier information field",
+  "S": "Reading the backup of the supplier information field"
+ },
+ "ZIF_LESEN": {
+  "L": "Reading the supplier information field",
+  "S": "Reading the supplier information field"
+ },
+ "STAT_STFT_BANK1_PCT": {
+  "L": "STFT bank 1 (%)",
+  "S": "STFT B1%"
+ },
+ "STAT_STFT_BANK2_PCT": {
+  "L": "STFT bank 2 (%)",
+  "S": "STFT B2%"
+ },
+ "STAT_LTFT_MUL_BANK1_PCT": {
+  "L": "LTFT multiplicative bank 1 (%)",
+  "S": "LTFT mul. B1%"
+ },
+ "STAT_LTFT_MUL_BANK2_PCT": {
+  "L": "LTFT multiplicative bank 2 (%)",
+  "S": "LTFT mul. B2%"
+ },
+ "STAT_TOTAL_CORR_BANK1_PCT": {
+  "L": "Total fuel correction bank 1 (%)",
+  "S": "Total corr. B1%"
+ },
+ "STAT_TOTAL_CORR_BANK2_PCT": {
+  "L": "Total fuel correction bank 2 (%)",
+  "S": "Total corr. B2%"
+ },
+ "STAT_INJ_AVG_MS": {
+  "L": "Average injection time (ms)",
+  "S": "Inj. avg (ms)"
+ },
+ "STAT_LAMBDA_AVG": {
+  "L": "Lambda average",
+  "S": "Lambda avg"
+ }
 }

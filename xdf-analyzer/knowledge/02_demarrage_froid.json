@@ -95,8 +95,20 @@
           "doc": "Masse carburant after-start en mode large-gradient de régime [mg/stk] f(TCO). Active pendant les ~2 à 5 premières secondes post-allumage, lorsque le régime monte rapidement de 0 à ~800 RPM.",
           "type_doc": "COURBE 2D",
           "modification_e85": "OUI",
-          "e85_action": "Augmenter de ×1.35 pour TCO < 30°C pour éviter le calage immédiat après démarrage.",
-          "e85_factor": "×1.35",
+          "e85_action": "Appliquer un facteur gradué selon TCO — l'éthanol vaporise très mal au froid, la correction doit être progressive.",
+          "e85_factor": "×1.00 (chaud) à ×1.65 (très froid) — gradient linéaire",
+          "e85_factors_by_tco": {
+            "-30.0°C": { "facteur": 1.65, "stock_mg": 18.88, "e85_mg": 31.16, "raison": "Absence totale de vaporisation — risque de calage immédiat sans enrichissement massif." },
+            "-20.3°C": { "facteur": 1.60, "stock_mg": 15.41, "e85_mg": 24.65, "raison": "Froid extrême, évite le calage immédiat." },
+            "-9.75°C": { "facteur": 1.55, "stock_mg": 11.98, "e85_mg": 18.57, "raison": "Zone de gel, l'alcool colle encore aux parois d'admission." },
+            "0.00°C":  { "facteur": 1.45, "stock_mg": 9.64,  "e85_mg": 13.99, "raison": "Seuil critique, vaporisation très limitée." },
+            "9.75°C":  { "facteur": 1.35, "stock_mg": 8.54,  "e85_mg": 11.53, "raison": "Frais — enrichissement aide à la montée en régime 0-800 RPM." },
+            "30.0°C":  { "facteur": 1.20, "stock_mg": 7.55,  "e85_mg": 9.05,  "raison": "Moteur tiède — peu d'aide nécessaire mais sécurise le démarrage." },
+            "60.0°C":  { "facteur": 1.10, "stock_mg": 6.17,  "e85_mg": 6.78,  "raison": "Moteur chaud — léger surplus pour la stabilité de la montée en régime." },
+            "84.75°C": { "facteur": 1.00, "stock_mg": 4.49,  "e85_mg": 4.49,  "raison": "Vaporisation parfaite — aucune correction nécessaire." }
+          },
+          "e85_raw_new": [1471, 1163, 876, 660, 544, 427, 320, 212],
+          "e85_raw_stock": [891, 727, 565, 455, 403, 356, 291, 212],
           "warning": false
         }
       },
