@@ -212,22 +212,22 @@ Resultname=STAT_INTEGRATOR_BANK2_WERT
 decimals=1
 
 [LTFT_MUL1]
-Min=0.7
-Max=1.3
+Min=-30
+Max=30
 Title=LTFT mul. B1
-Unit=
+Unit=%
 Jobname=STATUS_MESSWERTBLOCK_LESEN
 Resultname=STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT
-decimals=3
+decimals=2
 
 [LTFT_MUL2]
-Min=0.7
-Max=1.3
+Min=-30
+Max=30
 Title=LTFT mul. B2
-Unit=
+Unit=%
 Jobname=STATUS_MESSWERTBLOCK_LESEN
 Resultname=STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT
-decimals=3
+decimals=2
 
 [LTFT_ADD1]
 Min=-3
