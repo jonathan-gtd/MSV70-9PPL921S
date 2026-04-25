@@ -1,4 +1,91 @@
 {
  "loggingSets" : {
+  "E85" : [
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_MOTORDREHZAHL_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_KUEHLMITTELTEMPERATUR_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_LAMBDA_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_LAMBDA_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_INTEGRATOR_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_INTEGRATOR_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_ADAPTION_ADDITIV_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_ADAPTION_ADDITIV_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_EINSPRITZZEIT_ZYL1_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_EINSPRITZZEIT_ZYL2_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_EINSPRITZZEIT_ZYL3_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_EINSPRITZZEIT_ZYL4_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_EINSPRITZZEIT_ZYL5_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_EINSPRITZZEIT_ZYL6_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_KRAFTSTOFFDRUCK_WERT"
+   }
+  ]
  }
 }
