@@ -7,14 +7,8 @@ For each RESULTNAME in the JSON, updates matching RES_L and RES_S lines.
 import json
 import os
 
-TRANSLATOR_JSON = os.path.join(
-    os.path.dirname(__file__),
-    "TestO Datalogger", "translator", "translations_table.json"
-)
-TRANSLATIONS_TXT = os.path.join(
-    os.path.dirname(__file__),
-    "TestO Datalogger", "translations", "jobs_all_en_EN.txt"
-)
+TRANSLATOR_JSON = os.path.join(os.path.dirname(__file__), "translations_table.json")
+TRANSLATIONS_TXT = os.path.join(os.path.dirname(__file__), "..", "translations", "jobs_all_en_EN.txt")
 
 
 def load_json(path):
