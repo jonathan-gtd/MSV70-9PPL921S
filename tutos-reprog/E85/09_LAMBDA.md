@@ -16,16 +16,23 @@
 
 **Avant / Après :**
 
-| Phase | ◀ Avant — Stock | ✅ Après — Break-in (0–500 km) | ✅ Après — Stabilisé (> 500 km) |
-|---|---|---|---|
-| `ip_fac_lamb_max_fsd_1` | ~1.15 (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+Courbe 6 points (valeurs lues sur VB67774 / S7581293 identiques) :
+
+| Cellule | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| ◀ Stock (%) | 100.0 | 35.0 | **30.0** | **30.0** | 35.0 | 100.0 |
+| ✅ E85 Break-in (%) | 100.0 | 45.0 | **40.0** | **40.0** | 45.0 | 100.0 |
+| ✅ E85 Stabilisé (%) | 100.0 | 38.0 | **35.0** | **35.0** | 38.0 | 100.0 |
+
+> Les cellules extrêmes (1 et 6) sont déjà à 100% stock → pas de limite aux extrêmes.
+> Les cellules centrales à **30%** sont le vrai goulot d'étranglement sur E85 (correction E85 ≈ +30–36% sur stoichio).
 
 **Vérification :**
 
 | Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| Voyant moteur dans les 500 premiers km | Absent | Allumé → FSD trop serré, élargir à 1.30 |
-| STFT boucle fermée | ±15% max | > ±20% continu → calibration injecteurs à revoir |
+| Voyant moteur dans les 500 premiers km | Absent | Allumé → cellules 3/4 trop serrées, monter à 40% |
+| STFT boucle fermée | ±15% max | > ±30% continu → calibration injecteurs à revoir |
 
 ---
 
@@ -41,9 +48,15 @@
 
 **Avant / Après :**
 
-| Phase | ◀ Avant — Stock | ✅ Après — Break-in (0–500 km) | ✅ Après — Stabilisé (> 500 km) |
-|---|---|---|---|
-| `ip_fac_lamb_max_fsd_2` | ~1.15 (±15%) | **1.25–1.30** (±25–30%) | **1.20** (±20%) |
+Identique à `ip_fac_lamb_max_fsd_1` — mêmes valeurs stock, mêmes cibles E85 :
+
+| Cellule | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| ◀ Stock (%) | 100.0 | 35.0 | **30.0** | **30.0** | 35.0 | 100.0 |
+| ✅ E85 Break-in (%) | 100.0 | 45.0 | **40.0** | **40.0** | 45.0 | 100.0 |
+| ✅ E85 Stabilisé (%) | 100.0 | 38.0 | **35.0** | **35.0** | 38.0 | 100.0 |
+
+> Toujours modifier les deux modes ensemble — une incohérence entre mode 1 et mode 2 déclenche un DTC lors des commutations.
 
 **Vérification :**
 

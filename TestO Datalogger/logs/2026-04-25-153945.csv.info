@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSVFile>
+    <info>
+        <starttime>1777124385819</starttime>
+        <startdate>2026-04-25 15:39:45.819</startdate>
+        <timeformat>0</timeformat>
+        <CSVSeparator><![CDATA[;]]></CSVSeparator>
+        <columns>
+            <column>
+                <number>1</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>LTFT add. B1</resultname>
+            </column>
+            <column>
+                <number>2</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>LTFT add. B2</resultname>
+            </column>
+            <column>
+                <number>3</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>LTFT mul. B1</resultname>
+            </column>
+            <column>
+                <number>4</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>LTFT mul. B2</resultname>
+            </column>
+            <column>
+                <number>5</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>InjTmCyl1</resultname>
+            </column>
+            <column>
+                <number>6</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>STFT B1</resultname>
+            </column>
+            <column>
+                <number>7</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>STFT B2</resultname>
+            </column>
+            <column>
+                <number>8</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>Coolant</resultname>
+            </column>
+            <column>
+                <number>9</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>Lambda B1</resultname>
+            </column>
+            <column>
+                <number>10</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>Lambda B2</resultname>
+            </column>
+            <column>
+                <number>11</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>01_E85_WARMUP_STAT</virtualname>
+                <resultname>RPM</resultname>
+            </column>
+        </columns>
+    </info>
+</CSVFile>
