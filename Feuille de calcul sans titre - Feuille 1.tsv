@@ -1,23 +1,23 @@
-﻿_STATUS_FASTA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_FASTA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_FASTA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
-_STATUS_FASTA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
-_STATUS_FASTA_KRANN	JOB_L	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
-_STATUS_FASTA_KRANN	JOB_S	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
-_STATUS_FASTA_TECU	JOB_L	0x23 Auslesen der DME-Temperaturstatistik	0x23 Reading the DME temperature statistics	0x23 Lecture des statistiques de température du DME
-_STATUS_FASTA_TECU	JOB_S	0x23 Auslesen der DME-Temperaturstatistik	0x23 Reading the DME temperature statistics	0x23 Lecture des statistiques de température du DME
-_STATUS_INPA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_INPA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	0x31E1 & 0x33E1 Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
-_STATUS_INPA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
-_STATUS_INPA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	0x31E0 & 0x33E0 Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
-_STATUS_INPA_KRANN	JOB_L	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
-_STATUS_INPA_KRANN	JOB_S	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	0x31E3 & 0x33E3 Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
-_STATUS_OBD_MODE_01	JOB_L	0x0101 _STATUS_OBD_MODE_01	0x0101 OBD mode 01 - Current powertrain data	0x0101 _STATUS_OBD_MODE_01
-_STATUS_OBD_MODE_01	JOB_S	0x0101 _STATUS_OBD_MODE_01	0x0101 OBD mode 01 - Current powertrain data	0x0101 _STATUS_OBD_MODE_01
-_STATUS_OBD_MODE_03	JOB_L	0x03 _STATUS_OBD_MODE_03	0x03 OBD mode 03 - Stored emission-related DTCs	0x03 _STATUS_OBD_MODE_03
-_STATUS_OBD_MODE_03	JOB_S	0x03 _STATUS_OBD_MODE_03	0x03 OBD mode 03 - Stored emission-related DTCs	0x03 _STATUS_OBD_MODE_03
-_STATUS_OBD_MODE_07	JOB_L	0x07 _STATUS_OBD_MODE_07	0x07 OBD mode 07 - Pending emission-related DTCs	0x07 _STATUS_OBD_MODE_07
-_STATUS_OBD_MODE_07	JOB_S	0x07 _STATUS_OBD_MODE_07	0x07 OBD mode 07 - Pending emission-related DTCs	0x07 _STATUS_OBD_MODE_07
+﻿_STATUS_FASTA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_FASTA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_FASTA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+_STATUS_FASTA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+_STATUS_FASTA_KRANN	JOB_L	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
+_STATUS_FASTA_KRANN	JOB_S	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
+_STATUS_FASTA_TECU	JOB_L	0x23 Auslesen der DME-Temperaturstatistik	Reading the DME temperature statistics	0x23 Lecture des statistiques de température du DME
+_STATUS_FASTA_TECU	JOB_S	0x23 Auslesen der DME-Temperaturstatistik	Reading the DME temperature statistics	0x23 Lecture des statistiques de température du DME
+_STATUS_INPA_EISYGD	JOB_L	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_INPA_EISYGD	JOB_S	0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)	Control and read Eisy adaptation values (throttled)	0x31E1 et 0x33E1 Contrôle et lecture des valeurs d'adaptation Eisy (limitées)
+_STATUS_INPA_EISYUGD	JOB_L	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+_STATUS_INPA_EISYUGD	JOB_S	0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)	Control and read Eisy adaptation values (unthrottled)	0x31E0 et 0x33E0 Contrôle et lecture des valeurs d'adaptation Eisy (non bridées)
+_STATUS_INPA_KRANN	JOB_L	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
+_STATUS_INPA_KRANN	JOB_S	0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte	Control and read crane adaptation values	0x31E3 et 0x33E3 : Contrôle et lecture des valeurs d’adaptation de la grue
+_STATUS_OBD_MODE_01	JOB_L	0x0101 _STATUS_OBD_MODE_01	OBD mode 01 - Current powertrain data	0x0101 _STATUS_OBD_MODE_01
+_STATUS_OBD_MODE_01	JOB_S	0x0101 _STATUS_OBD_MODE_01	OBD mode 01 - Current powertrain data	0x0101 _STATUS_OBD_MODE_01
+_STATUS_OBD_MODE_03	JOB_L	0x03 _STATUS_OBD_MODE_03	OBD mode 03 - Stored emission-related DTCs	0x03 _STATUS_OBD_MODE_03
+_STATUS_OBD_MODE_03	JOB_S	0x03 _STATUS_OBD_MODE_03	OBD mode 03 - Stored emission-related DTCs	0x03 _STATUS_OBD_MODE_03
+_STATUS_OBD_MODE_07	JOB_L	0x07 _STATUS_OBD_MODE_07	OBD mode 07 - Pending emission-related DTCs	0x07 _STATUS_OBD_MODE_07
+_STATUS_OBD_MODE_07	JOB_S	0x07 _STATUS_OBD_MODE_07	OBD mode 07 - Pending emission-related DTCs	0x07 _STATUS_OBD_MODE_07
 AIF_LESEN	JOB_L	Auslesen des Anwender-Info-Feldes	Reading the user information field	Lecture du champ d'informations utilisateur
 AIF_LESEN	JOB_S	Auslesen des Anwender-Info-Feldes	Reading the user information field	Lecture du champ d'informations utilisateur
 AUTHENTISIERUNG_START	JOB_L	Authentisierung pruefen	Verify authentication	Vérifier l'authentification
@@ -74,20 +74,20 @@ FS_LESEN_TEXT	JOB_L	Read fault codes	Read fault codes	Lire les codes d'erreur
 FS_LESEN_TEXT	JOB_S	Read fault codes	Read fault codes	Lire les codes d'erreur
 HARDWARE_REFERENZ_LESEN	JOB_L	Auslesen der Hardware Referenz	Reading the hardware reference	Lecture du manuel de référence du matériel
 HARDWARE_REFERENZ_LESEN	JOB_S	Auslesen der Hardware Referenz	Reading the hardware reference	Lecture du manuel de référence du matériel
-HS_LESEN	JOB_L	0x222100 HS_LESEN	0x222100 Read history snapshot	0x222100 HS_READING
-HS_LESEN	JOB_S	0x222100 HS_LESEN	0x222100 Read history snapshot	0x222100 HS_READING
+HS_LESEN	JOB_L	0x222100 HS_LESEN	Read history snapshot	0x222100 HS_READING
+HS_LESEN	JOB_S	0x222100 HS_LESEN	Read history snapshot	0x222100 HS_READING
 INFO	JOB_L	Info about SGBD	Information about SGBD	Informations sur le SGBD
 INFO	JOB_S	Info about SGBD	Information about SGBD	Informations sur le SGBD
-INNENTEMP_LESEN	JOB_L	0x301001 INNENTEMP_LESEN	0x301001 Read interior temperature	0x301001 TEMPÉRATURE INTÉRIEURE_LECTURE
-INNENTEMP_LESEN	JOB_S	0x301001 INNENTEMP_LESEN	0x301001 Read interior temperature	0x301001 TEMPÉRATURE INTÉRIEURE_LECTURE
+INNENTEMP_LESEN	JOB_L	0x301001 INNENTEMP_LESEN	Read interior temperature	0x301001 TEMPÉRATURE INTÉRIEURE_LECTURE
+INNENTEMP_LESEN	JOB_S	0x301001 INNENTEMP_LESEN	Read interior temperature	0x301001 TEMPÉRATURE INTÉRIEURE_LECTURE
 KRAFTSTOFFVERBRAUCH_LESEN	JOB_L	Auslesen der Daten Referenz	Read fuel consumption	Lecture des données de référence
 KRAFTSTOFFVERBRAUCH_LESEN	JOB_S	Auslesen der Daten Referenz	Read fuel consumption	Lecture des données de référence
 LESEN_SYSTEMCHECK_SLS	JOB_L	Status Systemdiagnose SLS	System diagnostic status SLS	État du diagnostic système SLS
 LESEN_SYSTEMCHECK_SLS	JOB_S	Status Systemdiagnose SLS	System diagnostic status SLS	État du diagnostic système SLS
 LESEN_SYSTEMCHECK_TEVSYS	JOB_L	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
 LESEN_SYSTEMCHECK_TEVSYS	JOB_S	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
-MESSWERTBLOCK_LESEN	JOB_L	0x2CF0 MESSWERTBLOCK_LESEN	0x2CF0 READ MEASURING VALUE BLOCK	0x2CF0 LECTURE DU BLOC DE VALEURS DE MESURE
-MESSWERTBLOCK_LESEN	JOB_S	0x2CF0 MESSWERTBLOCK_LESEN	0x2CF0 READ MEASURING VALUE BLOCK	0x2CF0 LECTURE DU BLOC DE VALEURS DE MESURE
+MESSWERTBLOCK_LESEN	JOB_L	0x2CF0 MESSWERTBLOCK_LESEN	READ MEASURING VALUE BLOCK	0x2CF0 LECTURE DU BLOC DE VALEURS DE MESURE
+MESSWERTBLOCK_LESEN	JOB_S	0x2CF0 MESSWERTBLOCK_LESEN	READ MEASURING VALUE BLOCK	0x2CF0 LECTURE DU BLOC DE VALEURS DE MESURE
 PHYSIKALISCHE_HW_NR_LESEN	JOB_L	Auslesen der physikalischen Hardwarenummer	Reading the physical hardware number	Lecture du numéro de matériel physique
 PHYSIKALISCHE_HW_NR_LESEN	JOB_S	Auslesen der physikalischen Hardwarenummer	Reading the physical hardware number	Lecture du numéro de matériel physique
 PRUEFCODE_LESEN	JOB_L	Pruefcode-Daten in Hex auslesen	Read test code data in hexadecimal format	Lire les données du code de test au format hexadécimal
@@ -98,20 +98,20 @@ SERIENNUMMER_LESEN	JOB_L	Hersteller Seriennummer lesen	Read manufacturer serial 
 SERIENNUMMER_LESEN	JOB_S	Hersteller Seriennummer lesen	Read manufacturer serial number	Lire le numéro de série du fabricant
 SPEICHER_LESEN	JOB_L	Lese Bytes ueber direkte Adressierung	Read bytes via direct addressing	Lecture des octets par adressage direct
 SPEICHER_LESEN	JOB_S	Lese Bytes ueber direkte Adressierung	Read bytes via direct addressing	Lecture des octets par adressage direct
-SPEICHER_LESEN_ASCII	JOB_L	0x23 SPEICHER_LESEN_ASCII	0x23 Read memory (ASCII format)	0x23 LECTURE_STOCKAGE_ASCII
-SPEICHER_LESEN_ASCII	JOB_S	0x23 SPEICHER_LESEN_ASCII	0x23 Read memory (ASCII format)	0x23 LECTURE_STOCKAGE_ASCII
+SPEICHER_LESEN_ASCII	JOB_L	0x23 SPEICHER_LESEN_ASCII	Read memory (ASCII format)	0x23 LECTURE_STOCKAGE_ASCII
+SPEICHER_LESEN_ASCII	JOB_S	0x23 SPEICHER_LESEN_ASCII	Read memory (ASCII format)	0x23 LECTURE_STOCKAGE_ASCII
 START_SYSTEMCHECK_DMTL	JOB_L	Systemcheck Tankentlueftungssystem Leckdiagnose starten	System check fuel tank venting system: Start leak diagnosis	Vérification du système de ventilation du réservoir de carburant : Démarrer le diagnostic des fuites
 START_SYSTEMCHECK_DMTL	JOB_S	Systemcheck Tankentlueftungssystem Leckdiagnose starten	System check fuel tank venting system: Start leak diagnosis	Vérification du système de ventilation du réservoir de carburant : Démarrer le diagnostic des fuites
 START_SYSTEMCHECK_DMTL_ECOS	JOB_L	Systemcheck Tankentlueftungssystem Leckdiagnose starten	System check fuel tank venting system: Start leak diagnosis	Vérification du système de ventilation du réservoir de carburant : Démarrer le diagnostic des fuites
 START_SYSTEMCHECK_DMTL_ECOS	JOB_S	Systemcheck Tankentlueftungssystem Leckdiagnose starten	System check fuel tank venting system: Start leak diagnosis	Vérification du système de ventilation du réservoir de carburant : Démarrer le diagnostic des fuites
-START_SYSTEMCHECK_EVAUSBL	JOB_L	0x3125 START_SYSTEMCHECK_EVAUSBL	0x3125 START_SYSTEMCHECK_EVAUSBL	0x3125 DÉMARRER_VÉRIFICATION_SYSTÈME_EVAUSBL
-START_SYSTEMCHECK_EVAUSBL	JOB_S	0x3125 START_SYSTEMCHECK_EVAUSBL	0x3125 START_SYSTEMCHECK_EVAUSBL	0x3125 DÉMARRER_VÉRIFICATION_SYSTÈME_EVAUSBL
-START_SYSTEMCHECK_L_REGELUNG_AUS	JOB_L	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS
-START_SYSTEMCHECK_L_REGELUNG_AUS	JOB_S	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS
-START_SYSTEMCHECK_L_SONDE	JOB_L	0x31DF START_SYSTEMCHECK_L_SONDE	0x31DF START_SYSTEMCHECK_L_SONDE	0x31DF DÉMARRER_VÉRIFICATION_SYSTEM_L_SONDE
-START_SYSTEMCHECK_L_SONDE	JOB_S	0x31DF START_SYSTEMCHECK_L_SONDE	0x31DF START_SYSTEMCHECK_L_SONDE	0x31DF DÉMARRER_VÉRIFICATION_SYSTEM_L_SONDE
-START_SYSTEMCHECK_LLERH	JOB_L	0x30B3     Ansteuern Diagnosefunktion Leerlauf-Erhöhung (absolut)	0x30B3 Control diagnostic function idle speed increase (absolute)	0x30B3 Fonction de diagnostic de contrôle : augmentation du régime de ralenti (absolu)
-START_SYSTEMCHECK_LLERH	JOB_S	0x30B3     Ansteuern Diagnosefunktion Leerlauf-Erhöhung (absolut)	0x30B3 Control diagnostic function idle speed increase (absolute)	0x30B3 Fonction de diagnostic de contrôle : augmentation du régime de ralenti (absolu)
+START_SYSTEMCHECK_EVAUSBL	JOB_L	0x3125 START_SYSTEMCHECK_EVAUSBL	START_SYSTEMCHECK_EVAUSBL	0x3125 DÉMARRER_VÉRIFICATION_SYSTÈME_EVAUSBL
+START_SYSTEMCHECK_EVAUSBL	JOB_S	0x3125 START_SYSTEMCHECK_EVAUSBL	START_SYSTEMCHECK_EVAUSBL	0x3125 DÉMARRER_VÉRIFICATION_SYSTÈME_EVAUSBL
+START_SYSTEMCHECK_L_REGELUNG_AUS	JOB_L	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS	START_SYSTEMCHECK_L_REGELUNG_AUS	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS
+START_SYSTEMCHECK_L_REGELUNG_AUS	JOB_S	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS	START_SYSTEMCHECK_L_REGELUNG_AUS	0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS
+START_SYSTEMCHECK_L_SONDE	JOB_L	0x31DF START_SYSTEMCHECK_L_SONDE	START_SYSTEMCHECK_L_SONDE	0x31DF DÉMARRER_VÉRIFICATION_SYSTEM_L_SONDE
+START_SYSTEMCHECK_L_SONDE	JOB_S	0x31DF START_SYSTEMCHECK_L_SONDE	START_SYSTEMCHECK_L_SONDE	0x31DF DÉMARRER_VÉRIFICATION_SYSTEM_L_SONDE
+START_SYSTEMCHECK_LLERH	JOB_L	0x30B3     Ansteuern Diagnosefunktion Leerlauf-Erhöhung (absolut)	Control diagnostic function idle speed increase (absolute)	0x30B3 Fonction de diagnostic de contrôle : augmentation du régime de ralenti (absolu)
+START_SYSTEMCHECK_LLERH	JOB_S	0x30B3     Ansteuern Diagnosefunktion Leerlauf-Erhöhung (absolut)	Control diagnostic function idle speed increase (absolute)	0x30B3 Fonction de diagnostic de contrôle : augmentation du régime de ralenti (absolu)
 START_SYSTEMCHECK_PM_MESSEMODE	JOB_L	$31 F6 Systemdiagnose BatterieSensor reset	$31 F6 system diagnosis battery sensor reset	31 $ F6 réinitialisation du capteur de batterie diagnostic système
 START_SYSTEMCHECK_PM_MESSEMODE	JOB_S	$31 F6 Systemdiagnose BatterieSensor reset	$31 F6 system diagnosis battery sensor reset	31 $ F6 réinitialisation du capteur de batterie diagnostic système
 START_SYSTEMCHECK_SEK_LUFT	JOB_L	SLS Funktionstest	SLS Functional Test	Test fonctionnel SLS
@@ -716,26 +716,26 @@ STATUS_ANWS	JOB_L	0x30EE01 STATUS_ANWS	0x30EE01 STATUS_ANWS	0x30EE01 STATUT_ANWS
 STATUS_ANWS	JOB_S	0x30EE01 STATUS_ANWS	0x30EE01 STATUS_ANWS	0x30EE01 STATUT_ANWS
 STATUS_BETRIEBSSTUNDENZAEHLER	JOB_L	Usage hours	Usage hours	heures d'utilisation
 STATUS_BETRIEBSSTUNDENZAEHLER	JOB_S	Usage hours	Usage hours	heures d'utilisation
-STATUS_BLS	JOB_L	0x300201 STATUS_BLS	0x300201 Read brake light switch	0x300201 STATUT_BLS
-STATUS_BLS	JOB_S	0x300201 STATUS_BLS	0x300201 Read brake light switch	0x300201 STATUT_BLS
-STATUS_BLTS	JOB_L	0x300301 STATUS_BLTS	0x300301 Read brake light test switch	0x300301 STATUS_BLTS
-STATUS_BLTS	JOB_S	0x300301 STATUS_BLTS	0x300301 Read brake light test switch	0x300301 STATUS_BLTS
+STATUS_BLS	JOB_L	0x300201 STATUS_BLS	Read brake light switch	0x300201 STATUT_BLS
+STATUS_BLS	JOB_S	0x300201 STATUS_BLS	Read brake light switch	0x300201 STATUT_BLS
+STATUS_BLTS	JOB_L	0x300301 STATUS_BLTS	Read brake light test switch	0x300301 STATUS_BLTS
+STATUS_BLTS	JOB_S	0x300301 STATUS_BLTS	Read brake light test switch	0x300301 STATUS_BLTS
 STATUS_CO	JOB_L	Auslesen des LL-CO-Wertes	Reading the LL-CO value	Lecture de la valeur LL-CO
 STATUS_CO	JOB_S	Auslesen des LL-CO-Wertes	Reading the LL-CO value	Lecture de la valeur LL-CO
 STATUS_CO_ABGLEICH	JOB_L	Auslesen des LL-CO-Wertes	Reading the LL-CO value	Lecture de la valeur LL-CO
 STATUS_CO_ABGLEICH	JOB_S	Auslesen des LL-CO-Wertes	Reading the LL-CO value	Lecture de la valeur LL-CO
 STATUS_DFMONITOR	JOB_L	Batterieladezustand auslesen	Read battery charge level	Lire le niveau de charge de la batterie
 STATUS_DFMONITOR	JOB_S	Batterieladezustand auslesen	Read battery charge level	Lire le niveau de charge de la batterie
-STATUS_DIGITAL_0	JOB_L	0x224007 STATUS_DIGITAL_0	0x224007 Digital status register 0	0x224007 STATUT_NUMÉRIQUE_0
-STATUS_DIGITAL_0	JOB_S	0x224007 STATUS_DIGITAL_0	0x224007 Digital status register 0	0x224007 STATUT_NUMÉRIQUE_0
-STATUS_DIGITAL_1	JOB_L	0x224002 STATUS_DIGITAL_1	0x224002 Digital status register 1	0x224002 STATUT_NUMÉRIQUE_1
-STATUS_DIGITAL_1	JOB_S	0x224002 STATUS_DIGITAL_1	0x224002 Digital status register 1	0x224002 STATUT_NUMÉRIQUE_1
+STATUS_DIGITAL_0	JOB_L	0x224007 STATUS_DIGITAL_0	Digital status register 0	0x224007 STATUT_NUMÉRIQUE_0
+STATUS_DIGITAL_0	JOB_S	0x224007 STATUS_DIGITAL_0	Digital status register 0	0x224007 STATUT_NUMÉRIQUE_0
+STATUS_DIGITAL_1	JOB_L	0x224002 STATUS_DIGITAL_1	Digital status register 1	0x224002 STATUT_NUMÉRIQUE_1
+STATUS_DIGITAL_1	JOB_S	0x224002 STATUS_DIGITAL_1	Digital status register 1	0x224002 STATUT_NUMÉRIQUE_1
 STATUS_DIGITAL_3	JOB_L	Statusbit KOmpressorRELais	Status bit compressor relay	Relais de compresseur à bit d'état
 STATUS_DIGITAL_3	JOB_S	Statusbit KOmpressorRELais	Status bit compressor relay	Relais de compresseur à bit d'état
 STATUS_DIGITAL_4	JOB_L	Statusbit LeerLauf	Status bit Idle	Bit d'état inactif
 STATUS_DIGITAL_4	JOB_S	Statusbit LeerLauf	Status bit Idle	Bit d'état inactif
-STATUS_DISA	JOB_L	0x30C601 STATUS_DISA	0x30C601 Read DISA variable intake flap	0x30C601 STATUT_DISA
-STATUS_DISA	JOB_S	0x30C601 STATUS_DISA	0x30C601 Read DISA variable intake flap	0x30C601 STATUT_DISA
+STATUS_DISA	JOB_L	0x30C601 STATUS_DISA	Read DISA variable intake flap	0x30C601 STATUT_DISA
+STATUS_DISA	JOB_S	0x30C601 STATUS_DISA	Read DISA variable intake flap	0x30C601 STATUT_DISA
 STATUS_DISA2	JOB_L	disa2 status	DISA2 status	statut disa2
 STATUS_DISA2	JOB_S	disa2 status	DISA2 status	statut disa2
 STATUS_DKP_WINKEL	JOB_L	Drosselklappenwinkel auslesen	Read throttle valve angle	Lire l'angle du papillon des gaz
@@ -746,40 +746,40 @@ STATUS_DMTL	JOB_L	Status Systemtest DMTL	Status System Test DMTL	Test du systèm
 STATUS_DMTL	JOB_S	Status Systemtest DMTL	Status System Test DMTL	Test du système d'état DMTL
 STATUS_DMTL_HEIZUNG	JOB_L	DMTL-Heizung Satus auslesen	Read DMTL heater status	Lire l'état du chauffage DMTL
 STATUS_DMTL_HEIZUNG	JOB_S	DMTL-Heizung Satus auslesen	Read DMTL heater status	Lire l'état du chauffage DMTL
-STATUS_DMTL_P	JOB_L	0x30CC01 STATUS_DMTL_P	0x30CC01 Read DMTL pump	0x30CC01 STATUT_DMTL_P
-STATUS_DMTL_P	JOB_S	0x30CC01 STATUS_DMTL_P	0x30CC01 Read DMTL pump	0x30CC01 STATUT_DMTL_P
-STATUS_DMTL_V	JOB_L	0x30CD01 STATUS_DMTL_V	0x30CD01 Read DMTL valve	0x30CD01 STATUT_DMTL_V
-STATUS_DMTL_V	JOB_S	0x30CD01 STATUS_DMTL_V	0x30CD01 Read DMTL valve	0x30CD01 STATUT_DMTL_V
+STATUS_DMTL_P	JOB_L	0x30CC01 STATUS_DMTL_P	Read DMTL pump	0x30CC01 STATUT_DMTL_P
+STATUS_DMTL_P	JOB_S	0x30CC01 STATUS_DMTL_P	Read DMTL pump	0x30CC01 STATUT_DMTL_P
+STATUS_DMTL_V	JOB_L	0x30CD01 STATUS_DMTL_V	Read DMTL valve	0x30CD01 STATUT_DMTL_V
+STATUS_DMTL_V	JOB_S	0x30CD01 STATUS_DMTL_V	Read DMTL valve	0x30CD01 STATUT_DMTL_V
 STATUS_DROSSELKLAPPE	JOB_L	Auslesen des Drosselklappen Winkels	Reading the throttle valve angle	Lecture de l'angle du papillon des gaz
 STATUS_DROSSELKLAPPE	JOB_S	Auslesen des Drosselklappen Winkels	Reading the throttle valve angle	Lecture de l'angle du papillon des gaz
-STATUS_E_LUEFTER	JOB_L	0x30DA01 STATUS_E_LUEFTER	0x30DA01 Read electric cooling fan	0x30DA01 STATUT_E_LUEFTER
-STATUS_E_LUEFTER	JOB_S	0x30DA01 STATUS_E_LUEFTER	0x30DA01 Read electric cooling fan	0x30DA01 STATUT_E_LUEFTER
-STATUS_EBL	JOB_L	0x30C801 STATUS_EBL	0x30C801 Read E-box fan	0x30C801 STATUT_EBL
-STATUS_EBL	JOB_S	0x30C801 STATUS_EBL	0x30C801 Read E-box fan	0x30C801 STATUT_EBL
-STATUS_EISYGD	JOB_L	0x33E1 STATUS_EISYGD	0x33E1 Read Eisy adaptation (throttled)	0x33E1 STATUT_EISYGD
-STATUS_EISYGD	JOB_S	0x33E1 STATUS_EISYGD	0x33E1 Read Eisy adaptation (throttled)	0x33E1 STATUT_EISYGD
-STATUS_EISYUGD	JOB_L	0x33E0 STATUS_EISYUGD	0x33E0 Read Eisy adaptation (unthrottled)	0x33E0 STATUT_EISYUGD
-STATUS_EISYUGD	JOB_S	0x33E0 STATUS_EISYUGD	0x33E0 Read Eisy adaptation (unthrottled)	0x33E0 STATUT_EISYUGD
-STATUS_EKP	JOB_L	0x30D801 STATUS_EKP	0x30D801 Read electric fuel pump	0x30D801 STATUT_EKP
-STATUS_EKP	JOB_S	0x30D801 STATUS_EKP	0x30D801 Read electric fuel pump	0x30D801 STATUT_EKP
-STATUS_EML	JOB_L	0x30D601 STATUS_EML	0x30D601 Read engine power management	0x30D601 STATUT_EML
-STATUS_EML	JOB_S	0x30D601 STATUS_EML	0x30D601 Read engine power management	0x30D601 STATUT_EML
+STATUS_E_LUEFTER	JOB_L	0x30DA01 STATUS_E_LUEFTER	Read electric cooling fan	0x30DA01 STATUT_E_LUEFTER
+STATUS_E_LUEFTER	JOB_S	0x30DA01 STATUS_E_LUEFTER	Read electric cooling fan	0x30DA01 STATUT_E_LUEFTER
+STATUS_EBL	JOB_L	0x30C801 STATUS_EBL	Read E-box fan	0x30C801 STATUT_EBL
+STATUS_EBL	JOB_S	0x30C801 STATUS_EBL	Read E-box fan	0x30C801 STATUT_EBL
+STATUS_EISYGD	JOB_L	0x33E1 STATUS_EISYGD	Read Eisy adaptation (throttled)	0x33E1 STATUT_EISYGD
+STATUS_EISYGD	JOB_S	0x33E1 STATUS_EISYGD	Read Eisy adaptation (throttled)	0x33E1 STATUT_EISYGD
+STATUS_EISYUGD	JOB_L	0x33E0 STATUS_EISYUGD	Read Eisy adaptation (unthrottled)	0x33E0 STATUT_EISYUGD
+STATUS_EISYUGD	JOB_S	0x33E0 STATUS_EISYUGD	Read Eisy adaptation (unthrottled)	0x33E0 STATUT_EISYUGD
+STATUS_EKP	JOB_L	0x30D801 STATUS_EKP	Read electric fuel pump	0x30D801 STATUT_EKP
+STATUS_EKP	JOB_S	0x30D801 STATUS_EKP	Read electric fuel pump	0x30D801 STATUT_EKP
+STATUS_EML	JOB_L	0x30D601 STATUS_EML	Read engine power management	0x30D601 STATUT_EML
+STATUS_EML	JOB_S	0x30D601 STATUS_EML	Read engine power management	0x30D601 STATUT_EML
 STATUS_ENWS	JOB_L	0x30ED01 STATUS_ENWS	0x30ED01 STATUS_ENWS	0x30ED01 STATUT_ENWS
 STATUS_ENWS	JOB_S	0x30ED01 STATUS_ENWS	0x30ED01 STATUS_ENWS	0x30ED01 STATUT_ENWS
-STATUS_EV1	JOB_L	0x30E101 STATUS_EV1	0x30E101 Read fuel injector 1	0x30E101 STATUT_EV1
-STATUS_EV1	JOB_S	0x30E101 STATUS_EV1	0x30E101 Read fuel injector 1	0x30E101 STATUT_EV1
-STATUS_EV2	JOB_L	0x30E201 STATUS_EV2	0x30E201 Read fuel injector 2	0x30E201 STATUT_EV2
-STATUS_EV2	JOB_S	0x30E201 STATUS_EV2	0x30E201 Read fuel injector 2	0x30E201 STATUT_EV2
-STATUS_EV3	JOB_L	0x30E301 STATUS_EV3	0x30E301 Read fuel injector 3	0x30E301 STATUT_EV3
-STATUS_EV3	JOB_S	0x30E301 STATUS_EV3	0x30E301 Read fuel injector 3	0x30E301 STATUT_EV3
-STATUS_EV4	JOB_L	0x30E401 STATUS_EV4	0x30E401 Read fuel injector 4	0x30E401 STATUT_EV4
-STATUS_EV4	JOB_S	0x30E401 STATUS_EV4	0x30E401 Read fuel injector 4	0x30E401 STATUT_EV4
-STATUS_EV5	JOB_L	0x30E501 STATUS_EV5	0x30E501 Read fuel injector 5	0x30E501 STATUT_EV5
-STATUS_EV5	JOB_S	0x30E501 STATUS_EV5	0x30E501 Read fuel injector 5	0x30E501 STATUT_EV5
-STATUS_EV6	JOB_L	0x30E601 STATUS_EV6	0x30E601 Read fuel injector 6	0x30E601 STATUT_EV6
-STATUS_EV6	JOB_S	0x30E601 STATUS_EV6	0x30E601 Read fuel injector 6	0x30E601 STATUT_EV6
-STATUS_EWAP	JOB_L	0x30BF01 STATUS_EWAP	0x30BF01 Read electric water pump	0x30BF01 STATUT_EWAP
-STATUS_EWAP	JOB_S	0x30BF01 STATUS_EWAP	0x30BF01 Read electric water pump	0x30BF01 STATUT_EWAP
+STATUS_EV1	JOB_L	0x30E101 STATUS_EV1	Read fuel injector 1	0x30E101 STATUT_EV1
+STATUS_EV1	JOB_S	0x30E101 STATUS_EV1	Read fuel injector 1	0x30E101 STATUT_EV1
+STATUS_EV2	JOB_L	0x30E201 STATUS_EV2	Read fuel injector 2	0x30E201 STATUT_EV2
+STATUS_EV2	JOB_S	0x30E201 STATUS_EV2	Read fuel injector 2	0x30E201 STATUT_EV2
+STATUS_EV3	JOB_L	0x30E301 STATUS_EV3	Read fuel injector 3	0x30E301 STATUT_EV3
+STATUS_EV3	JOB_S	0x30E301 STATUS_EV3	Read fuel injector 3	0x30E301 STATUT_EV3
+STATUS_EV4	JOB_L	0x30E401 STATUS_EV4	Read fuel injector 4	0x30E401 STATUT_EV4
+STATUS_EV4	JOB_S	0x30E401 STATUS_EV4	Read fuel injector 4	0x30E401 STATUT_EV4
+STATUS_EV5	JOB_L	0x30E501 STATUS_EV5	Read fuel injector 5	0x30E501 STATUT_EV5
+STATUS_EV5	JOB_S	0x30E501 STATUS_EV5	Read fuel injector 5	0x30E501 STATUT_EV5
+STATUS_EV6	JOB_L	0x30E601 STATUS_EV6	Read fuel injector 6	0x30E601 STATUT_EV6
+STATUS_EV6	JOB_S	0x30E601 STATUS_EV6	Read fuel injector 6	0x30E601 STATUT_EV6
+STATUS_EWAP	JOB_L	0x30BF01 STATUS_EWAP	Read electric water pump	0x30BF01 STATUT_EWAP
+STATUS_EWAP	JOB_S	0x30BF01 STATUS_EWAP	Read electric water pump	0x30BF01 STATUT_EWAP
 STATUS_EWS_LOCK	JOB_L	Statusbit LV_LOCK_IMOB = 1 blockt Zündung und Einspritzung	Status bit LV_LOCK_IMOB = 1 blocks ignition and injection.	Le bit d'état LV_LOCK_IMOB = 1 bloque l'allumage et l'injection.
 STATUS_EWS_LOCK	JOB_S	Statusbit LV_LOCK_IMOB = 1 blockt Zündung und Einspritzung	Status bit LV_LOCK_IMOB = 1 blocks ignition and injection.	Le bit d'état LV_LOCK_IMOB = 1 bloque l'allumage et l'injection.
 STATUS_FASTA_BIN	JOB_L	Messwerteblock lesen	Read measured value block	bloc de lecture de la valeur mesurée
@@ -794,18 +794,18 @@ STATUS_FGRL	JOB_L	$30 F2 01 Status der Stellgliedansteuerung FGR Lampe	$30 F2 01
 STATUS_FGRL	JOB_S	$30 F2 01 Status der Stellgliedansteuerung FGR Lampe	$30 F2 01 Actuator control status FGR lamp	Voyant FGR d'état de la commande de l'actionneur 30 $ F2 01
 STATUS_FUNKTIONS	JOB_L	Status Schaltzustaende	Status Switching states	États de commutation d'état
 STATUS_FUNKTIONS	JOB_S	Status Schaltzustaende	Status Switching states	États de commutation d'état
-STATUS_FWV1	JOB_L	0x301E01 STATUS_FWV1	0x301E01 Read coolant flow valve 1	0x301E01 STATUT_FWV1
-STATUS_FWV1	JOB_S	0x301E01 STATUS_FWV1	0x301E01 Read coolant flow valve 1	0x301E01 STATUT_FWV1
-STATUS_FWV2	JOB_L	0x301F01 STATUS_FWV2	0x301F01 Read coolant flow valve 2	0x301F01 STATUT_FWV2
-STATUS_FWV2	JOB_S	0x301F01 STATUS_FWV2	0x301F01 Read coolant flow valve 2	0x301F01 STATUT_FWV2
+STATUS_FWV1	JOB_L	0x301E01 STATUS_FWV1	Read coolant flow valve 1	0x301E01 STATUT_FWV1
+STATUS_FWV1	JOB_S	0x301E01 STATUS_FWV1	Read coolant flow valve 1	0x301E01 STATUT_FWV1
+STATUS_FWV2	JOB_L	0x301F01 STATUS_FWV2	Read coolant flow valve 2	0x301F01 STATUT_FWV2
+STATUS_FWV2	JOB_S	0x301F01 STATUS_FWV2	Read coolant flow valve 2	0x301F01 STATUT_FWV2
 STATUS_GEBERRAD_ADAPTION	JOB_L	Geberradadaption	Encoder wheel adaptation	adaptation de la roue codeuse
 STATUS_GEBERRAD_ADAPTION	JOB_S	Geberradadaption	Encoder wheel adaptation	adaptation de la roue codeuse
 STATUS_GESCHWINDIGKEIT	JOB_L	Geschwindigkeit auslesen	Read speed	vitesse de lecture
 STATUS_GESCHWINDIGKEIT	JOB_S	Geschwindigkeit auslesen	Read speed	vitesse de lecture
 STATUS_GLF	JOB_L	0x30DE01 STATUS_GLF	0x30DE01 STATUS_GLF	0x30DE01 STATUT_GLF
 STATUS_GLF	JOB_S	0x30DE01 STATUS_GLF	0x30DE01 STATUS_GLF	0x30DE01 STATUT_GLF
-STATUS_HFMS	JOB_L	0x302E01 STATUS_HFMS	0x302E01 Read hot film mass airflow sensor	0x302E01 STATUT_HFMS
-STATUS_HFMS	JOB_S	0x302E01 STATUS_HFMS	0x302E01 Read hot film mass airflow sensor	0x302E01 STATUT_HFMS
+STATUS_HFMS	JOB_L	0x302E01 STATUS_HFMS	Read hot film mass airflow sensor	0x302E01 STATUT_HFMS
+STATUS_HFMS	JOB_S	0x302E01 STATUS_HFMS	Read hot film mass airflow sensor	0x302E01 STATUT_HFMS
 STATUS_INT	JOB_L	Lambdaregelfaktor auslesen	Read lambda control factor	Lire le facteur de contrôle lambda
 STATUS_INT	JOB_S	Lambdaregelfaktor auslesen	Read lambda control factor	Lire le facteur de contrôle lambda
 STATUS_INT_2	JOB_L	INT-Signal Bank 2	INT signal Bank 2	Signal INT Banque 2
@@ -816,14 +816,14 @@ STATUS_KALT_MOTORDREHZAHL_N40	JOB_L	Engine RPM auslesen	Read engine RPM	Lire le 
 STATUS_KALT_MOTORDREHZAHL_N40	JOB_S	Engine RPM auslesen	Read engine RPM	Lire le régime moteur
 STATUS_KALT_MOTORTEMPERATUR	JOB_L	Motortemperatur auslesen	Read engine temperature	Lire la température du moteur
 STATUS_KALT_MOTORTEMPERATUR	JOB_S	Motortemperatur auslesen	Read engine temperature	Lire la température du moteur
-STATUS_KB1	JOB_L	0x303001 STATUS_KB1	0x303001 Read knock bank 1	0x303001 STATUT_KB1
-STATUS_KB1	JOB_S	0x303001 STATUS_KB1	0x303001 Read knock bank 1	0x303001 STATUT_KB1
-STATUS_KB2	JOB_L	0x303101 STATUS_KB2	0x303101 Read knock bank 2	0x303101 STATUT_KB2
-STATUS_KB2	JOB_S	0x303101 STATUS_KB2	0x303101 Read knock bank 2	0x303101 STATUT_KB2
-STATUS_KFT	JOB_L	0x30C901 STATUS_KFT	0x30C901 Read fuel temperature	0x30C901 STATUT_KFT
-STATUS_KFT	JOB_S	0x30C901 STATUS_KFT	0x30C901 Read fuel temperature	0x30C901 STATUT_KFT
-STATUS_KGEH	JOB_L	0x30AD01 STATUS_KGEH	0x30AD01 Read crankcase	0x30AD01 STATUT_KGEH
-STATUS_KGEH	JOB_S	0x30AD01 STATUS_KGEH	0x30AD01 Read crankcase	0x30AD01 STATUT_KGEH
+STATUS_KB1	JOB_L	0x303001 STATUS_KB1	Read knock bank 1	0x303001 STATUT_KB1
+STATUS_KB1	JOB_S	0x303001 STATUS_KB1	Read knock bank 1	0x303001 STATUT_KB1
+STATUS_KB2	JOB_L	0x303101 STATUS_KB2	Read knock bank 2	0x303101 STATUT_KB2
+STATUS_KB2	JOB_S	0x303101 STATUS_KB2	Read knock bank 2	0x303101 STATUT_KB2
+STATUS_KFT	JOB_L	0x30C901 STATUS_KFT	Read fuel temperature	0x30C901 STATUT_KFT
+STATUS_KFT	JOB_S	0x30C901 STATUS_KFT	Read fuel temperature	0x30C901 STATUT_KFT
+STATUS_KGEH	JOB_L	0x30AD01 STATUS_KGEH	Read crankcase	0x30AD01 STATUT_KGEH
+STATUS_KGEH	JOB_S	0x30AD01 STATUS_KGEH	Read crankcase	0x30AD01 STATUT_KGEH
 STATUS_KILOMETERSTAND	JOB_L	Kilometer reading	Kilometer reading	Lecture du kilomètre
 STATUS_KILOMETERSTAND	JOB_S	Kilometer reading	Kilometer reading	Lecture du kilomètre
 STATUS_KL15_SPANNUNG	JOB_L	Lastsignal Spg auslesen	Read load signal voltage	Lire la tension du signal de charge
@@ -840,8 +840,8 @@ STATUS_KTEST_MOTORDREHZAHL	JOB_L	Engine RPM auslesen	Read engine RPM	Lire le ré
 STATUS_KTEST_MOTORDREHZAHL	JOB_S	Engine RPM auslesen	Read engine RPM	Lire le régime moteur
 STATUS_KUEHLMITTELTEMPERATUR	JOB_L	Coolant temperature	Coolant temperature	température du liquide de refroidissement
 STATUS_KUEHLMITTELTEMPERATUR	JOB_S	Coolant temperature	Coolant temperature	température du liquide de refroidissement
-STATUS_KUP	JOB_L	0x300401 STATUS_KUP     Kupplungsschalter auslesen NO_CON keine Vorraussetzungen	0x300401 Read clutch switch STATUS_KUP NO_CON no prerequisites	0x300401 Lecture du contacteur d'embrayage STATUS_KUP NO_CON aucune condition préalable
-STATUS_KUP	JOB_S	0x300401 STATUS_KUP     Kupplungsschalter auslesen NO_CON keine Vorraussetzungen	0x300401 Read clutch switch STATUS_KUP NO_CON no prerequisites	0x300401 Lecture du contacteur d'embrayage STATUS_KUP NO_CON aucune condition préalable
+STATUS_KUP	JOB_L	0x300401 STATUS_KUP     Kupplungsschalter auslesen NO_CON keine Vorraussetzungen	Read clutch switch STATUS_KUP NO_CON no prerequisites	0x300401 Lecture du contacteur d'embrayage STATUS_KUP NO_CON aucune condition préalable
+STATUS_KUP	JOB_S	0x300401 STATUS_KUP     Kupplungsschalter auslesen NO_CON keine Vorraussetzungen	Read clutch switch STATUS_KUP NO_CON no prerequisites	0x300401 Lecture du contacteur d'embrayage STATUS_KUP NO_CON aucune condition préalable
 STATUS_KVA	JOB_L	0x21C1 STATUS_KVA	0x21C1 STATUS_KVA	0x21C1 STATUT_KVA
 STATUS_KVA	JOB_S	0x21C1 STATUS_KVA	0x21C1 STATUS_KVA	0x21C1 STATUT_KVA
 STATUS_L_SONDE	JOB_L	Lambdasondendifferenzspannung 1	Lambda sensor differential voltage 1	Tension différentielle du capteur Lambda 1
@@ -876,26 +876,26 @@ STATUS_LL_ABGLEICH	JOB_L	LL_Abgleich	LL_Comparison	LL_Comparaison
 STATUS_LL_ABGLEICH	JOB_S	LL_Abgleich	LL_Comparison	LL_Comparaison
 STATUS_LMM_MASSE	JOB_L	Luftmenge lesen	Read air volume	Lire le volume d'air
 STATUS_LMM_MASSE	JOB_S	Luftmenge lesen	Read air volume	Lire le volume d'air
-STATUS_LRP	JOB_L	0x225FF7     Laufruhepruefung auslesen	0x225FF7 Read out smooth running test	0x225FF7 Lecture du test de fonctionnement fluide
-STATUS_LRP	JOB_S	0x225FF7     Laufruhepruefung auslesen	0x225FF7 Read out smooth running test	0x225FF7 Lecture du test de fonctionnement fluide
+STATUS_LRP	JOB_L	0x225FF7     Laufruhepruefung auslesen	Read out smooth running test	0x225FF7 Lecture du test de fonctionnement fluide
+STATUS_LRP	JOB_S	0x225FF7     Laufruhepruefung auslesen	Read out smooth running test	0x225FF7 Lecture du test de fonctionnement fluide
 STATUS_LS_NKAT_SIGNAL_2	JOB_L	Voltage Lambdasonde vor KAT auslesen Sonde 2	Read the voltage of the lambda sensor before the catalytic converter (sensor 2).	Lisez la tension du capteur lambda avant le convertisseur catalytique (capteur 2).
 STATUS_LS_NKAT_SIGNAL_2	JOB_S	Voltage Lambdasonde vor KAT auslesen Sonde 2	Read the voltage of the lambda sensor before the catalytic converter (sensor 2).	Lisez la tension du capteur lambda avant le convertisseur catalytique (capteur 2).
 STATUS_LS_VKAT_SIGNAL_1	JOB_L	Lambdasondendifferenzspannung 1	Lambda sensor differential voltage 1	Tension différentielle du capteur Lambda 1
 STATUS_LS_VKAT_SIGNAL_1	JOB_S	Lambdasondendifferenzspannung 1	Lambda sensor differential voltage 1	Tension différentielle du capteur Lambda 1
 STATUS_LS_VKAT_SIGNAL_2	JOB_L	Voltage Lambdasonde vor KAT auslesen Sonde 2	Read the voltage of the lambda sensor before the catalytic converter (sensor 2).	Lisez la tension du capteur lambda avant le convertisseur catalytique (capteur 2).
 STATUS_LS_VKAT_SIGNAL_2	JOB_S	Voltage Lambdasonde vor KAT auslesen Sonde 2	Read the voltage of the lambda sensor before the catalytic converter (sensor 2).	Lisez la tension du capteur lambda avant le convertisseur catalytique (capteur 2).
-STATUS_LSH1	JOB_L	0x30D001 STATUS_LSH1	0x30D001 Read lambda probe heater 1	0x30D001 STATUT_LSH1
-STATUS_LSH1	JOB_S	0x30D001 STATUS_LSH1	0x30D001 Read lambda probe heater 1	0x30D001 STATUT_LSH1
-STATUS_LSH2	JOB_L	0x30D101 STATUS_LSH2	0x30D101 Read lambda probe heater 2	0x30D101 STATUT_LSH2
-STATUS_LSH2	JOB_S	0x30D101 STATUS_LSH2	0x30D101 Read lambda probe heater 2	0x30D101 STATUT_LSH2
-STATUS_LSH3	JOB_L	0x30D201 STATUS_LSH3	0x30D201 Read lambda probe heater 3	0x30D201 STATUT_LSH3
-STATUS_LSH3	JOB_S	0x30D201 STATUS_LSH3	0x30D201 Read lambda probe heater 3	0x30D201 STATUT_LSH3
-STATUS_LSH4	JOB_L	0x30D301 STATUS_LSH4	0x30D301 Read lambda probe heater 4	0x30D301 STATUT_LSH4
-STATUS_LSH4	JOB_S	0x30D301 STATUS_LSH4	0x30D301 Read lambda probe heater 4	0x30D301 STATUT_LSH4
+STATUS_LSH1	JOB_L	0x30D001 STATUS_LSH1	Read lambda probe heater 1	0x30D001 STATUT_LSH1
+STATUS_LSH1	JOB_S	0x30D001 STATUS_LSH1	Read lambda probe heater 1	0x30D001 STATUT_LSH1
+STATUS_LSH2	JOB_L	0x30D101 STATUS_LSH2	Read lambda probe heater 2	0x30D101 STATUT_LSH2
+STATUS_LSH2	JOB_S	0x30D101 STATUS_LSH2	Read lambda probe heater 2	0x30D101 STATUT_LSH2
+STATUS_LSH3	JOB_L	0x30D201 STATUS_LSH3	Read lambda probe heater 3	0x30D201 STATUT_LSH3
+STATUS_LSH3	JOB_S	0x30D201 STATUS_LSH3	Read lambda probe heater 3	0x30D201 STATUT_LSH3
+STATUS_LSH4	JOB_L	0x30D301 STATUS_LSH4	Read lambda probe heater 4	0x30D301 STATUT_LSH4
+STATUS_LSH4	JOB_S	0x30D301 STATUS_LSH4	Read lambda probe heater 4	0x30D301 STATUT_LSH4
 STATUS_LUFTMASSE	JOB_L	Luftmasse	Air mass	masse d'air
 STATUS_LUFTMASSE	JOB_S	Luftmasse	Air mass	masse d'air
-STATUS_MESSWERTBLOCK_ADC	JOB_L	0x2CF0 STATUS_MESSWERTBLOCK_ADC	0x2CF0 Read ADC measured value block	0x2CF0 STATUS_MESSWERTBLOCK_ADC
-STATUS_MESSWERTBLOCK_ADC	JOB_S	0x2CF0 STATUS_MESSWERTBLOCK_ADC	0x2CF0 Read ADC measured value block	0x2CF0 STATUS_MESSWERTBLOCK_ADC
+STATUS_MESSWERTBLOCK_ADC	JOB_L	0x2CF0 STATUS_MESSWERTBLOCK_ADC	Read ADC measured value block	0x2CF0 STATUS_MESSWERTBLOCK_ADC
+STATUS_MESSWERTBLOCK_ADC	JOB_S	0x2CF0 STATUS_MESSWERTBLOCK_ADC	Read ADC measured value block	0x2CF0 STATUS_MESSWERTBLOCK_ADC
 STATUS_MESSWERTBLOCK_LESEN	JOB_L	Lesen eines Messwertblockes	Reading a measured value block	Lecture d'un bloc de valeur mesurée
 STATUS_MESSWERTBLOCK_LESEN	JOB_S	Lesen eines Messwertblockes	Reading a measured value block	Lecture d'un bloc de valeur mesurée
 STATUS_MESSWERTE_KD	JOB_L	$2C F0 02 DDLI Messwerte nach Wunsch VS-22	$2C F0 02 DDLI Measurement values as desired VS-22	$2C F0 02 DDLI Valeurs de mesure souhaitées VS-22
@@ -904,66 +904,66 @@ STATUS_MESSWERTE_LRP	JOB_L	Messwerte Laufruhepruefung auslesen	Read out measured
 STATUS_MESSWERTE_LRP	JOB_S	Messwerte Laufruhepruefung auslesen	Read out measured values from the smooth running test	Lire les valeurs mesurées du test de fonctionnement régulier
 STATUS_MESSWERTE_NL	JOB_L	$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22	$2C F0 02 DDLI Measured values Knock on request VS-22	$2C F0 02 DDLI Valeurs mesurées Frapper sur demande VS-22
 STATUS_MESSWERTE_NL	JOB_S	$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22	$2C F0 02 DDLI Measured values Knock on request VS-22	$2C F0 02 DDLI Valeurs mesurées Frapper sur demande VS-22
-STATUS_MESSWERTE_VANOS	JOB_L	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUT_MESURES_VANOS
-STATUS_MESSWERTE_VANOS	JOB_S	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUT_MESURES_VANOS
-STATUS_MIL	JOB_L	0x30D401 STATUS_MIL	0x30D401 Read MIL (check engine light)	0x30D401 STATUT_MIL
-STATUS_MIL	JOB_S	0x30D401 STATUS_MIL	0x30D401 Read MIL (check engine light)	0x30D401 STATUT_MIL
+STATUS_MESSWERTE_VANOS	JOB_L	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS	0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUT_MESURES_VANOS
+STATUS_MESSWERTE_VANOS	JOB_S	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS	0x4508,0x450B,0x4509,0x450A STATUS_MEASUREMENTS_VANOS	0x2CF0 0x4508,0x450B,0x4509,0x450A STATUT_MESURES_VANOS
+STATUS_MIL	JOB_L	0x30D401 STATUS_MIL	Read MIL (check engine light)	0x30D401 STATUT_MIL
+STATUS_MIL	JOB_S	0x30D401 STATUS_MIL	Read MIL (check engine light)	0x30D401 STATUT_MIL
 STATUS_MOTORDREHZAHL	JOB_L	Engine RPM auslesen	Read engine RPM	Lire le régime moteur
 STATUS_MOTORDREHZAHL	JOB_S	Engine RPM auslesen	Read engine RPM	Lire le régime moteur
-STATUS_MOTORLAUFUNRUHE	JOB_L	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUS_MOTORLAUFUNRUHE	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 Engine running roughness	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUT_MOTEUR_EN_FONCTIONNEMENT
-STATUS_MOTORLAUFUNRUHE	JOB_S	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUS_MOTORLAUFUNRUHE	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 Engine running roughness	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUT_MOTEUR_EN_FONCTIONNEMENT
+STATUS_MOTORLAUFUNRUHE	JOB_L	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUS_MOTORLAUFUNRUHE	5A30, 5A31, 5A32, 5A33, 5A99, 5845 Engine running roughness	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUT_MOTEUR_EN_FONCTIONNEMENT
+STATUS_MOTORLAUFUNRUHE	JOB_S	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUS_MOTORLAUFUNRUHE	5A30, 5A31, 5A32, 5A33, 5A99, 5845 Engine running roughness	0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUT_MOTEUR_EN_FONCTIONNEMENT
 STATUS_MOTORTEMPERATUR	JOB_L	Motortemperatur auslesen	Read engine temperature	Lire la température du moteur
 STATUS_MOTORTEMPERATUR	JOB_S	Motortemperatur auslesen	Read engine temperature	Lire la température du moteur
 STATUS_MUL	JOB_L	Adaption Gemisch multiplikativ auslesen	Multiplicative reading of the mixture adaptation	Lecture multiplicative de l'adaptation du mélange
 STATUS_MUL	JOB_S	Adaption Gemisch multiplikativ auslesen	Multiplicative reading of the mixture adaptation	Lecture multiplicative de l'adaptation du mélange
 STATUS_MUL_2	JOB_L	MUL-Signal Bank 2	MUL signal Bank 2	Banque de signaux MUL 2
 STATUS_MUL_2	JOB_S	MUL-Signal Bank 2	MUL signal Bank 2	Banque de signaux MUL 2
-STATUS_NOCKENWELLE_ADAPTION	JOB_L	0x224006 STATUS_NOCKENWELLE_ADAPTION	0x224006 Camshaft adaptation	0x224006 STATUT_ADAPTATION_ARBRE_À_CAMES
-STATUS_NOCKENWELLE_ADAPTION	JOB_S	0x224006 STATUS_NOCKENWELLE_ADAPTION	0x224006 Camshaft adaptation	0x224006 STATUT_ADAPTATION_ARBRE_À_CAMES
+STATUS_NOCKENWELLE_ADAPTION	JOB_L	0x224006 STATUS_NOCKENWELLE_ADAPTION	Camshaft adaptation	0x224006 STATUT_ADAPTATION_ARBRE_À_CAMES
+STATUS_NOCKENWELLE_ADAPTION	JOB_S	0x224006 STATUS_NOCKENWELLE_ADAPTION	Camshaft adaptation	0x224006 STATUT_ADAPTATION_ARBRE_À_CAMES
 STATUS_OBD	JOB_L	$21 05 Monitoring Funktionen und Status Bits	$21 05 Monitoring Functions and Status Bits	21,05 $ Fonctions de surveillance et bits d'état
 STATUS_OBD	JOB_S	$21 05 Monitoring Funktionen und Status Bits	$21 05 Monitoring Functions and Status Bits	21,05 $ Fonctions de surveillance et bits d'état
-STATUS_ODS	JOB_L	0x300501 STATUS_ODS	0x300501 Read oil pressure switch	0x300501 STATUT_ODS
-STATUS_ODS	JOB_S	0x300501 STATUS_ODS	0x300501 Read oil pressure switch	0x300501 STATUT_ODS
-STATUS_OEL	JOB_L	0x300E01 STATUS_OEL	0x300E01 Read oil status	0x300E01 STATUT_HUILE
-STATUS_OEL	JOB_S	0x300E01 STATUS_OEL	0x300E01 Read oil status	0x300E01 STATUT_HUILE
+STATUS_ODS	JOB_L	0x300501 STATUS_ODS	Read oil pressure switch	0x300501 STATUT_ODS
+STATUS_ODS	JOB_S	0x300501 STATUS_ODS	Read oil pressure switch	0x300501 STATUT_ODS
+STATUS_OEL	JOB_L	0x300E01 STATUS_OEL	Read oil status	0x300E01 STATUT_HUILE
+STATUS_OEL	JOB_S	0x300E01 STATUS_OEL	Read oil status	0x300E01 STATUT_HUILE
 STATUS_OELTEMPERATUR	JOB_L	LADELUFTtemperatur	Oil temperature	TEMPÉRATURE DE L'AIR DE CHARGEMENT
 STATUS_OELTEMPERATUR	JOB_S	LADELUFTtemperatur	Oil temperature	TEMPÉRATURE DE L'AIR DE CHARGEMENT
 STATUS_PWG	JOB_L	PWG	Accelerator pedal	PWG
 STATUS_PWG	JOB_S	PWG	Accelerator pedal	PWG
 STATUS_PWG_POTI_SPANNUNG	JOB_L	Pedal sensor voltage	Pedal sensor voltage	tension du capteur de pédale
 STATUS_PWG_POTI_SPANNUNG	JOB_S	Pedal sensor voltage	Pedal sensor voltage	tension du capteur de pédale
-STATUS_PWG2	JOB_L	0x302901 STATUS_PWG2	0x302901 Read accelerator pedal sensor 2	0x302901 STATUT_PWG2
-STATUS_PWG2	JOB_S	0x302901 STATUS_PWG2	0x302901 Read accelerator pedal sensor 2	0x302901 STATUT_PWG2
-STATUS_RBMMODE9	JOB_L	0x224026 STATUS_RBMMODE9	0x224026 Ring buffer measurement mode 9	0x224026 STATUT_RBMMODE9
-STATUS_RBMMODE9	JOB_S	0x224026 STATUS_RBMMODE9	0x224026 Ring buffer measurement mode 9	0x224026 STATUT_RBMMODE9
-STATUS_RBMMS1	JOB_L	0x224029 STATUS_RBMMS1	0x224029 Ring buffer measurement selection 1	0x224029 STATUT_RBMMS1
-STATUS_RBMMS1	JOB_S	0x224029 STATUS_RBMMS1	0x224029 Ring buffer measurement selection 1	0x224029 STATUT_RBMMS1
-STATUS_RBMMS2	JOB_L	0x22402A STATUS_RBMMS2	0x22402A Ring buffer measurement selection 2	0x22402A STATUT_RBMMS2
-STATUS_RBMMS2	JOB_S	0x22402A STATUS_RBMMS2	0x22402A Ring buffer measurement selection 2	0x22402A STATUT_RBMMS2
+STATUS_PWG2	JOB_L	0x302901 STATUS_PWG2	Read accelerator pedal sensor 2	0x302901 STATUT_PWG2
+STATUS_PWG2	JOB_S	0x302901 STATUS_PWG2	Read accelerator pedal sensor 2	0x302901 STATUT_PWG2
+STATUS_RBMMODE9	JOB_L	0x224026 STATUS_RBMMODE9	Ring buffer measurement mode 9	0x224026 STATUT_RBMMODE9
+STATUS_RBMMODE9	JOB_S	0x224026 STATUS_RBMMODE9	Ring buffer measurement mode 9	0x224026 STATUT_RBMMODE9
+STATUS_RBMMS1	JOB_L	0x224029 STATUS_RBMMS1	Ring buffer measurement selection 1	0x224029 STATUT_RBMMS1
+STATUS_RBMMS1	JOB_S	0x224029 STATUS_RBMMS1	Ring buffer measurement selection 1	0x224029 STATUT_RBMMS1
+STATUS_RBMMS2	JOB_L	0x22402A STATUS_RBMMS2	Ring buffer measurement selection 2	0x22402A STATUT_RBMMS2
+STATUS_RBMMS2	JOB_S	0x22402A STATUS_RBMMS2	Ring buffer measurement selection 2	0x22402A STATUT_RBMMS2
 STATUS_READINESS	JOB_L	Auslesen Readiness Systemchecks	Reading Readiness System Checks	Contrôles du système de préparation à la lecture
 STATUS_READINESS	JOB_S	Auslesen Readiness Systemchecks	Reading Readiness System Checks	Contrôles du système de préparation à la lecture
 STATUS_SDF1	JOB_L	0x301801 STATUS_SDF1	0x301801 STATUS_SDF1	0x301801 STATUT_SDF1
 STATUS_SDF1	JOB_S	0x301801 STATUS_SDF1	0x301801 STATUS_SDF1	0x301801 STATUT_SDF1
-STATUS_SLP	JOB_L	0x30CB01 STATUS_SLP	0x30CB01 Read secondary air pump	0x30CB01 STATUT_SLP
-STATUS_SLP	JOB_S	0x30CB01 STATUS_SLP	0x30CB01 Read secondary air pump	0x30CB01 STATUT_SLP
+STATUS_SLP	JOB_L	0x30CB01 STATUS_SLP	Read secondary air pump	0x30CB01 STATUT_SLP
+STATUS_SLP	JOB_S	0x30CB01 STATUS_SLP	Read secondary air pump	0x30CB01 STATUT_SLP
 STATUS_SLS	JOB_L	Status Systemdiagnose SLS	System diagnostic status SLS	État du diagnostic système SLS
 STATUS_SLS	JOB_S	Status Systemdiagnose SLS	System diagnostic status SLS	État du diagnostic système SLS
-STATUS_SLV	JOB_L	0x30CA01 STATUS_SLV	0x30CA01 Read secondary air valve	0x30CA01 STATUT_SLV
-STATUS_SLV	JOB_S	0x30CA01 STATUS_SLV	0x30CA01 Read secondary air valve	0x30CA01 STATUT_SLV
-STATUS_SOK	JOB_L	0x30C201 STATUS_SOK	0x30C201 Read catalyst oxygen sensor	0x30C201 STATUT_SOK
-STATUS_SOK	JOB_S	0x30C201 STATUS_SOK	0x30C201 Read catalyst oxygen sensor	0x30C201 STATUT_SOK
-STATUS_SPT	JOB_L	0x300601 STATUS_SPT	0x300601 Read sport switch	0x300601 STATUT_SPT
-STATUS_SPT	JOB_S	0x300601 STATUS_SPT	0x300601 Read sport switch	0x300601 STATUT_SPT
-STATUS_SR	JOB_L	0x30C401 STATUS_SR	0x30C401 Read secondary air relay	0x30C401 STATUT_SR
-STATUS_SR	JOB_S	0x30C401 STATUS_SR	0x30C401 Read secondary air relay	0x30C401 STATUT_SR
+STATUS_SLV	JOB_L	0x30CA01 STATUS_SLV	Read secondary air valve	0x30CA01 STATUT_SLV
+STATUS_SLV	JOB_S	0x30CA01 STATUS_SLV	Read secondary air valve	0x30CA01 STATUT_SLV
+STATUS_SOK	JOB_L	0x30C201 STATUS_SOK	Read catalyst oxygen sensor	0x30C201 STATUT_SOK
+STATUS_SOK	JOB_S	0x30C201 STATUS_SOK	Read catalyst oxygen sensor	0x30C201 STATUT_SOK
+STATUS_SPT	JOB_L	0x300601 STATUS_SPT	Read sport switch	0x300601 STATUT_SPT
+STATUS_SPT	JOB_S	0x300601 STATUS_SPT	Read sport switch	0x300601 STATUT_SPT
+STATUS_SR	JOB_L	0x30C401 STATUS_SR	Read secondary air relay	0x30C401 STATUT_SR
+STATUS_SR	JOB_S	0x30C401 STATUS_SR	Read secondary air relay	0x30C401 STATUT_SR
 STATUS_SYSTEMCHECK_DMTL	JOB_L	Status Systemtest DMTL	Status System Test DMTL	Test du système d'état DMTL
 STATUS_SYSTEMCHECK_DMTL	JOB_S	Status Systemtest DMTL	Status System Test DMTL	Test du système d'état DMTL
 STATUS_SYSTEMCHECK_DMTL_WERT	JOB_L	Status und Messströme	Status and measurement currents	Courants d'état et de mesure
 STATUS_SYSTEMCHECK_DMTL_WERT	JOB_S	Status und Messströme	Status and measurement currents	Courants d'état et de mesure
-STATUS_SYSTEMCHECK_EVAUSBL	JOB_L	0x3325 STATUS_SYSTEMCHECK_EVAUSBL	0x3325 EV actuator system check	0x3325 STATUS_SYSTEMCHECK_EVAUSBL
-STATUS_SYSTEMCHECK_EVAUSBL	JOB_S	0x3325 STATUS_SYSTEMCHECK_EVAUSBL	0x3325 EV actuator system check	0x3325 STATUS_SYSTEMCHECK_EVAUSBL
-STATUS_SYSTEMCHECK_L_SONDE	JOB_L	0x33DF STATUS_SYSTEMCHECK_L_SONDE	0x33DF Lambda sensor system check	0x33DF STATUS_SYSTEMCHECK_L_SONDE
-STATUS_SYSTEMCHECK_L_SONDE	JOB_S	0x33DF STATUS_SYSTEMCHECK_L_SONDE	0x33DF Lambda sensor system check	0x33DF STATUS_SYSTEMCHECK_L_SONDE
+STATUS_SYSTEMCHECK_EVAUSBL	JOB_L	0x3325 STATUS_SYSTEMCHECK_EVAUSBL	EV actuator system check	0x3325 STATUS_SYSTEMCHECK_EVAUSBL
+STATUS_SYSTEMCHECK_EVAUSBL	JOB_S	0x3325 STATUS_SYSTEMCHECK_EVAUSBL	EV actuator system check	0x3325 STATUS_SYSTEMCHECK_EVAUSBL
+STATUS_SYSTEMCHECK_L_SONDE	JOB_L	0x33DF STATUS_SYSTEMCHECK_L_SONDE	Lambda sensor system check	0x33DF STATUS_SYSTEMCHECK_L_SONDE
+STATUS_SYSTEMCHECK_L_SONDE	JOB_S	0x33DF STATUS_SYSTEMCHECK_L_SONDE	Lambda sensor system check	0x33DF STATUS_SYSTEMCHECK_L_SONDE
 STATUS_SYSTEMCHECK_L_SONDE_WERTE	JOB_L	Status und Messwerte	Status and measured values	État et valeurs mesurées
 STATUS_SYSTEMCHECK_L_SONDE_WERTE	JOB_S	Status und Messwerte	Status and measured values	État et valeurs mesurées
 STATUS_SYSTEMCHECK_LLERH_WERT	JOB_L	aktuelle Drehzahl N	Current speed N	vitesse actuelle N
@@ -978,8 +978,8 @@ STATUS_SYSTEMCHECK_SEK_LUFT	JOB_L	Status Systemdiagnose SLS	System diagnostic st
 STATUS_SYSTEMCHECK_SEK_LUFT	JOB_S	Status Systemdiagnose SLS	System diagnostic status SLS	État du diagnostic système SLS
 STATUS_SYSTEMCHECK_SEK_LUFT_WERT	JOB_L	Status und Luftmassen	Status and air masses	État et masses d'air
 STATUS_SYSTEMCHECK_SEK_LUFT_WERT	JOB_S	Status und Luftmassen	Status and air masses	État et masses d'air
-STATUS_SYSTEMCHECK_TEV	JOB_L	0x3322 STATUS_SYSTEMCHECK_TEV	0x3322 TEV system check	0x3322 STATUS_SYSTEMCHECK_TEV
-STATUS_SYSTEMCHECK_TEV	JOB_S	0x3322 STATUS_SYSTEMCHECK_TEV	0x3322 TEV system check	0x3322 STATUS_SYSTEMCHECK_TEV
+STATUS_SYSTEMCHECK_TEV	JOB_L	0x3322 STATUS_SYSTEMCHECK_TEV	TEV system check	0x3322 STATUS_SYSTEMCHECK_TEV
+STATUS_SYSTEMCHECK_TEV	JOB_S	0x3322 STATUS_SYSTEMCHECK_TEV	TEV system check	0x3322 STATUS_SYSTEMCHECK_TEV
 STATUS_SYSTEMCHECK_TEV_FUNC	JOB_L	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
 STATUS_SYSTEMCHECK_TEV_FUNC	JOB_S	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
 STATUS_SYSTEMCHECK_TEV_WERT	JOB_L	Status und Messströme	Status and measurement currents	Courants d'état et de mesure
@@ -990,20 +990,20 @@ STATUS_TEV	JOB_L	MUL-Signal TEV-Bank1	MUL signal TEV bank 1	Signal MUL TEV banc 
 STATUS_TEV	JOB_S	MUL-Signal TEV-Bank1	MUL signal TEV bank 1	Signal MUL TEV banc 1
 STATUS_TEVSYS	JOB_L	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
 STATUS_TEVSYS	JOB_S	Status Systemtest TEV	Status System Test TEV	Test du système d'état TEV
-STATUS_TKA	JOB_L	0x300D01 STATUS_TKA	0x300D01 Read tank control output	0x300D01 STATUT_TKA
-STATUS_TKA	JOB_S	0x300D01 STATUS_TKA	0x300D01 Read tank control output	0x300D01 STATUT_TKA
-STATUS_TTEMP	JOB_L	0x302F01 STATUS_TTEMP	0x302F01 Read throttle temperature	0x302F01 STATUT_TTEMP
-STATUS_TTEMP	JOB_S	0x302F01 STATUS_TTEMP	0x302F01 Read throttle temperature	0x302F01 STATUT_TTEMP
-STATUS_UBAT	JOB_L	0x302701 STATUS_UBAT	0x302701 Read battery voltage	0x302701 STATUT_UBAT
-STATUS_UBAT	JOB_S	0x302701 STATUS_UBAT	0x302701 Read battery voltage	0x302701 STATUT_UBAT
+STATUS_TKA	JOB_L	0x300D01 STATUS_TKA	Read tank control output	0x300D01 STATUT_TKA
+STATUS_TKA	JOB_S	0x300D01 STATUS_TKA	Read tank control output	0x300D01 STATUT_TKA
+STATUS_TTEMP	JOB_L	0x302F01 STATUS_TTEMP	Read throttle temperature	0x302F01 STATUT_TTEMP
+STATUS_TTEMP	JOB_S	0x302F01 STATUS_TTEMP	Read throttle temperature	0x302F01 STATUT_TTEMP
+STATUS_UBAT	JOB_L	0x302701 STATUS_UBAT	Read battery voltage	0x302701 STATUT_UBAT
+STATUS_UBAT	JOB_S	0x302701 STATUS_UBAT	Read battery voltage	0x302701 STATUT_UBAT
 STATUS_UBATT	JOB_L	Battery voltage	Battery voltage	Tension de la batterie
 STATUS_UBATT	JOB_S	Battery voltage	Battery voltage	Tension de la batterie
 STATUS_UDF	JOB_L	0x301701 STATUS_UDF	0x301701 STATUS_UDF	0x301701 STATUT_UDF
 STATUS_UDF	JOB_S	0x301701 STATUS_UDF	0x301701 STATUS_UDF	0x301701 STATUT_UDF
-STATUS_UGEN	JOB_L	0x303201 STATUS_UGEN	0x303201 Read generator voltage	0x303201 STATUT_UGEN
-STATUS_UGEN	JOB_S	0x303201 STATUS_UGEN	0x303201 Read generator voltage	0x303201 STATUT_UGEN
-STATUS_UKL15	JOB_L	0x301B01 STATUS_UKL15	0x301B01 Read terminal 15 voltage (ignition)	0x301B01 STATUT_UKL15
-STATUS_UKL15	JOB_S	0x301B01 STATUS_UKL15	0x301B01 Read terminal 15 voltage (ignition)	0x301B01 STATUT_UKL15
+STATUS_UGEN	JOB_L	0x303201 STATUS_UGEN	Read generator voltage	0x303201 STATUT_UGEN
+STATUS_UGEN	JOB_S	0x303201 STATUS_UGEN	Read generator voltage	0x303201 STATUT_UGEN
+STATUS_UKL15	JOB_L	0x301B01 STATUS_UKL15	Read terminal 15 voltage (ignition)	0x301B01 STATUT_UKL15
+STATUS_UKL15	JOB_S	0x301B01 STATUS_UKL15	Read terminal 15 voltage (ignition)	0x301B01 STATUT_UKL15
 STATUS_UMGEBUNGSDRUCK	JOB_L	UWTEXT	Atmospheric pressure	UWTEXT
 STATUS_UMGEBUNGSDRUCK	JOB_S	UWTEXT	Atmospheric pressure	UWTEXT
 STATUS_UMGEBUNGSTEMPERATUR	JOB_L	Messwert selectiv lesen	Selectively read measured value	lire sélectivement la valeur mesurée
@@ -1012,8 +1012,8 @@ STATUS_UVLSS	JOB_L	0x302001 STATUS_UVLSS	0x302001 STATUS_UVLSS	0x302001 STATUT_U
 STATUS_UVLSS	JOB_S	0x302001 STATUS_UVLSS	0x302001 STATUS_UVLSS	0x302001 STATUT_UVLSS
 STATUS_VVT	JOB_L	Auslesen VVT-Messwerte	Reading VVT measured values	Lecture des valeurs mesurées VVT
 STATUS_VVT	JOB_S	Auslesen VVT-Messwerte	Reading VVT measured values	Lecture des valeurs mesurées VVT
-STATUS_VVTR	JOB_L	0x30DC01 STATUS_VVTR	0x30DC01 Read VVT relay	0x30DC01 STATUT_VVTR
-STATUS_VVTR	JOB_S	0x30DC01 STATUS_VVTR	0x30DC01 Read VVT relay	0x30DC01 STATUT_VVTR
+STATUS_VVTR	JOB_L	0x30DC01 STATUS_VVTR	Read VVT relay	0x30DC01 STATUT_VVTR
+STATUS_VVTR	JOB_S	0x30DC01 STATUS_VVTR	Read VVT relay	0x30DC01 STATUT_VVTR
 STATUS_ZEIT_EINSPRITZ	JOB_L	Auslesen der Injection time Cyl. 1	Reading the injection time of cylinder 1	Lecture du temps d'injection du cylindre 1
 STATUS_ZEIT_EINSPRITZ	JOB_S	Auslesen der Injection time Cyl. 1	Reading the injection time of cylinder 1	Lecture du temps d'injection du cylindre 1
 STATUS_ZUENDWINKEL	JOB_L	Ignition angle auslesen	Read ignition angle	Lire l'angle d'allumage

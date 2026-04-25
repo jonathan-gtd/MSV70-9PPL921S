@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<customjobs>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>DATALOG_1</virtualname>
+  <comment>Basic Datalog</comment>
+  <argument>3;0x4807;0x4200;0x4600;0x5A49;0x4203;0x5A50;0x5A51;0x4205;0x4300;0x4610;0x4506;0x4507;0x5A3D;0x5896;0x5897;0x5813</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>LAMBDA</virtualname>
+  <comment>Lambda</comment>
+  <argument>3;0x4704;0x5A50;0x4705;0x5A51;0x5A11;0x5A12</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>SET_1</virtualname>
+  <comment>Values #1</comment>
+  <argument>3;0x4807;0x4200;0x4201;0x4202;0x4203;0x4205;0x4300;0x4402;0x4506;0x4507;0x4600;0x4601</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>SET_2</virtualname>
+  <comment>Injection</comment>
+  <argument>3;0x5B00;0x5B01;0x5B02;0x5B03;0x5B04;0x5B05</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>SET_3</virtualname>
+  <comment>Values #3</comment>
+  <argument>3;0x470;0x4470;0x5581;0x3587;0x5588;0x3588;0x5588;0x6588;0x8589;0x6589;0x7589;0x958C;0xF58D;0x58D1</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>SET_4</virtualname>
+  <comment>Values #4</comment>
+  <argument>3;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47;0x5A49</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>SET_6</virtualname>
+  <comment>Values #6</comment>
+  <argument>3;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47;0x5A49</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>E85</virtualname>
+  <comment>E85 fuel check</comment>
+  <argument>3;0x4807;0x4300;0x5A50;0x5A51;0x5A81;0x5A82;0x5A83;0x5A84;0x5A85;0x5A86;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47;0x580A</argument>
+ </customjob>
+</customjobs>
