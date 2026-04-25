@@ -1030,3 +1030,19 @@ ZIF_BACKUP_LESEN	JOB_L	Auslesen des Backups des Zulieferinfofeldes	Reading the b
 ZIF_BACKUP_LESEN	JOB_S	Auslesen des Backups des Zulieferinfofeldes	Reading the backup of the supplier information field	Lecture de la sauvegarde du champ d'informations du fournisseur
 ZIF_LESEN	JOB_L	Auslesen des Zulieferinfofeldes	Reading the supplier information field	Lecture du champ d'informations du fournisseur
 ZIF_LESEN	JOB_S	Auslesen des Zulieferinfofeldes	Reading the supplier information field	Lecture du champ d'informations du fournisseur
+STAT_STFT_BANK1_PCT	RES_L		STFT bank 1 (%)	
+STAT_STFT_BANK1_PCT	RES_S		STFT B1%	
+STAT_STFT_BANK2_PCT	RES_L		STFT bank 2 (%)	
+STAT_STFT_BANK2_PCT	RES_S		STFT B2%	
+STAT_LTFT_MUL_BANK1_PCT	RES_L		LTFT multiplicative bank 1 (%)	
+STAT_LTFT_MUL_BANK1_PCT	RES_S		LTFT mul. B1%	
+STAT_LTFT_MUL_BANK2_PCT	RES_L		LTFT multiplicative bank 2 (%)	
+STAT_LTFT_MUL_BANK2_PCT	RES_S		LTFT mul. B2%	
+STAT_TOTAL_CORR_BANK1_PCT	RES_L		Total fuel correction bank 1 (%)	
+STAT_TOTAL_CORR_BANK1_PCT	RES_S		Total corr. B1%	
+STAT_TOTAL_CORR_BANK2_PCT	RES_L		Total fuel correction bank 2 (%)	
+STAT_TOTAL_CORR_BANK2_PCT	RES_S		Total corr. B2%	
+STAT_INJ_AVG_MS	RES_L		Average injection time (ms)	
+STAT_INJ_AVG_MS	RES_S		Inj. avg (ms)	
+STAT_LAMBDA_AVG	RES_L		Lambda average	
+STAT_LAMBDA_AVG	RES_S		Lambda avg	
