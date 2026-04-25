@@ -2,12 +2,6 @@
 <customjobs>
  <customjob ecu="MSV70">
   <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-  <virtualname>test</virtualname>
-  <comment>test</comment>
-  <argument>3</argument>
- </customjob>
- <customjob ecu="MSV70">
-  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
   <virtualname>DATALOG_1</virtualname>
   <comment>Basic Datalog</comment>
   <argument>3;0x4807;0x4200;0x4600;0x5A49;0x4203;0x5A50;0x5A51;0x4205;0x4300;0x4610;0x4506;0x4507;0x5A3D;0x5896;0x5897;0x5813</argument>
@@ -51,7 +45,13 @@
  <customjob ecu="MSV70">
   <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
   <virtualname>E85</virtualname>
-  <comment>E85 fuel check</comment>
-  <argument>3;0x4807;0x4300;0x5A50;0x5A51;0x5A81;0x5A82;0x5A83;0x5A84;0x5A85;0x5A86;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47;0x580A</argument>
+  <comment>E85 fuel trims</comment>
+  <argument>3;0x4807;0x4300;0x5A50;0x5A51;0x5A81;0x5A82;0x5A83;0x5A84;0x5A85;0x5A86;0x580A</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>E85_INJ</virtualname>
+  <comment>E85 injection times</comment>
+  <argument>3;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47</argument>
  </customjob>
 </customjobs>

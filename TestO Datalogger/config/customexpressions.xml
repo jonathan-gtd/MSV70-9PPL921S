@@ -27,12 +27,16 @@
 			<expression>(STAT_INTEGRATOR_BANK2_WERT*STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT-1)*100</expression>
 		</result>
 		<result>
-			<resultname>STAT_INJ_AVG_MS</resultname>
-			<expression>(STAT_EINSPRITZZEIT_ZYL1_WERT+STAT_EINSPRITZZEIT_ZYL2_WERT+STAT_EINSPRITZZEIT_ZYL3_WERT+STAT_EINSPRITZZEIT_ZYL4_WERT+STAT_EINSPRITZZEIT_ZYL5_WERT+STAT_EINSPRITZZEIT_ZYL6_WERT)/6</expression>
-		</result>
-		<result>
 			<resultname>STAT_LAMBDA_AVG</resultname>
 			<expression>(STAT_LAMBDA_BANK1_WERT+STAT_LAMBDA_BANK2_WERT)/2</expression>
+		</result>
+	</customexpression>
+	<customexpression>
+		<ecu>MSV70</ecu>
+		<job>E85_INJ</job>
+		<result>
+			<resultname>STAT_INJ_AVG_MS</resultname>
+			<expression>(STAT_EINSPRITZZEIT_ZYL1_WERT+STAT_EINSPRITZZEIT_ZYL2_WERT+STAT_EINSPRITZZEIT_ZYL3_WERT+STAT_EINSPRITZZEIT_ZYL4_WERT+STAT_EINSPRITZZEIT_ZYL5_WERT+STAT_EINSPRITZZEIT_ZYL6_WERT)/6</expression>
 		</result>
 	</customexpression>
 </customexpressions>
