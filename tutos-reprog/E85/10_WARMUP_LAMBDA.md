@@ -9,15 +9,15 @@
 
 | Champ | Valeur |
 |---|---|
-| Adresse | 0x42764 |
+| Adresse | 0x2764 |
 | Structure | Map 6×6 |
 | Axes | X = MAF (mg/stk), Y = RPM |
 
-**Rôle :** Facteur multiplicateur sur la consigne lambda pendant la phase de chauffe, actif à **tous les régimes**. S'applique avant que la boucle fermée lambda soit stabilisée. Sur E85, le bin de référence applique +3 à +8% d'enrichissement aux bas régimes (704–2016 RPM) et basse charge, ce qui compense la moins bonne vaporisation de l'éthanol pendant le warm-up. **Ce paramètre EST modifié dans le bin E85 de référence** — stock = tout à 1.000.
+**Rôle :** Facteur multiplicateur sur la consigne lambda pendant la phase de chauffe, actif à **tous les régimes**. S'applique avant que la boucle fermée lambda soit stabilisée. Sur E85, enrichissement nécessaire aux bas régimes / basse charge pour compenser la moins bonne vaporisation de l'éthanol pendant le warm-up. **Ce paramètre EST modifié sur E85** — stock = tout à 1.000.
 
-**◀ Avant — Stock (facteur λ)**
+**◀ Avant — Stock (facteur λ)** *(axes lus sur VB67774)*
 
-| RPM (tr/min) \ MAF (mg/stk) | 0.83 | 1.57 | 2.33 | 3.92 | 4.66 | 5.32 |
+| RPM (tr/min) \ MAF (mg/stk) | **65** | **100** | **200** | **300** | **400** | **500** |
 |---|---|---|---|---|---|---|
 | 704 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 | 1216 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
@@ -26,16 +26,16 @@
 | 2496 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 | 3008 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 
-**✏️ Opération — enrichissement +3 à +8% cellules bas RPM / basse charge**
+**✏️ Opération — enrichissement +3 à +8% cellules bas RPM / basse charge (≤ 200 mg/stk, ≤ 2016 rpm)**
 
 **✅ Après — E85 (facteur λ)**
 
-| RPM (tr/min) \ MAF (mg/stk) | 0.83 | 1.57 | 2.33 | 3.92 | 4.66 | 5.32 |
+| RPM (tr/min) \ MAF (mg/stk) | **65** | **100** | **200** | **300** | **400** | **500** |
 |---|---|---|---|---|---|---|
-| 704 | **1.031** | **1.063** | **1.078** | **1.047** | **1.070** | **1.078** |
-| 1216 | **1.031** | **1.047** | **1.070** | **1.047** | **1.063** | **1.078** |
-| 1760 | **1.031** | **1.039** | **1.047** | **1.031** | **1.039** | **1.047** |
-| 2016 | 1.000 | **1.031** | **1.031** | **1.031** | **1.031** | **1.031** |
+| 704 | **1.078** | **1.063** | **1.047** | **1.031** | 1.000 | 1.000 |
+| 1216 | **1.063** | **1.047** | **1.039** | **1.031** | 1.000 | 1.000 |
+| 1760 | **1.047** | **1.039** | **1.031** | 1.000 | 1.000 | 1.000 |
+| 2016 | **1.031** | **1.031** | 1.000 | 1.000 | 1.000 | 1.000 |
 | 2496 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 | 3008 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 
