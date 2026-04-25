@@ -2,6 +2,12 @@
 <customjobs>
  <customjob ecu="MSV70">
   <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+  <virtualname>test</virtualname>
+  <comment>test</comment>
+  <argument>3</argument>
+ </customjob>
+ <customjob ecu="MSV70">
+  <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
   <virtualname>DATALOG_1</virtualname>
   <comment>Basic Datalog</comment>
   <argument>3;0x4807;0x4200;0x4600;0x5A49;0x4203;0x5A50;0x5A51;0x4205;0x4300;0x4610;0x4506;0x4507;0x5A3D;0x5896;0x5897;0x5813</argument>

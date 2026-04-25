@@ -130,14 +130,14 @@ STAT_ABWEICHUNG_DK_POTI1_WERT	RES_L	Abweichung DK-Potentiometer 1 und Modellwert
 STAT_ABWEICHUNG_DK_POTI1_WERT	RES_S			
 STAT_ABWEICHUNG_DK_POTI2_WERT	RES_L	Abweichung DK-Potentiometer 2 und Modellwert	Deviation of DK potentiometer 2 and model value	Écart du potentiomètre DK 2 et de la valeur du modèle
 STAT_ABWEICHUNG_DK_POTI2_WERT	RES_S			
-STAT_ADAPTION_ADDITIV_BANK1_WERT	RES_L			
-STAT_ADAPTION_ADDITIV_BANK1_WERT	RES_S			
-STAT_ADAPTION_ADDITIV_BANK2_WERT	RES_L			
-STAT_ADAPTION_ADDITIV_BANK2_WERT	RES_S			
-STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT	RES_L	multiplikative Gemischkorrektur der Gemischadaption (Word)	Multiplicative mixture correction of mixture adaptation (Word)	Correction multiplicative du mélange d'adaptation du mélange (Word)
-STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT	RES_S			
-STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT	RES_L			
-STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT	RES_S			
+STAT_ADAPTION_ADDITIV_BANK1_WERT	RES_L		LTFT additive bank 1	
+STAT_ADAPTION_ADDITIV_BANK1_WERT	RES_S		LTFT add. B1	
+STAT_ADAPTION_ADDITIV_BANK2_WERT	RES_L		LTFT additive bank 2	
+STAT_ADAPTION_ADDITIV_BANK2_WERT	RES_S		LTFT add. B2	
+STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT	RES_L	multiplikative Gemischkorrektur der Gemischadaption (Word)	LTFT multiplicative bank 1	Correction multiplicative du mélange d'adaptation du mélange (Word)
+STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT	RES_S		LTFT mul. B1	
+STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT	RES_L		LTFT multiplicative bank 2	
+STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT	RES_S		LTFT mul. B2	
 STAT_ANSAUGLUFTTEMPERATUR_LAW_WERT	RES_L	Ansauglufttemperatur	Intake air temperature	Température de l'air d'admission
 STAT_ANSAUGLUFTTEMPERATUR_LAW_WERT	RES_S			
 STAT_ANSAUGLUFTTEMPERATUR_SPANNUNG_WERT	RES_L	Voltage Ansauglufttemperatur	Voltage Intake air temperature	Tension Température de l'air d'admission
