@@ -1197,19 +1197,19 @@
   },
   "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT": {
     "L": "Lambda probe voltage pre-cat Bank 1",
-    "S": "λ-V B1"
+    "S": "Lam-V B1"
   },
   "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT": {
     "L": "Lambda probe voltage pre-cat Bank 2",
-    "S": "λ-V B2"
+    "S": "Lam-V B2"
   },
   "STAT_SONDENSPANNUNG_NACHKAT_BANK1_WERT": {
     "L": "Lambda probe voltage post-cat Bank 1",
-    "S": "λ-V NK1"
+    "S": "Lam-V NK1"
   },
   "STAT_SONDENSPANNUNG_NACHKAT_BANK2_WERT": {
     "L": "Lambda probe voltage post-cat Bank 2",
-    "S": "λ-V NK2"
+    "S": "Lam-V NK2"
   },
   "STAT_DMTL_SPANNUNG_WERT": {
     "L": "Voltage Pumpenstrom Tankdiagnose",
