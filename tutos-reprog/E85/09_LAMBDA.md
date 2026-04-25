@@ -80,7 +80,9 @@ Identique à `ip_fac_lamb_max_fsd_1` — mêmes valeurs stock, mêmes cibles E85
 
 | Phase | ◀ Avant — Stock | ✅ Après — Break-in (0–500 km) | ✅ Après — Stabilisé (> 500 km) |
 |---|---|---|---|
-| `c_lamb_delta_i_max_lam_adj` | ~0.15–0.20 λ (~15–20%) | **0.25–0.30 λ** (25–30%) | **0.20 λ** (20%) |
+| `c_lamb_delta_i_max_lam_adj` | **0.050 λ** (5%) | **0.25–0.30 λ** (25–30%) | **0.15 λ** (15%) |
+
+> Stock réel lu sur VB67774 : **0.050 λ** — bien plus serré que les valeurs génériques circulant sur les forums. Sur E85 break-in, le LTFT veut s'accumuler jusqu'à +25–30% → muliplier le plafond par 5 avant le premier flash.
 
 **Vérification :**
 
@@ -121,7 +123,7 @@ Voyant MIL allumé pendant break-in :
 
 **Rôle :** Consigne de richesse ciblée par le calculateur en mode pleine charge (WOT). Stock N52B30 : déjà enrichi à λ 0.920 en WOT (descend à 0.871 à 6500 RPM). Sur E85, cette richesse protège le moteur — rien d'obligatoire à modifier. Option B : dé-enrichir légèrement (λ 0.940–0.950) pour gagner un peu de puissance en exploitant la chaleur de vaporisation de l'éthanol (qui refroidit naturellement la chambre).
 
-**◀ Avant — Stock (λ)**
+**◀ Avant — Stock (λ)** *(valeurs lues sur VB67774_921S_Full.bin)*
 
 | RPM (tr/min) | 608 | 992 | 1216 | 1600 | 2016 | 2496 | 3008 | 3520 | 4128 | 4800 | 5504 | 6496 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
