@@ -25,6 +25,29 @@ def _dtype_fmt(bin_dtype: str, lsb_first: bool = True) -> str:
     }.get(bin_dtype, endian + "B")
 
 
+def read_axis_values(bin_path: str, addr_str: str, count: int, bits: int, lsb_first: bool, equation: str) -> list[float] | None:
+    """Read axis tick values from a BIN file."""
+    if not addr_str:
+        return None
+    try:
+        addr = int(addr_str, 16)
+    except ValueError:
+        return None
+    dtype = {8: "uint8", 16: "uint16", 32: "uint32"}.get(bits, "uint8")
+    fmt   = _dtype_fmt(dtype, lsb_first)
+    size  = struct.calcsize(fmt)
+    try:
+        with open(bin_path, "rb") as f:
+            f.seek(addr)
+            raw_bytes = f.read(size * count)
+    except (IOError, OSError):
+        return None
+    if len(raw_bytes) < size * count:
+        return None
+    raws = [struct.unpack_from(fmt, raw_bytes, i * size)[0] for i in range(count)]
+    return [round(_safe_eval(equation, v), 6) for v in raws]
+
+
 def read_param_values(bin_path: str, param: dict) -> dict:
     """
     Read raw + converted values for a parameter from a BIN file.
@@ -73,7 +96,14 @@ def read_param_values(bin_path: str, param: dict) -> dict:
     ]
     physical_values = [round(_safe_eval(z_eq, v), 6) for v in raw_values]
 
-    return {
+    x_values = read_axis_values(bin_path,
+        param.get("x_addr"), param.get("x_count", 1),
+        param.get("x_bits", 8), param.get("x_lsb", False), param.get("x_eq", "X"))
+    y_values = read_axis_values(bin_path,
+        param.get("y_addr"), param.get("y_count", 1),
+        param.get("y_bits", 8), param.get("y_lsb", False), param.get("y_eq", "X"))
+
+    result = {
         "raw":      raw_values,
         "physical": physical_values,
         "rows":     rows,
@@ -81,6 +111,13 @@ def read_param_values(bin_path: str, param: dict) -> dict:
         "z_unit":   z_unit,
         "z_eq":     z_eq,
     }
+    if x_values and len(x_values) > 1:
+        result["x_values"] = x_values
+        result["x_unit"]   = param.get("x_unit", "")
+    if y_values and len(y_values) > 1:
+        result["y_values"] = y_values
+        result["y_unit"]   = param.get("y_unit", "")
+    return result
 
 
 def compare_params(bin_path1: str, bin_path2: str, param: dict) -> dict:

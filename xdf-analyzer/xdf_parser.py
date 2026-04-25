@@ -86,18 +86,34 @@ class XDFParser:
             z_eq = math.attrib.get("equation", "X") if math is not None else "X"
 
         def _get_axis_info(axis_id):
-            if kind == "CONST": return 1, "", "X"
+            if kind == "CONST": return 1, "", "X", None, 8, False
             ax = el.find(f"XDFAXIS[@id='{axis_id}']")
-            if ax is None: return 1, "", "X"
+            if ax is None: return 1, "", "X", None, 8, False
             ic_el = ax.find("indexcount")
             ic = int(ic_el.text) if ic_el is not None and ic_el.text else 1
             unit = ax.find("units").text if ax.find("units") is not None else ""
             math = ax.find("MATH")
             eq = math.attrib.get("equation", "X") if math is not None else "X"
-            return ic, unit, eq
+            # Axis embedded data (address + bits)
+            emb = ax.find("EMBEDDEDDATA")
+            ax_addr = None
+            ax_bits = 8
+            ax_lsb  = False
+            if emb is not None:
+                raw_addr = emb.attrib.get("mmedaddress")
+                if raw_addr:
+                    try:
+                        ax_addr = f"0x{int(raw_addr, 0) + self.base_offset:05X}"
+                    except ValueError:
+                        pass
+                ax_bits = int(emb.attrib.get("mmedelementsizebits", "8"))
+                modflag = emb.attrib.get("mmedmodflag")
+                if modflag:
+                    ax_lsb = bool(int(modflag, 0) & 0x01)
+            return ic, unit, eq, ax_addr, ax_bits, ax_lsb
 
-        x_count, x_unit, x_eq = _get_axis_info("x")
-        y_count, y_unit, y_eq = _get_axis_info("y")
+        x_count, x_unit, x_eq, x_addr, x_bits, x_lsb = _get_axis_info("x")
+        y_count, y_unit, y_eq, y_addr, y_bits, y_lsb = _get_axis_info("y")
 
         def _bin_addr(addr_str):
             if addr_str == "?": return "?"
@@ -136,9 +152,15 @@ class XDFParser:
             "x_count": x_count,
             "x_unit": x_unit,
             "x_eq": x_eq,
+            "x_addr": x_addr,
+            "x_bits": x_bits,
+            "x_lsb":  x_lsb,
             "y_count": y_count,
             "y_unit": y_unit,
             "y_eq": y_eq,
+            "y_addr": y_addr,
+            "y_bits": y_bits,
+            "y_lsb":  y_lsb,
             # Placeholder for doc infos
             "group_label": "",
             "subcat_label": "",

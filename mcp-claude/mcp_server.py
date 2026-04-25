@@ -30,7 +30,7 @@ BIN_FILES = {
 
 # ── Lazy-loaded cache ──────────────────────────────────────────────────────────
 
-_cache: dict = {}
+_cache: dict = {}  # cleared on server restart
 
 def _get_params(full: bool = True) -> list[dict]:
     key = "full" if full else "partial"
