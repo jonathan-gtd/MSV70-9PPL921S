@@ -1,0 +1,5170 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Project-Id-Version: \n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+"X-Qt-Contexts: true\n"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_FASTA_EISYGD"
+msgstr "0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_FASTA_EISYGD"
+msgstr "0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_FASTA_EISYUGD"
+msgstr "0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_FASTA_EISYUGD"
+msgstr "0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_FASTA_KRANN"
+msgstr "0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_FASTA_KRANN"
+msgstr "0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_FASTA_TECU"
+msgstr "0x23 Auslesen der DME-Temperaturstatistik"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_FASTA_TECU"
+msgstr "0x23 Auslesen der DME-Temperaturstatistik"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_INPA_EISYGD"
+msgstr "0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_INPA_EISYGD"
+msgstr "0x31E1 & 0x33E1    Ansteuern und Auslesen Eisy-Adaptionswerte (gedrosselt)"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_INPA_EISYUGD"
+msgstr "0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_INPA_EISYUGD"
+msgstr "0x31E0 & 0x33E0    Ansteuern und Auslesen Eisy-Adaptionswerte (ungedrosselt)"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_INPA_KRANN"
+msgstr "0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_INPA_KRANN"
+msgstr "0x31E3 & 0x33E3    Ansteuern und Auslesen Krann-Adaptionswerte"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_OBD_MODE_01"
+msgstr "0x0101 _STATUS_OBD_MODE_01"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_OBD_MODE_01"
+msgstr "0x0101 _STATUS_OBD_MODE_01"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_OBD_MODE_03"
+msgstr "0x03 _STATUS_OBD_MODE_03"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_OBD_MODE_03"
+msgstr "0x03 _STATUS_OBD_MODE_03"
+
+# 
+msgctxt "JOB_L|"
+msgid "_STATUS_OBD_MODE_07"
+msgstr "0x07 _STATUS_OBD_MODE_07"
+
+# 
+msgctxt "JOB_S|"
+msgid "_STATUS_OBD_MODE_07"
+msgstr "0x07 _STATUS_OBD_MODE_07"
+
+# 
+msgctxt "JOB_L|"
+msgid "AIF_LESEN"
+msgstr "Auslesen des Anwender-Info-Feldes"
+
+# 
+msgctxt "JOB_S|"
+msgid "AIF_LESEN"
+msgstr "Auslesen des Anwender-Info-Feldes"
+
+# 
+msgctxt "JOB_L|"
+msgid "AUTHENTISIERUNG_START"
+msgstr "Authentisierung pruefen"
+
+# 
+msgctxt "JOB_S|"
+msgid "AUTHENTISIERUNG_START"
+msgstr "Authentisierung pruefen"
+
+# 
+msgctxt "JOB_L|"
+msgid "AUTHENTISIERUNG_ZUFALLSZAHL_LESEN"
+msgstr "Authentisierung Zufallszahl des SG lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "AUTHENTISIERUNG_ZUFALLSZAHL_LESEN"
+msgstr "Authentisierung Zufallszahl des SG lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "C_AEI_LESEN"
+msgstr "Aenderungsindex der Codierdaten lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "C_AEI_LESEN"
+msgstr "Aenderungsindex der Codierdaten lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "C_C_LESEN"
+msgstr "Codierdaten lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "C_C_LESEN"
+msgstr "Codierdaten lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "C_CI_LESEN"
+msgstr "Codierindex lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "C_CI_LESEN"
+msgstr "Codierindex lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "C_FG_LESEN"
+msgstr "Fahrgestellnummer lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "C_FG_LESEN"
+msgstr "Fahrgestellnummer lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "CBS_DATEN_LESEN"
+msgstr "CBS Daten auslesen (fuer CBS Version 1-3)"
+
+# 
+msgctxt "JOB_S|"
+msgid "CBS_DATEN_LESEN"
+msgstr "CBS Daten auslesen (fuer CBS Version 1-3)"
+
+# 
+msgctxt "JOB_L|"
+msgid "CBS_INFO"
+msgstr "Ausgabe der CBS-Version"
+
+# 
+msgctxt "JOB_S|"
+msgid "CBS_INFO"
+msgstr "Ausgabe der CBS-Version"
+
+# 
+msgctxt "JOB_L|"
+msgid "COD_AEIND_LESEN"
+msgstr "Aenderungsindex der Codierdaten lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "COD_AEIND_LESEN"
+msgstr "Aenderungsindex der Codierdaten lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "DATEN_REFERENZ_LESEN"
+msgstr "Auslesen der Daten Referenz"
+
+# 
+msgctxt "JOB_S|"
+msgid "DATEN_REFERENZ_LESEN"
+msgstr "Auslesen der Daten Referenz"
+
+# 
+msgctxt "JOB_L|"
+msgid "DIAGNOSEPROTOKOLL_LESEN"
+msgstr "Diagnosing protocols"
+
+# 
+msgctxt "JOB_S|"
+msgid "DIAGNOSEPROTOKOLL_LESEN"
+msgstr "Diagnosing protocols"
+
+# 
+msgctxt "JOB_L|"
+msgid "DME_STARTWERT_ABGLEICH"
+msgstr "Kopiert die ISN auf beide Wechselcodes"
+
+# 
+msgctxt "JOB_S|"
+msgid "DME_STARTWERT_ABGLEICH"
+msgstr "Kopiert die ISN auf beide Wechselcodes"
+
+# 
+msgctxt "JOB_L|"
+msgid "EWS_EMPFANG"
+msgstr "EWS-Empfangsstatus auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "EWS_EMPFANG"
+msgstr "EWS-Empfangsstatus auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "EWS_STARTWERT"
+msgstr "EWS-Empfangsstatus auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "EWS_STARTWERT"
+msgstr "EWS-Empfangsstatus auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "EWS_STARTWERTPROGRAMMIERUNG"
+msgstr "EWS-Startwertinitialisierung"
+
+# 
+msgctxt "JOB_S|"
+msgid "EWS_STARTWERTPROGRAMMIERUNG"
+msgstr "EWS-Startwertinitialisierung"
+
+# 
+msgctxt "JOB_L|"
+msgid "EWS_STARTWERTRUECKSETZUNG"
+msgstr "EWS-Startwertinitialisierung"
+
+# 
+msgctxt "JOB_S|"
+msgid "EWS_STARTWERTRUECKSETZUNG"
+msgstr "EWS-Startwertinitialisierung"
+
+# 
+msgctxt "JOB_L|"
+msgid "FLASH_BLOCKLAENGE_LESEN"
+msgstr "Auslesen des maximalen Blocklaenge beim Flashen"
+
+# 
+msgctxt "JOB_S|"
+msgid "FLASH_BLOCKLAENGE_LESEN"
+msgstr "Auslesen des maximalen Blocklaenge beim Flashen"
+
+# 
+msgctxt "JOB_L|"
+msgid "FLASH_PARAMETER_LESEN"
+msgstr "Gibt die SG-spezifischen Flash-Parameter zurück"
+
+# 
+msgctxt "JOB_S|"
+msgid "FLASH_PARAMETER_LESEN"
+msgstr "Gibt die SG-spezifischen Flash-Parameter zurück"
+
+# 
+msgctxt "JOB_L|"
+msgid "FLASH_PROGRAMMIER_STATUS_LESEN"
+msgstr "Programmierstatus des SG lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "FLASH_PROGRAMMIER_STATUS_LESEN"
+msgstr "Programmierstatus des SG lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "FLASH_ZEITEN_LESEN"
+msgstr "Auslesen der Flash Loeschzeit, Signaturtestzeit,"
+
+# 
+msgctxt "JOB_S|"
+msgid "FLASH_ZEITEN_LESEN"
+msgstr "Auslesen der Flash Loeschzeit, Signaturtestzeit,"
+
+# 
+msgctxt "JOB_L|"
+msgid "FS_HEX_LESEN"
+msgstr "Fehlerspeicher auslesen als Hex Dump"
+
+# 
+msgctxt "JOB_S|"
+msgid "FS_HEX_LESEN"
+msgstr "Fehlerspeicher auslesen als Hex Dump"
+
+# 
+msgctxt "JOB_L|"
+msgid "FS_LESEN"
+msgstr "Read fault codes"
+
+# 
+msgctxt "JOB_S|"
+msgid "FS_LESEN"
+msgstr "Read fault codes"
+
+# 
+msgctxt "JOB_L|"
+msgid "FS_LESEN_DETAIL"
+msgstr "Fehlerspeicher lesen (ein Fehler / alle Details)"
+
+# 
+msgctxt "JOB_S|"
+msgid "FS_LESEN_DETAIL"
+msgstr "Fehlerspeicher lesen (ein Fehler / alle Details)"
+
+# 
+msgctxt "JOB_L|"
+msgid "FS_LESEN_FREEZE_FRAME"
+msgstr "Fehlerspeicher auslesen mit SAE Werten Umwelt und P-Code"
+
+# 
+msgctxt "JOB_S|"
+msgid "FS_LESEN_FREEZE_FRAME"
+msgstr "Fehlerspeicher auslesen mit SAE Werten Umwelt und P-Code"
+
+# 
+msgctxt "JOB_L|"
+msgid "FS_LESEN_HEX"
+msgstr "Fehlerspeicher auslesen als Hex Dump"
+
+# 
+msgctxt "JOB_S|"
+msgid "FS_LESEN_HEX"
+msgstr "Fehlerspeicher auslesen als Hex Dump"
+
+# 
+msgctxt "JOB_L|"
+msgid "FS_LESEN_TEXT"
+msgstr "Read fault codes"
+
+# 
+msgctxt "JOB_S|"
+msgid "FS_LESEN_TEXT"
+msgstr "Read fault codes"
+
+# 
+msgctxt "JOB_L|"
+msgid "HARDWARE_REFERENZ_LESEN"
+msgstr "Auslesen der Hardware Referenz"
+
+# 
+msgctxt "JOB_S|"
+msgid "HARDWARE_REFERENZ_LESEN"
+msgstr "Auslesen der Hardware Referenz"
+
+# 
+msgctxt "JOB_L|"
+msgid "HS_LESEN"
+msgstr "0x222100 HS_LESEN"
+
+# 
+msgctxt "JOB_S|"
+msgid "HS_LESEN"
+msgstr "0x222100 HS_LESEN"
+
+# 
+msgctxt "JOB_L|"
+msgid "INFO"
+msgstr "Info about SGBD"
+
+# 
+msgctxt "JOB_S|"
+msgid "INFO"
+msgstr "Info about SGBD"
+
+# 
+msgctxt "JOB_L|"
+msgid "INNENTEMP_LESEN"
+msgstr "0x301001 INNENTEMP_LESEN"
+
+# 
+msgctxt "JOB_S|"
+msgid "INNENTEMP_LESEN"
+msgstr "0x301001 INNENTEMP_LESEN"
+
+# 
+msgctxt "JOB_L|"
+msgid "KRAFTSTOFFVERBRAUCH_LESEN"
+msgstr "Auslesen der Daten Referenz"
+
+# 
+msgctxt "JOB_S|"
+msgid "KRAFTSTOFFVERBRAUCH_LESEN"
+msgstr "Auslesen der Daten Referenz"
+
+# 
+msgctxt "JOB_L|"
+msgid "LESEN_SYSTEMCHECK_SLS"
+msgstr "Status Systemdiagnose SLS"
+
+# 
+msgctxt "JOB_S|"
+msgid "LESEN_SYSTEMCHECK_SLS"
+msgstr "Status Systemdiagnose SLS"
+
+# 
+msgctxt "JOB_L|"
+msgid "LESEN_SYSTEMCHECK_TEVSYS"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_S|"
+msgid "LESEN_SYSTEMCHECK_TEVSYS"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_L|"
+msgid "MESSWERTBLOCK_LESEN"
+msgstr "0x2CF0 MESSWERTBLOCK_LESEN"
+
+# 
+msgctxt "JOB_S|"
+msgid "MESSWERTBLOCK_LESEN"
+msgstr "0x2CF0 MESSWERTBLOCK_LESEN"
+
+# 
+msgctxt "JOB_L|"
+msgid "PHYSIKALISCHE_HW_NR_LESEN"
+msgstr "Auslesen der physikalischen Hardwarenummer"
+
+# 
+msgctxt "JOB_S|"
+msgid "PHYSIKALISCHE_HW_NR_LESEN"
+msgstr "Auslesen der physikalischen Hardwarenummer"
+
+# 
+msgctxt "JOB_L|"
+msgid "PRUEFCODE_LESEN"
+msgstr "Pruefcode-Daten in Hex auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "PRUEFCODE_LESEN"
+msgstr "Pruefcode-Daten in Hex auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "PRUEFSTEMPEL_LESEN"
+msgstr "Auslesen des Pruefstempels"
+
+# 
+msgctxt "JOB_S|"
+msgid "PRUEFSTEMPEL_LESEN"
+msgstr "Auslesen des Pruefstempels"
+
+# 
+msgctxt "JOB_L|"
+msgid "SERIENNUMMER_LESEN"
+msgstr "Hersteller Seriennummer lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "SERIENNUMMER_LESEN"
+msgstr "Hersteller Seriennummer lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "SPEICHER_LESEN"
+msgstr "Lese Bytes ueber direkte Adressierung"
+
+# 
+msgctxt "JOB_S|"
+msgid "SPEICHER_LESEN"
+msgstr "Lese Bytes ueber direkte Adressierung"
+
+# 
+msgctxt "JOB_L|"
+msgid "SPEICHER_LESEN_ASCII"
+msgstr "0x23 SPEICHER_LESEN_ASCII"
+
+# 
+msgctxt "JOB_S|"
+msgid "SPEICHER_LESEN_ASCII"
+msgstr "0x23 SPEICHER_LESEN_ASCII"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_DMTL"
+msgstr "Systemcheck Tankentlueftungssystem Leckdiagnose starten"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_DMTL"
+msgstr "Systemcheck Tankentlueftungssystem Leckdiagnose starten"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_DMTL_ECOS"
+msgstr "Systemcheck Tankentlueftungssystem Leckdiagnose starten"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_DMTL_ECOS"
+msgstr "Systemcheck Tankentlueftungssystem Leckdiagnose starten"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_EVAUSBL"
+msgstr "0x3125 START_SYSTEMCHECK_EVAUSBL"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_EVAUSBL"
+msgstr "0x3125 START_SYSTEMCHECK_EVAUSBL"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_L_REGELUNG_AUS"
+msgstr "0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_L_REGELUNG_AUS"
+msgstr "0x31D9 START_SYSTEMCHECK_L_REGELUNG_AUS"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_L_SONDE"
+msgstr "0x31DF START_SYSTEMCHECK_L_SONDE"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_L_SONDE"
+msgstr "0x31DF START_SYSTEMCHECK_L_SONDE"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_LLERH"
+msgstr "0x30B3     Ansteuern Diagnosefunktion Leerlauf-Erhöhung (absolut)"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_LLERH"
+msgstr "0x30B3     Ansteuern Diagnosefunktion Leerlauf-Erhöhung (absolut)"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_PM_MESSEMODE"
+msgstr "$31 F6 Systemdiagnose BatterieSensor reset"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_PM_MESSEMODE"
+msgstr "$31 F6 Systemdiagnose BatterieSensor reset"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_SEK_LUFT"
+msgstr "SLS Funktionstest"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_SEK_LUFT"
+msgstr "SLS Funktionstest"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_TEV_FUNC"
+msgstr "Systemcheck TEV Functionalcheck starten"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_TEV_FUNC"
+msgstr "Systemcheck TEV Functionalcheck starten"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_VVT_ANSCHLAG"
+msgstr "Anstoßen Diagnose 'VVT-Anschläge lernen'"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_VVT_ANSCHLAG"
+msgstr "Anstoßen Diagnose 'VVT-Anschläge lernen'"
+
+# 
+msgctxt "JOB_L|"
+msgid "START_SYSTEMCHECK_VVT_SOLLWERT"
+msgstr "$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben"
+
+# 
+msgctxt "JOB_S|"
+msgid "START_SYSTEMCHECK_VVT_SOLLWERT"
+msgstr "$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ABGASKLAPPE_ANSTEUERUNG_WERT"
+msgstr "Bedingung Abgasklappe mit Resonator"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ABGASKLAPPE_ANSTEUERUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ABGASKLAPPE_EIN_WERT"
+msgstr "Bedingung Abgasklappe mit Resonator"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ABGASKLAPPE_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ABWEICHUNG_DK_POTI1_WERT"
+msgstr "Abweichung DK-Potentiometer 1 und Modellwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ABWEICHUNG_DK_POTI1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ABWEICHUNG_DK_POTI2_WERT"
+msgstr "Abweichung DK-Potentiometer 2 und Modellwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ABWEICHUNG_DK_POTI2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ADAPTION_ADDITIV_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ADAPTION_ADDITIV_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ADAPTION_ADDITIV_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ADAPTION_ADDITIV_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT"
+msgstr "multiplikative Gemischkorrektur der Gemischadaption (Word)"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR_LAW_WERT"
+msgstr "Ansauglufttemperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR_LAW_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR_SPANNUNG_WERT"
+msgstr "Voltage Ansauglufttemperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR_WERT"
+msgstr "Air intake temperature"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR1_ROH_WERT"
+msgstr "Air intake temperature raw value 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ANSAUGLUFTTEMPERATUR1_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BATTERIELAST_WERT"
+msgstr "Batterielast"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BATTERIELAST_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BEHEIZTER_THERMOSTAT_PWM_WERT"
+msgstr "Beheizter Thermostat PWM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BEHEIZTER_THERMOSTAT_PWM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BERECHNETE_LAST_WERT"
+msgstr "Berechneter Lastwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BERECHNETE_LAST_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BERECHNETER_GANG_WERT"
+msgstr "Ganginformation"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BERECHNETER_GANG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BETRIEBSSTUNDENZAEHLER_WERT"
+msgstr "Ergebnis"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BETRIEBSSTUNDENZAEHLER_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BREMSDRUCK_WERT"
+msgstr "Brake pressure"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BREMSDRUCK_WERT"
+msgstr "BrkPress"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BREMSLICHTSCHALTER_EIN_WERT"
+msgstr "Rohwert Bremskontakt nicht entprellt"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BREMSLICHTSCHALTER_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_BREMSLICHTTESTSCHALTER_EIN_WERT"
+msgstr "Rohwert redundanter Bremskontakt nicht entprellt"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_BREMSLICHTTESTSCHALTER_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_CHECK_ENGINE_LAMPE_EIN_WERT"
+msgstr "Lampe Check Engine Ein"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_CHECK_ENGINE_LAMPE_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DIFFERENZ_MAX_MIN_SAF_WERT"
+msgstr "Differenz zwischen Maximum und Minimum SAF"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DIFFERENZ_MAX_MIN_SAF_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DISA1_PWM_WERT"
+msgstr "DISA1 PWM (große/obere Klappe)"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DISA1_PWM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DISA2_PWM_WERT"
+msgstr "DISA2 PWM (kleine/untere Klappe)"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DISA2_PWM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DISAKLAPPEN_POSITION_WERT"
+msgstr "aktuelle Position Disaklappen"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DISAKLAPPEN_POSITION_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DK_ADAPTIONSSCHRITT_WERT"
+msgstr "DK-Adaptionsschritt"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DK_ADAPTIONSSCHRITT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DK_WINKEL_SOLL_WERT"
+msgstr "Drosselklappe Sollwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DK_WINKEL_SOLL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DK1_SPANNUNG_WERT"
+msgstr "Throttle 1 pos. voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DK1_SPANNUNG_WERT"
+msgstr "Thr1PosVolt"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DK2_SPANNUNG_WERT"
+msgstr "Throttle 2 pos. voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DK2_SPANNUNG_WERT"
+msgstr "Thr2PosVolt"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DME_LOSNUMMER_WERT"
+msgstr "DME - Losnummer"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DME_LOSNUMMER_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DMTL_DIAGNOSE_WERT"
+msgstr "Status Diagnose Lambdasonden"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DMTL_DIAGNOSE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DMTL_HEIZUNG_EIN_WERT"
+msgstr "Bedingung Heizung DM-TL Portansteuerung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DMTL_HEIZUNG_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DMTL_PUMPE_EIN_WERT"
+msgstr "Bedingung DMTL-Pumpenmotor an"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DMTL_PUMPE_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DMTL_SPANNUNG_WERT"
+msgstr "Voltage Pumpenstrom Tankdiagnose"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DMTL_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DMTL_VENTIL_EIN_WERT"
+msgstr "Bedingung DMTL-Magnetventil an"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DMTL_VENTIL_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DREHMOMENTABFALL_BEIM_GANGWECHSEL_WERT"
+msgstr "Drehmomentabfall schnell bei Gangwechsel"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DREHMOMENTABFALL_BEIM_GANGWECHSEL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DREHMOMENTEINGRIFF_CAN_WERT"
+msgstr "Drehmomenteingriff über CAN"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DREHMOMENTEINGRIFF_CAN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DREHZAHL_MAXIMAL_BEI_ZUENDAUSSETZER_WERT"
+msgstr "Maximale Drehzahl bei Zündaussetzern"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DREHZAHL_MAXIMAL_BEI_ZUENDAUSSETZER_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DREHZAHL_MINIMAL_BEI_ZUENDAUSSETZER_WERT"
+msgstr "Minimale Drehzahl bei Zündaussetzern"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DREHZAHL_MINIMAL_BEI_ZUENDAUSSETZER_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DREHZAHLGRADIENT_WERT"
+msgstr "Drehzahlgradient"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DREHZAHLGRADIENT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DROSSELKLAPPE_NOTLAUF_WERT"
+msgstr "Status Drosselklappe Notlauf"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DROSSELKLAPPE_NOTLAUF_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DROSSELKLAPPE_SENSOR1_WERT"
+msgstr "Throttle sensor 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DROSSELKLAPPE_SENSOR1_WERT"
+msgstr "ThrSens1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DROSSELKLAPPENWINKEL_SOLL_WERT"
+msgstr "Throttle pos. target"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DROSSELKLAPPENWINKEL_SOLL_WERT"
+msgstr "ThrottlePosTgt"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_DROSSELKLAPPENWINKEL_WERT"
+msgstr "Throttle pos."
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_DROSSELKLAPPENWINKEL_WERT"
+msgstr "ThrottlePos"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_E_BOXLUEFTER_EIN_WERT"
+msgstr "E-Box-Lüfter Ein"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_E_BOXLUEFTER_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_E_LUEFTER_PWM_SOLL_WERT"
+msgstr "Sollwert E-Lüfter als PWM Wert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_E_LUEFTER_PWM_SOLL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_E_LUEFTER_PWM_WERT"
+msgstr "E-Lüfter PWM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_E_LUEFTER_PWM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_E_LUEFTER_TASTVERHAELTNIS_WERT"
+msgstr "duty cycle E-Lüfter"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_E_LUEFTER_TASTVERHAELTNIS_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_EINSPRITZZEIT_ZYL1_WERT"
+msgstr "Injection time Cylinder 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_EINSPRITZZEIT_ZYL1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_EINSPRITZZEIT_ZYL2_WERT"
+msgstr "Injection time Cylinder 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_EINSPRITZZEIT_ZYL2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_EINSPRITZZEIT_ZYL3_WERT"
+msgstr "Injection time Cylinder 3"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_EINSPRITZZEIT_ZYL3_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_EINSPRITZZEIT_ZYL4_WERT"
+msgstr "Injection time Cylinder 4"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_EINSPRITZZEIT_ZYL4_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_EINSPRITZZEIT_ZYL5_WERT"
+msgstr "Injection time Cylinder 5"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_EINSPRITZZEIT_ZYL5_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_EINSPRITZZEIT_ZYL6_WERT"
+msgstr "Injection time Cylinder 6"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_EINSPRITZZEIT_ZYL6_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FAHRERWUNSCH_PEDAL_ROH_WERT"
+msgstr "Fahrpedalwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FAHRERWUNSCH_PEDAL_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FAHRERWUNSCH_PEDAL_WERT"
+msgstr "Pedal value"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FAHRERWUNSCH_PEDAL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FAHRSTRECKE_MIL_AN_WERT"
+msgstr "Zähler für gefahrene Kilometer mit MIL EIN"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FAHRSTRECKE_MIL_AN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FGR_WERT"
+msgstr "Fahrgeschwingigkeitsregler (FGR) Status-Rohwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FGR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FUELLSTAND_MOTOROEL_KURZZEIT_WERT"
+msgstr "Ölniveau - kurz"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FUELLSTAND_MOTOROEL_KURZZEIT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL1_WERT"
+msgstr "Spark burn duration Cylinder 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL1_WERT"
+msgstr "SprkDur1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL2_WERT"
+msgstr "Spark burn duration Cylinder 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL2_WERT"
+msgstr "SprkDur2"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL3_WERT"
+msgstr "Spark burn duration Cylinder 3"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL3_WERT"
+msgstr "SprkDur3"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL4_WERT"
+msgstr "Spark burn duration Cylinder 4"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL4_WERT"
+msgstr "SprkDur4"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL5_WERT"
+msgstr "Spark burn duration Cylinder 5"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL5_WERT"
+msgstr "SprkDur5"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL6_WERT"
+msgstr "Spark burn duration Cylinder 6"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_FUNKENBRENNDAUER_ZYL6_WERT"
+msgstr "SprkDur6"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GEBERRAD_ADAPTION_VSA_WERT"
+msgstr "vsa_adp_fl"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GEBERRAD_ADAPTION_VSA_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GEBERRAD_ADAPTION_VSE_WERT"
+msgstr "vse_adp_fl"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GEBERRAD_ADAPTION_VSE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_CHIPVERSION_WERT"
+msgstr "Chipversion Generator 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_CHIPVERSION_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_ELEKTRONIKTEMPERATUR_WERT"
+msgstr "Chiptemperatur vom Regler (BSD, LIN, SGR - Auflösung 1 °C)"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_ELEKTRONIKTEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_HERSTELLERCODE_WERT"
+msgstr "Herstellercode Generator 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_HERSTELLERCODE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_REGLERVERSION_WERT"
+msgstr "Reglerversion Generator 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_REGLERVERSION_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_SPANNUNG_BSD_SOLL_WERT"
+msgstr "Generator Sollspannung über BSD"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_SPANNUNG_BSD_SOLL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_SPANNUNG_SOLL_WERT"
+msgstr "Generator Sollspannung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_SPANNUNG_SOLL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_STROM_WERT"
+msgstr "Generatorstrom"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_STROM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GENERATOR_TYP_WERT"
+msgstr "Kennung Generatortyp Generator 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GENERATOR_TYP_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GESCHWINDIGKEIT_2_WERT"
+msgstr "Speed"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GESCHWINDIGKEIT_2_WERT"
+msgstr "Speed"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_GESCHWINDIGKEIT_WERT"
+msgstr "Vehicle Speed"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_GESCHWINDIGKEIT_WERT"
+msgstr "Speed"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_INTEGRATOR_BANK1_WERT"
+msgstr "Lambdaintegrator bank1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_INTEGRATOR_BANK1_WERT"
+msgstr "LambdInt1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_INTEGRATOR_BANK2_WERT"
+msgstr "Lambdaintegrator bank2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_INTEGRATOR_BANK2_WERT"
+msgstr "LambdaInt2"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KILOMETERSTAND_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KILOMETERSTAND_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KL15_SPANNUNG_ROH_WERT"
+msgstr "Voltage Kl. 15 Rohwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KL15_SPANNUNG_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KL15_SPANNUNG_WERT"
+msgstr "Lastsignal SPG"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KL15_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KL87_SPANNUNG_WERT"
+msgstr "Kl.87 Spannung / Versorgung DME"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KL87_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLIMA_EIN"
+msgstr "Bedingung für Kompressoreinschalten"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLIMA_EIN"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLIMAKOMPRESSORRELAIS_EIN"
+msgstr "Klimakompressorrelais Ein"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLIMAKOMPRESSORRELAIS_EIN"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFSIGNAL_ZYL1_RELATIV_WERT"
+msgstr "Knock sensor signal Cylinder 1 relativ"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFSIGNAL_ZYL1_RELATIV_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFSIGNAL_ZYL1_WERT"
+msgstr "Knock sensor signal Cylinder 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFSIGNAL_ZYL1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFSIGNAL_ZYL6_RELATIV_WERT"
+msgstr "Knock sensor signal Cylinder 6 relativ"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFSIGNAL_ZYL6_RELATIV_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFSIGNAL_ZYL6_WERT"
+msgstr "Knock sensor signal Cylinder 6"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFSIGNAL_ZYL6_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFWERT_ZYL1_SPANNUNG_WERT"
+msgstr "Knock voltage Cylinder 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFWERT_ZYL1_SPANNUNG_WERT"
+msgstr "KnockVoltCyl1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFWERT_ZYL2_SPANNUNG_WERT"
+msgstr "Knock voltage Cylinder 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFWERT_ZYL2_SPANNUNG_WERT"
+msgstr "KnockVoltCyl2"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFWERT_ZYL3_SPANNUNG_WERT"
+msgstr "Knock voltage Cylinder 3"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFWERT_ZYL3_SPANNUNG_WERT"
+msgstr "KnockVoltCyl3"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFWERT_ZYL4_SPANNUNG_WERT"
+msgstr "Knock voltage Cylinder 4"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFWERT_ZYL4_SPANNUNG_WERT"
+msgstr "KnockVoltCyl4"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFWERT_ZYL5_SPANNUNG_WERT"
+msgstr "Knock voltage Cylinder 5"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFWERT_ZYL5_SPANNUNG_WERT"
+msgstr "KnockVoltCyl5"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KLOPFWERT_ZYL6_SPANNUNG_WERT"
+msgstr "Knock voltage Cylinder 6"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KLOPFWERT_ZYL6_SPANNUNG_WERT"
+msgstr "KnockVoltCyl6"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KRAFTSTOFF_ANFORDERUNG_AN_PUMPE_WERT"
+msgstr "EKP-Sollvolumenstrom"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KRAFTSTOFF_ANFORDERUNG_AN_PUMPE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KRAFTSTOFFDRUCK_WERT"
+msgstr "Bereich von 0 [bar] bis 10 [bar]"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KRAFTSTOFFDRUCK_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KRAFTSTOFFPUMPE_PWM_WERT"
+msgstr "Kraftstoffpumpe PWM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KRAFTSTOFFPUMPE_PWM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KRAFTSTOFFTANK_FUELLSTAND_WERT"
+msgstr "Tank filling status"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KRAFTSTOFFTANK_FUELLSTAND_WERT"
+msgstr "TankStatus"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KRAFTSTOFFVERBRAUCH_SEIT_SERVICE_WERT"
+msgstr "Kraftstoff-Verbrauch seit letztem Service"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KRAFTSTOFFVERBRAUCH_SEIT_SERVICE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KUEHLERAUSLASSTEMPERATUR_SPANNUNG_WERT"
+msgstr "Voltage Kühlmitteltemperatur Kühlerausgang"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KUEHLERAUSLASSTEMPERATUR_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KUEHLERAUSLASSTEMPERATUR_WERT"
+msgstr "Kühlmitteltemperatur (Sensorwert) nach Tiefpassfilterung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KUEHLERAUSLASSTEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KUEHLMITTELTEMPERATUR_SPANNUNG_WERT"
+msgstr "Voltage Motortemperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KUEHLMITTELTEMPERATUR_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KUEHLMITTELTEMPERATUR_WERT"
+msgstr "Motor temp."
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KUEHLMITTELTEMPERATUR_WERT"
+msgstr "MotorTemp"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KUEHLWASSERTEMPERATUR_ROH_WERT"
+msgstr "Rohwert Kühlwassertemperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KUEHLWASSERTEMPERATUR_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KUPPLUNGSSCHALTER_BETAETIGT_WERT"
+msgstr "Kupplungsschalter Status"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KUPPLUNGSSCHALTER_BETAETIGT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KUPPLUNGSSCHALTER_VORHANDEN_WERT"
+msgstr "Schalter Kupplung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KUPPLUNGSSCHALTER_VORHANDEN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT"
+msgstr "fofstat"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LADEDRUCK_WERT"
+msgstr "Boost pressure"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LADEDRUCK_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE1_WERT"
+msgstr "Lambda Adaption Summe mul. und add. Gruppe 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE2_WERT"
+msgstr "Lambda Adaption Summe mul. und add. Gruppe 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_BANK1_SOLL_WERT"
+msgstr "Lambda target bank1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_BANK1_SOLL_WERT"
+msgstr "Lambda_tgt_bank1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_BANK1_WERT"
+msgstr "Lambda pre-cat bank1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_BANK1_WERT"
+msgstr "Lambda_precat_Bank1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_BANK2_SOLL_WERT"
+msgstr "Lambda target bank2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_BANK2_SOLL_WERT"
+msgstr "Lambda_tgt_bank2"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_BANK2_WERT"
+msgstr "Lambda pre-cat Bank2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_BANK2_WERT"
+msgstr "Lambda precat_Bank2"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_INTEGRATOR_GRUPPE1_WERT"
+msgstr "Lambda Integrator Gruppe 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_INTEGRATOR_GRUPPE1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_INTEGRATOR_GRUPPE2_WERT"
+msgstr "Lambda Integrator Gruppe 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_INTEGRATOR_GRUPPE2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_ISTWERT_GRUPPE1_WERT"
+msgstr "Lambda value group1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_ISTWERT_GRUPPE1_WERT"
+msgstr "LBD_grp1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_ISTWERT_GRUPPE2_WERT"
+msgstr "Lambda value group2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_ISTWERT_GRUPPE2_WERT"
+msgstr "LDB_grp2"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_SOLLWERT_GRUPPE1_WERT"
+msgstr "Lambda-Sollwert Gruppe 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_SOLLWERT_GRUPPE1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDA_SOLLWERT_GRUPPE2_WERT"
+msgstr "Lambda-Sollwert Gruppe 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDA_SOLLWERT_GRUPPE2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDAREGELUNG_ZUSTAND_BANK1_WERT"
+msgstr "Zustand Lambdaregelung Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDAREGELUNG_ZUSTAND_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDAREGELUNG_ZUSTAND_BANK2_WERT"
+msgstr "Zustand Lambdaregelung Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDAREGELUNG_ZUSTAND_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT1_WERT"
+msgstr "Lambda ceramic temp pre-cat Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT1_WERT"
+msgstr "LambdaCerTmpBank1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT2_WERT"
+msgstr "Lambda ceramic temp pre-cat Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_KERAMIKTEMPERATUR_VORKAT2_WERT"
+msgstr "LambdaCerTmpBank2"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT1_UNTERES_BYTE_WERT"
+msgstr "unteres Byte Widerstand Lambdasonde hinter Katalysator Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT1_UNTERES_BYTE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_UNTERES_BYTE_WERT"
+msgstr "unteres Byte Widerstand Lambdasonde hinter Katalysator Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_UNTERES_BYTE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_WERT"
+msgstr "Widerstand Lambdasonde hinter Katalysator Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_UNTERES_BYTE_WERT"
+msgstr "untere Byte Widerstand Lambdasonde before cat. Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_UNTERES_BYTE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_WERT"
+msgstr "Widerstand Lambdasonde before cat. Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_UNTERES_BYTE_WERT"
+msgstr "untere Byte Widerstand Lambdasonde before cat. Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_UNTERES_BYTE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_WERT"
+msgstr "Widerstand Lambdasonde before cat. Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT"
+msgstr "Lambdaverschiebung Rückführregler 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT"
+msgstr "Lambdaverschiebung Rückführregler 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAMPE_FGR_EIN_WERT"
+msgstr "Status der CrCtl-Lampe (wird über CAN versendet)"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAMPE_FGR_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAST_MAXIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT"
+msgstr "Maximale relative Last bei Zündaussetzern"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAST_MAXIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAST_MINIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT"
+msgstr "Minimale relative Last bei Zündaussetzern"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAST_MINIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LASTWERT_BERECHNET_WERT"
+msgstr "Berechneter Lastwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LASTWERT_BERECHNET_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LASTWERT_RELATIV_WERT"
+msgstr "Relative Filling"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LASTWERT_RELATIV_WERT"
+msgstr "RF"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL3_WERT"
+msgstr "Segmentadaption Laufunruhe Cyl. 3"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL3_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL5_WERT"
+msgstr "Segmentadaption Laufunruhe Cyl. 5"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL5_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_SEGMENTZEIT_WERT"
+msgstr "Laufunruhe Segmentzeit"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_SEGMENTZEIT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_ZYL1_WERT"
+msgstr "lutskzyl[0]"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_ZYL1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_ZYL2_WERT"
+msgstr "lutskzyl[3]"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_ZYL2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_ZYL3_WERT"
+msgstr "lutskzyl[1]"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_ZYL3_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_ZYL4_WERT"
+msgstr "lutskzyl[2]"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_ZYL4_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_ZYL5_WERT"
+msgstr "[1] Laufunruhe Cylinder 5"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_ZYL5_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LAUFUNRUHE_ZYL6_WERT"
+msgstr "[3] Laufunruhe Cylinder 6"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LAUFUNRUHE_ZYL6_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LEERLAUF_AKTIV"
+msgstr "Bedingung Leerlaufregelung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LEERLAUF_AKTIV"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LEERLAUF_SOLLDREHZAHLABWEICHUNG_WERT"
+msgstr "LL-Solldrehzahlabweichung Überwachung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LEERLAUF_SOLLDREHZAHLABWEICHUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LEERLAUFDREHZAHL_SOLL_WERT"
+msgstr "Idle target RPM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LEERLAUFDREHZAHL_SOLL_WERT"
+msgstr "Idle_tgt_RPM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LS_DIAGNOSE_WERT"
+msgstr "Funktionsstatus LLRNS bei Anforderung Systemcheck"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LS_DIAGNOSE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LUFTMASSE_GRAMM_PRO_SEKUNDE_WERT"
+msgstr "relative Air mass (calc. load value) nach SAE J1979"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LUFTMASSE_GRAMM_PRO_SEKUNDE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LUFTMASSE_MITTLERE_MINIMALE_WERT"
+msgstr "Mittlere Diagnosewert minimale Air mass"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LUFTMASSE_MITTLERE_MINIMALE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LUFTMASSE_PRO_HUB_WERT"
+msgstr "Air mass per Cylinder"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LUFTMASSE_PRO_HUB_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LUFTMASSE_SEKUNDAERLUFT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LUFTMASSE_SEKUNDAERLUFT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LUFTMASSE_SPANNUNG_WERT"
+msgstr "Air mass sensor voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LUFTMASSE_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_LUFTMASSE_WERT"
+msgstr "Air mass"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_LUFTMASSE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MIL_EIN_WERT"
+msgstr "DSM Mil Anforderungsstatus (1 = kontinuierlich, 2 blinkend)"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MIL_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOMENTANFORDERUNG_KUPPLUNG_WERT"
+msgstr "Torque request from clutch"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOMENTANFORDERUNG_KUPPLUNG_WERT"
+msgstr "TqReq_Cltch"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOMENTENANFORDERUNG_VON_MSR_RELATIV_WERT"
+msgstr "relative Momentenforderung von MSR über CAN"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOMENTENANFORDERUNG_VON_MSR_RELATIV_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTOR_STATUS_WERT"
+msgstr "Zustand Motor-Koordinator"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTOR_STATUS_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORABSTELLZEIT_WERT"
+msgstr "Rel. Exzenterwinkel am unteren mech. Anschlag"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORABSTELLZEIT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORDREHZAHL_N32_WERT"
+msgstr "Engine RPM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORDREHZAHL_N32_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORDREHZAHL_WERT"
+msgstr "RPM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORDREHZAHL_WERT"
+msgstr "RPM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORMOMENT_AKTUELL_WERT"
+msgstr "engine torque output"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORMOMENT_AKTUELL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORMOMENT_IST_WERT"
+msgstr "Engine torque"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORMOMENT_IST_WERT"
+msgstr "EngTrq"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORMOMENT_SOLL_WERT"
+msgstr "Engine torque target"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORMOMENT_SOLL_WERT"
+msgstr "EngTrqTgt"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORSTEUERUNG_WERT"
+msgstr "Status Motorsteuerung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORSTEUERUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_MOTORTEMPERATUR_BEIM_START_WERT"
+msgstr "Motortemperatur beim Start"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_MOTORTEMPERATUR_BEIM_START_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_N_AUFLOESUNG_WERT"
+msgstr "RPM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_N_AUFLOESUNG_WERT"
+msgstr "RPM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_NW_AUSLASS_SOLL_WERT"
+msgstr "Outlet Camshaft Target"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_NW_AUSLASS_SOLL_WERT"
+msgstr "OutletCamTgt"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_NW_AUSLASSSPREIZUNG_WERT"
+msgstr "Camshaft outlet spread"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_NW_AUSLASSSPREIZUNG_WERT"
+msgstr "CamOutletSpread"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_NW_EINLASSSPREIZUNG_WERT"
+msgstr "Camshaft inlet spread"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_NW_EINLASSSPREIZUNG_WERT"
+msgstr "CamInSpread"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_NW_NORMSPREIZUNG_AUSLASS_WERT"
+msgstr "Normspreizung Auslass"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_NW_NORMSPREIZUNG_AUSLASS_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_NW_NORMSPREIZUNG_EINLASS_WERT"
+msgstr "Normspreizung Einlass"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_NW_NORMSPREIZUNG_EINLASS_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELDRUCKSCHALTER_EIN_WERT"
+msgstr "Ausgangssignal Öldruckschalter"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELDRUCKSCHALTER_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELSENSOR_NIVEAU_ROH_WERT"
+msgstr "Ölsensor Niveau Rohwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELSENSOR_NIVEAU_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELSENSOR_NIVEAU_WERT"
+msgstr "Ölsensor Niveau"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELSENSOR_NIVEAU_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELSENSOR_QUALITAET_ROH_WERT"
+msgstr "Ölsensor Qualität Rohwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELSENSOR_QUALITAET_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELSENSOR_QUALITAET_WERT"
+msgstr "Ölsensor Qualität"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELSENSOR_QUALITAET_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELSENSOR_TEMPERATUR_ROH_WERT"
+msgstr "Ölsensor Temperatur Rohwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELSENSOR_TEMPERATUR_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELSENSOR_TEMPERATUR_WERT"
+msgstr "Ölsensor Temperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELSENSOR_TEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELSTAND_LANGZEIT_MITTEL_WERT"
+msgstr "Ölstand Mittelwert Langzeit"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELSTAND_LANGZEIT_MITTEL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_OELTEMPERATUR_WERT"
+msgstr "Motor oil temp."
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_OELTEMPERATUR_WERT"
+msgstr "OilTemp"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PEDALWERTGEBER1_WERT"
+msgstr "Sauerstoffspeichervermögen KAT"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PEDALWERTGEBER1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_POSITION_NOCKENWELLE_AUSLASS_WERT"
+msgstr "Camshaft pos exhaust"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_POSITION_NOCKENWELLE_AUSLASS_WERT"
+msgstr "CamPosExh"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_POSITION_NOCKENWELLE_EINLASS_WERT"
+msgstr "Camshaft pos. intake"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_POSITION_NOCKENWELLE_EINLASS_WERT"
+msgstr "CamPosInt"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PUMPENSTROM_BEI_DMTL_PUMPENPRUEFUNG_WERT"
+msgstr "Pumpenstrom Tankdiagnose"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PUMPENSTROM_BEI_DMTL_PUMPENPRUEFUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PWG1_SPANNUNG_WERT"
+msgstr "Pedal 1 Position Voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PWG1_SPANNUNG_WERT"
+msgstr "Pedal1_pos"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PWG1_VERSORGUNGSSPANNUNG_WERT"
+msgstr "Versorgung Fahrwertgeber 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PWG1_VERSORGUNGSSPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PWG1_WERT"
+msgstr "linearized APP1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PWG1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PWG2_SPANNUNG_WERT"
+msgstr "Pedal 2 Position Voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PWG2_SPANNUNG_WERT"
+msgstr "Pedal2_pos"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PWG2_VERSORGUNGSSPANNUNG_WERT"
+msgstr "Versorgung Fahrwertgeber 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PWG2_VERSORGUNGSSPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_PWG2_WERT"
+msgstr "linearized APP2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_PWG2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_READINESS_SONDE_NACHKAT_BANK1_WERT"
+msgstr "Status LS hinter Katalysator Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_READINESS_SONDE_NACHKAT_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_READINESS_SONDE_NACHKAT_BANK2_WERT"
+msgstr "Status LS hinter Katalysator Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_READINESS_SONDE_NACHKAT_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SAUGROHRDRUCK_2_WERT"
+msgstr "Saugrohrdruck"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SAUGROHRDRUCK_2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SAUGROHRDRUCK_SPANNUNG_WERT"
+msgstr "Intake manifold pressure voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SAUGROHRDRUCK_SPANNUNG_WERT"
+msgstr "IntMan_Volt"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SAUGROHRDRUCK_WERT"
+msgstr "Intake manifold pressure"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SAUGROHRDRUCK_WERT"
+msgstr "IntManPress"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SEKUNDAERLUFT_SPANNUNG_WERT"
+msgstr "Voltage Sekundärluft"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SEKUNDAERLUFT_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SEKUNDAERLUFT_VENTIL_PWM_WERT"
+msgstr "Sekundärluft Ventil"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SEKUNDAERLUFT_VENTIL_PWM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SEKUNDAERLUFTPUMPE_WERT"
+msgstr "Sekundärluft Pumpe aktiv"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SEKUNDAERLUFTPUMPE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SLS_DIAGNOSE_WERT"
+msgstr "Status Diagnose TEV"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SLS_DIAGNOSE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENBEREITSCHAFT_VORKAT_BANK1"
+msgstr "Bedingung Sonde betriebsbereit vor Kat"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENBEREITSCHAFT_VORKAT_BANK1"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENBEREITSCHAFT_VORKAT_BANK2"
+msgstr "Status Lambdasonde betriebsbereit before cat. Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENBEREITSCHAFT_VORKAT_BANK2"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_NACHKAT_BANK1_WERT"
+msgstr "Status LS Heizung hinter Katalysator Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_NACHKAT_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_NACHKAT_BANK2_WERT"
+msgstr "Status LS Heizung hinter Katalysator Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_NACHKAT_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK1_WERT"
+msgstr "normierte Heizleistung der Lambdasonde hinter Kat"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK2_WERT"
+msgstr "Lambda heating PWM hinter Katalysator Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK1_WERT"
+msgstr "Lambda heating PWM before cat. Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK2_WERT"
+msgstr "Lambda heating PWM before cat. Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_VORKAT_BANK1_WERT"
+msgstr "Status LS Heizung before cat. Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_VORKAT_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENHEIZUNG_VORKAT_BANK2_WERT"
+msgstr "Status LS Heizung before cat. Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENHEIZUNG_VORKAT_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENSPANNUNG_NACHKAT_BANK1_WERT"
+msgstr "Voltage Lambdasonde hinter Katalysator Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENSPANNUNG_NACHKAT_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENSPANNUNG_NACHKAT_BANK2_WERT"
+msgstr "Voltage Lambdasonde hinter Katalysator Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENSPANNUNG_NACHKAT_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK1_MIT_OFFSET_WERT"
+msgstr "Voltage Lambdasonde before cat. Bank 1 mit Offsetkorrektur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK1_MIT_OFFSET_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT"
+msgstr "Voltage Lambdasonde before cat. Bank 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK2_MIT_OFFSET_WERT"
+msgstr "Voltage Lambdasonde before cat. Bank 2 mit Offsetkorrektur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK2_MIT_OFFSET_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT"
+msgstr "Voltage Lambdasonde before cat. Bank 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SOUNDKLAPPE_PWM_WERT"
+msgstr "Soundklappe Zustand"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SOUNDKLAPPE_PWM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SPANNUNGSOFFSET_SIGNALPFAD1_WERT"
+msgstr "Voltagesoffset Signalpfad CJ120 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SPANNUNGSOFFSET_SIGNALPFAD1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SPANNUNGSOFFSET_SIGNALPFAD2_WERT"
+msgstr "Voltagesoffset Signalpfad CJ120 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SPANNUNGSOFFSET_SIGNALPFAD2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SPORTSCHALTER_SPANNUNG_WERT"
+msgstr "Voltage Sportschalter"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SPORTSCHALTER_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_SPORTTASTER_BETAETIGT_WERT"
+msgstr "Sporttaster aktiv"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_SPORTTASTER_BETAETIGT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL1_WERT"
+msgstr "Status Standverbraucher registriert Teil 1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL1_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL2_WERT"
+msgstr "Status Standverbraucher registriert Teil 2"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL2_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STARTRELAIS_AKTIV_WERT"
+msgstr "Bedingung automatischer Start"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STARTRELAIS_AKTIV_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STARTRELAIS_UEBER_CAN_WERT"
+msgstr "Schalter Klemme 50 von CAN"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STARTRELAIS_UEBER_CAN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STATUS_KLOPFEN_WERT"
+msgstr "Status Klopfen"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STATUS_KLOPFEN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_ROH_WERT"
+msgstr "value Temperatur Steuergerät"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_SPANNUNG_WERT"
+msgstr "Voltage SG-Innentemperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_WERT"
+msgstr "Steuergeräte-Innentemperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_TANKENTLUEFTUNG_DURCHFLUSS_SOLL_WERT"
+msgstr "Tank ventilation air flow target in intake manifold"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_TANKENTLUEFTUNG_DURCHFLUSS_SOLL_WERT"
+msgstr "TankVentAFT"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_TASTE_FGR_EIN_WERT"
+msgstr "Status Taste FGR"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_TASTE_FGR_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_TEV_DIAGNOSE_WERT"
+msgstr "Funktionsstatus-Zähler DM-TL für Testerausgabe from letztem Fahrzyklus"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_TEV_DIAGNOSE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_TEV_PWM_WERT"
+msgstr "Tank valve PWM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_TEV_PWM_WERT"
+msgstr "TankVlvPWM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UBAT_WERT"
+msgstr "Battery voltage"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UBATT_AD_WANDLER_WERT"
+msgstr "Batteriespannung vom AD-Wandler DME"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_UBATT_AD_WANDLER_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UBATT_IBS_WERT"
+msgstr "value von ubatt_w"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_UBATT_IBS_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UBATT_WERT"
+msgstr "Battery voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_UBATT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UBATT2_WERT"
+msgstr "Battery voltage"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UMGEBUNGSDRUCK_SPANNUNG_WERT"
+msgstr "Atmospheric pressure sensor voltage"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_UMGEBUNGSDRUCK_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UMGEBUNGSDRUCK_WERT"
+msgstr "Atmospheric pressure"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_UMGEBUNGSDRUCK_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_UMGEBUNGSTEMPERATUR_WERT"
+msgstr "Result"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_UMGEBUNGSTEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VANOS_AUSLASS_PWM_WERT"
+msgstr "Outlet VANOS PWM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VANOS_AUSLASS_PWM_WERT"
+msgstr "OutletVAN_PWM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VANOS_EINLASS_PWM_WERT"
+msgstr "Inlet VANOS PWM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VANOS_EINLASS_PWM_WERT"
+msgstr "InletVAN_PWM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VARIANTE_SEKUNDAERLUFTPUMPE_WERT"
+msgstr "Variante Sekundärluftpumpe"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VARIANTE_SEKUNDAERLUFTPUMPE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPE_DREHZAHL_SOLL_IST_DIFFERENZ_WERT"
+msgstr "Wasserpumpe Drehzahl Soll-Ist-Differenz"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPE_DREHZAHL_SOLL_IST_DIFFERENZ_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPE_DREHZAHL_SOLL_WERT"
+msgstr "BSS Waterpump target RPM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPE_DREHZAHL_SOLL_WERT"
+msgstr "BSS_Target_RPM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPE_DREHZAHL_WERT"
+msgstr "Waterpump RPM"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPE_DREHZAHL_WERT"
+msgstr "WaterPmpRPM"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPE_ELEKTRONIK_TEMPERATUR_WERT"
+msgstr "empf. Temperatur von BSS-Wasserpumpe"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPE_ELEKTRONIK_TEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPE_LEISTUNGSREDUZIERT_WERT"
+msgstr "Wasserpumpe leistungsreduziert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPE_LEISTUNGSREDUZIERT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPE_SPANNUNG_WERT"
+msgstr "empf. Spannung von BSS-Wasserpumpe"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPE_SPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPE_STROM_WERT"
+msgstr "Current from waterpump"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPE_STROM_WERT"
+msgstr "CurrWP"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WASSERPUMPENLEISTUNG_BSD_WERT"
+msgstr "Wasserpumpe Leistung über BSD"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WASSERPUMPENLEISTUNG_BSD_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_WEG_SEIT_SERVICE_WERT"
+msgstr "KM reading since last service"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_WEG_SEIT_SERVICE_WERT"
+msgstr "KMReading"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT"
+msgstr "Sollwert Einlassspreizung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_ENDSTUFENTEMPERATUR_WERT"
+msgstr "VVT-Endstufentemperatur from Modell"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_ENDSTUFENTEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_ENTLASTUNGSRELAIS_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_ENTLASTUNGSRELAIS_EIN_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_EXCENTER_SOLL_WERT"
+msgstr "VVT-Excenter Sollwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_EXCENTER_SOLL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_EXCENTER_WERT"
+msgstr "VVT-Excenter Istwert"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_EXCENTER_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_ISTWINKEL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_ISTWINKEL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_LAGEREGLER_SOLL_WERT"
+msgstr "Sollwert für Lageregler vom Tester"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_LAGEREGLER_SOLL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_LAGEREGLER_SOLL_VON_TESTER_WERT"
+msgstr "Sollwert Einlassspreizung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_LAGEREGLER_SOLL_VON_TESTER_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_MOTORSTROM_WERT"
+msgstr "Strom für VVT-Motor"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_MOTORSTROM_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_MOTORTEMPERATUR_WERT"
+msgstr "VVT Motortemperatur"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_MOTORTEMPERATUR_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_SENSORDIFFERENZ_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_SENSORDIFFERENZ_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_SENSORVERSORGUNGSSPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_SENSORVERSORGUNGSSPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_SOLLWINKEL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_SOLLWINKEL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_SPANNUNGSVERSORGUNG_WERT"
+msgstr "VVT Spannungsversorgung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_SPANNUNGSVERSORGUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_VERSORGUNGSSPANNUNG_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_VERSORGUNGSSPANNUNG_ROH_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_VERSORGUNGSSPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_VERSORGUNGSSPANNUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT"
+msgstr "Mechanischer Verstellbereich VVT from Lernroutine"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_VVT_WINKEL_AUSWAHL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_VVT_WINKEL_AUSWAHL_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZAEHLER_ERKENNUNG_SCHLECHTE_STRASSE_WERT"
+msgstr "Zähler Erkennung schlechte Strasse"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZAEHLER_ERKENNUNG_SCHLECHTE_STRASSE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZEIT_DMTL_LECKMESSUNG_WERT"
+msgstr "aktuelle Zeit Leckmessung"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZEIT_DMTL_LECKMESSUNG_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZEIT_MIT_RUHESTROM_200_1000_WERT"
+msgstr "Zeit mit Ruhestrom 200 - 1000 mA"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZEIT_MIT_RUHESTROM_200_1000_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZEIT_MIT_RUHESTROM_80_200_WERT"
+msgstr "Zeit mit Ruhestrom 80 - 200 mA"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZEIT_MIT_RUHESTROM_80_200_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZEIT_MIT_RUHESTROM_GROESER_1000_WERT"
+msgstr "Zeit mit Ruhestrom größer 1000 mA"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZEIT_MIT_RUHESTROM_GROESER_1000_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZEIT_MOTOR_STEHT_WERT"
+msgstr "Abstellzeit"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZEIT_MOTOR_STEHT_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZEIT_SEIT_STARTENDE_WERT"
+msgstr "Zeit seit Startende"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZEIT_SEIT_STARTENDE_WERT"
+msgstr ""
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZUENDWINKEL_ZYL1_WERT"
+msgstr "Ignition angle Cyl.1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZUENDWINKEL_ZYL1_WERT"
+msgstr "IgnAnglCyl1"
+
+# 
+msgctxt "RES_L|"
+msgid "STAT_ZUENDZEITPUNKT_ZYL1_WERT"
+msgstr "Ignition angle Cyl1"
+
+# 
+msgctxt "RES_S|"
+msgid "STAT_ZUENDZEITPUNKT_ZYL1_WERT"
+msgstr "IgnAnglCyl1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ADAPTION_DK"
+msgstr "Drosselklappenadaptionswerte auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ADAPTION_DK"
+msgstr "Drosselklappenadaptionswerte auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ADAPTION_GEMISCH"
+msgstr "Gemischadaptionswerte auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ADAPTION_GEMISCH"
+msgstr "Gemischadaptionswerte auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ADC_ULS1"
+msgstr "Lambdasondendifferenzspannung 1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ADC_ULS1"
+msgstr "Lambdasondendifferenzspannung 1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ADC_ULS2"
+msgstr "Lambdasondendifferenzspannung 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ADC_ULS2"
+msgstr "Lambdasondendifferenzspannung 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ADD"
+msgstr "Additive adaption value"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ADD"
+msgstr "Additive adaption value"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ADD_2"
+msgstr "Additive adaption value Bank2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ADD_2"
+msgstr "Additive adaption value Bank2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_AGK"
+msgstr "$30 D9 01 Status der Stellgliedansteuerung AbGasKlappe"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_AGK"
+msgstr "$30 D9 01 Status der Stellgliedansteuerung AbGasKlappe"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_AN_LUFTTEMPERATUR"
+msgstr "air intake temperatue"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_AN_LUFTTEMPERATUR"
+msgstr "air intake temperatue"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_AN_LUFTTEMPERATUR_1"
+msgstr "air intake temperatue"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_AN_LUFTTEMPERATUR_1"
+msgstr "air intake temperatue"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_AN_LUFTTEMPERATUR_2"
+msgstr "air intake temperatue"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_AN_LUFTTEMPERATUR_2"
+msgstr "air intake temperatue"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ANALOG"
+msgstr "Analogen Messwert periodisch lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ANALOG"
+msgstr "Analogen Messwert periodisch lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ANSAUGLUFTTEMPERATUR"
+msgstr "Air intake temperature"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ANSAUGLUFTTEMPERATUR"
+msgstr "Air intake temperature"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ANWS"
+msgstr "0x30EE01 STATUS_ANWS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ANWS"
+msgstr "0x30EE01 STATUS_ANWS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_BETRIEBSSTUNDENZAEHLER"
+msgstr "Usage hours"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_BETRIEBSSTUNDENZAEHLER"
+msgstr "Usage hours"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_BLS"
+msgstr "0x300201 STATUS_BLS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_BLS"
+msgstr "0x300201 STATUS_BLS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_BLTS"
+msgstr "0x300301 STATUS_BLTS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_BLTS"
+msgstr "0x300301 STATUS_BLTS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_CO"
+msgstr "Auslesen des LL-CO-Wertes"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_CO"
+msgstr "Auslesen des LL-CO-Wertes"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_CO_ABGLEICH"
+msgstr "Auslesen des LL-CO-Wertes"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_CO_ABGLEICH"
+msgstr "Auslesen des LL-CO-Wertes"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DFMONITOR"
+msgstr "Batterieladezustand auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DFMONITOR"
+msgstr "Batterieladezustand auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DIGITAL_0"
+msgstr "0x224007 STATUS_DIGITAL_0"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DIGITAL_0"
+msgstr "0x224007 STATUS_DIGITAL_0"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DIGITAL_1"
+msgstr "0x224002 STATUS_DIGITAL_1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DIGITAL_1"
+msgstr "0x224002 STATUS_DIGITAL_1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DIGITAL_3"
+msgstr "Statusbit KOmpressorRELais"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DIGITAL_3"
+msgstr "Statusbit KOmpressorRELais"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DIGITAL_4"
+msgstr "Statusbit LeerLauf"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DIGITAL_4"
+msgstr "Statusbit LeerLauf"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DISA"
+msgstr "0x30C601 STATUS_DISA"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DISA"
+msgstr "0x30C601 STATUS_DISA"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DISA2"
+msgstr "disa2 status"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DISA2"
+msgstr "disa2 status"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DKP_WINKEL"
+msgstr "Drosselklappenwinkel auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DKP_WINKEL"
+msgstr "Drosselklappenwinkel auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DKP_VOLT"
+msgstr "Drosselklappenwinkel auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DKP_VOLT"
+msgstr "Drosselklappenwinkel auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DMTL"
+msgstr "Status Systemtest DMTL"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DMTL"
+msgstr "Status Systemtest DMTL"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DMTL_HEIZUNG"
+msgstr "DMTL-Heizung Satus auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DMTL_HEIZUNG"
+msgstr "DMTL-Heizung Satus auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DMTL_P"
+msgstr "0x30CC01 STATUS_DMTL_P"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DMTL_P"
+msgstr "0x30CC01 STATUS_DMTL_P"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DMTL_V"
+msgstr "0x30CD01 STATUS_DMTL_V"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DMTL_V"
+msgstr "0x30CD01 STATUS_DMTL_V"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_DROSSELKLAPPE"
+msgstr "Auslesen des Drosselklappen Winkels"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_DROSSELKLAPPE"
+msgstr "Auslesen des Drosselklappen Winkels"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_E_LUEFTER"
+msgstr "0x30DA01 STATUS_E_LUEFTER"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_E_LUEFTER"
+msgstr "0x30DA01 STATUS_E_LUEFTER"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EBL"
+msgstr "0x30C801 STATUS_EBL"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EBL"
+msgstr "0x30C801 STATUS_EBL"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EISYGD"
+msgstr "0x33E1 STATUS_EISYGD"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EISYGD"
+msgstr "0x33E1 STATUS_EISYGD"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EISYUGD"
+msgstr "0x33E0 STATUS_EISYUGD"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EISYUGD"
+msgstr "0x33E0 STATUS_EISYUGD"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EKP"
+msgstr "0x30D801 STATUS_EKP"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EKP"
+msgstr "0x30D801 STATUS_EKP"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EML"
+msgstr "0x30D601 STATUS_EML"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EML"
+msgstr "0x30D601 STATUS_EML"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ENWS"
+msgstr "0x30ED01 STATUS_ENWS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ENWS"
+msgstr "0x30ED01 STATUS_ENWS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EV1"
+msgstr "0x30E101 STATUS_EV1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EV1"
+msgstr "0x30E101 STATUS_EV1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EV2"
+msgstr "0x30E201 STATUS_EV2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EV2"
+msgstr "0x30E201 STATUS_EV2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EV3"
+msgstr "0x30E301 STATUS_EV3"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EV3"
+msgstr "0x30E301 STATUS_EV3"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EV4"
+msgstr "0x30E401 STATUS_EV4"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EV4"
+msgstr "0x30E401 STATUS_EV4"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EV5"
+msgstr "0x30E501 STATUS_EV5"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EV5"
+msgstr "0x30E501 STATUS_EV5"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EV6"
+msgstr "0x30E601 STATUS_EV6"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EV6"
+msgstr "0x30E601 STATUS_EV6"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EWAP"
+msgstr "0x30BF01 STATUS_EWAP"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EWAP"
+msgstr "0x30BF01 STATUS_EWAP"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_EWS_LOCK"
+msgstr "Statusbit LV_LOCK_IMOB = 1 blockt Zündung und Einspritzung"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_EWS_LOCK"
+msgstr "Statusbit LV_LOCK_IMOB = 1 blockt Zündung und Einspritzung"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FASTA_BIN"
+msgstr "Messwerteblock lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FASTA_BIN"
+msgstr "Messwerteblock lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FASTA_COMMON"
+msgstr "Messwerteblock lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FASTA_COMMON"
+msgstr "Messwerteblock lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FASTA2"
+msgstr "Auslesen FASTA-Messwertblock 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FASTA2"
+msgstr "Auslesen FASTA-Messwertblock 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FGR"
+msgstr "PWG"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FGR"
+msgstr "PWG"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FGRL"
+msgstr "$30 F2 01 Status der Stellgliedansteuerung FGR Lampe"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FGRL"
+msgstr "$30 F2 01 Status der Stellgliedansteuerung FGR Lampe"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FUNKTIONS"
+msgstr "Status Schaltzustaende"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FUNKTIONS"
+msgstr "Status Schaltzustaende"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FWV1"
+msgstr "0x301E01 STATUS_FWV1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FWV1"
+msgstr "0x301E01 STATUS_FWV1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_FWV2"
+msgstr "0x301F01 STATUS_FWV2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_FWV2"
+msgstr "0x301F01 STATUS_FWV2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_GEBERRAD_ADAPTION"
+msgstr "Geberradadaption"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_GEBERRAD_ADAPTION"
+msgstr "Geberradadaption"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_GESCHWINDIGKEIT"
+msgstr "Geschwindigkeit auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_GESCHWINDIGKEIT"
+msgstr "Geschwindigkeit auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_GLF"
+msgstr "0x30DE01 STATUS_GLF"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_GLF"
+msgstr "0x30DE01 STATUS_GLF"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_HFMS"
+msgstr "0x302E01 STATUS_HFMS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_HFMS"
+msgstr "0x302E01 STATUS_HFMS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_INT"
+msgstr "Lambdaregelfaktor auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_INT"
+msgstr "Lambdaregelfaktor auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_INT_2"
+msgstr "INT-Signal Bank 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_INT_2"
+msgstr "INT-Signal Bank 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KALT_MOTORDREHZAHL_N10"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KALT_MOTORDREHZAHL_N10"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KALT_MOTORDREHZAHL_N40"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KALT_MOTORDREHZAHL_N40"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KALT_MOTORTEMPERATUR"
+msgstr "Motortemperatur auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KALT_MOTORTEMPERATUR"
+msgstr "Motortemperatur auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KB1"
+msgstr "0x303001 STATUS_KB1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KB1"
+msgstr "0x303001 STATUS_KB1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KB2"
+msgstr "0x303101 STATUS_KB2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KB2"
+msgstr "0x303101 STATUS_KB2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KFT"
+msgstr "0x30C901 STATUS_KFT"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KFT"
+msgstr "0x30C901 STATUS_KFT"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KGEH"
+msgstr "0x30AD01 STATUS_KGEH"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KGEH"
+msgstr "0x30AD01 STATUS_KGEH"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KILOMETERSTAND"
+msgstr "Kilometer reading"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KILOMETERSTAND"
+msgstr "Kilometer reading"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KL15_SPANNUNG"
+msgstr "Lastsignal Spg auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KL15_SPANNUNG"
+msgstr "Lastsignal Spg auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KLOPFEN"
+msgstr "Auslesen des Status Klopfen erkannt 0/1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KLOPFEN"
+msgstr "Auslesen des Status Klopfen erkannt 0/1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KOREL"
+msgstr "$30 D7 01 Status der Stellgliedansteuerung KOmpressorRELais"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KOREL"
+msgstr "$30 D7 01 Status der Stellgliedansteuerung KOmpressorRELais"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KRAFTSTOFFDRUCK"
+msgstr "Kraftstoffdruck"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KRAFTSTOFFDRUCK"
+msgstr "Kraftstoffdruck"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KRANN"
+msgstr "0x33E3 STATUS_KRANN"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KRANN"
+msgstr "0x33E3 STATUS_KRANN"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KTEST_MOTORDREHZAHL"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KTEST_MOTORDREHZAHL"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KUEHLMITTELTEMPERATUR"
+msgstr "Coolant temperature"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KUEHLMITTELTEMPERATUR"
+msgstr "Coolant temperature"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KUP"
+msgstr "0x300401 STATUS_KUP     Kupplungsschalter auslesen NO_CON keine Vorraussetzungen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KUP"
+msgstr "0x300401 STATUS_KUP     Kupplungsschalter auslesen NO_CON keine Vorraussetzungen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_KVA"
+msgstr "0x21C1 STATUS_KVA"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_KVA"
+msgstr "0x21C1 STATUS_KVA"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE"
+msgstr "Lambdasondendifferenzspannung 1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE"
+msgstr "Lambdasondendifferenzspannung 1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE_2"
+msgstr "Lambdasondendifferenzspannung 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE_2"
+msgstr "Lambdasondendifferenzspannung 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE_2_H"
+msgstr "Voltage Lambdasonde vor KAT auslesen Sonde 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE_2_H"
+msgstr "Voltage Lambdasonde vor KAT auslesen Sonde 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE_H"
+msgstr "Voltage Lambdasonde nach KAT auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE_H"
+msgstr "Voltage Lambdasonde nach KAT auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE_HEIZUNG_H_1"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE_HEIZUNG_H_1"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE_HEIZUNG_H_2"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE_HEIZUNG_H_2"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE_HEIZUNG_V_1"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE_HEIZUNG_V_1"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_L_SONDE_HEIZUNG_V_2"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_L_SONDE_HEIZUNG_V_2"
+msgstr "Auslesen des Reglerzustands der Sondenheizung"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LADEDRUCK"
+msgstr "Boost pressure"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LADEDRUCK"
+msgstr "Boost pressure"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LAMBDA_INTEGRATOR_1"
+msgstr "Lambdaregelfaktor auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LAMBDA_INTEGRATOR_1"
+msgstr "Lambdaregelfaktor auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LAMBDA_INTEGRATOR_2"
+msgstr "INT-Signal Bank 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LAMBDA_INTEGRATOR_2"
+msgstr "INT-Signal Bank 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LAMBDA_MUL_1"
+msgstr "Adaption Gemisch multiplikativ auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LAMBDA_MUL_1"
+msgstr "Adaption Gemisch multiplikativ auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LAMBDA_MUL_2"
+msgstr "MUL-Signal Bank 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LAMBDA_MUL_2"
+msgstr "MUL-Signal Bank 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LEISTUNGSSTUFE"
+msgstr "Auslesen der Codierung Obere/Untere Leistungsstufe"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LEISTUNGSSTUFE"
+msgstr "Auslesen der Codierung Obere/Untere Leistungsstufe"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LL_ABGLEICH"
+msgstr "LL_Abgleich"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LL_ABGLEICH"
+msgstr "LL_Abgleich"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LMM_MASSE"
+msgstr "Luftmenge lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LMM_MASSE"
+msgstr "Luftmenge lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LRP"
+msgstr "0x225FF7     Laufruhepruefung auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LRP"
+msgstr "0x225FF7     Laufruhepruefung auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LS_NKAT_SIGNAL_2"
+msgstr "Voltage Lambdasonde vor KAT auslesen Sonde 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LS_NKAT_SIGNAL_2"
+msgstr "Voltage Lambdasonde vor KAT auslesen Sonde 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LS_VKAT_SIGNAL_1"
+msgstr "Lambdasondendifferenzspannung 1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LS_VKAT_SIGNAL_1"
+msgstr "Lambdasondendifferenzspannung 1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LS_VKAT_SIGNAL_2"
+msgstr "Voltage Lambdasonde vor KAT auslesen Sonde 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LS_VKAT_SIGNAL_2"
+msgstr "Voltage Lambdasonde vor KAT auslesen Sonde 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LSH1"
+msgstr "0x30D001 STATUS_LSH1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LSH1"
+msgstr "0x30D001 STATUS_LSH1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LSH2"
+msgstr "0x30D101 STATUS_LSH2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LSH2"
+msgstr "0x30D101 STATUS_LSH2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LSH3"
+msgstr "0x30D201 STATUS_LSH3"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LSH3"
+msgstr "0x30D201 STATUS_LSH3"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LSH4"
+msgstr "0x30D301 STATUS_LSH4"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LSH4"
+msgstr "0x30D301 STATUS_LSH4"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_LUFTMASSE"
+msgstr "Luftmasse"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_LUFTMASSE"
+msgstr "Luftmasse"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MESSWERTBLOCK_ADC"
+msgstr "0x2CF0 STATUS_MESSWERTBLOCK_ADC"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MESSWERTBLOCK_ADC"
+msgstr "0x2CF0 STATUS_MESSWERTBLOCK_ADC"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MESSWERTBLOCK_LESEN"
+msgstr "Lesen eines Messwertblockes"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MESSWERTBLOCK_LESEN"
+msgstr "Lesen eines Messwertblockes"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MESSWERTE_KD"
+msgstr "$2C F0 02 DDLI Messwerte nach Wunsch VS-22"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MESSWERTE_KD"
+msgstr "$2C F0 02 DDLI Messwerte nach Wunsch VS-22"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MESSWERTE_LRP"
+msgstr "Messwerte Laufruhepruefung auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MESSWERTE_LRP"
+msgstr "Messwerte Laufruhepruefung auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MESSWERTE_NL"
+msgstr "$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MESSWERTE_NL"
+msgstr "$2C F0 02 DDLI Messwerte Klopfen nach Wunsch VS-22"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MESSWERTE_VANOS"
+msgstr "0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MESSWERTE_VANOS"
+msgstr "0x2CF0 0x4508,0x450B,0x4509,0x450A STATUS_MESSWERTE_VANOS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MIL"
+msgstr "0x30D401 STATUS_MIL"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MIL"
+msgstr "0x30D401 STATUS_MIL"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MOTORDREHZAHL"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MOTORDREHZAHL"
+msgstr "Engine RPM auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MOTORLAUFUNRUHE"
+msgstr "0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUS_MOTORLAUFUNRUHE"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MOTORLAUFUNRUHE"
+msgstr "0x2CF0 5A30, 5A31, 5A32, 5A33, 5A99, 5845 STATUS_MOTORLAUFUNRUHE"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MOTORTEMPERATUR"
+msgstr "Motortemperatur auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MOTORTEMPERATUR"
+msgstr "Motortemperatur auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MUL"
+msgstr "Adaption Gemisch multiplikativ auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MUL"
+msgstr "Adaption Gemisch multiplikativ auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_MUL_2"
+msgstr "MUL-Signal Bank 2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_MUL_2"
+msgstr "MUL-Signal Bank 2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_NOCKENWELLE_ADAPTION"
+msgstr "0x224006 STATUS_NOCKENWELLE_ADAPTION"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_NOCKENWELLE_ADAPTION"
+msgstr "0x224006 STATUS_NOCKENWELLE_ADAPTION"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_OBD"
+msgstr "$21 05 Monitoring Funktionen und Status Bits"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_OBD"
+msgstr "$21 05 Monitoring Funktionen und Status Bits"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ODS"
+msgstr "0x300501 STATUS_ODS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ODS"
+msgstr "0x300501 STATUS_ODS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_OEL"
+msgstr "0x300E01 STATUS_OEL"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_OEL"
+msgstr "0x300E01 STATUS_OEL"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_OELTEMPERATUR"
+msgstr "LADELUFTtemperatur"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_OELTEMPERATUR"
+msgstr "LADELUFTtemperatur"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_PWG"
+msgstr "PWG"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_PWG"
+msgstr "PWG"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_PWG_POTI_SPANNUNG"
+msgstr "Pedal sensor voltage"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_PWG_POTI_SPANNUNG"
+msgstr "Pedal sensor voltage"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_PWG2"
+msgstr "0x302901 STATUS_PWG2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_PWG2"
+msgstr "0x302901 STATUS_PWG2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_RBMMODE9"
+msgstr "0x224026 STATUS_RBMMODE9"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_RBMMODE9"
+msgstr "0x224026 STATUS_RBMMODE9"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_RBMMS1"
+msgstr "0x224029 STATUS_RBMMS1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_RBMMS1"
+msgstr "0x224029 STATUS_RBMMS1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_RBMMS2"
+msgstr "0x22402A STATUS_RBMMS2"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_RBMMS2"
+msgstr "0x22402A STATUS_RBMMS2"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_READINESS"
+msgstr "Auslesen Readiness Systemchecks"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_READINESS"
+msgstr "Auslesen Readiness Systemchecks"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SDF1"
+msgstr "0x301801 STATUS_SDF1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SDF1"
+msgstr "0x301801 STATUS_SDF1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SLP"
+msgstr "0x30CB01 STATUS_SLP"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SLP"
+msgstr "0x30CB01 STATUS_SLP"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SLS"
+msgstr "Status Systemdiagnose SLS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SLS"
+msgstr "Status Systemdiagnose SLS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SLV"
+msgstr "0x30CA01 STATUS_SLV"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SLV"
+msgstr "0x30CA01 STATUS_SLV"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SOK"
+msgstr "0x30C201 STATUS_SOK"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SOK"
+msgstr "0x30C201 STATUS_SOK"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SPT"
+msgstr "0x300601 STATUS_SPT"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SPT"
+msgstr "0x300601 STATUS_SPT"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SR"
+msgstr "0x30C401 STATUS_SR"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SR"
+msgstr "0x30C401 STATUS_SR"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_DMTL"
+msgstr "Status Systemtest DMTL"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_DMTL"
+msgstr "Status Systemtest DMTL"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_DMTL_WERT"
+msgstr "Status und Messströme"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_DMTL_WERT"
+msgstr "Status und Messströme"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_EVAUSBL"
+msgstr "0x3325 STATUS_SYSTEMCHECK_EVAUSBL"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_EVAUSBL"
+msgstr "0x3325 STATUS_SYSTEMCHECK_EVAUSBL"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_L_SONDE"
+msgstr "0x33DF STATUS_SYSTEMCHECK_L_SONDE"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_L_SONDE"
+msgstr "0x33DF STATUS_SYSTEMCHECK_L_SONDE"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_L_SONDE_WERTE"
+msgstr "Status und Messwerte"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_L_SONDE_WERTE"
+msgstr "Status und Messwerte"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_LLERH_WERT"
+msgstr "aktuelle Drehzahl N"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_LLERH_WERT"
+msgstr "aktuelle Drehzahl N"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_PM_INFO_1"
+msgstr "$22 40 22 Bytefeld 1 Batterie Powermanagement lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_PM_INFO_1"
+msgstr "$22 40 22 Bytefeld 1 Batterie Powermanagement lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_PM_INFO_2"
+msgstr "$22 40 23 Bytefeld 2 Batterie Powermanagement lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_PM_INFO_2"
+msgstr "$22 40 23 Bytefeld 2 Batterie Powermanagement lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_SEK_LAMBDA_WERT"
+msgstr "Status und Luftmassen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_SEK_LAMBDA_WERT"
+msgstr "Status und Luftmassen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_SEK_LUFT"
+msgstr "Status Systemdiagnose SLS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_SEK_LUFT"
+msgstr "Status Systemdiagnose SLS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_SEK_LUFT_WERT"
+msgstr "Status und Luftmassen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_SEK_LUFT_WERT"
+msgstr "Status und Luftmassen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_TEV"
+msgstr "0x3322 STATUS_SYSTEMCHECK_TEV"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_TEV"
+msgstr "0x3322 STATUS_SYSTEMCHECK_TEV"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_TEV_FUNC"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_TEV_FUNC"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_TEV_WERT"
+msgstr "Status und Messströme"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_TEV_WERT"
+msgstr "Status und Messströme"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_SYSTEMCHECK_VVT_ANSCHLAG"
+msgstr "Diagnosestatus 'VVT-Anschläge lernen'"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_SYSTEMCHECK_VVT_ANSCHLAG"
+msgstr "Diagnosestatus 'VVT-Anschläge lernen'"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_TEV"
+msgstr "MUL-Signal TEV-Bank1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_TEV"
+msgstr "MUL-Signal TEV-Bank1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_TEVSYS"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_TEVSYS"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_TKA"
+msgstr "0x300D01 STATUS_TKA"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_TKA"
+msgstr "0x300D01 STATUS_TKA"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_TTEMP"
+msgstr "0x302F01 STATUS_TTEMP"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_TTEMP"
+msgstr "0x302F01 STATUS_TTEMP"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UBAT"
+msgstr "0x302701 STATUS_UBAT"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UBAT"
+msgstr "0x302701 STATUS_UBAT"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UBATT"
+msgstr "Battery voltage"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UBATT"
+msgstr "Battery voltage"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UDF"
+msgstr "0x301701 STATUS_UDF"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UDF"
+msgstr "0x301701 STATUS_UDF"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UGEN"
+msgstr "0x303201 STATUS_UGEN"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UGEN"
+msgstr "0x303201 STATUS_UGEN"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UKL15"
+msgstr "0x301B01 STATUS_UKL15"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UKL15"
+msgstr "0x301B01 STATUS_UKL15"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UMGEBUNGSDRUCK"
+msgstr "UWTEXT"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UMGEBUNGSDRUCK"
+msgstr "UWTEXT"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UMGEBUNGSTEMPERATUR"
+msgstr "Messwert selectiv lesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UMGEBUNGSTEMPERATUR"
+msgstr "Messwert selectiv lesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_UVLSS"
+msgstr "0x302001 STATUS_UVLSS"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_UVLSS"
+msgstr "0x302001 STATUS_UVLSS"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_VVT"
+msgstr "Auslesen VVT-Messwerte"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_VVT"
+msgstr "Auslesen VVT-Messwerte"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_VVTR"
+msgstr "0x30DC01 STATUS_VVTR"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_VVTR"
+msgstr "0x30DC01 STATUS_VVTR"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ZEIT_EINSPRITZ"
+msgstr "Auslesen der Injection time Cyl. 1"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ZEIT_EINSPRITZ"
+msgstr "Auslesen der Injection time Cyl. 1"
+
+# 
+msgctxt "JOB_L|"
+msgid "STATUS_ZUENDWINKEL"
+msgstr "Ignition angle auslesen"
+
+# 
+msgctxt "JOB_S|"
+msgid "STATUS_ZUENDWINKEL"
+msgstr "Ignition angle auslesen"
+
+# 
+msgctxt "JOB_L|"
+msgid "STOP_SYSTEMCHECK_TEV_FUNC"
+msgstr "Systemcheck TEV Functionalcheck starten"
+
+# 
+msgctxt "JOB_S|"
+msgid "STOP_SYSTEMCHECK_TEV_FUNC"
+msgstr "Systemcheck TEV Functionalcheck starten"
+
+# 
+msgctxt "JOB_L|"
+msgid "STOP_SYSTEMCHECK_VVT_SOLLWERT"
+msgstr "$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben"
+
+# 
+msgctxt "JOB_S|"
+msgid "STOP_SYSTEMCHECK_VVT_SOLLWERT"
+msgstr "$31 FE Systemdiagnose VVT Steuerung ueber CAN freigeben"
+
+# 
+msgctxt "JOB_L|"
+msgid "TEST_SYSTEMCHECK_DMTL"
+msgstr "Systemcheck Tankentlueftungssystem Leckdiagnose starten"
+
+# 
+msgctxt "JOB_S|"
+msgid "TEST_SYSTEMCHECK_DMTL"
+msgstr "Systemcheck Tankentlueftungssystem Leckdiagnose starten"
+
+# 
+msgctxt "JOB_L|"
+msgid "TEV_SYSTEM"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_S|"
+msgid "TEV_SYSTEM"
+msgstr "Status Systemtest TEV"
+
+# 
+msgctxt "JOB_L|"
+msgid "ZIF_BACKUP_LESEN"
+msgstr "Auslesen des Backups des Zulieferinfofeldes"
+
+# 
+msgctxt "JOB_S|"
+msgid "ZIF_BACKUP_LESEN"
+msgstr "Auslesen des Backups des Zulieferinfofeldes"
+
+# 
+msgctxt "JOB_L|"
+msgid "ZIF_LESEN"
+msgstr "Auslesen des Zulieferinfofeldes"
+
+# 
+msgctxt "JOB_S|"
+msgid "ZIF_LESEN"
+msgstr "Auslesen des Zulieferinfofeldes"
+
