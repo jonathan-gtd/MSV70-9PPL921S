@@ -69,31 +69,6 @@
    {
     "ecu" : "MSV70",
     "job" : "E85",
-    "result" : "STAT_EINSPRITZZEIT_ZYL2_WERT"
-   },
-   {
-    "ecu" : "MSV70",
-    "job" : "E85",
-    "result" : "STAT_EINSPRITZZEIT_ZYL3_WERT"
-   },
-   {
-    "ecu" : "MSV70",
-    "job" : "E85",
-    "result" : "STAT_EINSPRITZZEIT_ZYL4_WERT"
-   },
-   {
-    "ecu" : "MSV70",
-    "job" : "E85",
-    "result" : "STAT_EINSPRITZZEIT_ZYL5_WERT"
-   },
-   {
-    "ecu" : "MSV70",
-    "job" : "E85",
-    "result" : "STAT_EINSPRITZZEIT_ZYL6_WERT"
-   },
-   {
-    "ecu" : "MSV70",
-    "job" : "E85",
     "result" : "STAT_KRAFTSTOFFDRUCK_WERT"
    }
   ]

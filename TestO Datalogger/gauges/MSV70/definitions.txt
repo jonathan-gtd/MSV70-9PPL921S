@@ -249,12 +249,12 @@ decimals=2
 
 [FUEL_P]
 Min=0
-Max=10
+Max=700
 Title=Fuel pressure
-Unit=bar
+Unit=kPa
 Jobname=STATUS_MESSWERTBLOCK_LESEN
 Resultname=STAT_KRAFTSTOFFDRUCK_WERT
-decimals=2
+decimals=0
 
 [INJ1]
 Min=0
