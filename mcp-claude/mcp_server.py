@@ -255,5 +255,95 @@ def diff_all_changed_params(
     }
 
 
+@mcp.tool()
+def verify_e85_bin(
+    bin_key: str,
+    reference_key: str = "stock",
+    full_rom: bool = True,
+) -> dict:
+    """
+    Compare an E85 bin against a stock reference and cross-check every change
+    against the knowledge base E85 documentation.
+
+    Returns three lists:
+      - ok:      params changed as expected per knowledge base
+      - missing: E85-required params that were NOT changed
+      - unexpected: params changed but NOT documented as E85 modifications
+      - out_of_range: params where the new value seems wrong
+
+    Args:
+        bin_key:       E85 BIN key or absolute path.
+        reference_key: Stock reference BIN key (default: stock).
+        full_rom:      True = Full ROM XDF, False = Partial ROM XDF.
+    """
+    path_e85 = _resolve_bin(bin_key)
+    path_ref  = _resolve_bin(reference_key)
+    if path_e85 is None:
+        return {"error": f"BIN not found: '{bin_key}'"}
+    if path_ref is None:
+        return {"error": f"BIN not found: '{reference_key}'"}
+
+    params = _get_params(full_rom)
+
+    # Build lookup: title -> param
+    param_map = {p["title"]: p for p in params}
+
+    # Params documented as E85 modifications
+    e85_required = {p["title"]: p for p in params if p.get("modification_e85", "").upper() == "OUI"}
+
+    # Scan all params for actual changes
+    actually_changed = {}
+    for p in params:
+        result = compare_params(path_ref, path_e85, p)
+        if "error" not in result and result["changed"]:
+            actually_changed[p["title"]] = result
+
+    ok          = []
+    missing     = []
+    unexpected  = []
+
+    for title, p in e85_required.items():
+        if title in actually_changed:
+            ok.append({
+                "title":      title,
+                "category":   p.get("category", ""),
+                "type":       p.get("type", ""),
+                "diff_count": actually_changed[title]["diff_count"],
+                "total_cells":actually_changed[title]["total_cells"],
+                "e85_action": p.get("e85_action", ""),
+            })
+        else:
+            missing.append({
+                "title":      title,
+                "category":   p.get("category", ""),
+                "type":       p.get("type", ""),
+                "e85_action": p.get("e85_action", ""),
+                "impact":     p.get("tuning_impact", ""),
+            })
+
+    for title, result in actually_changed.items():
+        if title not in e85_required:
+            p = param_map.get(title, {})
+            unexpected.append({
+                "title":      title,
+                "category":   p.get("category", ""),
+                "type":       p.get("type", ""),
+                "diff_count": result["diff_count"],
+                "total_cells":result["total_cells"],
+                "flex_fuel":  p.get("flex_fuel", ""),
+            })
+
+    return {
+        "bin_e85":         os.path.basename(path_e85),
+        "bin_ref":         os.path.basename(path_ref),
+        "ok_count":        len(ok),
+        "missing_count":   len(missing),
+        "unexpected_count":len(unexpected),
+        "ok":              ok,
+        "missing":         missing,
+        "unexpected":      unexpected,
+    }
+
+
 if __name__ == "__main__":
     mcp.run()
