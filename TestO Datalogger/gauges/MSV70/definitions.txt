@@ -230,19 +230,19 @@ Resultname=STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT
 decimals=3
 
 [LTFT_ADD1]
-Min=-10
-Max=10
+Min=-3
+Max=3
 Title=LTFT add. B1
-Unit=%
+Unit=mg/Hub
 Jobname=STATUS_MESSWERTBLOCK_LESEN
 Resultname=STAT_ADAPTION_ADDITIV_BANK1_WERT
 decimals=2
 
 [LTFT_ADD2]
-Min=-10
-Max=10
+Min=-3
+Max=3
 Title=LTFT add. B2
-Unit=%
+Unit=mg/Hub
 Jobname=STATUS_MESSWERTBLOCK_LESEN
 Resultname=STAT_ADAPTION_ADDITIV_BANK2_WERT
 decimals=2
