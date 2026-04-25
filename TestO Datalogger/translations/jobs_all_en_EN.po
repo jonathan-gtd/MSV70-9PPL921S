@@ -636,7 +636,7 @@ msgstr "Condition: Exhaust flap with resonator"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ABGASKLAPPE_ANSTEUERUNG_WERT"
-msgstr ""
+msgstr "ExhFlap ctrl"
 
 # 
 msgctxt "RES_L|"
@@ -646,7 +646,7 @@ msgstr "Condition: Exhaust flap with resonator"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ABGASKLAPPE_EIN_WERT"
-msgstr ""
+msgstr "ExhFlap on"
 
 # 
 msgctxt "RES_L|"
@@ -656,7 +656,7 @@ msgstr "Deviation of DK potentiometer 1 and model value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ABWEICHUNG_DK_POTI1_WERT"
-msgstr ""
+msgstr "TPS Pot1 dev"
 
 # 
 msgctxt "RES_L|"
@@ -666,7 +666,7 @@ msgstr "Deviation of DK potentiometer 2 and model value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ABWEICHUNG_DK_POTI2_WERT"
-msgstr ""
+msgstr "TPS Pot2 dev"
 
 # 
 msgctxt "RES_L|"
@@ -716,7 +716,7 @@ msgstr "Intake air temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ANSAUGLUFTTEMPERATUR_LAW_WERT"
-msgstr ""
+msgstr "IAT (LAW)"
 
 # 
 msgctxt "RES_L|"
@@ -726,7 +726,7 @@ msgstr "Voltage Intake air temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ANSAUGLUFTTEMPERATUR_SPANNUNG_WERT"
-msgstr ""
+msgstr "IAT volt"
 
 # 
 msgctxt "RES_L|"
@@ -736,7 +736,7 @@ msgstr "Air intake temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ANSAUGLUFTTEMPERATUR_WERT"
-msgstr ""
+msgstr "IAT"
 
 # 
 msgctxt "RES_L|"
@@ -746,7 +746,7 @@ msgstr "Air intake temperature raw value 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ANSAUGLUFTTEMPERATUR1_ROH_WERT"
-msgstr ""
+msgstr "IAT raw"
 
 # 
 msgctxt "RES_L|"
@@ -756,7 +756,7 @@ msgstr "Battery load"
 # 
 msgctxt "RES_S|"
 msgid "STAT_BATTERIELAST_WERT"
-msgstr ""
+msgstr "Batt load"
 
 # 
 msgctxt "RES_L|"
@@ -766,7 +766,7 @@ msgstr "Heated thermostat PWM"
 # 
 msgctxt "RES_S|"
 msgid "STAT_BEHEIZTER_THERMOSTAT_PWM_WERT"
-msgstr ""
+msgstr "HTherm PWM"
 
 # 
 msgctxt "RES_L|"
@@ -776,7 +776,7 @@ msgstr "Calculated load value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_BERECHNETE_LAST_WERT"
-msgstr ""
+msgstr "Load calc."
 
 # 
 msgctxt "RES_L|"
@@ -786,7 +786,7 @@ msgstr "Gear information"
 # 
 msgctxt "RES_S|"
 msgid "STAT_BERECHNETER_GANG_WERT"
-msgstr ""
+msgstr "Gear"
 
 # 
 msgctxt "RES_L|"
@@ -796,7 +796,7 @@ msgstr "Operating hours counter"
 # 
 msgctxt "RES_S|"
 msgid "STAT_BETRIEBSSTUNDENZAEHLER_WERT"
-msgstr ""
+msgstr "Op.hours"
 
 # 
 msgctxt "RES_L|"
@@ -816,7 +816,7 @@ msgstr "Raw value brake contact not debounced"
 # 
 msgctxt "RES_S|"
 msgid "STAT_BREMSLICHTSCHALTER_EIN_WERT"
-msgstr ""
+msgstr "Brake sw."
 
 # 
 msgctxt "RES_L|"
@@ -826,7 +826,7 @@ msgstr "Raw value of redundant brake contact not debounced"
 # 
 msgctxt "RES_S|"
 msgid "STAT_BREMSLICHTTESTSCHALTER_EIN_WERT"
-msgstr ""
+msgstr "Brake tst sw"
 
 # 
 msgctxt "RES_L|"
@@ -836,7 +836,7 @@ msgstr "Check Engine Light On"
 # 
 msgctxt "RES_S|"
 msgid "STAT_CHECK_ENGINE_LAMPE_EIN_WERT"
-msgstr ""
+msgstr "CEL on"
 
 # 
 msgctxt "RES_L|"
@@ -846,7 +846,7 @@ msgstr "Difference between maximum and minimum SAF"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DIFFERENZ_MAX_MIN_SAF_WERT"
-msgstr ""
+msgstr "SAF max-min"
 
 # 
 msgctxt "RES_L|"
@@ -856,7 +856,7 @@ msgstr "DISA1 PWM (large/top flap)"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DISA1_PWM_WERT"
-msgstr ""
+msgstr "DISA1 PWM"
 
 # 
 msgctxt "RES_L|"
@@ -866,7 +866,7 @@ msgstr "DISA2 PWM (small/bottom flap)"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DISA2_PWM_WERT"
-msgstr ""
+msgstr "DISA2 PWM"
 
 # 
 msgctxt "RES_L|"
@@ -876,7 +876,7 @@ msgstr "Current position of the DISA flaps"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DISAKLAPPEN_POSITION_WERT"
-msgstr ""
+msgstr "DISA pos."
 
 # 
 msgctxt "RES_L|"
@@ -886,7 +886,7 @@ msgstr "DK adaptation step"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DK_ADAPTIONSSCHRITT_WERT"
-msgstr ""
+msgstr "TPS adapt."
 
 # 
 msgctxt "RES_L|"
@@ -896,7 +896,7 @@ msgstr "Throttle valve setpoint"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DK_WINKEL_SOLL_WERT"
-msgstr ""
+msgstr "TPS SP"
 
 # 
 msgctxt "RES_L|"
@@ -926,7 +926,7 @@ msgstr "DME - Lot number"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DME_LOSNUMMER_WERT"
-msgstr ""
+msgstr "DME lot nr"
 
 # 
 msgctxt "RES_L|"
@@ -936,7 +936,7 @@ msgstr "Status Diagnosis Lambda Sensors"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DMTL_DIAGNOSE_WERT"
-msgstr ""
+msgstr "DMTL diag."
 
 # 
 msgctxt "RES_L|"
@@ -946,7 +946,7 @@ msgstr "Condition: Heating DM-TL port control"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DMTL_HEIZUNG_EIN_WERT"
-msgstr ""
+msgstr "DMTL heat"
 
 # 
 msgctxt "RES_L|"
@@ -956,7 +956,7 @@ msgstr "Condition: DMTL pump motor on"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DMTL_PUMPE_EIN_WERT"
-msgstr ""
+msgstr "DMTL pump"
 
 # 
 msgctxt "RES_L|"
@@ -966,7 +966,7 @@ msgstr "Voltage pump current tank diagnostics"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DMTL_SPANNUNG_WERT"
-msgstr ""
+msgstr "DMTL volt"
 
 # 
 msgctxt "RES_L|"
@@ -976,7 +976,7 @@ msgstr "Condition: DMTL solenoid valve on"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DMTL_VENTIL_EIN_WERT"
-msgstr ""
+msgstr "DMTL valve"
 
 # 
 msgctxt "RES_L|"
@@ -986,7 +986,7 @@ msgstr "Rapid torque drop during gear changes"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DREHMOMENTABFALL_BEIM_GANGWECHSEL_WERT"
-msgstr ""
+msgstr "Tq drop gear"
 
 # 
 msgctxt "RES_L|"
@@ -996,7 +996,7 @@ msgstr "Torque intervention via CAN"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DREHMOMENTEINGRIFF_CAN_WERT"
-msgstr ""
+msgstr "Tq intv CAN"
 
 # 
 msgctxt "RES_L|"
@@ -1006,7 +1006,7 @@ msgstr "Maximum engine speed during misfires"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DREHZAHL_MAXIMAL_BEI_ZUENDAUSSETZER_WERT"
-msgstr ""
+msgstr "RPM max mis."
 
 # 
 msgctxt "RES_L|"
@@ -1016,7 +1016,7 @@ msgstr "Minimum engine speed during misfires"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DREHZAHL_MINIMAL_BEI_ZUENDAUSSETZER_WERT"
-msgstr ""
+msgstr "RPM min mis."
 
 # 
 msgctxt "RES_L|"
@@ -1026,7 +1026,7 @@ msgstr "Speed gradient"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DREHZAHLGRADIENT_WERT"
-msgstr ""
+msgstr "RPM grad."
 
 # 
 msgctxt "RES_L|"
@@ -1036,7 +1036,7 @@ msgstr "Throttle valve status: Emergency mode"
 # 
 msgctxt "RES_S|"
 msgid "STAT_DROSSELKLAPPE_NOTLAUF_WERT"
-msgstr ""
+msgstr "TPS emrg."
 
 # 
 msgctxt "RES_L|"
@@ -1076,7 +1076,7 @@ msgstr "E-Box fan ON"
 # 
 msgctxt "RES_S|"
 msgid "STAT_E_BOXLUEFTER_EIN_WERT"
-msgstr ""
+msgstr "EBox fan"
 
 # 
 msgctxt "RES_L|"
@@ -1086,7 +1086,7 @@ msgstr "Target value of electric fan as PWM value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_E_LUEFTER_PWM_SOLL_WERT"
-msgstr ""
+msgstr "Fan PWM SP"
 
 # 
 msgctxt "RES_L|"
@@ -1096,7 +1096,7 @@ msgstr "Electric fan PWM"
 # 
 msgctxt "RES_S|"
 msgid "STAT_E_LUEFTER_PWM_WERT"
-msgstr ""
+msgstr "Fan PWM"
 
 # 
 msgctxt "RES_L|"
@@ -1106,7 +1106,7 @@ msgstr "Electric fan duty cycle"
 # 
 msgctxt "RES_S|"
 msgid "STAT_E_LUEFTER_TASTVERHAELTNIS_WERT"
-msgstr ""
+msgstr "Fan duty%"
 
 # 
 msgctxt "RES_L|"
@@ -1116,7 +1116,7 @@ msgstr "Injection time Cylinder 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_EINSPRITZZEIT_ZYL1_WERT"
-msgstr ""
+msgstr "Inj.t. cyl.1"
 
 # 
 msgctxt "RES_L|"
@@ -1126,7 +1126,7 @@ msgstr "Injection time Cylinder 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_EINSPRITZZEIT_ZYL2_WERT"
-msgstr ""
+msgstr "Inj.t. cyl.2"
 
 # 
 msgctxt "RES_L|"
@@ -1136,7 +1136,7 @@ msgstr "Injection time Cylinder 3"
 # 
 msgctxt "RES_S|"
 msgid "STAT_EINSPRITZZEIT_ZYL3_WERT"
-msgstr ""
+msgstr "Inj.t. cyl.3"
 
 # 
 msgctxt "RES_L|"
@@ -1146,7 +1146,7 @@ msgstr "Injection time Cylinder 4"
 # 
 msgctxt "RES_S|"
 msgid "STAT_EINSPRITZZEIT_ZYL4_WERT"
-msgstr ""
+msgstr "Inj.t. cyl.4"
 
 # 
 msgctxt "RES_L|"
@@ -1156,7 +1156,7 @@ msgstr "Injection time Cylinder 5"
 # 
 msgctxt "RES_S|"
 msgid "STAT_EINSPRITZZEIT_ZYL5_WERT"
-msgstr ""
+msgstr "Inj.t. cyl.5"
 
 # 
 msgctxt "RES_L|"
@@ -1166,27 +1166,27 @@ msgstr "Injection time Cylinder 6"
 # 
 msgctxt "RES_S|"
 msgid "STAT_EINSPRITZZEIT_ZYL6_WERT"
-msgstr ""
+msgstr "Inj.t. cyl.6"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_FAHRERWUNSCH_PEDAL_ROH_WERT"
-msgstr "Accelerator pedal value"
+msgstr "Accelerator pedal value (raw)"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_FAHRERWUNSCH_PEDAL_ROH_WERT"
-msgstr ""
+msgstr "Pedal raw"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_FAHRERWUNSCH_PEDAL_WERT"
-msgstr "Pedal value"
+msgstr "Accelerator pedal (WOT=100%)"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_FAHRERWUNSCH_PEDAL_WERT"
-msgstr ""
+msgstr "Pedal %"
 
 # 
 msgctxt "RES_L|"
@@ -1196,7 +1196,7 @@ msgstr "Odometer for kilometers driven with MIL ON"
 # 
 msgctxt "RES_S|"
 msgid "STAT_FAHRSTRECKE_MIL_AN_WERT"
-msgstr ""
+msgstr "Dist MIL on"
 
 # 
 msgctxt "RES_L|"
@@ -1206,7 +1206,7 @@ msgstr "Vehicle speed controller (VSC) status raw value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_FGR_WERT"
-msgstr ""
+msgstr "Cruise ctrl"
 
 # 
 msgctxt "RES_L|"
@@ -1216,7 +1216,7 @@ msgstr "Oil level - brief"
 # 
 msgctxt "RES_S|"
 msgid "STAT_FUELLSTAND_MOTOROEL_KURZZEIT_WERT"
-msgstr ""
+msgstr "Oil level"
 
 # 
 msgctxt "RES_L|"
@@ -1286,7 +1286,7 @@ msgstr "Encoder wheel adaptation VSA"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GEBERRAD_ADAPTION_VSA_WERT"
-msgstr ""
+msgstr "CrkAdp VSA"
 
 # 
 msgctxt "RES_L|"
@@ -1296,7 +1296,7 @@ msgstr "Encoder wheel adaptation VSE"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GEBERRAD_ADAPTION_VSE_WERT"
-msgstr ""
+msgstr "CrkAdp VSE"
 
 # 
 msgctxt "RES_L|"
@@ -1306,7 +1306,7 @@ msgstr "Chip version Generator 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_CHIPVERSION_WERT"
-msgstr ""
+msgstr "Alt chip v."
 
 # 
 msgctxt "RES_L|"
@@ -1316,7 +1316,7 @@ msgstr "Chip temperature of the controller (BSD, LIN, SGR - resolution 1 °C)"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_ELEKTRONIKTEMPERATUR_WERT"
-msgstr ""
+msgstr "Alt chip T"
 
 # 
 msgctxt "RES_L|"
@@ -1326,7 +1326,7 @@ msgstr "Manufacturer Code Generator 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_HERSTELLERCODE_WERT"
-msgstr ""
+msgstr "Alt mfr code"
 
 # 
 msgctxt "RES_L|"
@@ -1336,7 +1336,7 @@ msgstr "Regulator version Generator 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_REGLERVERSION_WERT"
-msgstr ""
+msgstr "Alt reg. v."
 
 # 
 msgctxt "RES_L|"
@@ -1346,7 +1346,7 @@ msgstr "Generator target voltage via BSD"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_SPANNUNG_BSD_SOLL_WERT"
-msgstr ""
+msgstr "Alt V BSD SP"
 
 # 
 msgctxt "RES_L|"
@@ -1356,7 +1356,7 @@ msgstr "Generator target voltage"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_SPANNUNG_SOLL_WERT"
-msgstr ""
+msgstr "Alt V SP"
 
 # 
 msgctxt "RES_L|"
@@ -1366,7 +1366,7 @@ msgstr "Generator current"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_STROM_WERT"
-msgstr ""
+msgstr "Alt current"
 
 # 
 msgctxt "RES_L|"
@@ -1376,7 +1376,7 @@ msgstr "Identifier Generator type Generator 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_GENERATOR_TYP_WERT"
-msgstr ""
+msgstr "Alt type"
 
 # 
 msgctxt "RES_L|"
@@ -1401,22 +1401,22 @@ msgstr "speed"
 # 
 msgctxt "RES_L|"
 msgid "STAT_INTEGRATOR_BANK1_WERT"
-msgstr "Lambda integrator bank 1"
+msgstr "Short-term fuel trim Bank 1"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_INTEGRATOR_BANK1_WERT"
-msgstr "LambdInt1"
+msgstr "STFT B1"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_INTEGRATOR_BANK2_WERT"
-msgstr "Lambda integrator bank 2"
+msgstr "Short-term fuel trim Bank 2"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_INTEGRATOR_BANK2_WERT"
-msgstr "LambdaInt2"
+msgstr "STFT B2"
 
 # 
 msgctxt "RES_L|"
@@ -1436,7 +1436,7 @@ msgstr "Voltage Class 15 Raw Value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KL15_SPANNUNG_ROH_WERT"
-msgstr ""
+msgstr "KL15 V raw"
 
 # 
 msgctxt "RES_L|"
@@ -1446,7 +1446,7 @@ msgstr "Load signal SPG"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KL15_SPANNUNG_WERT"
-msgstr ""
+msgstr "KL15 V"
 
 # 
 msgctxt "RES_L|"
@@ -1456,7 +1456,7 @@ msgstr "Terminal 87 Voltage / Supply DME"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KL87_SPANNUNG_WERT"
-msgstr ""
+msgstr "KL87 V"
 
 # 
 msgctxt "RES_L|"
@@ -1466,7 +1466,7 @@ msgstr "Condition for switching on the compressor"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KLIMA_EIN"
-msgstr ""
+msgstr "A/C on"
 
 # 
 msgctxt "RES_L|"
@@ -1476,7 +1476,7 @@ msgstr "Air conditioning compressor relay ON"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KLIMAKOMPRESSORRELAIS_EIN"
-msgstr ""
+msgstr "A/C relay"
 
 # 
 msgctxt "RES_L|"
@@ -1486,7 +1486,7 @@ msgstr "Knock sensor signal Cylinder 1 relative"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KLOPFSIGNAL_ZYL1_RELATIV_WERT"
-msgstr ""
+msgstr "Knock1 rel."
 
 # 
 msgctxt "RES_L|"
@@ -1496,7 +1496,7 @@ msgstr "Knock sensor signal cylinder 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KLOPFSIGNAL_ZYL1_WERT"
-msgstr ""
+msgstr "Knock cyl.1"
 
 # 
 msgctxt "RES_L|"
@@ -1506,7 +1506,7 @@ msgstr "Knock sensor signal Cylinder 6 relative"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KLOPFSIGNAL_ZYL6_RELATIV_WERT"
-msgstr ""
+msgstr "Knock6 rel."
 
 # 
 msgctxt "RES_L|"
@@ -1516,7 +1516,7 @@ msgstr "Knock sensor signal cylinder 6"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KLOPFSIGNAL_ZYL6_WERT"
-msgstr ""
+msgstr "Knock cyl.6"
 
 # 
 msgctxt "RES_L|"
@@ -1586,17 +1586,17 @@ msgstr "EKP target volume flow"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KRAFTSTOFF_ANFORDERUNG_AN_PUMPE_WERT"
-msgstr ""
+msgstr "EKP flow SP"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_KRAFTSTOFFDRUCK_WERT"
-msgstr "Range from 0 [bar] to 10 [bar]"
+msgstr "Fuel pressure"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_KRAFTSTOFFDRUCK_WERT"
-msgstr ""
+msgstr "Fuel pres."
 
 # 
 msgctxt "RES_L|"
@@ -1606,7 +1606,7 @@ msgstr "Fuel pump PWM"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KRAFTSTOFFPUMPE_PWM_WERT"
-msgstr ""
+msgstr "FuelPmp PWM"
 
 # 
 msgctxt "RES_L|"
@@ -1626,7 +1626,7 @@ msgstr "Fuel consumption since last service"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KRAFTSTOFFVERBRAUCH_SEIT_SERVICE_WERT"
-msgstr ""
+msgstr "Fuel cons srv"
 
 # 
 msgctxt "RES_L|"
@@ -1636,7 +1636,7 @@ msgstr "Voltage, coolant temperature, radiator outlet"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KUEHLERAUSLASSTEMPERATUR_SPANNUNG_WERT"
-msgstr ""
+msgstr "TCO2 volt"
 
 # 
 msgctxt "RES_L|"
@@ -1646,7 +1646,7 @@ msgstr "Coolant temperature (sensor value) after low-pass filtering"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KUEHLERAUSLASSTEMPERATUR_WERT"
-msgstr ""
+msgstr "TCO2"
 
 # 
 msgctxt "RES_L|"
@@ -1656,17 +1656,17 @@ msgstr "Voltage Motor temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KUEHLMITTELTEMPERATUR_SPANNUNG_WERT"
-msgstr ""
+msgstr "TCO volt"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_KUEHLMITTELTEMPERATUR_WERT"
-msgstr "Engine temp."
+msgstr "Coolant temperature"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_KUEHLMITTELTEMPERATUR_WERT"
-msgstr "Engine temperature"
+msgstr "Coolant"
 
 # 
 msgctxt "RES_L|"
@@ -1676,7 +1676,7 @@ msgstr "Raw value cooling water temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KUEHLWASSERTEMPERATUR_ROH_WERT"
-msgstr ""
+msgstr "TCO raw"
 
 # 
 msgctxt "RES_L|"
@@ -1686,7 +1686,7 @@ msgstr "Clutch switch status"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KUPPLUNGSSCHALTER_BETAETIGT_WERT"
-msgstr ""
+msgstr "Clutch sw."
 
 # 
 msgctxt "RES_L|"
@@ -1696,7 +1696,7 @@ msgstr "Clutch switch present"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KUPPLUNGSSCHALTER_VORHANDEN_WERT"
-msgstr ""
+msgstr "Clutch pres."
 
 # 
 msgctxt "RES_L|"
@@ -1706,7 +1706,7 @@ msgstr "Crankshaft adaptation completed"
 # 
 msgctxt "RES_S|"
 msgid "STAT_KURBELWELLEN_ADAPTION_BEENDET_WERT"
-msgstr ""
+msgstr "CrkAdp done"
 
 # 
 msgctxt "RES_L|"
@@ -1716,7 +1716,7 @@ msgstr "Boost pressure"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LADEDRUCK_WERT"
-msgstr ""
+msgstr "MAP"
 
 # 
 msgctxt "RES_L|"
@@ -1726,7 +1726,7 @@ msgstr "Lambda Adaptation Sum of multiplicative and additive group 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE1_WERT"
-msgstr ""
+msgstr "LTFT mul G1"
 
 # 
 msgctxt "RES_L|"
@@ -1736,7 +1736,7 @@ msgstr "Lambda Adaptation Sum of multiplicative and additive group 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDA_ADAPTION_MULTIPLIKATIV_GRUPPE2_WERT"
-msgstr ""
+msgstr "LTFT mul G2"
 
 # 
 msgctxt "RES_L|"
@@ -1786,7 +1786,7 @@ msgstr "Lambda Integrator Group 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDA_INTEGRATOR_GRUPPE1_WERT"
-msgstr ""
+msgstr "STFT G1"
 
 # 
 msgctxt "RES_L|"
@@ -1796,7 +1796,7 @@ msgstr "Lambda Integrator Group 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDA_INTEGRATOR_GRUPPE2_WERT"
-msgstr ""
+msgstr "STFT G2"
 
 # 
 msgctxt "RES_L|"
@@ -1826,7 +1826,7 @@ msgstr "Lambda setpoint group 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDA_SOLLWERT_GRUPPE1_WERT"
-msgstr ""
+msgstr "Lambda SP G1"
 
 # 
 msgctxt "RES_L|"
@@ -1836,7 +1836,7 @@ msgstr "Lambda setpoint group 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDA_SOLLWERT_GRUPPE2_WERT"
-msgstr ""
+msgstr "Lambda SP G2"
 
 # 
 msgctxt "RES_L|"
@@ -1846,7 +1846,7 @@ msgstr "Lambda control status, bank 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDAREGELUNG_ZUSTAND_BANK1_WERT"
-msgstr ""
+msgstr "Lambda ctrl B1"
 
 # 
 msgctxt "RES_L|"
@@ -1856,7 +1856,7 @@ msgstr "Lambda control status, bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDAREGELUNG_ZUSTAND_BANK2_WERT"
-msgstr ""
+msgstr "Lambda ctrl B2"
 
 # 
 msgctxt "RES_L|"
@@ -1886,7 +1886,7 @@ msgstr "Lower byte resistance lambda sensor downstream of catalytic converter ba
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT1_UNTERES_BYTE_WERT"
-msgstr ""
+msgstr "Rpost B1 lo"
 
 # 
 msgctxt "RES_L|"
@@ -1896,7 +1896,7 @@ msgstr "Lower byte resistance lambda sensor downstream of catalytic converter, b
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_UNTERES_BYTE_WERT"
-msgstr ""
+msgstr "Rpost B2 lo"
 
 # 
 msgctxt "RES_L|"
@@ -1906,7 +1906,7 @@ msgstr "Lambda sensor resistance downstream of catalytic converter, bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDASONDE_WIDERSTAND_NACHKAT2_WERT"
-msgstr ""
+msgstr "Rpost B2"
 
 # 
 msgctxt "RES_L|"
@@ -1916,7 +1916,7 @@ msgstr "Lower byte resistance lambda sensor before catalytic converter, Bank 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_UNTERES_BYTE_WERT"
-msgstr ""
+msgstr "Rpre B1 lo"
 
 # 
 msgctxt "RES_L|"
@@ -1926,7 +1926,7 @@ msgstr "Lambda sensor resistance before catalytic converter, Bank 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT1_WERT"
-msgstr ""
+msgstr "Rpre B1"
 
 # 
 msgctxt "RES_L|"
@@ -1936,7 +1936,7 @@ msgstr "Lower byte resistance lambda sensor before catalytic converter, Bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_UNTERES_BYTE_WERT"
-msgstr ""
+msgstr "Rpre B2 lo"
 
 # 
 msgctxt "RES_L|"
@@ -1946,7 +1946,7 @@ msgstr "Lambda sensor resistance before catalytic converter, Bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDASONDE_WIDERSTAND_VORKAT2_WERT"
-msgstr ""
+msgstr "Rpre B2"
 
 # 
 msgctxt "RES_L|"
@@ -1956,7 +1956,7 @@ msgstr "Lambda shift feedback controller 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT"
-msgstr ""
+msgstr "Lambda sft B1"
 
 # 
 msgctxt "RES_L|"
@@ -1966,7 +1966,7 @@ msgstr "Lambda shift feedback controller 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT"
-msgstr ""
+msgstr "Lambda sft B2"
 
 # 
 msgctxt "RES_L|"
@@ -1976,7 +1976,7 @@ msgstr "Status of the CrCtl lamp (sent via CAN)"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMPE_FGR_EIN_WERT"
-msgstr ""
+msgstr "CrCtl lamp"
 
 # 
 msgctxt "RES_L|"
@@ -1986,7 +1986,7 @@ msgstr "Maximum relative load during misfires"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAST_MAXIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT"
-msgstr ""
+msgstr "Load max mis"
 
 # 
 msgctxt "RES_L|"
@@ -1996,7 +1996,7 @@ msgstr "Minimum relative load during misfires"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAST_MINIMAL_BEI_ZUENDAUSSETZER_RELATIV_WERT"
-msgstr ""
+msgstr "Load min mis"
 
 # 
 msgctxt "RES_L|"
@@ -2006,7 +2006,7 @@ msgstr "Calculated load value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LASTWERT_BERECHNET_WERT"
-msgstr ""
+msgstr "Load calc"
 
 # 
 msgctxt "RES_L|"
@@ -2026,7 +2026,7 @@ msgstr "Segment adaptation Unsteady running Cyl. 3"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL3_WERT"
-msgstr ""
+msgstr "Rough seg3"
 
 # 
 msgctxt "RES_L|"
@@ -2036,7 +2036,7 @@ msgstr "Segment adaptation Unsteady running Cyl. 5"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_SEGMENTADAPTION_ZYL5_WERT"
-msgstr ""
+msgstr "Rough seg5"
 
 # 
 msgctxt "RES_L|"
@@ -2046,7 +2046,7 @@ msgstr "Running roughness segment time"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_SEGMENTZEIT_WERT"
-msgstr ""
+msgstr "Rough segT"
 
 # 
 msgctxt "RES_L|"
@@ -2056,7 +2056,7 @@ msgstr "Running roughness cylinder 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_ZYL1_WERT"
-msgstr ""
+msgstr "Rough cyl.1"
 
 # 
 msgctxt "RES_L|"
@@ -2066,7 +2066,7 @@ msgstr "Running roughness cylinder 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_ZYL2_WERT"
-msgstr ""
+msgstr "Rough cyl.2"
 
 # 
 msgctxt "RES_L|"
@@ -2076,7 +2076,7 @@ msgstr "Running roughness cylinder 3"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_ZYL3_WERT"
-msgstr ""
+msgstr "Rough cyl.3"
 
 # 
 msgctxt "RES_L|"
@@ -2086,7 +2086,7 @@ msgstr "Running roughness cylinder 4"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_ZYL4_WERT"
-msgstr ""
+msgstr "Rough cyl.4"
 
 # 
 msgctxt "RES_L|"
@@ -2096,7 +2096,7 @@ msgstr "[1] Running roughness Cylinder 5"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_ZYL5_WERT"
-msgstr ""
+msgstr "Rough cyl.5"
 
 # 
 msgctxt "RES_L|"
@@ -2106,7 +2106,7 @@ msgstr "[3] Running roughness Cylinder 6"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAUFUNRUHE_ZYL6_WERT"
-msgstr ""
+msgstr "Rough cyl.6"
 
 # 
 msgctxt "RES_L|"
@@ -2116,7 +2116,7 @@ msgstr "Idle speed control condition"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LEERLAUF_AKTIV"
-msgstr ""
+msgstr "Idle active"
 
 # 
 msgctxt "RES_L|"
@@ -2126,7 +2126,7 @@ msgstr "LL target speed deviation monitoring"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LEERLAUF_SOLLDREHZAHLABWEICHUNG_WERT"
-msgstr ""
+msgstr "Idle RPM dev"
 
 # 
 msgctxt "RES_L|"
@@ -2146,7 +2146,7 @@ msgstr "LLRNS functional status upon request system check"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LS_DIAGNOSE_WERT"
-msgstr ""
+msgstr "LS diag."
 
 # 
 msgctxt "RES_L|"
@@ -2156,7 +2156,7 @@ msgstr "Relative air mass (calc. load value) according to SAE J1979"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LUFTMASSE_GRAMM_PRO_SEKUNDE_WERT"
-msgstr ""
+msgstr "MAF g/s"
 
 # 
 msgctxt "RES_L|"
@@ -2166,7 +2166,7 @@ msgstr "Average diagnostic value minimum air mass"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LUFTMASSE_MITTLERE_MINIMALE_WERT"
-msgstr ""
+msgstr "MAF min avg"
 
 # 
 msgctxt "RES_L|"
@@ -2176,7 +2176,7 @@ msgstr "Air mass per cylinder"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LUFTMASSE_PRO_HUB_WERT"
-msgstr ""
+msgstr "MAF/stroke"
 
 # 
 msgctxt "RES_L|"
@@ -2196,7 +2196,7 @@ msgstr "Air mass sensor voltage"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LUFTMASSE_SPANNUNG_WERT"
-msgstr ""
+msgstr "MAF volt"
 
 # 
 msgctxt "RES_L|"
@@ -2206,7 +2206,7 @@ msgstr "Air mass"
 # 
 msgctxt "RES_S|"
 msgid "STAT_LUFTMASSE_WERT"
-msgstr ""
+msgstr "MAF"
 
 # 
 msgctxt "RES_L|"
@@ -2216,7 +2216,7 @@ msgstr "DSM Mil Request Status (1 = continuous, 2 = flashing)"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MIL_EIN_WERT"
-msgstr ""
+msgstr "MIL on"
 
 # 
 msgctxt "RES_L|"
@@ -2236,7 +2236,7 @@ msgstr "Relative torque request from MSR via CAN"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MOMENTENANFORDERUNG_VON_MSR_RELATIV_WERT"
-msgstr ""
+msgstr "Tq req MSR"
 
 # 
 msgctxt "RES_L|"
@@ -2246,7 +2246,7 @@ msgstr "Engine Coordinator Condition"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MOTOR_STATUS_WERT"
-msgstr ""
+msgstr "Eng. status"
 
 # 
 msgctxt "RES_L|"
@@ -2256,7 +2256,7 @@ msgstr "Relative eccentric angle at the lower mechanical stop"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MOTORABSTELLZEIT_WERT"
-msgstr ""
+msgstr "Eccnt stop"
 
 # 
 msgctxt "RES_L|"
@@ -2266,7 +2266,7 @@ msgstr "Engine RPM"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MOTORDREHZAHL_N32_WERT"
-msgstr ""
+msgstr "RPM (N32)"
 
 # 
 msgctxt "RES_L|"
@@ -2286,7 +2286,7 @@ msgstr "Engine torque output"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MOTORMOMENT_AKTUELL_WERT"
-msgstr ""
+msgstr "EngTrq act."
 
 # 
 msgctxt "RES_L|"
@@ -2316,7 +2316,7 @@ msgstr "Engine control status"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MOTORSTEUERUNG_WERT"
-msgstr ""
+msgstr "ECU ctrl"
 
 # 
 msgctxt "RES_L|"
@@ -2326,7 +2326,7 @@ msgstr "Engine temperature at start"
 # 
 msgctxt "RES_S|"
 msgid "STAT_MOTORTEMPERATUR_BEIM_START_WERT"
-msgstr ""
+msgstr "TCO@start"
 
 # 
 msgctxt "RES_L|"
@@ -2376,7 +2376,7 @@ msgstr "Standard spread outlet"
 # 
 msgctxt "RES_S|"
 msgid "STAT_NW_NORMSPREIZUNG_AUSLASS_WERT"
-msgstr ""
+msgstr "Cam sprd exh"
 
 # 
 msgctxt "RES_L|"
@@ -2386,7 +2386,7 @@ msgstr "Standard spread inlet"
 # 
 msgctxt "RES_S|"
 msgid "STAT_NW_NORMSPREIZUNG_EINLASS_WERT"
-msgstr ""
+msgstr "Cam sprd int"
 
 # 
 msgctxt "RES_L|"
@@ -2396,7 +2396,7 @@ msgstr "Output signal oil pressure switch"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELDRUCKSCHALTER_EIN_WERT"
-msgstr ""
+msgstr "Oil P sw."
 
 # 
 msgctxt "RES_L|"
@@ -2406,7 +2406,7 @@ msgstr "Oil sensor level raw value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELSENSOR_NIVEAU_ROH_WERT"
-msgstr ""
+msgstr "Oil lvl raw"
 
 # 
 msgctxt "RES_L|"
@@ -2416,7 +2416,7 @@ msgstr "Oil sensor level"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELSENSOR_NIVEAU_WERT"
-msgstr ""
+msgstr "Oil lvl"
 
 # 
 msgctxt "RES_L|"
@@ -2426,7 +2426,7 @@ msgstr "Oil sensor quality raw value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELSENSOR_QUALITAET_ROH_WERT"
-msgstr ""
+msgstr "Oil qual raw"
 
 # 
 msgctxt "RES_L|"
@@ -2436,7 +2436,7 @@ msgstr "Oil sensor quality"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELSENSOR_QUALITAET_WERT"
-msgstr ""
+msgstr "Oil qual."
 
 # 
 msgctxt "RES_L|"
@@ -2446,7 +2446,7 @@ msgstr "Oil sensor temperature raw value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELSENSOR_TEMPERATUR_ROH_WERT"
-msgstr ""
+msgstr "TOEL snsr raw"
 
 # 
 msgctxt "RES_L|"
@@ -2456,7 +2456,7 @@ msgstr "Oil sensor temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELSENSOR_TEMPERATUR_WERT"
-msgstr ""
+msgstr "TOEL sensor"
 
 # 
 msgctxt "RES_L|"
@@ -2466,17 +2466,17 @@ msgstr "Oil level average long-term"
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELSTAND_LANGZEIT_MITTEL_WERT"
-msgstr ""
+msgstr "Oil avg LT"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_OELTEMPERATUR_WERT"
-msgstr "Motor oil temp."
+msgstr "Oil temperature"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_OELTEMPERATUR_WERT"
-msgstr "OilTemperature"
+msgstr "Oil temp"
 
 # 
 msgctxt "RES_L|"
@@ -2486,7 +2486,7 @@ msgstr "Accelerator pedal sensor 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_PEDALWERTGEBER1_WERT"
-msgstr ""
+msgstr "APP1"
 
 # 
 msgctxt "RES_L|"
@@ -2516,7 +2516,7 @@ msgstr "Pump current tank diagnostics"
 # 
 msgctxt "RES_S|"
 msgid "STAT_PUMPENSTROM_BEI_DMTL_PUMPENPRUEFUNG_WERT"
-msgstr ""
+msgstr "DMTL pmp I"
 
 # 
 msgctxt "RES_L|"
@@ -2536,7 +2536,7 @@ msgstr "Power supply for accelerator pedal sensor 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_PWG1_VERSORGUNGSSPANNUNG_WERT"
-msgstr ""
+msgstr "APP1 supply"
 
 # 
 msgctxt "RES_L|"
@@ -2546,7 +2546,7 @@ msgstr "Linearized APP1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_PWG1_WERT"
-msgstr ""
+msgstr "APP1 lin."
 
 # 
 msgctxt "RES_L|"
@@ -2566,7 +2566,7 @@ msgstr "Power supply for accelerator pedal sensor 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_PWG2_VERSORGUNGSSPANNUNG_WERT"
-msgstr ""
+msgstr "APP2 supply"
 
 # 
 msgctxt "RES_L|"
@@ -2576,7 +2576,7 @@ msgstr "Linearized APP2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_PWG2_WERT"
-msgstr ""
+msgstr "APP2 lin."
 
 # 
 msgctxt "RES_L|"
@@ -2586,7 +2586,7 @@ msgstr "Status LS behind catalyst bank 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_READINESS_SONDE_NACHKAT_BANK1_WERT"
-msgstr ""
+msgstr "LS ready B1"
 
 # 
 msgctxt "RES_L|"
@@ -2596,7 +2596,7 @@ msgstr "Status LS behind catalyst bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_READINESS_SONDE_NACHKAT_BANK2_WERT"
-msgstr ""
+msgstr "LS ready B2"
 
 # 
 msgctxt "RES_L|"
@@ -2606,7 +2606,7 @@ msgstr "Intake manifold pressure"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SAUGROHRDRUCK_2_WERT"
-msgstr ""
+msgstr "MAP2"
 
 # 
 msgctxt "RES_L|"
@@ -2636,7 +2636,7 @@ msgstr "Voltage secondary air"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SEKUNDAERLUFT_SPANNUNG_WERT"
-msgstr ""
+msgstr "SecAir volt"
 
 # 
 msgctxt "RES_L|"
@@ -2646,7 +2646,7 @@ msgstr "Secondary air valve"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SEKUNDAERLUFT_VENTIL_PWM_WERT"
-msgstr ""
+msgstr "SecAir vlv"
 
 # 
 msgctxt "RES_L|"
@@ -2656,7 +2656,7 @@ msgstr "Secondary air pump active"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SEKUNDAERLUFTPUMPE_WERT"
-msgstr ""
+msgstr "SecAir pump"
 
 # 
 msgctxt "RES_L|"
@@ -2666,7 +2666,7 @@ msgstr "Status Diagnosis TEV"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SLS_DIAGNOSE_WERT"
-msgstr ""
+msgstr "TEV diag."
 
 # 
 msgctxt "RES_L|"
@@ -2676,7 +2676,7 @@ msgstr "Condition: Probe must be operational before catalytic converter"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENBEREITSCHAFT_VORKAT_BANK1"
-msgstr ""
+msgstr "Lambda rdy B1"
 
 # 
 msgctxt "RES_L|"
@@ -2686,7 +2686,7 @@ msgstr "Lambda sensor status: operational before cat. Bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENBEREITSCHAFT_VORKAT_BANK2"
-msgstr ""
+msgstr "Lambda rdy B2"
 
 # 
 msgctxt "RES_L|"
@@ -2696,7 +2696,7 @@ msgstr "Status LS heater behind catalytic converter bank 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_NACHKAT_BANK1_WERT"
-msgstr ""
+msgstr "Lheat post B1"
 
 # 
 msgctxt "RES_L|"
@@ -2706,7 +2706,7 @@ msgstr "Status LS heater behind catalytic converter bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_NACHKAT_BANK2_WERT"
-msgstr ""
+msgstr "Lheat post B2"
 
 # 
 msgctxt "RES_L|"
@@ -2716,7 +2716,7 @@ msgstr "Normalized heating power of the lambda sensor downstream of the catalyti
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK1_WERT"
-msgstr ""
+msgstr "LhPWM post B1"
 
 # 
 msgctxt "RES_L|"
@@ -2726,7 +2726,7 @@ msgstr "Lambda heating PWM behind catalytic converter, bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_PWM_NACHKAT_BANK2_WERT"
-msgstr ""
+msgstr "LhPWM post B2"
 
 # 
 msgctxt "RES_L|"
@@ -2736,7 +2736,7 @@ msgstr "Lambda heating PWM before cat. Bench 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK1_WERT"
-msgstr ""
+msgstr "LhPWM pre B1"
 
 # 
 msgctxt "RES_L|"
@@ -2746,7 +2746,7 @@ msgstr "Lambda heating PWM before cat. Bench 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_PWM_VORKAT_BANK2_WERT"
-msgstr ""
+msgstr "LhPWM pre B2"
 
 # 
 msgctxt "RES_L|"
@@ -2756,7 +2756,7 @@ msgstr "Status LS heating before cat. Bench 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_VORKAT_BANK1_WERT"
-msgstr ""
+msgstr "Lheat pre B1"
 
 # 
 msgctxt "RES_L|"
@@ -2766,7 +2766,7 @@ msgstr "Status LS heating before cat. Bench 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENHEIZUNG_VORKAT_BANK2_WERT"
-msgstr ""
+msgstr "Lheat pre B2"
 
 # 
 msgctxt "RES_L|"
@@ -2776,7 +2776,7 @@ msgstr "Voltage Lambda sensor downstream of catalytic converter, bank 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENSPANNUNG_NACHKAT_BANK1_WERT"
-msgstr ""
+msgstr "LV post B1"
 
 # 
 msgctxt "RES_L|"
@@ -2786,7 +2786,7 @@ msgstr "Voltage Lambda sensor behind catalytic converter, bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENSPANNUNG_NACHKAT_BANK2_WERT"
-msgstr ""
+msgstr "LV post B2"
 
 # 
 msgctxt "RES_L|"
@@ -2796,17 +2796,17 @@ msgstr "Voltage lambda sensor before cat. Bank 1 with offset correction"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENSPANNUNG_VORKAT_BANK1_MIT_OFFSET_WERT"
-msgstr ""
+msgstr "LV pre B1+off"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT"
-msgstr "Voltage lambda sensor before cat. Bench 1"
+msgstr "Lambda probe voltage pre-cat Bank 1"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT"
-msgstr ""
+msgstr "λ-V B1"
 
 # 
 msgctxt "RES_L|"
@@ -2816,17 +2816,17 @@ msgstr "Voltage lambda sensor before cat. Bank 2 with offset correction"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENSPANNUNG_VORKAT_BANK2_MIT_OFFSET_WERT"
-msgstr ""
+msgstr "LV pre B2+off"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT"
-msgstr "Voltage lambda sensor before cat. Bench 2"
+msgstr "Lambda probe voltage pre-cat Bank 2"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT"
-msgstr ""
+msgstr "λ-V B2"
 
 # 
 msgctxt "RES_L|"
@@ -2836,7 +2836,7 @@ msgstr "Sound flap condition"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SOUNDKLAPPE_PWM_WERT"
-msgstr ""
+msgstr "Sound flap"
 
 # 
 msgctxt "RES_L|"
@@ -2846,7 +2846,7 @@ msgstr "Voltage offset signal path CJ120 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SPANNUNGSOFFSET_SIGNALPFAD1_WERT"
-msgstr ""
+msgstr "Voff path1"
 
 # 
 msgctxt "RES_L|"
@@ -2856,7 +2856,7 @@ msgstr "Voltage offset signal path CJ120 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SPANNUNGSOFFSET_SIGNALPFAD2_WERT"
-msgstr ""
+msgstr "Voff path2"
 
 # 
 msgctxt "RES_L|"
@@ -2866,7 +2866,7 @@ msgstr "Voltage Sport Switch"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SPORTSCHALTER_SPANNUNG_WERT"
-msgstr ""
+msgstr "Sport SW V"
 
 # 
 msgctxt "RES_L|"
@@ -2876,7 +2876,7 @@ msgstr "Sport button activated"
 # 
 msgctxt "RES_S|"
 msgid "STAT_SPORTTASTER_BETAETIGT_WERT"
-msgstr ""
+msgstr "Sport btn"
 
 # 
 msgctxt "RES_L|"
@@ -2886,7 +2886,7 @@ msgstr "Status: Standby consumer registered, Part 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL1_WERT"
-msgstr ""
+msgstr "StdbyCons1"
 
 # 
 msgctxt "RES_L|"
@@ -2896,7 +2896,7 @@ msgstr "Status: Standby consumer registered, Part 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STANDVERBRAUCHER_REGISTRIERT_TEIL2_WERT"
-msgstr ""
+msgstr "StdbyCons2"
 
 # 
 msgctxt "RES_L|"
@@ -2906,7 +2906,7 @@ msgstr "Automatic start condition"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STARTRELAIS_AKTIV_WERT"
-msgstr ""
+msgstr "Starter act."
 
 # 
 msgctxt "RES_L|"
@@ -2916,7 +2916,7 @@ msgstr "Switch terminal 50 of CAN"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STARTRELAIS_UEBER_CAN_WERT"
-msgstr ""
+msgstr "Starter CAN"
 
 # 
 msgctxt "RES_L|"
@@ -2926,7 +2926,7 @@ msgstr "Status Knock"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STATUS_KLOPFEN_WERT"
-msgstr ""
+msgstr "Knock status"
 
 # 
 msgctxt "RES_L|"
@@ -2936,7 +2936,7 @@ msgstr "Control unit temperature raw value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_ROH_WERT"
-msgstr ""
+msgstr "ECU T raw"
 
 # 
 msgctxt "RES_L|"
@@ -2946,7 +2946,7 @@ msgstr "Voltage SG-Internal temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_SPANNUNG_WERT"
-msgstr ""
+msgstr "ECU T volt"
 
 # 
 msgctxt "RES_L|"
@@ -2956,7 +2956,7 @@ msgstr "Control unit internal temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_STEUERGERAETE_INNENTEMPERATUR_WERT"
-msgstr ""
+msgstr "ECU temp"
 
 # 
 msgctxt "RES_L|"
@@ -2976,7 +2976,7 @@ msgstr "Status Key FGR"
 # 
 msgctxt "RES_S|"
 msgid "STAT_TASTE_FGR_EIN_WERT"
-msgstr ""
+msgstr "Cruise btn"
 
 # 
 msgctxt "RES_L|"
@@ -2986,7 +2986,7 @@ msgstr "Function status counter DM-TL for tester output from last driving cycle"
 # 
 msgctxt "RES_S|"
 msgid "STAT_TEV_DIAGNOSE_WERT"
-msgstr ""
+msgstr "DMTL diag2"
 
 # 
 msgctxt "RES_L|"
@@ -3011,7 +3011,7 @@ msgstr "Battery voltage from the AD converter DME"
 # 
 msgctxt "RES_S|"
 msgid "STAT_UBATT_AD_WANDLER_WERT"
-msgstr ""
+msgstr "Vbatt ADC"
 
 # 
 msgctxt "RES_L|"
@@ -3021,7 +3021,7 @@ msgstr "Battery voltage (IBS)"
 # 
 msgctxt "RES_S|"
 msgid "STAT_UBATT_IBS_WERT"
-msgstr ""
+msgstr "Vbatt IBS"
 
 # 
 msgctxt "RES_L|"
@@ -3031,7 +3031,7 @@ msgstr "Battery voltage"
 # 
 msgctxt "RES_S|"
 msgid "STAT_UBATT_WERT"
-msgstr ""
+msgstr "Vbatt"
 
 # 
 msgctxt "RES_L|"
@@ -3046,7 +3046,7 @@ msgstr "Atmospheric pressure sensor voltage"
 # 
 msgctxt "RES_S|"
 msgid "STAT_UMGEBUNGSDRUCK_SPANNUNG_WERT"
-msgstr ""
+msgstr "Patm volt"
 
 # 
 msgctxt "RES_L|"
@@ -3056,7 +3056,7 @@ msgstr "Atmospheric pressure"
 # 
 msgctxt "RES_S|"
 msgid "STAT_UMGEBUNGSDRUCK_WERT"
-msgstr ""
+msgstr "Patm"
 
 # 
 msgctxt "RES_L|"
@@ -3066,7 +3066,7 @@ msgstr "Ambient temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_UMGEBUNGSTEMPERATUR_WERT"
-msgstr ""
+msgstr "Tamb"
 
 # 
 msgctxt "RES_L|"
@@ -3096,7 +3096,7 @@ msgstr "Variant secondary air pump"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VARIANTE_SEKUNDAERLUFTPUMPE_WERT"
-msgstr ""
+msgstr "SecAir var."
 
 # 
 msgctxt "RES_L|"
@@ -3106,7 +3106,7 @@ msgstr "Water pump speed: target/actual difference"
 # 
 msgctxt "RES_S|"
 msgid "STAT_WASSERPUMPE_DREHZAHL_SOLL_IST_DIFFERENZ_WERT"
-msgstr ""
+msgstr "WP RPM dev"
 
 # 
 msgctxt "RES_L|"
@@ -3136,7 +3136,7 @@ msgstr "Recommended temperature of BSS water pump"
 # 
 msgctxt "RES_S|"
 msgid "STAT_WASSERPUMPE_ELEKTRONIK_TEMPERATUR_WERT"
-msgstr ""
+msgstr "WP elec T"
 
 # 
 msgctxt "RES_L|"
@@ -3146,7 +3146,7 @@ msgstr "Water pump with reduced power"
 # 
 msgctxt "RES_S|"
 msgid "STAT_WASSERPUMPE_LEISTUNGSREDUZIERT_WERT"
-msgstr ""
+msgstr "WP pwr red"
 
 # 
 msgctxt "RES_L|"
@@ -3156,7 +3156,7 @@ msgstr "Recommended voltage for BSS water pump"
 # 
 msgctxt "RES_S|"
 msgid "STAT_WASSERPUMPE_SPANNUNG_WERT"
-msgstr ""
+msgstr "WP volt"
 
 # 
 msgctxt "RES_L|"
@@ -3176,7 +3176,7 @@ msgstr "Water pump output via BSD"
 # 
 msgctxt "RES_S|"
 msgid "STAT_WASSERPUMPENLEISTUNG_BSD_WERT"
-msgstr ""
+msgstr "WP pwr BSD"
 
 # 
 msgctxt "RES_L|"
@@ -3196,7 +3196,7 @@ msgstr "Target value inlet spread"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT"
-msgstr ""
+msgstr "VVT int SP"
 
 # 
 msgctxt "RES_L|"
@@ -3206,7 +3206,7 @@ msgstr "VVT output stage temperature from model"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_ENDSTUFENTEMPERATUR_WERT"
-msgstr ""
+msgstr "VVT stg T"
 
 # 
 msgctxt "RES_L|"
@@ -3226,7 +3226,7 @@ msgstr "VVT eccentric setpoint"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_EXCENTER_SOLL_WERT"
-msgstr ""
+msgstr "VVT exc SP"
 
 # 
 msgctxt "RES_L|"
@@ -3236,7 +3236,7 @@ msgstr "VVT eccentric actual value"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_EXCENTER_WERT"
-msgstr ""
+msgstr "VVT exc act"
 
 # 
 msgctxt "RES_L|"
@@ -3256,7 +3256,7 @@ msgstr "Target value for position controller from the tester"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_LAGEREGLER_SOLL_WERT"
-msgstr ""
+msgstr "VVT pos SP"
 
 # 
 msgctxt "RES_L|"
@@ -3266,7 +3266,7 @@ msgstr "Target value inlet spread"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_LAGEREGLER_SOLL_VON_TESTER_WERT"
-msgstr ""
+msgstr "VVT tstr SP"
 
 # 
 msgctxt "RES_L|"
@@ -3276,7 +3276,7 @@ msgstr "Current for VVT actuator"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_MOTORSTROM_WERT"
-msgstr ""
+msgstr "VVT act. I"
 
 # 
 msgctxt "RES_L|"
@@ -3286,7 +3286,7 @@ msgstr "VVT engine temperature"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_MOTORTEMPERATUR_WERT"
-msgstr ""
+msgstr "VVT act. T"
 
 # 
 msgctxt "RES_L|"
@@ -3326,7 +3326,7 @@ msgstr "VVT power supply"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_SPANNUNGSVERSORGUNG_WERT"
-msgstr ""
+msgstr "VVT supply V"
 
 # 
 msgctxt "RES_L|"
@@ -3356,7 +3356,7 @@ msgstr "Mechanical adjustment range VVT from learning routine"
 # 
 msgctxt "RES_S|"
 msgid "STAT_VVT_VERSTELLBEREICH_LERNROUTINE_WERT"
-msgstr ""
+msgstr "VVT adj rng"
 
 # 
 msgctxt "RES_L|"
@@ -3376,7 +3376,7 @@ msgstr "Counter detection bad road"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ZAEHLER_ERKENNUNG_SCHLECHTE_STRASSE_WERT"
-msgstr ""
+msgstr "RoughRd cnt"
 
 # 
 msgctxt "RES_L|"
@@ -3386,7 +3386,7 @@ msgstr "Current leak measurement time"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ZEIT_DMTL_LECKMESSUNG_WERT"
-msgstr ""
+msgstr "DMTL leak T"
 
 # 
 msgctxt "RES_L|"
@@ -3396,7 +3396,7 @@ msgstr "Time with quiescent current 200 - 1000 mA"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ZEIT_MIT_RUHESTROM_200_1000_WERT"
-msgstr ""
+msgstr "Iq 200-1000"
 
 # 
 msgctxt "RES_L|"
@@ -3406,7 +3406,7 @@ msgstr "Time with quiescent current 80 - 200 mA"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ZEIT_MIT_RUHESTROM_80_200_WERT"
-msgstr ""
+msgstr "Iq 80-200"
 
 # 
 msgctxt "RES_L|"
@@ -3416,7 +3416,7 @@ msgstr "Time with quiescent current greater than 1000 mA"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ZEIT_MIT_RUHESTROM_GROESER_1000_WERT"
-msgstr ""
+msgstr "Iq >1000"
 
 # 
 msgctxt "RES_L|"
@@ -3426,7 +3426,7 @@ msgstr "Parking time"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ZEIT_MOTOR_STEHT_WERT"
-msgstr ""
+msgstr "Park time"
 
 # 
 msgctxt "RES_L|"
@@ -3436,7 +3436,7 @@ msgstr "Time since start"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ZEIT_SEIT_STARTENDE_WERT"
-msgstr ""
+msgstr "T since start"
 
 # 
 msgctxt "RES_L|"

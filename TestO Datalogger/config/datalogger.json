@@ -14,6 +14,16 @@
    {
     "ecu" : "MSV70",
     "job" : "E85",
+    "result" : "STAT_OELTEMPERATUR_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
+    "result" : "STAT_FAHRERWUNSCH_PEDAL_WERT"
+   },
+   {
+    "ecu" : "MSV70",
+    "job" : "E85",
     "result" : "STAT_LAMBDA_BANK1_WERT"
    },
    {
