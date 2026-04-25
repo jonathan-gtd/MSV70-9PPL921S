@@ -1,0 +1,311 @@
+[DEFAULTS]
+decimals=1
+color=#00bcd4
+needlecolor=#ff6f00
+textcolor=#ffffff
+titlecolor=#b2ebf2
+fillcolor=#1c2833
+
+[RPM]
+Min=0
+Max=7500
+Title=RPM
+Unit=1/min
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_MOTORDREHZAHL_WERT
+decimals=0
+
+[COOLANT]
+Min=0
+Max=130
+Title=Coolant temp
+Unit=C
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_KUEHLMITTELTEMPERATUR_WERT
+
+[IAT]
+Min=-20
+Max=60
+Title=Intake air temp
+Unit=C
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_ANSAUGLUFTTEMPERATUR_WERT
+
+[OIL]
+Min=-10
+Max=150
+Title=Oil temp
+Unit=C
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_OELTEMPERATUR_WERT
+
+[MAF]
+Min=0
+Max=500
+Title=MAF
+Unit=kg/h
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_LUFTMASSE_WERT
+
+[MAP]
+Min=800
+Max=1200
+Title=Intake pressure
+Unit=hPa
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_LADEDRUCK_WERT
+decimals=0
+
+[TPS]
+Min=0
+Max=100
+Title=Throttle pos.
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_DROSSELKLAPPENWINKEL_WERT
+
+[TPS_SP]
+Min=0
+Max=100
+Title=Throttle setpoint
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_DROSSELKLAPPENWINKEL_SOLL_WERT
+
+[LOAD]
+Min=0
+Max=100
+Title=Relative load
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_LASTWERT_RELATIV_WERT
+
+[DISA]
+Min=0
+Max=100
+Title=DISA position
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_DISAKLAPPEN_POSITION_WERT
+
+[CAM_IN]
+Min=0
+Max=60
+Title=Cam intake
+Unit=CRK
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_POSITION_NOCKENWELLE_EINLASS_WERT
+
+[CAM_EX]
+Min=0
+Max=60
+Title=Cam exhaust
+Unit=CRK
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_POSITION_NOCKENWELLE_AUSLASS_WERT
+
+[IGA]
+Min=-10
+Max=50
+Title=Ign. angle cyl.1
+Unit=CRK
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_ZUENDWINKEL_ZYL1_WERT
+
+[KNOCK1]
+Min=0
+Max=5
+Title=Knock cyl.1
+Unit=V
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_KLOPFSIGNAL_ZYL1_WERT
+decimals=2
+
+[LAMBDA1]
+Min=0.7
+Max=1.3
+Title=Lambda B1
+Unit=
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_LAMBDA_BANK1_WERT
+decimals=3
+
+[LAMBDA2]
+Min=0.7
+Max=1.3
+Title=Lambda B2
+Unit=
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_LAMBDA_BANK2_WERT
+decimals=3
+
+[LAMBDA1_SP]
+Min=0.7
+Max=1.3
+Title=Lambda B1 target
+Unit=
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_LAMBDA_BANK1_SOLL_WERT
+decimals=3
+
+[LAMBDA2_SP]
+Min=0.7
+Max=1.3
+Title=Lambda B2 target
+Unit=
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_LAMBDA_BANK2_SOLL_WERT
+decimals=3
+
+[PROBE_V1]
+Min=0
+Max=5
+Title=Lambda probe V B1
+Unit=V
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_SONDENSPANNUNG_VORKAT_BANK1_WERT
+decimals=2
+
+[PROBE_V2]
+Min=0
+Max=5
+Title=Lambda probe V B2
+Unit=V
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_SONDENSPANNUNG_VORKAT_BANK2_WERT
+decimals=2
+
+[EGT1]
+Min=0
+Max=900
+Title=Exhaust temp B1
+Unit=C
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_0x5896_WERT
+decimals=0
+
+[EGT2]
+Min=0
+Max=900
+Title=Exhaust temp B2
+Unit=C
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_0x5897_WERT
+decimals=0
+
+[STFT1]
+Min=-25
+Max=25
+Title=STFT B1
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_INTEGRATOR_BANK1_WERT
+decimals=1
+
+[STFT2]
+Min=-25
+Max=25
+Title=STFT B2
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_INTEGRATOR_BANK2_WERT
+decimals=1
+
+[LTFT_MUL1]
+Min=0.7
+Max=1.3
+Title=LTFT mul. B1
+Unit=
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT
+decimals=3
+
+[LTFT_MUL2]
+Min=0.7
+Max=1.3
+Title=LTFT mul. B2
+Unit=
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT
+decimals=3
+
+[LTFT_ADD1]
+Min=-10
+Max=10
+Title=LTFT add. B1
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_ADAPTION_ADDITIV_BANK1_WERT
+decimals=2
+
+[LTFT_ADD2]
+Min=-10
+Max=10
+Title=LTFT add. B2
+Unit=%
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_ADAPTION_ADDITIV_BANK2_WERT
+decimals=2
+
+[FUEL_P]
+Min=0
+Max=10
+Title=Fuel pressure
+Unit=bar
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_KRAFTSTOFFDRUCK_WERT
+decimals=2
+
+[INJ1]
+Min=0
+Max=20
+Title=Inj. time cyl.1
+Unit=ms
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_EINSPRITZZEIT_ZYL1_WERT
+decimals=2
+
+[INJ2]
+Min=0
+Max=20
+Title=Inj. time cyl.2
+Unit=ms
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_EINSPRITZZEIT_ZYL2_WERT
+decimals=2
+
+[INJ3]
+Min=0
+Max=20
+Title=Inj. time cyl.3
+Unit=ms
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_EINSPRITZZEIT_ZYL3_WERT
+decimals=2
+
+[INJ4]
+Min=0
+Max=20
+Title=Inj. time cyl.4
+Unit=ms
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_EINSPRITZZEIT_ZYL4_WERT
+decimals=2
+
+[INJ5]
+Min=0
+Max=20
+Title=Inj. time cyl.5
+Unit=ms
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_EINSPRITZZEIT_ZYL5_WERT
+decimals=2
+
+[INJ6]
+Min=0
+Max=20
+Title=Inj. time cyl.6
+Unit=ms
+Jobname=STATUS_MESSWERTBLOCK_LESEN
+Resultname=STAT_EINSPRITZZEIT_ZYL6_WERT
+decimals=2
