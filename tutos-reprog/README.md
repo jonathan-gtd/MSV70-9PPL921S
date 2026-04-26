@@ -22,6 +22,7 @@ Conversion éthanol sur **Siemens MSV70** (BMW N52B30, SW 9PPL921S — dump VB67
 | `ip_fac_ti_tco_wup_opm_1` `_2` | ~1.000@−30°C, ~0.969@17°C | 1.40@−30°C, 1.35@−10°C, 1.25@0°C, 1.15@20°C, 1.08@40°C, 1.02@60°C, 1.00@80°C+ | Identique au stock dans FinalV1 — non modifié. Remplacer la courbe entière. |
 | `ip_ti_tco_wup_opm_1` `_2` | Voir bin | ×1.15 à ×1.35 pour TCO < 50°C | Non modifié dans FinalV1. |
 | `ip_ti_wup_opm_1` `_2` | Voir bin | ×1.20 à ×1.35 pour TCO < 50°C | Non modifié dans FinalV1. |
+| `ip_mff_pre_inj_bas_opm_1` `_2` | 431mg@−30°C → 35mg@90°C | ×1.473 pour TCO < 30°C | La pré-injection passe par un module séparé (`INJR_Transfer_to_basic_sw`) — probablement **non couverte** par ip_mff_cor. Sur E85, pré-injection lean à froid → allumage difficile. Vérifier en log : si TI pré-injection identique avant/après flash, le facteur ×1.473 manque. Modifier les 2 modes identiquement. |
 
 ---
 
@@ -39,12 +40,13 @@ Conversion éthanol sur **Siemens MSV70** (BMW N52B30, SW 9PPL921S — dump VB67
 
 ---
 
-## ⚪ Optionnel — Allumage
+## ⚪ Optionnel — Allumage et ralenti
 
 Uniquement après validation complète de l'injection et absence de cliquetis confirmée sur E85.
 
 | Paramètre(s) | Stock VB67774 | Cible E85 | Notes |
 |---|---|---|---|
+| `ip_n_sp_is` | 1120rpm@−30°C → 660rpm@105°C | +50–100rpm entre −30°C et 0°C | Consigne ralenti f(TCO). Non modifié dans FinalV1. Utile si ralenti froid instable pendant la phase de break-in — l'ISC controller rattrapera seul une fois ip_fac_ti_tco_wup correctement calibré. |
 | `ip_iga_st_bas_opm_1` `_2` | −5.6° à +14.6°CRK — table 6×8 f(TCO, RPM 80–920) | +2° à +3° à TCO < 0°C | Table allumage démarrage (axes TCO × 80–920 rpm). `ip_iga_bas_knk` (table principale en charge) absent du XDF 9PPL921S. |
 | `c_iga_ini` | 6.0°CRK — raw 111 | 7.0°CRK (raw 114) à 8.0°CRK (raw 116) | Avance cranking. Uniquement si démarrage froid difficile malgré cranking mass correctement calibré. |
 
