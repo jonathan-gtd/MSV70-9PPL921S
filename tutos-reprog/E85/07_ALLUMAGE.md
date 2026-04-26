@@ -1,6 +1,8 @@
-# §5 — Avance à l'allumage
+# Allumage — Avance et délai WOT
 
-> L'éthanol a un indice d'octane de 104–108 RON (vs 95 SP95) — il résiste mieux à la détonation et permet d'augmenter l'avance. Calibration **E60 (101 RON)** = pire carburant légal hivernal : zéro risque quelle que soit la saison. Gain : **+5 à +12% de puissance**. Règle absolue : progressivité. Un seul degré de trop = cliquetis = casse moteur.
+L'éthanol a un indice d'octane de 104–108 RON (vs 95 SP95) — il résiste mieux à la détonation et permet d'augmenter l'avance. Calibration **E60 (101 RON)** = pire carburant légal hivernal : zéro risque quelle que soit la saison. Gain : **+5 à +12% de puissance**.
+
+**Règle absolue : progressivité.** Un seul degré de trop = cliquetis = casse moteur. Valider 50 km par palier, jamais plus de +2.5° sur un N52 atmosphérique.
 
 | Carburant | RON | Avance max exploitable |
 |---|:---:|:---:|
@@ -11,26 +13,27 @@
 
 ---
 
+## OBLIGATOIRE
+
 <a id="p1"></a>
 ## ① `ip_iga_bas_max_knk__n__maf` — Plafond avance anti-cliquetis f(MAF × RPM)
 
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x4323A |
-| Structure | Map 8×8 |
-| Axes | X = MAF (0.55–2.25 mg/stk), Y = RPM (608–7008) |
+| Type | Map 8×8 |
+| Unité | °CRK avant PMH |
+| Axes | X = MAF (0.55–2.25 mg/stk), Y = RPM (608–7008 tr/min) |
 
-**Rôle :** Table principale d'avance à modifier pour bénéficier de l'octane supérieur de l'E85. C'est le plafond knock-limited — l'avance effective ne peut pas dépasser ces valeurs. En augmentant les cellules de haute charge (colonnes MAF élevé), on autorise le modèle de couple à demander davantage d'avance. Le knock control reste actif et reculera si cliquetis détecté. Procédure obligatoire : un palier à la fois, 50 km entre chaque.
+**Rôle :** Table principale d'avance à modifier pour bénéficier de l'octane supérieur de l'E85. C'est le plafond knock-limited — l'avance effective ne peut pas dépasser ces valeurs. En augmentant les cellules de haute charge (colonnes MAF élevé), on autorise le modèle de couple à demander davantage d'avance. Le knock control reste actif et reculera si cliquetis détecté.
 
 **Procédure d'augmentation par zones :**
 
-| Zone | MAF | Incrément Phase 1 | Incrément Phase 2 | Incrément Phase 3 |
+| Zone | MAF | Phase 1 | Phase 2 | Phase 3 |
 |---|---|---|---|---|
 | Ralenti / très faible charge | < 0.65 mg/stk | +0° | +0° | +0° |
 | Charge moyenne | 1.0–1.5 mg/stk | +0.5° | +1.0° | — |
 | Haute charge / WOT | > 1.5 mg/stk | +1.0° | +2.0° | +2.5° |
-
-**Avant / Après :**
 
 **◀ Avant — Stock (°CRK avant PMH)**
 
@@ -45,7 +48,7 @@
 | 6016 | +43.12 | +39.75 | +33.38 | +23.25 | +19.88 | +18.00 | +15.38 | +13.50 |
 | 7008 | +43.50 | +39.38 | +33.38 | +24.00 | +20.62 | +19.12 | +17.62 | +16.88 |
 
-**✏️ Opération — Offset à ajouter par cellule (°CRK)**
+**✏️ Delta à ajouter par cellule (°CRK) — objectif E60-safe**
 
 | RPM (tr/min) \ MAF (mg/stk) | 0.55 | 0.64 | 1.02 | 1.31 | 1.55 | 1.78 | 2.01 | 2.25 |
 |---|---|---|---|---|---|---|---|---|
@@ -76,25 +79,100 @@
 | Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
 | Après chaque palier (+1°) | 50 km sans cliquetis | Son métallique bref → **−1° immédiat** |
-| Knock control OBD | LTFT avance stable, aucun retrait répété | Retrait fréquent → trop d'avance |
+| Knock control OBD | LTFT avance stable, aucun retrait répété | Retrait fréquent → trop d'avance, reculer |
 | Pleine charge | Seulement après validation charge partielle | — |
-
-> Maximum recommandé stratégie E60-safe : **+2.5°** sur les colonnes droites (haute charge). Jamais plus de +5° même sur E85 pur sur un N52 atmosphérique.
 
 ---
 
 <a id="p2"></a>
-## ② `ip_iga_st_bas_opm_1` — Avance cranking, mode Valvetronic
+## ② `c_t_ti_dly_fl_1` — Délai enrichissement WOT, boîte manuelle, copie 1
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x44EC4 |
+| Type | Constante scalaire |
+| Unité | secondes |
+
+**Rôle :** Délai entre la détection du full load flag et l'application de l'enrichissement WOT, pour les boîtes manuelles. Stock 200 ms — conçu sur essence pour éviter des enrichissements intempestifs lors de brèves sollicitations pédale. Sur E85, ce délai crée un lean transitoire non compensé (boucle ouverte WOT) à chaque appui franc sur l'accélérateur.
+
+**Avant / Après :**
+
+| | ◀ Stock VB67774 | ✅ E85 (MT) |
+|---|---|---|
+| `c_t_ti_dly_fl_1` | 0.200 s | **0.000 s** |
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Accélération franche WOT | Enrichissement immédiat | Trou bref → vérifier les 2 copies MT à zéro |
+
+---
+
+<a id="p3"></a>
+## ③ `c_t_ti_dly_fl_2` — Délai enrichissement WOT, boîte manuelle, copie 2
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x44EC6 |
+| Type | Constante scalaire |
+| Unité | secondes |
+
+**Rôle :** Deuxième copie du délai WOT MT. L'ECU alterne entre ces deux copies selon le contexte d'exécution. Si _1 est mis à zéro mais _2 reste à 200 ms, l'enrichissement peut encore être retardé de façon intermittente. Les deux doivent être à zéro.
+
+**Avant / Après :**
+
+| | ◀ Stock VB67774 | ✅ E85 (MT) |
+|---|---|---|
+| `c_t_ti_dly_fl_2` | 0.200 s | **0.000 s** |
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| WOT répété plusieurs fois | Richesse WOT immédiate à chaque sollicitation | Délai intermittent → _2 non modifié |
+
+---
+
+<a id="p4"></a>
+## ④ `c_t_ti_dly_fl_at_1` / `c_t_ti_dly_fl_at_2` — Délai enrichissement WOT, boîte automatique
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x44EC8 / 0x44ECA |
+| Type | Constante scalaire (×2) |
+| Unité | secondes |
+
+**Rôle :** Même logique que les copies MT mais pour les boîtes automatiques ZF 6HP. Modifier uniquement si le véhicule est AT — inutile sur MT.
+
+**Avant / Après :**
+
+| | ◀ Stock VB67774 | ✅ E85 (AT uniquement) |
+|---|---|---|
+| `c_t_ti_dly_fl_at_1` | 0.200 s | **0.000 s** |
+| `c_t_ti_dly_fl_at_2` | 0.200 s | **0.000 s** |
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Kickdown AT | Enrichissement immédiat lors du passage de rapport | Délai perceptible → vérifier les 2 copies AT |
+
+---
+
+## OPTIONNEL
+
+<a id="p5"></a>
+## ⑤ `ip_iga_st_bas_opm_1` — Avance cranking, mode Valvetronic
 
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x43586 |
-| Structure | Map 6×8 |
+| Type | Map 6×8 |
+| Unité | °CRK avant PMH |
 | Axes | X = TCO (°C), Y = RPM cranking (80–920 tr/min) |
 
-**Rôle :** Avance à l'allumage pendant la phase de cranking uniquement (RPM 80–920), en mode Valvetronic. Active uniquement lors du démarrage. Les valeurs stock sont conservées dans le bin E85 de référence — modifier seulement si le démarrage froid reste difficile (> 5 tours) malgré ip_mff_cst_opm_* correctement calibré.
-
-**Avant / Après :**
+**Rôle :** Avance à l'allumage pendant la phase de cranking uniquement, en mode Valvetronic. **Modifier seulement si le démarrage froid reste difficile (> 5 tours) malgré `ip_mff_cst_opm_*` correctement calibré.** Le réglage cranking de §05 doit être validé en premier.
 
 **◀ Avant — Stock (°CRK avant PMH)**
 
@@ -107,7 +185,7 @@
 | 640 | 12.00 | 10.50 | 8.25 | 5.25 | 3.38 | 0.75 | −0.38 | −2.63 |
 | 920 | 14.63 | 12.75 | 9.38 | 4.88 | 2.25 | −0.38 | −0.75 | −2.63 |
 
-**✏️ Opération — +1° sur les 3 colonnes TCO ≤ 0°C (−30.0, −20.3, −9.8) uniquement (si démarrage difficile)**
+**✏️ Opération — +1° sur les 3 colonnes TCO ≤ 0°C (−30.0, −20.3, −9.8) uniquement**
 
 **✅ Après — E85 (°CRK avant PMH)**
 
@@ -129,18 +207,17 @@
 
 ---
 
-<a id="p3"></a>
-## ③ `ip_iga_st_bas_opm_2` — Avance cranking, mode papillonné (GD)
+<a id="p6"></a>
+## ⑥ `ip_iga_st_bas_opm_2` — Avance cranking, mode papillonné (GD)
 
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x435B6 |
-| Structure | Map 6×8 |
+| Type | Map 6×8 |
+| Unité | °CRK avant PMH |
 | Axes | X = TCO (°C), Y = RPM cranking (80–920 tr/min) |
 
-**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné (Valvetronic désactivé au démarrage). Si le N52 démarre en mode GD, c'est cette table qui s'applique. Modifier en même temps qu'opm_1 si la correction est nécessaire — appliquer les mêmes incréments sur les colonnes TCO ≤ 0°C.
-
-**Avant / Après :**
+**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné. Modifier en même temps qu'opm_1 si la correction est nécessaire — appliquer les mêmes incréments sur les colonnes TCO ≤ 0°C.
 
 **◀ Avant — Stock (°CRK avant PMH)**
 
@@ -153,7 +230,7 @@
 | 640 | 11.25 | 9.75 | 8.63 | 7.13 | 2.63 | 1.50 | 0.75 | −0.75 |
 | 920 | 12.00 | 10.13 | 8.63 | 6.38 | 1.50 | 0.38 | 0.00 | −0.38 |
 
-**✏️ Opération — +1° sur les 3 colonnes TCO ≤ 0°C (−30.0, −20.3, −9.8) uniquement (si démarrage difficile)**
+**✏️ Opération — +1° sur les 3 colonnes TCO ≤ 0°C (−30.0, −20.3, −9.8) uniquement**
 
 **✅ Après — E85 (°CRK avant PMH)**
 
@@ -171,3 +248,33 @@
 | Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
 | Démarrage froid mode GD | < 3 tours | > 5 tours → +1° colonnes froides, même valeur qu'opm_1 |
+
+---
+
+<a id="p7"></a>
+## ⑦ `c_iga_ini` — Avance initiale cranking — DERNIER RECOURS
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x44B2A |
+| Type | Constante scalaire |
+| Unité | °CRK avant PMH |
+
+**Rôle :** Avance à l'allumage appliquée lors du premier cycle d'allumage pendant la phase de cranking. Stock = 6.0°CRK. Un léger supplément peut aider le premier allumage à se propager dans une chambre froide chargée en éthanol peu vaporisé. **Modifier uniquement si démarrage > 5 tours malgré §05 et ⑤⑥ ci-dessus correctement calibrés.**
+
+**Avant / Après :**
+
+| Scénario | ◀ Stock VB67774 | ✅ E85 |
+|---|---|---|
+| Recommandé — inchangé | 6.0 °CRK | 6.0 °CRK |
+| Option +1° (démarrage > 5 tours) | 6.0 °CRK | **7.13 °CRK** |
+| Option +2° (démarrage > 8 tours) | 6.0 °CRK | **7.88 °CRK** |
+
+> Maximum recommandé : +2° (7.88 °CRK). Au-delà, risque de détonation au cranking sur moteur froid.
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Démarrage froid (TCO < 10°C) | < 3 tours | > 5 tours → vérifier §05 en priorité avant de toucher `c_iga_ini` |
+| Son de cliquetis au cranking | Absent | Son métallique bref → réduire de −1° immédiatement |

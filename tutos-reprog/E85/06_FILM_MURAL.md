@@ -1,6 +1,6 @@
-# §4 — Film mural (Wall Film Correction)
+# Film mural (Wall Film Correction)
 
-> Le film de carburant sur les parois du collecteur est **~25–35% plus épais sur E85** (éthanol s'évapore moins vite, viscosité plus élevée à froid). En accélération, ce film absorbe du carburant — la chambre reçoit moins que prévu → lean transitoire. Les 4 tables positives doivent être multipliées par ×1.25. Les tables négatives (décélération) ne sont pas modifiées en première intention.
+Le film de carburant sur les parois du collecteur est **~25–35% plus épais sur E85** (éthanol s'évapore moins vite, viscosité plus élevée à froid). En accélération, ce film absorbe du carburant — la chambre reçoit moins que prévu → lean transitoire. Les 4 tables positives doivent être multipliées par **×1.25**. Les tables négatives (décélération) ne sont pas modifiées en première intention.
 
 **Procédure commune aux 4 tables :** TunerPro → ouvrir la table → Ctrl+A → Scale ×1.25 → valider → répéter ×4.
 
@@ -10,7 +10,6 @@
 |---|---|---|
 | Dynamique | Film résiduel (accumulation sur plusieurs secondes) | Réponse instantanée au tip-in brutal |
 | Valeurs | Plus élevées (couche permanente) | Plus faibles (correction transitoire) |
-| Axes | TCO × RPM | TCO × RPM |
 
 | Dimension | Tables "opm_1" (Valvetronic) | Tables "opm_2" (papillonné GD) |
 |---|---|---|
@@ -25,10 +24,11 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x4CBFC |
-| Structure | Map 8×8 |
-| Axes | X = TCO (°C), Y = RPM (608–5600) |
+| Type | Map 8×8 |
+| Unité | mg/stk |
+| Axes | X = TCO (°C), Y = RPM (608–5600 tr/min) |
 
-**Rôle :** Correction d'enrichissement pour le film de carburant lent (composante résiduelle, constante de temps de plusieurs secondes) en mode Valvetronic, direction positive (accélération / augmentation de charge). C'est la table principale du film mural — elle gère l'enrichissement continu pour compenser le film qui s'accumule sur les parois entre les injections. Sur E85, ce film est plus épais à cause de la viscosité plus élevée de l'éthanol et de sa plus faible pression de vapeur → multiplier par ×1.25.
+**Rôle :** Correction d'enrichissement pour le film de carburant lent (composante résiduelle, constante de temps de plusieurs secondes) en mode Valvetronic, direction positive (accélération / augmentation de charge). Gère l'enrichissement continu pour compenser le film qui s'accumule sur les parois entre les injections. Sur E85, ce film est plus épais à cause de la viscosité plus élevée de l'éthanol et de sa plus faible pression de vapeur → ×1.25.
 
 **◀ Avant — Stock (mg/stk)**
 
@@ -73,10 +73,11 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x4CC7C |
-| Structure | Map 8×8 |
-| Axes | X = TCO (°C), Y = RPM (608–5600) |
+| Type | Map 8×8 |
+| Unité | mg/stk |
+| Axes | X = TCO (°C), Y = RPM (608–5600 tr/min) |
 
-**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné (Valvetronic désactivé). Les valeurs stock opm_2 sont nettement plus élevées que opm_1 à froid (ex. 224.7 vs 36.0 à 608 rpm, −30°C) car le mode GD a une géométrie d'admission différente qui crée davantage de film. Le facteur ×1.25 s'applique identiquement — les valeurs absolues après multiplication sont simplement plus élevées.
+**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné (Valvetronic désactivé). Les valeurs stock opm_2 sont nettement plus élevées que opm_1 à froid (ex. 224.7 vs 36.0 mg/stk à 608 rpm, −30°C) car le mode GD a une géométrie d'admission différente qui crée davantage de film. Le facteur ×1.25 s'applique identiquement.
 
 **◀ Avant — Stock (mg/stk)**
 
@@ -121,10 +122,11 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x443FC |
-| Structure | Map 8×8 |
-| Axes | X = TCO (°C), Y = RPM (608–5600) |
+| Type | Map 8×8 |
+| Unité | mg/stk |
+| Axes | X = TCO (°C), Y = RPM (608–5600 tr/min) |
 
-**Rôle :** Correction d'enrichissement pour la composante rapide du film mural (réponse instantanée au tip-in brutal), mode Valvetronic. Quand la pédale est enfoncée brusquement, le débit d'air augmente soudainement alors que le film n'a pas encore eu le temps de répondre — cette table injecte un surplus immédiat. Les valeurs sont ~0.4–0.6× plus faibles que la table slow (correction transitoire vs couche permanente). Sur E85, le film plus épais nécessite une correction rapide plus importante → ×1.25.
+**Rôle :** Correction d'enrichissement pour la composante rapide du film mural (réponse instantanée au tip-in brutal), mode Valvetronic. Quand la pédale est enfoncée brusquement, le débit d'air augmente soudainement alors que le film n'a pas encore eu le temps de répondre — cette table injecte un surplus immédiat. Les valeurs sont ~0.4–0.6× plus faibles que la table slow. Sur E85, le film plus épais nécessite une correction rapide plus importante → ×1.25.
 
 **◀ Avant — Stock (mg/stk)**
 
@@ -169,10 +171,11 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x4443C |
-| Structure | Map 8×8 |
-| Axes | X = TCO (°C), Y = RPM (608–5600) |
+| Type | Map 8×8 |
+| Unité | mg/stk |
+| Axes | X = TCO (°C), Y = RPM (608–5600 tr/min) |
 
-**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné. Les valeurs stock opm_2 fast sont intermédiaires entre opm_1 fast et opm_2 slow. Active lors des accélérations brutales en mode GD (démarrage froid, mode dégradé). Facteur ×1.25 identique aux 3 autres tables.
+**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné. Active lors des accélérations brutales en mode GD (démarrage froid, mode dégradé). Facteur ×1.25 identique aux 3 autres tables.
 
 **◀ Avant — Stock (mg/stk)**
 
@@ -214,10 +217,7 @@
 ## Note — Tables négatives et Valvetronic
 
 **Tables `_neg_*_wf` (non modifiées en première intention) :**
-Les tables négatives gèrent la récupération de film en tip-out (levée de pied) — elles sont statiques dans le bin. La sous-correction produit un mélange légèrement riche en décélération (sans risque), contrairement aux tables positives où la sous-correction produit un lean transitoire (risque réel). Corriger en deuxième étape (×1.25 identique), une fois les tables positives validées sur route.
-
-**Particularité Valvetronic N52 :**
-Les tables `ip_fac_ti_maf_sp_wf_*_opm_1` gèrent le film mural induit par les changements de levée Valvetronic. Sur E85, un +15–20% peut être nécessaire si des ratés apparaissent lors d'accélérations progressives (pas brutales). À régler uniquement si les 4 tables principales ×1.25 sont validées et que des trous persistent exclusivement lors de transitions Valvetronic douces.
+Les tables négatives gèrent la récupération de film en tip-out (levée de pied). La sous-correction produit un mélange légèrement riche en décélération (sans risque), contrairement aux tables positives où la sous-correction produit un lean transitoire (risque réel). Corriger en deuxième étape (×1.25 identique), une fois les tables positives validées.
 
 **Test pratique recommandé :**
 ```

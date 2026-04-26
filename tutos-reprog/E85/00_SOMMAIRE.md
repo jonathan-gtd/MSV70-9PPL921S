@@ -18,12 +18,11 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
 
 À faire dans cet ordre. Ne pas passer à l'étape suivante sans avoir validé la précédente.
 
-- **[04 — Injecteurs](04_INJECTEURS.md)** — Facteur de masse carburant — le plus critique
-  - [① `ip_mff_cor_opm_1_1` — Multiplicateur Valvetronic, mode 1](04_INJECTEURS.md#p1)
-  - [② `ip_mff_cor_opm_1_2` — Multiplicateur Valvetronic, mode 2](04_INJECTEURS.md#p2)
-  - [③ `ip_mff_cor_opm_2_1` — Multiplicateur papillonné (GD), mode 1](04_INJECTEURS.md#p3)
-  - [④ `ip_mff_cor_opm_2_2` — Multiplicateur papillonné (GD), mode 2](04_INJECTEURS.md#p4)
-  - [⑤ `ip_ti_min` — Dead time f(tension batterie)](04_INJECTEURS.md#p5)
+- **[04 — Enrichissement](04_ENRICHISSEMENT.md)** — Facteur de masse carburant — le plus critique
+  - [① `ip_mff_cor_opm_1_1` — Multiplicateur Valvetronic, mode 1](04_ENRICHISSEMENT.md#p1)
+  - [② `ip_mff_cor_opm_1_2` — Multiplicateur Valvetronic, mode 2](04_ENRICHISSEMENT.md#p2)
+  - [③ `ip_mff_cor_opm_2_1` — Multiplicateur papillonné (GD), mode 1](04_ENRICHISSEMENT.md#p3)
+  - [④ `ip_mff_cor_opm_2_2` — Multiplicateur papillonné (GD), mode 2](04_ENRICHISSEMENT.md#p4)
 
 - **[05 — Démarrage froid](05_DEMARRAGE_FROID.md)** — Cranking et after-start sur éthanol
   - [① `ip_mff_cst_opm_1` — Cranking Valvetronic](05_DEMARRAGE_FROID.md#p1)
@@ -37,10 +36,17 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
   - [③ `ip_ti_tco_pos_fast_wf_opm_1` — Film rapide positif, Valvetronic](06_FILM_MURAL.md#p3)
   - [④ `ip_ti_tco_pos_fast_wf_opm_2` — Film rapide positif, papillonné (GD)](06_FILM_MURAL.md#p4)
 
-- **[07 — Avance allumage](07_AVANCE.md)** — Plafond knock — exploite l'octane de l'E85
-  - [① `ip_iga_bas_max_knk__n__maf` — Plafond anti-cliquetis f(MAF × RPM)](07_AVANCE.md#p1)
-  - [② `ip_iga_st_bas_opm_1` — Avance cranking Valvetronic](07_AVANCE.md#p2)
-  - [③ `ip_iga_st_bas_opm_2` — Avance cranking papillonné (GD)](07_AVANCE.md#p3)
+- **[07 — Allumage](07_ALLUMAGE.md)** — Avance E60-safe + délai WOT
+  - [① `ip_iga_bas_max_knk__n__maf` — Plafond anti-cliquetis f(MAF × RPM)](07_ALLUMAGE.md#p1)
+  - [② `c_t_ti_dly_fl_1` — Délai WOT boîte manuelle, copie 1](07_ALLUMAGE.md#p2)
+  - [③ `c_t_ti_dly_fl_2` — Délai WOT boîte manuelle, copie 2](07_ALLUMAGE.md#p3)
+  - [④ `c_t_ti_dly_fl_at_1/2` — Délai WOT boîte automatique](07_ALLUMAGE.md#p4)
+
+- **[08 — Lambda](08_LAMBDA.md)** — Anti-DTC break-in, warm-up lambda, richesse WOT
+  - [① `ip_fac_lamb_max_fsd_1` — Plafond WRAF, mode 1](08_LAMBDA.md#p1)
+  - [② `ip_fac_lamb_max_fsd_2` — Plafond WRAF, mode 2](08_LAMBDA.md#p2)
+  - [③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral](08_LAMBDA.md#p3)
+  - [④ `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes](08_LAMBDA.md#p4)
 
 ---
 
@@ -48,69 +54,27 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
 
 Améliorent le comportement mais non bloquantes pour un premier essai.
 
-- **[08 — Délai WOT](08_DELAI_WOT.md)** — Délai avant enrichissement pleine charge
-  - [① `c_t_ti_dly_fl_1` — MT, copie 1](08_DELAI_WOT.md#p1)
-  - [② `c_t_ti_dly_fl_2` — MT, copie 2](08_DELAI_WOT.md#p2)
-  - [③ `c_t_ti_dly_fl_at_1` — AT, copie 1](08_DELAI_WOT.md#p3)
-  - [④ `c_t_ti_dly_fl_at_2` — AT, copie 2](08_DELAI_WOT.md#p4)
+- **[08 — Lambda (suite)](08_LAMBDA.md)** — Paramètres optionnels
+  - [⑤ `ip_fac_lamb_wup_is` — Warm-up lambda ralenti (si instable)](08_LAMBDA.md#p5)
+  - [⑥ `ip_lamb_fl__n` — Lambda cible WOT f(RPM)](08_LAMBDA.md#p6)
 
-- **[09 — Lambda WOT](09_LAMBDA.md)** — Prévention DTC et richesse pleine charge
-  - [① `ip_fac_lamb_max_fsd_1` — Plafond WRAF, mode 1 (anti-DTC)](09_LAMBDA.md#p1)
-  - [② `ip_fac_lamb_max_fsd_2` — Plafond WRAF, mode 2 (anti-DTC)](09_LAMBDA.md#p2)
-  - [③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral (anti-DTC)](09_LAMBDA.md#p3)
-  - [④ `ip_lamb_fl__n` — Lambda cible WOT f(RPM) — OPTIONNEL](09_LAMBDA.md#p4)
+- **[07 — Allumage (suite)](07_ALLUMAGE.md)** — Avance cranking
+  - [⑤ `ip_iga_st_bas_opm_1` — Avance cranking Valvetronic (si démarrage > 5 tours)](07_ALLUMAGE.md#p5)
+  - [⑥ `ip_iga_st_bas_opm_2` — Avance cranking papillonné GD](07_ALLUMAGE.md#p6)
+  - [⑦ `c_iga_ini` — Avance initiale cranking (dernier recours)](07_ALLUMAGE.md#p7)
 
----
+- **[09 — Transitoire](09_TRANSITOIRE.md)** — À-coups à l'accélération (kickdown uniquement)
+  - [① `KF_FTRANSVL` — Facteur transition pleine charge](09_TRANSITOIRE.md#p1)
 
-## Paramètres secondaires
-
-À consulter selon le comportement observé. Ne pas modifier en aveugle.
-
-- **[10 — Warm-up lambda](10_WARMUP_LAMBDA.md)** — Enrichissement warm-up tous régimes et ralenti
-  - [① `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes](10_WARMUP_LAMBDA.md#p1)
-  - [② `ip_fac_lamb_wup_is` — Facteur warm-up lambda, ralenti](10_WARMUP_LAMBDA.md#p2)
-
-- **[11 — Avance cranking](11_AVANCE_CRANKING.md)** — Démarrage difficile malgré §05 correct
-  - [① `c_iga_ini` — Avance initiale cranking](11_AVANCE_CRANKING.md#p1)
-
-- **[12 — Transitoire](12_TRANSITOIRE.md)** — À-coups à l'accélération
-  - [① `KF_FTRANSVL` — Facteur transition pleine charge](12_TRANSITOIRE.md#p1)
-  - [② `KL_STEND_TRANS` — Facteur démarrage transition](12_TRANSITOIRE.md#p2)
-  - [③ `KL_FUPSRF_TRANS` — Correction surface pression transitoire](12_TRANSITOIRE.md#p3)
-  - [④ `KL_PIRG_TRANS` — Pression résiduelle gaz brûlés](12_TRANSITOIRE.md#p4)
-
-- **[13 — LTFT](13_LTFT.md)** — STFT/LTFT saturés en adaptation
-  - [① `c_fac_max_h_rng_lam_ad` — Limite haute LTFT, haute charge](13_LTFT.md#p1)
-  - [② `c_fac_max_l_rng_lam_ad` — Limite haute LTFT, basse charge](13_LTFT.md#p2)
-  - [③ `c_fac_min_h_rng_lam_ad` — Limite basse LTFT, haute charge](13_LTFT.md#p3)
-  - [④ `c_fac_min_l_rng_lam_ad` — Limite basse LTFT, basse charge](13_LTFT.md#p4)
-  - [⑤ `c_lam_mv_dyw_dly` — Fenêtre dynamique STFT](13_LTFT.md#p5)
-
-- **[14 — EVAP](14_EVAP.md)** — Oscillations STFT > ±15% à chaud
-  - [① `ip_flow_max_cps` — Débit maximal purge canister](14_EVAP.md#p1)
-  - [② `ip_flow_cps` — Débit nominal purge canister](14_EVAP.md#p2)
-
-- **[15 — Chauffe catalyseur](15_CHAUFFE_CAT.md)** — Sans catalyseur uniquement
-  - [① `ip_fac_eff_iga_ch_cold_opm_1` — Retard allumage chauffe cat, Valvetronic](15_CHAUFFE_CAT.md#p1)
-  - [② `ip_fac_eff_iga_ch_cold_opm_2` — Retard allumage chauffe cat, papillonné (GD)](15_CHAUFFE_CAT.md#p2)
-
-- **[16 — Surveillance](16_SURVEILLANCE.md)** — Indicateurs OBD à lire pendant la mise au point
-  - [① Duty cycle injecteur — saturation haut régime](16_SURVEILLANCE.md#p1)
-  - [② STFT / LTFT — convergence de l'adaptation](16_SURVEILLANCE.md#p2)
-  - [③ Lambda WOT — richesse pleine charge](16_SURVEILLANCE.md#p3)
-  - [④ Retrait d'avance knock control](16_SURVEILLANCE.md#p4)
+- **[10 — EVAP](10_EVAP.md)** — Oscillations STFT lors de la purge canister
+  - [① `ip_flow_max_cps` — Débit maximal purge canister](10_EVAP.md#p1)
+  - [② `ip_flow_cps` — Débit nominal purge canister](10_EVAP.md#p2)
 
 ---
 
-## Validation
-
-À suivre après chaque session de modifications.
+## Validation et suivi
 
 | # | Fichier | Contenu |
 |---|---|---|
-| 17 | [Résumé](17_RESUME.md) | Tableau complet : modifier / surveiller / ne pas toucher |
-| 18 | [Plan de test](18_PLAN_TEST.md) | Protocole de validation en 5 phases |
-| 19 | [Diagnostic](19_DIAGNOSTIC.md) | Symptôme → cause → solution |
-| 20 | [Avertissements](20_AVERTISSEMENTS.md) | Surveillance STFT/LTFT, pompe, filtre, bougies, hiver |
-| 21 | [Vérification](21_VERIFICATION.md) | Niveaux de confiance par section |
-| 22 | [Conclusion](22_CONCLUSION.md) | Avertissement légal et responsabilité |
+| 11 | [Surveillance](11_SURVEILLANCE.md) | Indicateurs OBD à lire pendant la mise au point |
+| 12 | [Plan de test](12_PLAN_TEST.md) | Résumé paramètres, plan 5 phases, diagnostic, avertissements |

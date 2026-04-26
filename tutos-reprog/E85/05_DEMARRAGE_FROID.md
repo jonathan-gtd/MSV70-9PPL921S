@@ -1,6 +1,6 @@
-# §5 — Démarrage à froid (Cranking)
+# Démarrage à froid (Cranking)
 
-> L'éthanol s'évapore difficilement sous 25°C (ébullition à 78°C vs −40°C pour l'essence). Le moteur a besoin de **×1.35 à ×2.00 de masse carburant** au cranking selon la température. Trois paramètres à modifier : les deux tables de cranking + le seuil TCO. Un quatrième paramètre (after-start) gère la phase immédiatement post-démarrage.
+L'éthanol s'évapore difficilement sous 25°C (ébullition à 78°C vs −40°C pour l'essence). Le moteur a besoin de **×1.35 à ×2.00 de masse carburant** au cranking selon la température. Trois paramètres à modifier : les deux tables de cranking + le seuil TCO. Un quatrième paramètre (after-start) gère la phase immédiatement post-démarrage.
 
 **Règles absolues :**
 - Ne jamais appuyer sur la pédale avant démarrage — le MSV70 désactive l'enrichissement cranking si la pédale est enfoncée (Full Load Cutoff)
@@ -15,7 +15,8 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x437DC |
-| Structure | Map 3×8 |
+| Type | Map 3×8 |
+| Unité | mg/stk |
 | Axes | X = TCO (°C), Y = RPM démarreur |
 
 **Rôle :** Masse de carburant injectée pendant la phase de cranking (moteur en rotation avant premier allumage), en mode Valvetronic. C'est le paramètre principal qui détermine si le moteur démarre ou non sur E85 froid. Les valeurs doivent être multipliées colonne par colonne selon la température — le facteur varie de ×2.00 à −30°C à ×1.05 à 90°C.
@@ -28,7 +29,7 @@
 | 320 | 320.3 | 260.7 | 202.1 | 152.1 | 87.9 | 61.3 | 46.5 | 39.1 |
 | 920 | 194.4 | 175.1 | 146.0 | 112.9 | 68.4 | 48.6 | 36.5 | 33.0 |
 
-**✏️ Opération — Facteurs E85 à appliquer par colonne TCO :**
+**✏️ Facteurs E85 à appliquer par colonne TCO :**
 
 | TCO (°C) | −30 | −20 | −10 | 0 | +17 | +30 | +60 | +90 |
 |---|---|---|---|---|---|---|---|---|
@@ -48,7 +49,7 @@
 |---|---|---|
 | Démarrage froid (TCO < 10°C), sans pédale | ≤ 3 tours | > 5 tours → cranking +15% sur colonnes froides |
 | Démarrage froid (TCO 10–25°C) | ≤ 3 tours | > 3 tours → cranking +10% colonnes concernées |
-| Ralenti initial après démarrage | 800–1200 RPM, décroissant | Instable → vérifier warm-up lambda §10 |
+| Ralenti initial après démarrage | 800–1200 RPM, décroissant | Instable → vérifier warm-up lambda §08 |
 
 ---
 
@@ -58,10 +59,11 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x4380C |
-| Structure | Map 3×8 |
+| Type | Map 3×8 |
+| Unité | mg/stk |
 | Axes | X = TCO (°C), Y = RPM démarreur |
 
-**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné (Gedrosselt, Valvetronic désactivé). Actif au démarrage froid quand le Valvetronic n'est pas encore opérationnel. Les valeurs stock opm_2 sont nettement plus élevées à froid que opm_1 — les mêmes facteurs multiplicatifs s'appliquent aux deux tables. Si seule opm_1 est modifiée, le démarrage reste difficile si le moteur démarre en mode GD.
+**Rôle :** Même rôle qu'opm_1 mais pour le mode papillonné (Gedrosselt, Valvetronic désactivé). Actif au démarrage froid quand le Valvetronic n'est pas encore opérationnel. Les valeurs stock opm_2 sont nettement plus élevées à froid que opm_1. Les mêmes facteurs multiplicatifs s'appliquent aux deux tables. Si seule opm_1 est modifiée, le démarrage reste difficile si le moteur démarre en mode GD.
 
 **◀ Avant — Stock (mg/stk)**
 
@@ -71,7 +73,7 @@
 | 320 | 546.2 | 415.6 | 297.0 | 201.8 | 106.4 | 82.3 | 57.0 | 39.1 |
 | 920 | 363.0 | 281.4 | 215.8 | 159.0 | 84.1 | 65.8 | 47.0 | 34.5 |
 
-**✏️ Opération — Mêmes facteurs E85 que opm_1 par colonne TCO :**
+**✏️ Mêmes facteurs E85 que opm_1 par colonne TCO :**
 
 | TCO (°C) | −30 | −20 | −10 | 0 | +17 | +30 | +60 | +90 |
 |---|---|---|---|---|---|---|---|---|
@@ -100,19 +102,20 @@
 | Champ | Valeur |
 |---|---|
 | Adresse | 0x44F2F |
-| Structure | Constante scalaire |
+| Type | Constante scalaire |
+| Unité | °C |
 
 **Rôle :** Température de liquide de refroidissement (TCO) en dessous de laquelle les tables de cranking enrichies opm_1 et opm_2 s'appliquent. Au-dessus de ce seuil, le calculateur utilise les valeurs stock essence. Sur E85, l'éthanol nécessite un enrichissement cranking jusqu'à ~25°C (contre ~17°C pour l'essence) car sa vaporisation reste déficiente jusqu'à cette température. Sans ce seuil relevé, le moteur démarre en mélange pauvre par temps frais.
 
 **Avant / Après :**
 
-| | ◀ Stock | ✏️ E85 |
+| | ◀ Stock VB67774 | ✅ E85 |
 |---|---|---|
 | `c_tco_n_mff_cst` | 17.25 °C | **25.00 °C** |
 
 Autres valeurs possibles selon la rigueur hivernale :
 
-| ✏️ Seuil TCO | Usage |
+| Seuil TCO | Usage |
 |---|---|
 | 20.25 °C | Minimum E85 (hivers doux) |
 | **25.00 °C** | **Recommandé** |
@@ -133,14 +136,15 @@ Autres valeurs possibles selon la rigueur hivernale :
 | Champ | Valeur |
 |---|---|
 | Adresse | (voir XDF) |
-| Structure | Courbe 1D f(RPM) |
-| Plage active | Phase 0–800 RPM post-démarrage (montée en régime initiale) |
+| Type | Courbe 1D f(RPM) |
+| Unité | facteur multiplicateur (×) |
+| Axes | X = RPM (0–800 tr/min post-démarrage) |
 
-**Rôle :** Masse de carburant additionnelle injectée pendant la phase after-start — les premières secondes après que le moteur a pris vie mais avant que le régime soit stabilisé. Distinct du cranking (moteur en rotation sans allumage) et du warm-up (régime stabilisé). Sur E85, cette zone est critique : si l'enrichissement after-start est insuffisant, le moteur démarre puis cale dans les 2 premières secondes (il "prend" mais s'arrête immédiatement). Les mêmes facteurs que le cranking s'appliquent selon la TCO.
+**Rôle :** Masse de carburant additionnelle injectée pendant la phase after-start — les premières secondes après que le moteur a pris vie mais avant que le régime soit stabilisé. Distinct du cranking (moteur en rotation sans allumage) et du warm-up (régime stabilisé). Sur E85, si l'enrichissement after-start est insuffisant, le moteur démarre puis cale dans les 2 premières secondes (il "prend" mais s'arrête immédiatement).
 
 **Avant / Après :**
 
-| Condition TCO | ◀ Stock | ✏️ E85 | Facteur |
+| Condition TCO | ◀ Stock | ✅ E85 | Facteur |
 |---|---|---|---|
 | TCO ≤ 0°C | Valeur stock | **Stock × 1.55–1.65** | Vaporisation très déficiente |
 | TCO 0–17°C | Valeur stock | **Stock × 1.35–1.45** | Vaporisation partielle |
@@ -152,6 +156,6 @@ Autres valeurs possibles selon la rigueur hivernale :
 
 | Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| Démarrage froid (< 5°C) | Moteur stable dès la 1ère seconde après démarrage | Cale dans les 3 s → ip_mff_lgrd_ast +15% colonnes froides |
+| Démarrage froid (< 5°C) | Moteur stable dès la 1ère seconde | Cale dans les 3 s → +15% colonnes froides |
 | Montée régime après démarrage | 0 → 800 RPM lisse, pas de chute | Chute transitoire RPM → facteur insuffisant |
 | Distinction cranking / after-start | — | Moteur ne part pas = cranking / part puis cale = after-start |
