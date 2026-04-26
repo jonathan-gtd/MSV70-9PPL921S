@@ -30,7 +30,7 @@ Les limites LTFT stock (−8% / +12%) sont documentées en fin de fichier — **
 | ✅ E85 Break-in (%) | 100.0 | 45.0 | **40.0** | **40.0** | 45.0 | 100.0 |
 | ✅ E85 Stabilisé (%) | 100.0 | 38.0 | **35.0** | **35.0** | 38.0 | 100.0 |
 
-> Les cellules 1 et 6 sont déjà à 100% stock. Les cellules centrales à 30% sont le vrai goulot d'étranglement sur E85 (correction E85 ≈ +30–36% sur stoichio).
+> Les cellules 1 et 6 sont déjà à 100% stock. Les cellules centrales à 30% sont le vrai goulot d'étranglement : **sans** ip_mff_cor_opm correctement calibré (stock 1.016 → E85 besoin 1.473), le STFT devrait couvrir +44.9% — impossible avec un plafond à 30%. Avec ip_mff_cor_opm à 1.473, le STFT devrait rester à ±5–10% ; le plafond à 40% est une précaution pour le break-in (LTFT à 0%, transitoires), pas une valeur cible.
 
 **Vérification :**
 
