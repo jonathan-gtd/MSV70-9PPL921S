@@ -48,20 +48,12 @@ for cat in sorted(catalog_cats.keys()):
         desc  = p.get("desc", "") or ""
         ptype = p.get("type", "")
         kind  = p.get("kind", "")
-        param_entries[title] = {
-            "doc": desc if desc else f"{kind} — {ptype}",
-            "type_doc": ptype,
-            "modification_e85": "NON"
-        }
+        param_entries[title] = desc if desc else f"{kind} — {ptype}"
     subcategories.append({
         "xdf_category": cat,
         "label": cat,
         "role": "",
-        "undocumented_params_default": "NON",
         "parameters": param_entries,
-        "tuning_impact": "low",
-        "flex_fuel_sensitive": False,
-        "tags": []
     })
 
 catalog = {
