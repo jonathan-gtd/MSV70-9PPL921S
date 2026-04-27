@@ -9,16 +9,18 @@ AFR_blend = 1 / ( E_fraction/9.0 + (1−E_fraction)/14.7 )
 Facteur   = (14.7 / AFR_blend) × 0.94
 ```
 
-| Teneur éthanol | AFR stœchio | Facteur cible |
-|---|---|---|
-| E65 | 10.41:1 | ×1.33 |
-| E70 | 10.18:1 | ×1.36 |
-| E75 | 9.97:1  | ×1.39 |
-| **E85 ← cible recommandée** | **9.55:1** | **×1.45** |
+| Teneur éthanol | AFR stœchio | Facteur cible | Valeur à saisir dans le bin |
+|---|---|---|---|
+| E65 | 10.41:1 | ×1.33 | 1.351 |
+| E70 | 10.18:1 | ×1.36 | 1.382 |
+| E75 | 9.97:1  | ×1.39 | 1.412 |
+| **E85 ← cible recommandée** | **9.55:1** | **×1.45** | **1.473** |
+
+> La colonne "Valeur à saisir" = stock VB67774 (1.016) × facteur cible. Exemple E85 : 1.016 × 1.45 = **1.473**. C'est ce nombre qu'on entre dans TunerPro, pas le facteur.
 
 > Calibrer sur E85 même avec du E70 réel : en boucle ouverte (WOT, transitions), le LTFT ne corrige pas. Côté riche = safe. Côté pauvre = danger.
 
-**Procédure commune aux 4 maps :** TunerPro → ouvrir la map → Ctrl+A → saisir **1.473** → valider → répéter ×4.
+**Procédure commune aux 4 maps :** TunerPro → ouvrir la map → Ctrl+A → saisir **1.473** → valider → répéter ×4. (Pour E70 : saisir 1.382. Pour E75 : 1.412.)
 
 ---
 

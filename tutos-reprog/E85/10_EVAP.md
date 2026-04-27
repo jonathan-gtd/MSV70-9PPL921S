@@ -11,9 +11,10 @@ Les vapeurs E85 sont plus riches en éthanol et plus denses que les vapeurs esse
 
 | Champ | Valeur |
 |---|---|
-| Adresse | (voir XDF) |
-| Type | Courbe ou map f(conditions) |
-| Unité | voir XDF |
+| Adresse | 0x4FD54 |
+| Type | Map 12×12 |
+| Unité | kg/h |
+| Axes | X = charge (mg/stk), Y = RPM |
 
 **Rôle :** Limite le débit d'air maximum autorisé à travers la vanne de purge canister (CPS). Sur E85, les vapeurs d'éthanol sont plus denses et ont un pouvoir calorifique inférieur — un débit identique à l'essence enrichit davantage le mélange. Réduire de 10–15% si les STFT oscillent de façon prononcée lors des purges.
 
@@ -38,9 +39,10 @@ Les vapeurs E85 sont plus riches en éthanol et plus denses que les vapeurs esse
 
 | Champ | Valeur |
 |---|---|
-| Adresse | (voir XDF) |
-| Type | Courbe ou map f(conditions) |
-| Unité | voir XDF |
+| Adresse | 0x48B90 |
+| Type | Courbe 16 pts |
+| Unité | kg/h |
+| Axes | X = dépression (hPa) |
 
 **Rôle :** Débit nominal de la purge canister (valeur courante en conditions normales, en dessous du maximum). Agit en tandem avec `ip_flow_max_cps` — réduire les deux si les oscillations STFT persistent après avoir réduit le maximum.
 

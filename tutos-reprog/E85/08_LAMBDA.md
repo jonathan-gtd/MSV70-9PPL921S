@@ -16,7 +16,7 @@ Les limites LTFT stock (−8% / +12%) sont documentées en fin de fichier — **
 
 | Champ | Valeur |
 |---|---|
-| Adresse | (voir XDF) |
+| Adresse | 0x47F5E |
 | Type | Constante scalaire |
 | Unité | λ |
 
@@ -100,7 +100,7 @@ Les limites LTFT stock (−8% / +12%) sont documentées en fin de fichier — **
 
 | Champ | Valeur |
 |---|---|
-| Adresse | (voir XDF) |
+| Adresse | 0x42734 |
 | Type | Courbe 6 points |
 | Unité | % |
 
@@ -127,7 +127,7 @@ Les limites LTFT stock (−8% / +12%) sont documentées en fin de fichier — **
 
 | Champ | Valeur |
 |---|---|
-| Adresse | (voir XDF) |
+| Adresse | 0x42740 |
 | Type | Courbe 6 points |
 | Unité | % |
 

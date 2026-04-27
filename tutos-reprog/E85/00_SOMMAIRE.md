@@ -44,10 +44,8 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
   - [④ `c_t_ti_dly_fl_at_1/2` — Délai WOT boîte automatique](07_ALLUMAGE.md#p4)
 
 - **[08 — Lambda](08_LAMBDA.md)** — Anti-DTC break-in, warm-up lambda, richesse WOT
-  - [① `ip_fac_lamb_max_fsd_1` — Plafond WRAF, mode 1](08_LAMBDA.md#p1)
-  - [② `ip_fac_lamb_max_fsd_2` — Plafond WRAF, mode 2](08_LAMBDA.md#p2)
-  - [③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral](08_LAMBDA.md#p3)
-  - [④ `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes](08_LAMBDA.md#p4)
+  - [① `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral](08_LAMBDA.md#p1)
+  - [② `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes](08_LAMBDA.md#p2)
 
 ---
 
@@ -56,6 +54,8 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
 Améliorent le comportement mais non bloquantes pour un premier essai.
 
 - **[08 — Lambda (suite)](08_LAMBDA.md)** — Paramètres optionnels
+  - [③ `ip_fac_lamb_max_fsd_1` — Plafond WRAF, mode 1](08_LAMBDA.md#p3)
+  - [④ `ip_fac_lamb_max_fsd_2` — Plafond WRAF, mode 2](08_LAMBDA.md#p4)
   - [⑤ `ip_fac_lamb_wup_is` — Warm-up lambda ralenti (si instable)](08_LAMBDA.md#p5)
   - [⑥ `ip_lamb_fl__n` — Lambda cible WOT f(RPM)](08_LAMBDA.md#p6)
 
