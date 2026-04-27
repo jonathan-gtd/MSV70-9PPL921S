@@ -217,24 +217,3 @@ Option A (recommandée) : **laisser stock** — λ 0.920 WOT déjà présent, E8
 | Lambda WOT (sonde large bande) | 0.90–0.95 | Hors plage → ajuster ip_lamb_fl__n |
 | LTFT roulage | ±5% | > +10% → ip_mff_cor_opm trop petit |
 
----
-
-## INFO — Limites LTFT stock MSV70 (ne pas modifier)
-
-> **Les vraies limites sur ce bin sont −8% / +12% — asymétriques.** Si le LTFT plafonne en permanence : affiner le facteur injecteur (`ip_mff_cor_opm_*`) plutôt que d'élargir ces limites.
-
-| Paramètre | Adresse | Valeur stock | Modification E85 |
-|---|---|---|---|
-| `c_fac_max_h_rng_lam_ad` — limite haute LTFT haute charge | 0x47F4C | **+12.0%** | Ne pas modifier — surveiller |
-| `c_fac_max_l_rng_lam_ad` — limite haute LTFT basse charge | 0x47F4E | **+12.0%** | Ne pas modifier — surveiller |
-| `c_fac_min_h_rng_lam_ad` — limite basse LTFT haute charge | 0x47F50 | **92.0% (= −8%)** | Ne pas modifier |
-| `c_fac_min_l_rng_lam_ad` — limite basse LTFT basse charge | 0x47F52 | **92.0% (= −8%)** | Ne pas modifier |
-| `c_lam_mv_dyw_dly` — fenêtre dynamique STFT | 0x44B3E | **±7.7%** | Ne pas modifier |
-
-L'asymétrie (−8% / +12%) est intentionnelle — le MSV70 tolère mieux un mélange légèrement riche qu'un mélange pauvre. Calibrer `ip_mff_cor_opm_*` pour que le LTFT se stabilise à ±5% — jamais aux limites.
-
-| Condition | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| LTFT haute charge | −8% à +12% | Plafonne à +12% → ip_mff_cor_opm_* trop petit, augmenter |
-| LTFT plafonné à −8% en permanence | Absent | Plafonné → ip_mff_cor_opm_* trop élevé, réduire vers E70 (raw 44 581) |
-| LTFT après 500 km | ±5% | Instable → convergence en cours ou calibration à affiner |

@@ -1,6 +1,6 @@
 # Démarrage à froid (Cranking)
 
-L'éthanol s'évapore difficilement sous 25°C (ébullition à 78°C vs −40°C pour l'essence). Le moteur a besoin de **×1.35 à ×2.00 de masse carburant** au cranking selon la température. Trois paramètres à modifier : les deux tables de cranking + le seuil TCO. Un quatrième paramètre (after-start) gère la phase immédiatement post-démarrage.
+L'éthanol s'évapore difficilement sous 25°C (ébullition à 78°C vs −40°C pour l'essence). Le moteur a besoin de **×1.35 à ×2.00 de masse carburant** au cranking selon la température. Trois paramètres à modifier : les deux tables de cranking + le seuil TCO. Deux paramètres supplémentaires gèrent la phase immédiatement post-démarrage (after-start).
 
 **Règles absolues :**
 - Ne jamais appuyer sur la pédale avant démarrage — le MSV70 désactive l'enrichissement cranking si la pédale est enfoncée (Full Load Cutoff)
@@ -131,31 +131,39 @@ Autres valeurs possibles selon la rigueur hivernale :
 ---
 
 <a id="p4"></a>
-## ④ `ip_mff_lgrd_ast` — Enrichissement after-start (phase post-démarrage)
+## ④ `ip_ti_cast_opm_1` — Enrichissement after-start, mode Valvetronic
 
 | Champ | Valeur |
 |---|---|
-| Adresse | (voir XDF) |
-| Type | Courbe 1D f(RPM) |
-| Unité | facteur multiplicateur (×) |
-| Axes | X = RPM (0–800 tr/min post-démarrage) |
+| Adresse | 0x43FA4 |
+| Type | Map 2×10 |
+| Unité | facteur (sans dimension) |
+| Axes | X = TCO liquide (°C), Y = TCO admission (°C) |
 
-**Rôle :** Masse de carburant additionnelle injectée pendant la phase after-start — les premières secondes après que le moteur a pris vie mais avant que le régime soit stabilisé. Distinct du cranking (moteur en rotation sans allumage) et du warm-up (régime stabilisé). Sur E85, si l'enrichissement after-start est insuffisant, le moteur démarre puis cale dans les 2 premières secondes (il "prend" mais s'arrête immédiatement).
+**Rôle :** Valeur d'initialisation du facteur d'enrichissement post-démarrage — les premières secondes après que le moteur a pris vie mais avant que le régime soit stabilisé. Distinct du cranking (moteur en rotation sans allumage) et du warm-up (régime stabilisé). Sur E85, si l'enrichissement after-start est insuffisant, le moteur démarre puis cale dans les 2 premières secondes ("prend" mais s'arrête immédiatement). **Facteurs E85 à appliquer : ×1.55–1.65 à froid (< 0°C), ×1.35–1.45 entre 0–17°C, ×1.15–1.25 entre 17–30°C, ×1.00 au-dessus de 60°C.** Lire le bin avant modification pour obtenir les valeurs stock exactes.
 
-**Avant / Après :**
-
-| Condition TCO | ◀ Stock | ✅ E85 | Facteur |
-|---|---|---|---|
-| TCO ≤ 0°C | Valeur stock | **Stock × 1.55–1.65** | Vaporisation très déficiente |
-| TCO 0–17°C | Valeur stock | **Stock × 1.35–1.45** | Vaporisation partielle |
-| TCO 17–30°C | Valeur stock | **Stock × 1.20–1.30** | Légèrement insuffisant |
-| TCO 30–60°C | Valeur stock | **Stock × 1.10–1.15** | Quasi normal |
-| TCO > 60°C | Valeur stock | Inchangé | Vaporisation correcte |
+> `ip_mff_lgrd_ast` (0x4387C) est un **limiteur de gradient TI** post-démarrage (rate limiter sur la vitesse de variation du TI), non un enrichissement. Ne pas modifier.
 
 **Vérification :**
 
 | Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| Démarrage froid (< 5°C) | Moteur stable dès la 1ère seconde | Cale dans les 3 s → +15% colonnes froides |
-| Montée régime après démarrage | 0 → 800 RPM lisse, pas de chute | Chute transitoire RPM → facteur insuffisant |
-| Distinction cranking / after-start | — | Moteur ne part pas = cranking / part puis cale = after-start |
+| Démarrage froid (< 5°C) | Moteur stable dès la 1ère seconde | Cale dans les 3 s → +15% sur les colonnes TCO froides |
+| Montée régime après démarrage | 0 → 800 RPM lisse | Chute transitoire RPM → facteur insuffisant |
+| Distinction cranking / after-start | — | Ne part pas = cranking / part puis cale = after-start |
+
+---
+
+<a id="p5"></a>
+## ⑤ `ip_ti_cast_opm_2` — Enrichissement after-start, mode papillonné (GD)
+
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x43FB8 |
+| Type | Map 2×10 |
+| Unité | facteur (sans dimension) |
+| Axes | X = TCO liquide (°C), Y = TCO admission (°C) |
+
+**Rôle :** Même rôle qu'opm_1 pour le mode papillonné. Modifier identiquement à opm_1.
+
+**Vérification :** Identique à ④.

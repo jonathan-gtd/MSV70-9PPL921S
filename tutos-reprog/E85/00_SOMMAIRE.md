@@ -28,7 +28,8 @@ Guide complet de conversion éthanol pour le **Siemens MSV70** (BMW N52B30, SW 9
   - [① `ip_mff_cst_opm_1` — Cranking Valvetronic](05_DEMARRAGE_FROID.md#p1)
   - [② `ip_mff_cst_opm_2` — Cranking papillonné (GD)](05_DEMARRAGE_FROID.md#p2)
   - [③ `c_tco_n_mff_cst` — Seuil TCO activation cranking enrichi](05_DEMARRAGE_FROID.md#p3)
-  - [④ `ip_mff_lgrd_ast` — Enrichissement after-start](05_DEMARRAGE_FROID.md#p4)
+  - [④ `ip_ti_cast_opm_1` — Enrichissement after-start Valvetronic](05_DEMARRAGE_FROID.md#p4)
+  - [⑤ `ip_ti_cast_opm_2` — Enrichissement after-start papillonné (GD)](05_DEMARRAGE_FROID.md#p5)
 
 - **[06 — Film mural](06_FILM_MURAL.md)** — Compensation paroi collecteur (×1.25)
   - [① `ip_ti_tco_pos_slow_wf_opm_1` — Film lent positif, Valvetronic](06_FILM_MURAL.md#p1)
@@ -63,8 +64,7 @@ Améliorent le comportement mais non bloquantes pour un premier essai.
   - [⑥ `ip_iga_st_bas_opm_2` — Avance cranking papillonné GD](07_ALLUMAGE.md#p6)
   - [⑦ `c_iga_ini` — Avance initiale cranking (dernier recours)](07_ALLUMAGE.md#p7)
 
-- **[09 — Transitoire](09_TRANSITOIRE.md)** — À-coups à l'accélération (kickdown uniquement)
-  - [① `KF_FTRANSVL` — Facteur transition pleine charge](09_TRANSITOIRE.md#p1)
+- **[09 — Transitoire](09_TRANSITOIRE.md)** — Aucune modification E85 nécessaire (diagnostic §06 en premier)
 
 - **[10 — EVAP](10_EVAP.md)** — Oscillations STFT lors de la purge canister
   - [① `ip_flow_max_cps` — Débit maximal purge canister](10_EVAP.md#p1)

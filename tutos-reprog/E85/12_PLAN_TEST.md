@@ -24,18 +24,18 @@
 | **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | ×**1.25** |
 | **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | ×**1.25** |
 | **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | ×**1.25** |
-| **✅ MODIFIER** | `c_lamb_delta_i_max_lam_adj` | (voir XDF) | §08 | 0.050λ → **0.25λ** break-in |
-| ⬜ OPTIONNEL | `ip_fac_lamb_max_fsd_1/2` | (voir XDF) | §08 | cellules 3/4 : 30% → 40% — si DTC fuel trim malgré LTFT OK |
+| **✅ MODIFIER** | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | 0.050λ → **0.25λ** break-in |
+| **✅ MODIFIER** | `ip_ti_cast_opm_1` | 0x43FA4 | §05 | ×1.55–1.65 froid — after-start enrichissement |
+| **✅ MODIFIER** | `ip_ti_cast_opm_2` | 0x43FB8 | §05 | Idem mode papillonné |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | 200 ms → **0 ms** (MT) |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_2` | 0x44EC6 | §07 | 200 ms → **0 ms** (MT) |
+| ⬜ OPTIONNEL | `ip_fac_lamb_max_fsd_1/2` | 0x42734/40 | §08 | 30% → 40% — si DTC fuel trim malgré LTFT OK |
 | ⬜ OPTIONNEL | `ip_lamb_fl__n` | 0x436A2 | §08 | Stock λ 0.920 suffisant. Dé-enrichir à 0.940–0.950 pour +puissance |
 | ⬜ OPTIONNEL | `ip_fac_lamb_wup_is` | 0x42788 | §08 | 1.000 → 1.02–1.05 si ralenti instable warm-up |
 | ⬜ OPTIONNEL | `ip_iga_st_bas_opm_1/2` | 0x43586/B6 | §07 | +1° colonnes TCO ≤ 0°C si démarrage > 5 tours |
 | ⬜ OPTIONNEL | `c_iga_ini` | 0x44B2A | §07 | +1° à +2° si démarrage > 5 tours (dernier recours) |
-| ⬜ OPTIONNEL | `KF_FTRANSVL` | 0x5C5EE | §09 | +10% zone mi-charge si trou exclusivement en kickdown brutal |
-| ⬜ OPTIONNEL | `ip_flow_max_cps` | (voir XDF) | §10 | −10 à −15% si STFT > ±15% lors purge |
-| ⬜ OPTIONNEL | `ip_flow_cps` | (voir XDF) | §10 | −15% si STFT > ±10% lors purge |
-| 👁 SURVEILLER | `c_fac_max/min_*_rng_lam_ad` | 0x47F4C–52 | §08 | Limites LTFT −8% / +12% — ne pas modifier |
+| ⬜ OPTIONNEL | `ip_flow_max_cps` | 0x4FD54 | §10 | −10 à −15% si STFT > ±15% lors purge |
+| ⬜ OPTIONNEL | `ip_flow_cps` | 0x48B90 | §10 | −15% si STFT > ±10% lors purge |
 | ⛔ NE PAS MODIFIER | `c_fac_mff_ti_stnd` (×5 copies) | — | §04 | Overflow XDF — utiliser `ip_mff_cor_opm_*` |
 | ⛔ NE PAS MODIFIER | `ip_fac_eff_iga_ch_cold_opm_*` | 0x4A444/A4A8 | — | Retard chauffe catalyseur — E85 produit moins d'EGT |
 

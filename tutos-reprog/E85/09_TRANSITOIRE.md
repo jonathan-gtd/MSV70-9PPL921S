@@ -1,42 +1,8 @@
 # Enrichissement transitoire pleine charge
 
-Paramètres pilotant l'enrichissement lors d'un appel de couple brutal (kickdown). **Ne pas modifier en première intention.** Le film mural (§06) couvre la majorité des transitoires — diagnostiquer §06 en premier. Intervenir ici uniquement si des trous d'accélération persistent **exclusivement lors de kickdown brutal**, après validation §06.
+Le film mural (§06) couvre la majorité des transitoires sur E85. Aucun paramètre spécifique transitoire n'est à modifier pour une conversion E85. Si des trous persistent **exclusivement lors de kickdown brutal** après validation §06 complète, diagnostiquer la pression rail (DTC P0087, mesure WOT) avant toute autre intervention.
 
----
-
-## OPTIONNEL
-
-<a id="p1"></a>
-## ① `KF_FTRANSVL` — Facteur de transition pleine charge f(charge)
-
-| Champ | Valeur |
-|---|---|
-| Adresse | 0x5C5EE |
-| Type | Courbe 1×8 (uniforme sur tous les RPM) |
-| Unité | facteur (sans dimension) |
-| Axes | X = charge normalisée (0.0–0.983) |
-
-**Rôle :** Multiplicateur sur la masse carburant calculée lors d'une transition vers la pleine charge. À charge normalisée ~0.5, le facteur stock est ~0.39 — l'enrichissement transitoire n'est appliqué qu'à ~40% en zone intermédiaire. Sur E85, si le facteur est insuffisant, le mélange est lean de façon transitoire lors des kickdowns.
-
-**Avant / Après :**
-
-| Charge normalisée | ◀ Stock VB67774 | ✅ E85 (si trous kickdown) |
-|---|---|---|
-| 0.000 | 0.000 | 0.000 |
-| 0.098 | 0.049 | 0.049 |
-| 0.197 | 0.098 | 0.098 |
-| 0.295 | 0.147 | 0.147 |
-| 0.393 | 0.197 | **0.217** |
-| 0.492 | 0.393 | **0.432** |
-| 0.786 | 0.688 | **0.757** |
-| 0.983 | 0.983 | 0.983 |
-
-**Vérification :**
-
-| Condition | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Accélération progressive | Lisse, aucun trou | → problème film mural §06, pas transitoire |
-| Kickdown brutal uniquement | Aucun trou bref | Trou < 0.5s lors de kickdown → +10% zone 0.393–0.786 |
+> `KF_FTRANSVL` (0x5C5EE, module BLSHUB) est un paramètre de gestion charge/Valvetronic — pas de la carburant. Ne pas modifier.
 
 ---
 
