@@ -1,7 +1,6 @@
 # Reprog ECU — MSV70 E85
 
-Conversion éthanol sur **Siemens MSV70** (BMW N52B30, SW 9PPL921S — dump VB67774).  
-État : **FinalV1** — paramètres restants à modifier.
+Conversion éthanol sur **Siemens MSV70** (BMW N52B30, SW 9PPL921S — dump VB67774).
 
 ---
 
@@ -11,42 +10,89 @@ Toutes les certitudes sont basées sur : description XDF anglaise + catégorie X
 
 ### Obligatoires
 
-| Statut | Paramètre | Adresse | Guide | Type · Axes · Unité | Décodage du nom | Description XDF | Ce que ça fait | Conf. |
-|---|---|---|---|---|---|---|---|---|
-| ✅ | `ip_mff_cor_opm_1_1` | 0x4E3D4 | §04 | Map 12×16 · charge(mg/stk)×RPM · facteur | **ip**=table · **mff**=mass fuel flow · **cor**=correction · **opm**=operating mode · **1_1**=mode1 banque1 | *Injected fuel mass correction for operating mode 1 (bank 1)* | Multiplicateur masse carburant f(charge, RPM), mode Valvetronic, banque 1. Stock 1.016, E85 : 1.473 | 100% |
-| ✅ | `ip_mff_cor_opm_1_2` | 0x4E554 | §04 | Map 12×16 · charge(mg/stk)×RPM · facteur | **1_2**=mode1 banque2 | *…bank 2* | Même rôle, banque 2 | 100% |
-| ✅ | `ip_mff_cor_opm_2_1` | 0x4E6D4 | §04 | Map 10×12 · charge(mg/stk)×RPM · facteur | **2**=mode papillonné (GD) | *…operating mode 2 (bank 1)* | Même rôle, mode papillonné, banque 1 | 100% |
-| ✅ | `ip_mff_cor_opm_2_2` | 0x4E7C4 | §04 | Map 10×12 · charge(mg/stk)×RPM · facteur | **2_2**=mode papillonné banque2 | *…operating mode 2 (bank 2)* | Même rôle, mode papillonné, banque 2 | 100% |
-| ✅ | `ip_mff_cst_opm_1` | 0x437DC | §05 | Map 3×8 · RPM démarreur×TCO(°C) · mg/stk | **cst**=cold start · **opm_1**=Valvetronic | *Basic value for cranking injection at operation mode 1* | Masse injectée pendant cranking f(RPM démarreur, TCO), Valvetronic. E85 : ×1.35–2.00 selon TCO | 100% |
-| ✅ | `ip_mff_cst_opm_2` | 0x4380C | §05 | Map 3×8 · RPM démarreur×TCO(°C) · mg/stk | **opm_2**=papillonné | *…operation mode 2* | Même rôle, mode papillonné | 100% |
-| ✅ | `c_tco_n_mff_cst` | 0x44F2F | §05 | Scalaire · °C | **c**=constante · **tco**=temp. liquide · **n**=seuil · **mff_cst**=cold start MFF | *Cool temperature constant* | Seuil TCO d'activation cranking enrichi. Stock 17.25°C, E85 : 25°C | 100% |
-| ✅ | `ip_ti_cast_opm_1` | 0x43FA4 | §05 | Map 2×10 · TCO admission×TCO liquide(°C) · facteur | **ti**=injection time · **cast**=cold/catalyst after start · **opm_1**=Valvetronic | *Initialization value of post start enrichment factor at operation mode 1* | Valeur initiale du facteur d'enrichissement post-démarrage f(TCO liquide, TCO admission). E85 : ×1.55–1.65 froid | 82% |
-| ✅ | `ip_ti_cast_opm_2` | 0x43FB8 | §05 | Map 2×10 · TCO admission×TCO liquide(°C) · facteur | **opm_2**=papillonné | *…operation mode 2* | Même rôle, mode papillonné | 82% |
-| ✅ | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | Map 8×8 · RPM×TCO(°C) · facteur | **ti**=injection time · **tco**=f(TCO) · **pos**=montée charge · **fast**=rapide · **wf**=wall film · **opm_1**=Valvetronic | *fast positive wall film factor* | Film mural positif rapide f(RPM, TCO), Valvetronic. E85 : ×1.25 sous 70°C | 93% |
-| ✅ | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | Map 8×8 · RPM×TCO(°C) · facteur | **opm_2**=papillonné | *fast positive wall film factor* | Même rôle, mode papillonné | 93% |
-| ✅ | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | §06 | Map 8×8 · RPM×TCO(°C) · facteur | **slow**=composante lente · **total**=accumulation totale film | *total positive wall film factor* | Film mural positif lent f(RPM, TCO), Valvetronic. E85 : ×1.25 sous 70°C | 90% |
-| ✅ | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | Map 8×8 · RPM×TCO(°C) · facteur | **opm_2**=papillonné | *total positive wall film factor* | Même rôle, mode papillonné | 90% |
-| ✅ | `ip_iga_bas_max_knk__n__maf` | 0x4323A | §07 | Map 8×8 · RPM×charge(mg/stk) · °CRK | **iga**=ignition angle · **bas**=base · **max**=plafond · **knk**=knock · **n**=RPM · **maf**=débit air | *Maximum value for spark retard* | Plafond avance anti-cliquetis f(RPM, MAF). ⚠️ Plafond ≠ avance effective — lever ne fait rien si le modèle couple demande moins | 92% |
-| ✅ | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | Scalaire · s | **c**=constante · **t**=temps · **ti**=injection time · **dly**=delay · **fl**=full load · **1**=BM copie1 | *Delay time Full load* | Délai activation enrichissement WOT boîte manuelle. Stock 200 ms, E85 : 0 ms | 100% |
-| ✅ | `c_t_ti_dly_fl_2` | 0x44EC6 | §07 | Scalaire · s | **2**=copie 2 | *Delay time Full load* | Copie 2 — modifier identiquement | 100% |
-| ✅ | `c_t_ti_dly_fl_at_1` | 0x44EC8 | §07 | Scalaire · s | **at**=automatic transmission | *Delay time Full load AT* | Idem boîte automatique | 100% |
-| ✅ | `c_t_ti_dly_fl_at_2` | 0x44ECA | §07 | Scalaire · s | **at_2**=BVA copie 2 | *Delay time Full load AT* | Copie 2 BVA | 100% |
-| ✅ | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | Scalaire · λ | **c**=constante · **lamb**=lambda · **delta**=variation · **i**=intégrateur · **max**=plafond · **lam_adj**=lambda adjustment | *upper limit of trim control I share* | Plafond d'accumulation LTFT (part intégrale du régulateur). Stock 0.050λ (5%), E85 break-in : 0.25λ | 98% |
-| ✅ | `ip_fac_lamb_wup` | 0x42764 | §08 | Map 6×6 · RPM×charge(mg/stk) · facteur | **fac**=facteur · **lamb**=lambda · **wup**=warm-up | *correction factor for basic lambda warm-up* | Facteur correctif sur consigne lambda pendant warm-up f(RPM, MAF). Stock 1.000, E85 : 1.03–1.08 basses charges | 95% |
+**Navigation**
+
+| Statut | Paramètre | Adresse | Guide | Type · Axes · Unité | Conf. |
+|---|---|---|---|---|---|
+| ✅ | `ip_mff_cor_opm_1_1` | 0x4E3D4 | §04 | Map 12×16 · charge(mg/stk)×RPM · facteur | 100% |
+| ✅ | `ip_mff_cor_opm_1_2` | 0x4E554 | §04 | Map 12×16 · charge(mg/stk)×RPM · facteur | 100% |
+| ✅ | `ip_mff_cor_opm_2_1` | 0x4E6D4 | §04 | Map 10×12 · charge(mg/stk)×RPM · facteur | 100% |
+| ✅ | `ip_mff_cor_opm_2_2` | 0x4E7C4 | §04 | Map 10×12 · charge(mg/stk)×RPM · facteur | 100% |
+| ✅ | `ip_mff_cst_opm_1` | 0x437DC | §05 | Map 3×8 · RPM démarreur×TCO(°C) · mg/stk | 100% |
+| ✅ | `ip_mff_cst_opm_2` | 0x4380C | §05 | Map 3×8 · RPM démarreur×TCO(°C) · mg/stk | 100% |
+| ✅ | `c_tco_n_mff_cst` | 0x44F2F | §05 | Scalaire · °C | 100% |
+| ✅ | `ip_ti_cast_opm_1` | 0x43FA4 | §05 | Map 2×10 · TCO admission×TCO liquide(°C) · facteur | 82% |
+| ✅ | `ip_ti_cast_opm_2` | 0x43FB8 | §05 | Map 2×10 · TCO admission×TCO liquide(°C) · facteur | 82% |
+| ✅ | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | Map 8×8 · RPM×TCO(°C) · facteur | 93% |
+| ✅ | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | Map 8×8 · RPM×TCO(°C) · facteur | 93% |
+| ✅ | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | §06 | Map 8×8 · RPM×TCO(°C) · facteur | 90% |
+| ✅ | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | Map 8×8 · RPM×TCO(°C) · facteur | 90% |
+| ✅ | `ip_iga_bas_max_knk__n__maf` | 0x4323A | §07 | Map 8×8 · RPM×charge(mg/stk) · °CRK | 92% |
+| ✅ | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | Scalaire · s | 100% |
+| ✅ | `c_t_ti_dly_fl_2` | 0x44EC6 | §07 | Scalaire · s | 100% |
+| ✅ | `c_t_ti_dly_fl_at_1` | 0x44EC8 | §07 | Scalaire · s | 100% |
+| ✅ | `c_t_ti_dly_fl_at_2` | 0x44ECA | §07 | Scalaire · s | 100% |
+| ✅ | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | Scalaire · λ | 98% |
+| ✅ | `ip_fac_lamb_wup` | 0x42764 | §08 | Map 6×6 · RPM×charge(mg/stk) · facteur | 95% |
+
+**Détail**
+
+| Paramètre | Description XDF (originale) | Décodage du nom | Ce que ça fait |
+|---|---|---|---|
+| `ip_mff_cor_opm_1_1` | *Injected fuel mass correction for operating mode 1 (bank 1)* | **ip**=table · **mff**=mass fuel flow · **cor**=correction · **opm**=operating mode · **1_1**=mode1 banque1 | Multiplicateur masse carburant f(charge, RPM), mode Valvetronic, banque 1. Stock 1.016, E85 : 1.473 |
+| `ip_mff_cor_opm_1_2` | *…bank 2* | **1_2**=mode1 banque2 | Même rôle, banque 2 |
+| `ip_mff_cor_opm_2_1` | *…operating mode 2 (bank 1)* | **2**=mode papillonné (GD) | Même rôle, mode papillonné, banque 1 |
+| `ip_mff_cor_opm_2_2` | *…operating mode 2 (bank 2)* | **2_2**=mode papillonné banque2 | Même rôle, mode papillonné, banque 2 |
+| `ip_mff_cst_opm_1` | *Basic value for cranking injection at operation mode 1* | **cst**=cold start · **opm_1**=Valvetronic | Masse injectée pendant cranking f(RPM démarreur, TCO), Valvetronic. E85 : ×1.35–2.00 selon TCO |
+| `ip_mff_cst_opm_2` | *…operation mode 2* | **opm_2**=papillonné | Même rôle, mode papillonné |
+| `c_tco_n_mff_cst` | *Cool temperature constant* | **c**=constante · **tco**=temp. liquide · **n**=seuil · **mff_cst**=cold start MFF | Seuil TCO d'activation cranking enrichi. Stock 17.25°C, E85 : 25°C |
+| `ip_ti_cast_opm_1` | *Initialization value of post start enrichment factor at operation mode 1* | **ti**=injection time · **cast**=cold/catalyst after start · **opm_1**=Valvetronic | Valeur initiale du facteur d'enrichissement post-démarrage f(TCO liquide, TCO admission). E85 : ×1.55–1.65 froid |
+| `ip_ti_cast_opm_2` | *…operation mode 2* | **opm_2**=papillonné | Même rôle, mode papillonné |
+| `ip_ti_tco_pos_fast_wf_opm_1` | *fast positive wall film factor* | **ti**=injection time · **tco**=f(TCO) · **pos**=montée charge · **fast**=rapide · **wf**=wall film · **opm_1**=Valvetronic | Film mural positif rapide f(RPM, TCO), Valvetronic. E85 : ×1.25 sous 70°C |
+| `ip_ti_tco_pos_fast_wf_opm_2` | *fast positive wall film factor* | **opm_2**=papillonné | Même rôle, mode papillonné |
+| `ip_ti_tco_pos_slow_wf_opm_1` | *total positive wall film factor* | **slow**=composante lente · **total**=accumulation totale film | Film mural positif lent f(RPM, TCO), Valvetronic. E85 : ×1.25 sous 70°C |
+| `ip_ti_tco_pos_slow_wf_opm_2` | *total positive wall film factor* | **opm_2**=papillonné | Même rôle, mode papillonné |
+| `ip_iga_bas_max_knk__n__maf` | *Maximum value for spark retard* | **iga**=ignition angle · **bas**=base · **max**=plafond · **knk**=knock · **n**=RPM · **maf**=débit air | Plafond avance anti-cliquetis f(RPM, MAF). ⚠️ Plafond ≠ avance effective — lever ne fait rien si le modèle couple demande moins |
+| `c_t_ti_dly_fl_1` | *Delay time Full load* | **c**=constante · **t**=temps · **ti**=injection time · **dly**=delay · **fl**=full load · **1**=BM copie1 | Délai activation enrichissement WOT boîte manuelle. Stock 200 ms, E85 : 0 ms |
+| `c_t_ti_dly_fl_2` | *Delay time Full load* | **2**=copie 2 | Copie 2 — modifier identiquement |
+| `c_t_ti_dly_fl_at_1` | *Delay time Full load AT* | **at**=automatic transmission | Idem boîte automatique |
+| `c_t_ti_dly_fl_at_2` | *Delay time Full load AT* | **at_2**=BVA copie 2 | Copie 2 BVA |
+| `c_lamb_delta_i_max_lam_adj` | *upper limit of trim control I share* | **c**=constante · **lamb**=lambda · **delta**=variation · **i**=intégrateur · **max**=plafond · **lam_adj**=lambda adjustment | Plafond d'accumulation LTFT (part intégrale du régulateur). Stock 0.050λ (5%), E85 break-in : 0.25λ |
+| `ip_fac_lamb_wup` | *correction factor for basic lambda warm-up* | **fac**=facteur · **lamb**=lambda · **wup**=warm-up | Facteur correctif sur consigne lambda pendant warm-up f(RPM, MAF). Stock 1.000, E85 : 1.03–1.08 basses charges |
+
+---
 
 ### Optionnels
 
-| Statut | Paramètre | Adresse | Guide | Type · Axes · Unité | Décodage du nom | Description XDF | Ce que ça fait | Conf. |
-|---|---|---|---|---|---|---|---|---|
-| ⬜ | `ip_fac_lamb_max_fsd_1` | 0x42734 | §08 | Courbe 6 pts · f(λ consigne normalisée) · % | **fac**=facteur · **lamb**=lambda · **max**=plafond · **fsd**=fuel system deviation · **1**=mode 1 | *Lambdacontroller maximum threshold for FSD dependent on LAMB_SP* | Plafond STFT autorisé par le contrôleur lambda f(consigne λ). Stock ~30%. Uniquement si DTC fuel trim malgré LTFT OK | 88% |
-| ⬜ | `ip_fac_lamb_max_fsd_2` | 0x42740 | §08 | Courbe 6 pts · f(λ consigne normalisée) · % | **2**=mode 2 | *…mode 2* | Idem mode 2 — modifier simultanément | 88% |
-| ⬜ | `ip_fac_lamb_wup_is` | 0x42788 | §08 | Map 3×4 · RPM×charge(mg/stk) · facteur | **is**=idle speed (ralenti) | *correction factor for basic lambda warm-up during idle* | Facteur warm-up lambda restreint au ralenti. Uniquement si ralenti instable malgré ip_fac_lamb_wup OK | 95% |
-| ⬜ | `ip_lamb_fl__n` | 0x436A2 | §08 | Courbe 12 pts · f(RPM) · λ | **lamb**=lambda · **fl**=full load · **n**=f(RPM) | *Lambda full load enrichment* | Consigne lambda WOT f(RPM). Stock VB67774 déjà à 0.920λ — ne modifier que si sonde large bande hors plage | 98% |
-| ⬜ | `ip_iga_st_bas_opm_1` | 0x43586 | §07 | Map 6×8 · RPM×TCO(°C) · °CRK | **iga**=ignition angle · **st**=start · **bas**=basic · **opm_1**=Valvetronic | *Basic ignition angle at start at operation mode 1* | Avance allumage de base au démarrage f(RPM, TCO). Si démarrage > 5 tours malgré cranking MFF OK | 95% |
-| ⬜ | `ip_iga_st_bas_opm_2` | 0x435B6 | §07 | Map 6×8 · RPM×TCO(°C) · °CRK | **opm_2**=papillonné | *…operation mode 2* | Même rôle, mode papillonné | 95% |
-| ⬜ | `c_iga_ini` | 0x44B2A | §07 | Scalaire · °CRK | **c**=constante · **iga**=ignition angle · **ini**=initial | *Init value for ignition angle* | Avance initiale premier cycle cranking. Stock 6.0°CRK, E85 : +1° à +2°. Dernier recours | 95% |
-| ⬜ | `ip_flow_max_cps` | 0x4FD54 | §10 | Map 12×12 · RPM×charge(mg/stk) · kg/h | **flow**=débit · **max**=maximum · **cps**=canister purge solenoid | *flow setpoint for MAX_PURGE* | Débit maximal purge canister f(RPM, charge). Réduire −10–15% si STFT oscille lors purges | 93% |
-| ⬜ | `ip_flow_cps` | 0x48B90 | §10 | Courbe 16 pts · f(dépression hPa) · kg/h | **cps**=canister purge solenoid | *FLOW_CPS for fully opened CPS (CPPWM=100%)* | Débit canister vanne 100% ouverte f(dépression). Réduire −15% si STFT > ±10% lors purges | 93% |
+**Navigation**
+
+| Statut | Paramètre | Adresse | Guide | Type · Axes · Unité | Conf. |
+|---|---|---|---|---|---|
+| ⬜ | `ip_fac_lamb_max_fsd_1` | 0x42734 | §08 | Courbe 6 pts · f(λ consigne normalisée) · % | 88% |
+| ⬜ | `ip_fac_lamb_max_fsd_2` | 0x42740 | §08 | Courbe 6 pts · f(λ consigne normalisée) · % | 88% |
+| ⬜ | `ip_fac_lamb_wup_is` | 0x42788 | §08 | Map 3×4 · RPM×charge(mg/stk) · facteur | 95% |
+| ⬜ | `ip_lamb_fl__n` | 0x436A2 | §08 | Courbe 12 pts · f(RPM) · λ | 98% |
+| ⬜ | `ip_iga_st_bas_opm_1` | 0x43586 | §07 | Map 6×8 · RPM×TCO(°C) · °CRK | 95% |
+| ⬜ | `ip_iga_st_bas_opm_2` | 0x435B6 | §07 | Map 6×8 · RPM×TCO(°C) · °CRK | 95% |
+| ⬜ | `c_iga_ini` | 0x44B2A | §07 | Scalaire · °CRK | 95% |
+| ⬜ | `ip_flow_max_cps` | 0x4FD54 | §10 | Map 12×12 · RPM×charge(mg/stk) · kg/h | 93% |
+| ⬜ | `ip_flow_cps` | 0x48B90 | §10 | Courbe 16 pts · f(dépression hPa) · kg/h | 93% |
+
+**Détail**
+
+| Paramètre | Description XDF (originale) | Décodage du nom | Ce que ça fait |
+|---|---|---|---|
+| `ip_fac_lamb_max_fsd_1` | *Lambdacontroller maximum threshold for FSD dependent on LAMB_SP* | **fac**=facteur · **lamb**=lambda · **max**=plafond · **fsd**=fuel system deviation · **1**=mode 1 | Plafond STFT autorisé par le contrôleur lambda f(consigne λ). Stock ~30%. Uniquement si DTC fuel trim malgré LTFT OK |
+| `ip_fac_lamb_max_fsd_2` | *…mode 2* | **2**=mode 2 | Idem mode 2 — modifier simultanément |
+| `ip_fac_lamb_wup_is` | *correction factor for basic lambda warm-up during idle* | **is**=idle speed (ralenti) | Facteur warm-up lambda restreint au ralenti. Uniquement si ralenti instable malgré ip_fac_lamb_wup OK |
+| `ip_lamb_fl__n` | *Lambda full load enrichment* | **lamb**=lambda · **fl**=full load · **n**=f(RPM) | Consigne lambda WOT f(RPM). Stock VB67774 déjà à 0.920λ — ne modifier que si sonde large bande hors plage |
+| `ip_iga_st_bas_opm_1` | *Basic ignition angle at start at operation mode 1* | **iga**=ignition angle · **st**=start · **bas**=basic · **opm_1**=Valvetronic | Avance allumage de base au démarrage f(RPM, TCO). Si démarrage > 5 tours malgré cranking MFF OK |
+| `ip_iga_st_bas_opm_2` | *…operation mode 2* | **opm_2**=papillonné | Même rôle, mode papillonné |
+| `c_iga_ini` | *Init value for ignition angle* | **c**=constante · **iga**=ignition angle · **ini**=initial | Avance initiale premier cycle cranking. Stock 6.0°CRK, E85 : +1° à +2°. Dernier recours |
+| `ip_flow_max_cps` | *flow setpoint for MAX_PURGE* | **flow**=débit · **max**=maximum · **cps**=canister purge solenoid | Débit maximal purge canister f(RPM, charge). Réduire −10–15% si STFT oscille lors purges |
+| `ip_flow_cps` | *FLOW_CPS for fully opened CPS (CPPWM=100%)* | **cps**=canister purge solenoid | Débit canister vanne 100% ouverte f(dépression). Réduire −15% si STFT > ±10% lors purges |
+
+---
 
 ### Ne pas modifier
 
