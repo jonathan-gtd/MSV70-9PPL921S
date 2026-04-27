@@ -1,9 +1,9 @@
 # Lambda — Corrections STFT/LTFT, warm-up et richesse WOT
 
 Ce fichier couvre trois aspects liés à la gestion lambda :
-1. **Plafonds de correction** (anti-DTC break-in) — obligatoires avant le premier flash
+1. **Plafond LTFT intégral** — obligatoire avant le premier flash
 2. **Warm-up lambda** — enrichissement pendant la chauffe
-3. **Lambda cible WOT** — optionnel
+3. **Plafond WRAF / lambda WOT / warm-up ralenti** — optionnel
 
 Les limites LTFT stock (−8% / +12%) sont documentées en fin de fichier — **ne pas modifier**.
 
@@ -12,66 +12,7 @@ Les limites LTFT stock (−8% / +12%) sont documentées en fin de fichier — **
 ## OBLIGATOIRE — Anti-DTC break-in
 
 <a id="p1"></a>
-## ① `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF instantanée, mode 1
-
-| Champ | Valeur |
-|---|---|
-| Adresse | (voir XDF) |
-| Type | Courbe 6 points |
-| Unité | % |
-
-**Rôle :** Limite haute de la correction STFT instantanée autorisée par le système WRAF (Wide Range Air Fuel). Si le STFT monte au-delà de ce plafond, l'ECU peut lever un DTC → voyant moteur. Sur E85 en break-in (0–500 km), le STFT peut atteindre +18 à +22% pendant la convergence — au-delà du plafond stock de 30%. Élargir pendant le rodage, resserrer une fois stabilisé.
-
-**Avant / Après :**
-
-| Cellule | 1 | 2 | 3 | 4 | 5 | 6 |
-|---|---|---|---|---|---|---|
-| ◀ Stock VB67774 (%) | 100.0 | 35.0 | **30.0** | **30.0** | 35.0 | 100.0 |
-| ✅ E85 Break-in (%) | 100.0 | 45.0 | **40.0** | **40.0** | 45.0 | 100.0 |
-| ✅ E85 Stabilisé (%) | 100.0 | 38.0 | **35.0** | **35.0** | 38.0 | 100.0 |
-
-> Les cellules 1 et 6 sont déjà à 100% stock. Les cellules centrales à 30% sont le vrai goulot d'étranglement : **sans** ip_mff_cor_opm correctement calibré (stock 1.016 → E85 besoin 1.473), le STFT devrait couvrir +44.9% — impossible avec un plafond à 30%. Avec ip_mff_cor_opm à 1.473, le STFT devrait rester à ±5–10% ; le plafond à 40% est une précaution pour le break-in (LTFT à 0%, transitoires), pas une valeur cible.
-
-**Vérification :**
-
-| Condition | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Voyant moteur dans les 500 premiers km | Absent | Allumé → cellules 3/4 trop serrées, monter à 40% |
-| STFT boucle fermée | ±15% max | > ±30% continu → calibration injecteurs à revoir |
-
----
-
-<a id="p2"></a>
-## ② `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF instantanée, mode 2
-
-| Champ | Valeur |
-|---|---|
-| Adresse | (voir XDF) |
-| Type | Courbe 6 points |
-| Unité | % |
-
-**Rôle :** Copie du plafond WRAF pour le mode 2. Même logique qu'opm_1. Les deux modes doivent être cohérents — si mode 1 est élargi et mode 2 reste stock, le voyant peut s'allumer lors des commutations de mode de régulation lambda.
-
-**Avant / Après :**
-
-Identique à `ip_fac_lamb_max_fsd_1` — mêmes valeurs :
-
-| Cellule | 1 | 2 | 3 | 4 | 5 | 6 |
-|---|---|---|---|---|---|---|
-| ◀ Stock VB67774 (%) | 100.0 | 35.0 | **30.0** | **30.0** | 35.0 | 100.0 |
-| ✅ E85 Break-in (%) | 100.0 | 45.0 | **40.0** | **40.0** | 45.0 | 100.0 |
-| ✅ E85 Stabilisé (%) | 100.0 | 38.0 | **35.0** | **35.0** | 38.0 | 100.0 |
-
-**Vérification :**
-
-| Condition | ✅ Cible | ⚠️ Action |
-|---|---|---|
-| Voyant moteur intermittent | Absent | Intermittent → mode 2 non modifié, commutation déclenche DTC |
-
----
-
-<a id="p3"></a>
-## ③ `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral
+## ① `c_lamb_delta_i_max_lam_adj` — Plafond LTFT intégral
 
 | Champ | Valeur |
 |---|---|
@@ -79,7 +20,7 @@ Identique à `ip_fac_lamb_max_fsd_1` — mêmes valeurs :
 | Type | Constante scalaire |
 | Unité | λ |
 
-**Rôle :** Valeur maximale d'accumulation de l'intégrateur LTFT (long term fuel trim). Si l'adaptation atteint ce plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Sur E85 en break-in, le LTFT peut vouloir s'accumuler jusqu'à +25% pendant les premiers 200 km. Stock réel lu sur VB67774 : **0.050 λ** — multiplier par 5 avant le premier flash.
+**Rôle :** Valeur maximale d'accumulation de l'intégrateur LTFT (long term fuel trim). Si l'adaptation atteint ce plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Sur E85 en break-in, le LTFT doit pouvoir s'accumuler jusqu'à ~+20% pendant les premiers 200 km. **Stock réel lu sur VB67774 : 0.050 λ (5%) — multiplier par 5 avant le premier flash.** Sans cette modification, le LTFT plafonne immédiatement et l'ECU ne converge jamais.
 
 **Avant / Après :**
 
@@ -96,29 +37,10 @@ Identique à `ip_fac_lamb_max_fsd_1` — mêmes valeurs :
 
 ---
 
-**Procédure complète prévention DTC break-in :**
-
-```
-Avant premier flash E85 :
-  1. Monter ip_fac_lamb_max_fsd_1/2 cellules 3/4 à 40%
-  2. Monter c_lamb_delta_i_max_lam_adj à 0.25 λ
-
-Après 300–500 km :
-  3. Lire LTFT avec ISTA ou scanner OBD → cible ±5%
-  4. Si stable → resserrer : cellules FSD à 35%, LTFT max à 0.15 λ
-  5. Reflasher — valeurs serrées évitent les faux DTC futurs
-
-Voyant MIL allumé pendant break-in :
-  → DTC "fuel trim" → FSD/LTFT trop serrés → élargir et reflasher
-  → NE PAS effacer le DTC sans reflasher : il revient immédiatement
-```
-
----
-
 ## OBLIGATOIRE — Warm-up lambda
 
-<a id="p4"></a>
-## ④ `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes
+<a id="p2"></a>
+## ② `ip_fac_lamb_wup` — Facteur warm-up lambda, tous régimes
 
 | Champ | Valeur |
 |---|---|
@@ -173,6 +95,54 @@ Voyant MIL allumé pendant break-in :
 
 ## OPTIONNEL
 
+<a id="p3"></a>
+## ③ `ip_fac_lamb_max_fsd_1` — Plafond correction WRAF instantanée, mode 1
+
+| Champ | Valeur |
+|---|---|
+| Adresse | (voir XDF) |
+| Type | Courbe 6 points |
+| Unité | % |
+
+**Rôle :** Plafond de la correction STFT instantanée autorisée par le système WRAF. Avec `ip_mff_cor_opm` correctement à 1.473, le STFT reste à ±5–10% et ce plafond n'est jamais atteint. **À modifier uniquement si un voyant DTC fuel trim apparaît pendant le break-in** malgré `c_lamb_delta_i_max_lam_adj` correctement élargi — ou si des transitions de mode (STFT → LTFT) déclenchent des DTC intermittents.
+
+**Avant / Après :**
+
+| Cellule | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| ◀ Stock VB67774 (%) | 100.0 | 35.0 | **30.0** | **30.0** | 35.0 | 100.0 |
+| ✅ E85 Break-in (%) | 100.0 | 45.0 | **40.0** | **40.0** | 45.0 | 100.0 |
+| ✅ E85 Stabilisé (%) | 100.0 | 38.0 | **35.0** | **35.0** | 38.0 | 100.0 |
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Voyant DTC fuel trim pendant break-in | Absent | Allumé malgré LTFT OK → monter cellules 3/4 à 40% |
+
+---
+
+<a id="p4"></a>
+## ④ `ip_fac_lamb_max_fsd_2` — Plafond correction WRAF instantanée, mode 2
+
+| Champ | Valeur |
+|---|---|
+| Adresse | (voir XDF) |
+| Type | Courbe 6 points |
+| Unité | % |
+
+**Rôle :** Copie du plafond WRAF pour le mode 2. Si ③ est modifié, modifier ④ identiquement — une incohérence entre les deux modes déclenche un DTC lors des commutations.
+
+**Avant / Après :** Identique à ③.
+
+| Cellule | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| ◀ Stock VB67774 (%) | 100.0 | 35.0 | **30.0** | **30.0** | 35.0 | 100.0 |
+| ✅ E85 Break-in (%) | 100.0 | 45.0 | **40.0** | **40.0** | 45.0 | 100.0 |
+| ✅ E85 Stabilisé (%) | 100.0 | 38.0 | **35.0** | **35.0** | 38.0 | 100.0 |
+
+---
+
 <a id="p5"></a>
 ## ⑤ `ip_fac_lamb_wup_is` — Facteur warm-up lambda, ralenti uniquement
 
@@ -183,7 +153,7 @@ Voyant MIL allumé pendant break-in :
 | Unité | facteur (sans dimension) |
 | Axes | X = MAF (65–300 mg/stk), Y = RPM (704–1760 tr/min) |
 
-**Rôle :** Facteur multiplicateur sur la consigne lambda pendant le warm-up, actif uniquement au ralenti. Sur E85, le ralenti peut être instable pendant le warm-up si la vaporisation de l'éthanol est insuffisante aux basses températures. Un léger enrichissement (+2 à +5%) aux cellules basses MAF / bas RPM peut stabiliser. **Modifier uniquement si ralenti instable pendant warm-up malgré `ip_mff_cst_opm_*` et `ip_fac_lamb_wup` corrects.**
+**Rôle :** Facteur multiplicateur sur la consigne lambda pendant le warm-up, actif uniquement au ralenti. **Modifier uniquement si ralenti instable pendant warm-up malgré `ip_mff_cst_opm_*` et `ip_fac_lamb_wup` corrects.**
 
 **◀ Avant — Stock (facteur λ)**
 
@@ -207,7 +177,7 @@ Voyant MIL allumé pendant break-in :
 
 | Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| Ralenti pendant warm-up (TCO 30–70°C) | Stable, aucune oscillation RPM | Instable → augmenter cellules 704 rpm / 65–100 mg/stk de +1–2% |
+| Ralenti pendant warm-up (TCO 30–70°C) | Stable, aucune oscillation RPM | Instable → +1–2% cellules 704 rpm / 65–100 mg/stk |
 | STFT ralenti chaud (TCO > 80°C) | −5% à +5% | Riche → facteur trop élevé, réduire |
 
 ---

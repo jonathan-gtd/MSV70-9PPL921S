@@ -24,8 +24,8 @@
 | **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | ×**1.25** |
 | **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | ×**1.25** |
 | **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | ×**1.25** |
-| **✅ MODIFIER** | `ip_fac_lamb_max_fsd_1/2` | (voir XDF) | §08 | cellules 3/4 : 30% → **40%** break-in |
 | **✅ MODIFIER** | `c_lamb_delta_i_max_lam_adj` | (voir XDF) | §08 | 0.050λ → **0.25λ** break-in |
+| ⬜ OPTIONNEL | `ip_fac_lamb_max_fsd_1/2` | (voir XDF) | §08 | cellules 3/4 : 30% → 40% — si DTC fuel trim malgré LTFT OK |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | 200 ms → **0 ms** (MT) |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_2` | 0x44EC6 | §07 | 200 ms → **0 ms** (MT) |
 | ⬜ OPTIONNEL | `ip_lamb_fl__n` | 0x436A2 | §08 | Stock λ 0.920 suffisant. Dé-enrichir à 0.940–0.950 pour +puissance |
