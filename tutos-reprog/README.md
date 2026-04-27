@@ -5,63 +5,57 @@ Conversion éthanol sur **Siemens MSV70** (BMW N52B30, SW 9PPL921S — dump VB67
 
 ---
 
-## 🔴 Obligatoire — Carburant de base
+## Tableau de référence — Paramètres E85
 
-| Paramètre(s) | Valeur FinalV1 | Cible | Notes |
-|---|---|---|---|
-| `ip_fac_lamb_max_fsd_1` `_2` | **40%** — raw 45875/47513 | Break-in : **120–125%** (raw ~72082–73722). Stable : 115–120% | ⚠️ CRITIQUE. Avec 40%, DTCs STFT garantis pendant la convergence LTFT. La correction STFT va plafonner et déclencher P0171/P0172. Monter à 120% avant premier démarrage E85. |
-| `c_lamb_delta_i_max_lam_adj` | 0.250 λ — raw 4098 ✓ break-in | Après 500 km : **0.20 λ** | Break-in correct. Réduire à 0.20λ une fois le LTFT stabilisé (±5%). |
+Toutes les certitudes sont basées sur : description XDF anglaise + catégorie XDF + décodage du nom + cohérence avec les valeurs stock lues dans le bin.
 
----
+### Obligatoires
 
-## 🔴 Obligatoire — Démarrage froid
+| Statut | Paramètre | Adresse | Guide | Décodage du nom | Description XDF | Ce que ça fait | Conf. |
+|---|---|---|---|---|---|---|---|
+| ✅ | `ip_mff_cor_opm_1_1` | 0x4E3D4 | §04 | **ip**=table · **mff**=mass fuel flow · **cor**=correction · **opm**=operating mode · **1_1**=mode1 banque1 | *Injected fuel mass correction for operating mode 1 (bank 1)* | Multiplicateur masse carburant f(RPM, charge), mode Valvetronic, banque 1. Stock 1.016, E85 : 1.473 | 95% |
+| ✅ | `ip_mff_cor_opm_1_2` | 0x4E554 | §04 | **1_2**=mode1 banque2 | *…bank 2* | Même rôle, banque 2 | 95% |
+| ✅ | `ip_mff_cor_opm_2_1` | 0x4E6D4 | §04 | **2**=mode papillonné (GD) | *…operating mode 2 (bank 1)* | Même rôle, mode papillonné, banque 1 | 95% |
+| ✅ | `ip_mff_cor_opm_2_2` | 0x4E7C4 | §04 | **2_2**=mode papillonné banque2 | *…operating mode 2 (bank 2)* | Même rôle, mode papillonné, banque 2 | 95% |
+| ✅ | `ip_mff_cst_opm_1` | 0x437DC | §05 | **cst**=cold start · **opm_1**=Valvetronic | *Basic value for cranking injection at operation mode 1* | Masse injectée pendant cranking f(TCO, RPM démarreur), Valvetronic. E85 : ×1.35–2.00 selon TCO | 90% |
+| ✅ | `ip_mff_cst_opm_2` | 0x4380C | §05 | **opm_2**=papillonné | *…operation mode 2* | Même rôle, mode papillonné | 90% |
+| ✅ | `c_tco_n_mff_cst` | 0x44F2F | §05 | **c**=constante · **tco**=temp. liquide · **n**=seuil · **mff_cst**=cold start MFF | *Cool temperature constant* | Seuil TCO d'activation cranking enrichi. Stock 17.25°C, E85 : 25°C | 90% |
+| ✅ | `ip_ti_cast_opm_1` | 0x43FA4 | §05 | **ti**=injection time · **cast**=cold/catalyst after start · **opm_1**=Valvetronic | *Initialization value of post start enrichment factor at operation mode 1* | Facteur d'enrichissement post-démarrage f(TCO liquide, TCO admission). E85 : ×1.55–1.65 froid | 80% |
+| ✅ | `ip_ti_cast_opm_2` | 0x43FB8 | §05 | **opm_2**=papillonné | *…operation mode 2* | Même rôle, mode papillonné | 80% |
+| ✅ | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | **ti**=injection time · **tco**=f(TCO) · **pos**=montée charge · **fast**=rapide · **wf**=wall film · **opm_1**=Valvetronic | *fast positive wall film factor* | Film mural positif rapide f(TCO, RPM), Valvetronic. E85 : ×1.25 sous 70°C | 90% |
+| ✅ | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | **opm_2**=papillonné | *fast positive wall film factor* | Même rôle, mode papillonné | 90% |
+| ✅ | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | §06 | **slow**=composante lente d'accumulation | *total positive wall film factor* | Film mural positif lent f(TCO, RPM), Valvetronic. E85 : ×1.25 sous 70°C | 88% |
+| ✅ | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | **opm_2**=papillonné | *total positive wall film factor* | Même rôle, mode papillonné | 88% |
+| ✅ | `ip_iga_bas_max_knk__n__maf` | 0x4323A | §07 | **iga**=ignition angle · **bas**=base · **max**=plafond · **knk**=knock · **n**=RPM · **maf**=débit air | *Maximum value for spark retard* | Plafond avance anti-cliquetis f(RPM, MAF). ⚠️ C'est un plafond — lever ne fait rien si le modèle couple demande moins | 90% |
+| ✅ | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | **c**=constante · **t**=temps · **ti**=injection time · **dly**=delay · **fl**=full load · **1**=MT copie1 | *Delay time Full load* | Délai activation enrichissement WOT BM. Stock 200 ms, E85 : 0 ms | 90% |
+| ✅ | `c_t_ti_dly_fl_2` | 0x44EC6 | §07 | **2**=copie 2 | *Delay time Full load* | Copie 2 — modifier identiquement | 90% |
+| ✅ | `c_t_ti_dly_fl_at_1` | 0x44EC8 | §07 | **at**=automatic transmission | *Delay time Full load AT* | Idem boîte automatique | 90% |
+| ✅ | `c_t_ti_dly_fl_at_2` | 0x44ECA | §07 | **at_2**=BVA copie 2 | *Delay time Full load AT* | Copie 2 BVA | 90% |
+| ✅ | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | **c**=constante · **lamb**=lambda · **delta**=variation · **i**=intégrateur · **max**=plafond · **lam_adj**=lambda adjustment | *upper limit of trim control I share* | Plafond d'accumulation LTFT (intégrateur). Stock 0.050λ (5%), E85 break-in : 0.25λ | 95% |
+| ✅ | `ip_fac_lamb_wup` | 0x42764 | §08 | **fac**=facteur · **lamb**=lambda · **wup**=warm-up | *correction factor for basic lambda warm-up* | Facteur correctif sur consigne lambda pendant warm-up f(MAF, RPM). Stock 1.000, E85 : 1.03–1.08 basses charges | 90% |
 
-| Paramètre(s) | Stock VB67774 | Cible E85 | Notes |
-|---|---|---|---|
-| `c_tco_n_mff_cst` | 17.25°C — raw 87 | **26°C — raw 99** (E80) | Actuellement raw=97 → 24.75°C dans FinalV1. Passer à raw=99. Équation 0.75×raw−48. |
-| `ip_fac_ti_tco_wup_opm_1` `_2` | ~1.000@−30°C, ~0.969@17°C | 1.40@−30°C, 1.35@−10°C, 1.25@0°C, 1.15@20°C, 1.08@40°C, 1.02@60°C, 1.00@80°C+ | Identique au stock dans FinalV1 — non modifié. Remplacer la courbe entière. |
-| `ip_ti_tco_wup_opm_1` `_2` | Voir bin | ×1.15 à ×1.35 pour TCO < 50°C | Non modifié dans FinalV1. |
-| `ip_ti_wup_opm_1` `_2` | Voir bin | ×1.20 à ×1.35 pour TCO < 50°C | Non modifié dans FinalV1. |
-| `ip_mff_pre_inj_bas_opm_1` `_2` | 431mg@−30°C → 35mg@90°C | ×1.473 pour TCO < 30°C | La pré-injection passe par un module séparé (`INJR_Transfer_to_basic_sw`) — probablement **non couverte** par ip_mff_cor. Sur E85, pré-injection lean à froid → allumage difficile. Vérifier en log : si TI pré-injection identique avant/après flash, le facteur ×1.473 manque. Modifier les 2 modes identiquement. |
+### Optionnels
 
----
+| Statut | Paramètre | Adresse | Guide | Décodage du nom | Description XDF | Ce que ça fait | Conf. |
+|---|---|---|---|---|---|---|---|
+| ⬜ | `ip_fac_lamb_max_fsd_1` | 0x42734 | §08 | **fac**=facteur · **lamb**=lambda · **max**=plafond · **fsd**=fuel system deviation · **1**=mode 1 | *Lambdacontroller maximum threshold for FSD dependent on LAMB_SP* | Plafond STFT autorisé par le contrôleur lambda. Stock ~30%. Uniquement si DTC fuel trim malgré LTFT OK | 85% |
+| ⬜ | `ip_fac_lamb_max_fsd_2` | 0x42740 | §08 | **2**=mode 2 | *…mode 2* | Idem mode 2 — modifier simultanément | 85% |
+| ⬜ | `ip_fac_lamb_wup_is` | 0x42788 | §08 | **is**=idle speed (ralenti) | *correction factor for basic lambda warm-up during idle* | Facteur warm-up lambda restreint au ralenti. Uniquement si ralenti instable warm-up malgré ip_fac_lamb_wup OK | 90% |
+| ⬜ | `ip_lamb_fl__n` | 0x436A2 | §08 | **lamb**=lambda · **fl**=full load · **n**=f(RPM) | *Lambda full load enrichment* | Consigne lambda WOT f(RPM). Stock VB67774 déjà à 0.920λ — ne modifier que si sonde large bande hors plage | 92% |
+| ⬜ | `ip_iga_st_bas_opm_1` | 0x43586 | §07 | **iga**=ignition angle · **st**=start · **bas**=basic · **opm_1**=Valvetronic | *Basic ignition angle at start at operation mode 1* | Avance allumage de base pendant démarrage f(TCO, RPM). Si démarrage > 5 tours malgré cranking MFF OK | 90% |
+| ⬜ | `ip_iga_st_bas_opm_2` | 0x435B6 | §07 | **opm_2**=papillonné | *…operation mode 2* | Même rôle, mode papillonné | 90% |
+| ⬜ | `c_iga_ini` | 0x44B2A | §07 | **c**=constante · **iga**=ignition angle · **ini**=initial | *Init value for ignition angle* | Avance initiale premier cycle cranking. Stock 6.0°CRK, E85 : +1° à +2°. Dernier recours | 90% |
+| ⬜ | `ip_flow_max_cps` | 0x4FD54 | §10 | **flow**=débit · **max**=maximum · **cps**=canister purge solenoid | *flow setpoint for MAX_PURGE* | Débit maximal purge canister f(charge, RPM). Réduire −10–15% si STFT oscille lors purges | 90% |
+| ⬜ | `ip_flow_cps` | 0x48B90 | §10 | **cps**=canister purge solenoid | *FLOW_CPS for fully opened CPS (CPPWM=100%)* | Débit canister vanne 100% ouverte f(dépression). Réduire −15% si STFT > ±10% lors purges | 90% |
 
-## 🟠 Recommandé — Film mural et transitoires
+### Ne pas modifier
 
-| Paramètre(s) | Stock VB67774 | Cible E85 | Notes |
-|---|---|---|---|
-| `id_fac_mff_tco_pos_wf` | 0.061@−30°C → 0.029@90°C | ×1.20–1.25 entre 20°C et 70°C | Non modifié dans FinalV1. |
-| `id_fac_mff_tco_neg_wf` | Voir bin | ×1.15 sous 60°C | Non modifié dans FinalV1. |
-| `id_mff_inc_wf` | 0.106mg@704rpm → 0.021mg@3000rpm+ | ×1.20 entre 20°C et 60°C | Non modifié dans FinalV1. |
-| `id_mff_dec_wf` | Voir bin | ×1.20 entre 20°C et 60°C | Non modifié dans FinalV1. |
-| `ip_fac_mff_map_wf` | 0.121@124hPa, 0.102@324hPa, 0.062@724hPa, 0.035@924hPa | ×1.15 uniforme | Non modifié dans FinalV1. |
-| `ip_fac_ti_temp_cor` | 1.000@−20°C→50°C ; 1.013@60°C, 1.027@70°C, 1.039@80°C+ | 1.20@−20°C, 1.18@0°C, 1.15@20°C, 1.10@40°C, 1.05@60°C, 1.00@80°C+ | Identique au stock dans FinalV1 — remplacer entièrement la courbe. |
-| `ip_lamb_bas_4` | 0.997λ flat — raw 16351, 64 cellules | 0.92–0.95λ en zone >200mg/stk et >3000rpm | Identique au stock dans FinalV1. Valider à la sonde large bande. |
-
----
-
-## ⚪ Optionnel — Allumage et ralenti
-
-Uniquement après validation complète de l'injection et absence de cliquetis confirmée sur E85.
-
-| Paramètre(s) | Stock VB67774 | Cible E85 | Notes |
-|---|---|---|---|
-| `ip_n_sp_is` | 1120rpm@−30°C → 660rpm@105°C | +50–100rpm entre −30°C et 0°C | Consigne ralenti f(TCO). Non modifié dans FinalV1. Utile si ralenti froid instable pendant la phase de break-in — l'ISC controller rattrapera seul une fois ip_fac_ti_tco_wup correctement calibré. |
-| `ip_iga_st_bas_opm_1` `_2` | −5.6° à +14.6°CRK — table 6×8 f(TCO, RPM 80–920) | +2° à +3° à TCO < 0°C | Table allumage démarrage (axes TCO × 80–920 rpm). `ip_iga_bas_knk` (table principale en charge) absent du XDF 9PPL921S. |
-| `c_iga_ini` | 6.0°CRK — raw 111 | 7.0°CRK (raw 114) à 8.0°CRK (raw 116) | Avance cranking. Uniquement si démarrage froid difficile malgré cranking mass correctement calibré. |
-
----
-
-## Si changement d'injecteurs
-
-> Stock injecteurs 13537531634 (~237 cc/min chaud) : `c_fac_mff_ti_stnd_1` raw=56567 → 0.3394 ms/mg.
-> ⚠️ Pour E85 WOT sans limitation RPM, il faut au minimum **380 cc/min** (DC stock@6000rpm ≈ 70%, ×1.473 → 103% → saturation).
-
-| Paramètre(s) | Stock VB67774 | Après remplacement | Notes |
-|---|---|---|---|
-| `c_fac_mff_ti_stnd_1` `_2` `_mon` | raw 56567 → 0.3394 ms/mg (éq. 0.000006×raw) | Recalculer depuis débit réel injecteur chaud | **5 copies à modifier simultanément.** Oublier `_mon` → DTC cohérence injection immédiat. |
-| `c_fac_mff_ti_stnd[0]` `[1]` | raw 28284 → 0.3394 ms/mg (éq. 0.000012×raw) | raw = moitié du raw des copies `_1`/`_2` | Copies SOI/EOI — équation différente (×2). Adresses 0x045AAC et 0x045AAE. |
-| `ip_ti_min` | 1.300ms flat — raw 325 | Recalibrer depuis fiche constructeur | Dead time injecteur f(tension batterie). |
+| Paramètre | Adresse | Raison |
+|---|---|---|
+| `c_fac_mff_ti_stnd_*` (×5 copies) | — | Overflow XDF — passer par `ip_mff_cor_opm_*` à la place |
+| `ip_fac_eff_iga_ch_cold_opm_*` | 0x4A444/A4A8 | Retard chauffe catalyseur — E85 produit moins d'EGT, ne pas toucher |
+| `ip_mff_lgrd_ast` | 0x4387C | Limiteur de gradient TI post-démarrage — pas un enrichissement |
+| `KF_FTRANSVL` | 0x5C5EE | Module BLSHUB = gestion couple/Valvetronic, rien à voir avec le carburant |
 
 ---
 
@@ -74,7 +68,7 @@ Uniquement après validation complète de l'injection et absence de cliquetis co
 | STFT B1/B2 | −10% à +10% | >+15% stable = enrichissement insuffisant |
 | LTFT B1/B2 | −5% à +15% (0–200 km), puis −5% à +5% | >+20% ou <−10% stable = problème de base |
 | DC injecteur | <80% WOT (<85% limite absolue) | >85% → saturation, lean non détectable |
-| Pression rail `0x580A` | 4.8–5.2 bar chaud WOT | <4.5 bar WOT = pompe insuffisante |
+| Pression rail | 4.8–5.2 bar chaud WOT | <4.5 bar WOT = pompe insuffisante |
 
 ---
 
@@ -91,7 +85,7 @@ Uniquement après validation complète de l'injection et absence de cliquetis co
 | [06 — Film mural](E85/06_FILM_MURAL.md) | Correction transitoires (wall film ×1.25) |
 | [07 — Allumage](E85/07_ALLUMAGE.md) | Avance E60-safe + délai WOT + avance cranking |
 | [08 — Lambda](E85/08_LAMBDA.md) | Anti-DTC break-in, warm-up lambda, richesse WOT |
-| [09 — Transitoire](E85/09_TRANSITOIRE.md) | Enrichissement transitoire pleine charge (kickdown) |
+| [09 — Transitoire](E85/09_TRANSITOIRE.md) | Transitoire pleine charge (rien à modifier) |
 | [10 — EVAP](E85/10_EVAP.md) | Purge canister — oscillations STFT |
 | [11 — Surveillance](E85/11_SURVEILLANCE.md) | Indicateurs OBD à lire pendant la mise au point |
 | [12 — Plan de test](E85/12_PLAN_TEST.md) | Résumé paramètres, plan 5 phases, diagnostic, avertissements |
