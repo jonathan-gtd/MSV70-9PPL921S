@@ -24,7 +24,8 @@
 | **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | ×**1.25** |
 | **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | ×**1.25** |
 | **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | ×**1.25** |
-| **✅ MODIFIER** | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | 0.050λ → **0.25λ** break-in |
+| **✅ MODIFIER** | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | +0.050λ → **+0.25λ** break-in |
+| **✅ MODIFIER** | `c_lamb_delta_i_min_lam_adj` | 0x47F60 | §08 | −0.050λ → **−0.25λ** break-in |
 | **✅ MODIFIER** | `ip_ti_cast_opm_1` | 0x43FA4 | §05 | ×1.55–1.65 froid — after-start enrichissement |
 | **✅ MODIFIER** | `ip_ti_cast_opm_2` | 0x43FB8 | §05 | Idem mode papillonné |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | 200 ms → **0 ms** (MT) |
@@ -148,8 +149,9 @@ J7 : +2.5° UNIQUEMENT si aucun cliquetis aux étapes précédentes
 ```
 1. Lire LTFT avec ISTA → cible ±5%
 2. Resserrer ip_fac_lamb_max_fsd_1/2 : 40% → 35%
-3. Resserrer c_lamb_delta_i_max_lam_adj : 0.25λ → 0.15λ
-4. Reflasher
+3. Resserrer c_lamb_delta_i_max_lam_adj : +0.25λ → +0.15λ
+4. Resserrer c_lamb_delta_i_min_lam_adj : −0.25λ → −0.15λ
+5. Reflasher
 ```
 
 ---

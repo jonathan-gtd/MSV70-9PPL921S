@@ -33,6 +33,7 @@ Toutes les certitudes sont basées sur : description XDF anglaise + catégorie X
 | ✅ | `c_t_ti_dly_fl_at_1` | 0x44EC8 | §07 | Scalaire · s | 100% |
 | ✅ | `c_t_ti_dly_fl_at_2` | 0x44ECA | §07 | Scalaire · s | 100% |
 | ✅ | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | Scalaire · λ | 98% |
+| ✅ | `c_lamb_delta_i_min_lam_adj` | 0x47F60 | §08 | Scalaire · λ | 98% |
 | ✅ | `ip_fac_lamb_wup` | 0x42764 | §08 | Map 6×6 · RPM×charge(mg/stk) · facteur | 95% |
 
 **Détail**
@@ -57,7 +58,8 @@ Toutes les certitudes sont basées sur : description XDF anglaise + catégorie X
 | `c_t_ti_dly_fl_2` | *Delay time Full load* | **2**=copie 2 | Copie 2 — modifier identiquement |
 | `c_t_ti_dly_fl_at_1` | *Delay time Full load AT* | **at**=automatic transmission | Idem boîte automatique |
 | `c_t_ti_dly_fl_at_2` | *Delay time Full load AT* | **at_2**=BVA copie 2 | Copie 2 BVA |
-| `c_lamb_delta_i_max_lam_adj` | *upper limit of trim control I share* | **c**=constante · **lamb**=lambda · **delta**=variation · **i**=intégrateur · **max**=plafond · **lam_adj**=lambda adjustment | Plafond d'accumulation LTFT (part intégrale du régulateur). Stock 0.050λ (5%), E85 break-in : 0.25λ |
+| `c_lamb_delta_i_max_lam_adj` | *upper limit of trim control I share* | **c**=constante · **lamb**=lambda · **delta**=variation · **i**=intégrateur · **max**=plafond · **lam_adj**=lambda adjustment | Plafond haut LTFT (intégrateur). Stock +0.050λ (+5%), E85 break-in : +0.25λ |
+| `c_lamb_delta_i_min_lam_adj` | *lower limit of trim control I share* | **min**=plancher | Plafond bas LTFT (intégrateur). Stock −0.050λ (−5%), E85 break-in : −0.25λ |
 | `ip_fac_lamb_wup` | *correction factor for basic lambda warm-up* | **fac**=facteur · **lamb**=lambda · **wup**=warm-up | Facteur correctif sur consigne lambda pendant warm-up f(RPM, MAF). Stock 1.000, E85 : 1.03–1.08 basses charges |
 
 ---

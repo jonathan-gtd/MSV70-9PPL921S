@@ -20,13 +20,14 @@ Les limites LTFT stock (−8% / +12%) sont documentées en fin de fichier — **
 | Type | Constante scalaire |
 | Unité | λ |
 
-**Rôle :** Valeur maximale d'accumulation de l'intégrateur LTFT (long term fuel trim). Si l'adaptation atteint ce plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Sur E85 en break-in, le LTFT doit pouvoir s'accumuler jusqu'à ~+20% pendant les premiers 200 km. **Stock réel lu sur VB67774 : 0.050 λ (5%) — multiplier par 5 avant le premier flash.** Sans cette modification, le LTFT plafonne immédiatement et l'ECU ne converge jamais.
+**Rôle :** Limites haute et basse de l'intégrateur LTFT (long term fuel trim). Si l'adaptation atteint l'un ou l'autre plafond, l'ECU ne peut plus compenser et déclare "adaptation at limit" → DTC voyant moteur. Les deux limites sont symétriques à ±0.050λ stock. Sur E85 en break-in, le LTFT peut dériver dans **les deux sens** (légèrement riche ou légèrement pauvre selon le batch d'éthanol réel) — les deux limites doivent être élargies pour éviter un blocage. **Stock réel lu sur VB67774 : ±0.050λ (±5%).**
 
 **Avant / Après :**
 
 | Phase | ◀ Stock VB67774 | ✅ Break-in (0–500 km) | ✅ Stabilisé (> 500 km) |
 |---|---|---|---|
-| `c_lamb_delta_i_max_lam_adj` | **0.050 λ** (5%) | **0.25 λ** (25%) | **0.15 λ** (15%) |
+| `c_lamb_delta_i_max_lam_adj` | **+0.050 λ** (+5%) | **+0.25 λ** (+25%) | **+0.15 λ** (+15%) |
+| `c_lamb_delta_i_min_lam_adj` | **−0.050 λ** (−5%) | **−0.25 λ** (−25%) | **−0.15 λ** (−15%) |
 
 **Vérification :**
 
