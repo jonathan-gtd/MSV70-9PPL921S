@@ -140,9 +140,29 @@ Autres valeurs possibles selon la rigueur hivernale :
 | Unité | facteur (sans dimension) |
 | Axes | X = TCO liquide (°C), Y = TCO admission (°C) |
 
-**Rôle :** Valeur d'initialisation du facteur d'enrichissement post-démarrage — les premières secondes après que le moteur a pris vie mais avant que le régime soit stabilisé. Distinct du cranking (moteur en rotation sans allumage) et du warm-up (régime stabilisé). Sur E85, si l'enrichissement after-start est insuffisant, le moteur démarre puis cale dans les 2 premières secondes ("prend" mais s'arrête immédiatement). **Facteurs E85 à appliquer : ×1.55–1.65 à froid (< 0°C), ×1.35–1.45 entre 0–17°C, ×1.15–1.25 entre 17–30°C, ×1.00 au-dessus de 60°C.** Lire le bin avant modification pour obtenir les valeurs stock exactes.
+**Rôle :** Valeur d'initialisation du facteur d'enrichissement post-démarrage — les premières secondes après que le moteur a pris vie mais avant que le régime soit stabilisé. Distinct du cranking (moteur en rotation sans allumage) et du warm-up (régime stabilisé). Sur E85, si l'enrichissement after-start est insuffisant, le moteur démarre puis cale dans les 2 premières secondes ("prend" mais s'arrête immédiatement).
 
 > `ip_mff_lgrd_ast` (0x4387C) est un **limiteur de gradient TI** post-démarrage (rate limiter sur la vitesse de variation du TI), non un enrichissement. Ne pas modifier.
+
+**◀ Avant — Stock VB67774 (facteur)**
+
+| TCO\_adm \ TCO\_liq | −30.0 | −20.2 | −9.8 | 0.0 | 9.8 | 17.2 | 30.0 | 45.0 | 69.8 | 84.0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **−9.8°C** | 1.375 | 1.188 | 1.078 | 0.875 | 0.859 | 0.750 | 0.625 | 0.500 | 0.359 | 0.234 |
+| **60.0°C** | 1.375 | 1.172 | 1.031 | 0.813 | 0.813 | 0.672 | 0.547 | 0.438 | 0.313 | 0.219 |
+
+**✏️ Facteurs E85 par colonne TCO liquide**
+
+| TCO liq | −30 | −20 | −10 | 0 | +10 | +17 | +30 | +45 | +70 | +84 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Facteur | ×1.65 | ×1.60 | ×1.55 | ×1.45 | ×1.40 | ×1.35 | ×1.20 | ×1.10 | ×1.05 | ×1.00 |
+
+**✅ Après — E85 (facteur)**
+
+| TCO\_adm \ TCO\_liq | −30.0 | −20.2 | −9.8 | 0.0 | 9.8 | 17.2 | 30.0 | 45.0 | 69.8 | 84.0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **−9.8°C** | **2.269** | **1.900** | **1.671** | **1.269** | **1.203** | **1.013** | **0.750** | **0.550** | **0.377** | **0.234** |
+| **60.0°C** | **2.269** | **1.875** | **1.598** | **1.178** | **1.138** | **0.907** | **0.656** | **0.481** | **0.328** | **0.219** |
 
 **Vérification :**
 
@@ -165,5 +185,21 @@ Autres valeurs possibles selon la rigueur hivernale :
 | Axes | X = TCO liquide (°C), Y = TCO admission (°C) |
 
 **Rôle :** Même rôle qu'opm_1 pour le mode papillonné. Modifier identiquement à opm_1.
+
+**◀ Avant — Stock VB67774 (facteur)**
+
+| TCO\_adm \ TCO\_liq | −30.0 | −20.2 | −9.8 | 0.0 | 9.8 | 17.2 | 30.0 | 45.0 | 69.8 | 84.0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **−9.8°C** | 1.984 | 1.797 | 1.563 | 1.281 | 1.031 | 0.875 | 0.656 | 0.516 | 0.406 | 0.313 |
+| **60.0°C** | 1.859 | 1.766 | 1.563 | 1.281 | 1.031 | 0.875 | 0.656 | 0.516 | 0.406 | 0.313 |
+
+**✏️ Mêmes facteurs que opm\_1**
+
+**✅ Après — E85 (facteur)**
+
+| TCO\_adm \ TCO\_liq | −30.0 | −20.2 | −9.8 | 0.0 | 9.8 | 17.2 | 30.0 | 45.0 | 69.8 | 84.0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **−9.8°C** | **3.274** | **2.875** | **2.422** | **1.857** | **1.444** | **1.181** | **0.788** | **0.567** | **0.427** | **0.313** |
+| **60.0°C** | **3.068** | **2.825** | **2.422** | **1.857** | **1.444** | **1.181** | **0.788** | **0.567** | **0.427** | **0.313** |
 
 **Vérification :** Identique à ④.
