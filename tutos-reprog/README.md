@@ -111,12 +111,12 @@ Toutes les certitudes sont basées sur : description XDF anglaise + catégorie X
 
 > Après tout reflash ou déconnexion batterie : LTFT repart de 0 — 50–100 km de convergence normaux.
 
-| Paramètre OBD | Seuils normaux E85 | Alarme |
-|---|---|---|
-| STFT B1/B2 | −10% à +10% | >+15% stable = enrichissement insuffisant |
-| LTFT B1/B2 | −5% à +15% (0–200 km), puis −5% à +5% | >+20% ou <−10% stable = problème de base |
-| DC injecteur | <80% WOT (<85% limite absolue) | >85% → saturation, lean non détectable |
-| Pression rail | 4.8–5.2 bar chaud WOT | <4.5 bar WOT = pompe insuffisante |
+| Paramètre OBD | Seuils normaux E85 | Plafond ECU | Alarme |
+|---|---|---|---|
+| STFT B1/B2 | −10% à +10% | **±30%** (`ip_fac_lamb_max_fsd`) | >+15% stable = enrichissement insuffisant |
+| LTFT B1/B2 | −5% à +15% (0–200 km), puis −5% à +5% | **±25%** break-in / **±15%** stabilisé (`c_lamb_delta_i_max/min_lam_adj`) | >+20% ou <−10% stable = problème de base |
+| DC injecteur | <80% WOT (<85% limite absolue) | — | >85% → saturation, lean non détectable |
+| Pression rail | 4.8–5.2 bar chaud WOT | — | <4.5 bar WOT = pompe insuffisante |
 
 ---
 
