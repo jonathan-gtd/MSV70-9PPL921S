@@ -1,108 +1,92 @@
-# TestO Datalogger — MSV70 Custom Jobs
+# TestO Datalogger — Configuration BMW N52 (MSV70)
 
-> **Véhicule :** BMW E9x N52B30 — Siemens MSV70 9PPL921S  
-> **Protocole :** K-line — job `STATUS_MESSWERTBLOCK_LESEN`  
-> **Format argument :** `mode;adresse1;adresse2;...`  
-> **Fichier :** `config/customjobs.xml`
+Jobs de logging K-line configurés dans `config/customjobs.xml`. Chaque job utilise `STATUS_MESSWERTBLOCK_LESEN` et est limité à 12 paramètres pour garantir une fréquence d'acquisition fluide.
 
 ---
 
-## Référence adresses MSV70
+## JOB 01 — 01_E85_WARMUP_STAT
 
-| Adresse | Signal | Unité | Confirmé |
-|---|---|---|---|
-| `0x4102` | Température air admission (IAT) | °C | ✓ |
-| `0x4300` | Température liquide refroidissement (TCO) | °C | ✓ log |
-| `0x4704` | Pression carburant | hPa | ~ |
-| `0x4807` | Régime moteur (RPM) | tr/min | ✓ log |
-| `0x480B` | Charge relative moteur | % | ✓ |
-| `0x5812` | Débit air mesuré (MAF) | kg/h | ✓ trad. |
-| `0x5813` | Débit air calculé | kg/h | ~ |
-| `0x5818` | Débit air calculé (variante) | kg/h | ✓ trad. |
-| `0x5A11` | Tension sonde lambda B1 | V | ✓ |
-| `0x5A12` | Tension sonde lambda B2 | V | ✓ |
-| `0x5A3E` | Angle allumage | °CRK | ✓ |
-| `0x5A40` | Retard anti-cliquetis | °CRK | ✓ |
-| `0x5A42` | Temps injection cylindre 1 | ms | ✓ log+trad. |
-| `0x5A49` | Niveau signal cliquetis | V | ~ |
-| `0x5A50` | Lambda actuel B1 | λ | ✓ log+trad. |
-| `0x5A51` | Lambda actuel B2 | λ | ✓ log |
-| `0x5A81` | STFT B1 (intégrateur court terme) | % | ✓ log |
-| `0x5A82` | STFT B2 | % | ✓ log |
-| `0x5A83` | LTFT multiplicatif B1 | % | ✓ log |
-| `0x5A84` | LTFT multiplicatif B2 | % | ✓ log |
-| `0x5A85` | LTFT additif B1 | mg/stk | ✓ log |
-| `0x5A86` | LTFT additif B2 | mg/stk | ✓ log |
+**Usage :** Au garage, du démarrage à froid jusqu'à la température de fonctionnement.  
+**Objectif :** Valider le cold start et la stabilisation du mélange au ralenti.
 
-> `✓ log` = confirmé par header CSV  `✓ trad.` = confirmé par jobs_all_en_EN.txt  `~` = inféré par contexte
+| Adresse | Signal | Description |
+|---|---|---|
+| 0x4300 | Cooling water temp | Température liquide de refroidissement (°C) |
+| 0x4807 | Engine speed | Régime moteur (tr/min) |
+| 0x5A42 | Injection time cyl 1 | Durée ouverture injecteur (ms) — doit descendre vers 2.5–3.5 ms à chaud |
+| 0x5A50 | Lambda Bank 1 | Richesse réelle sonde 1 — doit tendre vers 1.00 à chaud |
+| 0x5A51 | Lambda Bank 2 | Richesse réelle sonde 2 — équilibre entre bancs |
+| 0x5A81 | Integrator Bank 1 | STFT B1 — correction immédiate (> 0 = ECU ajoute de l'essence) |
+| 0x5A82 | Integrator Bank 2 | STFT B2 |
+| 0x5A83 | Adapt. Offset 1 | LTFT idle B1 — correction spécifique ralenti. Très positif = manque d'essence au ralenti |
+| 0x5A84 | Adapt. Offset 2 | LTFT idle B2 |
+| 0x5A85 | Adapt. Multiplicative 1 | LTFT global B1 — apprentissage global (enrichissement éthanol) |
+| 0x5A86 | Adapt. Multiplicative 2 | LTFT global B2 |
 
 ---
 
-## Jobs configurés
+## JOB 02 — 02_E85_WOT_PULL
 
-### 01 — E85_WARMUP_STAT
-*Observation démarrage et chauffe au garage*
+**Usage :** En roulant, 3ème vitesse, pied au plancher (2000 à 7000 tr/min).  
+**Objectif :** Vérifier la richesse WOT et la saturation des injecteurs.
 
-| Adresse | Signal |
-|---|---|
-| `0x4300` | TCO |
-| `0x4807` | RPM |
-| `0x5A42` | Temps injection cyl.1 |
-| `0x5A50` | Lambda B1 |
-| `0x5A51` | Lambda B2 |
-| `0x5A81` | STFT B1 |
-| `0x5A82` | STFT B2 |
-| `0x5A83` | LTFT mul. B1 |
-| `0x5A84` | LTFT mul. B2 |
-| `0x5A85` | LTFT add. B1 |
-| `0x5A86` | LTFT add. B2 |
-
----
-
-### 02 — E85_WOT_PULL
-*Richesse et saturation injecteurs en roulant*
-
-| Adresse | Signal |
-|---|---|
-| `0x4704` | Pression carburant |
-| `0x4807` | RPM |
-| `0x480B` | Charge relative |
-| `0x5812` | MAF |
-| `0x5A42` | Temps injection cyl.1 |
-| `0x5A50` | Lambda B1 |
-| `0x5A51` | Lambda B2 |
-| `0x5A81` | STFT B1 |
-| `0x5A82` | STFT B2 |
-| `0x5A85` | LTFT add. B1 |
-| `0x5A86` | LTFT add. B2 |
+| Adresse | Signal | Description |
+|---|---|---|
+| 0x4704 | Lambda setpoint | Cible de richesse demandée par la cartographie (ex : 0.85 WOT) |
+| 0x4807 | Engine speed | Régime moteur (tr/min) |
+| 0x480B | Pedal value % | Position pédale — confirme le test à 100% charge |
+| 0x5812 | Measured air mass | Débit d'air réel MAF (kg/h) |
+| 0x5A42 | Injection time cyl 1 | Si > 18.5 ms à haut régime → injecteurs saturés |
+| 0x5A50 | Lambda Bank 1 | Richesse réelle B1 — doit suivre le setpoint. Danger si > 0.90 WOT |
+| 0x5A51 | Lambda Bank 2 | Richesse réelle B2 |
+| 0x5A81 | Integrator Bank 1 | STFT B1 — si sature à +25%, le système est à bout |
+| 0x5A82 | Integrator Bank 2 | STFT B2 |
+| 0x5A85 | Adapt. Multiplicative 1 | LTFT global B1 |
+| 0x5A86 | Adapt. Multiplicative 2 | LTFT global B2 |
 
 ---
 
-### 03 — E85_KNOCK_IGNITION
-*Sécurité avance à l'allumage*
+## JOB 03 — 03_E85_KNOCK_IGNITION
 
-| Adresse | Signal |
-|---|---|
-| `0x4102` | IAT |
-| `0x4300` | TCO |
-| `0x4807` | RPM |
-| `0x480B` | Charge relative |
-| `0x5813` | Débit air calculé |
-| `0x5A3E` | Angle allumage |
-| `0x5A40` | Retard cliquetis |
-| `0x5A49` | Niveau signal cliquetis |
+**Usage :** Après avoir validé la richesse avec le Job 02.  
+**Objectif :** Optimiser l'avance à l'allumage et détecter les cliquetis.
+
+| Adresse | Signal | Description |
+|---|---|---|
+| 0x4102 | VVT Eccentric shaft | Angle arbre Valvetronic — doit être ~250° (ouverture max) en accélération |
+| 0x4300 | Cooling water temp | Température — surveiller la surchauffe pendant les tests |
+| 0x4807 | Engine speed | Régime moteur (tr/min) |
+| 0x480B | Pedal value % | Position pédale |
+| 0x5813 | Relative load | Charge moteur calculée (%) — détermine la case dans la table allumage |
+| 0x5A3E | Knock signal cyl 1 | Activité capteur cliquetis cylindre 1 — pic = combustion anormale |
+| 0x5A40 | Knock signal cyl 6 | Activité capteur cliquetis cylindre 6 (souvent le plus chaud) |
+| 0x5A49 | Ignition angle cyl 1 | Avance allumage finale (°) — plus c'est élevé, meilleur le rendement |
 
 ---
 
-### 04 — E85_HEALTH_CHECK
-*Diagnostic sondes lambda et MAF*
+## JOB 04 — 04_E85_HEALTH_CHECK
 
-| Adresse | Signal |
-|---|---|
-| `0x4807` | RPM |
-| `0x5812` | MAF mesuré |
-| `0x5818` | MAF calculé |
-| `0x5A11` | Tension sonde B1 |
-| `0x5A12` | Tension sonde B2 |
-| `0x5A50` | Lambda B1 |
-| `0x5A51` | Lambda B2 |
+**Usage :** Diagnostic général ou comportement moteur anormal.  
+**Objectif :** Vérifier la santé des capteurs (sondes lambda et débitmètre).
+
+| Adresse | Signal | Description |
+|---|---|---|
+| 0x4807 | Engine speed | Régime moteur (tr/min) |
+| 0x5812 | Measured air mass | Masse d'air mesurée par le MAF (kg/h) |
+| 0x5818 | Calculated air mass | Masse d'air théorique calculée par l'ECU — écart > 10% avec 0x5812 = fuite d'air |
+| 0x5A11 | Voltage Lambda 1 | Tension brute sonde 1 (V) — détecte une sonde HS ou encrassée |
+| 0x5A12 | Voltage Lambda 2 | Tension brute sonde 2 (V) |
+| 0x5A50 | Lambda Bank 1 | Richesse réelle B1 |
+| 0x5A51 | Lambda Bank 2 | Richesse réelle B2 |
+
+---
+
+## Seuils de sécurité N52 (E85)
+
+| Paramètre | Limite | Conséquence si dépassé |
+|---|---|---|
+| Injection Time (Ti) | < 18.5 ms @ 6500 RPM | Saturation injecteur → mélange pauvre non compensable |
+| Lambda WOT | 0.82 – 0.88 λ | > 0.90 → danger soupapes échappement |
+| STFT | ±10% nominal | > +20% → couper immédiatement |
+| LTFT | ±10% après 500 km | > ±15% → recalibrer les correcteurs injecteurs |
+| Température eau | 85°C – 110°C | > 110°C → arrêt test, vérifier refroidissement |
