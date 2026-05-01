@@ -13,8 +13,8 @@ from bin_reader import read_param_values, compare_params
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 
-DATA_FULL    = os.path.join(_ANALYZER, "data", "Full")
-DATA_PARTIAL = os.path.join(_ANALYZER, "data", "Partial")
+DATA_FULL    = os.path.join(_HERE, "..", "bins", "Full")
+DATA_PARTIAL = os.path.join(_HERE, "..", "bins", "Partial")
 DOCS_PATH    = os.path.join(_ANALYZER, "knowledge")
 
 XDF_FULL    = os.path.join(DATA_FULL,    "BMW_Siemens_MSV70_9PPL921S_2560K.xdf")

@@ -1,13 +1,15 @@
 import xml.etree.ElementTree as ET
 import os
 
+_DIR = os.path.dirname(os.path.abspath(__file__))
+
 class XDFParser:
     def __init__(self, xdf_filename):
-        # Accept absolute paths as-is; otherwise resolve relative to data/
+        # Accept absolute paths as-is; otherwise resolve relative to bins/Full/
         if os.path.isabs(xdf_filename):
             self.xdf_path = xdf_filename
         else:
-            self.xdf_path = os.path.join("data", xdf_filename)
+            self.xdf_path = os.path.join(_DIR, "..", "bins", "Full", xdf_filename)
         if not os.path.exists(self.xdf_path):
             raise FileNotFoundError(f"Fichier XDF introuvable : {self.xdf_path}")
             

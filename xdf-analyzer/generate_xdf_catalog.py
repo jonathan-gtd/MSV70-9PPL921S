@@ -14,7 +14,7 @@ sys.path.insert(0, SCRIPT_DIR)
 
 from xdf_parser import XDFParser
 
-XDF_FILE       = os.path.join(SCRIPT_DIR, "data", "Full", "BMW_Siemens_MSV70_9PPL921S_2560K.xdf")
+XDF_FILE       = os.path.join(SCRIPT_DIR, "..", "bins", "Full", "BMW_Siemens_MSV70_9PPL921S_2560K.xdf")
 E85_KNOWLEDGE  = os.path.join(SCRIPT_DIR, "knowledge", "e85_knowledge.json")
 OUTPUT_FILE    = os.path.join(SCRIPT_DIR, "knowledge", "xdf_catalog.json")
 
