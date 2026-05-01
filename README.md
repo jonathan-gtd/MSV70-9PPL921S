@@ -9,7 +9,8 @@ Reprogrammation et calibration du calculateur Siemens MSV70 pour E85.
 | Dossier / Fichier | Description |
 |---|---|
 | [tutos-reprog/](tutos-reprog/README.md) | Tutoriels de reprogrammation (E85, RPM, VMAX, flash ECU, lexique) |
-| [xdf-analyzer/](xdf-analyzer/README.md) | Outils Python — parser XDF, lecture BIN, serveur MCP |
+| [mcp-claude/](mcp-claude/README.md) | Serveur MCP — expose les outils ECU dans Claude Code et Claude Desktop |
+| [xdf-analyzer/](xdf-analyzer/README.md) | Bibliothèques Python — parser XDF, lecture BIN, base de connaissance |
 | [TestO Datalogger/](TestO%20Datalogger/README.md) | Configuration OBD — jobs de logging et jauges |
 | [MSx70-Flasher/](MSx70-Flasher/README.md) | Outil de lecture et flash de l'ECU via K-line |
 | [CUSTOMJOBS.MD](CUSTOMJOBS.MD) | Détail complet des 4 custom jobs E85 (adresses, seuils, procédures) |
