@@ -465,7 +465,7 @@ namespace MSx70_Flasher
                 {
                     statusTextBlock.Text = "Reading parameters";
                 });
-                await Task.Run(() => MemoryDump = ReadMemory(ediabas, start, end, MemSegment));
+                await Task.Run(() => MemoryDump = ReadMemory(ediabas, start, end, MemSegment, () => Reconnect(ediabas)));
 
 
                     this.Dispatcher.Invoke(() =>
@@ -545,7 +545,7 @@ namespace MSx70_Flasher
             {
                 statusTextBlock.Text = "Reading External Flash";
             });
-                await Task.Run(() => MemoryDump = ReadMemory(ediabas, start, end, MemSegment));
+                await Task.Run(() => MemoryDump = ReadMemory(ediabas, start, end, MemSegment, () => Reconnect(ediabas)));
 
                 start = 0x00000;
                 end = 0x7FFFF;
@@ -554,7 +554,7 @@ namespace MSx70_Flasher
                 {
                     statusTextBlock.Text = "Reading Internal Flash";
                 });
-                await Task.Run(() => mpcdump = ReadMemory(ediabas, start, end, MemSegment));
+                await Task.Run(() => mpcdump = ReadMemory(ediabas, start, end, MemSegment, () => Reconnect(ediabas)));
 
                 byte[] fullbin = MemoryDump.Concat(mpcdump).ToArray();
 
@@ -599,7 +599,16 @@ namespace MSx70_Flasher
 
         //Consider adding RAM reading
         
-        private byte[] ReadMemory(EdiabasNet ediabas, uint start, uint end, string MemSegment)
+        private bool Reconnect(EdiabasNet ediabas)
+        {
+            _debugLogger?.Invoke("RECONNECT: waiting 800ms then re-establishing session...");
+            System.Threading.Thread.Sleep(800);
+            bool ok = RequestSecurityAccess(ediabas);
+            _debugLogger?.Invoke(ok ? "RECONNECT: OK — resuming read" : "RECONNECT: FAILED");
+            return ok;
+        }
+
+        private byte[] ReadMemory(EdiabasNet ediabas, uint start, uint end, string MemSegment, Func<bool> reconnect = null)
         {
             SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_AWAYMODE_REQUIRED);
 
@@ -610,6 +619,7 @@ namespace MSx70_Flasher
             int dumpOffset = 0;
             byte[] MemoryDump = new byte[length];
             var sw = System.Diagnostics.Stopwatch.StartNew();
+            long lastLogMs = 0;
 
             _debugLogger?.Invoke($"ReadMemory START seg={MemSegment} 0x{start:X6}–0x{end:X6} len={length} ({length / 1024}KB)");
 
@@ -617,6 +627,14 @@ namespace MSx70_Flasher
             {
                 if (lengthRemaining < segLength)
                     segLength = lengthRemaining;
+
+                // Periodic progress log every 5 seconds
+                long nowMs = sw.ElapsedMilliseconds;
+                if (nowMs - lastLogMs >= 5000)
+                {
+                    _debugLogger?.Invoke($"  @ 0x{start:X6}  {bytesRead}/{length}B ({bytesRead * 100 / length}%)  {nowMs / 1000}s elapsed");
+                    lastLogMs = nowMs;
+                }
 
                 bool chunkOk = false;
                 for (int attempt = 0; attempt < 3; attempt++)
@@ -633,9 +651,26 @@ namespace MSx70_Flasher
                     }
                 }
 
+                if (!chunkOk && reconnect != null)
+                {
+                    _debugLogger?.Invoke($"SESSION LOST at 0x{start:X6} ({bytesRead * 100 / length}% done) — reconnecting...");
+                    if (reconnect())
+                    {
+                        if (ExecuteJob(ediabas, "speicher_lesen_ascii", MemSegment + ";" + start + ";" + segLength))
+                        {
+                            chunkOk = true;
+                            lastLogMs = sw.ElapsedMilliseconds; // reset log timer after reconnect
+                        }
+                        else
+                        {
+                            _debugLogger?.Invoke($"  Chunk still failed after reconnect");
+                        }
+                    }
+                }
+
                 if (!chunkOk)
                 {
-                    _debugLogger?.Invoke($"ABORT at 0x{start:X6} after 3 attempts — {bytesRead}/{length}B ({bytesRead * 100 / length}%) in {sw.ElapsedMilliseconds}ms");
+                    _debugLogger?.Invoke($"ABORT at 0x{start:X6} — {bytesRead}/{length}B ({bytesRead * 100 / length}%) in {sw.ElapsedMilliseconds}ms");
                     SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
                     return MemoryDump.Take(dumpOffset).ToArray();
                 }
