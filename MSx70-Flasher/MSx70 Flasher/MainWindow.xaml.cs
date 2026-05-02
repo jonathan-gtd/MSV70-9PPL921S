@@ -32,6 +32,50 @@ namespace MSx70_Flasher
             // ES_USER_PRESENT = 0x00000004
         }
 
+        private static Action<string> _debugLogger = null;
+        private readonly string _debugLogPath = Path.Combine(Path.GetTempPath(), "MSx70_debug.log");
+
+        private void Log(string msg)
+        {
+            string line = $"[{DateTime.Now:HH:mm:ss.fff}] {msg}";
+            Dispatcher.InvokeAsync(() => {
+                debugLogBox.AppendText(line + "\n");
+                DebugScroll.ScrollToBottom();
+            });
+            try { File.AppendAllText(_debugLogPath, line + "\r\n"); } catch { }
+        }
+
+        private void ToggleDebug_Click(object sender, RoutedEventArgs e)
+        {
+            if (ToggleDebug.IsChecked)
+            {
+                _debugLogger = msg => Log(msg);
+                DebugScroll.Visibility = Visibility.Visible;
+                DebugScroll.Height = 200;
+                this.MinHeight = 560;
+                this.Height = Math.Max(this.Height, 560);
+                Log($"=== Debug log opened {DateTime.Now:yyyy-MM-dd HH:mm:ss} ===");
+                Log($"Log file: {_debugLogPath}");
+            }
+            else
+            {
+                _debugLogger = null;
+                DebugScroll.Visibility = Visibility.Collapsed;
+                DebugScroll.Height = 0;
+                this.MinHeight = 350;
+            }
+        }
+
+        private void ClearDebugLog_Click(object sender, RoutedEventArgs e)
+        {
+            debugLogBox.Clear();
+            try { File.WriteAllText(_debugLogPath, ""); } catch { }
+        }
+
+        private void OpenDebugLog_Click(object sender, RoutedEventArgs e)
+        {
+            try { System.Diagnostics.Process.Start(_debugLogPath); } catch { }
+        }
 
         public MainWindow()
         {
@@ -565,6 +609,9 @@ namespace MSx70_Flasher
             uint bytesRead = 0;
             int dumpOffset = 0;
             byte[] MemoryDump = new byte[length];
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+
+            _debugLogger?.Invoke($"ReadMemory START seg={MemSegment} 0x{start:X6}–0x{end:X6} len={length} ({length / 1024}KB)");
 
             while (bytesRead < length)
             {
@@ -574,16 +621,21 @@ namespace MSx70_Flasher
                 bool chunkOk = false;
                 for (int attempt = 0; attempt < 3; attempt++)
                 {
+                    if (attempt > 0)
+                    {
+                        _debugLogger?.Invoke($"  RETRY {attempt}/2 addr=0x{start:X6} len={segLength}");
+                        System.Threading.Thread.Sleep(200);
+                    }
                     if (ExecuteJob(ediabas, "speicher_lesen_ascii", MemSegment + ";" + start + ";" + segLength))
                     {
                         chunkOk = true;
                         break;
                     }
-                    System.Threading.Thread.Sleep(200);
                 }
 
                 if (!chunkOk)
                 {
+                    _debugLogger?.Invoke($"ABORT at 0x{start:X6} after 3 attempts — {bytesRead}/{length}B ({bytesRead * 100 / length}%) in {sw.ElapsedMilliseconds}ms");
                     SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
                     return MemoryDump.Take(dumpOffset).ToArray();
                 }
@@ -600,6 +652,7 @@ namespace MSx70_Flasher
                 UpdateProgressBar(progress);
             }
 
+            _debugLogger?.Invoke($"ReadMemory DONE {bytesRead}B in {sw.ElapsedMilliseconds}ms");
             SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
             return MemoryDump;
         }
@@ -1209,15 +1262,14 @@ namespace MSx70_Flasher
             }
             catch (Exception ex)
             {
-                if (ediabas.ErrorCodeLast == EdiabasNet.ErrorCodes.EDIABAS_ERR_NONE)
-                {
-                    System.Diagnostics.Debug.WriteLine("Job execution failed: " + EdiabasNet.GetExceptionText(ex));
-                    System.Diagnostics.Debug.WriteLine("");
-
-                }
+                _debugLogger?.Invoke($"  ERR Job={Job} ErrCode={ediabas.ErrorCodeLast} | {EdiabasNet.GetExceptionText(ex)}");
+                System.Diagnostics.Debug.WriteLine("Job execution failed: " + EdiabasNet.GetExceptionText(ex));
                 return false;
             }
-            return (GetResult_String("JOB_STATUS", ediabas.ResultSets) == "OKAY");
+            string status = GetResult_String("JOB_STATUS", ediabas.ResultSets);
+            if (status != "OKAY")
+                _debugLogger?.Invoke($"  FAIL Job={Job} JOB_STATUS={status}");
+            return (status == "OKAY");
         }
 
         private static bool ExecuteJob(EdiabasNet ediabas, string Job, byte[] Arg)
@@ -1229,14 +1281,14 @@ namespace MSx70_Flasher
             }
             catch (Exception ex)
             {
-                if (ediabas.ErrorCodeLast == EdiabasNet.ErrorCodes.EDIABAS_ERR_NONE)
-                {
-                    System.Diagnostics.Debug.WriteLine("Job execution failed: " + EdiabasNet.GetExceptionText(ex));
-                    System.Diagnostics.Debug.WriteLine("");
-                }
+                _debugLogger?.Invoke($"  ERR Job={Job} ErrCode={ediabas.ErrorCodeLast} | {EdiabasNet.GetExceptionText(ex)}");
+                System.Diagnostics.Debug.WriteLine("Job execution failed: " + EdiabasNet.GetExceptionText(ex));
                 return false;
             }
-            return (GetResult_String("JOB_STATUS", ediabas.ResultSets) == "OKAY");
+            string status = GetResult_String("JOB_STATUS", ediabas.ResultSets);
+            if (status != "OKAY")
+                _debugLogger?.Invoke($"  FAIL Job={Job} JOB_STATUS={status}");
+            return (status == "OKAY");
         }
     }
 }

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MSx70_Flasher"
         mc:Ignorable="d"
-        Height="350" Width="580"
+        Height="350" Width="580" MinHeight="350" MinWidth="580"
         d:DesignHeight="350" d:DesignWidth="580"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         Title="{x:Static local:Global.Title}"
         Opacity="1.0"
         Closing="MainWindow_Closing" Background="White" Foreground="{x:Null}" 
@@ -23,6 +23,11 @@
             <Menu Width="Auto" Height="20"  DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Click="AppExit_Click"/>
+                </MenuItem>
+                <MenuItem x:Name="DebugMenu" Header="_Debug">
+                    <MenuItem x:Name="ToggleDebug" Header="Show debug log" IsCheckable="True" Click="ToggleDebug_Click"/>
+                    <MenuItem x:Name="ClearDebugLog" Header="Clear log" Click="ClearDebugLog_Click"/>
+                    <MenuItem x:Name="OpenDebugLog" Header="Open log file…" Click="OpenDebugLog_Click"/>
                 </MenuItem>
                 <MenuItem x:Name = "AdvancedMenu" Header="_Advanced" IsEnabled="False">
                     <!--<MenuItem x:Name="Read_RAM" Header="Read RAM" Click="Read_RAM_Click"/>
@@ -67,9 +72,12 @@
         </StackPanel>
         <!--<CheckBox x:Name="FullBin_CheckBox" Content="Full Binary" Margin="0,310,414,0" Click="FullBin_CheckBox_Changed" IsEnabled="False" HorizontalAlignment="Right" Width="103" Height="15" VerticalAlignment="Top"/>-->
         <TextBox x:Name="statusTextBlock" Text="" TextWrapping="Wrap" Margin="20,188,13,0" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Foreground="Black" Height="38" BorderThickness ="0" BorderBrush="{x:Null}" AllowDrop="False" IsReadOnly="True" IsReadOnlyCaretVisible="False" />
-        <!--<TextBlock Margin="19,284,0,0" TextAlignment="Left" Foreground="#FF666666" Grid.ColumnSpan="2" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" Width="534">
-            Provided at no cost by M3Forum.us
-            <Hyperlink NavigateUri="https://nam3forum.com/forums/forum/e9x-2008-2013/e9x-coding-tuning/11026-mss6x-flasher-beta-testers-requested" RequestNavigate="Url_Click">Click here for latest version</Hyperlink>
-        </TextBlock>-->
+        <ScrollViewer x:Name="DebugScroll" Grid.ColumnSpan="2" Margin="10,280,10,5"
+                      Height="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      Visibility="Collapsed" VerticalAlignment="Top">
+            <TextBox x:Name="debugLogBox" IsReadOnly="True" FontFamily="Consolas" FontSize="10"
+                     TextWrapping="NoWrap" Background="#FF1E1E1E" Foreground="#FFCCCCCC"
+                     BorderThickness="0" VerticalAlignment="Top"/>
+        </ScrollViewer>
     </Grid>
 </Window>
