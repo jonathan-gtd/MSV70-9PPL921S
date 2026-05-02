@@ -559,38 +559,47 @@ namespace MSx70_Flasher
         {
             SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_AWAYMODE_REQUIRED);
 
-            byte[] MemoryDump = { };
-            byte[] MemoryRead = { };
-            byte[] Result = { };
             uint length = end - start + 1;
             uint lengthRemaining = length;
             uint segLength = 254;
             uint bytesRead = 0;
+            int dumpOffset = 0;
+            byte[] MemoryDump = new byte[length];
 
             while (bytesRead < length)
             {
                 if (lengthRemaining < segLength)
                     segLength = lengthRemaining;
-                if (!ExecuteJob(ediabas, "speicher_lesen_ascii", MemSegment + ";" + start + ";" + segLength))
+
+                bool chunkOk = false;
+                for (int attempt = 0; attempt < 3; attempt++)
                 {
-                    SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
-                    return MemoryDump;
+                    if (ExecuteJob(ediabas, "speicher_lesen_ascii", MemSegment + ";" + start + ";" + segLength))
+                    {
+                        chunkOk = true;
+                        break;
+                    }
+                    System.Threading.Thread.Sleep(200);
                 }
 
-                bytesRead += segLength;
-                MemoryRead = GetResult_ByteArray("DATEN", ediabas.ResultSets);
+                if (!chunkOk)
+                {
+                    SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
+                    return MemoryDump.Take(dumpOffset).ToArray();
+                }
 
+                byte[] MemoryRead = GetResult_ByteArray("DATEN", ediabas.ResultSets);
+                Buffer.BlockCopy(MemoryRead, 0, MemoryDump, dumpOffset, MemoryRead.Length);
+                dumpOffset += MemoryRead.Length;
+
+                bytesRead += segLength;
                 start = start + segLength;
                 lengthRemaining = lengthRemaining - segLength;
 
                 uint progress = bytesRead * 500 / length;
                 UpdateProgressBar(progress);
-                MemoryDump = MemoryDump.Concat(MemoryRead).ToArray();
             }
 
-            //Console.WriteLine("Out of loop");
-            //Console.WriteLine(bytesRead.ToString("X"));
-            //Console.WriteLine(segLength.ToString("X"));
             SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
             return MemoryDump;
         }
