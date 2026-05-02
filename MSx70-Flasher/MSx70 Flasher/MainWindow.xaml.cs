@@ -619,7 +619,9 @@ namespace MSx70_Flasher
             int dumpOffset = 0;
             byte[] MemoryDump = new byte[length];
             var sw = System.Diagnostics.Stopwatch.StartNew();
+            var chunkTimer = new System.Diagnostics.Stopwatch();
             long lastLogMs = 0;
+            const int chunkTimeoutMs = 10000; // abort EdiabasLib if chunk takes >10s
 
             _debugLogger?.Invoke($"ReadMemory START seg={MemSegment} 0x{start:X6}–0x{end:X6} len={length} ({length / 1024}KB)");
 
@@ -644,27 +646,31 @@ namespace MSx70_Flasher
                         _debugLogger?.Invoke($"  RETRY {attempt}/2 addr=0x{start:X6} len={segLength}");
                         System.Threading.Thread.Sleep(200);
                     }
+                    chunkTimer.Restart();
+                    ediabas.AbortJobFunc = () => chunkTimer.ElapsedMilliseconds > chunkTimeoutMs;
                     if (ExecuteJob(ediabas, "speicher_lesen_ascii", MemSegment + ";" + start + ";" + segLength))
                     {
                         chunkOk = true;
                         break;
                     }
+                    if (chunkTimer.ElapsedMilliseconds >= chunkTimeoutMs)
+                        _debugLogger?.Invoke($"  TIMEOUT {chunkTimeoutMs/1000}s — EdiabasLib aborted at 0x{start:X6}");
                 }
+                ediabas.AbortJobFunc = null;
 
                 if (!chunkOk && reconnect != null)
                 {
                     _debugLogger?.Invoke($"SESSION LOST at 0x{start:X6} ({bytesRead * 100 / length}% done) — reconnecting...");
                     if (reconnect())
                     {
+                        chunkTimer.Restart();
+                        ediabas.AbortJobFunc = () => chunkTimer.ElapsedMilliseconds > chunkTimeoutMs;
                         if (ExecuteJob(ediabas, "speicher_lesen_ascii", MemSegment + ";" + start + ";" + segLength))
-                        {
                             chunkOk = true;
-                            lastLogMs = sw.ElapsedMilliseconds; // reset log timer after reconnect
-                        }
                         else
-                        {
                             _debugLogger?.Invoke($"  Chunk still failed after reconnect");
-                        }
+                        ediabas.AbortJobFunc = null;
+                        lastLogMs = sw.ElapsedMilliseconds;
                     }
                 }
 
@@ -687,6 +693,7 @@ namespace MSx70_Flasher
                 UpdateProgressBar(progress);
             }
 
+            ediabas.AbortJobFunc = null;
             _debugLogger?.Invoke($"ReadMemory DONE {bytesRead}B in {sw.ElapsedMilliseconds}ms");
             SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
             return MemoryDump;
