@@ -601,11 +601,19 @@ namespace MSx70_Flasher
         
         private bool Reconnect(EdiabasNet ediabas)
         {
-            _debugLogger?.Invoke("RECONNECT: waiting 800ms then re-establishing session...");
-            System.Threading.Thread.Sleep(800);
-            bool ok = RequestSecurityAccess(ediabas);
-            _debugLogger?.Invoke(ok ? "RECONNECT: OK — resuming read" : "RECONNECT: FAILED");
-            return ok;
+            for (int attempt = 1; attempt <= 3; attempt++)
+            {
+                int delay = attempt * 2000; // 2s, 4s, 6s
+                _debugLogger?.Invoke($"RECONNECT attempt {attempt}/3 — waiting {delay / 1000}s...");
+                System.Threading.Thread.Sleep(delay);
+                if (RequestSecurityAccess(ediabas))
+                {
+                    _debugLogger?.Invoke("RECONNECT: OK — resuming read");
+                    return true;
+                }
+            }
+            _debugLogger?.Invoke("RECONNECT: FAILED after 3 attempts");
+            return false;
         }
 
         private byte[] ReadMemory(EdiabasNet ediabas, uint start, uint end, string MemSegment, Func<bool> reconnect = null)
