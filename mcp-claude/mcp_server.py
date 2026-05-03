@@ -23,9 +23,9 @@ XDF_PARTIAL = os.path.join(DATA_PARTIAL, "BMW_Siemens_MSV70_9PPL921S_128K.xdf")
 BIN_FILES = {
     "stock":         os.path.join(DATA_FULL,    "VB67774_921S_Full.bin"),
     "stock_e85":     os.path.join(DATA_FULL,    "VB67774_921S_Full_E85.bin"),
-    "partial":       os.path.join(DATA_PARTIAL, "VB67774_921S_Partial.bin"),
-    "partial_e85":   os.path.join(DATA_PARTIAL, "VB67774_921S_Partial_E85.bin"),
-    "s7_partial":    os.path.join(DATA_PARTIAL, "S7581293_Partial.bin"),
+    "partial":       os.path.join(DATA_PARTIAL, "VB67774_921S_0BN1S_tune.bin"),
+    "partial_e85":   os.path.join(DATA_PARTIAL, "VB67774_921S_0BN1S_TUNE_E85.bin"),
+    "s7_partial":    os.path.join(DATA_PARTIAL, "S7581293.bin"),
 }
 
 # ── Lazy-loaded cache ──────────────────────────────────────────────────────────
