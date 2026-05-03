@@ -6,30 +6,25 @@
 
 > **Véhicule ciblé :** BMW E9x 330i — N52B30 — Siemens MSV70 (SW 9PPL921S)  
 > **Injecteurs stock :** Bosch EV14 13537531634 — pression rail nominale 5000 hPa  
-> **Fichier de base :** VB67774_921S_Full.bin  
-> **Stratégie :** Facteur injecteur → E85 (×1.473) / Cranking → E70 / Avance → E60 / Film mural → ×1.25
+> **Fichier de base :** S7581293.bin (stock officiel — c_ti_as_global = 0.999)  
+> **Stratégie :** Scalaire global `c_ti_as_global` → 1.47 / Seuil cranking TCO → 25°C / Film mural → ×1.25 / Avance → E60
 
 | Statut | Paramètre(s) | Adresse | Fichier | Action |
 |---|---|---|---|---|
-| **✅ MODIFIER** | `ip_mff_cor_opm_1_1` | 0x4E3D4 | §04 | 1.016 → **1.473** |
-| **✅ MODIFIER** | `ip_mff_cor_opm_1_2` | 0x4E554 | §04 | 1.016 → **1.473** |
-| **✅ MODIFIER** | `ip_mff_cor_opm_2_1` | 0x4E6D4 | §04 | 1.016 → **1.473** |
-| **✅ MODIFIER** | `ip_mff_cor_opm_2_2` | 0x4E7C4 | §04 | 1.016 → **1.473** |
+| **✅ MODIFIER** | `c_ti_as_global` | 0x45AE2 | §04 | 0.999 → **1.47** |
 | **✅ MODIFIER** | `c_tco_n_mff_cst` | 0x44F2F | §05 | 17.25 → **25.00 °C** |
-| **✅ MODIFIER** | `ip_mff_cst_opm_1` | 0x437DC | §05 | Table 3×8 : ×1.35–2.00 selon TCO |
-| **✅ MODIFIER** | `ip_mff_cst_opm_2` | 0x4380C | §05 | Idem — mode papillonné |
-| **✅ MODIFIER** | `ip_fac_lamb_wup` | 0x42764 | §08 | 1.000 → **1.03–1.08** basses charges |
-| **✅ MODIFIER** | `ip_iga_bas_max_knk__n__maf` | 0x4323A | §07 | +0 à +2.5° haute charge |
-| **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | §06 | ×**1.25** |
-| **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | ×**1.25** |
-| **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | ×**1.25** |
-| **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | ×**1.25** |
 | **✅ MODIFIER** | `c_lamb_delta_i_max_lam_adj` | 0x47F5E | §08 | +0.050λ → **+0.25λ** break-in |
 | **✅ MODIFIER** | `c_lamb_delta_i_min_lam_adj` | 0x47F60 | §08 | −0.050λ → **−0.25λ** break-in |
-| **✅ MODIFIER** | `ip_ti_cast_opm_1` | 0x43FA4 | §05 | ×1.55–1.65 froid — after-start enrichissement |
-| **✅ MODIFIER** | `ip_ti_cast_opm_2` | 0x43FB8 | §05 | Idem mode papillonné |
+| **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_1` | 0x4CBFC | §06 | 1.000 → ×**1.25** sous 70°C |
+| **✅ MODIFIER** | `ip_ti_tco_pos_slow_wf_opm_2` | 0x4CC7C | §06 | 1.000 → ×**1.25** sous 70°C |
+| **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_1` | 0x443FC | §06 | 1.000 → ×**1.25** sous 70°C |
+| **✅ MODIFIER** | `ip_ti_tco_pos_fast_wf_opm_2` | 0x4443C | §06 | 1.000 → ×**1.25** sous 70°C |
+| **✅ MODIFIER** | `ip_fac_lamb_wup` | 0x42764 | §08 | 1.000 → **1.03–1.08** basses charges |
+| **✅ MODIFIER** | `ip_iga_bas_max_knk__n__maf` | 0x4323A | §07 | +0 à +2.5° haute charge |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | 200 ms → **0 ms** (MT) |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_2` | 0x44EC6 | §07 | 200 ms → **0 ms** (MT) |
+| ⬜ NON MODIFIÉ | `ip_mff_cst_opm_1/2` | 0x437DC/0C | §05 | Stock S7581293 × c_ti_as_global = ×1.47 cranking |
+| ⬜ NON MODIFIÉ | `ip_ti_cast_opm_1/2` | 0x43FA4/B8 | §05 | Stock × 1.47 ≈ ×2.02 froid — suffisant E85 |
 | ⬜ OPTIONNEL | `ip_fac_lamb_max_fsd_1/2` | 0x42734/40 | §08 | 30% → 40% — si DTC fuel trim malgré LTFT OK |
 | ⬜ OPTIONNEL | `ip_lamb_fl__n` | 0x436A2 | §08 | Stock λ 0.920 suffisant. Dé-enrichir à 0.940–0.950 pour +puissance |
 | ⬜ OPTIONNEL | `ip_fac_lamb_wup_is` | 0x42788 | §08 | 1.000 → 1.02–1.05 si ralenti instable warm-up |
@@ -37,18 +32,18 @@
 | ⬜ OPTIONNEL | `c_iga_ini` | 0x44B2A | §07 | +1° à +2° si démarrage > 5 tours (dernier recours) |
 | ⬜ OPTIONNEL | `ip_flow_max_cps` | 0x4FD54 | §10 | −10 à −15% si STFT > ±15% lors purge |
 | ⬜ OPTIONNEL | `ip_flow_cps` | 0x48B90 | §10 | −15% si STFT > ±10% lors purge |
-| ⛔ NE PAS MODIFIER | `c_fac_mff_ti_stnd` (×5 copies) | — | §04 | Overflow XDF — utiliser `ip_mff_cor_opm_*` |
-| ⛔ NE PAS MODIFIER | `ip_fac_eff_iga_ch_cold_opm_*` | 0x4A444/A4A8 | — | Retard chauffe catalyseur — E85 produit moins d'EGT |
+| ⛔ NE PAS MODIFIER | `c_fac_mff_ti_stnd` (×5 copies) | — | — | Overflow XDF |
+| ⛔ NE PAS MODIFIER | `ip_fac_eff_iga_ch_cold_opm_*` | 0x4A444/A4A8 | — | Retard chauffe catalyseur |
+| ⛔ NE PAS MODIFIER | `c_ti_as_global_*` (×4) | 0x4E3D4… | — | Non utilisé dans cette approche — c_ti_as_global couvre tout |
 
 **Ordre d'application recommandé :**
 
 | Étape | Paramètre(s) clé(s) | Priorité |
 |---|---|---|
-| **1** | `ip_mff_cor_opm_*` (×4) | **CRITIQUE — base de tout** |
-| **2** | `ip_mff_cst_opm_1/2` + `c_tco_n_mff_cst` + `ip_fac_lamb_wup` | **CRITIQUE — démarrage froid** |
-| **3** | `ip_fac_lamb_max_fsd_1/2` + `c_lamb_delta_i_max_lam_adj` | **CRITIQUE — anti-DTC break-in** |
-| **4** | `ip_ti_tco_pos_slow/fast_wf_opm_1/2` (×4) | Important — transitions lisses |
-| **5** | `ip_iga_bas_max_knk__n__maf` + `c_t_ti_dly_fl_1/2` | Important — avance + WOT |
+| **1** | `c_ti_as_global` | **CRITIQUE — base de tout** |
+| **2** | `c_tco_n_mff_cst` + `c_lamb_delta_i_max/min_lam_adj` | **CRITIQUE — cold start + anti-DTC** |
+| **3** | `ip_ti_tco_pos_slow/fast_wf_opm_1/2` (×4) | Important — transitions lisses |
+| **4** | `ip_fac_lamb_wup` + `ip_iga_bas_max_knk__n__maf` + `c_t_ti_dly_fl_1/2` | Important — warm-up lambda + WOT |
 
 ---
 
@@ -74,13 +69,13 @@ Baseline à enregistrer (sur essence, avant le plein E85) :
 
 ### Phase 1 — Application des paramètres injecteurs (Jour 1)
 
-**Modifications :** ip_mff_cor_opm_* → raw 47 407 (1.473) + c_tco_n_mff_cst → 25°C + FSD/LTFT élargis
+**Modifications :** `c_ti_as_global` → 1.47 + `c_tco_n_mff_cst` → 25°C + LTFT élargis
 
 **Test immédiat :**
 1. Démarrer moteur (si tiède ou chaud)
 2. Attendre ralenti stable (1–2 min)
 3. Lire STFT → doivent être entre −10% et +10%
-4. Si STFT > +12% : augmenter `ip_mff_cor_opm` (toutes les 4 maps) de +3% supplémentaire
+4. Si STFT > +12% : augmenter `c_ti_as_global` de +0.03
 5. Rouler 20 km, vérifier stabilisation LTFT
 
 **Critère de validation Phase 1 :**
@@ -109,11 +104,11 @@ Baseline à enregistrer (sur essence, avant le plein E85) :
 
 1. Moteur chaud (90°C), ralenti 5 min :
    - STFT/LTFT doivent se stabiliser à ±5%
-   - Si LTFT dérive → ajuster `ip_mff_cor_opm` (toutes les 4 maps)
+   - Si LTFT dérive → ajuster `c_ti_as_global` (±0.03)
 
 2. Roulage 30 km mixte :
    - Log continu STFT par zone de charge
-   - Si correction persistante > ±10% : ajuster `ip_mff_cor_opm`
+   - Si correction persistante > ±10% : ajuster `c_ti_as_global`
 
 3. Pleine charge (accélération 5–6 sec sur route droite sûre) :
    - Si sonde large bande installée : vérifier lambda 0.90–0.95 à WOT
@@ -164,13 +159,13 @@ J7 : +2.5° UNIQUEMENT si aucun cliquetis aux étapes précédentes
 | Démarrage laborieux (10+ tours) | ip_mff_cst_opm insuffisant | +15% cranking + vérifier batterie |
 | Cale après démarrage froid | ip_fac_lamb_wup insuffisant | +0.05 à 0.08 aux cellules 704 rpm |
 | Trou/hésitation à 40–60°C | Film mural insuffisant | +10% sur `ip_ti_tco_pos_fast_wf_opm_1/2` ligne TCO concernée |
-| STFT > +15% en permanence | ip_mff_cor_opm trop faible | +3–5% sur les 4 maps |
-| STFT < −15% en permanence | ip_mff_cor_opm trop élevé | −3–5% sur les 4 maps |
+| STFT > +15% en permanence | c_ti_as_global trop faible | +0.03 sur c_ti_as_global |
+| STFT < −15% en permanence | c_ti_as_global trop élevé | −0.03 sur c_ti_as_global |
 | Ralenti instable moteur chaud | EVAP ou STFT oscillant | Vérifier purge canister §10, STFT en temps réel |
 | Cliquetis pleine charge | Avance trop haute | −1° à −2° immédiatement, puis diagnostiquer |
 | Perte puissance progressive | Filtre bouché ou pompe fatiguée | Changer filtre / tester pompe (≥ 2 L/30 s) |
 | Fumée noire échappement | ip_fac_lamb_wup trop riche | −0.05 à 0.08 sur cellules concernées |
-| LTFT monte sur autoroute | ip_mff_cor_opm trop faible | +3–5% sur les 4 maps |
+| LTFT monte sur autoroute | c_ti_as_global trop faible | +0.03 sur c_ti_as_global |
 | Odeur forte éthanol à l'arrêt | Fuite carburant (joints) | **Inspection immédiate obligatoire** |
 
 ---
@@ -186,13 +181,13 @@ J7 : +2.5° UNIQUEMENT si aucun cliquetis aux étapes précédentes
 
 ```
 STFT > +15% = Le calculateur rajoute du carburant en permanence
-  → ip_mff_cor_opm trop petit
+  → c_ti_as_global trop petit
 
 STFT < −15% = Le calculateur enlève du carburant
-  → ip_mff_cor_opm trop grand
+  → c_ti_as_global trop grand
 
 LTFT élevé en permanence = Dérive systématique de la calibration
-  → Ajustez ip_mff_cor_opm (positif si LTFT positif, négatif si négatif)
+  → Ajuster `c_ti_as_global` (+0.03 si LTFT positif, −0.03 si LTFT négatif)
 ```
 
 ### Pompe à essence
