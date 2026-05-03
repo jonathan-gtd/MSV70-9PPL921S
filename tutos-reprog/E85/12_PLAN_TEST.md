@@ -23,7 +23,7 @@
 | **✅ MODIFIER** | `ip_iga_bas_max_knk__n__maf` | 0x4323A | §07 | +0 à +2.5° haute charge |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_1` | 0x44EC4 | §07 | 200 ms → **0 ms** (MT) |
 | **✅ MODIFIER** | `c_t_ti_dly_fl_2` | 0x44EC6 | §07 | 200 ms → **0 ms** (MT) |
-| ⬜ NON MODIFIÉ | `ip_mff_cst_opm_1/2` | 0x437DC/0C | §05 | Stock S7581293 × c_ti_as_global = ×1.47 cranking |
+| **✅ MODIFIER** | `ip_mff_cst_opm_1/2` | 0x437DC/0C | §05 | Colonnes ≤ 0°C : ×2.04 / ×1.70 / ×1.36 / ×1.19 (résiduel après c_ti_as_global) |
 | ⬜ NON MODIFIÉ | `ip_ti_cast_opm_1/2` | 0x43FA4/B8 | §05 | Stock × 1.47 ≈ ×2.02 froid — suffisant E85 |
 | ⬜ OPTIONNEL | `ip_fac_lamb_max_fsd_1/2` | 0x42734/40 | §08 | 30% → 40% — si DTC fuel trim malgré LTFT OK |
 | ⬜ OPTIONNEL | `ip_lamb_fl__n` | 0x436A2 | §08 | Stock λ 0.920 suffisant. Dé-enrichir à 0.940–0.950 pour +puissance |
@@ -41,7 +41,7 @@
 | Étape | Paramètre(s) clé(s) | Priorité |
 |---|---|---|
 | **1** | `c_ti_as_global` | **CRITIQUE — base de tout** |
-| **2** | `c_tco_n_mff_cst` + `c_lamb_delta_i_max/min_lam_adj` | **CRITIQUE — cold start + anti-DTC** |
+| **2** | `ip_mff_cst_opm_1/2` + `c_tco_n_mff_cst` + `c_lamb_delta_i_max/min_lam_adj` | **CRITIQUE — cold start + anti-DTC** |
 | **3** | `ip_ti_tco_pos_slow/fast_wf_opm_1/2` (×4) | Important — transitions lisses |
 | **4** | `ip_fac_lamb_wup` + `ip_iga_bas_max_knk__n__maf` + `c_t_ti_dly_fl_1/2` | Important — warm-up lambda + WOT |
 

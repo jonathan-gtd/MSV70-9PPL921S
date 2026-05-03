@@ -1,10 +1,16 @@
 # Démarrage à froid (Cranking)
 
-L'éthanol s'évapore difficilement sous 25°C (ébullition à 78°C vs −40°C pour l'essence). Le moteur a besoin de **×1.35 à ×2.00 de masse carburant** au cranking selon la température.
+L'éthanol s'évapore très difficilement à froid (ébullition à 78°C, chaleur latente ×2.7 vs essence). Il faut **×1.47 à +17°C** (stoech seul) mais **×3.00 à −30°C** (stoech + atomisation + film mural cranking).
 
-`c_ti_as_global = 1.47` s'applique pendant le cranking — les tables stock S7581293 × 1.47 donnent l'enrichissement E85 nécessaire. **ip_mff_cst_opm_1 et ip_mff_cst_opm_2 ne sont donc pas modifiées.**
+`c_ti_as_global = 1.47` couvre les colonnes chaudes (+17°C et plus). Les colonnes froides doivent être multipliées **en plus** dans ip_mff_cst (facteur résiduel = facteur total ÷ 1.47).
 
-Un seul paramètre cold start à modifier : le **seuil TCO** d'activation des tables cranking.
+**Facteurs par colonne TCO :**
+
+| TCO (°C) | −30 | −20 | −10 | 0 | +17 | +30 | +60 | +90 |
+|---|---|---|---|---|---|---|---|---|
+| Facteur total E85 | ×3.00 | ×2.50 | ×2.00 | ×1.75 | ×1.47 | ×1.30 | ×1.15 | ×1.05 |
+| c_ti_as_global | ×1.47 | ×1.47 | ×1.47 | ×1.47 | ×1.47 | ×1.47 | ×1.47 | ×1.47 |
+| **Résiduel ip_mff_cst** | **×2.04** | **×1.70** | **×1.36** | **×1.19** | **×1.00** | **×1.00** | **×1.00** | **×1.00** |
 
 **Règles absolues :**
 - Ne jamais appuyer sur la pédale avant démarrage — le MSV70 désactive l'enrichissement cranking si la pédale est enfoncée (Full Load Cutoff)
@@ -16,9 +22,14 @@ Un seul paramètre cold start à modifier : le **seuil TCO** d'activation des ta
 <a id="p1"></a>
 ## ① `ip_mff_cst_opm_1` — Masse carburant cranking, mode Valvetronic
 
-**Non modifié.** `c_ti_as_global × stock` = enrichissement E85 au cranking.
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x437DC |
+| Type | Map 3×8 |
+| Unité | mg/stk |
+| Axes | X = TCO (°C), Y = RPM démarreur |
 
-**◀ Stock S7581293 (référence, mg/stk)**
+**◀ Avant — Stock S7581293 (mg/stk)**
 
 | RPM \ TCO (°C) | −30.0 | −20.2 | −9.8 | 0.0 | 17.2 | 30.0 | 60.0 | 90.0 |
 |---|---|---|---|---|---|---|---|---|
@@ -26,22 +37,38 @@ Un seul paramètre cold start à modifier : le **seuil TCO** d'activation des ta
 | 320 | 267.0 | 224.0 | 179.2 | 139.3 | 83.2 | 60.2 | 46.5 | 39.1 |
 | 920 | 162.1 | 150.5 | 129.4 | 103.4 | 64.8 | 47.6 | 36.5 | 33.0 |
 
-**Effective après c_ti_as_global × 1.47 (mg/stk)**
+**✅ Après — E85 (mg/stk) — facteurs résiduels appliqués colonne par colonne**
 
 | RPM \ TCO (°C) | −30.0 | −20.2 | −9.8 | 0.0 | 17.2 | 30.0 | 60.0 | 90.0 |
 |---|---|---|---|---|---|---|---|---|
-| 80 | **548.6** | **442.8** | **340.6** | **254.9** | **142.3** | **102.9** | **82.6** | **72.9** |
-| 320 | **392.5** | **329.3** | **263.4** | **204.8** | **122.3** | **88.5** | **68.4** | **57.5** |
-| 920 | **238.3** | **221.2** | **190.2** | **152.0** | **95.3** | **70.0** | **53.6** | **48.5** |
+| 80 | **761.3** | **512.0** | **315.1** | **206.3** | 96.8 | 70.0 | 56.2 | 49.6 |
+| 320 | **544.7** | **380.8** | **243.7** | **165.8** | 83.2 | 60.2 | 46.5 | 39.1 |
+| 920 | **330.7** | **255.9** | **175.9** | **123.0** | 64.8 | 47.6 | 36.5 | 33.0 |
+
+> Les colonnes +17°C à +90°C sont inchangées — c_ti_as_global × 1.47 couvre le besoin.
+
+**Vérification :**
+
+| Condition | ✅ Cible | ⚠️ Action |
+|---|---|---|
+| Démarrage froid (TCO < 10°C), sans pédale | ≤ 3 tours | > 5 tours → cranking +15% sur colonnes froides |
+| Démarrage froid (TCO 10–25°C) | ≤ 3 tours | > 3 tours → vérifier c_tco_n_mff_cst |
 
 ---
 
 <a id="p2"></a>
 ## ② `ip_mff_cst_opm_2` — Masse carburant cranking, mode papillonné (GD)
 
-**Non modifié.** Même principe qu'opm_1.
+| Champ | Valeur |
+|---|---|
+| Adresse | 0x4380C |
+| Type | Map 3×8 |
+| Unité | mg/stk |
+| Axes | X = TCO (°C), Y = RPM démarreur |
 
-**◀ Stock S7581293 (référence, mg/stk)**
+**Rôle :** Même rôle qu'opm_1 pour le mode papillonné (Valvetronic désactivé). Actif au démarrage froid quand le Valvetronic n'est pas encore opérationnel. Mêmes facteurs résiduels.
+
+**◀ Avant — Stock S7581293 (mg/stk)**
 
 | RPM \ TCO (°C) | −30.0 | −20.2 | −9.8 | 0.0 | 17.2 | 30.0 | 60.0 | 90.0 |
 |---|---|---|---|---|---|---|---|---|
@@ -49,20 +76,18 @@ Un seul paramètre cold start à modifier : le **seuil TCO** d'activation des ta
 | 320 | 455.2 | 357.1 | 263.3 | 184.8 | 100.8 | 80.7 | 57.0 | 39.1 |
 | 920 | 302.6 | 241.8 | 191.3 | 145.6 | 79.7 | 64.6 | 47.0 | 34.5 |
 
-**Effective après c_ti_as_global × 1.47 (mg/stk)**
+**✅ Après — E85 (mg/stk)**
 
 | RPM \ TCO (°C) | −30.0 | −20.2 | −9.8 | 0.0 | 17.2 | 30.0 | 60.0 | 90.0 |
 |---|---|---|---|---|---|---|---|---|
-| 80 | **895.7** | **665.5** | **472.8** | **329.9** | **192.4** | **147.3** | **99.7** | **72.9** |
-| 320 | **669.1** | **524.9** | **387.0** | **271.7** | **148.2** | **118.6** | **83.8** | **57.5** |
-| 920 | **444.8** | **355.4** | **281.2** | **214.0** | **117.2** | **94.9** | **69.1** | **50.7** |
+| 80 | **1243.0** | **769.6** | **437.4** | **267.0** | 130.9 | 100.2 | 67.8 | 49.6 |
+| 320 | **928.6** | **607.1** | **358.1** | **219.9** | 100.8 | 80.7 | 57.0 | 39.1 |
+| 920 | **617.3** | **411.1** | **260.2** | **173.3** | 79.7 | 64.6 | 47.0 | 34.5 |
 
 ---
 
 <a id="p3"></a>
 ## ③ `c_tco_n_mff_cst` — Seuil TCO activation cranking enrichi
-
-**Modifier.** Ce seuil contrôle quand les tables cranking s'activent — il n'est pas affecté par `c_ti_as_global`. Sur E85, l'éthanol nécessite l'enrichissement cranking jusqu'à ~25°C (contre ~17°C pour l'essence).
 
 **Avant / Après :**
 
@@ -90,7 +115,7 @@ Autres valeurs possibles selon la rigueur hivernale :
 <a id="p4"></a>
 ## ④ `ip_ti_cast_opm_1` — Enrichissement after-start, mode Valvetronic
 
-**Non modifié.** `c_ti_as_global × stock ip_ti_cast` fournit l'enrichissement post-démarrage E85. Exemple à −30°C : stock 1.375 × 1.47 = **2.02** (cible E85 ≈ ×2.00 ✓).
+**Non modifié.** `c_ti_as_global × stock ip_ti_cast` : exemple à −30°C → stock 1.375 × 1.47 = **2.02** (cible E85 ≈ ×2.00 ✓).
 
 Si le moteur démarre puis cale dans les 2 premières secondes malgré le cranking OK → augmenter uniquement à ce moment-là.
 
@@ -112,7 +137,7 @@ Si le moteur démarre puis cale dans les 2 premières secondes malgré le cranki
 
 | Condition | ✅ Cible | ⚠️ Action |
 |---|---|---|
-| Démarrage froid (TCO < 10°C), sans pédale | ≤ 3 tours | > 5 tours → cranking +15% sur colonnes froides dans ip_mff_cst |
+| Démarrage froid (TCO < 10°C), sans pédale | ≤ 3 tours | > 5 tours → cranking +15% colonnes froides ip_mff_cst |
 | Démarrage froid (TCO 10–25°C) | ≤ 3 tours | > 3 tours → vérifier c_tco_n_mff_cst |
 | Part puis cale dans les 3 s | — | after-start → si persistant, augmenter ip_ti_cast froid |
 | Ralenti initial après démarrage | 800–1200 RPM, décroissant | Instable → vérifier warm-up lambda §08 |

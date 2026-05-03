@@ -38,8 +38,8 @@ Toutes les certitudes sont basées sur : description XDF anglaise + catégorie X
 | Paramètre | Description XDF (originale) | Décodage du nom | Ce que ça fait |
 |---|---|---|---|
 | `c_ti_as_global` | *Global injection time scalar* | **c**=constante · **ti**=injection time · **as**=all systems · **global** | Multiplicateur global du temps d'injection — s'applique partout (ralenti, charge, cranking, wall film). **Stock S7581293 : 0.999. E85 cible : 1.47** (×stoich E85/E0 = ×1.50, légèrement réduit car LTFT finalise) |
-| `ip_mff_cst_opm_1` | *Basic value for cranking injection at operation mode 1* | **cst**=cold start · **opm_1**=Valvetronic | Masse injectée pendant cranking f(RPM démarreur, TCO), Valvetronic. **Stock S7581293 : valeurs essence.** Non modifié — c_ti_as_global × stock donne ×1.47 au cranking |
-| `ip_mff_cst_opm_2` | *…operation mode 2* | **opm_2**=papillonné | Même rôle, mode papillonné. Non modifié |
+| `ip_mff_cst_opm_1` | *Basic value for cranking injection at operation mode 1* | **cst**=cold start · **opm_1**=Valvetronic | Masse injectée pendant cranking f(RPM démarreur, TCO), Valvetronic. **Stock S7581293 : valeurs essence. E85 : colonnes ≤ 0°C multipliées (×2.04 / ×1.70 / ×1.36 / ×1.19) — résiduel après c_ti_as_global** |
+| `ip_mff_cst_opm_2` | *…operation mode 2* | **opm_2**=papillonné | Même rôle, mode papillonné. Mêmes facteurs résiduels |
 | `c_tco_n_mff_cst` | *Cool temperature constant* | **c**=constante · **tco**=temp. liquide · **n**=seuil · **mff_cst**=cold start MFF | Seuil TCO d'activation cranking enrichi. **Stock S7581293 : 17.25°C. E85 : 25°C** |
 | `ip_ti_cast_opm_1` | *Initialization value of post start enrichment factor at operation mode 1* | **ti**=injection time · **cast**=cold/catalyst after start · **opm_1**=Valvetronic | Valeur initiale du facteur d'enrichissement post-démarrage f(TCO liquide, TCO admission). **Stock S7581293 : ~1.00 froid. E85 : ×1.55–1.65 froid** |
 | `ip_ti_cast_opm_2` | *…operation mode 2* | **opm_2**=papillonné | Même rôle, mode papillonné |
