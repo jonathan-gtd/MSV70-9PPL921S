@@ -1,6 +1,12 @@
-"""MCP server exposing XDF/BIN tools for the MSV70 ECU."""
+"""MCP server exposing XDF/BIN/0da tools for the MSV70 ECU.
+
+All tools accept explicit file paths — no hardcoded project paths.
+The only optional shorthand is XDF auto-detection based on file size when
+full_rom is omitted, which the caller can override at any time.
+"""
 import os
 import sys
+import tempfile
 
 _HERE     = os.path.dirname(os.path.abspath(__file__))
 _ANALYZER = os.path.normpath(os.path.join(_HERE, "..", "xdf-analyzer"))
@@ -8,147 +14,102 @@ sys.path.insert(0, _ANALYZER)
 
 from mcp.server.fastmcp import FastMCP
 from xdf_parser import XDFParser
-from doc_manager import DocManager
 from bin_reader import read_param_values, compare_params
-
-# ── Paths ──────────────────────────────────────────────────────────────────────
-
-DATA_FULL    = r"C:\Users\jonat\Desktop\MSV70-9PPL921S\bins\Full"
-DATA_PARTIAL = r"C:\Users\jonat\Desktop\MSV70-9PPL921S\bins\Partial"
-DOCS_PATH    = os.path.join(_ANALYZER, "knowledge")
-
-XDF_FULL    = os.path.join(DATA_FULL,    "BMW_Siemens_MSV70_9PPL921S_2560K.xdf")
-XDF_PARTIAL = os.path.join(DATA_PARTIAL, "BMW_Siemens_MSV70_9PPL921S_128K.xdf")
-
-BIN_FILES = {
-    "stock":         os.path.join(DATA_FULL,    "VB67774_921S_Full.bin"),
-    "stock_e85":     os.path.join(DATA_FULL,    "VB67774_921S_Full_E85.bin"),
-    "partial":       os.path.join(DATA_PARTIAL, "dump.bin"),
-    "partial_e85":   os.path.join(DATA_PARTIAL, "e85.bin"),
-    "s7_partial":    os.path.join(DATA_PARTIAL, "stock.bin"),
-}
-
-# ── Lazy-loaded cache ──────────────────────────────────────────────────────────
-
-_cache: dict = {}  # cleared on server restart
-
-def _get_params(full: bool = True) -> list[dict]:
-    key = "full" if full else "partial"
-    if key not in _cache:
-        xdf_path = XDF_FULL if full else XDF_PARTIAL
-        parser = XDFParser(xdf_path)
-        params = parser.get_all_params()
-        doc_mgr = DocManager(DOCS_PATH)
-        for p in params:
-            doc_mgr.enrich_param(p)
-        _cache[key] = params
-    return _cache[key]
-
-def _find_param(title: str, full: bool = True) -> dict | None:
-    title_lower = title.lower()
-    for p in _get_params(full):
-        if p["title"].lower() == title_lower:
-            return p
-    return None
-
-def _resolve_bin(bin_key: str) -> str | None:
-    if bin_key in BIN_FILES:
-        return BIN_FILES[bin_key]
-    if os.path.isfile(bin_key):
-        return bin_key
-    return None
-
-# ── MCP Server ────────────────────────────────────────────────────────────────
+from da_converter import extract_calibration
 
 mcp = FastMCP("MSV70 XDF/BIN Analyzer")
 
+# ── Parameter cache (keyed by xdf_path) ──────────────────────────────────────
+
+_param_cache: dict[str, list[dict]] = {}
+
+def _load_params(xdf_path: str) -> list[dict]:
+    if xdf_path not in _param_cache:
+        parser = XDFParser(xdf_path)
+        _param_cache[xdf_path] = parser.get_all_params()
+    return _param_cache[xdf_path]
+
+def _find_param(title: str, xdf_path: str) -> dict | None:
+    tl = title.lower()
+    for p in _load_params(xdf_path):
+        if p["title"].lower() == tl:
+            return p
+    return None
+
+
+# ── Tools ─────────────────────────────────────────────────────────────────────
 
 @mcp.tool()
 def list_params(
+    xdf_path: str,
     search: str = "",
     category: str = "",
     kind: str = "",
-    flex_fuel_only: bool = False,
-    full_rom: bool = True,
     limit: int = 100,
 ) -> dict:
     """
-    List ECU parameters from the XDF definition.
+    List ECU parameters from an XDF file.
 
     Args:
-        search:        Keyword filter on title or description (case-insensitive).
-        category:      Filter by XDF category name (partial match).
-        kind:          "TABLE" or "CONST" to filter by type.
-        flex_fuel_only: Return only E85-relevant parameters.
-        full_rom:      True = Full 2560K ROM, False = Partial 128K ROM.
-        limit:         Max number of results (default 100).
+        xdf_path:  Absolute path to the XDF file.
+        search:    Keyword filter on title (case-insensitive).
+        category:  Filter by category name (partial match).
+        kind:      "TABLE" or "CONST".
+        limit:     Max results (default 100).
     """
-    params = _get_params(full_rom)
+    params = _load_params(xdf_path)
     results = []
-
     for p in params:
-        if search and search.lower() not in p["title"].lower() and search.lower() not in p.get("desc", "").lower():
+        if search and search.lower() not in p["title"].lower():
             continue
         if category and category.lower() not in p.get("category", "").lower():
             continue
         if kind and p.get("kind", "") != kind.upper():
             continue
-        if flex_fuel_only and p.get("flex_fuel", "") != "oui":
-            continue
         results.append({
-            "title":       p["title"],
-            "category":    p["category"],
-            "kind":        p["kind"],
-            "type":        p["type"],
-            "bin_addr":    p["bin_addr"],
-            "z_unit":      p["z_unit"],
-            "flex_fuel":   p.get("flex_fuel", ""),
-            "modification_e85": p.get("modification_e85", ""),
+            "title":    p["title"],
+            "category": p.get("category", ""),
+            "kind":     p.get("kind", ""),
+            "bin_addr": p.get("bin_addr", ""),
+            "z_unit":   p.get("z_unit", ""),
+            "rows":     p.get("rows", 1),
+            "cols":     p.get("cols", 1),
         })
         if len(results) >= limit:
             break
-
-    return {"count": len(results), "params": results}
+    return {"xdf": os.path.basename(xdf_path), "count": len(results), "params": results}
 
 
 @mcp.tool()
-def get_param_info(title: str, full_rom: bool = True) -> dict:
+def get_param_info(xdf_path: str, title: str) -> dict:
     """
-    Get full definition of a parameter (XDF metadata + documentation).
+    Get full XDF definition of a parameter.
 
     Args:
-        title:    Exact parameter title as defined in the XDF.
-        full_rom: True = Full 2560K ROM, False = Partial 128K ROM.
+        xdf_path: Absolute path to the XDF file.
+        title:    Exact parameter title.
     """
-    p = _find_param(title, full_rom)
+    p = _find_param(title, xdf_path)
     if p is None:
-        return {"error": f"Parameter '{title}' not found"}
+        return {"error": f"Parameter '{title}' not found in {os.path.basename(xdf_path)}"}
     return p
 
 
 @mcp.tool()
-def read_bin_value(
-    title: str,
-    bin_key: str = "stock",
-    full_rom: bool = True,
-) -> dict:
+def read_param(xdf_path: str, bin_path: str, title: str) -> dict:
     """
     Read the decoded value(s) of a parameter from a BIN file.
 
     Args:
-        title:    Exact parameter title as defined in the XDF.
-        bin_key:  One of: stock, stock_e85, partial, partial_e85, s7_partial.
-                  Or an absolute path to any .bin file.
-        full_rom: True = Full 2560K ROM XDF, False = Partial 128K XDF.
+        xdf_path: Absolute path to the XDF file.
+        bin_path: Absolute path to the BIN file.
+        title:    Exact parameter title.
     """
-    p = _find_param(title, full_rom)
+    p = _find_param(title, xdf_path)
     if p is None:
         return {"error": f"Parameter '{title}' not found"}
-
-    bin_path = _resolve_bin(bin_key)
-    if bin_path is None:
-        return {"error": f"BIN file not found: '{bin_key}'. Valid keys: {list(BIN_FILES.keys())}"}
-
+    if not os.path.isfile(bin_path):
+        return {"error": f"BIN not found: {bin_path}"}
     result = read_param_values(bin_path, p)
     result["title"]    = title
     result["bin_file"] = os.path.basename(bin_path)
@@ -156,192 +117,205 @@ def read_bin_value(
 
 
 @mcp.tool()
-def compare_bins(
-    title: str,
-    bin_key1: str = "stock",
-    bin_key2: str = "stock_e85",
-    full_rom: bool = True,
-) -> dict:
+def compare_param(xdf_path: str, bin_path1: str, bin_path2: str, title: str) -> dict:
     """
-    Compare a parameter's values between two BIN files and report differences.
+    Compare a single parameter between two BIN files.
 
     Args:
-        title:    Exact parameter title as defined in the XDF.
-        bin_key1: First BIN key (or absolute path).
-        bin_key2: Second BIN key (or absolute path).
-        full_rom: True = Full 2560K ROM XDF, False = Partial 128K XDF.
+        xdf_path:  Absolute path to the XDF file.
+        bin_path1: Absolute path to the first BIN (reference).
+        bin_path2: Absolute path to the second BIN.
+        title:     Exact parameter title.
     """
-    p = _find_param(title, full_rom)
+    p = _find_param(title, xdf_path)
     if p is None:
         return {"error": f"Parameter '{title}' not found"}
-
-    path1 = _resolve_bin(bin_key1)
-    path2 = _resolve_bin(bin_key2)
-    if path1 is None:
-        return {"error": f"BIN not found: '{bin_key1}'"}
-    if path2 is None:
-        return {"error": f"BIN not found: '{bin_key2}'"}
-
-    result = compare_params(path1, path2, p)
+    for path in (bin_path1, bin_path2):
+        if not os.path.isfile(path):
+            return {"error": f"BIN not found: {path}"}
+    result = compare_params(bin_path1, bin_path2, p)
     result["title"] = title
-    result["bin1"]  = os.path.basename(path1)
-    result["bin2"]  = os.path.basename(path2)
+    result["bin1"]  = os.path.basename(bin_path1)
+    result["bin2"]  = os.path.basename(bin_path2)
     return result
 
 
 @mcp.tool()
-def list_bin_files() -> dict:
-    """List all available BIN files with their size and path."""
-    files = {}
-    for key, path in BIN_FILES.items():
-        if os.path.isfile(path):
-            size = os.path.getsize(path)
-            files[key] = {"path": path, "size_kb": round(size / 1024, 1), "exists": True}
-        else:
-            files[key] = {"path": path, "exists": False}
-    return files
-
-
-@mcp.tool()
-def diff_all_changed_params(
-    bin_key1: str = "stock",
-    bin_key2: str = "stock_e85",
-    full_rom: bool = True,
-    flex_fuel_only: bool = True,
+def diff_bins(
+    xdf_path: str,
+    bin_path1: str,
+    bin_path2: str,
+    search: str = "",
+    category: str = "",
+    changed_only: bool = True,
 ) -> dict:
     """
-    Scan all parameters and return those that differ between two BIN files.
+    Compare ALL parameters between two BIN files and report differences.
 
     Args:
-        bin_key1:      First BIN key.
-        bin_key2:      Second BIN key.
-        full_rom:      True = Full ROM XDF, False = Partial ROM XDF.
-        flex_fuel_only: Restrict to E85-relevant params only (faster).
+        xdf_path:     Absolute path to the XDF file.
+        bin_path1:    Reference BIN (absolute path).
+        bin_path2:    Comparison BIN (absolute path).
+        search:       Optional keyword filter on param title.
+        category:     Optional category filter.
+        changed_only: Return only changed params (default True).
     """
-    path1 = _resolve_bin(bin_key1)
-    path2 = _resolve_bin(bin_key2)
-    if path1 is None:
-        return {"error": f"BIN not found: '{bin_key1}'"}
-    if path2 is None:
-        return {"error": f"BIN not found: '{bin_key2}'"}
+    for path in (bin_path1, bin_path2):
+        if not os.path.isfile(path):
+            return {"error": f"BIN not found: {path}"}
 
-    params = _get_params(full_rom)
-    changed = []
-    errors  = []
+    params = _load_params(xdf_path)
+    changed, same, errors = [], [], []
 
     for p in params:
-        if flex_fuel_only and p.get("flex_fuel", "") != "oui":
+        if search and search.lower() not in p["title"].lower():
             continue
-        result = compare_params(path1, path2, p)
+        if category and category.lower() not in p.get("category", "").lower():
+            continue
+        result = compare_params(bin_path1, bin_path2, p)
         if "error" in result:
             errors.append({"title": p["title"], "error": result["error"]})
         elif result["changed"]:
             changed.append({
                 "title":       p["title"],
                 "category":    p.get("category", ""),
-                "type":        p.get("type", ""),
+                "kind":        p.get("kind", ""),
+                "rows":        p.get("rows", 1),
+                "cols":        p.get("cols", 1),
+                "z_unit":      result["z_unit"],
                 "diff_count":  result["diff_count"],
                 "total_cells": result["total_cells"],
-                "z_unit":      result["z_unit"],
+                "diffs":       result["diffs"],
             })
+        else:
+            if not changed_only:
+                same.append(p["title"])
+
+    out = {
+        "xdf":           os.path.basename(xdf_path),
+        "bin1":          os.path.basename(bin_path1),
+        "bin2":          os.path.basename(bin_path2),
+        "changed_count": len(changed),
+        "error_count":   len(errors),
+        "changed":       changed,
+        "errors":        errors,
+    }
+    if not changed_only:
+        out["same_count"] = len(same)
+    return out
+
+
+@mcp.tool()
+def convert_0da(
+    da_path: str,
+    output_path: str = "",
+    base_addr: int = 0x840000,
+    size_kb: int = 128,
+) -> dict:
+    """
+    Convert a WinKFP .0da Intel HEX calibration file to a flat binary.
+
+    For MSV70: calibration at ECU address 0x840000, 128 KB.
+    Output binary can be flashed directly as a partial calibration.
+
+    Args:
+        da_path:     Absolute path to the .0da file.
+        output_path: Where to write the .bin (default: same name, .bin extension).
+        base_addr:   ECU calibration base address (default 0x840000).
+        size_kb:     Output size in KB (default 128).
+    """
+    if not os.path.isfile(da_path):
+        return {"error": f"0da not found: {da_path}"}
+
+    size = size_kb * 1024
+    cal_bytes, bytes_written = extract_calibration(da_path, base_addr, size)
+
+    if not output_path:
+        output_path = os.path.splitext(da_path)[0] + ".bin"
+
+    with open(output_path, "wb") as f:
+        f.write(cal_bytes)
 
     return {
-        "bin1":         os.path.basename(path1),
-        "bin2":         os.path.basename(path2),
-        "changed_count": len(changed),
-        "error_count":  len(errors),
-        "changed":      changed,
-        "errors":       errors,
+        "da_file":       os.path.basename(da_path),
+        "output_bin":    output_path,
+        "size_kb":       size_kb,
+        "base_addr":     hex(base_addr),
+        "bytes_written": bytes_written,
+        "ff_bytes":      cal_bytes.count(0xFF),
+        "programmed_kb": round((size - cal_bytes.count(0xFF)) / 1024, 1),
     }
 
 
 @mcp.tool()
-def verify_e85_bin(
-    bin_key: str,
-    reference_key: str = "stock",
-    full_rom: bool = True,
+def diff_0da_vs_bin(
+    xdf_path: str,
+    da_path: str,
+    bin_path: str,
+    base_addr: int = 0x840000,
+    size_kb: int = 128,
+    search: str = "",
+    category: str = "",
 ) -> dict:
     """
-    Compare an E85 bin against a stock reference and cross-check every change
-    against the knowledge base E85 documentation.
-
-    Returns three lists:
-      - ok:      params changed as expected per knowledge base
-      - missing: E85-required params that were NOT changed
-      - unexpected: params changed but NOT documented as E85 modifications
-      - out_of_range: params where the new value seems wrong
+    Convert a .0da on-the-fly and compare all parameters against a reference BIN.
 
     Args:
-        bin_key:       E85 BIN key or absolute path.
-        reference_key: Stock reference BIN key (default: stock).
-        full_rom:      True = Full ROM XDF, False = Partial ROM XDF.
+        xdf_path:  Absolute path to the XDF file.
+        da_path:   Absolute path to the .0da file.
+        bin_path:  Absolute path to the reference BIN.
+        base_addr: ECU calibration base address (default 0x840000).
+        size_kb:   Calibration region size in KB (default 128).
+        search:    Optional keyword filter on param title.
+        category:  Optional category filter.
     """
-    path_e85 = _resolve_bin(bin_key)
-    path_ref  = _resolve_bin(reference_key)
-    if path_e85 is None:
-        return {"error": f"BIN not found: '{bin_key}'"}
-    if path_ref is None:
-        return {"error": f"BIN not found: '{reference_key}'"}
+    for label, path in [("0da", da_path), ("BIN", bin_path)]:
+        if not os.path.isfile(path):
+            return {"error": f"{label} not found: {path}"}
 
-    params = _get_params(full_rom)
+    size = size_kb * 1024
+    cal_bytes, bytes_written = extract_calibration(da_path, base_addr, size)
 
-    # Build lookup: title -> param
-    param_map = {p["title"]: p for p in params}
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".bin")
+    try:
+        tmp.write(cal_bytes)
+        tmp.close()
 
-    # Params documented as E85 modifications
-    e85_required = {p["title"]: p for p in params if p.get("modification_e85", "").upper() == "OUI"}
+        params = _load_params(xdf_path)
+        changed, errors = [], []
 
-    # Scan all params for actual changes
-    actually_changed = {}
-    for p in params:
-        result = compare_params(path_ref, path_e85, p)
-        if "error" not in result and result["changed"]:
-            actually_changed[p["title"]] = result
-
-    ok          = []
-    missing     = []
-    unexpected  = []
-
-    for title, p in e85_required.items():
-        if title in actually_changed:
-            ok.append({
-                "title":      title,
-                "category":   p.get("category", ""),
-                "type":       p.get("type", ""),
-                "diff_count": actually_changed[title]["diff_count"],
-                "total_cells":actually_changed[title]["total_cells"],
-                "e85_action": p.get("e85_action", ""),
-            })
-        else:
-            missing.append({
-                "title":      title,
-                "category":   p.get("category", ""),
-                "type":       p.get("type", ""),
-                "e85_action": p.get("e85_action", ""),
-                "impact":     p.get("tuning_impact", ""),
-            })
-
-    for title, result in actually_changed.items():
-        if title not in e85_required:
-            p = param_map.get(title, {})
-            unexpected.append({
-                "title":      title,
-                "category":   p.get("category", ""),
-                "type":       p.get("type", ""),
-                "diff_count": result["diff_count"],
-                "total_cells":result["total_cells"],
-                "flex_fuel":  p.get("flex_fuel", ""),
-            })
+        for p in params:
+            if search and search.lower() not in p["title"].lower():
+                continue
+            if category and category.lower() not in p.get("category", "").lower():
+                continue
+            result = compare_params(bin_path, tmp.name, p)
+            if "error" in result:
+                errors.append({"title": p["title"], "error": result["error"]})
+            elif result["changed"]:
+                changed.append({
+                    "title":       p["title"],
+                    "category":    p.get("category", ""),
+                    "kind":        p.get("kind", ""),
+                    "rows":        p.get("rows", 1),
+                    "cols":        p.get("cols", 1),
+                    "z_unit":      result["z_unit"],
+                    "diff_count":  result["diff_count"],
+                    "total_cells": result["total_cells"],
+                    "diffs":       result["diffs"],
+                })
+    finally:
+        os.unlink(tmp.name)
 
     return {
-        "bin_e85":         os.path.basename(path_e85),
-        "bin_ref":         os.path.basename(path_ref),
-        "ok_count":        len(ok),
-        "missing_count":   len(missing),
-        "unexpected_count":len(unexpected),
-        "ok":              ok,
-        "missing":         missing,
-        "unexpected":      unexpected,
+        "xdf":           os.path.basename(xdf_path),
+        "da_file":       os.path.basename(da_path),
+        "bin_ref":       os.path.basename(bin_path),
+        "bytes_written": bytes_written,
+        "changed_count": len(changed),
+        "error_count":   len(errors),
+        "changed":       changed,
+        "errors":        errors,
     }
 
 
