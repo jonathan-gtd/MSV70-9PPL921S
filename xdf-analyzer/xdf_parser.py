@@ -3,6 +3,16 @@ import os
 
 _DIR = os.path.dirname(os.path.abspath(__file__))
 
+def _toint(s, default=0):
+    """Parse int, tolerating '0.' / '1.' style floats from some XDF files."""
+    try:
+        return int(s)
+    except (ValueError, TypeError):
+        try:
+            return int(float(s))
+        except (ValueError, TypeError):
+            return default
+
 class XDFParser:
     def __init__(self, xdf_filename):
         # Accept absolute paths as-is; otherwise resolve relative to bins/Full/
@@ -13,7 +23,8 @@ class XDFParser:
         if not os.path.exists(self.xdf_path):
             raise FileNotFoundError(f"Fichier XDF introuvable : {self.xdf_path}")
             
-        self.tree = ET.parse(self.xdf_path)
+        parser = ET.XMLParser(encoding="iso-8859-1")
+        self.tree = ET.parse(self.xdf_path, parser)
         self.root = self.tree.getroot()
         self.base_offset = self._get_base_offset()
         self.categories = self._parse_categories()
@@ -57,6 +68,7 @@ class XDFParser:
         # Default properties
         xdf_addr = "?"
         z_bits = "?"
+        z_signed = False
         z_min = ""
         z_max = ""
         rows, cols = 1, 1
@@ -72,9 +84,11 @@ class XDFParser:
             if emb is not None:
                 xdf_addr = emb.attrib.get("mmedaddress", "?")
                 if kind == "TABLE":
-                    rows = int(emb.attrib.get("mmedrowcount", "1"))
-                    cols = int(emb.attrib.get("mmedcolcount", "1"))
+                    rows = _toint(emb.attrib.get("mmedrowcount", "1"), 1)
+                    cols = _toint(emb.attrib.get("mmedcolcount", "1"), 1)
                 z_bits = emb.attrib.get("mmedelementsizebits", "?")
+                typeflags = emb.attrib.get("mmedtypeflags", "0")
+                z_signed = bool(int(typeflags, 0) & 0x01)
                 modflag = emb.attrib.get("mmedmodflag")
                 if modflag is not None:
                     lsb_first = bool(int(modflag, 0) & 0x01)
@@ -92,7 +106,7 @@ class XDFParser:
             ax = el.find(f"XDFAXIS[@id='{axis_id}']")
             if ax is None: return 1, "", "X", None, 8, False
             ic_el = ax.find("indexcount")
-            ic = int(ic_el.text) if ic_el is not None and ic_el.text else 1
+            ic = _toint(ic_el.text, 1) if ic_el is not None and ic_el.text else 1
             unit = ax.find("units").text if ax.find("units") is not None else ""
             math = ax.find("MATH")
             eq = math.attrib.get("equation", "X") if math is not None else "X"
@@ -108,7 +122,7 @@ class XDFParser:
                         ax_addr = f"0x{int(raw_addr, 0) + self.base_offset:05X}"
                     except ValueError:
                         pass
-                ax_bits = int(emb.attrib.get("mmedelementsizebits", "8"))
+                ax_bits = _toint(emb.attrib.get("mmedelementsizebits", "8"), 8)
                 modflag = emb.attrib.get("mmedmodflag")
                 if modflag:
                     ax_lsb = bool(int(modflag, 0) & 0x01)
@@ -124,7 +138,9 @@ class XDFParser:
             except ValueError:
                 return "?"
 
-        def _bits_to_type(b):
+        def _bits_to_type(b, signed=False):
+            if signed:
+                return {"8": "int8", "16": "int16", "32": "int32"}.get(b, f"{b}b")
             return {"8": "uint8", "16": "uint16", "32": "uint32"}.get(b, f"{b}b")
 
         # Type de structure
@@ -143,7 +159,7 @@ class XDFParser:
             "type": p_type,
             "xdf_addr": xdf_addr,
             "bin_addr": _bin_addr(xdf_addr),
-            "bin_dtype": _bits_to_type(z_bits),
+            "bin_dtype": _bits_to_type(z_bits, z_signed),
             "lsb_first": lsb_first,
             "z_eq": z_eq,
             "z_unit": z_unit,

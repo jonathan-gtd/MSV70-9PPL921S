@@ -1,0 +1,31 @@
+====================================================================
+           NOTES DE CONVERSION E85 / FLEX-FUEL MSV70
+====================================================================
+Source: Archive E90Post (Topic "I cloned my MSV70 DME")
+
+1. GESTION LAMBDA ET "FLEX-FUEL" NATUREL
+Le MSV70 possède un système de régulation Lambda très sophistiqué (sondes large bande / wideband).
+Techniquement, l'ECU est capable de s'adapter tout seul pour chercher le ratio stœchiométrique ("stoich is simply stoich"), sans capteur Flex-Fuel matériel.
+Cependant, rouler à l'éthanol demande environ 30% de volume de carburant supplémentaire.
+
+2. LE PROBLEME A PLEINE CHARGE (WOT)
+Si l'on compte uniquement sur la correction Lambda (Short Term Fuel Trims - STFT) :
+- En WOT (Wide Open Throttle), la demande en carburant est maximale.
+- Les sondes Lambda vont tenter d'ajouter de l'essence, mais les corrections (Trims) vont saturer (plafond de sécurité de l'ECU, souvent autour de +25%).
+- Conséquence : Le mélange devient trop pauvre en WOT, ou l'ECU se met en sécurité (Limp Mode), ce qui a été confirmé par un utilisateur du topic après un tirage WOT de 5 à 10 secondes.
+- Les injecteurs d'origine peuvent également saturer mécaniquement (Duty Cycle à 100%).
+
+3. LES TABLES A MODIFIER (LA SOLUTION)
+Pour une cartographie propre, il faut recentrer les corrections Lambda autour de 0%. L'ECU doit "savoir" de base qu'il faut injecter plus.
+
+Tables explicitement mentionnées pour la correction globale (Fuel Scalar) :
+- ip_mff_cor_opm_1_1
+- ip_mff_cor_opm_1_2
+- ip_mff_cor_opm_2_1
+- ip_mff_cor_opm_2_2
+Action : Augmenter les valeurs de ces tables pour fournir le carburant supplémentaire nécessaire à l'E85. Cela permet aux sondes Lambda de n'avoir qu'à faire un réglage fin (proche de 0%) au lieu de corriger en panique.
+
+En cas de changement d'injecteurs (ex: injecteurs de S65/M3) :
+- Injector Dead Times (Latence) : Souvent "ip_ti_add_dly" sur Siemens.
+- Minimum Pulse Width (Temps d'ouverture minimum) : Souvent "ip_ti_min_xxx".
+Action : Doivent être recalibrés impérativement pour matcher le flux des nouveaux injecteurs.
