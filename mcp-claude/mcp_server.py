@@ -319,5 +319,56 @@ def diff_0da_vs_bin(
     }
 
 
+@mcp.tool()
+def patch_full_rom(
+    full_bin_path: str,
+    cal_bin_path: str,
+    output_path: str = "",
+    cal_offset: int = 0x40000,
+) -> dict:
+    """
+    Inject a calibration (partial) BIN into a full 2MB ROM BIN.
+
+    Replaces the calibration region in the full ROM with the contents of
+    cal_bin_path, producing a new full ROM ready to send to the flasher.
+
+    For MSV70: calibration lives at offset 0x40000 in the full ROM
+    (ECU address 0x840000, ROM base 0x800000).
+
+    Args:
+        full_bin_path: Absolute path to the 2MB full ROM BIN.
+        cal_bin_path:  Absolute path to the partial calibration BIN.
+        output_path:   Where to write the patched full ROM (default: cal_bin stem + '_full.bin').
+        cal_offset:    Offset of the calibration region in the full ROM (default 0x40000).
+    """
+    for label, path in [("full ROM", full_bin_path), ("calibration", cal_bin_path)]:
+        if not os.path.isfile(path):
+            return {"error": f"{label} not found: {path}"}
+
+    full = bytearray(open(full_bin_path, "rb").read())
+    cal  = open(cal_bin_path, "rb").read()
+
+    if cal_offset + len(cal) > len(full):
+        return {"error": f"Calibration ({len(cal)} B) at offset 0x{cal_offset:X} exceeds full ROM size ({len(full)} B)"}
+
+    full[cal_offset:cal_offset + len(cal)] = cal
+
+    if not output_path:
+        stem = os.path.splitext(cal_bin_path)[0]
+        output_path = stem + "_full.bin"
+
+    with open(output_path, "wb") as f:
+        f.write(full)
+
+    return {
+        "full_rom":    os.path.basename(full_bin_path),
+        "calibration": os.path.basename(cal_bin_path),
+        "output":      output_path,
+        "cal_offset":  hex(cal_offset),
+        "cal_size_kb": round(len(cal) / 1024, 1),
+        "output_size_kb": round(len(full) / 1024, 1),
+    }
+
+
 if __name__ == "__main__":
     mcp.run()
