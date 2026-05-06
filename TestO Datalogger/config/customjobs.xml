@@ -2,22 +2,8 @@
 <customjobs>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>01_E85_WARMUP_STAT</virtualname>
-    <comment>01_Observation demarrage et chauffe au garage</comment>
-    <argument>3;0x4300;0x4807;0x5A42;0x5A50;0x5A51;0x5A81;0x5A82;0x5A83;0x5A84;0x5A85;0x5A86</argument>
-  </customjob>
-
-  <customjob ecu="MSV70">
-    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>02_E85_WOT_PULL</virtualname>
-    <comment>02_Richesse et saturation injecteurs en roulant</comment>
-    <argument>3;0x4704;0x4807;0x480B;0x5812;0x5A42;0x5A50;0x5A51;0x5A81;0x5A82;0x5A85;0x5A86</argument>
-  </customjob>
-
-  <customjob ecu="MSV70">
-    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>03_E85_HEALTH_CHECK</virtualname>
-    <comment>03_Diagnostic sondes Lambda et MAF</comment>
-    <argument>3;0x4807;0x5812;0x5818;0x5A11;0x5A12;0x5A50;0x5A51</argument>
+    <virtualname>E85_MONITOR</virtualname>
+    <comment>Lambda, trims, inj time, RPM, temp, charge, MAF</comment>
+    <argument>3;0x4300;0x4704;0x4807;0x480B;0x5812;0x5818;0x5A11;0x5A42;0x5A50;0x5A51;0x5A81;0x5A86</argument>
   </customjob>
 </customjobs>
