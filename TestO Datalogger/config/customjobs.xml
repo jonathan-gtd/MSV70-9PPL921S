@@ -16,15 +16,8 @@
 
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>03_E85_KNOCK_IGNITION</virtualname>
-    <comment>03_Securite avance a l allumage</comment>
-    <argument>3;0x4102;0x4300;0x4807;0x480B;0x5813;0x5A3E;0x5A40;0x5A49</argument>
-  </customjob>
-
-  <customjob ecu="MSV70">
-    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>04_E85_HEALTH_CHECK</virtualname>
-    <comment>04_Diagnostic sondes Lambda et MAF</comment>
+    <virtualname>03_E85_HEALTH_CHECK</virtualname>
+    <comment>03_Diagnostic sondes Lambda et MAF</comment>
     <argument>3;0x4807;0x5812;0x5818;0x5A11;0x5A12;0x5A50;0x5A51</argument>
   </customjob>
 </customjobs>
