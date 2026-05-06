@@ -1,0 +1,8 @@
+Edit Log for dump_full_e85.bin created by TunerPro.
+**************************************************************************
+05/06/2026 19:46:53  Scalar:    c_ti_as_global changed from 1.199 - (0x1333) to 1.450 - (0x1737).
+05/06/2026 19:47:00  Scalar:    c_tco_n_mff_cst changed from 17.250 °C (0x57) to 24.750 °C (0x61).
+05/06/2026 19:47:34  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.050 - (0xFCCD) to -0.150 - (0xF665).
+05/06/2026 19:47:38  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.050 - (0x0333) to 0.150 - (0x099B).
+05/06/2026 19:59:28  Table:     ip_mff_cst_opm_2 changed.
+05/06/2026 19:59:47  Table:     ip_mff_cst_opm_1 changed.
