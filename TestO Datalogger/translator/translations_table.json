@@ -608,12 +608,12 @@
   "S": "Lambda B2"
  },
  "STAT_0X5A87_WERT": {
-  "L": "Adaptionswert Trimregelung Bank 1",
-  "S": "Val5A87"
+  "L": "Lambda trim adaptation B1",
+  "S": "LTrimAd B1"
  },
  "STAT_0X5A88_WERT": {
-  "L": "Adaptionswert Trimregelung Bank 2",
-  "S": "Val5A88"
+  "L": "Lambda trim adaptation B2",
+  "S": "LTrimAd B2"
  },
  "STAT_0X5A91_WERT": {
   "L": "Katalysatordiagnosewert Bank1",
