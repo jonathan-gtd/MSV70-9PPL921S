@@ -7,8 +7,8 @@ if not exist "%GCC%" (
     exit /b 1
 )
 
-echo Compilation msv70_tools (GUI)...
-"%GCC%" -O2 -Wall msv70_tools.c -o msv70_tools.exe -lcomctl32 -lcomdlg32 -mwindows
+echo Compilation msv70_tools...
+"%GCC%" -O2 -Wall -fexec-charset=cp1252 msv70_tools.c -o msv70_tools.exe -lcomctl32 -lcomdlg32 -mwindows
 if errorlevel 1 ( echo ECHEC & pause & exit /b 1 )
 
 echo.
