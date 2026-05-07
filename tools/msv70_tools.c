@@ -383,6 +383,7 @@ int WINAPI WinMain(HINSTANCE hi, HINSTANCE hp, LPSTR cmd, int show)
     hTab = CreateWindow(WC_TABCONTROL,"",WS_CHILD|WS_VISIBLE|TCS_FIXEDWIDTH,
                         M,M,W-M*2,28,hMain,(HMENU)ID_TAB,hi,0);
     sf_ui(hTab);
+    SendMessage(hTab, TCM_SETPADDING, 0, MAKELPARAM(12, 5));
     for(int i=0;i<TAB_N;i++){
         TCITEM ti={0}; ti.mask=TCIF_TEXT; ti.pszText=(char*)TABS[i].title;
         TabCtrl_InsertItem(hTab,i,&ti);
