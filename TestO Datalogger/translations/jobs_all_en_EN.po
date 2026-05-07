@@ -33791,12 +33791,12 @@ msgstr ""
 # 
 msgctxt "RES_L|"
 msgid "STAT_0X5812_WERT"
-msgstr "Air mass"
+msgstr "Air mass (kg/h)"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_0X5812_WERT"
-msgstr "AirMass"
+msgstr "MAF kg/h"
 
 # 
 msgctxt "RES_L|"
@@ -36611,42 +36611,42 @@ msgstr ""
 # 
 msgctxt "RES_L|"
 msgid "STAT_0X5A87_WERT"
-msgstr "Adaptionswert Trimregelung Bank 1"
+msgstr "Lambda trim adaptation B1"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_0X5A87_WERT"
-msgstr "Val5A87"
+msgstr "LTrim B1"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_0X5A88_WERT"
-msgstr "Adaptionswert Trimregelung Bank 2"
+msgstr "Lambda trim adaptation B2"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_0X5A88_WERT"
-msgstr "Val5A88"
+msgstr "LTrim B2"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_0X5A89_WERT"
-msgstr "LTFT multiplicative high load Bank 1"
+msgstr "LTFT high load Bank 1"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_0X5A89_WERT"
-msgstr "MixAdHiB1"
+msgstr "LTFT Hi B1"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_0X5A8A_WERT"
-msgstr "LTFT multiplicative high load Bank 2"
+msgstr "LTFT high load Bank 2"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_0X5A8A_WERT"
-msgstr "MixAdHiB2"
+msgstr "LTFT Hi B2"
 
 # 
 msgctxt "RES_L|"
@@ -41016,7 +41016,7 @@ msgstr "LTFT multiplicative Bank 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT"
-msgstr "LTFT mul. B1"
+msgstr "LTFT Mul B1"
 
 # 
 msgctxt "RES_L|"
@@ -41026,7 +41026,7 @@ msgstr "LTFT multiplicative Bank 2"
 # 
 msgctxt "RES_S|"
 msgid "STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT"
-msgstr "LTFT mul. B2"
+msgstr "LTFT Mul B2"
 
 # 
 msgctxt "RES_L|"
@@ -91456,7 +91456,7 @@ msgstr "Injection time Cylinder 1"
 # 
 msgctxt "RES_S|"
 msgid "STAT_EINSPRITZZEIT_ZYL1_WERT"
-msgstr "InjTmCyl1"
+msgstr "Inj.T Cyl1"
 
 # 
 msgctxt "RES_L|"
@@ -132201,22 +132201,22 @@ msgstr ""
 # 
 msgctxt "RES_L|"
 msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT"
-msgstr "Lambda shift feedback ctrl 1"
+msgstr "Lambda shift feedback B1"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT"
-msgstr "LamShftB1"
+msgstr "Lam Shift B1"
 
 # 
 msgctxt "RES_L|"
 msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT"
-msgstr "Lambda shift feedback ctrl 2"
+msgstr "Lambda shift feedback B2"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT"
-msgstr "LamShftB2"
+msgstr "Lam Shift B2"
 
 # 
 msgctxt "RES_L|"
@@ -132911,12 +132911,12 @@ msgstr ""
 # 
 msgctxt "RES_L|"
 msgid "STAT_LASTWERT_BERECHNET_WERT"
-msgstr "Calculated load value"
+msgstr "Calculated load (%)"
 
 # 
 msgctxt "RES_S|"
 msgid "STAT_LASTWERT_BERECHNET_WERT"
-msgstr "CalcLoad"
+msgstr "Load %"
 
 # 
 msgctxt "RES_L|"
