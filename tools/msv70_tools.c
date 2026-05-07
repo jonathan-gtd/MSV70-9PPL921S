@@ -380,7 +380,7 @@ int WINAPI WinMain(HINSTANCE hi, HINSTANCE hp, LPSTR cmd, int show)
     int M=12, BW=85, BH=24;
 
     /* tab */
-    hTab = CreateWindow(WC_TABCONTROL,"",WS_CHILD|WS_VISIBLE|TCS_FIXEDWIDTH,
+    hTab = CreateWindow(WC_TABCONTROL,"",WS_CHILD|WS_VISIBLE,
                         M,M,W-M*2,28,hMain,(HMENU)ID_TAB,hi,0);
     sf_ui(hTab);
     SendMessage(hTab, TCM_SETPADDING, 0, MAKELPARAM(12, 5));
