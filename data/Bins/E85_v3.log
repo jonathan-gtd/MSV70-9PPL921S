@@ -1,0 +1,7 @@
+Edit Log for E85_v3.bin created by TunerPro.
+**************************************************************************
+05/09/2026 23:55:54  Table:     ip_mff_cor_opm_2_2 changed.
+05/09/2026 23:55:55  Table:     ip_mff_cor_opm_2_1 changed.
+05/09/2026 23:55:56  Table:     ip_mff_cor_opm_1_1 changed.
+05/09/2026 23:55:58  Table:     ip_mff_cor_opm_1_2 changed.
+05/09/2026 23:56:01  Scalar:    c_ti_as_global changed from 1.450 - (0x1737) to 0.999 - (0x0FFE).

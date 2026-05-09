@@ -1,6 +1,0 @@
-Edit Log for e85.bin created by TunerPro.
-**************************************************************************
-05/06/2026 15:46:13  Scalar:    c_ti_as_global changed from 0.999 - (0x1000) to 1.450 - (0x1737).
-05/06/2026 15:46:46  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.050 - (0xFCCD) to -0.150 - (0xF665).
-05/06/2026 15:46:50  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.050 - (0x0333) to 0.150 - (0x099B).
-05/06/2026 15:47:02  Scalar:    c_tco_n_mff_cst changed from 17.250 °C (0x57) to 24.750 °C (0x61).

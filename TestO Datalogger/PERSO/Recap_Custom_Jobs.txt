@@ -1,0 +1,95 @@
+# RECAPITULATIF DES CUSTOM JOBS MSV70 (TestO)
+# Fichier généré pour le monitoring avancé E85
+--------------------------------------------------------------------------------
+
+Toutes les variables ci-dessous ont été traduites (Nom long et Nom court) dans le fichier `translations\jobs_all_en_EN.txt`.
+
+================================================================================
+1. E85_MONITOR (Le Job Principal pour le roulage quotidien)
+================================================================================
+Ce job contient les variables essentielles pour vérifier la santé générale du moteur et de la cartographie.
+
+0x4807 : STAT_MOTORDREHZAHL_WERT              => Engine Speed (RPM) / RPM
+0x5804 : STAT_LASTWERT_BERECHNET_WERT         => Calculated Engine Load (%) / Load %
+0x480B : STAT_FAHRERWUNSCH_PEDAL_WERT         => Accelerator Pedal (%) / Pedal %
+0x5812 : STAT_0x5812_WERT                     => Mass Air Flow MAF (kg/h) / MAF kg/h
+0x5AB1 : STAT_GESCHWINDIGKEIT_WERT            => Vehicle Speed (km/h) / Speed km/h
+0x4200 : STAT_ANSAUGLUFTTEMPERATUR_WERT       => Intake Air Temp (°C) / IAT °C
+0x4300 : STAT_KUEHLMITTELTEMPERATUR_WERT      => Coolant Temp (°C) / Cool °C
+0x4402 : STAT_OELTEMPERATUR_WERT              => Oil Temp (°C) / Oil °C
+0x4704 : STAT_LAMBDA_BANK1_SOLL_WERT          => Lambda Target Bank 1 / Lmb Tgt B1
+0x5A50 : STAT_LAMBDA_BANK1_WERT               => Actual Lambda Bank 1 / Lmb Act B1
+0x5A51 : STAT_LAMBDA_BANK2_WERT               => Actual Lambda Bank 2 / Lmb Act B2
+0x5A81 : STAT_INTEGRATOR_BANK1_WERT           => STFT Integrator Bank 1 (%) / STFT B1
+0x5A82 : STAT_INTEGRATOR_BANK2_WERT           => STFT Integrator Bank 2 (%) / STFT B2
+
+================================================================================
+2. E85_AIR_CTRL (Le Job pour l'admission, Vanos et Valvetronic)
+================================================================================
+Ce job est dédié au diagnostic matériel de la respiration du moteur (Moteurs VVT et Solénoïdes Vanos).
+
+0x4807 : STAT_MOTORDREHZAHL_WERT              => Engine Speed (RPM) / RPM
+0x5804 : STAT_LASTWERT_BERECHNET_WERT         => Calculated Engine Load (%) / Load %
+0x4501 : STAT_VVT_EXCENTER_SOLL_WERT          => Valvetronic Target (°) / VVT Tgt °
+0x4500 : STAT_VVT_EXCENTER_WERT               => Valvetronic Actual (°) / VVT Act °
+0x4505 : STAT_VVT_EINLASSSPREIZUNG_SOLL_WERT  => Vanos Intake Target (°CRK) / Vanos InTgt
+0x4508 : STAT_NW_EINLASSSPREIZUNG_WERT        => Vanos Intake Actual (°CRK) / Vanos InAct
+0x5A94 : STAT_NW_AUSLASS_SOLL_WERT            => Vanos Exhaust Target (°CRK) / Vanos ExTgt
+0x4509 : STAT_NW_AUSLASSSPREIZUNG_WERT        => Vanos Exhaust Actual (°CRK) / Vanos ExAct
+
+================================================================================
+3. E85_IGN_INJ (Le Job pour l'allumage et l'injection Cylindre par Cylindre)
+================================================================================
+Idéal pour détecter un injecteur fatigué ou un problème de cliquetis.
+
+0x4807 : STAT_MOTORDREHZAHL_WERT              => Engine Speed (RPM) / RPM
+0x5804 : STAT_LASTWERT_BERECHNET_WERT         => Calculated Engine Load (%) / Load %
+0x5A49 : STAT_ZUENDWINKEL_ZYL1_WERT           => Ignition Timing Cyl 1 (°CRK) / Ign Cyl1 °
+0x5A42 : STAT_EINSPRITZZEIT_ZYL1_WERT         => Injection Time Cyl 1 (ms) / Inj C1 ms
+0x5A43 : STAT_EINSPRITZZEIT_ZYL2_WERT         => Injection Time Cyl 2 (ms) / Inj C2 ms
+0x5A44 : STAT_EINSPRITZZEIT_ZYL3_WERT         => Injection Time Cyl 3 (ms) / Inj C3 ms
+0x5A45 : STAT_EINSPRITZZEIT_ZYL4_WERT         => Injection Time Cyl 4 (ms) / Inj C4 ms
+0x5A46 : STAT_EINSPRITZZEIT_ZYL5_WERT         => Injection Time Cyl 5 (ms) / Inj C5 ms
+0x5A47 : STAT_EINSPRITZZEIT_ZYL6_WERT         => Injection Time Cyl 6 (ms) / Inj C6 ms
+0x5A37 : STAT_KLOPFWERT_ZYL1_SPANNUNG_WERT    => Knock Voltage Cyl 1 (V) / Knc V1
+0x5A38 : STAT_KLOPFWERT_ZYL2_SPANNUNG_WERT    => Knock Voltage Cyl 2 (V) / Knc V2
+0x5A39 : STAT_KLOPFWERT_ZYL3_SPANNUNG_WERT    => Knock Voltage Cyl 3 (V) / Knc V3
+0x5A3A : STAT_KLOPFWERT_ZYL4_SPANNUNG_WERT    => Knock Voltage Cyl 4 (V) / Knc V4
+0x5A3B : STAT_KLOPFWERT_ZYL5_SPANNUNG_WERT    => Knock Voltage Cyl 5 (V) / Knc V5
+0x5A3C : STAT_KLOPFWERT_ZYL6_SPANNUNG_WERT    => Knock Voltage Cyl 6 (V) / Knc V6
+
+================================================================================
+4. E85_ADAPT (Le Job pour lire les mémoires d'adaptation à long terme LTFT)
+================================================================================
+À lire uniquement au ralenti, permet de voir ce que l'ECU a compensé sur la durée.
+
+0x5878 : STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER1_WERT => Lambda Shift Post-Cat Bank 1 / Shft P-C B1
+0x5879 : STAT_LAMBDAVERSCHIEBUNG_RUECKFUEHRREGLER2_WERT => Lambda Shift Post-Cat Bank 2 / Shft P-C B2
+0x5A85 : STAT_ADAPTION_MULTIPLIKATIV_BANK1_WERT         => LTFT Multiplicative Global Bank 1 (%) / LTFT Mul B1
+0x5A86 : STAT_ADAPTION_MULTIPLIKATIV_BANK2_WERT         => LTFT Multiplicative Global Bank 2 (%) / LTFT Mul B2
+0x5A87 : STAT_0x5A87_WERT                               => Max Trim Adaptation Post-Cat Bank 1 / Max Trim B1
+0x5A88 : STAT_0x5A88_WERT                               => Max Trim Adaptation Post-Cat Bank 2 / Max Trim B2
+0x5A89 : STAT_0x5A89_WERT                               => LTFT Multiplicative High Load Bank 1 (%) / LTFT MulH B1
+0x5A8A : STAT_0x5A8A_WERT                               => LTFT Multiplicative High Load Bank 2 (%) / LTFT MulH B2
+0x5A8B : STAT_0x5A8B_WERT                               => LTFT Multiplicative Low Load Bank 1 (%) / LTFT MulL B1
+0x5A8C : STAT_0x5A8C_WERT                               => LTFT Multiplicative Low Load Bank 2 (%) / LTFT MulL B2
+0x5A8D : STAT_0x5A8D_WERT                               => LTFT Additive Idle Bank 1 (mg/stk) / LTFT Add B1
+0x5A8E : STAT_0x5A8E_WERT                               => LTFT Additive Idle Bank 2 (mg/stk) / LTFT Add B2
+
+================================================================================
+5. E85_FUEL_SYS (Le Job pour le syst�me de carburant : Pompe, Pression, Tank)
+================================================================================
+Id�al pour v�rifier si votre pompe � essence suit la demande en E85.
+
+0x4807 : STAT_MOTORDREHZAHL_WERT              => Engine Speed (RPM) / RPM
+0x5804 : STAT_LASTWERT_BERECHNET_WERT         => Calculated Engine Load (%) / Load %
+0x580A : STAT_KRAFTSTOFFDRUCK_WERT            => Fuel Pressure (kPa) / Fuel Pres
+0x5ABA : STAT_KRAFTSTOFFPUMPE_PWM_WERT        => Fuel Pump PWM (%) / Pump %
+0x58AF : STAT_KRAFTSTOFF_ANFORDERUNG_AN_PUMPE_WERT => Fuel Request (l/h) / Fuel Req
+0x583B : STAT_KRAFTSTOFFTANK_FUELLSTAND_WERT  => Fuel Tank Level (l) / Tank L
+0x5A42 : STAT_EINSPRITZZEIT_ZYL1_WERT         => Injection Time Cyl 1 (ms) / Inj C1 ms
+0x5A43 : STAT_EINSPRITZZEIT_ZYL2_WERT         => Injection Time Cyl 2 (ms) / Inj C2 ms
+0x5A44 : STAT_EINSPRITZZEIT_ZYL3_WERT         => Injection Time Cyl 3 (ms) / Inj C3 ms
+0x5A45 : STAT_EINSPRITZZEIT_ZYL4_WERT         => Injection Time Cyl 4 (ms) / Inj C4 ms
+0x5A46 : STAT_EINSPRITZZEIT_ZYL5_WERT         => Injection Time Cyl 5 (ms) / Inj C5 ms
+0x5A47 : STAT_EINSPRITZZEIT_ZYL6_WERT         => Injection Time Cyl 6 (ms) / Inj C6 ms

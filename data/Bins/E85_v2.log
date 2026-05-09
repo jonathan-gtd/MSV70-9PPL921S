@@ -1,0 +1,10 @@
+Edit Log for E85_v2.bin created by TunerPro.
+**************************************************************************
+05/09/2026 22:59:24  Scalar:    c_fac_lam_out_min changed from -30.003 % (0xB333) to -40.000 % (0x999C).
+05/09/2026 22:59:25  Scalar:    c_fac_lam_out_max changed from 30.003 % (0x4CCD) to 40.000 % (0x6664).
+05/09/2026 22:59:25  Scalar:    c_fac_lam_out_max_cp changed from 35.003 % (0x599A) to 45.000 % (0x7331).
+05/09/2026 22:59:26  Scalar:    c_fac_lam_out_min_cp changed from -40.003 % (0x999A) to -45.000 % (0x8CCF).
+05/09/2026 23:09:18  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.150 - (0x099B) to 0.350 - (0x166A).
+05/09/2026 23:09:18  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.150 - (0xF665) to -0.350 - (0xE996).
+05/09/2026 23:12:47  Table:     ip_ti_cast_opm_2 changed.
+05/09/2026 23:12:47  Table:     ip_ti_cast_opm_1 changed.
