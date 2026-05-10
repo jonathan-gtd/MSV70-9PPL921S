@@ -1,0 +1,43 @@
+{
+  "column_mapping": {
+    "time":           ["time"],
+    "rpm":            ["RPM"],
+    "load":           ["CalcLoad", "Load %", "Calc. load"],
+    "tps":            ["Pedal %", "Pedal"],
+    "lambda_b1":      ["Lambda B1", "LamAct B1", "Lmb Act B1"],
+    "lambda_b2":      ["Lambda B2", "LamAct B2", "Lmb Act B2"],
+    "lambda_tgt_b1":  ["Lambda B1 tgt", "Lmb Tgt B1"],
+    "stft_b1":        ["STFT B1"],
+    "stft_b2":        ["STFT B2"],
+    "ltft_add_b1":    ["LTFT add. B1"],
+    "ltft_add_b2":    ["LTFT add. B2"],
+    "ltft_mul_b1":    ["LTFT mul. B1", "LTFT Mul B1"],
+    "ltft_mul_b2":    ["LTFT mul. B2", "LTFT Mul B2"],
+    "ltft_mul_hi_b1": ["MixAdHiB1", "LTFT MulH B1"],
+    "ltft_mul_hi_b2": ["MixAdHiB2", "LTFT MulH B2"],
+    "coolant":        ["Coolant", "Cool °C"],
+    "oil_temp":       ["Oil temp", "Oil °C"],
+    "maf":            ["AirMass", "MAF kg/h"],
+    "inj_time":       ["InjTmCyl1", "Inj C1 ms"],
+    "lambda_shift_b1":["LamShftB1", "Shft P-C B1"],
+    "lambda_shift_b2":["LamShftB2", "Shft P-C B2"],
+    "speed":          ["Speed km/h", "Vehicle speed"],
+    "iat":            ["IAT °C", "AirTemp"]
+  },
+  "thresholds": {
+    "wot_tps_pct":              85.0,
+    "idle_rpm_max":             900,
+    "idle_load_max":            12.0,
+    "cruise_tps_stability_pct": 3.0,
+    "transient_tps_rate":       5.0,
+    "lambda_delay_ms":          500,
+    "min_analysis_temp_coolant":70.0,
+    "bank_balance_alert_pct":   5.0,
+    "ltft_warning_pct":         5.0,
+    "ltft_critical_pct":        10.0,
+    "stft_warning_pct":         5.0,
+    "max_job_params":           20
+  },
+  "ecu": "MSV70",
+  "jobs_file": ""
+}
