@@ -141,6 +141,7 @@ class GraphViewerModule(ctk.CTkFrame):
         )
         self._canvas.mpl_connect("motion_notify_event", self._on_hover)
         self._canvas.mpl_connect("axes_leave_event",    self._on_leave)
+        self._canvas.mpl_connect("pick_event",          self._on_pick)
 
     # ------------------------------------------------------------------ #
     # Channel management                                                   #
@@ -236,7 +237,6 @@ class GraphViewerModule(ctk.CTkFrame):
             leg_line.set_picker(6)
             self._legend_map[leg_line] = orig_line
 
-        self._canvas.mpl_connect("pick_event", self._on_pick)
         self._fig.tight_layout()
         self._canvas.draw()
 
@@ -250,8 +250,8 @@ class GraphViewerModule(ctk.CTkFrame):
         t  = time_s.values
         s  = states.values.astype(str)
 
-        # Find run boundaries
-        changes = np.where(np.diff(s) != "")[0] + 1
+        # Find run boundaries (string diff — compare adjacent elements directly)
+        changes = np.where(s[1:] != s[:-1])[0] + 1
         starts  = np.concatenate([[0], changes])
         ends    = np.concatenate([changes, [len(s)]])
 
