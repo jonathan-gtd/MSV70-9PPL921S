@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSVFile>
+    <info>
+        <starttime>1778436065317</starttime>
+        <startdate>2026-05-10 20:01:05.317</startdate>
+        <timeformat>0</timeformat>
+        <CSVSeparator><![CDATA[;]]></CSVSeparator>
+        <columns>
+            <column>
+                <number>1</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>Max Trim B1</resultname>
+            </column>
+            <column>
+                <number>2</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>Max Trim B2</resultname>
+            </column>
+            <column>
+                <number>3</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT MulH B1</resultname>
+            </column>
+            <column>
+                <number>4</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT MulH B2</resultname>
+            </column>
+            <column>
+                <number>5</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT MulL B1</resultname>
+            </column>
+            <column>
+                <number>6</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT MulL B2</resultname>
+            </column>
+            <column>
+                <number>7</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT Add B1</resultname>
+            </column>
+            <column>
+                <number>8</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT Add B2</resultname>
+            </column>
+            <column>
+                <number>9</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT Mul B1</resultname>
+            </column>
+            <column>
+                <number>10</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>LTFT Mul B2</resultname>
+            </column>
+            <column>
+                <number>11</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>Shft P-C B1</resultname>
+            </column>
+            <column>
+                <number>12</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_ADAPT</virtualname>
+                <resultname>Shft P-C B2</resultname>
+            </column>
+        </columns>
+    </info>
+</CSVFile>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSVFile>
+    <info>
+        <starttime>1778434782048</starttime>
+        <startdate>2026-05-10 19:39:42.048</startdate>
+        <timeformat>0</timeformat>
+        <CSVSeparator><![CDATA[;]]></CSVSeparator>
+        <columns>
+            <column>
+                <number>1</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>MAF kg/h</resultname>
+            </column>
+            <column>
+                <number>2</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>IAT degC</resultname>
+            </column>
+            <column>
+                <number>3</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Pedal %</resultname>
+            </column>
+            <column>
+                <number>4</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Speed km/h</resultname>
+            </column>
+            <column>
+                <number>5</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>STFT B1</resultname>
+            </column>
+            <column>
+                <number>6</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>STFT B2</resultname>
+            </column>
+            <column>
+                <number>7</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Cool degC</resultname>
+            </column>
+            <column>
+                <number>8</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Lmb Tgt B1</resultname>
+            </column>
+            <column>
+                <number>9</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Lmb Act B1</resultname>
+            </column>
+            <column>
+                <number>10</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Lmb Act B2</resultname>
+            </column>
+            <column>
+                <number>11</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Load %</resultname>
+            </column>
+            <column>
+                <number>12</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>RPM</resultname>
+            </column>
+            <column>
+                <number>13</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>E85_MONITOR</virtualname>
+                <resultname>Oil degC</resultname>
+            </column>
+        </columns>
+    </info>
+</CSVFile>
