@@ -30,6 +30,7 @@ impl UltraLogApp {
                 ActivePanel::ToolProperties => self.render_tool_properties_panel_content(ui),
                 ActivePanel::Tools => self.render_tools_panel_content(ui),
                 ActivePanel::Settings => self.render_settings_panel_content(ui),
+                ActivePanel::Msv70 => self.render_msv70_panel_content(ui),
             });
     }
 }

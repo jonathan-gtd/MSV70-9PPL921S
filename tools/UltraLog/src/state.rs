@@ -244,6 +244,8 @@ pub enum ActivePanel {
     Tools,
     /// Settings panel - all preferences consolidated
     Settings,
+    /// MSV70 ECU diagnostic panel - fuel trim, phase analysis, per-phase checks
+    Msv70,
 }
 
 impl ActivePanel {
@@ -254,6 +256,7 @@ impl ActivePanel {
             ActivePanel::ToolProperties => "Properties",
             ActivePanel::Tools => "Tools",
             ActivePanel::Settings => "Settings",
+            ActivePanel::Msv70 => "MSV70 Diagnostic",
         }
     }
 
@@ -265,6 +268,7 @@ impl ActivePanel {
             ActivePanel::ToolProperties => "\u{1F3DB}", // Sliders icon
             ActivePanel::Tools => "\u{1F527}",          // Wrench icon
             ActivePanel::Settings => "\u{2699}",        // Gear icon
+            ActivePanel::Msv70 => "\u{26A1}",           // Lightning bolt (ECU/diagnostic)
         }
     }
 }

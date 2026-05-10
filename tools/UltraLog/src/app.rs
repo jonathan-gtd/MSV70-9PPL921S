@@ -172,8 +172,6 @@ pub struct UltraLogApp {
     /// Whether spec refresh from API has been started
     spec_refresh_started: bool,
     // === MSV70 Analysis ===
-    /// Whether the MSV70 fuel-trim analysis window is open
-    pub(crate) show_msv70_analysis: bool,
     /// Whether the MSV70 job-creator window is open
     pub(crate) show_msv70_job_creator: bool,
     /// Persisted state for the fuel-trim analysis panel
@@ -245,7 +243,6 @@ impl Default for UltraLogApp {
             user_settings: UserSettings::default(),
             language: Language::default(),
             spec_refresh_started: false,
-            show_msv70_analysis: false,
             show_msv70_job_creator: false,
             msv70_analysis: crate::ui::msv70_analysis::Msv70AnalysisState::new(),
             msv70_job_creator: crate::ui::msv70_job_creator::Msv70JobCreatorState::default(),
@@ -2087,7 +2084,6 @@ impl eframe::App for UltraLogApp {
         self.render_computed_channels_manager(ctx);
         self.render_formula_editor(ctx);
         self.render_analysis_panel(ctx);
-        self.render_msv70_analysis(ctx);
         self.render_msv70_job_creator(ctx);
     }
 

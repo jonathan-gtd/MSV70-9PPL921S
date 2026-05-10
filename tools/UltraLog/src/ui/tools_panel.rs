@@ -265,34 +265,13 @@ impl UltraLogApp {
         )
         .default_open(true)
         .show(ui, |ui| {
+            // Hint pointing to the activity bar
             ui.label(
-                egui::RichText::new("BMW MSV70 ECU log analysis and job creator.")
+                egui::RichText::new("📊 Diagnostic ECU → icône ⚡ dans la barre d'activité")
                     .size(font_12)
-                    .color(egui::Color32::GRAY),
+                    .color(egui::Color32::from_rgb(160, 160, 90)),
             );
             ui.add_space(8.0);
-
-            // Fuel Trim Analysis button
-            let analysis_btn = egui::Frame::NONE
-                .fill(egui::Color32::from_rgb(60, 100, 140))
-                .corner_radius(4)
-                .inner_margin(egui::vec2(12.0, 6.0))
-                .show(ui, |ui| {
-                    ui.label(
-                        egui::RichText::new("📈  Fuel Trim & Phase Analysis")
-                            .color(egui::Color32::WHITE)
-                            .size(font_12),
-                    );
-                });
-
-            if analysis_btn.response.interact(egui::Sense::click()).clicked() {
-                self.show_msv70_analysis = true;
-            }
-            if analysis_btn.response.hovered() {
-                ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand);
-            }
-
-            ui.add_space(6.0);
 
             // Job Creator button
             let job_btn = egui::Frame::NONE

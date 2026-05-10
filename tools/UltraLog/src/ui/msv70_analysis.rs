@@ -134,12 +134,15 @@ pub struct DiagCheck {
 }
 
 impl DiagCheck {
+    #[allow(dead_code)]
     fn ok(label: &str, value: impl Into<String>, detail: &str) -> Self {
         Self { label: label.into(), value: value.into(), status: DiagStatus::Ok,       detail: detail.into() }
     }
+    #[allow(dead_code)]
     fn warn(label: &str, value: impl Into<String>, detail: &str) -> Self {
         Self { label: label.into(), value: value.into(), status: DiagStatus::Warn,     detail: detail.into() }
     }
+    #[allow(dead_code)]
     fn crit(label: &str, value: impl Into<String>, detail: &str) -> Self {
         Self { label: label.into(), value: value.into(), status: DiagStatus::Critical, detail: detail.into() }
     }
@@ -159,6 +162,8 @@ impl DiagCheck {
 #[derive(Default)]
 pub struct Msv70AnalysisState {
     pub active_tab:        usize,
+    /// Selected phase in the "Par Phase" tab (index into Phase::all())
+    pub selected_phase_tab: usize,
     pub show_phase_overlay: bool,
     pub phase_segments:    Vec<PhaseSegment>,
     pub phase_counts:      [usize; 7],
@@ -168,6 +173,8 @@ pub struct Msv70AnalysisState {
     pub checks_engine: Vec<DiagCheck>,
     pub checks_elec:   Vec<DiagCheck>,
     pub checks_temp:   Vec<DiagCheck>,
+    /// Per-phase deep diagnostics (indexed by Phase as usize)
+    pub checks_by_phase: Vec<Vec<DiagCheck>>,
 
     // Thresholds
     pub wot_tps_thresh:    f64,
@@ -555,6 +562,392 @@ fn temp_checks(log: &Log, cfg: &Msv70AnalysisState) -> Vec<DiagCheck> {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Per-phase deep diagnostic checks
+// ─────────────────────────────────────────────────────────────────────────────
+
+fn phase_checks_for(
+    log: &Log,
+    cfg: &Msv70AnalysisState,
+    phase: Phase,
+    warm: &[bool],
+    phases: &[Phase],
+    times: &[f64],
+) -> Vec<DiagCheck> {
+    let mut out = Vec::new();
+    let mask: Vec<bool> = phases.iter().map(|&p| p == phase).collect();
+    let n_spl = mask.iter().filter(|&&b| b).count();
+
+    if n_spl < 5 {
+        out.push(DiagCheck::info(
+            "Données insuffisantes",
+            &format!("{} points", n_spl),
+            "Phase trop courte ou absente du log",
+        ));
+        return out;
+    }
+
+    let rpm_d  = get(log, RPM);
+    let load_d = get(log, LOAD);
+    let tps_d  = get(log, TPS);
+    let lam_d  = get(log, LAMBDA1);
+    let inj_d  = get(log, INJ);
+
+    // Helper: filter a Vec<f64> by a boolean mask
+    let filtered = |v: &[f64], m: &[bool]| -> Vec<f64> {
+        v.iter().zip(m.iter()).filter_map(|(&x, &b)| if b { Some(x) } else { None }).collect()
+    };
+
+    match phase {
+        Phase::Wot => {
+            // Lambda WOT: cible 0.85-0.96 (enrichissement pleine charge)
+            if let Some(lam) = &lam_d {
+                let v: Vec<f64> = lam.iter().zip(mask.iter())
+                    .filter_map(|(&x, &b)| if b && x > 0.5 { Some(x) } else { None }).collect();
+                if !v.is_empty() {
+                    let m = mean(&v); let sd = stddev(&v); let mx = vmax(&v);
+                    let s = if (0.85..=0.96).contains(&m) { DiagStatus::Ok }
+                            else if (0.80..=1.0).contains(&m) { DiagStatus::Warn }
+                            else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Lambda WOT".into(), value: format!("{:.3} λ", m),
+                        status: s, detail: format!("Max: {:.3}  σ: {:.4}", mx, sd) });
+                }
+            } else { out.push(DiagCheck::missing("Lambda WOT")); }
+
+            // Charge WOT
+            if let Some(load) = &load_d {
+                let v = filtered(load, &mask);
+                if !v.is_empty() {
+                    let m = mean(&v); let mn = vmin(&v);
+                    let s = if m > 90.0 { DiagStatus::Ok } else if m > 80.0 { DiagStatus::Warn } else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Charge WOT".into(), value: format!("{:.1}%", m),
+                        status: s, detail: format!("Min WOT: {:.1}% — aspiration OK si > 90%", mn) });
+                }
+            }
+
+            // Cliquetis sous WOT (le plus critique)
+            if let Some(knock) = get(log, KNOCK) {
+                let v: Vec<f64> = knock.iter().zip(mask.iter())
+                    .filter_map(|(&k, &b)| if b && k.abs() > 0.5 { Some(k.abs()) } else { None }).collect();
+                let ne = v.len(); let ar = if ne > 0 { mean(&v) } else { 0.0 };
+                let s = if ne == 0 { DiagStatus::Ok } else if ar < 2.0 { DiagStatus::Warn } else { DiagStatus::Critical };
+                out.push(DiagCheck { label: "Cliquetis WOT".into(), value: format!("{} événements", ne),
+                    status: s, detail: if ne > 0 { format!("Retard moy: {:.1}° — danger moteur!", ar) } else { "Aucun cliquetis".into() } });
+            }
+
+            // Rapport cyclique WOT
+            if let (Some(inj), Some(rpm)) = (&inj_d, &rpm_d) {
+                let duties: Vec<f64> = inj.iter().zip(rpm.iter()).zip(mask.iter())
+                    .filter_map(|((&t, &r), &b)| if b && r > 100.0 { Some((t / (120_000.0 / r)) * 100.0) } else { None })
+                    .collect();
+                if !duties.is_empty() {
+                    let dmax = vmax(&duties); let dm = mean(&duties);
+                    let s = if dmax < cfg.duty_warn { DiagStatus::Ok } else if dmax < cfg.duty_crit { DiagStatus::Warn } else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Duty injecteur WOT (max)".into(), value: format!("{:.1}%", dmax),
+                        status: s, detail: format!("Moy: {:.1}% — risque si > {:.0}%", dm, cfg.duty_crit) });
+                }
+            }
+
+            // STFT WOT (doit être proche de 0 — correcteur stable)
+            for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
+                if let Some(d) = get(log, names) {
+                    let v: Vec<f64> = d.iter().zip(mask.iter())
+                        .filter_map(|(&x, &msk)| if msk { Some(x) } else { None }).collect();
+                    if v.len() > 3 {
+                        let m = mean(&v); let mx = maxabs(&v);
+                        let s = if m.abs() < 3.0 { DiagStatus::Ok } else if m.abs() < 7.0 { DiagStatus::Warn } else { DiagStatus::Critical };
+                        out.push(DiagCheck { label: format!("STFT B{} sous WOT", b), value: format!("{:+.2}%", m),
+                            status: s, detail: format!("Max |val|: {:.2}%", mx) });
+                    }
+                }
+            }
+        }
+
+        Phase::Idle => {
+            // Stabilité RPM ralenti
+            if let Some(rpm) = &rpm_d {
+                let v: Vec<f64> = rpm.iter().zip(mask.iter())
+                    .filter_map(|(&r, &b)| if b && r > 200.0 { Some(r) } else { None }).collect();
+                if v.len() > 10 {
+                    let sd = stddev(&v); let m = mean(&v);
+                    let s = if sd < 40.0 { DiagStatus::Ok } else if sd < 100.0 { DiagStatus::Warn } else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Stabilité RPM ralenti (σ)".into(), value: format!("{:.0} tr/min", sd),
+                        status: s, detail: format!("Moy: {:.0} tr/min — < 40 σ = excellent", m) });
+                }
+            }
+
+            // Lambda au ralenti (doit être ~1.00 ±0.02)
+            if let Some(lam) = &lam_d {
+                let v: Vec<f64> = lam.iter().zip(mask.iter())
+                    .filter_map(|(&x, &b)| if b && x > 0.5 { Some(x) } else { None }).collect();
+                if v.len() > 5 {
+                    let m = mean(&v); let sd = stddev(&v);
+                    let s = if (0.98..=1.02).contains(&m) && sd < 0.02 { DiagStatus::Ok }
+                            else if (0.96..=1.04).contains(&m) { DiagStatus::Warn }
+                            else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Lambda ralenti".into(), value: format!("{:.3} λ", m),
+                        status: s, detail: format!("σ = {:.4} — cible 1.00 ±0.02", sd) });
+                }
+            }
+
+            // Variabilité STFT ralenti (stabilité boucle fermée)
+            for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
+                if let Some(d) = get(log, names) {
+                    let v: Vec<f64> = d.iter().zip(mask.iter())
+                        .filter_map(|(&x, &msk)| if msk { Some(x) } else { None }).collect();
+                    if v.len() > 10 {
+                        let m = mean(&v); let sd = stddev(&v);
+                        let s = if m.abs() < 3.0 && sd < 2.0 { DiagStatus::Ok }
+                                else if m.abs() < 7.0 { DiagStatus::Warn }
+                                else { DiagStatus::Critical };
+                        out.push(DiagCheck { label: format!("STFT B{} ralenti", b), value: format!("{:+.2}% σ={:.2}", m, sd),
+                            status: s, detail: "Chasse si σ > 2 — vérif. sonde/préchauffe".into() });
+                    }
+                }
+            }
+
+            // Charge ralenti (doit être faible)
+            if let Some(load) = &load_d {
+                let v = filtered(load, &mask);
+                if !v.is_empty() {
+                    let m = mean(&v);
+                    let s = if m < cfg.idle_load_thresh { DiagStatus::Ok }
+                            else if m < cfg.idle_load_thresh * 1.5 { DiagStatus::Warn }
+                            else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Charge au ralenti".into(), value: format!("{:.1}%", m),
+                        status: s, detail: format!("Seuil: {:.0}% — fuites admission si élevé", cfg.idle_load_thresh) });
+                }
+            }
+        }
+
+        Phase::Cruise => {
+            // Lambda croisière — stabilité σ
+            if let Some(lam) = &lam_d {
+                let v: Vec<f64> = lam.iter().zip(mask.iter()).zip(warm.iter())
+                    .filter_map(|((&x, &b), &w)| if b && w && x > 0.5 { Some(x) } else { None }).collect();
+                if v.len() > 10 {
+                    let m = mean(&v); let sd = stddev(&v);
+                    let s = if sd < 0.02 { DiagStatus::Ok } else if sd < 0.05 { DiagStatus::Warn } else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Lambda croisière (σ)".into(), value: format!("{:.4}", sd),
+                        status: s, detail: format!("Moy: {:.3} — chasse si σ > 0.05", m) });
+                }
+            }
+
+            // Corrélation MAF-Charge en croisière
+            if let (Some(maf), Some(load)) = (get(log, MAF), &load_d) {
+                let pairs: Vec<(f64,f64)> = maf.iter().zip(load.iter()).zip(mask.iter()).zip(warm.iter())
+                    .filter_map(|(((&m, &l), &b), &w)| if b && w && m > 0.1 { Some((m, l)) } else { None }).collect();
+                let ma: Vec<f64> = pairs.iter().map(|p| p.0).collect();
+                let la: Vec<f64> = pairs.iter().map(|p| p.1).collect();
+                if let Some(r) = pearson(&ma, &la) {
+                    let s = if r > 0.88 { DiagStatus::Ok } else if r > 0.70 { DiagStatus::Warn } else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "MAF ↔ Charge (croisière r)".into(), value: format!("{:.4}", r),
+                        status: s, detail: if r < 0.70 { "Fuite air / débitmètre suspect".into() } else { "Cohérence MAF-Charge OK".into() } });
+                }
+            }
+
+            // STFT croisière
+            for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
+                if let Some(d) = get(log, names) {
+                    let v: Vec<f64> = d.iter().zip(mask.iter()).zip(warm.iter())
+                        .filter_map(|((&x, &msk), &w)| if msk && w { Some(x) } else { None }).collect();
+                    if v.len() > 5 {
+                        let m = mean(&v); let mx = maxabs(&v);
+                        let s = if m.abs() < cfg.ltft_warn { DiagStatus::Ok }
+                                else if m.abs() < cfg.ltft_crit { DiagStatus::Warn }
+                                else { DiagStatus::Critical };
+                        out.push(DiagCheck { label: format!("STFT B{} croisière", b), value: format!("{:+.2}%", m),
+                            status: s, detail: format!("Max |val|: {:.2}%", mx) });
+                    }
+                }
+            }
+
+            // RPM croisière stabilité
+            if let Some(rpm) = &rpm_d {
+                let v = filtered(rpm, &mask);
+                if !v.is_empty() {
+                    let m = mean(&v); let sd = stddev(&v);
+                    let s = if sd < 100.0 { DiagStatus::Ok } else { DiagStatus::Info };
+                    out.push(DiagCheck { label: "Régime croisière (σ)".into(), value: format!("{:.0} tr/min", sd),
+                        status: s, detail: format!("Moy: {:.0} tr/min", m) });
+                }
+            }
+        }
+
+        Phase::Deceleration => {
+            // Lambda DFCO — doit monter (> 1.05) ou coupure carbu
+            if let Some(lam) = &lam_d {
+                let v: Vec<f64> = lam.iter().zip(mask.iter())
+                    .filter_map(|(&x, &b)| if b && x > 0.5 { Some(x) } else { None }).collect();
+                if v.len() > 3 {
+                    let m = mean(&v); let mn = vmin(&v);
+                    let s = if m > 1.05 { DiagStatus::Ok } else { DiagStatus::Warn };
+                    out.push(DiagCheck { label: "Lambda DFCO".into(), value: format!("{:.3} λ", m),
+                        status: s, detail: format!("Min: {:.3} — appauvrissement attendu", mn) });
+                }
+            }
+
+            // Durée DFCO — nombre de segments et durée totale
+            let dfco_segs: Vec<&PhaseSegment> = {
+                // Recompute from times
+                let mut segs = Vec::new();
+                let mut in_phase = false;
+                let mut seg_start = 0.0_f64;
+                for (i, (&b, &t)) in mask.iter().zip(times.iter()).enumerate() {
+                    if b && !in_phase { in_phase = true; seg_start = t; }
+                    else if !b && in_phase {
+                        segs.push((seg_start, times.get(i.saturating_sub(1)).copied().unwrap_or(t)));
+                        in_phase = false;
+                    }
+                }
+                // Return durations
+                let durs: Vec<f64> = segs.iter().map(|(s, e)| e - s).collect();
+                let n_seg = durs.len();
+                let total_dur: f64 = durs.iter().sum();
+                let mean_dur = if n_seg > 0 { total_dur / n_seg as f64 } else { 0.0 };
+                let s = if n_seg > 0 { DiagStatus::Ok } else { DiagStatus::Info };
+                out.push(DiagCheck { label: "Durée DFCO".into(),
+                    value: format!("{:.1} s total", total_dur),
+                    status: s,
+                    detail: format!("{} événements, moy: {:.1} s", n_seg, mean_dur) });
+                Vec::new()
+            };
+            let _ = dfco_segs;
+
+            // RPM en DFCO (doit tomber progressivement)
+            if let Some(rpm) = &rpm_d {
+                let v = filtered(rpm, &mask);
+                if v.len() > 3 {
+                    let m = mean(&v); let mn = vmin(&v); let mx = vmax(&v);
+                    out.push(DiagCheck { label: "RPM décélération".into(), value: format!("{:.0} tr/min moy", m),
+                        status: DiagStatus::Info, detail: format!("Range: {:.0}–{:.0} tr/min", mn, mx) });
+                }
+            }
+
+            // TPS en DFCO (doit être < 3%)
+            if let Some(tps) = &tps_d {
+                let v = filtered(tps, &mask);
+                if !v.is_empty() {
+                    let m = mean(&v); let mx = vmax(&v);
+                    let s = if mx < 3.0 { DiagStatus::Ok } else { DiagStatus::Warn };
+                    out.push(DiagCheck { label: "TPS décélération (max)".into(), value: format!("{:.1}%", mx),
+                        status: s, detail: format!("Moy: {:.1}% — DFCO actif si TPS < 3%", m) });
+                }
+            }
+        }
+
+        Phase::Acceleration => {
+            // Lambda enrichissement (doit être < 1.0 = riche)
+            if let Some(lam) = &lam_d {
+                let v: Vec<f64> = lam.iter().zip(mask.iter())
+                    .filter_map(|(&x, &b)| if b && x > 0.5 { Some(x) } else { None }).collect();
+                if !v.is_empty() {
+                    let m = mean(&v); let mn = vmin(&v);
+                    let s = if m < 1.0 { DiagStatus::Ok } else if m < 1.05 { DiagStatus::Warn } else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Lambda accélération".into(), value: format!("{:.3} λ", m),
+                        status: s, detail: format!("Min: {:.3} — enrichissement transitoire attendu", mn) });
+                }
+            }
+
+            // STFT en accélération
+            for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
+                if let Some(d) = get(log, names) {
+                    let v: Vec<f64> = d.iter().zip(mask.iter())
+                        .filter_map(|(&x, &msk)| if msk { Some(x) } else { None }).collect();
+                    if v.len() > 3 {
+                        let m = mean(&v); let mx = maxabs(&v);
+                        let s = if mx < 10.0 { DiagStatus::Ok } else { DiagStatus::Warn };
+                        out.push(DiagCheck { label: format!("STFT B{} accélération", b), value: format!("{:+.2}%", m),
+                            status: s, detail: format!("Max |val|: {:.2}%", mx) });
+                    }
+                }
+            }
+
+            // Montée en charge (variation load/TPS)
+            if let (Some(load), Some(tps)) = (&load_d, &tps_d) {
+                let lv = filtered(load, &mask);
+                let tv = filtered(tps, &mask);
+                if !lv.is_empty() && !tv.is_empty() {
+                    let l_rise = vmax(&lv) - vmin(&lv);
+                    let t_rise = vmax(&tv) - vmin(&tv);
+                    let ratio = if t_rise > 1.0 { l_rise / t_rise } else { 0.0 };
+                    let s = if ratio > 0.8 { DiagStatus::Ok } else if ratio > 0.5 { DiagStatus::Warn } else { DiagStatus::Critical };
+                    out.push(DiagCheck { label: "Réponse charge/TPS".into(), value: format!("{:.2}", ratio),
+                        status: s, detail: format!("ΔCharge: {:.1}%  ΔTPS: {:.1}% — papillon = charge?", l_rise, t_rise) });
+                }
+            }
+        }
+
+        Phase::Overrun => {
+            // Lambda roue libre (doit être maigre > 1.0)
+            if let Some(lam) = &lam_d {
+                let v: Vec<f64> = lam.iter().zip(mask.iter())
+                    .filter_map(|(&x, &b)| if b && x > 0.5 { Some(x) } else { None }).collect();
+                if v.len() > 3 {
+                    let m = mean(&v);
+                    let s = if m > 1.0 { DiagStatus::Ok } else { DiagStatus::Warn };
+                    out.push(DiagCheck { label: "Lambda roue libre".into(), value: format!("{:.3} λ", m),
+                        status: s, detail: "Doit être > 1.0 (appauvrissement)".into() });
+                }
+            }
+
+            // Stabilité RPM roue libre
+            if let Some(rpm) = &rpm_d {
+                let v = filtered(rpm, &mask);
+                if v.len() > 3 {
+                    let m = mean(&v); let sd = stddev(&v);
+                    out.push(DiagCheck { label: "RPM roue libre (σ)".into(), value: format!("{:.0} tr/min", sd),
+                        status: DiagStatus::Info, detail: format!("Moy: {:.0} tr/min", m) });
+                }
+            }
+        }
+
+        Phase::WarmUp => {
+            // Enrichissement démarrage à froid (lambda < 1.0 attendu)
+            if let Some(lam) = &lam_d {
+                let v: Vec<f64> = lam.iter().zip(mask.iter())
+                    .filter_map(|(&x, &b)| if b && x > 0.3 { Some(x) } else { None }).collect();
+                if !v.is_empty() {
+                    let m = mean(&v); let mn = vmin(&v);
+                    let s = if m < 0.98 { DiagStatus::Ok } else if m < 1.05 { DiagStatus::Info } else { DiagStatus::Warn };
+                    out.push(DiagCheck { label: "Lambda chauffe (moy)".into(), value: format!("{:.3} λ", m),
+                        status: s, detail: format!("Min: {:.3} — enrichissement à froid normal si < 1.0", mn) });
+                }
+            }
+
+            // Montée en température (taux °C/s)
+            if let Some(cool) = get(log, COOLANT) {
+                let pairs: Vec<(f64,f64)> = cool.iter().zip(mask.iter()).zip(times.iter())
+                    .filter_map(|((&c, &b), &t)| if b { Some((t, c)) } else { None }).collect();
+                if pairs.len() > 2 {
+                    let dt = pairs.last().unwrap().0 - pairs.first().unwrap().0;
+                    let dc = pairs.last().unwrap().1 - pairs.first().unwrap().1;
+                    let rate = if dt > 0.0 { dc / dt } else { 0.0 };
+                    let s = if rate > 0.0 { DiagStatus::Ok } else { DiagStatus::Warn };
+                    out.push(DiagCheck { label: "Taux chauffe (°C/s)".into(), value: format!("{:.3}", rate),
+                        status: s, detail: format!("De {:.0}°C à {:.0}°C en {:.0}s",
+                            pairs.first().unwrap().1, pairs.last().unwrap().1, dt) });
+                }
+            }
+
+            // STFT à froid (peut être élevé par correction)
+            for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
+                if let Some(d) = get(log, names) {
+                    let v: Vec<f64> = d.iter().zip(mask.iter())
+                        .filter_map(|(&x, &msk)| if msk { Some(x) } else { None }).collect();
+                    if v.len() > 3 {
+                        let m = mean(&v);
+                        out.push(DiagCheck { label: format!("STFT B{} chauffe", b), value: format!("{:+.2}%", m),
+                            status: DiagStatus::Info, detail: "Normal si négatif à froid (enrichissement ECU)".into() });
+                    }
+                }
+            }
+        }
+    }
+
+    out
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Run analysis entry point
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -575,6 +968,12 @@ fn run_analysis(log: &Log, st: &mut Msv70AnalysisState) {
     st.checks_engine = engine_checks(log, st, &warm, &phase_vec);
     st.checks_elec   = elec_checks(log, &warm);
     st.checks_temp   = temp_checks(log, st);
+
+    // Per-phase deep diagnostics
+    st.checks_by_phase = Phase::all()
+        .iter()
+        .map(|&p| phase_checks_for(log, st, p, &warm, &phase_vec, &log.times))
+        .collect();
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -589,6 +988,7 @@ fn badge(ui: &mut egui::Ui, status: DiagStatus) {
         });
 }
 
+#[allow(dead_code)]
 fn check_row(ui: &mut egui::Ui, c: &DiagCheck) {
     ui.horizontal(|ui| {
         ui.add_sized([230.0, 18.0], egui::Label::new(
@@ -600,6 +1000,39 @@ fn check_row(ui: &mut egui::Ui, c: &DiagCheck) {
             ui.label(egui::RichText::new(&c.detail).size(11.0).color(egui::Color32::GRAY).italics());
         }
     });
+}
+
+/// Compact 2-line card for use in the narrow 280px side panel
+fn check_row_compact(ui: &mut egui::Ui, c: &DiagCheck) {
+    egui::Frame::NONE
+        .fill(egui::Color32::from_rgb(28, 30, 34))
+        .corner_radius(4)
+        .inner_margin(egui::vec2(7.0, 5.0))
+        .show(ui, |ui| {
+            ui.set_width(ui.available_width());
+            ui.horizontal(|ui| {
+                ui.add(egui::Label::new(
+                    egui::RichText::new(&c.label)
+                        .size(11.0)
+                        .color(egui::Color32::LIGHT_GRAY),
+                ).wrap());
+                ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                    badge(ui, c.status);
+                });
+            });
+            ui.horizontal(|ui| {
+                ui.label(egui::RichText::new(&c.value).monospace().size(11.0).strong());
+                if !c.detail.is_empty() {
+                    ui.label(
+                        egui::RichText::new(format!("· {}", &c.detail))
+                            .size(10.0)
+                            .color(egui::Color32::from_rgb(120, 120, 120))
+                            .italics(),
+                    );
+                }
+            });
+        });
+    ui.add_space(2.0);
 }
 
 fn phase_bar(ui: &mut egui::Ui, phase: Phase, count: usize, total: usize) {
@@ -617,29 +1050,21 @@ fn phase_bar(ui: &mut egui::Ui, phase: Phase, count: usize, total: usize) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Main floating window
+// Inline side panel (5th activity bar icon)
 // ─────────────────────────────────────────────────────────────────────────────
 
 impl UltraLogApp {
-    pub fn render_msv70_analysis(&mut self, ctx: &egui::Context) {
-        if !self.show_msv70_analysis { return; }
-        let mut open = true;
-        egui::Window::new("MSV70 — Diagnostic ECU")
-            .open(&mut open).resizable(true)
-            .default_width(740.0).default_height(610.0)
-            .order(egui::Order::Foreground)
-            .show(ctx, |ui| { self.render_msv70_inner(ui); });
-        if !open { self.show_msv70_analysis = false; }
-    }
-
-    fn render_msv70_inner(&mut self, ui: &mut egui::Ui) {
+    /// Render MSV70 diagnostic as inline side panel content (called from side_panel.rs routing)
+    pub fn render_msv70_panel_content(&mut self, ui: &mut egui::Ui) {
         let has_file = self.selected_file.is_some() && !self.files.is_empty();
 
-        // ── Top action bar ────────────────────────────────────────────────────
+        // ── Action bar ────────────────────────────────────────────────────────
         ui.horizontal(|ui| {
-            let run = ui.add_enabled(has_file,
-                egui::Button::new(egui::RichText::new("▶  Analyser").strong().size(13.0))
-                    .fill(egui::Color32::from_rgb(80, 110, 60)));
+            let run = ui.add_enabled(
+                has_file,
+                egui::Button::new(egui::RichText::new("▶  Analyser").strong().size(12.0))
+                    .fill(egui::Color32::from_rgb(70, 105, 50)),
+            );
             if run.clicked() {
                 if let Some(idx) = self.selected_file {
                     if let Some(file) = self.files.get(idx) {
@@ -648,92 +1073,137 @@ impl UltraLogApp {
                 }
             }
 
-            ui.add_space(8.0);
-            let (ov_lbl, ov_fill) = if self.msv70_analysis.show_phase_overlay {
-                ("🎨  Overlay ON", egui::Color32::from_rgb(40, 80, 55))
+            let ov = self.msv70_analysis.show_phase_overlay;
+            let ov_fill = if ov {
+                egui::Color32::from_rgb(35, 75, 50)
             } else {
-                ("🎨  Overlay phases", egui::Color32::from_rgb(50, 50, 55))
+                egui::Color32::from_rgb(45, 48, 54)
             };
-            let ov_btn = egui::Frame::NONE.fill(ov_fill).corner_radius(4)
-                .inner_margin(egui::vec2(10.0, 4.0))
+            let ov_btn = egui::Frame::NONE
+                .fill(ov_fill)
+                .corner_radius(4)
+                .inner_margin(egui::vec2(8.0, 4.0))
                 .show(ui, |ui| {
-                    ui.label(egui::RichText::new(ov_lbl).color(egui::Color32::WHITE).size(12.0));
+                    ui.label(
+                        egui::RichText::new(if ov { "🎨 ON" } else { "🎨" })
+                            .color(egui::Color32::WHITE)
+                            .size(11.0),
+                    );
                 });
             if ov_btn.response.interact(egui::Sense::click()).clicked() {
                 self.msv70_analysis.show_phase_overlay = !self.msv70_analysis.show_phase_overlay;
             }
-            if ov_btn.response.hovered() { ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand); }
-
-            if !has_file {
-                ui.colored_label(egui::Color32::GRAY, "  Charger un log Testo CSV d'abord.");
+            if ov_btn.response.hovered() {
+                ov_btn.response.on_hover_text("Activer l'overlay de phases sur le graphique");
+                ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand);
             }
         });
+
+        if !has_file {
+            ui.add_space(8.0);
+            ui.colored_label(egui::Color32::GRAY, "Charger un log Testo CSV d'abord.");
+            return;
+        }
 
         let analyzed = !self.msv70_analysis.checks_fuel.is_empty();
 
         // ── Score banner ──────────────────────────────────────────────────────
         if analyzed {
             let (score, n_checks) = self.msv70_analysis.health_score();
-            let sc = if score >= 80 { egui::Color32::from_rgb(50, 190, 100) }
-                     else if score >= 55 { egui::Color32::from_rgb(230, 160, 30) }
-                     else { egui::Color32::from_rgb(210, 55, 55) };
-            let verd = if score >= 80 { "Carto validée — état sain" }
-                       else if score >= 55 { "Anomalies mineures à surveiller" }
-                       else { "Problèmes critiques détectés" };
+            let sc = if score >= 80 {
+                egui::Color32::from_rgb(50, 190, 100)
+            } else if score >= 55 {
+                egui::Color32::from_rgb(230, 160, 30)
+            } else {
+                egui::Color32::from_rgb(210, 55, 55)
+            };
+            let verd = if score >= 80 { "Carto validée" }
+                       else if score >= 55 { "Anomalies mineures" }
+                       else { "Problèmes critiques" };
             ui.add_space(6.0);
-            egui::Frame::NONE.fill(egui::Color32::from_rgb(28, 30, 34)).corner_radius(8)
-                .inner_margin(egui::vec2(14.0, 8.0))
+            egui::Frame::NONE
+                .fill(egui::Color32::from_rgb(26, 28, 32))
+                .corner_radius(6)
+                .inner_margin(egui::vec2(10.0, 7.0))
                 .show(ui, |ui| {
+                    ui.set_width(ui.available_width());
                     ui.horizontal(|ui| {
-                        ui.label(egui::RichText::new(format!("{}%", score)).size(24.0).strong().color(sc));
-                        ui.add_space(10.0);
-                        ui.label(egui::RichText::new(verd).size(14.0).color(sc));
-                        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                            ui.label(egui::RichText::new(format!("{} contrôles", n_checks)).size(11.0).color(egui::Color32::GRAY));
+                        ui.label(egui::RichText::new(format!("{}%", score)).size(22.0).strong().color(sc));
+                        ui.add_space(6.0);
+                        ui.vertical(|ui| {
+                            ui.label(egui::RichText::new(verd).size(11.5).color(sc));
+                            ui.label(egui::RichText::new(format!("{} contrôles", n_checks)).size(10.0).color(egui::Color32::GRAY));
                         });
                     });
                 });
         }
 
-        ui.add_space(4.0);
+        ui.add_space(6.0);
         ui.separator();
 
-        // ── Tab bar ───────────────────────────────────────────────────────────
+        // ── Tab bar — icon-only to fit 280px ──────────────────────────────────
         ui.horizontal(|ui| {
-            for (i, lbl) in ["📊 Dashboard","🔄 Phases","⛽ Carburant","⚙ Moteur","🔧 Seuils"].iter().enumerate() {
+            ui.spacing_mut().item_spacing.x = 2.0;
+            for (i, (icon, tip)) in [
+                ("📊", "Dashboard"),
+                ("🔄", "Phases"),
+                ("⛽", "Carburant"),
+                ("⚙", "Moteur"),
+                ("🎯", "Par Phase"),
+                ("🔧", "Seuils"),
+            ]
+            .iter()
+            .enumerate()
+            {
                 let sel = self.msv70_analysis.active_tab == i;
-                let text = egui::RichText::new(*lbl).size(12.0)
-                    .color(if sel { egui::Color32::WHITE } else { egui::Color32::from_rgb(150, 150, 150) });
+                let fill = if sel {
+                    egui::Color32::from_rgb(50, 55, 62)
+                } else {
+                    egui::Color32::TRANSPARENT
+                };
+                let tcol = if sel {
+                    egui::Color32::WHITE
+                } else {
+                    egui::Color32::from_rgb(135, 135, 135)
+                };
                 let fr = egui::Frame::NONE
-                    .fill(if sel { egui::Color32::from_rgb(50, 55, 62) } else { egui::Color32::TRANSPARENT })
-                    .corner_radius(4).inner_margin(egui::vec2(10.0, 4.0))
-                    .show(ui, |ui| { ui.label(text); });
-                if fr.response.interact(egui::Sense::click()).clicked() { self.msv70_analysis.active_tab = i; }
-                if fr.response.hovered() { ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand); }
+                    .fill(fill)
+                    .corner_radius(4)
+                    .inner_margin(egui::vec2(5.0, 3.0))
+                    .show(ui, |ui| {
+                        ui.label(egui::RichText::new(*icon).size(14.0).color(tcol));
+                    });
+                let resp = fr.response.interact(egui::Sense::click());
+                if resp.clicked() { self.msv70_analysis.active_tab = i; }
+                if resp.hovered() {
+                    resp.clone().on_hover_text(*tip);
+                    ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand);
+                }
             }
         });
         ui.separator();
         ui.add_space(4.0);
 
         if !analyzed {
-            ui.colored_label(egui::Color32::GRAY, "Appuyer sur ▶ Analyser pour lancer le diagnostic.");
+            ui.colored_label(egui::Color32::GRAY, "Appuyer sur ▶ Analyser.");
             return;
         }
 
-        egui::ScrollArea::vertical().id_salt("msv70_scroll").show(ui, |ui| {
-            match self.msv70_analysis.active_tab {
-                0 => self.tab_dashboard(ui),
-                1 => self.tab_phases(ui),
-                2 => self.tab_fuel(ui),
-                3 => self.tab_engine(ui),
-                4 => self.tab_settings(ui),
-                _ => {}
-            }
-        });
+        // No outer ScrollArea here — side_panel.rs already wraps in one
+        ui.set_width(ui.available_width());
+        match self.msv70_analysis.active_tab {
+            0 => self.tab_dashboard_compact(ui),
+            1 => self.tab_phases(ui),
+            2 => self.tab_fuel_compact(ui),
+            3 => self.tab_engine_compact(ui),
+            4 => self.tab_per_phase(ui),
+            5 => self.tab_settings(ui),
+            _ => {}
+        }
     }
 
-    // ── Dashboard ─────────────────────────────────────────────────────────────
-    fn tab_dashboard(&mut self, ui: &mut egui::Ui) {
+    // ── Dashboard (compact 280px version) ────────────────────────────────────
+    fn tab_dashboard_compact(&mut self, ui: &mut egui::Ui) {
         let all: Vec<DiagCheck> = self.msv70_analysis.checks_fuel.iter()
             .chain(&self.msv70_analysis.checks_engine)
             .chain(&self.msv70_analysis.checks_elec)
@@ -744,54 +1214,54 @@ impl UltraLogApp {
         let n_warn = all.iter().filter(|c| c.status == DiagStatus::Warn).count();
         let n_crit = all.iter().filter(|c| c.status == DiagStatus::Critical).count();
 
-        // Summary tiles
+        // Summary tiles — horizontal strip
         ui.horizontal(|ui| {
+            ui.spacing_mut().item_spacing.x = 4.0;
             for (label, n, color) in [
-                ("✔  OK",            n_ok,   egui::Color32::from_rgb(50, 190, 100)),
-                ("⚠  Attention",     n_warn, egui::Color32::from_rgb(230, 160, 30)),
-                ("✖  Critique",      n_crit, egui::Color32::from_rgb(210, 55, 55)),
+                ("✔", n_ok,   egui::Color32::from_rgb(50, 190, 100)),
+                ("⚠", n_warn, egui::Color32::from_rgb(230, 160, 30)),
+                ("✖", n_crit, egui::Color32::from_rgb(210, 55, 55)),
             ] {
-                egui::Frame::NONE.fill(egui::Color32::from_rgb(34, 36, 40))
-                    .corner_radius(8).inner_margin(egui::vec2(18.0, 10.0))
+                egui::Frame::NONE.fill(egui::Color32::from_rgb(32, 34, 38))
+                    .corner_radius(6).inner_margin(egui::vec2(10.0, 6.0))
                     .show(ui, |ui| {
-                        ui.label(egui::RichText::new(format!("{}", n)).size(30.0).strong().color(color));
-                        ui.label(egui::RichText::new(label).size(11.0).color(egui::Color32::GRAY));
+                        ui.horizontal(|ui| {
+                            ui.label(egui::RichText::new(format!("{}", n)).size(20.0).strong().color(color));
+                            ui.add_space(3.0);
+                            ui.label(egui::RichText::new(label).size(13.0).color(color));
+                        });
                     });
-                ui.add_space(8.0);
             }
         });
-        ui.add_space(12.0);
+        ui.add_space(8.0);
 
-        // Critical items first
-        let critical: Vec<&DiagCheck> = all.iter()
-            .filter(|c| c.status == DiagStatus::Critical).collect();
-        let warn: Vec<&DiagCheck> = all.iter()
-            .filter(|c| c.status == DiagStatus::Warn).collect();
+        // Critical items
+        let critical: Vec<DiagCheck> = all.iter().filter(|c| c.status == DiagStatus::Critical).cloned().collect();
+        let warn: Vec<DiagCheck>     = all.iter().filter(|c| c.status == DiagStatus::Warn).cloned().collect();
 
         if !critical.is_empty() {
-            ui.label(egui::RichText::new("🚨  Points critiques").size(12.0).strong().color(egui::Color32::from_rgb(210, 55, 55)));
-            ui.add_space(4.0);
-            for c in &critical { check_row(ui, c); }
-            ui.add_space(8.0);
+            ui.label(egui::RichText::new("🚨 Critiques").size(11.5).strong().color(egui::Color32::from_rgb(210, 55, 55)));
+            ui.add_space(3.0);
+            for c in &critical { check_row_compact(ui, c); }
+            ui.add_space(6.0);
         }
         if !warn.is_empty() {
-            ui.label(egui::RichText::new("⚠  Points à surveiller").size(12.0).strong().color(egui::Color32::from_rgb(230, 160, 30)));
-            ui.add_space(4.0);
-            for c in &warn { check_row(ui, c); }
-            ui.add_space(8.0);
-        }
-
-        if critical.is_empty() && warn.is_empty() {
+            ui.label(egui::RichText::new("⚠ À surveiller").size(11.5).strong().color(egui::Color32::from_rgb(230, 160, 30)));
+            ui.add_space(3.0);
+            for c in &warn { check_row_compact(ui, c); }
             ui.add_space(6.0);
-            ui.label(egui::RichText::new("✅  Aucun problème détecté sur ce log.").size(13.0).color(egui::Color32::from_rgb(50, 190, 100)));
-            ui.add_space(10.0);
+        }
+        if critical.is_empty() && warn.is_empty() {
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new("✅ Aucun problème détecté").size(12.0).color(egui::Color32::from_rgb(50, 190, 100)));
+            ui.add_space(8.0);
         }
 
         ui.separator();
-        ui.add_space(6.0);
-        ui.label(egui::RichText::new("Tous les contrôles").size(12.0).strong().color(egui::Color32::GRAY));
         ui.add_space(4.0);
-        for c in &all { check_row(ui, c); ui.add_space(1.0); }
+        ui.label(egui::RichText::new("Tous les contrôles").size(11.0).strong().color(egui::Color32::GRAY));
+        ui.add_space(4.0);
+        for c in &all { check_row_compact(ui, c); }
     }
 
     // ── Phases ────────────────────────────────────────────────────────────────
@@ -851,46 +1321,121 @@ impl UltraLogApp {
         }
     }
 
-    // ── Fuel ─────────────────────────────────────────────────────────────────
-    fn tab_fuel(&mut self, ui: &mut egui::Ui) {
+    // ── Fuel (compact) ────────────────────────────────────────────────────────
+    fn tab_fuel_compact(&mut self, ui: &mut egui::Ui) {
         let checks = self.msv70_analysis.checks_fuel.clone();
         let sections: &[(&str, usize, usize)] = &[
             ("Court terme (STFT)", 0, 2),
-            ("Long terme add. (LTFT)", 2, 4),
-            ("Long terme mul. (LTFT)", 4, 6),
+            ("Long terme add.", 2, 4),
+            ("Long terme mul.", 4, 6),
             ("Balance & Lambda", 6, checks.len()),
         ];
         for &(title, from, to) in sections {
             let slice = &checks[from.min(checks.len())..to.min(checks.len())];
             if slice.is_empty() { continue; }
-            egui::CollapsingHeader::new(egui::RichText::new(title).size(12.0).strong())
+            egui::CollapsingHeader::new(egui::RichText::new(title).size(11.5).strong())
                 .default_open(true)
                 .show(ui, |ui| {
                     ui.add_space(2.0);
-                    for c in slice { check_row(ui, c); ui.add_space(2.0); }
+                    for c in slice { check_row_compact(ui, c); }
                 });
             ui.add_space(4.0);
         }
     }
 
-    // ── Engine ────────────────────────────────────────────────────────────────
-    fn tab_engine(&mut self, ui: &mut egui::Ui) {
+    // ── Engine (compact) ──────────────────────────────────────────────────────
+    fn tab_engine_compact(&mut self, ui: &mut egui::Ui) {
         let eng   = self.msv70_analysis.checks_engine.clone();
         let elec  = self.msv70_analysis.checks_elec.clone();
         let temps = self.msv70_analysis.checks_temp.clone();
 
         for (title, checks) in [
-            ("Aération, charge & mécanique", &eng),
-            ("Électricité",                  &elec),
-            ("Températures",                 &temps),
+            ("Mécanique & charge", &eng),
+            ("Électricité",        &elec),
+            ("Températures",       &temps),
         ] {
-            egui::CollapsingHeader::new(egui::RichText::new(title).size(12.0).strong())
+            egui::CollapsingHeader::new(egui::RichText::new(title).size(11.5).strong())
                 .default_open(true)
                 .show(ui, |ui| {
                     ui.add_space(2.0);
-                    for c in checks { check_row(ui, c); ui.add_space(2.0); }
+                    for c in checks { check_row_compact(ui, c); }
                 });
             ui.add_space(4.0);
+        }
+    }
+
+    // ── Par Phase ─────────────────────────────────────────────────────────────
+    fn tab_per_phase(&mut self, ui: &mut egui::Ui) {
+        // Phase selector pills
+        ui.horizontal_wrapped(|ui| {
+            ui.spacing_mut().item_spacing = egui::vec2(3.0, 3.0);
+            for (i, p) in Phase::all().iter().enumerate() {
+                let sel = self.msv70_analysis.selected_phase_tab == i;
+                let cnt = self.msv70_analysis.phase_counts[i];
+                let fill = if sel { p.bar_color() } else { egui::Color32::from_rgb(38, 40, 44) };
+                let tcol = if sel { egui::Color32::WHITE } else { egui::Color32::from_rgb(160, 160, 160) };
+                let fr = egui::Frame::NONE
+                    .fill(fill)
+                    .corner_radius(12)
+                    .inner_margin(egui::vec2(7.0, 3.0))
+                    .show(ui, |ui| {
+                        ui.label(
+                            egui::RichText::new(format!("{} ({})", p.label(), cnt))
+                                .size(10.5)
+                                .color(tcol),
+                        );
+                    });
+                if fr.response.interact(egui::Sense::click()).clicked() {
+                    self.msv70_analysis.selected_phase_tab = i;
+                }
+                if fr.response.hovered() {
+                    ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand);
+                }
+            }
+        });
+        ui.add_space(6.0);
+        ui.separator();
+        ui.add_space(4.0);
+
+        let phase_idx = self.msv70_analysis.selected_phase_tab;
+        let phase = Phase::all()[phase_idx];
+        let cnt = self.msv70_analysis.phase_counts[phase_idx];
+
+        // Phase header with colour bar
+        ui.horizontal(|ui| {
+            let (r, _) = ui.allocate_exact_size(egui::vec2(4.0, 16.0), egui::Sense::hover());
+            ui.painter().rect_filled(r, 2.0, phase.bar_color());
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new(phase.label()).size(12.5).strong());
+            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                ui.label(egui::RichText::new(format!("{} pts", cnt)).size(10.5).color(egui::Color32::GRAY));
+            });
+        });
+        ui.add_space(4.0);
+
+        // Phase description
+        let desc = match phase {
+            Phase::WarmUp       => "Moteur froid — correcteur d'enrichissement actif",
+            Phase::Wot          => "Pleine charge — lambda riche, knock=0 impératif",
+            Phase::Acceleration => "Transitoire — enrichissement injecteurs attendu",
+            Phase::Cruise       => "Régime stabilisé — boucle fermée stable",
+            Phase::Deceleration => "DFCO — coupure carburant / lambda maigre",
+            Phase::Overrun      => "Roue libre — pédale levée, régime élevé",
+            Phase::Idle         => "Ralenti — boucle fermée, stabilité RPM",
+        };
+        ui.label(egui::RichText::new(desc).size(10.5).color(egui::Color32::GRAY).italics());
+        ui.add_space(6.0);
+
+        if cnt < 5 {
+            ui.colored_label(egui::Color32::from_rgb(150, 150, 80),
+                "Phase insuffisamment représentée dans ce log.");
+            return;
+        }
+
+        // Show per-phase checks
+        if let Some(checks) = self.msv70_analysis.checks_by_phase.get(phase_idx) {
+            let checks = checks.clone();
+            for c in &checks { check_row_compact(ui, c); }
         }
     }
 

@@ -27,6 +27,7 @@ impl UltraLogApp {
                 ActivePanel::ToolProperties,
                 ActivePanel::Tools,
                 ActivePanel::Settings,
+                ActivePanel::Msv70,
             ] {
                 let is_selected = self.active_panel == panel;
                 self.render_activity_icon(ui, panel, is_selected);
@@ -187,6 +188,58 @@ impl UltraLogApp {
 
                 for i in 0..points.len() - 1 {
                     painter.line_segment([points[i], points[i + 1]], stroke);
+                }
+            }
+            ActivePanel::Msv70 => {
+                // ECU chip diagnostic icon: chip body + pins + internal waveform
+                let chip_w = size * 0.72;
+                let chip_h = size * 0.52;
+                let chip_rect =
+                    egui::Rect::from_center_size(center, egui::vec2(chip_w, chip_h));
+
+                // Chip body outline
+                painter.rect_stroke(
+                    chip_rect,
+                    egui::CornerRadius::same(2),
+                    egui::Stroke::new(1.5, color),
+                    egui::StrokeKind::Outside,
+                );
+
+                // Pins on top and bottom (3 each)
+                let pin_len = size * 0.13;
+                let stroke_thin = egui::Stroke::new(1.5, color);
+                for i in 0..3i32 {
+                    let x = chip_rect.left() + chip_w * (i as f32 + 1.0) / 4.0;
+                    painter.line_segment(
+                        [egui::pos2(x, chip_rect.top()),
+                         egui::pos2(x, chip_rect.top() - pin_len)],
+                        stroke_thin,
+                    );
+                    painter.line_segment(
+                        [egui::pos2(x, chip_rect.bottom()),
+                         egui::pos2(x, chip_rect.bottom() + pin_len)],
+                        stroke_thin,
+                    );
+                }
+
+                // Pulse/waveform inside chip
+                let wx = chip_rect.left() + chip_w * 0.1;
+                let wr = chip_rect.right() - chip_w * 0.1;
+                let seg = (wr - wx) / 4.0;
+                let wh = chip_h * 0.3;
+                let cy = center.y;
+                let wave = [
+                    egui::pos2(wx,           cy),
+                    egui::pos2(wx + seg,     cy),
+                    egui::pos2(wx + seg,     cy - wh),
+                    egui::pos2(wx + seg * 2.0, cy - wh),
+                    egui::pos2(wx + seg * 2.0, cy + wh),
+                    egui::pos2(wx + seg * 3.0, cy + wh),
+                    egui::pos2(wx + seg * 3.0, cy),
+                    egui::pos2(wr,           cy),
+                ];
+                for i in 0..wave.len() - 1 {
+                    painter.line_segment([wave[i], wave[i + 1]], stroke_thin);
                 }
             }
             ActivePanel::Settings => {

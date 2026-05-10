@@ -6,7 +6,6 @@ use rust_i18n::t;
 
 use crate::app::UltraLogApp;
 use crate::normalize::normalize_channel_name_with_custom;
-use crate::ui::msv70_analysis::Phase;
 use crate::state::{
     PlotArea, SelectedChannel, CHART_COLORS, COLORBLIND_COLORS, MAX_CHART_POINTS, MIN_PLOT_HEIGHT,
     PLOT_RESIZE_HANDLE_HEIGHT,
