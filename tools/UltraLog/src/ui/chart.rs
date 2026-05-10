@@ -1,11 +1,12 @@
 //! Chart rendering and data processing utilities.
 
 use eframe::egui;
-use egui_plot::{Line, Plot, PlotBounds, PlotPoints, VLine};
+use egui_plot::{Line, Plot, PlotBounds, PlotPoints, Polygon, VLine};
 use rust_i18n::t;
 
 use crate::app::UltraLogApp;
 use crate::normalize::normalize_channel_name_with_custom;
+use crate::ui::msv70_analysis::Phase;
 use crate::state::{
     PlotArea, SelectedChannel, CHART_COLORS, COLORBLIND_COLORS, MAX_CHART_POINTS, MIN_PLOT_HEIGHT,
     PLOT_RESIZE_HANDLE_HEIGHT,
@@ -150,6 +151,13 @@ impl UltraLogApp {
         let show_grid = self.show_grid;
         let grid_color = grid_color_with_opacity(ui, self.grid_opacity);
 
+        // Phase overlay (MSV70)
+        let phase_segs = if self.msv70_analysis.show_phase_overlay {
+            self.msv70_analysis.phase_segments.clone()
+        } else {
+            Vec::new()
+        };
+
         // Read scroll input before plot consumes it (for scroll-to-zoom mode)
         let scroll_delta_y = if scroll_to_zoom && !cursor_tracking {
             ui.input(|i| i.smooth_scroll_delta.y)
@@ -268,6 +276,19 @@ impl UltraLogApp {
             // Always enforce bounds: X clamped to data, Y fixed to normalized range
             let new_bounds = PlotBounds::from_min_max([x_min, Y_MIN], [x_max, Y_MAX]);
             plot_ui.set_plot_bounds(new_bounds);
+
+            // Phase overlay — draw semi-transparent filled bands
+            for seg in &phase_segs {
+                let pts: PlotPoints = vec![
+                    [seg.start, Y_MIN], [seg.end, Y_MIN],
+                    [seg.end,   Y_MAX], [seg.start, Y_MAX],
+                ].into();
+                plot_ui.polygon(
+                    Polygon::new(seg.phase.label(), pts)
+                        .fill_color(seg.phase.overlay_color())
+                        .stroke(egui::Stroke::new(0.0, egui::Color32::TRANSPARENT)),
+                );
+            }
 
             // Draw channel data lines with values in legend
             for (i, selected) in selected_channels.iter().enumerate() {
