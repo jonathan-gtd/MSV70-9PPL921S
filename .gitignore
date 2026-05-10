@@ -8,3 +8,6 @@ __pycache__/
 
 # Generated exports
 xdf-analyzer/exports/
+
+# Rust build artifacts
+tools/UltraLog/target/
