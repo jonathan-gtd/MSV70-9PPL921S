@@ -311,20 +311,28 @@ fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
 
 fn to_segments(phases: &[Phase], times: &[f64]) -> Vec<PhaseSegment> {
     if phases.is_empty() || times.is_empty() { return Vec::new(); }
-    let mut segs = Vec::new();
+    let mut segs: Vec<PhaseSegment> = Vec::new();
     let mut cur = phases[0];
     let mut start = times[0];
-    for i in 1..phases.len().min(times.len()) {
+    let n = phases.len().min(times.len());
+
+    for i in 1..n {
         if phases[i] != cur {
-            let end = times[i];
-            if end - start > 0.04 {
-                segs.push(PhaseSegment { start, end, phase: cur });
+            // Emit or extend: guarantees zero gaps between adjacent segments
+            match segs.last_mut() {
+                Some(last) if last.phase == cur => last.end = times[i],
+                _ => segs.push(PhaseSegment { start, end: times[i], phase: cur }),
             }
-            cur = phases[i]; start = times[i];
+            cur = phases[i];
+            start = times[i];
         }
     }
-    if let Some(&last) = times.last() {
-        if last - start > 0.04 { segs.push(PhaseSegment { start, end: last, phase: cur }); }
+    // Final segment
+    if let Some(&t_end) = times.last() {
+        match segs.last_mut() {
+            Some(last) if last.phase == cur => last.end = t_end,
+            _ => segs.push(PhaseSegment { start, end: t_end, phase: cur }),
+        }
     }
     segs
 }
