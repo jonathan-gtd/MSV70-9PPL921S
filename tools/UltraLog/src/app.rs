@@ -330,6 +330,13 @@ impl UltraLogApp {
             }
         }
 
+        // Reopen last file from previous session
+        if let Some(last_path) = user_settings.last_opened_file.clone() {
+            if last_path.exists() {
+                app.start_loading_file(last_path);
+            }
+        }
+
         app
     }
 
@@ -371,6 +378,10 @@ impl UltraLogApp {
             .unwrap_or_else(|| "Unknown".to_string());
 
         self.loading_state = LoadingState::Loading(filename.clone());
+
+        // Persist last opened path so it can be reloaded on next startup
+        self.user_settings.last_opened_file = Some(path.clone());
+        let _ = self.user_settings.save();
 
         let (sender, receiver): (Sender<LoadResult>, Receiver<LoadResult>) = channel();
         self.load_receiver = Some(receiver);
@@ -710,8 +721,14 @@ impl UltraLogApp {
 
                         self.show_toast_success(&t!("toast.file_loaded"));
 
-                        // Switch to Channels panel so user can select channels
-                        self.active_panel = ActivePanel::ToolProperties;
+                        // Auto-run MSV70 diagnostic on every file load
+                        if let Some(f) = self.files.get(file_index) {
+                            let log = f.log.clone();
+                            crate::ui::msv70_analysis::run_analysis(&log, &mut self.msv70_analysis);
+                        }
+
+                        // Switch to MSV70 diagnostic panel
+                        self.active_panel = ActivePanel::Msv70;
                     }
                     LoadResult::Error(e) => {
                         self.show_toast_error(&format!("Error: {}", e));

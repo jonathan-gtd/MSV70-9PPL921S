@@ -26,6 +26,9 @@ pub struct UserSettings {
     /// before egui_plot's distance-based fade
     #[serde(default = "default_grid_opacity")]
     pub grid_opacity: u8,
+    /// Path to the last successfully opened file (reloaded on next startup)
+    #[serde(default)]
+    pub last_opened_file: Option<PathBuf>,
 }
 
 fn default_version() -> u32 {
@@ -48,6 +51,7 @@ impl Default for UserSettings {
             scroll_to_zoom: false,
             show_grid: default_show_grid(),
             grid_opacity: default_grid_opacity(),
+            last_opened_file: None,
         }
     }
 }
