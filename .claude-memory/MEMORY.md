@@ -1,0 +1,4 @@
+- [Vue d'ensemble complète du projet](project_overview.md) — LIRE EN PREMIER : repo, UltraLog, MCP, workflow cartographie, état actuel
+- [Push after each modification](feedback_push_on_modify.md) — push git après chaque modification de fichier
+- [MCP only for bin/XDF](feedback_mcp_bin_xdf.md) — jamais PowerShell/Bash pour lire bin/XDF, toujours le MCP ; étendre le MCP si besoin
+- [TunerPro bin edit](feedback_tunerpro_bin_edit.md) — ne jamais écrire dans les .bin, l'utilisateur saisit manuellement dans TunerPro
