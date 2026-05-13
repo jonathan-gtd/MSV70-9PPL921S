@@ -2233,67 +2233,18 @@ impl eframe::App for UltraLogApp {
                     // Tab bar at top (Chrome-style tabs for log files)
                     self.render_tab_bar(ui);
 
-                    // When MSV70 panel is active: skip the channel-card strip so the chart
-                    // has maximum vertical space for the diagnostic view.
-                    // Also auto-select default channels if none are selected yet.
+                    // MSV70 mode: use all central-panel space for diagnostics — no chart.
+                    // All other panels: show channel cards + chart as usual.
                     let msv70_active = self.active_panel == ActivePanel::Msv70;
                     if msv70_active {
-                        // Defensive auto-select: if no channels are plotted, pick the
-                        // key diagnostic channels so the chart is never blank.
-                        let needs_autoselect = self
-                            .active_tab
-                            .map(|i| self.tabs[i].selected_channels.is_empty())
-                            .unwrap_or(false);
-                        if needs_autoselect {
-                            if let Some(file_idx) = self.selected_file {
-                                if let Some(file) = self.files.get(file_idx) {
-                                    let log = file.log.clone();
-                                    let preferred = [
-                                        "RPM",
-                                        "Load %", "CalcLoad", "Calc Load",
-                                        "Lmb Act B1", "Lambda B1", "Lambda 1", "Lambda",
-                                        "STFT B1", "STFT Bank1",
-                                        "Pedal %", "Pedal",
-                                    ];
-                                    if let Some(tab_idx) = self.active_tab {
-                                        let colors = if self.color_blind_mode {
-                                            &COLORBLIND_COLORS[..]
-                                        } else {
-                                            &CHART_COLORS[..]
-                                        };
-                                        let mut added = 0usize;
-                                        const MAX_AUTO: usize = 4;
-                                        'outer2: for pref in preferred.iter() {
-                                            for (ci, ch) in log.channels.iter().enumerate() {
-                                                if ch.name() == *pref {
-                                                    self.tabs[tab_idx].selected_channels.push(
-                                                        SelectedChannel {
-                                                            file_index: file_idx,
-                                                            channel_index: ci,
-                                                            channel: ch.clone(),
-                                                            color_index: added % colors.len(),
-                                                        },
-                                                    );
-                                                    added += 1;
-                                                    if added >= MAX_AUTO { break 'outer2; }
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        self.render_msv70_main_content(ui);
                     } else {
-                        // Normal view: show channel cards
                         ui.add_space(10.0);
                         self.render_selected_channels(ui);
                         ui.add_space(10.0);
                         ui.separator();
+                        self.render_chart(ui);
                     }
-
-                    // Chart takes remaining space
-                    self.render_chart(ui);
                 }
                 ActiveTool::ScatterPlot => {
                     ui.add_space(10.0);

@@ -1658,6 +1658,65 @@ fn check_row_compact(ui: &mut egui::Ui, c: &DiagCheck) {
     ui.add_space(3.0);
 }
 
+/// Wide-layout check row: label | value | badge | detail — for full-width central panel view
+fn check_row_wide(ui: &mut egui::Ui, c: &DiagCheck) {
+    if c.status == DiagStatus::Missing { return; }
+
+    let border_col = c.status.color();
+    let bg = match c.status {
+        DiagStatus::Critical => egui::Color32::from_rgb(38, 24, 24),
+        DiagStatus::Warn     => egui::Color32::from_rgb(36, 32, 20),
+        _                    => egui::Color32::from_rgb(26, 28, 32),
+    };
+
+    ui.horizontal(|ui| {
+        let (r, _) = ui.allocate_exact_size(egui::vec2(3.0, 28.0), egui::Sense::hover());
+        ui.painter().rect_filled(r, 1.5, border_col);
+        ui.add_space(2.0);
+        egui::Frame::NONE
+            .fill(bg)
+            .corner_radius(egui::CornerRadius { ne: 4, se: 4, nw: 0, sw: 0 })
+            .inner_margin(egui::vec2(8.0, 4.0))
+            .show(ui, |ui| {
+                ui.set_width(ui.available_width());
+                ui.horizontal(|ui| {
+                    ui.add_sized([210.0, 18.0], egui::Label::new(
+                        egui::RichText::new(&c.label).size(12.5).color(egui::Color32::LIGHT_GRAY)
+                    ));
+                    let val_col = match c.status {
+                        DiagStatus::Critical => egui::Color32::from_rgb(240, 110, 90),
+                        DiagStatus::Warn     => egui::Color32::from_rgb(230, 185, 70),
+                        _                    => egui::Color32::WHITE,
+                    };
+                    ui.add_sized([130.0, 18.0], egui::Label::new(
+                        egui::RichText::new(&c.value).monospace().size(12.5).strong().color(val_col)
+                    ));
+                    badge(ui, c.status);
+                    if !c.detail.is_empty() {
+                        ui.add(egui::Label::new(
+                            egui::RichText::new(&c.detail)
+                                .size(11.0)
+                                .color(egui::Color32::from_rgb(120, 120, 120))
+                                .italics()
+                        ).wrap());
+                    }
+                });
+            });
+    });
+    ui.add_space(2.0);
+}
+
+fn section_wide(ui: &mut egui::Ui, title: &str, checks: &[DiagCheck]) {
+    if checks.is_empty() { return; }
+    egui::CollapsingHeader::new(egui::RichText::new(title).size(13.0).strong())
+        .default_open(true)
+        .show(ui, |ui| {
+            ui.add_space(3.0);
+            for c in checks { check_row_wide(ui, c); }
+        });
+    ui.add_space(6.0);
+}
+
 /// Draw OK/WARN/CRIT counters as small pills — call at top of each tab
 fn status_counters(ui: &mut egui::Ui, checks: &[DiagCheck]) {
     let ok   = checks.iter().filter(|c| c.status == DiagStatus::Ok).count();
@@ -1825,49 +1884,6 @@ impl UltraLogApp {
 
         ui.add_space(6.0);
         ui.separator();
-
-        // ── Tab bar — icon-only to fit 280px ──────────────────────────────────
-        ui.horizontal(|ui| {
-            ui.spacing_mut().item_spacing.x = 2.0;
-            for (i, (icon, tip)) in [
-                ("📊", "Dashboard"),
-                ("🔄", "Phases"),
-                ("⛽", "Carburant"),
-                ("⚙", "Moteur"),
-                ("🎯", "Par Phase"),
-                ("🌽", "E85"),
-                ("🔧", "Seuils"),
-            ]
-            .iter()
-            .enumerate()
-            {
-                let sel = self.msv70_analysis.active_tab == i;
-                let fill = if sel {
-                    egui::Color32::from_rgb(50, 55, 62)
-                } else {
-                    egui::Color32::TRANSPARENT
-                };
-                let tcol = if sel {
-                    egui::Color32::WHITE
-                } else {
-                    egui::Color32::from_rgb(135, 135, 135)
-                };
-                let fr = egui::Frame::NONE
-                    .fill(fill)
-                    .corner_radius(4)
-                    .inner_margin(egui::vec2(5.0, 3.0))
-                    .show(ui, |ui| {
-                        ui.label(egui::RichText::new(*icon).size(14.0).color(tcol));
-                    });
-                let resp = fr.response.interact(egui::Sense::click());
-                if resp.clicked() { self.msv70_analysis.active_tab = i; }
-                if resp.hovered() {
-                    resp.clone().on_hover_text(*tip);
-                    ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand);
-                }
-            }
-        });
-        ui.separator();
         ui.add_space(4.0);
 
         if !analyzed {
@@ -1875,21 +1891,18 @@ impl UltraLogApp {
             return;
         }
 
-        // No outer ScrollArea here — side_panel.rs already wraps in one
-        ui.set_width(ui.available_width());
-        match self.msv70_analysis.active_tab {
-            0 => self.tab_dashboard_compact(ui),
-            1 => self.tab_phases(ui),
-            2 => self.tab_fuel_compact(ui),
-            3 => self.tab_engine_compact(ui),
-            4 => self.tab_per_phase(ui),
-            5 => self.tab_e85(ui),
-            6 => self.tab_settings(ui),
-            _ => {}
-        }
+        // Full diagnostic content is displayed in the central panel (right area).
+        // The side panel only shows the score summary.
+        ui.label(
+            egui::RichText::new("Les diagnostics détaillés sont affichés à droite →")
+                .size(10.5)
+                .color(egui::Color32::from_rgb(100, 100, 100))
+                .italics(),
+        );
     }
 
     // ── Dashboard (compact 280px version) ────────────────────────────────────
+    #[allow(dead_code)]
     fn tab_dashboard_compact(&mut self, ui: &mut egui::Ui) {
         let all: Vec<DiagCheck> = self.msv70_analysis.checks_fuel.iter()
             .chain(&self.msv70_analysis.checks_engine)
@@ -2009,6 +2022,7 @@ impl UltraLogApp {
     }
 
     // ── Fuel (compact) ────────────────────────────────────────────────────────
+    #[allow(dead_code)]
     fn tab_fuel_compact(&mut self, ui: &mut egui::Ui) {
         let checks = self.msv70_analysis.checks_fuel.clone();
         status_counters(ui, &checks);
@@ -2102,6 +2116,7 @@ impl UltraLogApp {
     }
 
     // ── Engine (compact) ──────────────────────────────────────────────────────
+    #[allow(dead_code)]
     fn tab_engine_compact(&mut self, ui: &mut egui::Ui) {
         let eng   = self.msv70_analysis.checks_engine.clone();
         let elec  = self.msv70_analysis.checks_elec.clone();
@@ -2204,6 +2219,7 @@ impl UltraLogApp {
     }
 
     // ── E85 Compatibility ─────────────────────────────────────────────────────
+    #[allow(dead_code)]
     fn tab_e85(&mut self, ui: &mut egui::Ui) {
         let checks = self.msv70_analysis.checks_e85.clone();
 
@@ -2328,6 +2344,372 @@ impl UltraLogApp {
         });
         ui.add_space(12.0);
         ui.colored_label(egui::Color32::GRAY, "Les seuils prennent effet à la prochaine analyse (▶ Analyser).");
+    }
+
+    // ── Full-width central panel view ─────────────────────────────────────────
+
+    /// Called from app.rs CentralPanel when MSV70 panel is active.
+    /// Shows tab bar + diagnostic content using all available width — no chart.
+    pub fn render_msv70_main_content(&mut self, ui: &mut egui::Ui) {
+        let analyzed = !self.msv70_analysis.checks_fuel.is_empty();
+
+        // Tab bar — icon + label, wide enough for text
+        ui.horizontal(|ui| {
+            ui.spacing_mut().item_spacing.x = 2.0;
+            for (i, (icon, label)) in [
+                ("📊", "Dashboard"),
+                ("🔄", "Phases"),
+                ("⛽", "Carburant"),
+                ("⚙",  "Moteur"),
+                ("🎯", "Par Phase"),
+                ("🌽", "E85"),
+                ("🔧", "Seuils"),
+            ].iter().enumerate() {
+                let sel = self.msv70_analysis.active_tab == i;
+                let fill = if sel {
+                    egui::Color32::from_rgb(50, 55, 62)
+                } else {
+                    egui::Color32::TRANSPARENT
+                };
+                let tcol = if sel {
+                    egui::Color32::WHITE
+                } else {
+                    egui::Color32::from_rgb(135, 135, 135)
+                };
+                let fr = egui::Frame::NONE
+                    .fill(fill)
+                    .corner_radius(4)
+                    .inner_margin(egui::vec2(10.0, 5.0))
+                    .show(ui, |ui| {
+                        ui.label(
+                            egui::RichText::new(format!("{} {}", icon, label))
+                                .size(13.0)
+                                .color(tcol),
+                        );
+                    });
+                let resp = fr.response.interact(egui::Sense::click());
+                if resp.clicked() {
+                    self.msv70_analysis.active_tab = i;
+                }
+                if resp.hovered() {
+                    ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand);
+                }
+            }
+        });
+        ui.separator();
+        ui.add_space(6.0);
+
+        if !analyzed {
+            ui.add_space(24.0);
+            ui.vertical_centered(|ui| {
+                ui.label(
+                    egui::RichText::new(
+                        "Charger un log Testo CSV puis appuyer sur ▶ Analyser dans le panneau gauche.",
+                    )
+                    .size(14.0)
+                    .color(egui::Color32::GRAY),
+                );
+            });
+            return;
+        }
+
+        egui::ScrollArea::vertical()
+            .id_salt("msv70_main_scroll")
+            .auto_shrink([false; 2])
+            .show(ui, |ui| {
+                ui.set_width(ui.available_width());
+                match self.msv70_analysis.active_tab {
+                    0 => self.tab_dashboard_wide(ui),
+                    1 => self.tab_phases(ui),
+                    2 => self.tab_fuel_wide(ui),
+                    3 => self.tab_engine_wide(ui),
+                    4 => self.tab_per_phase(ui),
+                    5 => self.tab_e85_wide(ui),
+                    6 => self.tab_settings(ui),
+                    _ => {}
+                }
+            });
+    }
+
+    fn tab_dashboard_wide(&mut self, ui: &mut egui::Ui) {
+        let all: Vec<DiagCheck> = self.msv70_analysis.checks_fuel.iter()
+            .chain(&self.msv70_analysis.checks_engine)
+            .chain(&self.msv70_analysis.checks_elec)
+            .chain(&self.msv70_analysis.checks_temp)
+            .cloned()
+            .collect();
+
+        let n_ok   = all.iter().filter(|c| c.status == DiagStatus::Ok).count();
+        let n_warn = all.iter().filter(|c| c.status == DiagStatus::Warn).count();
+        let n_crit = all.iter().filter(|c| c.status == DiagStatus::Critical).count();
+
+        // Summary tiles
+        ui.horizontal(|ui| {
+            ui.spacing_mut().item_spacing.x = 8.0;
+            for (label, n, color) in [
+                ("✔ OK",             n_ok,   egui::Color32::from_rgb(50, 190, 100)),
+                ("⚠ Avertissements", n_warn, egui::Color32::from_rgb(230, 160, 30)),
+                ("✖ Critiques",      n_crit, egui::Color32::from_rgb(210, 55, 55)),
+            ] {
+                egui::Frame::NONE
+                    .fill(egui::Color32::from_rgb(32, 34, 38))
+                    .corner_radius(8)
+                    .inner_margin(egui::vec2(18.0, 10.0))
+                    .show(ui, |ui| {
+                        ui.horizontal(|ui| {
+                            ui.label(
+                                egui::RichText::new(format!("{}", n))
+                                    .size(28.0)
+                                    .strong()
+                                    .color(color),
+                            );
+                            ui.add_space(6.0);
+                            ui.label(egui::RichText::new(label).size(14.0).color(color));
+                        });
+                    });
+            }
+        });
+        ui.add_space(12.0);
+
+        let critical: Vec<DiagCheck> = all.iter().filter(|c| c.status == DiagStatus::Critical).cloned().collect();
+        let warn: Vec<DiagCheck>     = all.iter().filter(|c| c.status == DiagStatus::Warn).cloned().collect();
+
+        if !critical.is_empty() {
+            ui.label(
+                egui::RichText::new("🚨 Problèmes critiques")
+                    .size(14.0)
+                    .strong()
+                    .color(egui::Color32::from_rgb(210, 55, 55)),
+            );
+            ui.add_space(4.0);
+            for c in &critical { check_row_wide(ui, c); }
+            ui.add_space(8.0);
+        }
+        if !warn.is_empty() {
+            ui.label(
+                egui::RichText::new("⚠ À surveiller")
+                    .size(14.0)
+                    .strong()
+                    .color(egui::Color32::from_rgb(230, 160, 30)),
+            );
+            ui.add_space(4.0);
+            for c in &warn { check_row_wide(ui, c); }
+            ui.add_space(8.0);
+        }
+        if critical.is_empty() && warn.is_empty() {
+            ui.add_space(8.0);
+            ui.vertical_centered(|ui| {
+                ui.label(
+                    egui::RichText::new("✅ Aucun problème détecté")
+                        .size(16.0)
+                        .color(egui::Color32::from_rgb(50, 190, 100)),
+                );
+            });
+            ui.add_space(12.0);
+        }
+
+        ui.separator();
+        ui.add_space(6.0);
+        ui.label(egui::RichText::new("Tous les contrôles").size(13.0).strong().color(egui::Color32::GRAY));
+        ui.add_space(6.0);
+        for c in &all { check_row_wide(ui, c); }
+    }
+
+    fn tab_fuel_wide(&mut self, ui: &mut egui::Ui) {
+        let checks = self.msv70_analysis.checks_fuel.clone();
+        status_counters(ui, &checks);
+        missing_channels_summary(ui, &checks);
+        ui.add_space(6.0);
+
+        let is_stft   = |c: &DiagCheck| c.label.contains("STFT") && !c.label.contains("oscillation") && !c.label.contains("Avancé");
+        let is_ltft   = |c: &DiagCheck| c.label.contains("LTFT") && !c.label.contains("Convergence") && !c.label.contains("oscillation");
+        let is_lambda = |c: &DiagCheck| c.label.contains("Lambda") || c.label.contains("Balance");
+        let is_adv    = |c: &DiagCheck| c.label.contains("Correction totale") || c.label.contains("oscillation") || c.label.contains("Convergence");
+
+        for (title, predicate) in [
+            ("Court terme (STFT)",  &is_stft   as &dyn Fn(&DiagCheck) -> bool),
+            ("Long terme (LTFT)",   &is_ltft),
+            ("Balance & Lambda",    &is_lambda),
+            ("Analyse avancée",     &is_adv),
+        ] {
+            let subset: Vec<DiagCheck> = checks.iter().filter(|c| predicate(c)).cloned().collect();
+            section_wide(ui, title, &subset);
+        }
+
+        // Bank 1 vs Bank 2 per-phase comparison
+        let bank_cmp = self.msv70_analysis.bank_compare_by_phase.clone();
+        let has_data = bank_cmp.iter().any(|row| row.iter().any(|v| !v.is_nan()));
+        if has_data {
+            egui::CollapsingHeader::new(
+                egui::RichText::new("Banque 1 vs Banque 2 par phase").size(13.0).strong(),
+            )
+            .default_open(true)
+            .show(ui, |ui| {
+                ui.add_space(4.0);
+                let col_w = [130.0f32, 72.0, 72.0, 72.0, 72.0, 72.0, 72.0];
+                ui.horizontal(|ui| {
+                    ui.add_sized([col_w[0], 16.0], egui::Label::new(
+                        egui::RichText::new("Phase").size(11.5).color(egui::Color32::GRAY).strong(),
+                    ));
+                    for lbl in ["STFT B1", "STFT B2", "LTFA B1", "LTFA B2", "LTFM B1", "LTFM B2"] {
+                        ui.add_sized([col_w[1], 16.0], egui::Label::new(
+                            egui::RichText::new(lbl).size(11.5).color(egui::Color32::GRAY).strong(),
+                        ));
+                    }
+                });
+                ui.separator();
+                ui.add_space(2.0);
+
+                for (p_idx, phase) in Phase::all().iter().enumerate() {
+                    let row = &bank_cmp[p_idx];
+                    if row.iter().any(|v| v.is_nan()) { continue; }
+                    let [s1, s2, a1, a2, m1, m2] = *row;
+                    let delta_stft = (s1 - s2).abs();
+                    let delta_ltfm = (m1 - m2).abs();
+                    let row_color = if delta_stft > 3.0 || delta_ltfm > 3.0 {
+                        egui::Color32::from_rgb(220, 100, 60)
+                    } else if delta_stft > 1.5 || delta_ltfm > 1.5 {
+                        egui::Color32::from_rgb(200, 170, 60)
+                    } else {
+                        egui::Color32::LIGHT_GRAY
+                    };
+                    ui.horizontal(|ui| {
+                        let (rect, _) = ui.allocate_exact_size(egui::vec2(4.0, 16.0), egui::Sense::hover());
+                        ui.painter().rect_filled(rect, 2.0, phase.bar_color());
+                        ui.add_sized([col_w[0] - 8.0, 16.0], egui::Label::new(
+                            egui::RichText::new(phase.label()).size(11.5).color(row_color),
+                        ));
+                        for val in [s1, s2, a1, a2, m1, m2] {
+                            let col = if val.abs() > 5.0 {
+                                egui::Color32::from_rgb(220, 100, 60)
+                            } else if val.abs() > 2.0 {
+                                egui::Color32::from_rgb(200, 170, 60)
+                            } else {
+                                egui::Color32::from_rgb(120, 200, 120)
+                            };
+                            ui.add_sized([col_w[1], 16.0], egui::Label::new(
+                                egui::RichText::new(format!("{:+.1}%", val))
+                                    .size(11.5)
+                                    .monospace()
+                                    .color(col),
+                            ));
+                        }
+                    });
+                    ui.add_space(2.0);
+                }
+                ui.add_space(4.0);
+                ui.label(
+                    egui::RichText::new(
+                        "Rouge = écart B1/B2 > 3% ou valeur > 5% | Orange = > 1.5% ou > 2%",
+                    )
+                    .size(11.0)
+                    .color(egui::Color32::GRAY)
+                    .italics(),
+                );
+            });
+        }
+    }
+
+    fn tab_engine_wide(&mut self, ui: &mut egui::Ui) {
+        let eng   = self.msv70_analysis.checks_engine.clone();
+        let elec  = self.msv70_analysis.checks_elec.clone();
+        let temps = self.msv70_analysis.checks_temp.clone();
+
+        let all: Vec<DiagCheck> = eng.iter().chain(&elec).chain(&temps).cloned().collect();
+        status_counters(ui, &all);
+        missing_channels_summary(ui, &all);
+        ui.add_space(6.0);
+
+        section_wide(ui, "Mécanique & charge", &eng);
+        section_wide(ui, "Électricité",        &elec);
+        section_wide(ui, "Températures",       &temps);
+    }
+
+    fn tab_e85_wide(&mut self, ui: &mut egui::Ui) {
+        let checks = self.msv70_analysis.checks_e85.clone();
+
+        let (score, n_checks) = self.msv70_analysis.e85_score();
+        if n_checks > 0 {
+            let sc = if score >= 75 { egui::Color32::from_rgb(50, 190, 100) }
+                     else if score >= 50 { egui::Color32::from_rgb(230, 160, 30) }
+                     else { egui::Color32::from_rgb(210, 55, 55) };
+            let verdict = if score >= 75 { "E85 compatible avec la carto" }
+                          else if score >= 50 { "E85 partiellement adapté" }
+                          else { "E85 incompatible / carto insuffisante" };
+            let n_crit = checks.iter().filter(|c| c.status == DiagStatus::Critical).count();
+            egui::Frame::NONE
+                .fill(egui::Color32::from_rgb(26, 28, 32))
+                .corner_radius(8)
+                .inner_margin(egui::vec2(16.0, 10.0))
+                .show(ui, |ui| {
+                    ui.set_width(ui.available_width());
+                    ui.horizontal(|ui| {
+                        ui.label(
+                            egui::RichText::new(format!("{}%", score))
+                                .size(30.0)
+                                .strong()
+                                .color(sc),
+                        );
+                        ui.add_space(10.0);
+                        ui.vertical(|ui| {
+                            ui.label(egui::RichText::new(verdict).size(14.0).color(sc));
+                            ui.label(
+                                egui::RichText::new(format!(
+                                    "{n_checks} contrôles{}",
+                                    if n_crit > 0 { format!(" · {n_crit} critique(s)") } else { String::new() }
+                                ))
+                                .size(12.0)
+                                .color(egui::Color32::GRAY),
+                            );
+                        });
+                    });
+                });
+            ui.add_space(10.0);
+        } else if checks.is_empty() {
+            ui.colored_label(
+                egui::Color32::GRAY,
+                "Lancer l'analyse (▶) pour diagnostiquer la compatibilité E85.",
+            );
+            return;
+        }
+
+        status_counters(ui, &checks);
+        missing_channels_summary(ui, &checks);
+        ui.add_space(6.0);
+
+        let is_lambda = |c: &DiagCheck| c.label.starts_with("Lambda");
+        let is_knock  = |c: &DiagCheck| c.label.starts_with("Cliquetis");
+        let is_duty   = |c: &DiagCheck| c.label.starts_with("Duty") || c.label.starts_with("Rapport duty");
+        let is_stft   = |c: &DiagCheck| c.label.starts_with("Dérive") || c.label.starts_with("Écart STFT");
+        let is_ltft   = |c: &DiagCheck| c.label.starts_with("LTFT") || c.label.starts_with("Écart LTFT");
+
+        for (title, predicate) in [
+            ("Lambda par phase (E85)",      &is_lambda as &dyn Fn(&DiagCheck) -> bool),
+            ("Cliquetis — tolérance E85",   &is_knock),
+            ("Injecteurs (E85)",             &is_duty),
+            ("STFT — dérive & équilibre",   &is_stft),
+            ("LTFT & déséquilibre banques", &is_ltft),
+        ] {
+            let subset: Vec<DiagCheck> = checks.iter().filter(|c| predicate(c)).cloned().collect();
+            section_wide(ui, title, &subset);
+        }
+
+        ui.add_space(4.0);
+        egui::Frame::NONE
+            .fill(egui::Color32::from_rgb(22, 30, 42))
+            .corner_radius(4)
+            .inner_margin(egui::vec2(10.0, 7.0))
+            .show(ui, |ui| {
+                ui.set_width(ui.available_width());
+                ui.label(
+                    egui::RichText::new(
+                        "ℹ Seuils lambda WOT et duty cycle E85 configurables dans l'onglet 🔧",
+                    )
+                    .size(11.0)
+                    .color(egui::Color32::from_rgb(100, 150, 200))
+                    .italics(),
+                );
+            });
     }
 
     // ── Generate Testo diagnostic job ─────────────────────────────────────────
