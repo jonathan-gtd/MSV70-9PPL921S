@@ -35,6 +35,7 @@ const VANOS_ACT: &[&str] = &["VANOS act.", "VANOS actual", "VANOS pos"];
 const VANOS_SET: &[&str] = &["VANOS set.", "VANOS setpoint", "VANOS tgt"];
 const BATTERY:   &[&str] = &["Battery V", "Battery", "Voltage", "Ubatt"];
 const OIL:       &[&str] = &["Oil degC", "Oil Temp", "Oil temp", "OilTemp"];
+const SPEED:     &[&str] = &["Speed km/h", "Speed", "Vitesse", "Vit km/h"];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase engine
@@ -319,13 +320,36 @@ fn linear_slope(xs: &[f64], ys: &[f64]) -> f64 {
 // Phase classification
 // ─────────────────────────────────────────────────────────────────────────────
 
+/// Returns the timestamp at which the car has been continuously above `min_kmh`
+/// for at least `required_s` seconds. Returns f64::INFINITY if never reached.
+fn find_driving_start(times: &[f64], speed: &[f64], min_kmh: f64, required_s: f64) -> f64 {
+    let n = times.len().min(speed.len());
+    let mut window_start = 0;
+    for i in 0..n {
+        if speed[i] < min_kmh {
+            window_start = i + 1;
+        } else if times[i] - times[window_start] >= required_s {
+            return times[window_start];
+        }
+    }
+    f64::INFINITY
+}
+
 fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
     let n = log.times.len();
     let rpm_d  = get(log, RPM);
     let tps_d  = get(log, TPS);
     let load_d = get(log, LOAD);
     let cool_d = get(log, COOLANT);
+    let spd_d  = get(log, SPEED);
     let mut out = vec![Phase::Idle; n];
+
+    // WarmUp ends once the car has been driven (> 10 km/h for 10 continuous seconds)
+    let driving_start = if let Some(spd) = &spd_d {
+        find_driving_start(&log.times, spd, 10.0, 10.0)
+    } else {
+        f64::INFINITY
+    };
 
     // Rate smoothing window: look back up to 0.5 s to compute %/s and RPM/s.
     // This normalises for sample rate and filters single-sample noise.
@@ -348,7 +372,8 @@ fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
         let dtps_per_s = (t - t_ref) / dt_s;  // %/s
         let drpm_per_s = (r - r_ref) / dt_s;  // RPM/s
 
-        out[i] = if c < cfg.min_coolant {
+        out[i] = if c < cfg.min_coolant && log.times[i] < driving_start {
+            // WarmUp : moteur froid ET pas encore en route (< 10s à >10 km/h)
             Phase::WarmUp
         } else if t > cfg.wot_tps_thresh {
             Phase::Wot

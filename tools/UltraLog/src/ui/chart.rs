@@ -150,9 +150,10 @@ impl UltraLogApp {
         let show_grid = self.show_grid;
         let grid_color = grid_color_with_opacity(ui, self.grid_opacity);
 
-        // Phase overlay (MSV70)
-        let phase_segs = if self.msv70_analysis.show_phase_overlay {
-            self.msv70_analysis.phase_segments.clone()
+        // Phase segments: always loaded for tooltip, filtered for overlay drawing
+        let phase_segs = self.msv70_analysis.phase_segments.clone();
+        let phase_segs_overlay = if self.msv70_analysis.show_phase_overlay {
+            phase_segs.clone()
         } else {
             Vec::new()
         };
@@ -277,7 +278,7 @@ impl UltraLogApp {
             plot_ui.set_plot_bounds(new_bounds);
 
             // Phase overlay — draw semi-transparent filled bands
-            for seg in &phase_segs {
+            for seg in &phase_segs_overlay {
                 let pts: PlotPoints = vec![
                     [seg.start, Y_MIN], [seg.end, Y_MIN],
                     [seg.end,   Y_MAX], [seg.start, Y_MAX],
@@ -327,6 +328,30 @@ impl UltraLogApp {
             // Return pointer position if hovering for click detection
             plot_ui.pointer_coordinate()
         });
+
+        // Phase tooltip: show current phase name when hovering over the chart
+        if !phase_segs.is_empty() {
+            let hover_ptr = response.inner;
+            response.response.clone().on_hover_ui_at_pointer(|ui| {
+                if let Some(ptr) = hover_ptr {
+                    if let Some(seg) = phase_segs.iter().find(|s| ptr.x >= s.start && ptr.x <= s.end) {
+                        ui.horizontal(|ui| {
+                            let (r, _) = ui.allocate_exact_size(
+                                egui::vec2(4.0, 14.0), egui::Sense::hover(),
+                            );
+                            ui.painter().rect_filled(r, 2.0, seg.phase.bar_color());
+                            ui.add_space(5.0);
+                            ui.label(
+                                egui::RichText::new(seg.phase.label())
+                                    .size(12.0)
+                                    .strong()
+                                    .color(seg.phase.bar_color()),
+                            );
+                        });
+                    }
+                }
+            });
+        }
 
         // Remember the X-axis bounds we just rendered so the next frame can
         // slice raw data to this viewport before LTTB-downsampling.
