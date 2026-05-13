@@ -1,0 +1,12 @@
+Edit Log for E85_v5.bin created by TunerPro.
+**************************************************************************
+05/13/2026 18:36:25  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.350 - (0x166A) to 0.050 - (0x0334).
+05/13/2026 18:36:30  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.350 - (0xE996) to -0.050 - (0xFCCC).
+05/13/2026 18:38:47  Table:     ip_mff_cor_opm_1_1 changed.
+05/13/2026 18:39:06  Table:     ip_mff_cor_opm_1_2 changed.
+05/13/2026 18:39:17  Table:     ip_mff_cor_opm_2_2 changed.
+05/13/2026 18:39:32  Table:     ip_mff_cor_opm_1_1 changed.
+05/13/2026 18:39:48  Table:     ip_mff_cor_opm_1_2 changed.
+05/13/2026 18:40:39  Table:     ip_mff_cor_opm_1_1 changed.
+05/13/2026 18:51:15  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.050 - (0xFCCD) to -0.200 - (0xF331).
+05/13/2026 18:51:17  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.050 - (0x0333) to 0.200 - (0x0CCF).
