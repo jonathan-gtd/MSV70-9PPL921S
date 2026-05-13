@@ -186,6 +186,7 @@ pub struct Msv70AnalysisState {
     pub accel_dtps_thresh: f64,
     pub decel_drpm_thresh: f64,
     pub overrun_tps_max:   f64,
+    pub overrun_load_max:  f64, // si load > seuil avec pédale à 0 → régulateur → Cruise
     pub phase_min_dur_s:   f64,
     pub ltft_warn:         f64,
     pub ltft_crit:         f64,
@@ -213,6 +214,7 @@ impl Msv70AnalysisState {
             accel_dtps_thresh: 20.0,
             decel_drpm_thresh: -200.0,
             overrun_tps_max:   5.0,
+            overrun_load_max:  20.0,
             phase_min_dur_s:   1.0,
             ltft_warn:         5.0,
             ltft_crit:         10.0,
@@ -350,7 +352,10 @@ fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
             Phase::WarmUp
         } else if t > cfg.wot_tps_thresh {
             Phase::Wot
-        } else if t < cfg.overrun_tps_max && r > cfg.idle_rpm_thresh + 200.0 {
+        } else if t < cfg.overrun_tps_max && r > cfg.idle_rpm_thresh + 200.0
+                  && l < cfg.overrun_load_max {
+            // load < seuil : vrai overrun ou DFCO
+            // load >= seuil + pédale à 0 : régulateur de vitesse → Cruise (ci-dessous)
             if drpm_per_s < cfg.decel_drpm_thresh { Phase::Deceleration } else { Phase::Overrun }
         } else if r < cfg.idle_rpm_thresh || l < cfg.idle_load_thresh {
             Phase::Idle
@@ -2318,6 +2323,7 @@ impl UltraLogApp {
             row!("Seuil décélération (ΔRPM/s)",   decel_drpm_thresh,-800.0, -10.0, 5.0);
             row!("Durée min. phase (s)",           phase_min_dur_s,    0.0,  10.0,  0.1);
             row!("TPS max roue libre (%)",         overrun_tps_max,   0.0,  15.0,  0.5);
+            row!("Charge max roue libre/DFCO (%)", overrun_load_max,  5.0,  40.0,  1.0);
             row!("LTFT avertissement (%)",         ltft_warn,         1.0,  15.0,  0.5);
             row!("LTFT critique (%)",              ltft_crit,         5.0,  25.0,  0.5);
             row!("Alerte balance banques (%)",     bank_alert,        1.0,  15.0,  0.5);
