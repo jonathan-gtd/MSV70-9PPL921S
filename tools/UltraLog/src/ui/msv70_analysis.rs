@@ -18,23 +18,23 @@ use crate::parsers::Log;
 const NEAR_ZERO: f64 = 1e-10;
 
 const RPM:       &[&str] = &["RPM"];
-const LOAD:      &[&str] = &["CalcLoad", "Load %", "Calc Load"];
+const LOAD:      &[&str] = &["Load %", "CalcLoad", "Calc Load"];
 const TPS:       &[&str] = &["Pedal %", "Pedal", "TPS"];
-const COOLANT:   &[&str] = &["Coolant", "Coolant Temp"];
+const COOLANT:   &[&str] = &["Cool degC", "Coolant", "Coolant Temp", "coolant"];
 const STFT1:     &[&str] = &["STFT B1", "STFT Bank1"];
 const STFT2:     &[&str] = &["STFT B2", "STFT Bank2"];
-const LTFA1:     &[&str] = &["LTFT add. B1", "LTFT add B1"];
-const LTFA2:     &[&str] = &["LTFT add. B2", "LTFT add B2"];
-const LTFM1:     &[&str] = &["LTFT mul. B1", "LTFT mul B1"];
-const LTFM2:     &[&str] = &["LTFT mul. B2", "LTFT mul B2"];
-const LAMBDA1:   &[&str] = &["Lambda B1", "Lambda 1", "Lambda"];
-const MAF:       &[&str] = &["AirMass", "MAF kg/h", "MAF"];
+const LTFA1:     &[&str] = &["LTFT add. B1", "LTFT add B1", "LTFT Add B1"];
+const LTFA2:     &[&str] = &["LTFT add. B2", "LTFT add B2", "LTFT Add B2"];
+const LTFM1:     &[&str] = &["LTFT mul. B1", "LTFT mul B1", "LTFT Mul B1"];
+const LTFM2:     &[&str] = &["LTFT mul. B2", "LTFT mul B2", "LTFT Mul B2"];
+const LAMBDA1:   &[&str] = &["Lmb Act B1", "Lambda B1", "Lambda 1", "Lambda"];
+const MAF:       &[&str] = &["MAF kg/h", "AirMass", "MAF"];
 const INJ:       &[&str] = &["InjTmCyl1", "Inj C1 ms", "Inj Time"];
 const KNOCK:     &[&str] = &["Knock retard", "Knock Retard", "Knock"];
 const VANOS_ACT: &[&str] = &["VANOS act.", "VANOS actual", "VANOS pos"];
 const VANOS_SET: &[&str] = &["VANOS set.", "VANOS setpoint", "VANOS tgt"];
 const BATTERY:   &[&str] = &["Battery V", "Battery", "Voltage", "Ubatt"];
-const OIL:       &[&str] = &["Oil Temp", "Oil temp", "OilTemp"];
+const OIL:       &[&str] = &["Oil degC", "Oil Temp", "Oil temp", "OilTemp"];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase engine

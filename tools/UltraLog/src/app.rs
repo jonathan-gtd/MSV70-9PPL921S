@@ -726,10 +726,13 @@ impl UltraLogApp {
                             let log = f.log.clone();
                             crate::ui::msv70_analysis::run_analysis(&log, &mut self.msv70_analysis);
 
-                            // Auto-add key channels if none are selected yet in this tab
+                            // Auto-add key channels if none are selected yet in this tab.
+                            // Names cover both Testo CSV short form ("Lmb Act B1", "Cool degC")
+                            // and legacy aliases used by other log formats.
                             let preferred = [
-                                "RPM", "CalcLoad", "Load %", "Calc Load",
-                                "Lambda B1", "Lambda 1", "Lambda",
+                                "RPM",
+                                "Load %", "CalcLoad", "Calc Load",
+                                "Lmb Act B1", "Lambda B1", "Lambda 1", "Lambda",
                                 "STFT B1", "STFT Bank1",
                                 "Pedal %", "Pedal",
                             ];
@@ -2192,9 +2195,12 @@ impl eframe::App for UltraLogApp {
             });
 
         // Side panel (context-sensitive based on activity bar selection)
+        // max_size caps at 50% of the available width so the chart always stays visible
+        let side_panel_max = (ui.available_width() * 0.50).max(crate::ui::side_panel::SIDE_PANEL_WIDTH);
         egui::Panel::left("side_panel")
             .default_size(crate::ui::side_panel::SIDE_PANEL_WIDTH)
             .min_size(crate::ui::side_panel::SIDE_PANEL_MIN_WIDTH)
+            .max_size(side_panel_max)
             .resizable(true)
             .frame(panel_frame)
             .show_inside(ui, |ui| {
