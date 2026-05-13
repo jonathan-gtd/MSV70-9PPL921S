@@ -721,10 +721,46 @@ impl UltraLogApp {
 
                         self.show_toast_success(&t!("toast.file_loaded"));
 
-                        // Auto-run MSV70 diagnostic on every file load
+                        // Auto-run MSV70 diagnostic and auto-select key channels
                         if let Some(f) = self.files.get(file_index) {
                             let log = f.log.clone();
                             crate::ui::msv70_analysis::run_analysis(&log, &mut self.msv70_analysis);
+
+                            // Auto-add key channels if none are selected yet in this tab
+                            let preferred = [
+                                "RPM", "CalcLoad", "Load %", "Calc Load",
+                                "Lambda B1", "Lambda 1", "Lambda",
+                                "STFT B1", "STFT Bank1",
+                                "Pedal %", "Pedal",
+                            ];
+                            if let Some(tab_idx) = self.active_tab {
+                                if self.tabs[tab_idx].selected_channels.is_empty() {
+                                    let colors = if self.color_blind_mode {
+                                        &COLORBLIND_COLORS[..]
+                                    } else {
+                                        &CHART_COLORS[..]
+                                    };
+                                    let mut added = 0usize;
+                                    const MAX_AUTO: usize = 4;
+                                    'outer: for pref in preferred.iter() {
+                                        for (ci, ch) in log.channels.iter().enumerate() {
+                                            if ch.name() == *pref {
+                                                self.tabs[tab_idx].selected_channels.push(
+                                                    SelectedChannel {
+                                                        file_index,
+                                                        channel_index: ci,
+                                                        channel: ch.clone(),
+                                                        color_index: added % colors.len(),
+                                                    },
+                                                );
+                                                added += 1;
+                                                if added >= MAX_AUTO { break 'outer; }
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         // Switch to MSV70 diagnostic panel
