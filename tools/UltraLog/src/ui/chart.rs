@@ -329,28 +329,113 @@ impl UltraLogApp {
             plot_ui.pointer_coordinate()
         });
 
-        // Phase tooltip: show current phase name when hovering over the chart
-        if !phase_segs.is_empty() {
-            let hover_ptr = response.inner;
-            response.response.clone().on_hover_ui_at_pointer(|ui| {
-                if let Some(ptr) = hover_ptr {
-                    if let Some(seg) = phase_segs.iter().find(|s| ptr.x >= s.start && ptr.x <= s.end) {
-                        ui.horizontal(|ui| {
-                            let (r, _) = ui.allocate_exact_size(
-                                egui::vec2(4.0, 14.0), egui::Sense::hover(),
-                            );
-                            ui.painter().rect_filled(r, 2.0, seg.phase.bar_color());
-                            ui.add_space(5.0);
-                            ui.label(
-                                egui::RichText::new(seg.phase.label())
-                                    .size(12.0)
-                                    .strong()
-                                    .color(seg.phase.bar_color()),
-                            );
+        // Hover overlay: channel values + phase at pointer position
+        if response.response.hovered() {
+            if let Some(ptr) = response.inner {
+                let hover_time = ptr.x;
+
+                // Find record nearest to hover time
+                let hover_record = self.find_record_at_time(hover_time);
+
+                // Collect channel name + value + color for each selected channel
+                let palette = if self.color_blind_mode { COLORBLIND_COLORS } else { CHART_COLORS };
+                let use_norm = self.field_normalization;
+                let custom = self.custom_normalizations.clone();
+                let rows: Vec<(String, String, [u8; 3])> = selected_channels
+                    .iter()
+                    .map(|sel| {
+                        let name = if use_norm {
+                            normalize_channel_name_with_custom(
+                                &sel.channel.name(),
+                                Some(&custom),
+                            )
+                        } else {
+                            sel.channel.name()
+                        };
+                        let color = palette[sel.color_index % palette.len()];
+                        let val_str = if let Some(rec) = hover_record {
+                            if let Some(v) =
+                                self.get_value_at_record(sel.file_index, sel.channel_index, rec)
+                            {
+                                let (cv, unit) =
+                                    self.unit_preferences.convert_value(v, sel.channel.unit());
+                                if unit.is_empty() {
+                                    format!("{:.2}", cv)
+                                } else {
+                                    format!("{:.2} {}", cv, unit)
+                                }
+                            } else {
+                                "—".into()
+                            }
+                        } else {
+                            "—".into()
+                        };
+                        (name, val_str, color)
+                    })
+                    .collect();
+
+                // Find phase at hover time
+                let hover_phase = phase_segs
+                    .iter()
+                    .find(|s| hover_time >= s.start && hover_time <= s.end)
+                    .map(|s| s.phase);
+
+                if let Some(screen_pos) = ui.ctx().pointer_latest_pos() {
+                    egui::Area::new(egui::Id::new("chart_hover_info"))
+                        .fixed_pos(screen_pos + egui::vec2(14.0, -8.0))
+                        .order(egui::Order::Tooltip)
+                        .interactable(false)
+                        .show(ui.ctx(), |ui| {
+                            egui::Frame::popup(&ui.ctx().style())
+                                .inner_margin(egui::vec2(8.0, 6.0))
+                                .show(ui, |ui| {
+                                    // Phase row (only if analysis was run)
+                                    if let Some(phase) = hover_phase {
+                                        ui.horizontal(|ui| {
+                                            let (r, _) = ui.allocate_exact_size(
+                                                egui::vec2(4.0, 13.0),
+                                                egui::Sense::hover(),
+                                            );
+                                            ui.painter().rect_filled(r, 2.0, phase.bar_color());
+                                            ui.add_space(5.0);
+                                            ui.label(
+                                                egui::RichText::new(phase.label())
+                                                    .size(11.0)
+                                                    .strong()
+                                                    .color(phase.bar_color()),
+                                            );
+                                        });
+                                        if !rows.is_empty() {
+                                            ui.add_space(2.0);
+                                            ui.separator();
+                                            ui.add_space(2.0);
+                                        }
+                                    }
+                                    // One row per channel
+                                    for (name, val, color) in &rows {
+                                        ui.horizontal(|ui| {
+                                            let (r, _) = ui.allocate_exact_size(
+                                                egui::vec2(10.0, 10.0),
+                                                egui::Sense::hover(),
+                                            );
+                                            ui.painter().circle_filled(
+                                                r.center(),
+                                                4.0,
+                                                egui::Color32::from_rgb(color[0], color[1], color[2]),
+                                            );
+                                            ui.add_space(4.0);
+                                            ui.label(
+                                                egui::RichText::new(
+                                                    format!("{}: {}", name, val),
+                                                )
+                                                .size(11.5),
+                                            );
+                                        });
+                                    }
+                                });
                         });
-                    }
                 }
-            });
+            }
         }
 
         // Remember the X-axis bounds we just rendered so the next frame can

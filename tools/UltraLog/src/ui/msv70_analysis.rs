@@ -652,17 +652,6 @@ fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[P
         }
     }
 
-    // Idle RPM stability
-    if let Some(rpm) = &rpm_d {
-        let iv: Vec<f64> = rpm.iter().zip(idle_m.iter()).filter_map(|(&r, &i)| if i && r > 200.0 { Some(r) } else { None }).collect();
-        if iv.len() > 20 {
-            let sd = stddev(&iv);
-            let s = if sd < 50.0 { DiagStatus::Ok } else if sd < 120.0 { DiagStatus::Warn } else { DiagStatus::Critical };
-            out.push(DiagCheck { label: "Stabilité ralenti (σ RPM)".into(), value: format!("{:.0} tr/min", sd),
-                status: s, detail: format!("Moy. ralenti: {:.0} tr/min", mean(&iv)) });
-        }
-    }
-
     // Injector duty
     if let (Some(inj), Some(rpm)) = (get(log, INJ), &rpm_d) {
         let duties: Vec<f64> = inj.iter().zip(rpm.iter()).zip(warm.iter())
@@ -675,27 +664,6 @@ fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[P
                 status: s, detail: format!("Moy: {:.1}% — critique > {:.0}%", dm, cfg.duty_crit) });
         }
     } else { out.push(DiagCheck::missing("Rapport cyclique injecteur")); }
-
-    // Idle RPM absolute value (not just stability — is it in spec?)
-    if let Some(rpm) = &rpm_d {
-        let iv: Vec<f64> = rpm.iter().zip(idle_m.iter()).zip(warm.iter())
-            .filter_map(|((&r, &i), &w)| if i && w && r > 200.0 { Some(r) } else { None }).collect();
-        if iv.len() > 20 {
-            let m = mean(&iv);
-            // MSV70 M54 target idle: 680–800 RPM (varies with A/C load)
-            let s = if (650.0..=820.0).contains(&m) { DiagStatus::Ok }
-                    else if (580.0..=900.0).contains(&m) { DiagStatus::Warn }
-                    else { DiagStatus::Critical };
-            out.push(DiagCheck {
-                label: "RPM ralenti (valeur)".into(),
-                value: format!("{:.0} tr/min", m),
-                status: s,
-                detail: if m < 650.0 { "Trop bas — vérifier IACV / idle trim".into() }
-                        else if m > 820.0 { "Trop haut — fuite admission ou IACV".into() }
-                        else { "Dans la plage MSV70 (680–800)".into() },
-            });
-        }
-    }
 
     // Knock — absolute count
     if let Some(knock) = get(log, KNOCK) {
@@ -779,9 +747,9 @@ fn temp_checks(log: &Log, cfg: &Msv70AnalysisState) -> Vec<DiagCheck> {
         out.push(DiagCheck { label: "Fraction à froid".into(), value: format!("{:.1}%", cold_pct),
             status: s, detail: format!("< {:.0}°C = {} pts", cfg.min_coolant, cold_n) });
         let mx = vmax(&cool);
-        let s2 = if (85.0..=105.0).contains(&mx) { DiagStatus::Ok } else if mx > 110.0 { DiagStatus::Critical } else { DiagStatus::Warn };
+        let s2 = if mx <= 105.0 { DiagStatus::Ok } else if mx <= 112.0 { DiagStatus::Warn } else { DiagStatus::Critical };
         out.push(DiagCheck { label: "Temp. max liquide refroid.".into(), value: format!("{:.1}°C", mx),
-            status: s2, detail: "Normal 85–105°C | > 110°C = surchauffe".into() });
+            status: s2, detail: "Normal 85–105°C | 105–112°C = attention | > 112°C = surchauffe (N52)".into() });
     } else { out.push(DiagCheck::missing("Liquide de refroidissement")); }
 
     // Thermostat check: once warm, does coolant plateau in expected range?
@@ -790,19 +758,22 @@ fn temp_checks(log: &Log, cfg: &Msv70AnalysisState) -> Vec<DiagCheck> {
         if warm_temps.len() > 20 {
             let operating_avg = mean(&warm_temps);
             let operating_max = vmax(&warm_temps);
-            let s = if (83.0..=98.0).contains(&operating_avg) { DiagStatus::Ok }
-                    else if operating_avg < 83.0 { DiagStatus::Warn }  // thermostat bloqué ouvert
-                    else { DiagStatus::Critical };  // surchauffe
+            let s = if (83.0..=105.0).contains(&operating_avg) { DiagStatus::Ok }
+                    else if operating_avg < 83.0 { DiagStatus::Warn }   // thermostat bloqué ouvert
+                    else if operating_avg <= 112.0 { DiagStatus::Warn } // N52 chauffe : attention
+                    else { DiagStatus::Critical };                       // > 112°C : surchauffe
             out.push(DiagCheck {
                 label: "Thermostat (temp. fonctionnement)".into(),
                 value: format!("{:.1}°C moy / {:.1}°C max", operating_avg, operating_max),
                 status: s,
                 detail: if operating_avg < 83.0 {
                     "Thermostat peut-être bloqué ouvert (< 83°C)".into()
-                } else if operating_avg > 98.0 {
+                } else if operating_avg > 112.0 {
                     "Surchauffe — vérifier pompe à eau / thermostat".into()
+                } else if operating_avg > 105.0 {
+                    "Chaud mais normal N52 (105–112°C) — surveiller".into()
                 } else {
-                    "Plage normale MSV70 (83–98°C)".into()
+                    "Plage normale N52 (83–105°C)".into()
                 },
             });
         }
