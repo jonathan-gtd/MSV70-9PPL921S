@@ -27,7 +27,7 @@ const LTFA1:     &[&str] = &["LTFT add. B1", "LTFT add B1", "LTFT Add B1"];
 const LTFA2:     &[&str] = &["LTFT add. B2", "LTFT add B2", "LTFT Add B2"];
 const LTFM1:     &[&str] = &["LTFT mul. B1", "LTFT mul B1", "LTFT Mul B1"];
 const LTFM2:     &[&str] = &["LTFT mul. B2", "LTFT mul B2", "LTFT Mul B2"];
-const LAMBDA1:   &[&str] = &["Lmb Act B1", "Lambda B1", "Lambda 1", "Lambda"];
+const LAMBDA1:   &[&str] = &["Lmb Act B1", "Lambda B1", "Lambda 1", "Lambda", "Lambda pre-cat bank1", "ILAB1"];
 const MAF:       &[&str] = &["MAF kg/h", "AirMass", "MAF"];
 const INJ:       &[&str] = &["InjTmCyl1", "Inj C1 ms", "Inj Time"];
 const KNOCK:     &[&str] = &["Knock retard", "Knock Retard", "Knock"];
@@ -35,7 +35,7 @@ const VANOS_ACT: &[&str] = &["Vanos InAct", "VANOS act.", "VANOS actual", "VANOS
 const VANOS_SET: &[&str] = &["Vanos InTgt", "VANOS set.", "VANOS setpoint", "VANOS tgt"];
 const BATTERY:   &[&str] = &["Battery V", "Battery", "Voltage", "Ubatt"];
 const OIL:       &[&str] = &["Oil degC", "Oil Temp", "Oil temp", "OilTemp"];
-const SPEED:     &[&str] = &["Speed km/h", "Speed", "Vitesse", "Vit km/h"];
+const SPEED:     &[&str] = &["Speed km/h", "Speed", "Vitesse", "Vit km/h", "Vehicle Speed", "Geschwindigkeit", "IVKMH"];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Custom channel name mappings
@@ -2869,14 +2869,17 @@ impl UltraLogApp {
     fn generate_testo_diagnostic_job(&mut self) {
         // Single merged job: RPM, Load, Pedal, Coolant,
         // STFT B1/B2, LTFT add B1/B2, LTFT mul B1/B2,
-        // MAF, Inj Cyl1, VANOS act/set, Ignition Cyl1
+        // MAF, Inj Cyl1, VANOS act/set, Ignition Cyl1,
+        // Speed km/h, Lambda B1, Lambda B2
         // Oil (0x4402) et Battery (0x460A) exclus pour réduire la taille du job.
         let args = "3;0x4807;0x5804;0x480B;0x4300;\
                     0x5806;0x5808;0x5A83;0x5A84;0x5A85;0x5A86;\
-                    0x4203;0x5A42;0x4508;0x4505;0x5A49";
+                    0x4203;0x5A42;0x4508;0x4505;0x5A49;\
+                    0x5AB1;0x5A50;0x5A51";
         let comment = "RPM, Load, Pedal, Coolant, \
                        STFT B1/B2, LTFT add B1/B2, LTFT mul B1/B2, \
-                       MAF, Inj Cyl1, VANOS act/set, Ignition Cyl1";
+                       MAF, Inj Cyl1, VANOS act/set, Ignition Cyl1, \
+                       Speed km/h, Lambda B1/B2";
 
         let xml = format!(
             "<?xml version='1.0' encoding='UTF-8'?>\n\
