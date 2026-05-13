@@ -99,9 +99,13 @@ impl UltraLogApp {
             })
             .collect();
 
-        // Pre-compute legend names with current values at cursor position
+        // Pre-compute legend names with current values.
+        // Prefer the hover record (mouse position, one frame behind) so the legend
+        // follows the cursor as the user sweeps over the chart. Fall back to the
+        // timeline cursor record when the mouse is not over the chart.
         let use_normalization = self.field_normalization;
         let custom_mappings = &self.custom_normalizations;
+        let display_record = self.last_hover_record.or_else(|| self.get_cursor_record());
         let legend_names: Vec<String> = selected_channels
             .iter()
             .map(|selected| {
@@ -111,7 +115,7 @@ impl UltraLogApp {
                 } else {
                     original_name
                 };
-                if let Some(record) = self.get_cursor_record() {
+                if let Some(record) = display_record {
                     if let Some(value) = self.get_value_at_record(
                         selected.file_index,
                         selected.channel_index,
@@ -329,6 +333,12 @@ impl UltraLogApp {
             plot_ui.pointer_coordinate()
         });
 
+        // Clear hover record when mouse leaves the chart so the legend reverts
+        // to the timeline cursor position.
+        if !response.response.hovered() {
+            self.last_hover_record = None;
+        }
+
         // Hover overlay: channel values + phase at pointer position
         if response.response.hovered() {
             if let Some(ptr) = response.inner {
@@ -336,6 +346,11 @@ impl UltraLogApp {
 
                 // Find record nearest to hover time
                 let hover_record = self.find_record_at_time(hover_time);
+
+                // Store for next frame's legend rendering and request a repaint
+                // so the legend stays in sync with mouse movement.
+                self.last_hover_record = hover_record;
+                ui.ctx().request_repaint();
 
                 // Collect channel name + value + color for each selected channel
                 let palette = if self.color_blind_mode { COLORBLIND_COLORS } else { CHART_COLORS };
@@ -645,9 +660,11 @@ impl UltraLogApp {
             })
             .collect();
 
-        // Build legend names with values
+        // Build legend names with values — prefer hover record so the legend
+        // follows the mouse, falling back to the timeline cursor record.
         let use_normalization = self.field_normalization;
         let custom_mappings = &self.custom_normalizations;
+        let display_record = self.last_hover_record.or_else(|| self.get_cursor_record());
         let legend_names: Vec<String> = channels
             .iter()
             .map(|selected| {
@@ -657,7 +674,7 @@ impl UltraLogApp {
                 } else {
                     original_name
                 };
-                if let Some(record) = self.get_cursor_record() {
+                if let Some(record) = display_record {
                     if let Some(value) = self.get_value_at_record(
                         selected.file_index,
                         selected.channel_index,
@@ -806,6 +823,16 @@ impl UltraLogApp {
         let final_bounds = response.transform.bounds();
         self.chart_last_x_bounds
             .insert(plot_area_id, (final_bounds.min()[0], final_bounds.max()[0]));
+
+        // Track hover record for legend synchronisation (same as single-plot mode).
+        if response.response.hovered() {
+            if let Some(ptr) = response.inner {
+                self.last_hover_record = self.find_record_at_time(ptr.x);
+                ui.ctx().request_repaint();
+            }
+        } else {
+            self.last_hover_record = None;
+        }
 
         // Detect interaction
         if response.response.dragged()

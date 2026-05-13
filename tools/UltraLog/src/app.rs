@@ -183,6 +183,10 @@ pub struct UltraLogApp {
     ipc_server: Option<IpcServer>,
     /// MCP HTTP server handle (embedded server for Claude Desktop connection)
     mcp_server: Option<McpServerHandle>,
+    /// Record index under the mouse pointer from the previous frame.
+    /// Used to make legend values follow the hover position rather than staying
+    /// frozen at the timeline cursor when the user moves the mouse.
+    pub(crate) last_hover_record: Option<usize>,
 }
 
 impl Default for UltraLogApp {
@@ -248,6 +252,7 @@ impl Default for UltraLogApp {
             msv70_job_creator: crate::ui::msv70_job_creator::Msv70JobCreatorState::default(),
             ipc_server: None,
             mcp_server: None,
+            last_hover_record: None,
         }
     }
 }
@@ -810,10 +815,13 @@ impl UltraLogApp {
         }
     }
 
-    /// Find the record index closest to the given time
+    /// Find the record index closest to the given time, using the active tab's file.
     pub fn find_record_at_time(&self, time: f64) -> Option<usize> {
-        // Use the first file with data for record indexing
-        if let Some(file) = self.files.first() {
+        let file_index = self.active_tab
+            .and_then(|idx| self.tabs.get(idx))
+            .map(|tab| tab.file_index)
+            .unwrap_or(0);
+        if let Some(file) = self.files.get(file_index) {
             let times = file.log.get_times_as_f64();
             if times.is_empty() {
                 return None;
