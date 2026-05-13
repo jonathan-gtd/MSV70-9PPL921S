@@ -66,13 +66,13 @@ impl Phase {
 
     pub fn bar_color(self) -> egui::Color32 {
         match self {
-            Phase::WarmUp       => egui::Color32::from_rgb(100, 160, 220),
-            Phase::Wot          => egui::Color32::from_rgb(210, 60,  50),
-            Phase::Acceleration => egui::Color32::from_rgb(230, 140, 30),
-            Phase::Cruise       => egui::Color32::from_rgb(60,  180, 90),
-            Phase::Deceleration => egui::Color32::from_rgb(160, 80,  200),
-            Phase::Overrun      => egui::Color32::from_rgb(80,  130, 200),
-            Phase::Idle         => egui::Color32::from_rgb(130, 130, 130),
+            Phase::WarmUp       => egui::Color32::from_rgb(100, 170, 230), // bleu ciel (moteur froid)
+            Phase::Wot          => egui::Color32::from_rgb(215, 55,  45),  // rouge vif
+            Phase::Acceleration => egui::Color32::from_rgb(235, 145, 25),  // orange
+            Phase::Cruise       => egui::Color32::from_rgb(55,  185, 85),  // vert
+            Phase::Deceleration => egui::Color32::from_rgb(155, 70,  205), // violet
+            Phase::Overrun      => egui::Color32::from_rgb(20,  195, 175), // turquoise (distinct du bleu)
+            Phase::Idle         => egui::Color32::from_rgb(135, 135, 135), // gris
         }
     }
 
