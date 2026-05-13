@@ -38,6 +38,36 @@ const OIL:       &[&str] = &["Oil degC", "Oil Temp", "Oil temp", "OilTemp"];
 const SPEED:     &[&str] = &["Speed km/h", "Speed", "Vitesse", "Vit km/h"];
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Custom channel name mappings
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// User-defined overrides for channel column names.
+/// Each field is the exact column name in the log CSV; leave empty to use the
+/// built-in fallback list for that channel.
+#[derive(Default, Clone)]
+pub struct MsvChannelMappings {
+    pub rpm:       String,
+    pub load:      String,
+    pub tps:       String,
+    pub coolant:   String,
+    pub stft1:     String,
+    pub stft2:     String,
+    pub ltfa1:     String,
+    pub ltfa2:     String,
+    pub ltfm1:     String,
+    pub ltfm2:     String,
+    pub lambda1:   String,
+    pub maf:       String,
+    pub inj:       String,
+    pub knock:     String,
+    pub vanos_act: String,
+    pub vanos_set: String,
+    pub battery:   String,
+    pub oil:       String,
+    pub speed:     String,
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Phase engine
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -181,14 +211,17 @@ pub struct Msv70AnalysisState {
     pub bank_compare_by_phase: Vec<[f64; 6]>,
 
     // Thresholds
-    pub wot_tps_thresh:    f64,
-    pub idle_rpm_thresh:   f64,
-    pub idle_load_thresh:  f64,
-    pub accel_dtps_thresh: f64,
-    pub decel_drpm_thresh: f64,
-    pub overrun_tps_max:   f64,
-    pub overrun_load_max:  f64, // si load > seuil avec pédale à 0 → régulateur → Cruise
-    pub phase_min_dur_s:   f64,
+    pub wot_tps_thresh:      f64,
+    pub idle_rpm_thresh:     f64,  // kept for per-phase diagnostics
+    pub idle_load_thresh:    f64,  // kept for per-phase diagnostics
+    pub idle_speed_max_kmh:  f64,  // speed < this → Ralenti
+    pub accel_dtps_thresh:   f64,
+    pub decel_drpm_thresh:   f64,
+    pub overrun_tps_max:     f64,  // no longer used in classification
+    pub overrun_load_max:    f64,  // load < this (and moving) → Roue libre / DFCO
+    pub phase_min_dur_s:     f64,
+
+    pub channel_mappings: MsvChannelMappings,
     pub ltft_warn:         f64,
     pub ltft_crit:         f64,
     pub bank_alert:        f64,
@@ -209,14 +242,15 @@ impl Msv70AnalysisState {
     pub fn new() -> Self {
         Self {
             show_phase_overlay: true,
-            wot_tps_thresh:    85.0,
-            idle_rpm_thresh:   900.0,
-            idle_load_thresh:  12.0,
-            accel_dtps_thresh: 20.0,
-            decel_drpm_thresh: -200.0,
-            overrun_tps_max:   5.0,
-            overrun_load_max:  20.0,
-            phase_min_dur_s:   1.0,
+            wot_tps_thresh:     85.0,
+            idle_rpm_thresh:    900.0,
+            idle_load_thresh:   12.0,
+            idle_speed_max_kmh: 2.0,
+            accel_dtps_thresh:  20.0,
+            decel_drpm_thresh:  -200.0,
+            overrun_tps_max:    5.0,
+            overrun_load_max:   10.0,
+            phase_min_dur_s:    1.0,
             ltft_warn:         5.0,
             ltft_crit:         10.0,
             bank_alert:        5.0,
@@ -274,6 +308,18 @@ fn get(log: &Log, names: &[&str]) -> Option<Vec<f64>> {
         }
     }
     None
+}
+
+/// Like `get`, but tries `custom` first (if non-empty) before the fallback list.
+fn get_mapped(log: &Log, fallbacks: &[&str], custom: &str) -> Option<Vec<f64>> {
+    if !custom.is_empty() {
+        if let Some(idx) = log.find_channel_index(custom) {
+            let v: Vec<f64> = log.get_channel_data(idx).into_iter()
+                .map(|x| if x.abs() < NEAR_ZERO { 0.0 } else { x }).collect();
+            return Some(v);
+        }
+    }
+    get(log, fallbacks)
 }
 
 fn mean(v: &[f64]) -> f64 {
@@ -337,11 +383,12 @@ fn find_driving_start(times: &[f64], speed: &[f64], min_kmh: f64, required_s: f6
 
 fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
     let n = log.times.len();
-    let rpm_d  = get(log, RPM);
-    let tps_d  = get(log, TPS);
-    let load_d = get(log, LOAD);
-    let cool_d = get(log, COOLANT);
-    let spd_d  = get(log, SPEED);
+    let maps = &cfg.channel_mappings;
+    let rpm_d  = get_mapped(log, RPM,     &maps.rpm);
+    let tps_d  = get_mapped(log, TPS,     &maps.tps);
+    let load_d = get_mapped(log, LOAD,    &maps.load);
+    let cool_d = get_mapped(log, COOLANT, &maps.coolant);
+    let spd_d  = get_mapped(log, SPEED,   &maps.speed);
     let mut out = vec![Phase::Idle; n];
 
     // WarmUp ends once the car has been driven (> 10 km/h for 10 continuous seconds)
@@ -352,7 +399,6 @@ fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
     };
 
     // Rate smoothing window: look back up to 0.5 s to compute %/s and RPM/s.
-    // This normalises for sample rate and filters single-sample noise.
     const SMOOTH_S: f64 = 0.5;
 
     for i in 1..n {
@@ -360,6 +406,8 @@ fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
         let t = tps_d.as_deref().and_then(|v| v.get(i)).copied().unwrap_or(0.0);
         let l = load_d.as_deref().and_then(|v| v.get(i)).copied().unwrap_or(0.0);
         let c = cool_d.as_deref().and_then(|v| v.get(i)).copied().unwrap_or(100.0);
+        // If no speed channel: use INFINITY so idle detection is never triggered
+        let s = spd_d.as_deref().and_then(|v| v.get(i)).copied().unwrap_or(f64::INFINITY);
 
         // Reference index: earliest sample within the smoothing window
         let t_ref_target = log.times[i] - SMOOTH_S;
@@ -371,19 +419,19 @@ fn classify_phases(log: &Log, cfg: &Msv70AnalysisState) -> Vec<Phase> {
 
         let dtps_per_s = (t - t_ref) / dt_s;  // %/s
         let drpm_per_s = (r - r_ref) / dt_s;  // RPM/s
+        let _ = r; // r used indirectly via r_ref / drpm_per_s
 
         out[i] = if c < cfg.min_coolant && log.times[i] < driving_start {
-            // WarmUp : moteur froid ET pas encore en route (< 10s à >10 km/h)
+            // WarmUp : moteur froid ET pas encore en route
             Phase::WarmUp
         } else if t > cfg.wot_tps_thresh {
             Phase::Wot
-        } else if t < cfg.overrun_tps_max && r > cfg.idle_rpm_thresh + 200.0
-                  && l < cfg.overrun_load_max {
-            // load < seuil : vrai overrun ou DFCO
-            // load >= seuil + pédale à 0 : régulateur de vitesse → Cruise (ci-dessous)
-            if drpm_per_s < cfg.decel_drpm_thresh { Phase::Deceleration } else { Phase::Overrun }
-        } else if r < cfg.idle_rpm_thresh || l < cfg.idle_load_thresh {
+        } else if s < cfg.idle_speed_max_kmh {
+            // Vitesse nulle → ralenti
             Phase::Idle
+        } else if l < cfg.overrun_load_max {
+            // Voiture en mouvement, charge faible → roue libre ou DFCO
+            if drpm_per_s < cfg.decel_drpm_thresh { Phase::Deceleration } else { Phase::Overrun }
         } else if dtps_per_s > cfg.accel_dtps_thresh {
             Phase::Acceleration
         } else {
@@ -457,14 +505,18 @@ fn to_segments(phases: &[Phase], times: &[f64]) -> Vec<PhaseSegment> {
 
 fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phase]) -> Vec<DiagCheck> {
     let mut out = Vec::new();
+    let maps = &cfg.channel_mappings;
     let (lw, lc) = (cfg.ltft_warn, cfg.ltft_crit);
     let cruise_m: Vec<bool> = warm.iter().zip(phases.iter())
         .map(|(&w, &p)| w && p == Phase::Cruise).collect();
     let wot_m: Vec<bool> = phases.iter().map(|&p| p == Phase::Wot).collect();
 
     // STFT
-    for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
-        if let Some(d) = get(log, names) {
+    for (b, names, custom) in [
+        (1usize, STFT1, maps.stft1.as_str()),
+        (2usize, STFT2, maps.stft2.as_str()),
+    ] {
+        if let Some(d) = get_mapped(log, names, custom) {
             let wv = warm_vals(&d, warm);
             let m = mean(&wv); let mx = maxabs(&wv);
             let s = if m.abs() < lw { DiagStatus::Ok } else if m.abs() < lc { DiagStatus::Warn } else { DiagStatus::Critical };
@@ -474,8 +526,11 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     }
 
     // LTFT add
-    for (b, names) in [(1usize, LTFA1), (2usize, LTFA2)] {
-        if let Some(d) = get(log, names) {
+    for (b, names, custom) in [
+        (1usize, LTFA1, maps.ltfa1.as_str()),
+        (2usize, LTFA2, maps.ltfa2.as_str()),
+    ] {
+        if let Some(d) = get_mapped(log, names, custom) {
             let m = mean(&warm_vals(&d, warm));
             let s = if m.abs() < lw { DiagStatus::Ok } else { DiagStatus::Warn };
             out.push(DiagCheck { label: format!("LTFT add B{}", b), value: format!("{:+.2}%", m), status: s, detail: String::new() });
@@ -483,8 +538,11 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     }
 
     // LTFT mul
-    for (b, names) in [(1usize, LTFM1), (2usize, LTFM2)] {
-        if let Some(d) = get(log, names) {
+    for (b, names, custom) in [
+        (1usize, LTFM1, maps.ltfm1.as_str()),
+        (2usize, LTFM2, maps.ltfm2.as_str()),
+    ] {
+        if let Some(d) = get_mapped(log, names, custom) {
             let m = mean(&warm_vals(&d, warm));
             let s = if m.abs() < lw { DiagStatus::Ok } else if m.abs() < lc { DiagStatus::Warn } else { DiagStatus::Critical };
             out.push(DiagCheck { label: format!("LTFT mul B{}", b), value: format!("{:+.2}%", m), status: s, detail: String::new() });
@@ -492,8 +550,8 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     }
 
     // Bank balance
-    let b1 = get(log, STFT1).zip(get(log, LTFM1));
-    let b2 = get(log, STFT2).zip(get(log, LTFM2));
+    let b1 = get_mapped(log, STFT1, &maps.stft1).zip(get_mapped(log, LTFM1, &maps.ltfm1));
+    let b2 = get_mapped(log, STFT2, &maps.stft2).zip(get_mapped(log, LTFM2, &maps.ltfm2));
     match (b1, b2) {
         (Some((s1, m1)), Some((s2, m2))) => {
             let n = s1.len().min(s2.len()).min(m1.len()).min(m2.len());
@@ -508,7 +566,7 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     }
 
     // Lambda WOT
-    if let Some(lam) = get(log, LAMBDA1) {
+    if let Some(lam) = get_mapped(log, LAMBDA1, &maps.lambda1) {
         let wv: Vec<f64> = lam.iter().zip(wot_m.iter()).filter_map(|(&v, &w)| if w && v > 0.5 { Some(v) } else { None }).collect();
         if wv.is_empty() {
             out.push(DiagCheck::info("Lambda WOT", "—", "Aucun échantillon WOT"));
@@ -523,7 +581,7 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     } else { out.push(DiagCheck::missing("Lambda WOT")); }
 
     // Lambda closed-loop stability
-    if let Some(lam) = get(log, LAMBDA1) {
+    if let Some(lam) = get_mapped(log, LAMBDA1, &maps.lambda1) {
         let cv: Vec<f64> = lam.iter().zip(cruise_m.iter()).filter_map(|(&v, &w)| if w && v > 0.5 { Some(v) } else { None }).collect();
         if cv.len() > 10 {
             let sd = stddev(&cv);
@@ -534,7 +592,7 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     }
 
     // Lambda at decel/DFCO (should go lean or cut)
-    if let Some(lam) = get(log, LAMBDA1) {
+    if let Some(lam) = get_mapped(log, LAMBDA1, &maps.lambda1) {
         let dec_m: Vec<bool> = phases.iter().map(|&p| p == Phase::Deceleration).collect();
         let dv: Vec<f64> = lam.iter().zip(dec_m.iter()).filter_map(|(&v, &w)| if w && v > 0.5 { Some(v) } else { None }).collect();
         if dv.len() > 5 {
@@ -546,8 +604,11 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     }
 
     // Total correction factor B1 / B2  (STFT + LTFT_mul combined — net error the ECU compensates)
-    for (b, snames, mnames) in [(1usize, STFT1, LTFM1), (2usize, STFT2, LTFM2)] {
-        if let (Some(stft), Some(ltfm)) = (get(log, snames), get(log, mnames)) {
+    for (b, snames, sc, mnames, mc) in [
+        (1usize, STFT1, maps.stft1.as_str(), LTFM1, maps.ltfm1.as_str()),
+        (2usize, STFT2, maps.stft2.as_str(), LTFM2, maps.ltfm2.as_str()),
+    ] {
+        if let (Some(stft), Some(ltfm)) = (get_mapped(log, snames, sc), get_mapped(log, mnames, mc)) {
             let n = stft.len().min(ltfm.len());
             let combined: Vec<f64> = (0..n)
                 .filter(|&i| warm.get(i).copied().unwrap_or(false))
@@ -575,7 +636,7 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     // STFT oscillation σ in cruise (hunting = bad O2 sensor / exhaust leak)
     let cruise_stft_samples: Vec<f64> = {
         let mut v = Vec::new();
-        if let Some(d) = get(log, STFT1) {
+        if let Some(d) = get_mapped(log, STFT1, &maps.stft1) {
             v.extend(d.iter().zip(phases.iter()).zip(warm.iter())
                 .filter_map(|((&x, &p), &w)| if w && p == Phase::Cruise { Some(x) } else { None }));
         }
@@ -595,7 +656,7 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
     }
 
     // LTFT convergence: compare first half vs second half of warm log
-    if let Some(ltfm) = get(log, LTFM1) {
+    if let Some(ltfm) = get_mapped(log, LTFM1, &maps.ltfm1) {
         let warm_vals_ltfm: Vec<(usize, f64)> = ltfm.iter().enumerate()
             .filter(|&(i, _)| warm.get(i).copied().unwrap_or(false))
             .map(|(i, &v)| (i, v))
@@ -622,13 +683,14 @@ fn fuel_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Pha
 
 fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phase]) -> Vec<DiagCheck> {
     let mut out = Vec::new();
-    let load_d = get(log, LOAD);
-    let rpm_d  = get(log, RPM);
+    let maps = &cfg.channel_mappings;
+    let load_d = get_mapped(log, LOAD,    &maps.load);
+    let rpm_d  = get_mapped(log, RPM,     &maps.rpm);
     let wot_m:  Vec<bool> = phases.iter().map(|&p| p == Phase::Wot).collect();
-    let idle_m: Vec<bool> = phases.iter().map(|&p| p == Phase::Idle).collect();
+    let _idle_m: Vec<bool> = phases.iter().map(|&p| p == Phase::Idle).collect();
 
     // MAF vs Load Pearson
-    if let (Some(maf), Some(load)) = (get(log, MAF), &load_d) {
+    if let (Some(maf), Some(load)) = (get_mapped(log, MAF, &maps.maf), &load_d) {
         let pairs: Vec<(f64,f64)> = maf.iter().zip(load.iter()).zip(warm.iter())
             .filter_map(|((&m, &l), &w)| if w && m > 0.1 && l > 0.1 { Some((m, l)) } else { None }).collect();
         let ma: Vec<f64> = pairs.iter().map(|p| p.0).collect();
@@ -653,7 +715,7 @@ fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[P
     }
 
     // Injector duty
-    if let (Some(inj), Some(rpm)) = (get(log, INJ), &rpm_d) {
+    if let (Some(inj), Some(rpm)) = (get_mapped(log, INJ, &maps.inj), &rpm_d) {
         let duties: Vec<f64> = inj.iter().zip(rpm.iter()).zip(warm.iter())
             .filter_map(|((&t, &r), &w)| if w && r > 100.0 { Some((t / (120_000.0 / r)) * 100.0) } else { None })
             .collect();
@@ -666,7 +728,7 @@ fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[P
     } else { out.push(DiagCheck::missing("Rapport cyclique injecteur")); }
 
     // Knock — absolute count
-    if let Some(knock) = get(log, KNOCK) {
+    if let Some(knock) = get_mapped(log, KNOCK, &maps.knock) {
         let events: Vec<f64> = knock.iter().zip(warm.iter())
             .filter_map(|(&k, &w)| if w && k.abs() > 0.5 { Some(k.abs()) } else { None }).collect();
         let ne = events.len(); let ar = if ne > 0 { mean(&events) } else { 0.0 };
@@ -693,7 +755,7 @@ fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[P
     } else { out.push(DiagCheck::missing("Retard cliquetis")); }
 
     // VANOS deviation
-    if let (Some(act), Some(set)) = (get(log, VANOS_ACT), get(log, VANOS_SET)) {
+    if let (Some(act), Some(set)) = (get_mapped(log, VANOS_ACT, &maps.vanos_act), get_mapped(log, VANOS_SET, &maps.vanos_set)) {
         let n = act.len().min(set.len());
         let errs: Vec<f64> = act[..n].iter().zip(set[..n].iter()).zip(warm.iter())
             .filter_map(|((&a, &s), &w)| if w { Some((a - s).abs()) } else { None }).collect();
@@ -706,7 +768,7 @@ fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[P
     }
 
     // Overrun lambda (should drop or cut when DFCO)
-    if let Some(lam) = get(log, LAMBDA1) {
+    if let Some(lam) = get_mapped(log, LAMBDA1, &maps.lambda1) {
         let ov_m: Vec<bool> = phases.iter().map(|&p| p == Phase::Overrun).collect();
         let ov: Vec<f64> = lam.iter().zip(ov_m.iter()).filter_map(|(&v, &w)| if w && v > 0.5 { Some(v) } else { None }).collect();
         if ov.len() > 5 {
@@ -720,9 +782,9 @@ fn engine_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[P
     out
 }
 
-fn elec_checks(log: &Log, warm: &[bool]) -> Vec<DiagCheck> {
+fn elec_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool]) -> Vec<DiagCheck> {
     let mut out = Vec::new();
-    if let Some(batt) = get(log, BATTERY) {
+    if let Some(batt) = get_mapped(log, BATTERY, &cfg.channel_mappings.battery) {
         let wv = warm_vals(&batt, warm);
         if !wv.is_empty() {
             let bmin = vmin(&wv); let bmax = vmax(&wv); let bavg = mean(&wv);
@@ -740,7 +802,8 @@ fn elec_checks(log: &Log, warm: &[bool]) -> Vec<DiagCheck> {
 
 fn temp_checks(log: &Log, cfg: &Msv70AnalysisState) -> Vec<DiagCheck> {
     let mut out = Vec::new();
-    if let Some(cool) = get(log, COOLANT) {
+    let maps = &cfg.channel_mappings;
+    if let Some(cool) = get_mapped(log, COOLANT, &maps.coolant) {
         let cold_n = cool.iter().filter(|&&c| c < cfg.min_coolant).count();
         let cold_pct = cold_n as f64 / cool.len().max(1) as f64 * 100.0;
         let s = if cold_pct < 20.0 { DiagStatus::Ok } else if cold_pct < 40.0 { DiagStatus::Warn } else { DiagStatus::Info };
@@ -753,7 +816,7 @@ fn temp_checks(log: &Log, cfg: &Msv70AnalysisState) -> Vec<DiagCheck> {
     } else { out.push(DiagCheck::missing("Liquide de refroidissement")); }
 
     // Thermostat check: once warm, does coolant plateau in expected range?
-    if let Some(cool) = get(log, COOLANT) {
+    if let Some(cool) = get_mapped(log, COOLANT, &maps.coolant) {
         let warm_temps: Vec<f64> = cool.iter().filter(|&&c| c >= cfg.min_coolant).copied().collect();
         if warm_temps.len() > 20 {
             let operating_avg = mean(&warm_temps);
@@ -779,7 +842,7 @@ fn temp_checks(log: &Log, cfg: &Msv70AnalysisState) -> Vec<DiagCheck> {
         }
     }
 
-    if let Some(oil) = get(log, OIL) {
+    if let Some(oil) = get_mapped(log, OIL, &maps.oil) {
         let mx = vmax(&oil); let mn = vmin(&oil);
         let s = if mx > 80.0 { DiagStatus::Ok } else if mx > 60.0 { DiagStatus::Warn } else { DiagStatus::Info };
         out.push(DiagCheck { label: "Temp. huile (max)".into(), value: format!("{:.1}°C", mx),
@@ -794,10 +857,11 @@ fn temp_checks(log: &Log, cfg: &Msv70AnalysisState) -> Vec<DiagCheck> {
 
 fn e85_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phase], times: &[f64]) -> Vec<DiagCheck> {
     let mut out = Vec::new();
-    let rpm_d   = get(log, RPM);
-    let inj_d   = get(log, INJ);
-    let lam_d   = get(log, LAMBDA1);
-    let knock_d = get(log, KNOCK);
+    let maps = &cfg.channel_mappings;
+    let rpm_d   = get_mapped(log, RPM,     &maps.rpm);
+    let inj_d   = get_mapped(log, INJ,     &maps.inj);
+    let lam_d   = get_mapped(log, LAMBDA1, &maps.lambda1);
+    let knock_d = get_mapped(log, KNOCK,   &maps.knock);
 
     // ─── Lambda par phase (cibles E85) ───────────────────────────────────────
 
@@ -1000,8 +1064,11 @@ fn e85_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phas
     // ─── STFT — dérive temporelle (régression linéaire) ──────────────────────
     // Si STFT dérive dans le temps → LTFT pas encore convergé → carto E85 à ajuster
 
-    for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
-        if let Some(stft) = get(log, names) {
+    for (b, names, custom) in [
+        (1usize, STFT1, maps.stft1.as_str()),
+        (2usize, STFT2, maps.stft2.as_str()),
+    ] {
+        if let Some(stft) = get_mapped(log, names, custom) {
             let pairs: Vec<(f64, f64)> = stft.iter().zip(times.iter()).zip(warm.iter())
                 .filter_map(|((&v, &t), &w)| if w { Some((t, v)) } else { None }).collect();
             if pairs.len() > 30 {
@@ -1029,7 +1096,7 @@ fn e85_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phas
 
     // ─── Écart STFT B1 / B2 par phase ────────────────────────────────────────
 
-    if let (Some(s1d), Some(s2d)) = (get(log, STFT1), get(log, STFT2)) {
+    if let (Some(s1d), Some(s2d)) = (get_mapped(log, STFT1, &maps.stft1), get_mapped(log, STFT2, &maps.stft2)) {
         let mut max_delta = 0.0_f64;
         let mut worst_phase = Phase::Idle;
         let mut any_phase = false;
@@ -1057,8 +1124,11 @@ fn e85_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phas
 
     // ─── LTFT add par phase — résumé E85 ─────────────────────────────────────
 
-    for (b, names) in [(1usize, LTFA1), (2usize, LTFA2)] {
-        if let Some(ltfa) = get(log, names) {
+    for (b, names, custom) in [
+        (1usize, LTFA1, maps.ltfa1.as_str()),
+        (2usize, LTFA2, maps.ltfa2.as_str()),
+    ] {
+        if let Some(ltfa) = get_mapped(log, names, custom) {
             let global: Vec<f64> = ltfa.iter().zip(warm.iter()).filter_map(|(&x, &w)| if w { Some(x) } else { None }).collect();
             if !global.is_empty() {
                 let gm = mean(&global);
@@ -1086,8 +1156,11 @@ fn e85_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phas
 
     // ─── LTFT mul par phase — correction globale E85 ─────────────────────────
 
-    for (b, names) in [(1usize, LTFM1), (2usize, LTFM2)] {
-        if let Some(ltfm) = get(log, names) {
+    for (b, names, custom) in [
+        (1usize, LTFM1, maps.ltfm1.as_str()),
+        (2usize, LTFM2, maps.ltfm2.as_str()),
+    ] {
+        if let Some(ltfm) = get_mapped(log, names, custom) {
             let global: Vec<f64> = ltfm.iter().zip(warm.iter()).filter_map(|(&x, &w)| if w { Some(x) } else { None }).collect();
             if !global.is_empty() {
                 let gm = mean(&global);
@@ -1117,7 +1190,7 @@ fn e85_checks(log: &Log, cfg: &Msv70AnalysisState, warm: &[bool], phases: &[Phas
 
     // ─── Écart LTFT mul B1 / B2 ──────────────────────────────────────────────
 
-    if let (Some(m1d), Some(m2d)) = (get(log, LTFM1), get(log, LTFM2)) {
+    if let (Some(m1d), Some(m2d)) = (get_mapped(log, LTFM1, &maps.ltfm1), get_mapped(log, LTFM2, &maps.ltfm2)) {
         let v1: Vec<f64> = m1d.iter().zip(warm.iter()).filter_map(|(&x, &w)| if w { Some(x) } else { None }).collect();
         let v2: Vec<f64> = m2d.iter().zip(warm.iter()).filter_map(|(&x, &w)| if w { Some(x) } else { None }).collect();
         if v1.len() >= 5 && v2.len() >= 5 {
@@ -1162,11 +1235,12 @@ fn phase_checks_for(
         return out;
     }
 
-    let rpm_d  = get(log, RPM);
-    let load_d = get(log, LOAD);
-    let tps_d  = get(log, TPS);
-    let lam_d  = get(log, LAMBDA1);
-    let inj_d  = get(log, INJ);
+    let maps  = &cfg.channel_mappings;
+    let rpm_d  = get_mapped(log, RPM,     &maps.rpm);
+    let load_d = get_mapped(log, LOAD,    &maps.load);
+    let tps_d  = get_mapped(log, TPS,     &maps.tps);
+    let lam_d  = get_mapped(log, LAMBDA1, &maps.lambda1);
+    let inj_d  = get_mapped(log, INJ,     &maps.inj);
 
     // Helper: filter a Vec<f64> by a boolean mask
     let filtered = |v: &[f64], m: &[bool]| -> Vec<f64> {
@@ -1201,7 +1275,7 @@ fn phase_checks_for(
             }
 
             // Cliquetis sous WOT (le plus critique)
-            if let Some(knock) = get(log, KNOCK) {
+            if let Some(knock) = get_mapped(log, KNOCK, &maps.knock) {
                 let v: Vec<f64> = knock.iter().zip(mask.iter())
                     .filter_map(|(&k, &b)| if b && k.abs() > 0.5 { Some(k.abs()) } else { None }).collect();
                 let ne = v.len(); let ar = if ne > 0 { mean(&v) } else { 0.0 };
@@ -1224,8 +1298,11 @@ fn phase_checks_for(
             }
 
             // STFT WOT (doit être proche de 0 — correcteur stable)
-            for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
-                if let Some(d) = get(log, names) {
+            for (b, names, custom) in [
+                (1usize, STFT1, maps.stft1.as_str()),
+                (2usize, STFT2, maps.stft2.as_str()),
+            ] {
+                if let Some(d) = get_mapped(log, names, custom) {
                     let v: Vec<f64> = d.iter().zip(mask.iter())
                         .filter_map(|(&x, &msk)| if msk { Some(x) } else { None }).collect();
                     if v.len() > 3 {
@@ -1309,7 +1386,7 @@ fn phase_checks_for(
             }
 
             // Corrélation MAF-Charge en croisière
-            if let (Some(maf), Some(load)) = (get(log, MAF), &load_d) {
+            if let (Some(maf), Some(load)) = (get_mapped(log, MAF, &maps.maf), &load_d) {
                 let pairs: Vec<(f64,f64)> = maf.iter().zip(load.iter()).zip(mask.iter()).zip(warm.iter())
                     .filter_map(|(((&m, &l), &b), &w)| if b && w && m > 0.1 { Some((m, l)) } else { None }).collect();
                 let ma: Vec<f64> = pairs.iter().map(|p| p.0).collect();
@@ -1491,7 +1568,7 @@ fn phase_checks_for(
             }
 
             // Montée en température (taux °C/s)
-            if let Some(cool) = get(log, COOLANT) {
+            if let Some(cool) = get_mapped(log, COOLANT, &maps.coolant) {
                 let pairs: Vec<(f64,f64)> = cool.iter().zip(mask.iter()).zip(times.iter())
                     .filter_map(|((&c, &b), &t)| if b { Some((t, c)) } else { None }).collect();
                 if pairs.len() > 2 {
@@ -1506,8 +1583,11 @@ fn phase_checks_for(
             }
 
             // STFT à froid (peut être élevé par correction)
-            for (b, names) in [(1usize, STFT1), (2usize, STFT2)] {
-                if let Some(d) = get(log, names) {
+            for (b, names, custom) in [
+                (1usize, STFT1, maps.stft1.as_str()),
+                (2usize, STFT2, maps.stft2.as_str()),
+            ] {
+                if let Some(d) = get_mapped(log, names, custom) {
                     let v: Vec<f64> = d.iter().zip(mask.iter())
                         .filter_map(|(&x, &msk)| if msk { Some(x) } else { None }).collect();
                     if v.len() > 3 {
@@ -1536,13 +1616,14 @@ pub fn run_analysis(log: &Log, st: &mut Msv70AnalysisState) {
     st.total_samples = n.saturating_sub(1);
     st.phase_segments = to_segments(&phase_vec, &log.times);
 
-    let warm: Vec<bool> = if let Some(c) = get(log, COOLANT) {
+    let maps = &st.channel_mappings;
+    let warm: Vec<bool> = if let Some(c) = get_mapped(log, COOLANT, &maps.coolant) {
         c.iter().map(|&v| v >= st.min_coolant).collect()
     } else { vec![true; n] };
 
     st.checks_fuel   = fuel_checks(log, st, &warm, &phase_vec);
     st.checks_engine = engine_checks(log, st, &warm, &phase_vec);
-    st.checks_elec   = elec_checks(log, &warm);
+    st.checks_elec   = elec_checks(log, st, &warm);
     st.checks_temp   = temp_checks(log, st);
 
     // Per-phase deep diagnostics
@@ -1552,11 +1633,12 @@ pub fn run_analysis(log: &Log, st: &mut Msv70AnalysisState) {
         .collect();
 
     // Per-phase bank comparison: mean of STFT/LTFT add/mul for B1 and B2
+    let maps = &st.channel_mappings;
     let mut bank_cmp = vec![[f64::NAN; 6]; 7];
     if let (Some(s1), Some(s2), Some(a1), Some(a2), Some(m1), Some(m2)) = (
-        get(log, STFT1), get(log, STFT2),
-        get(log, LTFA1), get(log, LTFA2),
-        get(log, LTFM1), get(log, LTFM2),
+        get_mapped(log, STFT1, &maps.stft1), get_mapped(log, STFT2, &maps.stft2),
+        get_mapped(log, LTFA1, &maps.ltfa1), get_mapped(log, LTFA2, &maps.ltfa2),
+        get_mapped(log, LTFM1, &maps.ltfm1), get_mapped(log, LTFM2, &maps.ltfm2),
     ) {
         let len = s1.len().min(s2.len()).min(a1.len()).min(a2.len()).min(m1.len()).min(m2.len());
         for (p_idx, _) in Phase::all().iter().enumerate() {
@@ -2300,6 +2382,74 @@ impl UltraLogApp {
             });
     }
 
+    // ── Channel mappings ──────────────────────────────────────────────────────
+    fn tab_channel_mappings(&mut self, ui: &mut egui::Ui) {
+        ui.label(egui::RichText::new("Correspondance des canaux").size(13.0).strong());
+        ui.add_space(4.0);
+        ui.colored_label(
+            egui::Color32::GRAY,
+            "Laissez vide pour utiliser les noms par défaut. Saisir le nom exact de la colonne du log CSV.",
+        );
+        ui.add_space(10.0);
+
+        egui::Grid::new("msv70_ch_map")
+            .num_columns(3)
+            .spacing([12.0, 5.0])
+            .show(ui, |ui| {
+                ui.label(egui::RichText::new("Canal logique").size(12.0).strong());
+                ui.label(egui::RichText::new("Colonne personnalisée").size(12.0).strong());
+                ui.label(egui::RichText::new("Noms par défaut").size(12.0).strong());
+                ui.end_row();
+
+                macro_rules! map_row {
+                    ($label:expr, $field:ident, $defaults:expr) => {
+                        ui.label(egui::RichText::new($label).size(12.0));
+                        ui.add(egui::TextEdit::singleline(
+                            &mut self.msv70_analysis.channel_mappings.$field)
+                            .desired_width(180.0)
+                            .hint_text("auto"));
+                        ui.label(
+                            egui::RichText::new($defaults)
+                                .size(11.0)
+                                .color(egui::Color32::GRAY)
+                                .italics(),
+                        );
+                        ui.end_row();
+                    }
+                }
+
+                map_row!("RPM",            rpm,       "RPM");
+                map_row!("Charge (%)",     load,      "Load %, CalcLoad, Calc Load");
+                map_row!("Pédale (%)",     tps,       "Pedal %, Pedal, TPS");
+                map_row!("Refroidiss.",    coolant,   "Cool degC, Coolant, Coolant Temp");
+                map_row!("STFT B1 (%)",    stft1,     "STFT B1, STFT Bank1");
+                map_row!("STFT B2 (%)",    stft2,     "STFT B2, STFT Bank2");
+                map_row!("LTFT add B1",    ltfa1,     "LTFT add. B1, LTFT add B1");
+                map_row!("LTFT add B2",    ltfa2,     "LTFT add. B2, LTFT add B2");
+                map_row!("LTFT mul B1",    ltfm1,     "LTFT mul. B1, LTFT mul B1");
+                map_row!("LTFT mul B2",    ltfm2,     "LTFT mul. B2, LTFT mul B2");
+                map_row!("Lambda B1",      lambda1,   "Lmb Act B1, Lambda B1, Lambda 1");
+                map_row!("MAF (kg/h)",     maf,       "MAF kg/h, AirMass, MAF");
+                map_row!("Injection Cyl1", inj,       "InjTmCyl1, Inj C1 ms, Inj Time");
+                map_row!("Cliquetis",      knock,     "Knock retard, Knock Retard, Knock");
+                map_row!("VANOS réel",     vanos_act, "VANOS act., VANOS actual, VANOS pos");
+                map_row!("VANOS cible",    vanos_set, "VANOS set., VANOS setpoint, VANOS tgt");
+                map_row!("Batterie (V)",   battery,   "Battery V, Battery, Voltage");
+                map_row!("Huile (°C)",     oil,       "Oil degC, Oil Temp, Oil temp");
+                map_row!("Vitesse (km/h)", speed,     "Speed km/h, Speed, Vitesse");
+            });
+
+        ui.add_space(12.0);
+        if ui.button("Effacer tous les mappings").clicked() {
+            self.msv70_analysis.channel_mappings = MsvChannelMappings::default();
+        }
+        ui.add_space(8.0);
+        ui.colored_label(
+            egui::Color32::GRAY,
+            "Les mappings prennent effet à la prochaine analyse (▶ Analyser).",
+        );
+    }
+
     // ── Settings ──────────────────────────────────────────────────────────────
     fn tab_settings(&mut self, ui: &mut egui::Ui) {
         ui.label(egui::RichText::new("Seuils de classification des phases").size(13.0).strong());
@@ -2312,14 +2462,13 @@ impl UltraLogApp {
                     ui.end_row();
                 }
             }
-            row!("WOT pédale (%)",               wot_tps_thresh,    50.0, 100.0,  0.5);
-            row!("RPM ralenti max",               idle_rpm_thresh,  400.0,1500.0, 10.0);
-            row!("Charge ralenti max (%)",         idle_load_thresh,  2.0,  30.0,  0.5);
-            row!("Seuil accélération (Δ%/s)",      accel_dtps_thresh,  5.0, 200.0,  1.0);
-            row!("Seuil décélération (ΔRPM/s)",   decel_drpm_thresh,-800.0, -10.0, 5.0);
-            row!("Durée min. phase (s)",           phase_min_dur_s,    0.0,  10.0,  0.1);
-            row!("TPS max roue libre (%)",         overrun_tps_max,   0.0,  15.0,  0.5);
-            row!("Charge max roue libre/DFCO (%)", overrun_load_max,  5.0,  40.0,  1.0);
+            row!("WOT pédale (%)",                wot_tps_thresh,     50.0, 100.0,  0.5);
+            row!("Vitesse max. ralenti (km/h)",   idle_speed_max_kmh,  0.0,  15.0,  0.5);
+            row!("Charge ralenti max (%, diag)",  idle_load_thresh,    2.0,  30.0,  0.5);
+            row!("Seuil accélération (Δ%/s)",     accel_dtps_thresh,   5.0, 200.0,  1.0);
+            row!("Seuil décélération (ΔRPM/s)",   decel_drpm_thresh, -800.0, -10.0, 5.0);
+            row!("Durée min. phase (s)",           phase_min_dur_s,     0.0,  10.0,  0.1);
+            row!("Charge max roue libre/DFCO (%)", overrun_load_max,   2.0,  30.0,  1.0);
             row!("LTFT avertissement (%)",         ltft_warn,         1.0,  15.0,  0.5);
             row!("LTFT critique (%)",              ltft_crit,         5.0,  25.0,  0.5);
             row!("Alerte balance banques (%)",     bank_alert,        1.0,  15.0,  0.5);
@@ -2366,6 +2515,7 @@ impl UltraLogApp {
                 ("🎯", "Par Phase"),
                 ("🌽", "E85"),
                 ("🔧", "Seuils"),
+                ("🔌", "Canaux"),
             ].iter().enumerate() {
                 let sel = self.msv70_analysis.active_tab == i;
                 let fill = if sel {
@@ -2428,6 +2578,7 @@ impl UltraLogApp {
                     4 => self.tab_per_phase(ui),
                     5 => self.tab_e85_wide(ui),
                     6 => self.tab_settings(ui),
+                    7 => self.tab_channel_mappings(ui),
                     _ => {}
                 }
             });
