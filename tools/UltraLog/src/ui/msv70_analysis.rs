@@ -2720,26 +2720,25 @@ impl UltraLogApp {
 
     // ── Generate Testo diagnostic job ─────────────────────────────────────────
     fn generate_testo_diagnostic_job(&mut self) {
-        // Hard-coded address lists for the two required MSV70 diagnostic jobs.
-        // Job 1: fuel trims + engine basics
-        let fuel_args = "3;0x4807;0x5804;0x480B;0x4300;0x4402;0x460A;0x5806;0x5808;0x5A83;0x5A84;0x5A85;0x5A86";
-        // Job 2: MAF, injection, VANOS, ignition angle
-        let engine_args = "3;0x4807;0x5804;0x4203;0x5A42;0x4508;0x4505;0x5A49";
+        // Single merged job: RPM, Load, Pedal, Coolant,
+        // STFT B1/B2, LTFT add B1/B2, LTFT mul B1/B2,
+        // MAF, Inj Cyl1, VANOS act/set, Ignition Cyl1
+        // Oil (0x4402) et Battery (0x460A) exclus pour réduire la taille du job.
+        let args = "3;0x4807;0x5804;0x480B;0x4300;\
+                    0x5806;0x5808;0x5A83;0x5A84;0x5A85;0x5A86;\
+                    0x4203;0x5A42;0x4508;0x4505;0x5A49";
+        let comment = "RPM, Load, Pedal, Coolant, \
+                       STFT B1/B2, LTFT add B1/B2, LTFT mul B1/B2, \
+                       MAF, Inj Cyl1, VANOS act/set, Ignition Cyl1";
 
         let xml = format!(
             "<?xml version='1.0' encoding='UTF-8'?>\n\
              <customjobs>\n\
              \x20 <customjob ecu=\"MSV70\">\n\
              \x20   <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>\n\
-             \x20   <virtualname>MSV70_DIAG_FUEL</virtualname>\n\
-             \x20   <comment>RPM, Load, Pedal, Coolant, Oil, Battery, STFT B1/B2, LTFT add B1/B2, LTFT mul B1/B2</comment>\n\
-             \x20   <argument>{fuel_args}</argument>\n\
-             \x20 </customjob>\n\
-             \x20 <customjob ecu=\"MSV70\">\n\
-             \x20   <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>\n\
-             \x20   <virtualname>MSV70_DIAG_ENGINE</virtualname>\n\
-             \x20   <comment>RPM, Load, MAF kg/h, Inj Cyl1, VANOS actual, VANOS setpoint, Ignition angle Cyl1</comment>\n\
-             \x20   <argument>{engine_args}</argument>\n\
+             \x20   <virtualname>MSV70_DIAG</virtualname>\n\
+             \x20   <comment>{comment}</comment>\n\
+             \x20   <argument>{args}</argument>\n\
              \x20 </customjob>\n\
              </customjobs>\n",
         );
