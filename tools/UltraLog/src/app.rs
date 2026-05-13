@@ -2195,11 +2195,14 @@ impl eframe::App for UltraLogApp {
             });
 
         // Side panel — fixed width, not resizable.
-        // egui persists the drag-resized width to disk; if the user accidentally
-        // dragged it to full-screen width the chart would disappear on every restart.
-        // Keeping it fixed bypasses that persistence and guarantees the chart is always visible.
+        // egui persists drag-resized width to disk. exact_size() only sets default_size
+        // which is ignored when a stored state exists. Setting min_size == max_size forces
+        // size_range = 280..=280, causing clamp_to_range() to always return 280 regardless
+        // of what is stored in persistence.
         egui::Panel::left("side_panel")
-            .exact_size(crate::ui::side_panel::SIDE_PANEL_WIDTH)
+            .default_size(crate::ui::side_panel::SIDE_PANEL_WIDTH)
+            .min_size(crate::ui::side_panel::SIDE_PANEL_WIDTH)
+            .max_size(crate::ui::side_panel::SIDE_PANEL_WIDTH)
             .resizable(false)
             .frame(panel_frame)
             .show_inside(ui, |ui| {
