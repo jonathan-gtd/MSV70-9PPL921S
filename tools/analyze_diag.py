@@ -62,7 +62,7 @@ THR = {
     "vanos_err_warn":   8.0,    # °CRK tracking error
     "vanos_err_alarm":  15.0,
     "ign_retard_warn":  -12.0,  # °CRK — knock-proxy (ignition retard events)
-    "coolant_warn":     105.0,  # °C
+    "coolant_warn":     114.0,  # °C — N52 thermostat 112°C normal, alarm above 114
 }
 
 # ─── phases ─────────────────────────────────────────────────────────────────────
