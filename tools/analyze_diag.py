@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-MSV70 Diagnostic Log Analyzer
+MSV70 Diagnostic Log Analyzer — deep precision mode
 Analyzes CSV logs from the custom MSV70_DIAG TestO job.
-Usage: python analyze_diag.py [file.csv]
-       If no file given, uses the most recent CSV in ../LOGS/
+
+Usage:
+    python analyze_diag.py [file.csv]
+    If no file given, uses the most recent CSV in ../LOGS/
 """
 
 import sys
@@ -14,76 +16,96 @@ import statistics
 from pathlib import Path
 from collections import defaultdict
 
-# Force UTF-8 output on Windows
 if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-# ─── column aliases (map various TestO label variants to internal names) ────────
-
+# ─── Column aliases ─────────────────────────────────────────────────────────────
 COL_ALIASES = {
     "time_ms":      ["time"],
-    "rpm":          ["RPM", "rpm"],
-    "load_pct":     ["Load %", "load %"],
-    "pedal_pct":    ["Pedal %", "pedal %"],
-    "speed_kmh":    ["Speed km/h", "speed km/h"],
-    "coolant_c":    ["Cool degC", "cool degc"],
-    "stft_b1":      ["STFTGrp1", "STFT B1", "stft b1"],
-    "stft_b2":      ["STFTGrp2", "STFT B2", "stft b2"],
-    "ltft_add_b1":  ["LTFT add. B1", "ltft add. b1"],
-    "ltft_add_b2":  ["LTFT add. B2", "ltft add. b2"],
-    "ltft_mul_b1":  ["LTFT Mul B1", "ltft mul b1"],
-    "ltft_mul_b2":  ["LTFT Mul B2", "ltft mul b2"],
-    "lmb_b1":       ["Lmb Act B1", "lmb act b1"],
-    "lmb_b2":       ["Lmb Act B2", "lmb act b2"],
-    "lmb_tgt_b1":   ["Lmb Tgt B1", "lmb tgt b1"],
-    "maf_kgh":      ["AirMass", "MAF kg/h", "maf kg/h"],
-    "inj_ms":       ["Inj C1 ms", "inj c1 ms"],
-    "vanos_act":    ["Vanos InAct", "vanos inact"],
-    "vanos_tgt":    ["Vanos InTgt", "vanos intgt"],
-    "ign_deg":      ["Ign Cyl1 deg", "ign cyl1 deg"],
-    "iat_c":        ["IAT degC", "iat degc"],
-    "oil_c":        ["Oil degC", "oil degc"],
+    "rpm":          ["RPM"],
+    "load_pct":     ["Load %"],
+    "pedal_pct":    ["Pedal %"],
+    "speed_kmh":    ["Speed km/h"],
+    "coolant_c":    ["Cool degC"],
+    "stft_b1":      ["STFTGrp1", "STFT B1"],
+    "stft_b2":      ["STFTGrp2", "STFT B2"],
+    "ltft_add_b1":  ["LTFT add. B1"],
+    "ltft_add_b2":  ["LTFT add. B2"],
+    "ltft_mul_b1":  ["LTFT Mul B1"],
+    "ltft_mul_b2":  ["LTFT Mul B2"],
+    "lmb_b1":       ["Lmb Act B1"],
+    "lmb_b2":       ["Lmb Act B2"],
+    "lmb_tgt_b1":   ["Lmb Tgt B1"],
+    "maf_kgh":      ["AirMass", "MAF kg/h"],
+    "inj_ms":       ["Inj C1 ms"],
+    "vanos_act":    ["Vanos InAct"],
+    "vanos_tgt":    ["Vanos InTgt"],
+    "ign_deg":      ["Ign Cyl1 deg"],
+    "iat_c":        ["IAT degC"],
+    "oil_c":        ["Oil degC"],
 }
 
-NEAR_ZERO = 1e-5  # float noise threshold
+NEAR_ZERO = 1e-5
 
-# ─── thresholds ─────────────────────────────────────────────────────────────────
-
+# ─── Thresholds ─────────────────────────────────────────────────────────────────
 THR = {
-    "stft_warn":        15.0,   # % — sustained deviation worth noting
+    "stft_note":         8.0,   # % — worth noting
+    "stft_warn":        15.0,   # % — sustained deviation
     "stft_alarm":       22.0,   # % — approaching ±40% saturation ceiling
-    "stft_imbalance":   10.0,   # % — |B1-B2| alerting inter-bank gap
-    "ltft_warn":        12.0,   # % multiplicative LTFT
+    "stft_imbalance":    8.0,   # % — |B1-B2| persistent gap
+    "ltft_warn":        12.0,   # % — multiplicative LTFT
     "ltft_alarm":       18.0,   # % — close to ±20% ceiling
-    "ltft_imbalance":   15.0,   # % |B1-B2|
-    "lmb_lean_load":    1.04,   # lambda — lean alarm under load
-    "lmb_rich":         0.93,   # lambda — rich alarm
-    "vanos_err_warn":   8.0,    # °CRK tracking error
-    "vanos_err_alarm":  15.0,
-    "ign_retard_warn":  -12.0,  # °CRK — knock-proxy (ignition retard events)
-    "coolant_warn":     114.0,  # °C — N52 thermostat 112°C normal, alarm above 114
+    "ltft_imbalance":   12.0,   # % — |B1-B2|
+    "lmb_lean_load":    1.04,   # λ — lean alarm under load
+    "lmb_rich":         0.93,   # λ — rich alarm
+    "vanos_steady_warn": 5.0,   # °CRK — steady-state tracking
+    "vanos_steady_alarm":10.0,
+    "inj_duty_warn":    80.0,   # % duty cycle
+    "coolant_warn":    114.0,   # °C — N52 thermostat 112°C normal
 }
 
-# ─── phases ─────────────────────────────────────────────────────────────────────
+# ─── RPM / Load bins for 2D map ─────────────────────────────────────────────────
+RPM_BINS  = [0, 800, 1200, 1600, 2000, 2500, 3000, 3800, 5000, 9999]
+LOAD_BINS = [0, 10,  20,   30,   40,   50,   60,   75,   100]
 
+RPM_LABELS  = ["<800", "800-1200", "1200-1600", "1600-2000",
+               "2000-2500", "2500-3000", "3000-3800", "3800-5000", "5000+"]
+LOAD_LABELS = ["0-10", "10-20", "20-30", "30-40",
+               "40-50", "50-60", "60-75", "75-100"]
+
+# ─── Phases ─────────────────────────────────────────────────────────────────────
 PHASES = ["ENGINE_OFF", "CRANKING", "WARMUP", "HOT_IDLE", "IDLE",
           "CRUISE", "ACCEL", "WOT", "FUEL_CUT"]
 
+CL_PHASES = ["HOT_IDLE", "IDLE", "CRUISE", "ACCEL", "WOT"]
+
+
+def rpm_bin(rpm):
+    for i in range(len(RPM_BINS) - 1):
+        if RPM_BINS[i] <= rpm < RPM_BINS[i + 1]:
+            return i
+    return len(RPM_BINS) - 2
+
+
+def load_bin(load):
+    for i in range(len(LOAD_BINS) - 1):
+        if LOAD_BINS[i] <= load < LOAD_BINS[i + 1]:
+            return i
+    return len(LOAD_BINS) - 2
+
 
 def detect_phase(row):
-    rpm    = row["rpm"]
-    speed  = row["speed_kmh"]
-    pedal  = row["pedal_pct"]
-    load   = row["load_pct"]
-    cool   = row["coolant_c"]
+    rpm   = row["rpm"]
+    speed = row["speed_kmh"]
+    pedal = row["pedal_pct"]
+    load  = row["load_pct"]
+    cool  = row["coolant_c"]
 
     if rpm < 50:
         return "ENGINE_OFF"
     if rpm < 400:
         return "CRANKING"
-    if cool < 80 and speed < 5 and rpm < 1500:
-        return "WARMUP"
     if pedal < 5 and rpm > 1200 and speed > 5:
         return "FUEL_CUT"
     if pedal > 85 or load > 72:
@@ -92,47 +114,30 @@ def detect_phase(row):
         return "ACCEL"
     if speed < 5 and rpm < 1200:
         return "HOT_IDLE" if cool >= 80 else "WARMUP"
+    if cool < 80:
+        return "WARMUP"
     return "CRUISE"
 
 
 def is_cl_active(row):
-    """Closed-loop fuel control active heuristic."""
     return (row["rpm"] > 600
             and row["coolant_c"] > 55
             and row["load_pct"] > 2
             and abs(row["stft_b1"]) > NEAR_ZERO)
 
 
-# ─── helpers ────────────────────────────────────────────────────────────────────
+def is_steady(row, prev_row, dt_s):
+    """True if engine not in rapid transient (for VANOS steady-state analysis)."""
+    if dt_s <= 0 or dt_s > 1.5:
+        return False
+    drpm  = abs(row["rpm"]   - prev_row["rpm"])   / dt_s
+    dload = abs(row["load_pct"] - prev_row["load_pct"]) / dt_s
+    return drpm < 300 and dload < 20
 
+
+# ─── Data loading ────────────────────────────────────────────────────────────────
 def safe(v):
-    """Return 0 for near-zero float noise."""
     return 0.0 if abs(v) < NEAR_ZERO else v
-
-
-def fmt(v, decimals=2, unit=""):
-    sign = "+" if v > 0 else ""
-    return f"{sign}{v:.{decimals}f}{unit}"
-
-
-def bar(value, lo, hi, width=20):
-    """ASCII bar chart between lo and hi."""
-    frac = max(0.0, min(1.0, (value - lo) / (hi - lo)))
-    filled = int(round(frac * width))
-    return "[" + "█" * filled + "░" * (width - filled) + "]"
-
-
-def pstats(values):
-    """Return (mean, std, min, max) or None."""
-    if not values:
-        return None
-    n = len(values)
-    mu = sum(values) / n
-    if n > 1:
-        std = statistics.stdev(values)
-    else:
-        std = 0.0
-    return mu, std, min(values), max(values)
 
 
 def load_csv(path):
@@ -142,7 +147,6 @@ def load_csv(path):
     if not raw:
         raise ValueError("Empty CSV")
 
-    # Build column map
     headers_lower = {h.lower(): h for h in raw[0].keys()}
     col_map = {}
     for internal, aliases in COL_ALIASES.items():
@@ -151,10 +155,20 @@ def load_csv(path):
                 col_map[internal] = headers_lower[alias.lower()]
                 break
 
-    required = ["time_ms", "rpm"]
-    for r in required:
-        if r not in col_map:
-            raise ValueError(f"Missing required column '{r}' in {path.name}")
+    for req in ["time_ms", "rpm"]:
+        if req not in col_map:
+            raise ValueError(f"Missing required column '{req}' — is this an MSV70_DIAG log?")
+
+    optional_defaults = {
+        "stft_b1": 0.0, "stft_b2": 0.0,
+        "ltft_add_b1": 0.0, "ltft_add_b2": 0.0,
+        "ltft_mul_b1": 0.0, "ltft_mul_b2": 0.0,
+        "lmb_b1": 1.0, "lmb_b2": 1.0, "lmb_tgt_b1": 1.0,
+        "maf_kgh": 0.0, "inj_ms": 0.0,
+        "vanos_act": 0.0, "vanos_tgt": 0.0, "ign_deg": 0.0,
+        "load_pct": 0.0, "pedal_pct": 0.0, "speed_kmh": 0.0,
+        "coolant_c": 20.0, "iat_c": 20.0, "oil_c": 0.0,
+    }
 
     rows = []
     for raw_row in raw:
@@ -164,522 +178,863 @@ def load_csv(path):
                 row[internal] = float(raw_row[header])
             except (ValueError, KeyError):
                 row[internal] = 0.0
-        # Apply safe() to all fuel-trim and lambda columns
         for key in ["stft_b1", "stft_b2", "ltft_add_b1", "ltft_add_b2",
                     "ltft_mul_b1", "ltft_mul_b2"]:
             if key in row:
                 row[key] = safe(row[key])
-        rows.append(row)
-
-    # Provide defaults for optional columns
-    optional_defaults = {
-        "stft_b1": 0.0, "stft_b2": 0.0,
-        "ltft_add_b1": 0.0, "ltft_add_b2": 0.0,
-        "ltft_mul_b1": 0.0, "ltft_mul_b2": 0.0,
-        "lmb_b1": 1.0, "lmb_b2": 1.0, "lmb_tgt_b1": 1.0,
-        "maf_kgh": 0.0, "inj_ms": 0.0,
-        "vanos_act": 0.0, "vanos_tgt": 0.0,
-        "ign_deg": 0.0, "load_pct": 0.0,
-        "pedal_pct": 0.0, "speed_kmh": 0.0,
-        "coolant_c": 20.0, "iat_c": 20.0, "oil_c": 0.0,
-    }
-    for row in rows:
         for key, default in optional_defaults.items():
-            if key not in row:
-                row[key] = default
+            row.setdefault(key, default)
+        rows.append(row)
 
     return rows, col_map
 
 
-def time_s(row):
+def ts(row):
     return row["time_ms"] / 1000.0
 
 
-# ─── analysis ───────────────────────────────────────────────────────────────────
+# ─── Statistical helpers ─────────────────────────────────────────────────────────
+def percentile(data, p):
+    if not data:
+        return 0.0
+    s = sorted(data)
+    idx = (len(s) - 1) * p / 100.0
+    lo, hi = int(idx), min(int(idx) + 1, len(s) - 1)
+    return s[lo] + (idx - lo) * (s[hi] - s[lo])
 
+
+def pct_above(data, threshold):
+    if not data:
+        return 0.0
+    return 100.0 * sum(1 for v in data if v > threshold) / len(data)
+
+
+def pct_below(data, threshold):
+    if not data:
+        return 0.0
+    return 100.0 * sum(1 for v in data if v < threshold) / len(data)
+
+
+def fmt_pct(v, w=7):
+    sign = "+" if v > 0 else ""
+    return f"{sign}{v:.1f}%".rjust(w)
+
+
+def fmt_val(v, dec=2, w=8):
+    sign = "+" if v > 0 else ""
+    return f"{sign}{v:.{dec}f}".rjust(w)
+
+
+def flag(v, warn, alarm, invert=False):
+    av = abs(v) if not invert else v
+    if abs(av) >= alarm:
+        return " ⛔"
+    if abs(av) >= warn:
+        return " ⚠"
+    return ""
+
+
+def phase_dur_s(rows):
+    """Compute per-phase duration in seconds from timestamp deltas."""
+    d = defaultdict(float)
+    for i in range(1, len(rows)):
+        dt = (rows[i]["time_ms"] - rows[i-1]["time_ms"]) / 1000.0
+        if 0 < dt < 2.0:
+            d[rows[i]["phase"]] += dt
+    return d
+
+
+# ─── Main analysis ───────────────────────────────────────────────────────────────
 def analyze(path):
     rows, col_map = load_csv(path)
     available = set(col_map.keys())
 
     for row in rows:
-        row["phase"] = detect_phase(row)
+        row["phase"]     = detect_phase(row)
         row["cl_active"] = is_cl_active(row)
-        row["vanos_err"] = row.get("vanos_act", 0) - row.get("vanos_tgt", 0)
+        row["vanos_err"] = row["vanos_act"] - row["vanos_tgt"]
+        row["rb"]        = rpm_bin(row["rpm"])
+        row["lb"]        = load_bin(row["load_pct"])
 
-    duration_s = time_s(rows[-1]) - time_s(rows[0])
-    n_rows = len(rows)
-    coolant_start = rows[0]["coolant_c"]
-    coolant_end   = rows[-1]["coolant_c"]
-    coolant_max   = max(r["coolant_c"] for r in rows)
+    n      = len(rows)
+    dur_s  = ts(rows[-1]) - ts(rows[0])
+    t_cool_start = rows[0]["coolant_c"]
+    t_cool_end   = rows[-1]["coolant_c"]
+    t_cool_max   = max(r["coolant_c"] for r in rows)
 
-    # ── Phase buckets ────────────────────────────────────────────────────────
     phase_rows = defaultdict(list)
     for row in rows:
         phase_rows[row["phase"]].append(row)
 
-    # Estimate phase durations using timestamp deltas
-    phase_dur = defaultdict(float)
-    for i in range(1, n_rows):
+    p_dur = phase_dur_s(rows)
+
+    cl_rows  = [r for r in rows if r["cl_active"]]
+    run_rows = [r for r in rows if r["rpm"] > 600]
+
+    # Steady-state rows for VANOS
+    steady_rows = []
+    for i in range(1, n):
         dt = (rows[i]["time_ms"] - rows[i-1]["time_ms"]) / 1000.0
-        if dt > 2.0:
-            dt = 0.1  # skip big gaps (logging paused)
-        phase_dur[rows[i]["phase"]] += dt
+        if is_steady(rows[i], rows[i-1], dt) and rows[i]["rpm"] > 800:
+            steady_rows.append(rows[i])
 
-    # ── CL-active rows only for fuel trim ───────────────────────────────────
-    cl_rows = [r for r in rows if r["cl_active"]]
-    cl_phase = defaultdict(list)
-    for row in cl_rows:
-        cl_phase[row["phase"]].append(row)
-
-    # ── LTFT check ──────────────────────────────────────────────────────────
-    ltft_rows = [r for r in rows if r["rpm"] > 600]
-    ltft_mul_b1_vals = [r["ltft_mul_b1"] for r in ltft_rows]
-    ltft_mul_b2_vals = [r["ltft_mul_b2"] for r in ltft_rows]
-    ltft_add_b1_vals = [r["ltft_add_b1"] for r in ltft_rows]
-    ltft_add_b2_vals = [r["ltft_add_b2"] for r in ltft_rows]
-
-    has_ltft = any(abs(v) > NEAR_ZERO for v in ltft_mul_b1_vals + ltft_mul_b2_vals)
-
-    # ── VANOS ────────────────────────────────────────────────────────────────
+    has_ltft = any(abs(r["ltft_mul_b1"]) > NEAR_ZERO or abs(r["ltft_mul_b2"]) > NEAR_ZERO
+                   for r in run_rows)
     has_vanos = "vanos_act" in available and "vanos_tgt" in available
-    vanos_rows = [r for r in rows if r["rpm"] > 800 and abs(r["vanos_tgt"]) > 1]
+    has_ign   = "ign_deg" in available
+    has_inj   = "inj_ms" in available
+    has_lmb   = "lmb_b1" in available and "lmb_b2" in available
 
-    # ── Ignition ─────────────────────────────────────────────────────────────
-    has_ign = "ign_deg" in available
-    ign_rows = [r for r in rows if r["rpm"] > 600 and abs(r["ign_deg"]) > NEAR_ZERO]
+    W   = 72
+    SEP = "═" * W
+    THN = "─" * W
 
-    # ── Injection ────────────────────────────────────────────────────────────
-    has_inj = "inj_ms" in available
+    def H(n, title):
+        return f"\n[{n}]  {title}\n{THN}"
 
-    # ── Lambda ───────────────────────────────────────────────────────────────
-    has_lmb = "lmb_b1" in available and "lmb_b2" in available
-    # Under-load lambda (load > 35%, CL active)
-    load_lmb_rows = [r for r in rows if r["cl_active"] and r["load_pct"] > 35
-                     and r["lmb_b1"] > 0.5]
+    lines = []
 
-    # ── Anomaly events ───────────────────────────────────────────────────────
+    # ════════════════════════════════════════════════════════════════════════════
+    # Header
+    # ════════════════════════════════════════════════════════════════════════════
+    lines += [
+        SEP,
+        f"  MSV70 DIAGNOSTIC — E85_v5  N52B30  9PPL921S",
+        f"  File     : {path.name}",
+        f"  Duration : {dur_s:.0f}s  ({dur_s/60:.1f} min)  |  {n} rows",
+        f"  Coolant  : {t_cool_start:.0f}°C → {t_cool_end:.0f}°C  (peak {t_cool_max:.0f}°C)",
+        SEP,
+    ]
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 1 — Session overview
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(1, "SESSION OVERVIEW"))
+
+    rpm_v  = [r["rpm"]       for r in run_rows]
+    load_v = [r["load_pct"]  for r in run_rows]
+    spd_v  = [r["speed_kmh"] for r in rows if r["speed_kmh"] > 2]
+
+    if rpm_v:
+        lines.append(f"  RPM        avg {statistics.mean(rpm_v):.0f}  "
+                     f"p95 {percentile(rpm_v,95):.0f}  max {max(rpm_v):.0f}")
+    if load_v:
+        lines.append(f"  Load       avg {statistics.mean(load_v):.1f}%  "
+                     f"p95 {percentile(load_v,95):.1f}%  max {max(load_v):.1f}%")
+    if spd_v:
+        lines.append(f"  Speed      avg {statistics.mean(spd_v):.0f}  max {max(spd_v):.0f} km/h")
+    if has_inj:
+        inj_v = [r["inj_ms"] for r in run_rows if r["inj_ms"] > 0.5]
+        if inj_v:
+            lines.append(f"  Inj C1     avg {statistics.mean(inj_v):.2f} ms  "
+                         f"max {max(inj_v):.2f} ms")
+    if "iat_c" in available:
+        iat_v = [r["iat_c"] for r in run_rows]
+        if iat_v:
+            lines.append(f"  IAT        {min(iat_v):.0f}–{max(iat_v):.0f}°C")
+    cl_pct = 100 * len(cl_rows) / n if n else 0
+    lines.append(f"  CL active  {cl_pct:.0f}%  ({len(cl_rows)} rows / {n} total)")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 2 — Phase distribution
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(2, "PHASE DISTRIBUTION"))
+    lines.append(f"  {'Phase':<14}  {'Dur':>6}  {'%':>5}  {'Rows':>6}  "
+                 f"{'RPM avg':>8}  {'Load avg':>9}  {'Coolant':>9}")
+
+    for ph in PHASES:
+        pr = phase_rows[ph]
+        if not pr:
+            continue
+        dur = p_dur.get(ph, 0)
+        pct = 100 * dur / dur_s if dur_s else 0
+        avg_rpm  = statistics.mean(r["rpm"]       for r in pr)
+        avg_load = statistics.mean(r["load_pct"]  for r in pr)
+        avg_cool = statistics.mean(r["coolant_c"] for r in pr)
+        lines.append(f"  {ph:<14}  {dur:>5.0f}s  {pct:>4.0f}%  {len(pr):>6}  "
+                     f"{avg_rpm:>8.0f}  {avg_load:>8.1f}%  {avg_cool:>8.1f}°C")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 3 — STFT deep dive
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(3, "STFT — PER PHASE  (closed-loop rows only, percentiles)"))
+
+    hdr3 = (f"  {'Phase':<14}  {'B1 p5':>7}  {'B1 p50':>7}  {'B1 p95':>7}  "
+            f"{'B2 p5':>7}  {'B2 p50':>7}  {'B2 p95':>7}  {'Δmed':>6}  {'n':>5}")
+    lines.append(hdr3)
+
+    for ph in CL_PHASES:
+        pr = [r for r in cl_rows if r["phase"] == ph]
+        if not pr:
+            continue
+        s1 = [r["stft_b1"] for r in pr]
+        s2 = [r["stft_b2"] for r in pr]
+        p5_1  = percentile(s1,  5); p50_1 = percentile(s1, 50); p95_1 = percentile(s1, 95)
+        p5_2  = percentile(s2,  5); p50_2 = percentile(s2, 50); p95_2 = percentile(s2, 95)
+        delta_med = p50_1 - p50_2
+
+        f1 = flag(p50_1, THR["stft_note"], THR["stft_warn"])
+        f2 = flag(p50_2, THR["stft_note"], THR["stft_warn"])
+        fi = flag(delta_med, THR["stft_imbalance"], THR["stft_imbalance"] * 1.5)
+
+        lines.append(f"  {ph:<14}  "
+                     f"{fmt_pct(p5_1)}  {fmt_pct(p50_1)}{f1}  {fmt_pct(p95_1)}  "
+                     f"{fmt_pct(p5_2)}  {fmt_pct(p50_2)}{f2}  {fmt_pct(p95_2)}  "
+                     f"{fmt_pct(delta_med,6)}{fi}  {len(pr):>5}")
+
+    # Overall CL
+    if cl_rows:
+        s1_all = [r["stft_b1"] for r in cl_rows]
+        s2_all = [r["stft_b2"] for r in cl_rows]
+        lines.append(THN)
+        lines.append(f"  {'OVERALL':<14}  "
+                     f"{fmt_pct(percentile(s1_all,5))}  "
+                     f"{fmt_pct(percentile(s1_all,50))}  "
+                     f"{fmt_pct(percentile(s1_all,95))}  "
+                     f"{fmt_pct(percentile(s2_all,5))}  "
+                     f"{fmt_pct(percentile(s2_all,50))}  "
+                     f"{fmt_pct(percentile(s2_all,95))}  "
+                     f"{fmt_pct(percentile(s1_all,50)-percentile(s2_all,50),6)}  "
+                     f"{len(cl_rows):>5}")
+
+        # Saturation info
+        sat1_w = pct_above(s1_all,  THR["stft_warn"]) + pct_below(s1_all, -THR["stft_warn"])
+        sat1_a = pct_above(s1_all,  THR["stft_alarm"]) + pct_below(s1_all, -THR["stft_alarm"])
+        sat2_w = pct_above(s2_all,  THR["stft_warn"]) + pct_below(s2_all, -THR["stft_warn"])
+        sat2_a = pct_above(s2_all,  THR["stft_alarm"]) + pct_below(s2_all, -THR["stft_alarm"])
+        lines.append(f"\n  Saturation >|{THR['stft_warn']:.0f}%|:  "
+                     f"B1 {sat1_w:.1f}%  B2 {sat2_w:.1f}%  of CL rows")
+        lines.append(f"  Saturation >|{THR['stft_alarm']:.0f}%|:  "
+                     f"B1 {sat1_a:.1f}%  B2 {sat2_a:.1f}%  of CL rows")
+
+    # ─── STFT temporal drift ─────────────────────────────────────────────────
+    lines.append(f"\n  STFT DRIFT OVER TIME  (60s buckets — shows LTFT learning direction)")
+    lines.append(f"  {'t(s)':>6}  {'B1 med':>7}  {'B2 med':>7}  {'Δ':>7}  "
+                 f"{'RPM':>6}  {'Load':>6}  {'Cool':>7}  {'n':>5}")
+
+    if cl_rows:
+        t0_cl  = ts(cl_rows[0])
+        BUCKET = 60.0
+        buckets = defaultdict(list)
+        for r in cl_rows:
+            buckets[int((ts(r) - t0_cl) / BUCKET)].append(r)
+
+        for b in sorted(buckets.keys()):
+            br = buckets[b]
+            t_mid = t0_cl + b * BUCKET
+            s1_b  = [r["stft_b1"] for r in br]
+            s2_b  = [r["stft_b2"] for r in br]
+            mu1   = percentile(s1_b, 50)
+            mu2   = percentile(s2_b, 50)
+            delta = mu1 - mu2
+            avg_rpm  = statistics.mean(r["rpm"]       for r in br)
+            avg_load = statistics.mean(r["load_pct"]  for r in br)
+            avg_cool = statistics.mean(r["coolant_c"] for r in br)
+            f1 = " ⚠" if abs(mu1) > THR["stft_warn"] else ""
+            f2 = " ⚠" if abs(mu2) > THR["stft_warn"] else ""
+            lines.append(f"  {t_mid:>6.0f}s  "
+                         f"{fmt_pct(mu1)}{f1}  {fmt_pct(mu2)}{f2}  "
+                         f"{fmt_pct(delta,7)}  "
+                         f"{avg_rpm:>6.0f}  {avg_load:>5.1f}%  "
+                         f"{avg_cool:>6.1f}°C  {len(br):>5}")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 4 — STFT 2D map (RPM × Load)
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(4, "STFT 2D MAP — RPM × Load  (median B1 | median B2 | n)"))
+    lines.append("  Cells with <5 rows shown as  ---  |  Bold = actionable offset")
+    lines.append("  Negative = running rich (map too fat) | Positive = running lean")
+
+    # Build cells
+    cell_b1 = defaultdict(list)
+    cell_b2 = defaultdict(list)
+    for r in cl_rows:
+        key = (r["rb"], r["lb"])
+        cell_b1[key].append(r["stft_b1"])
+        cell_b2[key].append(r["stft_b2"])
+
+    n_rb = len(RPM_BINS) - 1
+    n_lb = len(LOAD_BINS) - 1
+
+    col_w = 13
+
+    def render_map(label, cell_dict):
+        out = [f"\n  {label}"]
+        # Header: load bins
+        header = "  RPM \\ Load  " + "".join(f"{LOAD_LABELS[j]:>{col_w}}" for j in range(n_lb))
+        out.append(header)
+        out.append("  " + "─" * (13 + col_w * n_lb))
+        for i in range(n_rb):
+            row_line = f"  {RPM_LABELS[i]:<12} "
+            any_data = False
+            for j in range(n_lb):
+                vals = cell_dict.get((i, j), [])
+                if len(vals) < 5:
+                    row_line += f"{'---':>{col_w}}"
+                else:
+                    med = percentile(vals, 50)
+                    any_data = True
+                    cell_str = f"{'+' if med>=0 else ''}{med:.1f}%({len(vals)})"
+                    tag = ""
+                    if abs(med) > THR["stft_alarm"]:
+                        tag = "⛔"
+                    elif abs(med) > THR["stft_warn"]:
+                        tag = "⚠"
+                    elif abs(med) > THR["stft_note"]:
+                        tag = "·"
+                    row_line += f"{cell_str+tag:>{col_w}}"
+            if any_data:
+                out.append(row_line)
+        return out
+
+    lines += render_map("STFT B1 (median per cell)", cell_b1)
+    lines += render_map("STFT B2 (median per cell)", cell_b2)
+
+    # Correction table: cells where |median| > 8%
+    lines.append(f"\n  TUNING DELTAS — cells requiring ip_mff_cor adjustment  (|STFT| > {THR['stft_note']:.0f}%)")
+    lines.append(f"  {'RPM range':<14} {'Load range':<12} {'STFT B1':>8} {'STFT B2':>8} "
+                 f"{'avg Δ':>8}  {'Action'}")
+    lines.append("  " + "─" * 64)
+    any_corrections = False
+    for i in range(n_rb):
+        for j in range(n_lb):
+            v1 = cell_b1.get((i, j), [])
+            v2 = cell_b2.get((i, j), [])
+            if len(v1) < 5 and len(v2) < 5:
+                continue
+            med1 = percentile(v1, 50) if v1 else 0.0
+            med2 = percentile(v2, 50) if v2 else 0.0
+            avg_d = (med1 + med2) / 2 if v1 and v2 else (med1 or med2)
+            if abs(avg_d) < THR["stft_note"]:
+                continue
+            any_corrections = True
+            # Correction factor: if STFT=-10%, map too rich → reduce by 10%
+            # factor_delta = avg_d / 100  (positive = need more fuel, negative = less)
+            if avg_d < -THR["stft_warn"]:
+                severity = "⛔ REDUCE FUEL"
+            elif avg_d < -THR["stft_note"]:
+                severity = "⚠ reduce fuel"
+            elif avg_d > THR["stft_warn"]:
+                severity = "⛔ ADD FUEL"
+            else:
+                severity = "· add fuel"
+            lines.append(f"  {RPM_LABELS[i]:<14} {LOAD_LABELS[j]:<12} "
+                         f"{fmt_pct(med1)}  {fmt_pct(med2)}  {fmt_pct(avg_d,8)}  "
+                         f"{severity}")
+    if not any_corrections:
+        lines.append("  No cells with |STFT| > 8% — map is well calibrated in covered range")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 5 — LTFT
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(5, "LTFT — LONG-TERM FUEL TRIM"))
+    mul1_v = [r["ltft_mul_b1"] for r in run_rows]
+    mul2_v = [r["ltft_mul_b2"] for r in run_rows]
+    add1_v = [r["ltft_add_b1"] for r in run_rows]
+    add2_v = [r["ltft_add_b2"] for r in run_rows]
+
+    if has_ltft:
+        mul1_med = percentile(mul1_v, 50)
+        mul2_med = percentile(mul2_v, 50)
+        add1_med = percentile(add1_v, 50)
+        add2_med = percentile(add2_v, 50)
+
+        imbal = mul1_med - mul2_med
+        f_m1  = flag(mul1_med, THR["ltft_warn"], THR["ltft_alarm"])
+        f_m2  = flag(mul2_med, THR["ltft_warn"], THR["ltft_alarm"])
+        f_im  = flag(imbal,    THR["ltft_imbalance"], THR["ltft_imbalance"] * 1.5)
+
+        lines.append(f"  Multiplicative:  B1 {fmt_pct(mul1_med)}{f_m1}   "
+                     f"B2 {fmt_pct(mul2_med)}{f_m2}   "
+                     f"Δ = {fmt_pct(imbal)}{f_im}")
+        lines.append(f"  Additive:        B1 {add1_med:+.3f} mg/stk   B2 {add2_med:+.3f} mg/stk")
+
+        # Range (stability check)
+        mul1_range = max(mul1_v) - min(mul1_v)
+        mul2_range = max(mul2_v) - min(mul2_v)
+        lines.append(f"  Stability:       B1 range {mul1_range:.3f}%   B2 range {mul2_range:.3f}%"
+                     + ("  (stable)" if mul1_range < 0.5 and mul2_range < 0.5 else "  (drifting)"))
+
+        # Distance from ceiling (±20%)
+        ceiling = 20.0
+        dist1 = ceiling - abs(mul1_med)
+        dist2 = ceiling - abs(mul2_med)
+        lines.append(f"  Ceiling margin:  B1 {dist1:.1f}% left   B2 {dist2:.1f}% left  (ceiling ±{ceiling:.0f}%)")
+
+        if abs(imbal) > THR["ltft_imbalance"]:
+            lines.append(f"\n  ⚠ ASYMMETRY: {imbal:+.1f}% gap B1/B2 — suspect lambda sensor drift or mechanical fault")
+            lines.append(f"    → Compare with swap lambda B1↔B2: if asymmetry flips → sensor issue")
+            lines.append(f"    → If asymmetry stays → mechanical (injector, compression, intake)")
+    else:
+        lines.append("  LTFT = 0  — no adaptation built yet (session too short or reset)")
+        lines.append("  → Run at least 30–40 min in CL to accumulate meaningful LTFT")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 6 — Lambda quality
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(6, "LAMBDA ANALYSIS"))
+
+    if has_lmb:
+        lmb1_cl = [r["lmb_b1"] for r in cl_rows if 0.3 < r["lmb_b1"] < 2.5]
+        lmb2_cl = [r["lmb_b2"] for r in cl_rows if 0.3 < r["lmb_b2"] < 2.5]
+
+        if lmb1_cl:
+            mu1 = statistics.mean(lmb1_cl)
+            sd1 = statistics.stdev(lmb1_cl) if len(lmb1_cl) > 1 else 0
+            lines.append(f"  CL B1  mean={mu1:.4f}  std={sd1:.4f}  "
+                         f"p5={percentile(lmb1_cl,5):.3f}  p50={percentile(lmb1_cl,50):.3f}  "
+                         f"p95={percentile(lmb1_cl,95):.3f}")
+        if lmb2_cl:
+            mu2 = statistics.mean(lmb2_cl)
+            sd2 = statistics.stdev(lmb2_cl) if len(lmb2_cl) > 1 else 0
+            lines.append(f"  CL B2  mean={mu2:.4f}  std={sd2:.4f}  "
+                         f"p5={percentile(lmb2_cl,5):.3f}  p50={percentile(lmb2_cl,50):.3f}  "
+                         f"p95={percentile(lmb2_cl,95):.3f}")
+
+        # Stoichiometric crossing rate (PID health — should be ~0.5–2 Hz)
+        crossings_b1 = sum(1 for i in range(1, len(lmb1_cl))
+                           if (lmb1_cl[i-1] - 1.0) * (lmb1_cl[i] - 1.0) < 0)
+        crossings_b2 = sum(1 for i in range(1, len(lmb2_cl))
+                           if (lmb2_cl[i-1] - 1.0) * (lmb2_cl[i] - 1.0) < 0)
+        cl_dur = sum(p_dur.get(ph, 0) for ph in CL_PHASES)
+        if cl_dur > 0:
+            hz_b1 = crossings_b1 / cl_dur
+            hz_b2 = crossings_b2 / cl_dur
+            ok1 = "OK" if 0.3 < hz_b1 < 3.0 else ("SLOW" if hz_b1 < 0.3 else "FAST")
+            ok2 = "OK" if 0.3 < hz_b2 < 3.0 else ("SLOW" if hz_b2 < 0.3 else "FAST")
+            lines.append(f"\n  λ crossings (PID health):  B1 {hz_b1:.2f} Hz [{ok1}]   "
+                         f"B2 {hz_b2:.2f} Hz [{ok2}]")
+            lines.append(f"  (expected 0.3–2.0 Hz for healthy wide-band PID)")
+
+        # Lambda under different load ranges
+        lines.append(f"\n  LAMBDA vs LOAD  (CL rows only)")
+        lines.append(f"  {'Load range':<14} {'λ B1 med':>9} {'λ B2 med':>9} {'Δ B1-B2':>9}  {'n':>5}")
+        load_ranges = [(0, 20), (20, 40), (40, 60), (60, 80), (80, 100)]
+        for lo, hi in load_ranges:
+            lr = [r for r in cl_rows if lo <= r["load_pct"] < hi
+                  and 0.3 < r["lmb_b1"] < 2.5 and 0.3 < r["lmb_b2"] < 2.5]
+            if len(lr) < 5:
+                continue
+            l1 = [r["lmb_b1"] for r in lr]
+            l2 = [r["lmb_b2"] for r in lr]
+            med1 = percentile(l1, 50)
+            med2 = percentile(l2, 50)
+            delta = med1 - med2
+            f_l1 = " ⚠LEAN" if med1 > THR["lmb_lean_load"] else (" ⚠RICH" if med1 < THR["lmb_rich"] else "")
+            f_l2 = " ⚠LEAN" if med2 > THR["lmb_lean_load"] else (" ⚠RICH" if med2 < THR["lmb_rich"] else "")
+            f_d  = " ⚠IMBAL" if abs(delta) > 0.03 else ""
+            lines.append(f"  {lo}-{hi}%{'':<9} {med1:>9.4f}{f_l1}  {med2:>9.4f}{f_l2}  "
+                         f"{delta:>+9.4f}{f_d}  {len(lr):>5}")
+
+        # WOT lambda (E85 target ~0.85–0.92 for power)
+        wot_rows = [r for r in rows if r["phase"] == "WOT"
+                    and 0.3 < r["lmb_b1"] < 2.0 and 0.3 < r["lmb_b2"] < 2.0
+                    and r["rpm"] > 2500]
+        if wot_rows:
+            wl1 = [r["lmb_b1"] for r in wot_rows]
+            wl2 = [r["lmb_b2"] for r in wot_rows]
+            m1, m2 = statistics.mean(wl1), statistics.mean(wl2)
+            f_w1 = " ⚠LEAN" if m1 > 0.95 else (" OK(E85)" if m1 < 0.93 else "")
+            f_w2 = " ⚠LEAN" if m2 > 0.95 else (" OK(E85)" if m2 < 0.93 else "")
+            lines.append(f"\n  WOT lambda (>2500 RPM): B1 {m1:.4f}{f_w1}   B2 {m2:.4f}{f_w2}")
+            lines.append(f"  (E85 WOT target typically 0.85–0.92)")
+
+        # Fuel-cut (open-loop sensor check — should go lean)
+        fc_rows = [r for r in rows if r["phase"] == "FUEL_CUT"
+                   and 0.5 < r["lmb_b1"] < 4.0]
+        if fc_rows:
+            fl1 = [r["lmb_b1"] for r in fc_rows]
+            fl2 = [r["lmb_b2"] for r in fc_rows if 0.5 < r["lmb_b2"] < 4.0]
+            lines.append(f"\n  Fuel-cut λ B1 : med {percentile(fl1,50):.3f}  "
+                         f"range [{min(fl1):.3f}–{max(fl1):.3f}]  (open loop response)")
+            if fl2:
+                lines.append(f"  Fuel-cut λ B2 : med {percentile(fl2,50):.3f}  "
+                             f"range [{min(fl2):.3f}–{max(fl2):.3f}]")
+            if percentile(fl1, 50) < 1.3:
+                lines.append(f"  ⚠ B1 not going lean on fuel cut → possible sensor sluggishness")
+    else:
+        lines.append("  [lambda columns not present in this log]")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 7 — B1/B2 asymmetry deep dive
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(7, "B1 / B2 ASYMMETRY ANALYSIS"))
+
+    if cl_rows:
+        s1_all = [r["stft_b1"] for r in cl_rows]
+        s2_all = [r["stft_b2"] for r in cl_rows]
+        delta_all = [r["stft_b1"] - r["stft_b2"] for r in cl_rows]
+
+        med_delta = percentile(delta_all, 50)
+        p5_delta  = percentile(delta_all, 5)
+        p95_delta = percentile(delta_all, 95)
+        sd_delta  = statistics.stdev(delta_all) if len(delta_all) > 1 else 0
+
+        lines.append(f"  STFT B1-B2 delta:  median {med_delta:+.2f}%  std {sd_delta:.2f}%  "
+                     f"p5={p5_delta:+.1f}%  p95={p95_delta:+.1f}%")
+
+        if abs(med_delta) > THR["stft_imbalance"]:
+            lines.append(f"  ⚠ PERSISTENT IMBALANCE: {med_delta:+.2f}% — not random noise")
+        elif abs(med_delta) > 3:
+            lines.append(f"  · Slight systematic offset: {med_delta:+.2f}% — monitor over time")
+        else:
+            lines.append(f"  Banks are balanced (delta {med_delta:+.2f}% within tolerance)")
+
+        # Asymmetry vs temperature
+        lines.append(f"\n  Asymmetry vs coolant temperature:")
+        temp_ranges = [(30, 60), (60, 80), (80, 95), (95, 115)]
+        for t_lo, t_hi in temp_ranges:
+            tr = [r["stft_b1"] - r["stft_b2"] for r in cl_rows
+                  if t_lo <= r["coolant_c"] < t_hi]
+            if len(tr) < 10:
+                continue
+            med_t = percentile(tr, 50)
+            lines.append(f"  {t_lo}–{t_hi}°C : delta = {med_t:+.2f}%  (n={len(tr)})")
+
+        # Asymmetry vs RPM range
+        lines.append(f"\n  Asymmetry vs RPM:")
+        rpm_ranges = [(600, 1200), (1200, 2000), (2000, 3000), (3000, 5500)]
+        for r_lo, r_hi in rpm_ranges:
+            rr = [r["stft_b1"] - r["stft_b2"] for r in cl_rows
+                  if r_lo <= r["rpm"] < r_hi]
+            if len(rr) < 10:
+                continue
+            med_r = percentile(rr, 50)
+            lines.append(f"  {r_lo}–{r_hi} RPM : delta = {med_r:+.2f}%  (n={len(rr)})")
+
+        # Asymmetry vs load
+        lines.append(f"\n  Asymmetry vs load:")
+        for lo, hi in [(0, 20), (20, 40), (40, 60), (60, 100)]:
+            lr = [r["stft_b1"] - r["stft_b2"] for r in cl_rows
+                  if lo <= r["load_pct"] < hi]
+            if len(lr) < 10:
+                continue
+            med_l = percentile(lr, 50)
+            lines.append(f"  {lo}–{hi}% load : delta = {med_l:+.2f}%  (n={len(lr)})")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 8 — Injection & fueling
+    # ════════════════════════════════════════════════════════════════════════════
+    if has_inj:
+        lines.append(H(8, "INJECTION — DUTY CYCLE & FUELING"))
+        inj_run = [r for r in run_rows if r["inj_ms"] > 0.5]
+        if inj_run:
+            # Duty cycle = inj_ms / (60000/RPM) * 100
+            duty_list = []
+            for r in inj_run:
+                period_ms = 60000.0 / r["rpm"] if r["rpm"] > 0 else 0
+                if period_ms > 0:
+                    dc = r["inj_ms"] / period_ms * 100.0
+                    duty_list.append((r, dc))
+
+            if duty_list:
+                dc_vals = [dc for _, dc in duty_list]
+                lines.append(f"  Duty cycle: avg {statistics.mean(dc_vals):.1f}%  "
+                             f"p95 {percentile(dc_vals,95):.1f}%  "
+                             f"max {max(dc_vals):.1f}%")
+                if max(dc_vals) > THR["inj_duty_warn"]:
+                    peak_row, peak_dc = max(duty_list, key=lambda x: x[1])
+                    lines.append(f"  ⚠ Peak duty {peak_dc:.1f}% @ {peak_row['rpm']:.0f} RPM / "
+                                 f"{peak_row['load_pct']:.0f}% load  — headroom limited")
+                else:
+                    lines.append(f"  Injector duty OK — well below {THR['inj_duty_warn']:.0f}% limit")
+
+            # Inj time by phase
+            lines.append(f"\n  {'Phase':<14}  {'Inj avg':>8}  {'Inj max':>8}  {'DC avg':>8}")
+            for ph in CL_PHASES:
+                pr = [r for r in inj_run if r["phase"] == ph]
+                if not pr:
+                    continue
+                inj_v = [r["inj_ms"] for r in pr]
+                dc_v  = [r["inj_ms"] / (60000.0 / r["rpm"]) * 100.0
+                         for r in pr if r["rpm"] > 0]
+                lines.append(f"  {ph:<14}  {statistics.mean(inj_v):>7.2f}ms  "
+                             f"{max(inj_v):>7.2f}ms  "
+                             f"{(statistics.mean(dc_v) if dc_v else 0):>7.1f}%")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 9 — VANOS
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(9, "VANOS — INLET CAMSHAFT TRACKING"))
+    if has_vanos:
+        vanos_active = [r for r in rows if abs(r["vanos_tgt"]) > 1 and r["rpm"] > 800]
+        vanos_steady = [r for r in steady_rows if abs(r["vanos_tgt"]) > 1]
+
+        if vanos_active:
+            err_all    = [r["vanos_err"] for r in vanos_active]
+            err_steady = [r["vanos_err"] for r in vanos_steady]
+
+            lines.append(f"  All active rows:  "
+                         f"mean {statistics.mean(err_all):+.2f}°  "
+                         f"max|{max(abs(e) for e in err_all):.1f}°|  "
+                         f"p95|{percentile([abs(e) for e in err_all],95):.1f}°|  "
+                         f"(n={len(err_all)})")
+
+            if err_steady:
+                mean_ss = statistics.mean(err_steady)
+                max_ss  = max(abs(e) for e in err_steady)
+                f_ss    = flag(mean_ss, THR["vanos_steady_warn"], THR["vanos_steady_alarm"])
+                lines.append(f"  Steady-state:     "
+                             f"mean {mean_ss:+.2f}°  "
+                             f"max|{max_ss:.1f}°|{f_ss}  "
+                             f"(n={len(err_steady)}, after transients removed)")
+                ok_pct = 100 * sum(1 for e in err_steady
+                                   if abs(e) < THR["vanos_steady_warn"]) / len(err_steady)
+                lines.append(f"  Tracking OK:      {ok_pct:.1f}% within ±{THR['vanos_steady_warn']:.0f}°")
+
+            # VANOS error vs RPM
+            lines.append(f"\n  Steady-state error vs RPM:")
+            for r_lo, r_hi in [(800, 1500), (1500, 2500), (2500, 3500), (3500, 5500)]:
+                rr = [r["vanos_err"] for r in vanos_steady if r_lo <= r["rpm"] < r_hi]
+                if len(rr) < 5:
+                    continue
+                lines.append(f"  {r_lo}–{r_hi} RPM : {statistics.mean(rr):+.2f}°  "
+                             f"(max|{max(abs(e) for e in rr):.1f}°|  n={len(rr)})")
+
+            act_v = [r["vanos_act"] for r in vanos_active]
+            tgt_v = [r["vanos_tgt"] for r in vanos_active]
+            lines.append(f"\n  Actual range : {min(act_v):.0f}° – {max(act_v):.0f}°")
+            lines.append(f"  Target range : {min(tgt_v):.0f}° – {max(tgt_v):.0f}°")
+        else:
+            lines.append("  No VANOS active samples (target=0 throughout)")
+    else:
+        lines.append("  VANOS columns not present in this log")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 10 — Ignition
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(10, "IGNITION — ADVANCE & KNOCK PROXY"))
+    if has_ign:
+        ign_run = [r for r in run_rows if abs(r["ign_deg"]) > NEAR_ZERO]
+        if ign_run:
+            # Build RPM/Load-local baseline to detect true retards
+            # For each row, compare to p75 in its RPM × Load cell
+            ign_cell = defaultdict(list)
+            for r in ign_run:
+                ign_cell[(r["rb"], r["lb"])].append(r["ign_deg"])
+            cell_baseline = {k: percentile(v, 75) for k, v in ign_cell.items() if len(v) >= 5}
+
+            retard_events = []
+            for r in ign_run:
+                key = (r["rb"], r["lb"])
+                if key in cell_baseline:
+                    if r["ign_deg"] < cell_baseline[key] - 5.0 and r["rpm"] > 1500:
+                        retard_events.append(r)
+
+            ret_pct = 100 * len(retard_events) / len(ign_run) if ign_run else 0
+            ign_v = [r["ign_deg"] for r in ign_run]
+            lines.append(f"  Ignition avg : {statistics.mean(ign_v):+.1f}°  "
+                         f"range [{min(ign_v):+.1f}° – {max(ign_v):+.1f}°]")
+            lines.append(f"  Retard events: {len(retard_events)} ({ret_pct:.1f}%)  "
+                         f"threshold = cell p75 – 5°")
+
+            if ret_pct > 2.0:
+                lines.append(f"  ⚠ Significant knock activity — check fuel quality / octane")
+            elif ret_pct > 0.5:
+                lines.append(f"  · Occasional retard — normal for transients, monitor")
+            else:
+                lines.append(f"  Clean — no sustained knock retard detected")
+
+            # Ignition by phase
+            lines.append(f"\n  {'Phase':<14}  {'Ign avg':>8}  {'Ign p5':>8}  {'Ign max':>8}  {'Retards':>8}")
+            for ph in CL_PHASES:
+                pr_ign = [r for r in ign_run if r["phase"] == ph]
+                if not pr_ign:
+                    continue
+                iv = [r["ign_deg"] for r in pr_ign]
+                ret_ph = sum(1 for r in retard_events if r["phase"] == ph)
+                lines.append(f"  {ph:<14}  {statistics.mean(iv):>+7.1f}°  "
+                             f"{percentile(iv,5):>+7.1f}°  "
+                             f"{max(iv):>+7.1f}°  {ret_ph:>8}")
+
+            # WOT advance (E85 should allow high advance)
+            wot_ign = [r["ign_deg"] for r in ign_run if r["phase"] == "WOT" and r["rpm"] > 2500]
+            if wot_ign:
+                lines.append(f"\n  WOT advance (>2500 RPM) : avg {statistics.mean(wot_ign):+.1f}°  "
+                             f"max {max(wot_ign):+.1f}°")
+                if statistics.mean(wot_ign) < 15:
+                    lines.append(f"  ⚠ Low WOT advance — E85 should allow higher timing")
+        else:
+            lines.append("  No ignition data (all zero)")
+    else:
+        lines.append("  Ignition column not present in this log")
+
+    # ════════════════════════════════════════════════════════════════════════════
+    # 11 — Anomaly timeline
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(H(11, "ANOMALY EVENT TIMELINE"))
+
     events = []
 
-    prev_stft_b1_hi = False
-    prev_stft_b2_hi = False
-    stft_alarm_b1_streak = 0
-    stft_alarm_b2_streak = 0
+    stft_b1_streak = 0
+    stft_b2_streak = 0
 
     for i, row in enumerate(rows):
-        t = time_s(row)
+        t = ts(row)
         if not row["cl_active"]:
-            stft_alarm_b1_streak = 0
-            stft_alarm_b2_streak = 0
+            stft_b1_streak = 0
+            stft_b2_streak = 0
             continue
 
         s1, s2 = row["stft_b1"], row["stft_b2"]
 
-        # STFT sustained alarm (>5 consecutive CL samples above threshold)
         if abs(s1) > THR["stft_alarm"]:
-            stft_alarm_b1_streak += 1
-            if stft_alarm_b1_streak == 5:
-                events.append(("STFT_B1", t, f"STFT B1 sustained {s1:+.1f}%  [ALARM >{THR['stft_alarm']:.0f}%]"))
+            stft_b1_streak += 1
+            if stft_b1_streak == 6:
+                events.append(("STFT_B1",      t, f"B1 sustained {s1:+.1f}% (>{THR['stft_alarm']:.0f}%)  "
+                               f"RPM={row['rpm']:.0f} Load={row['load_pct']:.0f}%"))
         else:
-            stft_alarm_b1_streak = 0
+            stft_b1_streak = 0
 
         if abs(s2) > THR["stft_alarm"]:
-            stft_alarm_b2_streak += 1
-            if stft_alarm_b2_streak == 5:
-                events.append(("STFT_B2", t, f"STFT B2 sustained {s2:+.1f}%  [ALARM >{THR['stft_alarm']:.0f}%]"))
+            stft_b2_streak += 1
+            if stft_b2_streak == 6:
+                events.append(("STFT_B2",      t, f"B2 sustained {s2:+.1f}% (>{THR['stft_alarm']:.0f}%)  "
+                               f"RPM={row['rpm']:.0f} Load={row['load_pct']:.0f}%"))
         else:
-            stft_alarm_b2_streak = 0
+            stft_b2_streak = 0
 
-        # Instantaneous imbalance > threshold
-        delta = s1 - s2
-        if abs(delta) > THR["stft_imbalance"] + 5 and row["load_pct"] > 20:
-            events.append(("IMBALANCE", t, f"B1-B2 gap {delta:+.1f}%  (load {row['load_pct']:.0f}%)"))
+        if has_lmb:
+            if row["lmb_b1"] > THR["lmb_lean_load"] and row["load_pct"] > 35:
+                events.append(("LEAN_B1",   t, f"λB1={row['lmb_b1']:.3f} LEAN @ Load={row['load_pct']:.0f}% RPM={row['rpm']:.0f}"))
+            if row["lmb_b2"] > THR["lmb_lean_load"] and row["load_pct"] > 35:
+                events.append(("LEAN_B2",   t, f"λB2={row['lmb_b2']:.3f} LEAN @ Load={row['load_pct']:.0f}% RPM={row['rpm']:.0f}"))
+            if row["lmb_b1"] < THR["lmb_rich"] and s1 < -THR["stft_warn"]:
+                events.append(("RICH_B1",   t, f"λB1={row['lmb_b1']:.3f} RICH + STFT {s1:+.1f}%"))
+            if row["lmb_b2"] < THR["lmb_rich"] and s2 < -THR["stft_warn"]:
+                events.append(("RICH_B2",   t, f"λB2={row['lmb_b2']:.3f} RICH + STFT {s2:+.1f}%"))
 
-        # Lambda under load
-        if has_lmb and row["load_pct"] > 35:
-            if row["lmb_b1"] > THR["lmb_lean_load"]:
-                events.append(("LEAN_B1", t, f"Lambda B1 {row['lmb_b1']:.3f} LEAN under load {row['load_pct']:.0f}%"))
-            if row["lmb_b2"] > THR["lmb_lean_load"]:
-                events.append(("LEAN_B2", t, f"Lambda B2 {row['lmb_b2']:.3f} LEAN under load {row['load_pct']:.0f}%"))
-            if row["lmb_b1"] < THR["lmb_rich"] and row["stft_b1"] < -THR["stft_warn"]:
-                events.append(("RICH_B1", t, f"Lambda B1 {row['lmb_b1']:.3f} RICH, STFT {row['stft_b1']:+.1f}%"))
+        if has_vanos and abs(row["vanos_err"]) > THR["vanos_steady_alarm"] * 2 and row["rpm"] > 1000:
+            events.append(("VANOS",       t, f"Err={row['vanos_err']:+.1f}° (act={row['vanos_act']:.0f}° tgt={row['vanos_tgt']:.0f}°) RPM={row['rpm']:.0f}"))
 
-        # VANOS
-        if has_vanos and abs(row["vanos_err"]) > THR["vanos_err_alarm"] and row["rpm"] > 1000:
-            events.append(("VANOS", t, f"Vanos err {row['vanos_err']:+.1f}° CRK  (act {row['vanos_act']:.0f} tgt {row['vanos_tgt']:.0f})"))
-
-        # Ignition retard (knock proxy)
-        if has_ign and row["ign_deg"] < THR["ign_retard_warn"] and row["rpm"] > 1500:
-            events.append(("KNOCK_PROXY", t, f"Ign {row['ign_deg']:+.1f}° CRK retard  RPM={row['rpm']:.0f} Load={row['load_pct']:.0f}%"))
-
-    # Coolant overtemp
+    # Coolant alarm
     for row in rows:
         if row["coolant_c"] > THR["coolant_warn"]:
-            events.append(("OVERTEMP", time_s(row),
-                           f"Coolant {row['coolant_c']:.1f}°C  RPM={row['rpm']:.0f}"))
+            events.append(("OVERTEMP",    ts(row), f"Coolant {row['coolant_c']:.1f}°C  RPM={row['rpm']:.0f}"))
             break
 
-    # Deduplicate events: keep first per type per 10s window
+    # Deduplicate by type+10s window
+    seen = {}
     deduped = []
-    last_t = {}
     for ev_type, t, msg in sorted(events, key=lambda e: e[1]):
         key = (ev_type, int(t / 10))
-        if key not in last_t:
-            last_t[key] = t
+        if key not in seen:
+            seen[key] = True
             deduped.append((ev_type, t, msg))
-    events = deduped
 
-    # ── Build report ─────────────────────────────────────────────────────────
-    W = 66
-    sep = "═" * W
-    thin = "─" * W
-
-    def hdr(n, title):
-        return f"\n[{n}]  {title}\n{thin}"
-
-    lines = []
-    lines.append(sep)
-    lines.append(f"  MSV70 DIAGNOSTIC REPORT — E85_v5 / N52B30 9PPL921S")
-    lines.append(f"  File     : {path.name}")
-    lines.append(f"  Duration : {duration_s:.0f}s  ({duration_s/60:.1f} min)  |  {n_rows} rows")
-    lines.append(f"  Coolant  : {coolant_start:.0f}°C → {coolant_end:.0f}°C  (peak {coolant_max:.0f}°C)")
-    lines.append(sep)
-
-    # 1 ── Session overview
-    lines.append(hdr(1, "SESSION OVERVIEW"))
-    rpm_vals = [r["rpm"] for r in rows if r["rpm"] > 200]
-    load_vals = [r["load_pct"] for r in rows if r["rpm"] > 600]
-    speed_vals = [r["speed_kmh"] for r in rows if r["speed_kmh"] > 2]
-    if rpm_vals:
-        lines.append(f"  RPM       : avg {statistics.mean(rpm_vals):.0f}  max {max(rpm_vals):.0f}  "
-                     f"  {bar(statistics.mean(rpm_vals), 600, 5500)} (600–5500)")
-    if load_vals:
-        lines.append(f"  Load      : avg {statistics.mean(load_vals):.1f}%  max {max(load_vals):.1f}%"
-                     f"  {bar(statistics.mean(load_vals), 0, 100)}")
-    if speed_vals:
-        lines.append(f"  Speed     : avg {statistics.mean(speed_vals):.0f}  max {max(speed_vals):.0f} km/h"
-                     f"  {bar(statistics.mean(speed_vals), 0, 130)}")
-    if has_inj:
-        inj_run = [r["inj_ms"] for r in rows if r["rpm"] > 600 and r["inj_ms"] > 0.5]
-        if inj_run:
-            lines.append(f"  Inj C1    : avg {statistics.mean(inj_run):.2f} ms  max {max(inj_run):.2f} ms")
-    if "iat_c" in available:
-        iat_vals = [r["iat_c"] for r in rows if r["rpm"] > 200]
-        if iat_vals:
-            lines.append(f"  IAT       : {min(iat_vals):.0f}°C → {max(iat_vals):.0f}°C")
-    cl_pct = 100 * len(cl_rows) / n_rows if n_rows else 0
-    lines.append(f"  CL-loop   : {cl_pct:.0f}% of session ({len(cl_rows)} rows)")
-
-    # 2 ── Phase distribution
-    lines.append(hdr(2, "PHASE DISTRIBUTION"))
-    lines.append(f"  {'Phase':<14}  {'Dur':>6}  {'%':>5}  {'Rows':>6}  {'Avg RPM':>8}  {'Avg Load':>9}")
-    active_phases = [p for p in PHASES if phase_rows[p]]
-    for ph in active_phases:
-        pr = phase_rows[ph]
-        dur = phase_dur[ph]
-        pct = 100 * dur / duration_s if duration_s else 0
-        avg_rpm  = statistics.mean(r["rpm"] for r in pr) if pr else 0
-        avg_load = statistics.mean(r["load_pct"] for r in pr) if pr else 0
-        lines.append(f"  {ph:<14}  {dur:>5.0f}s  {pct:>4.0f}%  {len(pr):>6}  {avg_rpm:>8.0f}  {avg_load:>8.1f}%")
-
-    # 3 ── Fuel trims per phase
-    lines.append(hdr(3, "FUEL TRIMS — STFT per phase  (closed-loop rows only)"))
-    lines.append(f"  {'Phase':<14}  {'STFT B1 µ±σ':>14}  {'STFT B2 µ±σ':>14}  {'Δ(B1-B2)':>9}  {'Sat%B1':>7}  {'Sat%B2':>7}")
-    alarms_ft = []
-    for ph in ["WARMUP", "HOT_IDLE", "IDLE", "CRUISE", "ACCEL", "WOT", "FUEL_CUT"]:
-        pr = cl_phase[ph]
-        if not pr:
-            continue
-        s1v = [r["stft_b1"] for r in pr]
-        s2v = [r["stft_b2"] for r in pr]
-        mu1 = statistics.mean(s1v); sd1 = statistics.stdev(s1v) if len(s1v) > 1 else 0
-        mu2 = statistics.mean(s2v); sd2 = statistics.stdev(s2v) if len(s2v) > 1 else 0
-        delta = mu1 - mu2
-        sat1 = 100 * sum(1 for v in s1v if abs(v) > THR["stft_alarm"]) / len(s1v)
-        sat2 = 100 * sum(1 for v in s2v if abs(v) > THR["stft_alarm"]) / len(s2v)
-
-        flags = ""
-        if abs(mu1) > THR["stft_warn"] or sat1 > 5:
-            flags += " ⚠B1"
-        if abs(mu2) > THR["stft_warn"] or sat2 > 5:
-            flags += " ⚠B2"
-        if abs(delta) > THR["stft_imbalance"]:
-            flags += " ⚠IMBAL"
-        if abs(mu1) > THR["stft_alarm"] or abs(mu2) > THR["stft_alarm"]:
-            flags += " ⛔ALARM"
-
-        lines.append(f"  {ph:<14}  {fmt(mu1,2,'%'):>6}±{sd1:4.1f}%  "
-                     f"{fmt(mu2,2,'%'):>6}±{sd2:4.1f}%  "
-                     f"{fmt(delta,1,'%'):>9}  {sat1:>6.1f}%  {sat2:>6.1f}%{flags}")
-        if flags:
-            alarms_ft.append((ph, mu1, mu2, delta))
-
-    # Overall CL stats
-    if cl_rows:
-        s1_all = [r["stft_b1"] for r in cl_rows]
-        s2_all = [r["stft_b2"] for r in cl_rows]
-        mu1 = statistics.mean(s1_all); sd1 = statistics.stdev(s1_all) if len(s1_all) > 1 else 0
-        mu2 = statistics.mean(s2_all); sd2 = statistics.stdev(s2_all) if len(s2_all) > 1 else 0
-        lines.append(thin)
-        lines.append(f"  {'OVERALL (CL)':<14}  {fmt(mu1,2,'%'):>6}±{sd1:4.1f}%  "
-                     f"{fmt(mu2,2,'%'):>6}±{sd2:4.1f}%  {fmt(mu1-mu2,1,'%'):>9}")
-
-    # LTFT
-    lines.append("")
-    lines.append(f"  LTFT Multiplicative:")
-    if has_ltft:
-        mul1 = statistics.mean(ltft_mul_b1_vals) if ltft_mul_b1_vals else 0
-        mul2 = statistics.mean(ltft_mul_b2_vals) if ltft_mul_b2_vals else 0
-        add1 = statistics.mean(ltft_add_b1_vals) if ltft_add_b1_vals else 0
-        add2 = statistics.mean(ltft_add_b2_vals) if ltft_add_b2_vals else 0
-        ltft_imbal = abs(mul1 - mul2)
-        flag_ltft = ""
-        if ltft_imbal > THR["ltft_imbalance"]:
-            flag_ltft = "  ⚠⚠ ASYMMETRY"
-        elif ltft_imbal > 8:
-            flag_ltft = "  ⚠ imbalance"
-        if abs(mul1) > THR["ltft_alarm"] or abs(mul2) > THR["ltft_alarm"]:
-            flag_ltft += "  ⛔ AT LIMIT"
-        elif abs(mul1) > THR["ltft_warn"] or abs(mul2) > THR["ltft_warn"]:
-            flag_ltft += "  ⚠ HIGH"
-        lines.append(f"    B1 = {fmt(mul1,2,'%')}   B2 = {fmt(mul2,2,'%')}   Δ = {fmt(mul1-mul2,1,'%')}{flag_ltft}")
-        lines.append(f"  LTFT Additive:  B1 = {add1:+.3f} mg/stk   B2 = {add2:+.3f} mg/stk")
-    else:
-        lines.append("    [no LTFT data — values are 0 / session too short for adaptation]")
-
-    # 4 ── Lambda
-    lines.append(hdr(4, "LAMBDA ANALYSIS"))
-    if has_lmb:
-        # Overall CL lambda
-        lmb1_cl = [r["lmb_b1"] for r in cl_rows if 0.5 < r["lmb_b1"] < 2.0]
-        lmb2_cl = [r["lmb_b2"] for r in cl_rows if 0.5 < r["lmb_b2"] < 2.0]
-        if lmb1_cl:
-            mu1 = statistics.mean(lmb1_cl); sd1 = statistics.stdev(lmb1_cl) if len(lmb1_cl)>1 else 0
-            lines.append(f"  CL Lambda B1  : {mu1:.4f} ± {sd1:.4f}  "
-                         f"  range [{min(lmb1_cl):.3f} – {max(lmb1_cl):.3f}]")
-        if lmb2_cl:
-            mu2 = statistics.mean(lmb2_cl); sd2 = statistics.stdev(lmb2_cl) if len(lmb2_cl)>1 else 0
-            lines.append(f"  CL Lambda B2  : {mu2:.4f} ± {sd2:.4f}  "
-                         f"  range [{min(lmb2_cl):.3f} – {max(lmb2_cl):.3f}]")
-
-        # Under-load lambda
-        if load_lmb_rows:
-            ll1 = [r["lmb_b1"] for r in load_lmb_rows if 0.5 < r["lmb_b1"] < 2.0]
-            ll2 = [r["lmb_b2"] for r in load_lmb_rows if 0.5 < r["lmb_b2"] < 2.0]
-            if ll1:
-                mu = statistics.mean(ll1)
-                flag = "  ⚠ LEAN" if mu > THR["lmb_lean_load"] else ("  ⚠ RICH" if mu < THR["lmb_rich"] else "  OK")
-                lines.append(f"  Load>35% λ B1 : {mu:.4f} (n={len(ll1)}){flag}")
-            if ll2:
-                mu = statistics.mean(ll2)
-                flag = "  ⚠ LEAN" if mu > THR["lmb_lean_load"] else ("  ⚠ RICH" if mu < THR["lmb_rich"] else "  OK")
-                lines.append(f"  Load>35% λ B2 : {mu:.4f} (n={len(ll2)}){flag}")
-
-        # Decel lambda (fuel cut → open loop)
-        decel_rows = [r for r in rows if r["phase"] == "FUEL_CUT"]
-        if decel_rows:
-            l1 = [r["lmb_b1"] for r in decel_rows if r["lmb_b1"] > 0.5]
-            l2 = [r["lmb_b2"] for r in decel_rows if r["lmb_b2"] > 0.5]
-            if l1:
-                lines.append(f"  Fuel-cut λ B1 : avg {statistics.mean(l1):.3f}  "
-                             f"range [{min(l1):.3f}–{max(l1):.3f}]  (open loop)")
-            if l2:
-                lines.append(f"  Fuel-cut λ B2 : avg {statistics.mean(l2):.3f}  "
-                             f"range [{min(l2):.3f}–{max(l2):.3f}]")
-
-        # Lambda target tracking
-        if "lmb_tgt_b1" in available:
-            lmb_tgt_rows = [r for r in cl_rows if abs(r["lmb_tgt_b1"]) > NEAR_ZERO]
-            if lmb_tgt_rows:
-                errs = [r["lmb_b1"] - r["lmb_tgt_b1"] for r in lmb_tgt_rows]
-                lines.append(f"  λ B1 tracking error: {statistics.mean(errs):+.4f} avg, "
-                             f"±{statistics.stdev(errs) if len(errs)>1 else 0:.4f} std")
-    else:
-        lines.append("  [no lambda columns found]")
-
-    # 5 ── VANOS & Ignition
-    lines.append(hdr(5, "VANOS & IGNITION"))
-    if has_vanos:
-        if vanos_rows:
-            errs = [r["vanos_err"] for r in vanos_rows]
-            abs_errs = [abs(e) for e in errs]
-            mu_err = statistics.mean(errs)
-            max_err = max(abs_errs)
-            flag_v = ""
-            if max_err > THR["vanos_err_alarm"]:
-                flag_v = "  ⚠ TRACKING ALARM"
-            elif max_err > THR["vanos_err_warn"]:
-                flag_v = "  ⚠ tracking warn"
-            lines.append(f"  VANOS error   : avg {mu_err:+.2f}°  max |{max_err:.1f}°|{flag_v}")
-            act_vals = [r["vanos_act"] for r in vanos_rows]
-            tgt_vals = [r["vanos_tgt"] for r in vanos_rows]
-            lines.append(f"  Actual range  : {min(act_vals):.0f}° – {max(act_vals):.0f}°")
-            lines.append(f"  Target range  : {min(tgt_vals):.0f}° – {max(tgt_vals):.0f}°")
-
-            # Correlation check
-            tracking_ok = sum(1 for e in abs_errs if e < THR["vanos_err_warn"]) / len(abs_errs)
-            lines.append(f"  Tracking OK   : {tracking_ok*100:.1f}% of active samples within ±{THR['vanos_err_warn']:.0f}°")
-        else:
-            lines.append("  VANOS: no active samples (target=0 for all rows?)")
-    else:
-        lines.append("  VANOS: columns not present in this log")
-
-    if has_ign:
-        if ign_rows:
-            ign_vals = [r["ign_deg"] for r in ign_rows]
-            mu_ign = statistics.mean(ign_vals)
-            # Retard events vs mean (knock proxy: >8° below mean)
-            retard_threshold = mu_ign - 8.0
-            retard_events = [r for r in ign_rows if r["ign_deg"] < retard_threshold and r["rpm"] > 1500]
-            retard_pct = 100 * len(retard_events) / len(ign_rows)
-            lines.append(f"\n  Ignition C1   : avg {mu_ign:+.1f}°  range [{min(ign_vals):+.1f}° – {max(ign_vals):+.1f}°]")
-            if retard_pct > 0.5:
-                lines.append(f"  Knock retard  : {len(retard_events)} events ({retard_pct:.1f}%)  threshold < {retard_threshold:+.1f}°  ⚠")
-            else:
-                lines.append(f"  Knock retard  : {len(retard_events)} events ({retard_pct:.1f}%)  — clean")
-
-            # By phase
-            lines.append(f"  {'Phase':<14}  {'Ign avg':>8}  {'Ign min':>8}  {'n':>6}")
-            for ph in ["IDLE", "HOT_IDLE", "CRUISE", "ACCEL", "WOT"]:
-                ph_ign = [r["ign_deg"] for r in ign_rows if r["phase"] == ph]
-                if ph_ign:
-                    lines.append(f"  {ph:<14}  {statistics.mean(ph_ign):>+7.1f}°  {min(ph_ign):>+7.1f}°  {len(ph_ign):>6}")
-    else:
-        lines.append("\n  Ignition: column not present in this log")
-
-    # 6 ── STFT time evolution (buckets of 60s)
-    lines.append(hdr(6, "STFT EVOLUTION OVER TIME  (60s buckets, CL rows only)"))
-    if cl_rows:
-        t0 = time_s(cl_rows[0])
-        t_end = time_s(cl_rows[-1])
-        bucket_size = 60.0
-        n_buckets = max(1, int((t_end - t0) / bucket_size) + 1)
-        buckets = defaultdict(list)
-        for row in cl_rows:
-            b = int((time_s(row) - t0) / bucket_size)
-            buckets[b].append(row)
-
-        lines.append(f"  {'t(s)':>6}  {'STFT B1':>8}  {'STFT B2':>8}  {'Δ':>7}  {'RPM':>6}  {'Load':>6}  {'Coolant':>8}")
-        for b in sorted(buckets.keys()):
-            br = buckets[b]
-            t_mid = t0 + b * bucket_size
-            s1_b = [r["stft_b1"] for r in br]
-            s2_b = [r["stft_b2"] for r in br]
-            mu1 = statistics.mean(s1_b)
-            mu2 = statistics.mean(s2_b)
-            delta = mu1 - mu2
-            avg_rpm  = statistics.mean(r["rpm"] for r in br)
-            avg_load = statistics.mean(r["load_pct"] for r in br)
-            avg_cool = statistics.mean(r["coolant_c"] for r in br)
-            flag = ""
-            if abs(mu1) > THR["stft_warn"] or abs(mu2) > THR["stft_warn"]:
-                flag = " ⚠"
-            if abs(mu1) > THR["stft_alarm"] or abs(mu2) > THR["stft_alarm"]:
-                flag = " ⛔"
-            lines.append(f"  {t_mid:>6.0f}s  {fmt(mu1,1,'%'):>8}  {fmt(mu2,1,'%'):>8}  "
-                         f"{fmt(delta,1,'%'):>7}  {avg_rpm:>6.0f}  {avg_load:>5.1f}%  {avg_cool:>7.1f}°C{flag}")
-    else:
-        lines.append("  [no closed-loop rows in this log]")
-
-    # 7 ── Anomaly events log
-    lines.append(hdr(7, "ANOMALY EVENT LOG"))
-    if events:
-        for ev_type, t, msg in events[:50]:
-            lines.append(f"  t={t:>7.1f}s  [{ev_type:<14}]  {msg}")
-        if len(events) > 50:
-            lines.append(f"  ... ({len(events) - 50} more events truncated)")
+    if deduped:
+        for ev_type, t, msg in deduped[:60]:
+            lines.append(f"  t={t:>7.1f}s  [{ev_type:<10}]  {msg}")
+        if len(deduped) > 60:
+            lines.append(f"  … {len(deduped)-60} more events (same types)")
     else:
         lines.append("  No anomaly events detected.")
 
-    # 8 ── Verdict
-    lines.append(f"\n{sep}")
+    # ════════════════════════════════════════════════════════════════════════════
+    # 12 — Verdict
+    # ════════════════════════════════════════════════════════════════════════════
+    lines.append(f"\n{SEP}")
     lines.append("  VERDICT")
-    lines.append(thin)
+    lines.append(THN)
 
-    issues = []
-    oks = []
+    issues, warnings, oks = [], [], []
 
     # STFT
     if cl_rows:
-        s1_all = [r["stft_b1"] for r in cl_rows]
-        s2_all = [r["stft_b2"] for r in cl_rows]
-        mu1 = statistics.mean(s1_all); mu2 = statistics.mean(s2_all)
-        if abs(mu1) > THR["stft_alarm"]:
-            issues.append(f"STFT B1 avg {mu1:+.1f}% — approaching saturation, check fueling")
-        elif abs(mu1) > THR["stft_warn"]:
-            issues.append(f"STFT B1 avg {mu1:+.1f}% — elevated, tune may need adjustment")
-        else:
-            oks.append(f"STFT B1 avg {mu1:+.1f}% — within normal range")
-        if abs(mu2) > THR["stft_alarm"]:
-            issues.append(f"STFT B2 avg {mu2:+.1f}% — approaching saturation, check fueling")
-        elif abs(mu2) > THR["stft_warn"]:
-            issues.append(f"STFT B2 avg {mu2:+.1f}% — elevated")
-        else:
-            oks.append(f"STFT B2 avg {mu2:+.1f}% — within normal range")
-        delta = mu1 - mu2
-        if abs(delta) > THR["stft_imbalance"]:
-            issues.append(f"B1/B2 imbalance {delta:+.1f}% — suspect O2 sensor or mechanical issue")
+        s1a = [r["stft_b1"] for r in cl_rows]
+        s2a = [r["stft_b2"] for r in cl_rows]
+        m1, m2 = percentile(s1a, 50), percentile(s2a, 50)
+        delta_stft = m1 - m2
+
+        for bank, med, sat_a in [("B1", m1, pct_above(s1a, THR["stft_alarm"]) + pct_below(s1a, -THR["stft_alarm"])),
+                                  ("B2", m2, pct_above(s2a, THR["stft_alarm"]) + pct_below(s2a, -THR["stft_alarm"]))]:
+            if sat_a > 5:
+                issues.append(f"STFT {bank} median {med:+.1f}%, {sat_a:.1f}% near saturation — map richness off")
+            elif abs(med) > THR["stft_warn"]:
+                warnings.append(f"STFT {bank} median {med:+.1f}% — elevated, adjust ip_mff_cor")
+            else:
+                oks.append(f"STFT {bank} median {med:+.1f}% — OK")
+
+        if abs(delta_stft) > THR["stft_imbalance"]:
+            issues.append(f"B1/B2 gap {delta_stft:+.1f}% — suspect sensor or mechanical asymmetry")
+        elif abs(delta_stft) > 4:
+            warnings.append(f"B1/B2 slight asymmetry {delta_stft:+.1f}%")
 
     # LTFT
     if has_ltft:
-        mul1 = statistics.mean(ltft_mul_b1_vals)
-        mul2 = statistics.mean(ltft_mul_b2_vals)
+        mul1 = percentile([r["ltft_mul_b1"] for r in run_rows], 50)
+        mul2 = percentile([r["ltft_mul_b2"] for r in run_rows], 50)
         if abs(mul1) > THR["ltft_alarm"] or abs(mul2) > THR["ltft_alarm"]:
-            issues.append(f"LTFT Mul at ceiling: B1={mul1:+.1f}% B2={mul2:+.1f}% — map enrichment OFF")
+            issues.append(f"LTFT Mul: B1={mul1:+.1f}% B2={mul2:+.1f}% — at ceiling, map is wrong")
         elif abs(mul1) > THR["ltft_warn"] or abs(mul2) > THR["ltft_warn"]:
-            issues.append(f"LTFT Mul elevated: B1={mul1:+.1f}% B2={mul2:+.1f}% — consider map revision")
+            warnings.append(f"LTFT Mul: B1={mul1:+.1f}% B2={mul2:+.1f}% — elevated")
         else:
             oks.append(f"LTFT Mul: B1={mul1:+.1f}% B2={mul2:+.1f}% — OK")
         if abs(mul1 - mul2) > THR["ltft_imbalance"]:
-            issues.append(f"LTFT asymmetry {mul1-mul2:+.1f}% — sensor or mechanical fault suspected")
+            issues.append(f"LTFT asymmetry {mul1-mul2:+.1f}% — sensor or mechanical fault")
     else:
-        oks.append("LTFT: 0 (no adaptation yet or just reset)")
+        oks.append("LTFT = 0 (not yet adapted)")
 
     # Coolant
-    if coolant_max > THR["coolant_warn"]:
-        issues.append(f"Coolant peaked at {coolant_max:.0f}°C — check cooling system")
+    if t_cool_max > THR["coolant_warn"]:
+        issues.append(f"Coolant {t_cool_max:.0f}°C peak — check cooling")
     else:
-        oks.append(f"Coolant OK (max {coolant_max:.0f}°C)")
+        oks.append(f"Coolant OK (max {t_cool_max:.0f}°C)")
 
-    # Knock
-    if has_ign and ign_rows:
-        ign_vals = [r["ign_deg"] for r in ign_rows]
-        mu_ign = statistics.mean(ign_vals)
-        retard_events_count = sum(1 for r in ign_rows
-                                  if r["ign_deg"] < mu_ign - 8.0 and r["rpm"] > 1500)
-        if retard_events_count > 5:
-            issues.append(f"Ignition retard events: {retard_events_count} — possible knock activity")
-        else:
-            oks.append(f"Ignition: no significant retard events ({retard_events_count})")
+    # Lambda WOT
+    if has_lmb:
+        wot_lmb = [r["lmb_b1"] for r in rows if r["phase"] == "WOT"
+                   and 0.3 < r["lmb_b1"] < 2.0 and r["rpm"] > 2500]
+        if wot_lmb:
+            m = statistics.mean(wot_lmb)
+            if m > 0.98:
+                issues.append(f"WOT lambda B1 {m:.3f} — lean at full load, safety risk")
+            elif m > 0.94:
+                warnings.append(f"WOT lambda B1 {m:.3f} — slightly lean at WOT")
+            else:
+                oks.append(f"WOT lambda B1 {m:.3f} — rich enough for E85")
+
+    # Injector duty
+    if has_inj:
+        inj_run = [r for r in run_rows if r["inj_ms"] > 0.5 and r["rpm"] > 0]
+        if inj_run:
+            dc_max = max(r["inj_ms"] / (60000.0 / r["rpm"]) * 100.0 for r in inj_run)
+            if dc_max > THR["inj_duty_warn"]:
+                issues.append(f"Injector duty {dc_max:.1f}% peak — approaching limit")
+            else:
+                oks.append(f"Injector duty OK (max {dc_max:.1f}%)")
+
+    status = "⛔ CRITICAL" if issues else ("⚠ WARNINGS" if warnings else "✓ OK")
+    lines.append(f"  STATUS: {status}")
 
     if issues:
-        lines.append(f"  STATUS: ⚠  {len(issues)} issue(s) found\n")
-        for issue in issues:
-            lines.append(f"  ✗ {issue}")
-    else:
-        lines.append(f"  STATUS: OK  No critical issues found\n")
-
+        lines.append("")
+        for x in issues:
+            lines.append(f"  ✗ [ISSUE]   {x}")
+    if warnings:
+        lines.append("")
+        for x in warnings:
+            lines.append(f"  ⚠ [WARN]    {x}")
     if oks:
         lines.append("")
-        for ok in oks:
-            lines.append(f"  ✓ {ok}")
+        for x in oks:
+            lines.append(f"  ✓ [OK]      {x}")
 
-    lines.append(sep)
+    lines.append(SEP)
     lines.append("")
 
     return "\n".join(lines)
 
 
-# ─── entry point ────────────────────────────────────────────────────────────────
-
+# ─── Entry point ─────────────────────────────────────────────────────────────────
 def find_latest_csv():
     logs_dir = Path(__file__).parent.parent / "LOGS"
     csvs = sorted(logs_dir.glob("*.csv"), key=lambda p: p.stat().st_mtime, reverse=True)
     if not csvs:
-        # Fallback: check old/
         csvs = sorted((logs_dir / "old").glob("*.csv"),
                       key=lambda p: p.stat().st_mtime, reverse=True)
     if not csvs:
-        raise FileNotFoundError(f"No CSV files found in {logs_dir}")
+        raise FileNotFoundError(f"No CSV files in {logs_dir}")
     return csvs[0]
 
 
@@ -690,20 +1045,18 @@ def main():
             path = Path.cwd() / path
     else:
         path = find_latest_csv()
-        print(f"Auto-selected: {path.name}")
+        print(f"Auto-selected: {path.name}\n")
 
     if not path.exists():
-        print(f"Error: file not found: {path}", file=sys.stderr)
+        print(f"Error: {path}", file=sys.stderr)
         sys.exit(1)
 
     try:
-        report = analyze(path)
-    except Exception as e:
-        print(f"Error analyzing {path}: {e}", file=sys.stderr)
-        import traceback; traceback.print_exc()
+        print(analyze(path))
+    except Exception:
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
-
-    print(report)
 
 
 if __name__ == "__main__":
