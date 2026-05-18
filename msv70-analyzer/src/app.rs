@@ -1,6 +1,6 @@
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
-use egui::{Context, RichText, Ui};
+use egui::{Color32, Context, RichText, Ui};
 
 use crate::analysis::{compute_session, generate_report, percentile};
 use crate::config::AppConfig;
@@ -13,22 +13,23 @@ use crate::jobs::{load_customjobs, load_pid_db};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Nav {
-    Overview, StftMap, TimeSeries, Trend, CustomJobs, Settings,
+    TimeSeries, StftMap, Overview, Trend, Rapport, CustomJobs, Settings,
 }
 
 impl Nav {
     fn label(&self) -> &'static str {
         match self {
-            Nav::Overview   => "Overview",
-            Nav::StftMap    => "STFT Map",
             Nav::TimeSeries => "Time Series",
+            Nav::StftMap    => "STFT Map",
+            Nav::Overview   => "Overview",
             Nav::Trend      => "Trend",
+            Nav::Rapport    => "Rapport",
             Nav::CustomJobs => "Custom Jobs",
             Nav::Settings   => "Settings",
         }
     }
     fn is_analysis(&self) -> bool {
-        matches!(self, Nav::Overview | Nav::StftMap | Nav::TimeSeries)
+        matches!(self, Nav::TimeSeries | Nav::StftMap | Nav::Overview | Nav::Rapport)
     }
 }
 
@@ -39,7 +40,6 @@ type AsyncResult = Result<(SessionData, String), String>;
 pub struct MSV70App {
     pub config:       AppConfig,
     pub config_dirty: bool,
-
     pub session:      Option<SessionData>,
     pub report:       String,
     pub all_sessions: Vec<SessionData>,
@@ -47,16 +47,27 @@ pub struct MSV70App {
     pub status:       String,
     pub tips:         Vec<String>,
     pub tip_idx:      usize,
-
     pub jobs_state:      JobsState,
     pub customjobs_path: Option<PathBuf>,
-
     pub pending:     Option<Arc<Mutex<Option<AsyncResult>>>>,
     pub pending_all: Option<Arc<Mutex<Option<Vec<SessionData>>>>>,
-
     pub logs_dir:     Option<PathBuf>,
     pub log_files:    Vec<PathBuf>,
     pub selected_log: Option<usize>,
+    // Playback state
+    pub cursor_s:        Option<f64>,
+    pub is_playing:      bool,
+    pub playback_speed:  f64,
+    pub last_frame_time: Option<std::time::Instant>,
+    // Channel visibility
+    pub show_rpm:     bool,
+    pub show_load:    bool,
+    pub show_stft_b1: bool,
+    pub show_stft_b2: bool,
+    pub show_lmb_b1:  bool,
+    pub show_lmb_b2:  bool,
+    pub show_ign:     bool,
+    pub show_coolant: bool,
 }
 
 impl MSV70App {
@@ -70,18 +81,23 @@ impl MSV70App {
 
         let customjobs_path = find_customjobs();
         let mut jobs_state  = JobsState::default();
-        if let Some(ref p) = find_pid_db()     { if let Ok(db)   = load_pid_db(p)    { jobs_state.pid_db = db; } }
-        if let Some(ref p) = customjobs_path   { if let Ok(jobs) = load_customjobs(p){ jobs_state.jobs = jobs; } }
+        if let Some(ref p) = find_pid_db()   { if let Ok(db)   = load_pid_db(p)    { jobs_state.pid_db = db; } }
+        if let Some(ref p) = customjobs_path { if let Ok(jobs) = load_customjobs(p){ jobs_state.jobs = jobs; } }
 
         let mut app = MSV70App {
             config, config_dirty: false,
             session: None, report: String::new(), all_sessions: vec![],
-            nav: Nav::Overview,
+            nav: Nav::TimeSeries,
             status: "Ready — select a log from the sidebar".into(),
             tips: vec![], tip_idx: 0,
             jobs_state, customjobs_path,
             pending: None, pending_all: None,
             logs_dir, log_files, selected_log: None,
+            cursor_s: None, is_playing: false, playback_speed: 1.0, last_frame_time: None,
+            show_rpm: true, show_load: true,
+            show_stft_b1: true, show_stft_b2: true,
+            show_lmb_b1: true, show_lmb_b2: true,
+            show_ign: true, show_coolant: true,
         };
 
         if let Some(path) = app.log_files.last().cloned() {
@@ -93,6 +109,9 @@ impl MSV70App {
 
     pub fn start_analyze(&mut self, path: PathBuf) {
         self.status = format!("Analyzing {}…", path.file_name().unwrap_or_default().to_string_lossy());
+        self.cursor_s = None;
+        self.is_playing = false;
+        self.last_frame_time = None;
         let cfg   = self.config.clone();
         let shared: Arc<Mutex<Option<AsyncResult>>> = Arc::new(Mutex::new(None));
         let clone = shared.clone();
@@ -153,6 +172,27 @@ impl MSV70App {
             }
         }
     }
+
+    fn advance_playback(&mut self) {
+        if !self.is_playing { return; }
+        let Some(ref d) = self.session else { return; };
+        if d.rows.is_empty() { return; }
+        let t0    = d.rows[0].ts();
+        let t_max = d.rows.last().map(|r| r.ts() - t0).unwrap_or(0.0);
+        let now   = std::time::Instant::now();
+        if let Some(last) = self.last_frame_time {
+            let dt  = now.duration_since(last).as_secs_f64() * self.playback_speed;
+            let cur = self.cursor_s.get_or_insert(0.0);
+            *cur += dt;
+            if *cur >= t_max {
+                *cur = t_max;
+                self.is_playing = false;
+                self.last_frame_time = None;
+                return;
+            }
+        }
+        self.last_frame_time = Some(now);
+    }
 }
 
 // ── eframe::App ───────────────────────────────────────────────────────────────
@@ -160,8 +200,9 @@ impl MSV70App {
 impl eframe::App for MSV70App {
     fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame) {
         self.poll_background();
+        self.advance_playback();
 
-        if self.pending.is_some() || self.pending_all.is_some() {
+        if self.pending.is_some() || self.pending_all.is_some() || self.is_playing {
             ctx.request_repaint();
         }
         if self.config_dirty {
@@ -169,26 +210,66 @@ impl eframe::App for MSV70App {
             self.config_dirty = false;
         }
 
-        egui::TopBottomPanel::bottom("tip_bar").show(ctx, |ui| {
-            show_tip_bar(ui, self);
-        });
+        // ── Chrome-style nav tab bar ───────────────────────────────────────────
+        let current_nav = self.nav.clone();
+        let mut new_nav: Option<Nav> = None;
 
+        egui::TopBottomPanel::top("nav_tabs")
+            .frame(egui::Frame::NONE.fill(BG2))
+            .show(ctx, |ui| {
+                ui.add_space(6.0);
+                ui.horizontal(|ui| {
+                    ui.add_space(8.0);
+                    ui.label(RichText::new("MSV70").color(OLIVE).strong().size(14.0));
+                    ui.add_space(14.0);
+                    for item in [
+                        Nav::TimeSeries, Nav::StftMap, Nav::Overview,
+                        Nav::Trend, Nav::Rapport, Nav::CustomJobs, Nav::Settings,
+                    ] {
+                        if nav_tab(ui, item.label(), current_nav == item) {
+                            new_nav = Some(item);
+                        }
+                        ui.add_space(2.0);
+                    }
+                });
+                ui.add_space(2.0);
+            });
+        if let Some(n) = new_nav { self.nav = n; }
+
+        // ── Bottom tip bar ─────────────────────────────────────────────────────
+        egui::TopBottomPanel::bottom("tip_bar")
+            .frame(egui::Frame::NONE.fill(BG2))
+            .show(ctx, |ui| {
+                ui.add_space(3.0);
+                show_tip_bar(ui, self);
+                ui.add_space(3.0);
+            });
+
+        // ── Left sidebar ───────────────────────────────────────────────────────
         let sidebar_w = self.config.sidebar_width;
         egui::SidePanel::left("sidebar")
             .resizable(true)
             .default_width(sidebar_w)
             .min_width(160.0)
+            .frame(egui::Frame::NONE.fill(BG2).inner_margin(egui::Margin::symmetric(6, 6)))
             .show(ctx, |ui| {
                 show_sidebar(ui, self);
             });
 
+        // ── Central content panel ──────────────────────────────────────────────
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.horizontal(|ui| {
+                if self.pending.is_some() || self.pending_all.is_some() {
+                    ui.spinner();
+                    ui.add_space(4.0);
+                }
                 ui.label(RichText::new(&self.status).color(FG_DIM).small());
             });
-            ui.separator();
 
-            let nav = self.nav.clone();
+            let nav     = self.nav.clone();
+            let cfg     = self.config.clone();
+            let session = self.session.clone();
+
             match nav {
                 Nav::CustomJobs => {
                     crate::gui::tab_jobs::show(ui, &mut self.jobs_state, &self.customjobs_path);
@@ -197,81 +278,98 @@ impl eframe::App for MSV70App {
                     crate::gui::tab_settings::show(ui, &mut self.config, &mut self.config_dirty);
                 }
                 Nav::Trend => {
-                    let cfg = self.config.clone();
                     crate::gui::tab_trend::show(ui, &self.all_sessions, &cfg);
                 }
-                _ => {
-                    // Analysis tabs: report on left, chart on right
-                    let report_w = self.config.report_width;
-                    let report   = self.report.clone();
-                    let cfg      = self.config.clone();
-                    let session  = self.session.clone();
-
-                    egui::SidePanel::left("report_panel")
-                        .resizable(true)
-                        .default_width(report_w)
-                        .min_width(200.0)
-                        .show_inside(ui, |ui| {
-                            report_panel::show(ui, &report);
-                        });
-
-                    egui::CentralPanel::default().show_inside(ui, |ui| {
-                        if let Some(ref d) = session {
-                            match self.nav {
-                                Nav::Overview   => crate::gui::tab_overview::show(ui, d, &cfg),
-                                Nav::StftMap    => crate::gui::tab_stft_map::show(ui, d, &cfg),
-                                Nav::TimeSeries => crate::gui::tab_timeseries::show(ui, d, &cfg),
-                                _ => {}
-                            }
-                        } else {
-                            ui.centered_and_justified(|ui| {
-                                ui.label(RichText::new("Select a log from the sidebar to begin analysis")
-                                    .color(FG_DIM));
-                            });
-                        }
-                    });
+                Nav::Rapport => {
+                    report_panel::show(ui, &self.report);
+                }
+                Nav::TimeSeries => {
+                    if let Some(ref d) = session {
+                        crate::gui::tab_timeseries::show(
+                            ui, d, &cfg,
+                            self.show_rpm,     self.show_load,
+                            self.show_stft_b1, self.show_stft_b2,
+                            self.show_lmb_b1,  self.show_lmb_b2,
+                            self.show_ign,     self.show_coolant,
+                            &mut self.cursor_s,
+                            &mut self.is_playing,
+                            &mut self.playback_speed,
+                            &mut self.last_frame_time,
+                        );
+                    } else { show_empty(ui); }
+                }
+                Nav::Overview => {
+                    if let Some(ref d) = session {
+                        crate::gui::tab_overview::show(ui, d, &cfg);
+                    } else { show_empty(ui); }
+                }
+                Nav::StftMap => {
+                    if let Some(ref d) = session {
+                        crate::gui::tab_stft_map::show(ui, d, &cfg);
+                    } else { show_empty(ui); }
                 }
             }
         });
     }
 }
 
+// ── Chrome-style nav tab ──────────────────────────────────────────────────────
+
+fn nav_tab(ui: &mut egui::Ui, label: &str, is_active: bool) -> bool {
+    let bg       = if is_active { BG4 } else { Color32::from_rgb(40, 40, 40) };
+    let text_col = if is_active { Color32::WHITE } else { Color32::from_rgb(170, 170, 170) };
+    let border   = if is_active { OLIVE } else { BG4 };
+    let sw       = if is_active { 2.0_f32 } else { 1.0_f32 };
+
+    let mut clicked = false;
+    egui::Frame::NONE
+        .fill(bg)
+        .corner_radius(egui::CornerRadius { nw: 6, ne: 6, sw: 0, se: 0 })
+        .stroke(egui::Stroke::new(sw, border))
+        .inner_margin(egui::Margin { left: 12, right: 12, top: 5, bottom: 5 })
+        .show(ui, |ui| {
+            let r = ui.add(
+                egui::Label::new(RichText::new(label).color(text_col).size(13.0))
+                    .sense(egui::Sense::click()),
+            );
+            if r.clicked() { clicked = true; }
+            if r.hovered() { ui.ctx().set_cursor_icon(egui::CursorIcon::PointingHand); }
+        });
+    clicked
+}
+
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 
 fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
+    ui.add_space(4.0);
+
+    // ── Channel visibility ─────────────────────────────────────────────────
+    ui.label(RichText::new("CHANNELS").color(FG_DIM).small().strong());
+    ui.add_space(3.0);
+
+    ch_toggle(ui, &mut app.show_rpm,     "RPM",        CHART[0]);
+    ch_toggle(ui, &mut app.show_load,    "Load %",     CHART[4]);
+    ch_toggle(ui, &mut app.show_stft_b1, "STFT B1",    CHART[1]);
+    ch_toggle(ui, &mut app.show_stft_b2, "STFT B2",    CHART[0]);
+    ch_toggle(ui, &mut app.show_lmb_b1,  "λ Bank 1",  CHART[6]);
+    ch_toggle(ui, &mut app.show_lmb_b2,  "λ Bank 2",  CHART[8]);
+    ch_toggle(ui, &mut app.show_ign,     "Ignition",   CHART[9]);
+    ch_toggle(ui, &mut app.show_coolant, "Coolant",    CHART[3]);
+
     ui.add_space(6.0);
-    ui.label(RichText::new("MSV70 ANALYZER").color(ACCENT).strong().small());
-    ui.label(RichText::new("N52B30 · E85_v5 · 9PPL921S").color(FG_DIM).small());
     ui.separator();
-
     ui.add_space(4.0);
-    ui.label(RichText::new("ANALYSIS").color(FG_DIM).small().strong());
-    for item in &[Nav::Overview, Nav::StftMap, Nav::TimeSeries, Nav::Trend] {
-        let sel = app.nav == *item;
-        if ui.selectable_label(sel, RichText::new(item.label()).color(if sel { ACCENT } else { FG }).strong()).clicked() {
-            app.nav = item.clone();
-        }
-    }
 
-    ui.add_space(4.0);
-    ui.label(RichText::new("TOOLS").color(FG_DIM).small().strong());
-    for item in &[Nav::CustomJobs, Nav::Settings] {
-        let sel = app.nav == *item;
-        if ui.selectable_label(sel, RichText::new(item.label()).color(if sel { ACCENT } else { FG })).clicked() {
-            app.nav = item.clone();
-        }
-    }
-
-    ui.separator();
-
+    // ── Log file list ──────────────────────────────────────────────────────
     ui.horizontal(|ui| {
         ui.label(RichText::new("LOGS").color(FG_DIM).small().strong());
         if ui.small_button("⟳").on_hover_text("Rescan LOGS folder").clicked() {
             app.log_files = scan_logs(app.logs_dir.as_deref());
         }
     });
+    ui.add_space(2.0);
 
-    let list_h = ui.available_height() - 56.0;
+    let list_h = ui.available_height() - 58.0;
     let mut clicked_idx: Option<usize> = None;
     egui::ScrollArea::vertical()
         .id_salt("log_list")
@@ -281,7 +379,8 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
             for (idx, path) in app.log_files.iter().enumerate() {
                 let name = path.file_stem().and_then(|s| s.to_str()).unwrap_or("?");
                 let sel  = app.selected_log == Some(idx);
-                if ui.selectable_label(sel, RichText::new(name).color(if sel { ACCENT } else { FG_DIM }).small()).clicked() {
+                let color = if sel { ACCENT } else { FG_DIM };
+                if ui.selectable_label(sel, RichText::new(name).color(color).small()).clicked() {
                     clicked_idx = Some(idx);
                 }
             }
@@ -289,30 +388,40 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
                 ui.label(RichText::new("No CSV files found").color(FG_DIM).small());
             }
         });
+
     if let Some(idx) = clicked_idx {
         let path = app.log_files[idx].clone();
         app.selected_log = Some(idx);
         app.start_analyze(path);
         if !app.nav.is_analysis() && app.nav != Nav::Trend {
-            app.nav = Nav::Overview;
+            app.nav = Nav::TimeSeries;
         }
     }
 
     ui.separator();
-    if ui.button("⊕ All Logs (Trend)").clicked() && app.pending_all.is_none() {
-        app.start_load_all();
-    }
-    if ui.button("Browse…").clicked() {
-        if let Some(path) = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_file() {
-            if !app.log_files.contains(&path) { app.log_files.push(path.clone()); }
-            app.selected_log = app.log_files.iter().position(|p| p == &path);
-            app.start_analyze(path);
-            if !app.nav.is_analysis() { app.nav = Nav::Overview; }
+    ui.add_space(2.0);
+    ui.horizontal(|ui| {
+        if ui.button("⊕ Trend").clicked() && app.pending_all.is_none() {
+            app.start_load_all();
         }
-    }
-    if app.pending.is_some() || app.pending_all.is_some() {
-        ui.horizontal(|ui| { ui.spinner(); ui.label(RichText::new("working…").color(FG_DIM).small()); });
-    }
+        if ui.button("📂 Browse").clicked() {
+            if let Some(path) = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_file() {
+                if !app.log_files.contains(&path) { app.log_files.push(path.clone()); }
+                app.selected_log = app.log_files.iter().position(|p| p == &path);
+                app.start_analyze(path);
+                if !app.nav.is_analysis() { app.nav = Nav::TimeSeries; }
+            }
+        }
+    });
+}
+
+fn ch_toggle(ui: &mut Ui, val: &mut bool, label: &str, color: Color32) {
+    ui.horizontal(|ui| {
+        let (rect, _) = ui.allocate_exact_size(egui::vec2(10.0, 10.0), egui::Sense::hover());
+        ui.painter().rect_filled(rect, 2.0, if *val { color } else { Color32::from_gray(55) });
+        ui.add_space(2.0);
+        ui.checkbox(val, RichText::new(label).color(if *val { FG } else { FG_DIM }).small());
+    });
 }
 
 // ── Tip bar ───────────────────────────────────────────────────────────────────
@@ -327,6 +436,15 @@ fn show_tip_bar(ui: &mut Ui, app: &mut MSV70App) {
         if !app.tips.is_empty() && ui.small_button("▸").clicked() {
             app.tip_idx = (app.tip_idx + 1) % app.tips.len();
         }
+    });
+}
+
+// ── Empty state ───────────────────────────────────────────────────────────────
+
+fn show_empty(ui: &mut Ui) {
+    ui.centered_and_justified(|ui| {
+        ui.label(RichText::new("Select a log from the sidebar to begin analysis")
+            .color(FG_DIM).size(14.0));
     });
 }
 
@@ -453,8 +571,10 @@ fn apply_theme(ctx: &Context) {
     v.code_bg_color                  = BG2;
     v.widgets.noninteractive.bg_fill = BG2;
     v.widgets.inactive.bg_fill       = BG3;
-    v.widgets.hovered.bg_fill        = BG3;
+    v.widgets.hovered.bg_fill        = BG4;
     v.widgets.active.bg_fill         = ACCENT;
     v.selection.bg_fill              = ACCENT;
+    v.widgets.inactive.fg_stroke     = egui::Stroke::new(1.0, FG_DIM);
+    v.widgets.noninteractive.fg_stroke = egui::Stroke::new(1.0, FG_DIM);
     ctx.set_visuals(v);
 }
