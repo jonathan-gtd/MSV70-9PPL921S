@@ -7,6 +7,7 @@ use crate::config::AppConfig;
 use crate::data::SessionData;
 use crate::data::types::Phase;
 use crate::gui::{palette::*, report_panel, tab_jobs::JobsState};
+use crate::gui::tab_timeseries::{ChartPanel, ALL_CHANNELS, default_panels};
 use crate::jobs::{load_customjobs, load_pid_db};
 
 // ── Navigation ────────────────────────────────────────────────────────────────
@@ -59,15 +60,9 @@ pub struct MSV70App {
     pub is_playing:      bool,
     pub playback_speed:  f64,
     pub last_frame_time: Option<std::time::Instant>,
-    // Channel visibility
-    pub show_rpm:     bool,
-    pub show_load:    bool,
-    pub show_stft_b1: bool,
-    pub show_stft_b2: bool,
-    pub show_lmb_b1:  bool,
-    pub show_lmb_b2:  bool,
-    pub show_ign:     bool,
-    pub show_coolant: bool,
+    // Dynamic chart system
+    pub chart_panels:  Vec<ChartPanel>,
+    pub next_panel_id: usize,
 }
 
 impl MSV70App {
@@ -94,10 +89,8 @@ impl MSV70App {
             pending: None, pending_all: None,
             logs_dir, log_files, selected_log: None,
             cursor_s: None, is_playing: false, playback_speed: 1.0, last_frame_time: None,
-            show_rpm: true, show_load: true,
-            show_stft_b1: true, show_stft_b2: true,
-            show_lmb_b1: true, show_lmb_b2: true,
-            show_ign: true, show_coolant: true,
+            chart_panels: default_panels(),
+            next_panel_id: 3,
         };
 
         if let Some(path) = app.log_files.last().cloned() {
@@ -202,6 +195,20 @@ impl eframe::App for MSV70App {
         self.poll_background();
         self.advance_playback();
 
+        // File drop detection
+        let dropped_paths: Vec<PathBuf> = ctx.input(|i| {
+            i.raw.dropped_files.iter()
+                .filter_map(|f| f.path.clone())
+                .filter(|p| p.extension().map(|e| e == "csv").unwrap_or(false))
+                .collect()
+        });
+        for path in dropped_paths {
+            if !self.log_files.contains(&path) { self.log_files.push(path.clone()); }
+            self.selected_log = self.log_files.iter().position(|p| p == &path);
+            self.start_analyze(path.clone());
+            if !self.nav.is_analysis() { self.nav = Nav::TimeSeries; }
+        }
+
         if self.pending.is_some() || self.pending_all.is_some() || self.is_playing {
             ctx.request_repaint();
         }
@@ -287,26 +294,26 @@ impl eframe::App for MSV70App {
                     if let Some(ref d) = session {
                         crate::gui::tab_timeseries::show(
                             ui, d, &cfg,
-                            self.show_rpm,     self.show_load,
-                            self.show_stft_b1, self.show_stft_b2,
-                            self.show_lmb_b1,  self.show_lmb_b2,
-                            self.show_ign,     self.show_coolant,
+                            &mut self.chart_panels,
+                            &mut self.next_panel_id,
                             &mut self.cursor_s,
                             &mut self.is_playing,
                             &mut self.playback_speed,
                             &mut self.last_frame_time,
                         );
-                    } else { show_empty(ui); }
+                    } else {
+                        show_empty(ui, ctx);
+                    }
                 }
                 Nav::Overview => {
                     if let Some(ref d) = session {
                         crate::gui::tab_overview::show(ui, d, &cfg);
-                    } else { show_empty(ui); }
+                    } else { show_empty(ui, ctx); }
                 }
                 Nav::StftMap => {
                     if let Some(ref d) = session {
                         crate::gui::tab_stft_map::show(ui, d, &cfg);
-                    } else { show_empty(ui); }
+                    } else { show_empty(ui, ctx); }
                 }
             }
         });
@@ -343,18 +350,39 @@ fn nav_tab(ui: &mut egui::Ui, label: &str, is_active: bool) -> bool {
 fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
     ui.add_space(4.0);
 
-    // ── Channel visibility ─────────────────────────────────────────────────
+    // ── Channel palette ────────────────────────────────────────────────────
     ui.label(RichText::new("CHANNELS").color(FG_DIM).small().strong());
-    ui.add_space(3.0);
+    ui.label(RichText::new("Drag onto a chart").color(FG_DIM).size(9.5).italics());
+    ui.add_space(4.0);
 
-    ch_toggle(ui, &mut app.show_rpm,     "RPM",        CHART[0]);
-    ch_toggle(ui, &mut app.show_load,    "Load %",     CHART[4]);
-    ch_toggle(ui, &mut app.show_stft_b1, "STFT B1",    CHART[1]);
-    ch_toggle(ui, &mut app.show_stft_b2, "STFT B2",    CHART[0]);
-    ch_toggle(ui, &mut app.show_lmb_b1,  "λ Bank 1",  CHART[6]);
-    ch_toggle(ui, &mut app.show_lmb_b2,  "λ Bank 2",  CHART[8]);
-    ch_toggle(ui, &mut app.show_ign,     "Ignition",   CHART[9]);
-    ch_toggle(ui, &mut app.show_coolant, "Coolant",    CHART[3]);
+    for key in ALL_CHANNELS {
+        let col = key.color();
+        ui.dnd_drag_source(
+            egui::Id::new(format!("sidebar_{}", key.label())),
+            key.clone(),
+            |ui| {
+                egui::Frame::NONE
+                    .fill(BG3)
+                    .stroke(egui::Stroke::new(1.2, col))
+                    .corner_radius(3.0)
+                    .inner_margin(egui::Margin { left: 6, right: 6, top: 3, bottom: 3 })
+                    .show(ui, |ui| {
+                        ui.set_width(ui.available_width() - 4.0);
+                        ui.horizontal(|ui| {
+                            let (r, _) = ui.allocate_exact_size(
+                                egui::vec2(8.0, 8.0), egui::Sense::hover(),
+                            );
+                            ui.painter().circle_filled(r.center(), 4.0, col);
+                            ui.label(RichText::new(key.label()).color(FG).size(11.5));
+                            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                                ui.label(RichText::new(key.unit()).color(FG_DIM).size(9.5));
+                            });
+                        });
+                    });
+            },
+        );
+        ui.add_space(2.0);
+    }
 
     ui.add_space(6.0);
     ui.separator();
@@ -415,15 +443,6 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
     });
 }
 
-fn ch_toggle(ui: &mut Ui, val: &mut bool, label: &str, color: Color32) {
-    ui.horizontal(|ui| {
-        let (rect, _) = ui.allocate_exact_size(egui::vec2(10.0, 10.0), egui::Sense::hover());
-        ui.painter().rect_filled(rect, 2.0, if *val { color } else { Color32::from_gray(55) });
-        ui.add_space(2.0);
-        ui.checkbox(val, RichText::new(label).color(if *val { FG } else { FG_DIM }).small());
-    });
-}
-
 // ── Tip bar ───────────────────────────────────────────────────────────────────
 
 fn show_tip_bar(ui: &mut Ui, app: &mut MSV70App) {
@@ -439,12 +458,56 @@ fn show_tip_bar(ui: &mut Ui, app: &mut MSV70App) {
     });
 }
 
-// ── Empty state ───────────────────────────────────────────────────────────────
+// ── Empty state (UltraLog-style drop zone) ────────────────────────────────────
 
-fn show_empty(ui: &mut Ui) {
+fn show_empty(ui: &mut Ui, ctx: &Context) {
+    let is_hovering = ctx.input(|i| !i.raw.hovered_files.is_empty());
+    let border_col  = if is_hovering { OLIVE } else { BG4 };
+    let border_w    = if is_hovering { 2.0_f32 } else { 1.5_f32 };
+
     ui.centered_and_justified(|ui| {
-        ui.label(RichText::new("Select a log from the sidebar to begin analysis")
-            .color(FG_DIM).size(14.0));
+        let avail = ui.available_rect_before_wrap();
+        let zone_w = (avail.width() * 0.55).min(480.0).max(260.0);
+        let zone_h = 200.0_f32;
+        let zone = egui::Rect::from_center_size(avail.center(), egui::vec2(zone_w, zone_h));
+
+        // Drop zone background
+        ui.painter().rect_filled(zone, 10.0, BG2);
+        ui.painter().rect_stroke(zone, 10.0, egui::Stroke::new(border_w, border_col), egui::StrokeKind::Middle);
+
+        // Icon
+        let icon_pos = egui::pos2(zone.center().x, zone.top() + 52.0);
+        ui.painter().text(
+            icon_pos,
+            egui::Align2::CENTER_CENTER,
+            if is_hovering { "↓" } else { "↑" },
+            egui::FontId::proportional(40.0),
+            if is_hovering { OLIVE } else { FG_DIM },
+        );
+
+        // Label
+        let msg = if is_hovering {
+            "Release to load CSV"
+        } else {
+            "Drop a CSV log here"
+        };
+        ui.painter().text(
+            egui::pos2(zone.center().x, zone.top() + 98.0),
+            egui::Align2::CENTER_CENTER,
+            msg,
+            egui::FontId::proportional(15.0),
+            if is_hovering { OLIVE } else { FG },
+        );
+        ui.painter().text(
+            egui::pos2(zone.center().x, zone.top() + 120.0),
+            egui::Align2::CENTER_CENTER,
+            "or use the sidebar → Browse",
+            egui::FontId::proportional(11.0),
+            FG_DIM,
+        );
+
+        // Allocate the zone so egui knows about it
+        let _ = ui.allocate_rect(zone, egui::Sense::hover());
     });
 }
 
