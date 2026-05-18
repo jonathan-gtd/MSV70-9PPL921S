@@ -12,12 +12,12 @@ pub const FG:     Color32 = Color32::from_rgb(0xd4, 0xd4, 0xd4);
 pub const FG_DIM: Color32 = Color32::from_rgb(0x6a, 0x6a, 0x6a);
 pub const PURPLE: Color32 = Color32::from_rgb(0xc5, 0x86, 0xc0);
 
-pub fn stft_color(v: f64) -> Color32 {
-    use crate::analysis::Thresholds as THR;
-    if v.abs() > THR::STFT_ALARM { RED }
-    else if v.abs() > THR::STFT_WARN  { ORANGE }
-    else if v.abs() > THR::STFT_NOTE  { YELLOW }
-    else { GREEN }
+/// Color for STFT value using configurable thresholds
+pub fn stft_color(v: f64, note: f64, warn: f64, alarm: f64) -> Color32 {
+    if v.abs() > alarm      { RED }
+    else if v.abs() > warn  { ORANGE }
+    else if v.abs() > note  { YELLOW }
+    else                    { GREEN }
 }
 
 pub fn phase_color(phase: &crate::data::Phase) -> Color32 {

@@ -1,3 +1,4 @@
+mod config;
 mod data;
 mod analysis;
 mod jobs;

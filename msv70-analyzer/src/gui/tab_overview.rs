@@ -1,11 +1,11 @@
 use egui::Ui;
 use egui_plot::{Bar, BarChart, HLine, Line, Plot, PlotPoints, Points};
 use crate::analysis::percentile;
-use crate::analysis::Thresholds as THR;
+use crate::config::AppConfig;
 use crate::data::types::*;
 use super::palette::*;
 
-pub fn show(ui: &mut Ui, d: &SessionData) {
+pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
     let rows  = &d.rows;
     let cl_b1 = &d.cl_b1_idx;
     let cl_b2 = &d.cl_b2_idx;
@@ -45,13 +45,13 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
                 let vals: Vec<f64> = cl_b1.iter().filter(|&&i| rows[i].phase == *ph).map(|&i| rows[i].stft_b1).collect();
                 if vals.is_empty() { return None; }
                 let med = percentile_of(&vals, 50.0);
-                Some(Bar::new(idx as f64 - 0.2, med).fill(stft_color(med)).width(0.35).name("B1"))
+                Some(Bar::new(idx as f64 - 0.2, med).fill(stft_color(med, cfg.stft_note, cfg.stft_warn, cfg.stft_alarm)).width(0.35).name("B1"))
             }).collect();
             let b2_bars: Vec<Bar> = cl_phases.iter().enumerate().filter_map(|(idx, ph)| {
                 let vals: Vec<f64> = cl_b2.iter().filter(|&&i| rows[i].phase == *ph).map(|&i| rows[i].stft_b2).collect();
                 if vals.is_empty() { return None; }
                 let med = percentile_of(&vals, 50.0);
-                Some(Bar::new(idx as f64 + 0.2, med).fill(stft_color(med).gamma_multiply(0.7)).width(0.35).name("B2"))
+                Some(Bar::new(idx as f64 + 0.2, med).fill(stft_color(med, cfg.stft_note, cfg.stft_warn, cfg.stft_alarm).gamma_multiply(0.7)).width(0.35).name("B2"))
             }).collect();
             Plot::new("stft_phase")
                 .height(height - 24.0)
@@ -59,7 +59,7 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
                     if !b1_bars.is_empty() { plot_ui.bar_chart(BarChart::new(b1_bars)); }
                     if !b2_bars.is_empty() { plot_ui.bar_chart(BarChart::new(b2_bars)); }
                     plot_ui.hline(HLine::new(0.0).color(FG_DIM).style(egui_plot::LineStyle::Dashed { length: 10.0 }));
-                    for &thr_v in &[-THR::STFT_WARN, THR::STFT_WARN] {
+                    for &thr_v in &[-cfg.stft_warn, cfg.stft_warn] {
                         plot_ui.hline(HLine::new(thr_v).color(RED).style(egui_plot::LineStyle::Dotted { spacing: 6.0 }));
                     }
                 });
@@ -96,8 +96,8 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
                             plot_ui.line(Line::new(PlotPoints::new(pts_b2)).color(ORANGE).width(2.0).name("λ B2"));
                         }
                         plot_ui.hline(HLine::new(1.00).color(GREEN).style(egui_plot::LineStyle::Dashed { length: 10.0 }));
-                        plot_ui.hline(HLine::new(0.92).color(YELLOW).style(egui_plot::LineStyle::Dotted { spacing: 6.0 }));
-                        plot_ui.hline(HLine::new(THR::LMB_LEAN_LOAD).color(RED).style(egui_plot::LineStyle::Dotted { spacing: 6.0 }));
+                        plot_ui.hline(HLine::new(cfg.lmb_wot_target).color(YELLOW).style(egui_plot::LineStyle::Dotted { spacing: 6.0 }));
+                        plot_ui.hline(HLine::new(cfg.lmb_lean_load).color(RED).style(egui_plot::LineStyle::Dotted { spacing: 6.0 }));
                     });
             }
         });
@@ -106,14 +106,16 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
         ui.allocate_ui([half, height].into(), |ui| {
             ui.label(egui::RichText::new("Injector Duty Cycle vs RPM").color(ACCENT).strong());
             if d.has_inj && !run.is_empty() {
-                let step = (run.len() / 2000).max(1);
+                let step = (run.len() / cfg.display_max_points).max(1);
                 let pts: Vec<[f64; 2]> = run.iter().step_by(step)
                     .filter_map(|&i| rows[i].inj_duty().map(|dc| [rows[i].rpm, dc]))
                     .collect();
                 let (red_pts, orange_pts, normal_pts): (Vec<_>, Vec<_>, Vec<_>) = pts.iter().fold(
                     (vec![], vec![], vec![]),
                     |(mut r, mut o, mut n), &pt| {
-                        if pt[1] > 80.0 { r.push(pt); } else if pt[1] > 60.0 { o.push(pt); } else { n.push(pt); }
+                        if pt[1] > cfg.inj_duty_warn { r.push(pt); }
+                        else if pt[1] > cfg.inj_duty_warn * 0.75 { o.push(pt); }
+                        else { n.push(pt); }
                         (r, o, n)
                     }
                 );
@@ -129,8 +131,8 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
                         if !red_pts.is_empty() {
                             plot_ui.points(Points::new(PlotPoints::new(red_pts)).color(RED).radius(2.0).name("DC alarm"));
                         }
-                        plot_ui.hline(HLine::new(80.0).color(RED).style(egui_plot::LineStyle::Dashed { length: 10.0 }));
-                        plot_ui.hline(HLine::new(60.0).color(ORANGE).style(egui_plot::LineStyle::Dotted { spacing: 6.0 }));
+                        plot_ui.hline(HLine::new(cfg.inj_duty_warn).color(RED).style(egui_plot::LineStyle::Dashed { length: 10.0 }));
+                        plot_ui.hline(HLine::new(cfg.inj_duty_warn * 0.75).color(ORANGE).style(egui_plot::LineStyle::Dotted { spacing: 6.0 }));
                     });
             }
         });

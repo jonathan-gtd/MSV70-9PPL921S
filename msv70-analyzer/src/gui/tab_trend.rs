@@ -1,10 +1,11 @@
 use egui::{RichText, Ui};
 use egui_plot::{Bar, BarChart, HLine, Line, Plot, PlotPoints, Points};
-use crate::analysis::{percentile, Thresholds as THR};
+use crate::analysis::percentile;
+use crate::config::AppConfig;
 use crate::data::types::*;
 use super::palette::*;
 
-pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
+pub fn show(ui: &mut Ui, sessions: &[SessionData], cfg: &AppConfig) {
     if sessions.is_empty() {
         ui.label(RichText::new("No logs loaded — click '⊕ All Logs'").color(FG_DIM));
         return;
@@ -52,8 +53,7 @@ pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
     let dashed  = egui_plot::LineStyle::Dashed { length: 10.0 };
     let dotted  = egui_plot::LineStyle::Dotted { spacing: 6.0 };
 
-    // ── STFT trend (full width) ─────────────────────────────────────────────
-    ui.label(RichText::new("STFT Trend — target ±8% band").color(ACCENT).strong());
+    ui.label(RichText::new(format!("STFT Trend — target ±{:.0}% band", cfg.stft_note)).color(ACCENT).strong());
     Plot::new("trend_stft")
         .height(panel_h)
         .show(ui, |plot_ui| {
@@ -68,7 +68,7 @@ pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
                 plot_ui.points(Points::new(PlotPoints::new(b2pts)).color(ACCENT).radius(5.0).name("B2 pts"));
             }
             plot_ui.hline(HLine::new(0.0).color(FG_DIM).style(dashed));
-            for &tv in &[-THR::STFT_WARN, THR::STFT_WARN] {
+            for &tv in &[-cfg.stft_warn, cfg.stft_warn] {
                 plot_ui.hline(HLine::new(tv).color(RED).style(dotted));
             }
         });
@@ -77,7 +77,6 @@ pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
         let half = (ui.available_width() / 2.0 - 4.0).max(100.0);
         let ph2  = panel_h * 0.8;
 
-        // WOT lambda
         ui.allocate_ui([half, ph2 + 20.0].into(), |ui| {
             ui.label(RichText::new("WOT Lambda B1").color(ACCENT));
             Plot::new("trend_wot").height(ph2).show(ui, |plot_ui| {
@@ -86,23 +85,22 @@ pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
                     plot_ui.line(Line::new(PlotPoints::new(pts.clone())).color(YELLOW).width(1.5).name("WOT λ"));
                     plot_ui.points(Points::new(PlotPoints::new(pts)).color(YELLOW).radius(4.0).name("WOT pts"));
                 }
-                plot_ui.hline(HLine::new(0.92).color(GREEN).style(dashed));
-                plot_ui.hline(HLine::new(0.95).color(RED).style(dotted));
+                plot_ui.hline(HLine::new(cfg.lmb_wot_target).color(GREEN).style(dashed));
+                plot_ui.hline(HLine::new(cfg.lmb_wot_warn).color(RED).style(dotted));
             });
         });
 
-        // DC max
         ui.allocate_ui([half, ph2 + 20.0].into(), |ui| {
             ui.label(RichText::new("Peak Injector DC").color(ACCENT));
             Plot::new("trend_dc").height(ph2).show(ui, |plot_ui| {
                 let bars: Vec<Bar> = dc_maxes.iter().enumerate().filter(|(_, v)| !v.is_nan()).map(|(i, &v)| {
-                    let col = if v > 80.0 { RED } else if v > 60.0 { ORANGE } else { GREEN };
+                    let col = if v > cfg.inj_duty_warn { RED } else if v > cfg.inj_duty_warn * 0.75 { ORANGE } else { GREEN };
                     Bar::new(i as f64, v).fill(col)
                 }).collect();
                 if !bars.is_empty() {
                     plot_ui.bar_chart(BarChart::new(bars));
                 }
-                plot_ui.hline(HLine::new(80.0).color(RED).style(dashed));
+                plot_ui.hline(HLine::new(cfg.inj_duty_warn).color(RED).style(dashed));
             });
         });
     });
@@ -111,7 +109,6 @@ pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
         let half = (ui.available_width() / 2.0 - 4.0).max(100.0);
         let ph2  = panel_h * 0.8;
 
-        // Event count
         ui.allocate_ui([half, ph2 + 20.0].into(), |ui| {
             ui.label(RichText::new("Anomaly Events").color(ACCENT));
             Plot::new("trend_ev").height(ph2).show(ui, |plot_ui| {
@@ -123,7 +120,6 @@ pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
             });
         });
 
-        // Duration
         ui.allocate_ui([half, ph2 + 20.0].into(), |ui| {
             ui.label(RichText::new("Session Duration (min)").color(ACCENT));
             Plot::new("trend_dur").height(ph2).show(ui, |plot_ui| {
@@ -135,7 +131,6 @@ pub fn show(ui: &mut Ui, sessions: &[SessionData]) {
         });
     });
 
-    // File name labels
     ui.horizontal_wrapped(|ui| {
         for (i, name) in names.iter().enumerate() {
             ui.label(RichText::new(format!("[{i}] {name}")).color(FG_DIM).small());

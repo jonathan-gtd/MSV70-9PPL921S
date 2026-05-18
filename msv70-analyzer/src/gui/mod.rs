@@ -6,3 +6,4 @@ pub mod tab_stft_map;
 pub mod tab_timeseries;
 pub mod tab_trend;
 pub mod tab_jobs;
+pub mod tab_settings;

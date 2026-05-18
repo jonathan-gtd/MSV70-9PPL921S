@@ -1,6 +1,7 @@
+use crate::config::AppConfig;
 use crate::data::types::{Phase, Row};
 
-pub fn detect_phase(row: &Row) -> Phase {
+pub fn detect_phase(row: &Row, cfg: &AppConfig) -> Phase {
     let rpm   = row.rpm;
     let speed = row.speed_kmh;
     let pedal = row.pedal_pct;
@@ -9,18 +10,20 @@ pub fn detect_phase(row: &Row) -> Phase {
 
     if rpm < 50.0   { return Phase::EngineOff; }
     if rpm < 400.0  { return Phase::Cranking; }
-    if pedal < 5.0 && rpm > 1200.0 && speed > 5.0 { return Phase::FuelCut; }
-    if pedal > 85.0 || load > 72.0 { return Phase::Wot; }
-    if pedal > 40.0 { return Phase::Accel; }
-    if speed < 5.0 && rpm < 1200.0 {
-        return if cool >= 80.0 { Phase::HotIdle } else { Phase::Warmup };
+    if pedal < cfg.phase_fuel_cut_pedal && rpm > cfg.phase_fuel_cut_rpm && speed > cfg.phase_fuel_cut_speed {
+        return Phase::FuelCut;
     }
-    if cool < 80.0  { return Phase::Warmup; }
+    if pedal > cfg.phase_wot_pedal || load > cfg.phase_wot_load { return Phase::Wot; }
+    if pedal > cfg.phase_accel_pedal { return Phase::Accel; }
+    if speed < cfg.phase_idle_speed && rpm < cfg.phase_idle_rpm {
+        return if cool >= cfg.phase_hot_coolant { Phase::HotIdle } else { Phase::Warmup };
+    }
+    if cool < cfg.phase_hot_coolant { return Phase::Warmup; }
     Phase::Cruise
 }
 
-pub fn is_steady(curr: &Row, prev: &Row, dt_s: f64) -> bool {
-    if dt_s <= 0.0 || dt_s > 1.5 { return false; }
-    (curr.rpm - prev.rpm).abs() / dt_s < 300.0
-        && (curr.load_pct - prev.load_pct).abs() / dt_s < 20.0
+pub fn is_steady(curr: &Row, prev: &Row, dt_s: f64, cfg: &AppConfig) -> bool {
+    if dt_s <= 0.0 || dt_s > cfg.steady_state_max_dt { return false; }
+    (curr.rpm - prev.rpm).abs() / dt_s < cfg.steady_state_drpm
+        && (curr.load_pct - prev.load_pct).abs() / dt_s < cfg.steady_state_dload
 }

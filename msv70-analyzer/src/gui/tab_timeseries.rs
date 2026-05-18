@@ -1,14 +1,14 @@
 use egui::Ui;
 use egui_plot::{HLine, Line, Plot, PlotPoints, Points};
-use crate::analysis::Thresholds as THR;
+use crate::config::AppConfig;
 use crate::data::types::*;
 use super::palette::*;
 
-pub fn show(ui: &mut Ui, d: &SessionData) {
+pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
     let rows = &d.rows;
     let t0 = rows[0].ts();
 
-    let step = (rows.len() / 4000).max(1);
+    let step = (rows.len() / cfg.display_max_points).max(1);
     let ts: Vec<f64>    = rows.iter().step_by(step).map(|r| r.ts() - t0).collect();
     let rpms: Vec<f64>  = rows.iter().step_by(step).map(|r| r.rpm).collect();
     let loads: Vec<f64> = rows.iter().step_by(step).map(|r| r.load_pct).collect();
@@ -16,7 +16,7 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
     let stft2: Vec<f64> = rows.iter().step_by(step).map(|r| if r.cl_b2 { r.stft_b2 } else { f64::NAN }).collect();
     let lmb1: Vec<f64>  = rows.iter().step_by(step).map(|r| if (0.5..2.5).contains(&r.lmb_b1) { r.lmb_b1 } else { f64::NAN }).collect();
     let lmb2: Vec<f64>  = rows.iter().step_by(step).map(|r| if (0.5..2.5).contains(&r.lmb_b2) { r.lmb_b2 } else { f64::NAN }).collect();
-    let ign: Vec<f64>   = rows.iter().step_by(step).map(|r| if r.ign_deg.abs() > 0.001 { r.ign_deg } else { f64::NAN }).collect();
+    let ign: Vec<f64>   = rows.iter().step_by(step).map(|r| if r.ign_deg.abs() > cfg.near_zero { r.ign_deg } else { f64::NAN }).collect();
     let cool: Vec<f64>  = rows.iter().step_by(step).map(|r| r.coolant_c).collect();
 
     let to_points = |xs: &[f64], ys: &[f64]| -> PlotPoints {
@@ -28,7 +28,6 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
     let dashed   = egui_plot::LineStyle::Dashed { length: 10.0 };
     let dotted   = egui_plot::LineStyle::Dotted { spacing: 6.0 };
 
-    // ── Panel 1: RPM + Load ─────────────────────────────────────────────────
     Plot::new("ts_rpm")
         .height(panel_h)
         .show(ui, |plot_ui| {
@@ -36,7 +35,6 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
             plot_ui.line(Line::new(to_points(&ts, &loads)).color(YELLOW).width(0.8).name("Load %"));
         });
 
-    // ── Panel 2: STFT ──────────────────────────────────────────────────────
     Plot::new("ts_stft")
         .height(panel_h)
         .include_y(-35.0)
@@ -45,7 +43,6 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
             plot_ui.line(Line::new(to_points(&ts, &stft1)).color(RED).width(0.9).name("STFT B1"));
             plot_ui.line(Line::new(to_points(&ts, &stft2)).color(ACCENT).width(0.9).name("STFT B2"));
 
-            // 60s bucket medians
             if !d.stft_buckets.is_empty() {
                 let b1pts: Vec<[f64; 2]> = d.stft_buckets.iter()
                     .filter_map(|b| b.p50_b1.map(|v| [b.t_s - t0, v])).collect();
@@ -59,15 +56,14 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
                 }
             }
 
-            for &thr_v in &[-THR::STFT_ALARM, THR::STFT_ALARM] {
+            for &thr_v in &[-cfg.stft_alarm, cfg.stft_alarm] {
                 plot_ui.hline(HLine::new(thr_v).color(RED).style(dotted));
             }
-            for &thr_v in &[-THR::STFT_WARN, THR::STFT_WARN] {
+            for &thr_v in &[-cfg.stft_warn, cfg.stft_warn] {
                 plot_ui.hline(HLine::new(thr_v).color(ORANGE).style(dotted));
             }
             plot_ui.hline(HLine::new(0.0).color(FG_DIM).style(dashed));
 
-            // Anomaly markers
             let ev_y = |kind: &str| -> f64 {
                 match kind {
                     "LEAN_B1" => 28.0, "LEAN_B2" => 26.0,
@@ -93,7 +89,6 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
             }
         });
 
-    // ── Panel 3: Lambda ────────────────────────────────────────────────────
     if d.has_lmb {
         Plot::new("ts_lmb")
             .height(panel_h)
@@ -103,12 +98,11 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
                 plot_ui.line(Line::new(to_points(&ts, &lmb1)).color(PURPLE).width(0.9).name("λ B1"));
                 plot_ui.line(Line::new(to_points(&ts, &lmb2)).color(ORANGE).width(0.9).name("λ B2"));
                 plot_ui.hline(HLine::new(1.00).color(GREEN).style(dashed));
-                plot_ui.hline(HLine::new(THR::LMB_LEAN_LOAD).color(RED).style(dotted));
-                plot_ui.hline(HLine::new(THR::LMB_RICH).color(ORANGE).style(dotted));
+                plot_ui.hline(HLine::new(cfg.lmb_lean_load).color(RED).style(dotted));
+                plot_ui.hline(HLine::new(cfg.lmb_rich).color(ORANGE).style(dotted));
             });
     }
 
-    // ── Panel 4: Ignition + Coolant ────────────────────────────────────────
     if d.has_ign {
         Plot::new("ts_ign")
             .height(panel_h)
@@ -116,7 +110,7 @@ pub fn show(ui: &mut Ui, d: &SessionData) {
             .show(ui, |plot_ui| {
                 plot_ui.line(Line::new(to_points(&ts, &ign)).color(GREEN).width(0.9).name("Ign °BTDC"));
                 plot_ui.line(Line::new(to_points(&ts, &cool)).color(ORANGE).width(0.7).name("Coolant °C"));
-                plot_ui.hline(HLine::new(THR::COOLANT_WARN).color(RED).style(dotted));
+                plot_ui.hline(HLine::new(cfg.coolant_warn).color(RED).style(dotted));
             });
     }
 }

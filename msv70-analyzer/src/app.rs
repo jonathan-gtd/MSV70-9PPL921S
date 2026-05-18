@@ -2,39 +2,61 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use egui::{Context, RichText, Ui};
 
-use crate::analysis::{compute_session, generate_report};
+use crate::analysis::{compute_session, generate_report, percentile};
+use crate::config::AppConfig;
 use crate::data::SessionData;
-use crate::gui::{
-    palette::*,
-    report_panel,
-    tab_jobs::JobsState,
-};
+use crate::data::types::Phase;
+use crate::gui::{palette::*, report_panel, tab_jobs::JobsState};
 use crate::jobs::{load_customjobs, load_pid_db};
 
-// ── Background analysis result ────────────────────────────────────────────────
+// ── Navigation ────────────────────────────────────────────────────────────────
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Nav {
+    Overview, StftMap, TimeSeries, Trend, CustomJobs, Settings,
+}
+
+impl Nav {
+    fn label(&self) -> &'static str {
+        match self {
+            Nav::Overview   => "Overview",
+            Nav::StftMap    => "STFT Map",
+            Nav::TimeSeries => "Time Series",
+            Nav::Trend      => "Trend",
+            Nav::CustomJobs => "Custom Jobs",
+            Nav::Settings   => "Settings",
+        }
+    }
+    fn is_analysis(&self) -> bool {
+        matches!(self, Nav::Overview | Nav::StftMap | Nav::TimeSeries)
+    }
+}
+
+// ── App state ─────────────────────────────────────────────────────────────────
+
 type AsyncResult = Result<(SessionData, String), String>;
 
 pub struct MSV70App {
-    // State
-    pub csv_path:    String,
-    pub session:     Option<SessionData>,
-    pub report:      String,
-    pub all_sessions: Vec<SessionData>,
-    pub tab:         usize,
-    pub status:      String,
-    pub tips:        Vec<String>,
-    pub tip_idx:     usize,
+    pub config:       AppConfig,
+    pub config_dirty: bool,
 
-    // Jobs tab state
-    pub jobs_state:     JobsState,
+    pub session:      Option<SessionData>,
+    pub report:       String,
+    pub all_sessions: Vec<SessionData>,
+    pub nav:          Nav,
+    pub status:       String,
+    pub tips:         Vec<String>,
+    pub tip_idx:      usize,
+
+    pub jobs_state:      JobsState,
     pub customjobs_path: Option<PathBuf>,
 
-    // Background analysis
     pub pending:     Option<Arc<Mutex<Option<AsyncResult>>>>,
     pub pending_all: Option<Arc<Mutex<Option<Vec<SessionData>>>>>,
 
-    // Config
-    pub logs_dir: Option<PathBuf>,
+    pub logs_dir:     Option<PathBuf>,
+    pub log_files:    Vec<PathBuf>,
+    pub selected_log: Option<usize>,
 }
 
 impl MSV70App {
@@ -42,252 +64,254 @@ impl MSV70App {
         setup_fonts(&cc.egui_ctx);
         apply_theme(&cc.egui_ctx);
 
-        let logs_dir = find_logs_dir();
-        let customjobs_path = find_customjobs();
-        let mut jobs_state = JobsState::default();
+        let config = AppConfig::load(&AppConfig::config_path());
+        let logs_dir  = find_logs_dir();
+        let log_files = scan_logs(logs_dir.as_deref());
 
-        if let Some(ref p) = find_pid_db() {
-            match load_pid_db(p) {
-                Ok(db) => jobs_state.pid_db = db,
-                Err(e) => eprintln!("PID DB: {e}"),
-            }
-        }
-        if let Some(ref p) = customjobs_path {
-            match load_customjobs(p) {
-                Ok(jobs) => jobs_state.jobs = jobs,
-                Err(e) => eprintln!("customjobs: {e}"),
-            }
-        }
+        let customjobs_path = find_customjobs();
+        let mut jobs_state  = JobsState::default();
+        if let Some(ref p) = find_pid_db()     { if let Ok(db)   = load_pid_db(p)    { jobs_state.pid_db = db; } }
+        if let Some(ref p) = customjobs_path   { if let Ok(jobs) = load_customjobs(p){ jobs_state.jobs = jobs; } }
 
         let mut app = MSV70App {
-            csv_path: String::new(),
-            session: None,
-            report: String::new(),
-            all_sessions: vec![],
-            tab: 0,
-            status: "Ready — select a CSV log or click Analyze to auto-load".into(),
-            tips: vec![],
-            tip_idx: 0,
-            jobs_state,
-            customjobs_path,
-            pending: None,
-            pending_all: None,
-            logs_dir: logs_dir.clone(),
+            config, config_dirty: false,
+            session: None, report: String::new(), all_sessions: vec![],
+            nav: Nav::Overview,
+            status: "Ready — select a log from the sidebar".into(),
+            tips: vec![], tip_idx: 0,
+            jobs_state, customjobs_path,
+            pending: None, pending_all: None,
+            logs_dir, log_files, selected_log: None,
         };
 
-        // Auto-load latest CSV
-        if let Some(ref dir) = logs_dir {
-            if let Some(latest) = find_latest_csv(dir) {
-                app.csv_path = latest.display().to_string();
-                app.start_analyze(latest);
-            }
+        if let Some(path) = app.log_files.last().cloned() {
+            app.selected_log = Some(app.log_files.len() - 1);
+            app.start_analyze(path);
         }
-
         app
     }
 
     pub fn start_analyze(&mut self, path: PathBuf) {
         self.status = format!("Analyzing {}…", path.file_name().unwrap_or_default().to_string_lossy());
+        let cfg   = self.config.clone();
         let shared: Arc<Mutex<Option<AsyncResult>>> = Arc::new(Mutex::new(None));
-        let shared_clone = shared.clone();
+        let clone = shared.clone();
         std::thread::spawn(move || {
-            let result = compute_session(&path)
-                .map(|d| {
-                    let report = generate_report(&d);
-                    (d, report)
-                });
-            *shared_clone.lock().unwrap() = Some(result);
+            let res = compute_session(&path, &cfg)
+                .map(|d| { let r = generate_report(&d, &cfg); (d, r) });
+            *clone.lock().unwrap() = Some(res);
         });
         self.pending = Some(shared);
     }
 
     pub fn start_load_all(&mut self) {
-        if let Some(ref dir) = self.logs_dir.clone() {
-            let dir = dir.clone();
-            let shared: Arc<Mutex<Option<Vec<SessionData>>>> = Arc::new(Mutex::new(None));
-            let shared_clone = shared.clone();
-            self.status = "Loading all logs…".into();
-            std::thread::spawn(move || {
-                let mut results = vec![];
-                if let Ok(entries) = std::fs::read_dir(&dir) {
-                    let mut paths: Vec<PathBuf> = entries
-                        .flatten()
-                        .map(|e| e.path())
-                        .filter(|p| p.extension().map(|e| e == "csv").unwrap_or(false))
-                        .collect();
-                    paths.sort();
-                    for p in paths {
-                        if let Ok(d) = compute_session(&p) {
-                            if !d.run_idx.is_empty() {
-                                results.push(d);
-                            }
-                        }
-                    }
-                }
-                *shared_clone.lock().unwrap() = Some(results);
-            });
-            self.pending_all = Some(shared);
-        }
+        if self.log_files.is_empty() { return; }
+        let paths = self.log_files.clone();
+        let cfg   = self.config.clone();
+        let shared: Arc<Mutex<Option<Vec<SessionData>>>> = Arc::new(Mutex::new(None));
+        let clone = shared.clone();
+        self.status = "Loading all logs…".into();
+        std::thread::spawn(move || {
+            let results: Vec<SessionData> = paths.into_iter()
+                .filter_map(|p| compute_session(&p, &cfg).ok())
+                .filter(|d| !d.run_idx.is_empty())
+                .collect();
+            *clone.lock().unwrap() = Some(results);
+        });
+        self.pending_all = Some(shared);
     }
 
-    pub fn poll_background(&mut self) {
-        // Single file
+    fn poll_background(&mut self) {
         if let Some(ref pending) = self.pending.clone() {
-            if let Ok(mut guard) = pending.try_lock() {
-                if let Some(result) = guard.take() {
+            if let Ok(mut g) = pending.try_lock() {
+                if let Some(result) = g.take() {
                     self.pending = None;
                     match result {
                         Ok((d, report)) => {
-                            let n_corr = d.corrections.len();
-                            let n_ev   = d.events.len();
-                            let name   = d.file_name.clone();
-                            let dur    = d.dur_s;
-                            let n      = d.n_rows;
-                            self.tips  = build_tips(&d);
+                            let (n, dur, n_corr, n_ev, name) =
+                                (d.n_rows, d.dur_s, d.corrections.len(), d.events.len(), d.file_name.clone());
+                            self.tips    = build_tips(&d, &self.config);
                             self.tip_idx = 0;
                             self.report  = report;
                             self.session = Some(d);
-                            self.status  = format!("✓  {name}  ·  {n} rows  ·  {dur:.0}s  ·  {n_corr} cells to correct  ·  {n_ev} anomaly events");
+                            self.status  = format!("✓  {name}  ·  {n} rows  ·  {dur:.0}s  ·  {n_corr} cells  ·  {n_ev} events");
                         }
-                        Err(e) => {
-                            self.status = format!("Error: {e}");
-                        }
+                        Err(e) => { self.status = format!("Error: {e}"); }
                     }
                 }
             }
         }
-
-        // All logs
         if let Some(ref pending) = self.pending_all.clone() {
-            if let Ok(mut guard) = pending.try_lock() {
-                if let Some(sessions) = guard.take() {
+            if let Ok(mut g) = pending.try_lock() {
+                if let Some(sessions) = g.take() {
                     self.pending_all = None;
                     let n = sessions.len();
                     self.all_sessions = sessions;
                     self.status = format!("Trend: {n} logs loaded");
-                    self.tab = 4; // Switch to Trend tab
+                    self.nav = Nav::Trend;
                 }
             }
         }
     }
 }
+
+// ── eframe::App ───────────────────────────────────────────────────────────────
 
 impl eframe::App for MSV70App {
     fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame) {
         self.poll_background();
 
-        // Keep repainting while background work is in progress
         if self.pending.is_some() || self.pending_all.is_some() {
             ctx.request_repaint();
         }
-
-        egui::TopBottomPanel::top("toolbar").show(ctx, |ui| {
-            show_toolbar(ui, self);
-        });
+        if self.config_dirty {
+            let _ = self.config.save(&AppConfig::config_path());
+            self.config_dirty = false;
+        }
 
         egui::TopBottomPanel::bottom("tip_bar").show(ctx, |ui| {
             show_tip_bar(ui, self);
         });
 
-        egui::CentralPanel::default().show(ctx, |ui| {
-            if self.tab == 5 {
-                // Jobs tab — full width
-                crate::gui::tab_jobs::show(ui, &mut self.jobs_state, &self.customjobs_path);
-            } else {
-                // Left (report) | Right (charts)
-                egui::SidePanel::left("report_panel")
-                    .resizable(true)
-                    .default_width(430.0)
-                    .min_width(250.0)
-                    .show_inside(ui, |ui| {
-                        report_panel::show(ui, &self.report);
-                    });
+        let sidebar_w = self.config.sidebar_width;
+        egui::SidePanel::left("sidebar")
+            .resizable(true)
+            .default_width(sidebar_w)
+            .min_width(160.0)
+            .show(ctx, |ui| {
+                show_sidebar(ui, self);
+            });
 
-                egui::CentralPanel::default().show_inside(ui, |ui| {
-                    show_tabs(ui, self);
-                });
+        egui::CentralPanel::default().show(ctx, |ui| {
+            ui.horizontal(|ui| {
+                ui.label(RichText::new(&self.status).color(FG_DIM).small());
+            });
+            ui.separator();
+
+            let nav = self.nav.clone();
+            match nav {
+                Nav::CustomJobs => {
+                    crate::gui::tab_jobs::show(ui, &mut self.jobs_state, &self.customjobs_path);
+                }
+                Nav::Settings => {
+                    crate::gui::tab_settings::show(ui, &mut self.config, &mut self.config_dirty);
+                }
+                Nav::Trend => {
+                    let cfg = self.config.clone();
+                    crate::gui::tab_trend::show(ui, &self.all_sessions, &cfg);
+                }
+                _ => {
+                    // Analysis tabs: report on left, chart on right
+                    let report_w = self.config.report_width;
+                    let report   = self.report.clone();
+                    let cfg      = self.config.clone();
+                    let session  = self.session.clone();
+
+                    egui::SidePanel::left("report_panel")
+                        .resizable(true)
+                        .default_width(report_w)
+                        .min_width(200.0)
+                        .show_inside(ui, |ui| {
+                            report_panel::show(ui, &report);
+                        });
+
+                    egui::CentralPanel::default().show_inside(ui, |ui| {
+                        if let Some(ref d) = session {
+                            match self.nav {
+                                Nav::Overview   => crate::gui::tab_overview::show(ui, d, &cfg),
+                                Nav::StftMap    => crate::gui::tab_stft_map::show(ui, d, &cfg),
+                                Nav::TimeSeries => crate::gui::tab_timeseries::show(ui, d, &cfg),
+                                _ => {}
+                            }
+                        } else {
+                            ui.centered_and_justified(|ui| {
+                                ui.label(RichText::new("Select a log from the sidebar to begin analysis")
+                                    .color(FG_DIM));
+                            });
+                        }
+                    });
+                }
             }
         });
-
     }
 }
 
-// ── Toolbar ───────────────────────────────────────────────────────────────────
+// ── Sidebar ───────────────────────────────────────────────────────────────────
 
-fn show_toolbar(ui: &mut Ui, app: &mut MSV70App) {
-    ui.horizontal(|ui| {
-        ui.label(RichText::new("MSV70 ANALYZER").color(ACCENT).strong());
-        ui.separator();
-        ui.label(RichText::new("Log:").color(FG_DIM));
-        ui.add(egui::TextEdit::singleline(&mut app.csv_path).desired_width(360.0));
-
-        if ui.button("Browse…").clicked() {
-            if let Some(path) = rfd::FileDialog::new()
-                .add_filter("CSV", &["csv"])
-                .pick_file()
-            {
-                app.csv_path = path.display().to_string();
-            }
-        }
-
-        let analyze_btn = egui::Button::new(RichText::new("▶ Analyze").color(egui::Color32::BLACK))
-            .fill(ACCENT);
-        if ui.add(analyze_btn).clicked() && app.pending.is_none() {
-            let path = PathBuf::from(&app.csv_path);
-            if path.exists() {
-                app.start_analyze(path);
-            } else {
-                app.status = "File not found".into();
-            }
-        }
-
-        if ui.button("⊕ All Logs").clicked() && app.pending_all.is_none() {
-            app.start_load_all();
-        }
-
-        if app.pending.is_some() || app.pending_all.is_some() {
-            ui.spinner();
-        }
-
-        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-            ui.label(RichText::new(&app.status).color(FG_DIM).small());
-        });
-    });
-}
-
-// ── Tab bar ───────────────────────────────────────────────────────────────────
-
-fn show_tabs(ui: &mut Ui, app: &mut MSV70App) {
-    let tabs = ["Overview", "STFT Map", "Time Series", "Trend", "Custom Jobs"];
-    ui.horizontal(|ui| {
-        for (i, &name) in tabs.iter().enumerate() {
-            let sel = app.tab == i || (i == 4 && app.tab == 5);
-            let rich = RichText::new(name).color(if sel { ACCENT } else { FG_DIM });
-            if ui.selectable_label(sel, rich).clicked() {
-                app.tab = i;
-                if i == 4 { app.tab = 5; }
-            }
-        }
-    });
+fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
+    ui.add_space(6.0);
+    ui.label(RichText::new("MSV70 ANALYZER").color(ACCENT).strong().small());
+    ui.label(RichText::new("N52B30 · E85_v5 · 9PPL921S").color(FG_DIM).small());
     ui.separator();
 
-    if let Some(ref d) = app.session {
-        match app.tab {
-            0 => crate::gui::tab_overview::show(ui, d),
-            1 => crate::gui::tab_stft_map::show(ui, d),
-            2 => crate::gui::tab_timeseries::show(ui, d),
-            3 => crate::gui::tab_trend::show(ui, &app.all_sessions),
-            _ => {}
+    ui.add_space(4.0);
+    ui.label(RichText::new("ANALYSIS").color(FG_DIM).small().strong());
+    for item in &[Nav::Overview, Nav::StftMap, Nav::TimeSeries, Nav::Trend] {
+        let sel = app.nav == *item;
+        if ui.selectable_label(sel, RichText::new(item.label()).color(if sel { ACCENT } else { FG }).strong()).clicked() {
+            app.nav = item.clone();
         }
-    } else {
-        match app.tab {
-            3 => crate::gui::tab_trend::show(ui, &app.all_sessions),
-            _ => {
-                ui.centered_and_justified(|ui| {
-                    ui.label(RichText::new("No session loaded — select a CSV and click Analyze").color(FG_DIM));
-                });
+    }
+
+    ui.add_space(4.0);
+    ui.label(RichText::new("TOOLS").color(FG_DIM).small().strong());
+    for item in &[Nav::CustomJobs, Nav::Settings] {
+        let sel = app.nav == *item;
+        if ui.selectable_label(sel, RichText::new(item.label()).color(if sel { ACCENT } else { FG })).clicked() {
+            app.nav = item.clone();
+        }
+    }
+
+    ui.separator();
+
+    ui.horizontal(|ui| {
+        ui.label(RichText::new("LOGS").color(FG_DIM).small().strong());
+        if ui.small_button("⟳").on_hover_text("Rescan LOGS folder").clicked() {
+            app.log_files = scan_logs(app.logs_dir.as_deref());
+        }
+    });
+
+    let list_h = ui.available_height() - 56.0;
+    let mut clicked_idx: Option<usize> = None;
+    egui::ScrollArea::vertical()
+        .id_salt("log_list")
+        .max_height(list_h)
+        .show(ui, |ui| {
+            ui.set_width(ui.available_width());
+            for (idx, path) in app.log_files.iter().enumerate() {
+                let name = path.file_stem().and_then(|s| s.to_str()).unwrap_or("?");
+                let sel  = app.selected_log == Some(idx);
+                if ui.selectable_label(sel, RichText::new(name).color(if sel { ACCENT } else { FG_DIM }).small()).clicked() {
+                    clicked_idx = Some(idx);
+                }
             }
+            if app.log_files.is_empty() {
+                ui.label(RichText::new("No CSV files found").color(FG_DIM).small());
+            }
+        });
+    if let Some(idx) = clicked_idx {
+        let path = app.log_files[idx].clone();
+        app.selected_log = Some(idx);
+        app.start_analyze(path);
+        if !app.nav.is_analysis() && app.nav != Nav::Trend {
+            app.nav = Nav::Overview;
         }
+    }
+
+    ui.separator();
+    if ui.button("⊕ All Logs (Trend)").clicked() && app.pending_all.is_none() {
+        app.start_load_all();
+    }
+    if ui.button("Browse…").clicked() {
+        if let Some(path) = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_file() {
+            if !app.log_files.contains(&path) { app.log_files.push(path.clone()); }
+            app.selected_log = app.log_files.iter().position(|p| p == &path);
+            app.start_analyze(path);
+            if !app.nav.is_analysis() { app.nav = Nav::Overview; }
+        }
+    }
+    if app.pending.is_some() || app.pending_all.is_some() {
+        ui.horizontal(|ui| { ui.spinner(); ui.label(RichText::new("working…").color(FG_DIM).small()); });
     }
 }
 
@@ -306,7 +330,88 @@ fn show_tip_bar(ui: &mut Ui, app: &mut MSV70App) {
     });
 }
 
-// ── Discovery helpers ─────────────────────────────────────────────────────────
+// ── Tips builder ──────────────────────────────────────────────────────────────
+
+fn build_tips(d: &SessionData, cfg: &AppConfig) -> Vec<String> {
+    let rows = &d.rows;
+    let mut tips = vec![];
+
+    let wot_lmb: Vec<f64> = d.cl_b1_idx.iter()
+        .filter(|&&i| rows[i].phase == Phase::Wot && rows[i].rpm > 2500.0 && rows[i].coolant_c > 75.0)
+        .map(|&i| rows[i].lmb_b1).collect();
+    if !wot_lmb.is_empty() {
+        let m = wot_lmb.iter().sum::<f64>() / wot_lmb.len() as f64;
+        if m > cfg.lmb_wot_warn + 0.01 {
+            tips.push(format!("WOT λ={:.3} LEAN — check ip_mff_cor at 75–100% load", m));
+        } else if m > cfg.lmb_wot_target + 0.01 {
+            tips.push(format!("WOT λ={:.3} slightly lean — target <{:.2}", m, cfg.lmb_wot_target));
+        }
+    }
+
+    if let Some(top) = d.corrections.first() {
+        let rpm_lbl  = d.rpm_labels.get(top.rpm_idx).map(|s| s.as_str()).unwrap_or("?");
+        let load_lbl = d.load_labels.get(top.load_idx).map(|s| s.as_str()).unwrap_or("?");
+        tips.push(format!("Strongest correction: {} / {}% load → ×{:.3} ({:+.1}%)",
+            rpm_lbl, load_lbl, top.factor, top.avg_delta));
+    }
+
+    if d.has_inj && !d.run_idx.is_empty() {
+        let dc_max = d.run_idx.iter().filter_map(|&i| rows[i].inj_duty()).fold(f64::NEG_INFINITY, f64::max);
+        if dc_max > cfg.inj_duty_alarm {
+            tips.push(format!("Injector DC {:.0}% — near physical limit; upgrade injectors", dc_max));
+        } else if dc_max > cfg.inj_duty_warn {
+            tips.push(format!("Injector DC {:.0}% — watch at high RPM", dc_max));
+        }
+    }
+
+    if d.has_ltft && !d.run_idx.is_empty() {
+        let mut m1v: Vec<f64> = d.run_idx.iter().map(|&i| rows[i].ltft_mul_b1).collect();
+        let mut m2v: Vec<f64> = d.run_idx.iter().map(|&i| rows[i].ltft_mul_b2).collect();
+        let mul1 = percentile(&mut m1v, 50.0);
+        let mul2 = percentile(&mut m2v, 50.0);
+        if mul1.abs() > cfg.ltft_alarm || mul2.abs() > cfg.ltft_alarm {
+            tips.push(format!("LTFT Mul B1={:+.1}% B2={:+.1}% — near ceiling, reflash urgently", mul1, mul2));
+        } else if mul1.abs() > cfg.ltft_warn || mul2.abs() > cfg.ltft_warn {
+            tips.push(format!("LTFT Mul B1={:+.1}% B2={:+.1}% — elevated", mul1, mul2));
+        }
+    }
+
+    if !d.cl_b1_idx.is_empty() {
+        let mut vals: Vec<f64> = d.cl_b1_idx.iter().map(|&i| rows[i].stft_b1).collect();
+        let med = percentile(&mut vals, 50.0);
+        if med.abs() < cfg.stft_note / 2.0 {
+            tips.push("STFT median within tight band — base map well calibrated".into());
+        }
+    }
+
+    if !d.retard_idx.is_empty() {
+        let cands = d.hot_idx.iter()
+            .filter(|&&i| rows[i].rpm > cfg.knock_rpm_min && rows[i].load_pct > cfg.knock_load_min)
+            .count();
+        if cands > 0 {
+            let ret_pct = 100.0 * d.retard_idx.len() as f64 / cands as f64;
+            if ret_pct > 5.0 {
+                tips.push(format!("Knock proxy {:.1}% retard rate — verify fuel quality", ret_pct));
+            }
+        }
+    }
+
+    tips
+}
+
+// ── Discovery ─────────────────────────────────────────────────────────────────
+
+fn scan_logs(dir: Option<&Path>) -> Vec<PathBuf> {
+    let Some(dir) = dir else { return vec![]; };
+    let mut csvs: Vec<PathBuf> = std::fs::read_dir(dir)
+        .map(|rd| rd.flatten()
+            .map(|e| e.path())
+            .filter(|p| p.extension().map(|e| e == "csv").unwrap_or(false))
+            .collect())
+        .unwrap_or_default();
+    csvs.sort();
+    csvs
+}
 
 fn find_logs_dir() -> Option<PathBuf> {
     let exe = std::env::current_exe().ok()?;
@@ -318,132 +423,38 @@ fn find_logs_dir() -> Option<PathBuf> {
     candidates.into_iter().find(|p| p.is_dir())
 }
 
-fn find_latest_csv(dir: &Path) -> Option<PathBuf> {
-    let mut csvs: Vec<PathBuf> = std::fs::read_dir(dir).ok()?
-        .flatten()
-        .map(|e| e.path())
-        .filter(|p| p.extension().map(|e| e == "csv").unwrap_or(false))
-        .collect();
-    csvs.sort();
-    csvs.pop()
-}
-
 fn find_customjobs() -> Option<PathBuf> {
     let exe = std::env::current_exe().ok()?;
-    let candidates = [
+    [
         exe.parent()?.parent()?.join("TestO Datalogger/config/customjobs.xml"),
         PathBuf::from("TestO Datalogger/config/customjobs.xml"),
-    ];
-    candidates.into_iter().find(|p| p.exists())
+    ].into_iter().find(|p| p.exists())
 }
 
 fn find_pid_db() -> Option<PathBuf> {
     let exe = std::env::current_exe().ok()?;
-    let candidates = [
+    [
         exe.parent()?.parent()?.join("TestO Datalogger/PERSO/MSV70_jobs.txt"),
         PathBuf::from("TestO Datalogger/PERSO/MSV70_jobs.txt"),
-    ];
-    candidates.into_iter().find(|p| p.exists())
-}
-
-// ── Tips builder ──────────────────────────────────────────────────────────────
-
-fn build_tips(d: &SessionData) -> Vec<String> {
-    use crate::analysis::percentile;
-    use crate::data::types::Phase;
-    use crate::analysis::Thresholds as THR;
-
-    let rows = &d.rows;
-    let mut tips = vec![];
-
-    // WOT lambda
-    let wot_lmb: Vec<f64> = d.cl_b1_idx.iter()
-        .filter(|&&i| rows[i].phase == Phase::Wot && rows[i].rpm > 2500.0 && rows[i].coolant_c > 75.0)
-        .map(|&i| rows[i].lmb_b1).collect();
-    if !wot_lmb.is_empty() {
-        let m = wot_lmb.iter().sum::<f64>() / wot_lmb.len() as f64;
-        if m > 0.96 {
-            tips.push(format!("WOT λ={:.3} LEAN — injector may be maxed out or ip_mff_cor too low at 75–100% load", m));
-        } else if m > 0.93 {
-            tips.push(format!("WOT λ={:.3} slightly lean — monitor, target <0.92 for E85 power", m));
-        }
-    }
-
-    // Top correction
-    if let Some(top) = d.corrections.first() {
-        tips.push(format!("Strongest correction: {} / {}% load → ×{:.3} on ip_mff_cor  ({:+.1}%)",
-            crate::data::types::RPM_LABELS[top.rpm_idx],
-            crate::data::types::LOAD_LABELS[top.load_idx],
-            top.factor, top.avg_delta));
-    }
-
-    // DC
-    if d.has_inj && !d.run_idx.is_empty() {
-        let dc_max = d.run_idx.iter().filter_map(|&i| rows[i].inj_duty()).fold(f64::NEG_INFINITY, f64::max);
-        if dc_max > 90.0 {
-            tips.push(format!("Injector DC {:.0}% — physical limit reached; upgrade injectors or reduce WOT fuel demand", dc_max));
-        } else if dc_max > 80.0 {
-            tips.push(format!("Injector DC {:.0}% — headroom <20%; watch carefully at high RPM", dc_max));
-        }
-    }
-
-    // LTFT
-    if d.has_ltft && !d.run_idx.is_empty() {
-        let mut m1v: Vec<f64> = d.run_idx.iter().map(|&i| rows[i].ltft_mul_b1).collect();
-        let mut m2v: Vec<f64> = d.run_idx.iter().map(|&i| rows[i].ltft_mul_b2).collect();
-        let mul1 = percentile(&mut m1v, 50.0);
-        let mul2 = percentile(&mut m2v, 50.0);
-        if mul1.abs() > 15.0 || mul2.abs() > 15.0 {
-            tips.push(format!("LTFT Mul B1={:+.1}% B2={:+.1}% — near ±20% ceiling, reflash base map urgently", mul1, mul2));
-        } else if mul1.abs() > 10.0 || mul2.abs() > 10.0 {
-            tips.push(format!("LTFT Mul B1={:+.1}% B2={:+.1}% — elevated, schedule a base map correction", mul1, mul2));
-        }
-    }
-
-    // STFT overall
-    if !d.cl_b1_idx.is_empty() {
-        let mut vals: Vec<f64> = d.cl_b1_idx.iter().map(|&i| rows[i].stft_b1).collect();
-        let med = percentile(&mut vals, 50.0);
-        if med.abs() < 3.0 {
-            tips.push("STFT median within ±3% — base map well calibrated for logged conditions".into());
-        }
-    }
-
-    // Knock
-    if !d.retard_idx.is_empty() {
-        let knock_cands = d.hot_idx.iter()
-            .filter(|&&i| rows[i].rpm > THR::KNOCK_RPM_MIN && rows[i].load_pct > THR::KNOCK_LOAD_MIN)
-            .count();
-        if knock_cands > 0 {
-            let ret_pct = 100.0 * d.retard_idx.len() as f64 / knock_cands as f64;
-            if ret_pct > 5.0 {
-                tips.push(format!("Knock proxy {:.1}% retard rate — verify fuel quality and ignition map", ret_pct));
-            }
-        }
-    }
-
-    tips
+    ].into_iter().find(|p| p.exists())
 }
 
 // ── Theme / fonts ─────────────────────────────────────────────────────────────
 
 fn setup_fonts(ctx: &Context) {
-    let mut fonts = egui::FontDefinitions::default();
-    // Use built-in fonts; system Segoe UI will be used as fallback on Windows
-    ctx.set_fonts(fonts.clone());
-    let _ = fonts; // suppress warning
+    ctx.set_fonts(egui::FontDefinitions::default());
 }
 
 fn apply_theme(ctx: &Context) {
-    let mut visuals = egui::Visuals::dark();
-    visuals.panel_fill            = BG;
-    visuals.window_fill           = BG;
-    visuals.extreme_bg_color      = BG2;
-    visuals.code_bg_color         = BG2;
-    visuals.widgets.noninteractive.bg_fill = BG2;
-    visuals.widgets.inactive.bg_fill       = BG3;
-    visuals.widgets.hovered.bg_fill        = BG3;
-    visuals.widgets.active.bg_fill         = ACCENT;
-    visuals.selection.bg_fill             = ACCENT;
-    ctx.set_visuals(visuals);
+    let mut v = egui::Visuals::dark();
+    v.panel_fill                     = BG;
+    v.window_fill                    = BG;
+    v.extreme_bg_color               = BG2;
+    v.code_bg_color                  = BG2;
+    v.widgets.noninteractive.bg_fill = BG2;
+    v.widgets.inactive.bg_fill       = BG3;
+    v.widgets.hovered.bg_fill        = BG3;
+    v.widgets.active.bg_fill         = ACCENT;
+    v.selection.bg_fill              = ACCENT;
+    ctx.set_visuals(v);
 }
