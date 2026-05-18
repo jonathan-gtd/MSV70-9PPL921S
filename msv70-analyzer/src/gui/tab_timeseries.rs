@@ -1,6 +1,6 @@
 use std::time::Instant;
-use egui::{Color32, FontId, RichText, Ui};
-use egui_plot::{HLine, Line, Plot, PlotBounds, PlotPoints, Points, VLine};
+use egui::{Color32, FontId, RichText, Ui, vec2};
+use egui_plot::{HLine, Line, Plot, PlotBounds, PlotPoints, VLine};
 use crate::config::AppConfig;
 use crate::data::types::*;
 use super::palette::*;
@@ -79,7 +79,19 @@ impl ChannelKey {
 pub enum YAxis { Left, Right }
 
 #[derive(Clone, Debug)]
-pub struct ChartChannel { pub key: ChannelKey, pub y_axis: YAxis }
+pub struct ChartChannel {
+    pub key:         ChannelKey,
+    pub y_axis:      YAxis,
+    pub filter_min:  Option<f64>,
+    pub filter_max:  Option<f64>,
+    pub show_filter: bool,
+}
+
+impl ChartChannel {
+    pub fn new(key: ChannelKey, y_axis: YAxis) -> Self {
+        Self { key, y_axis, filter_min: None, filter_max: None, show_filter: false }
+    }
+}
 
 #[derive(Clone, Debug)]
 pub struct ChartPanel {
@@ -91,16 +103,16 @@ pub struct ChartPanel {
 pub fn default_panels() -> Vec<ChartPanel> {
     vec![
         ChartPanel { id: 0, height: 200.0, channels: vec![
-            ChartChannel { key: ChannelKey::Rpm,     y_axis: YAxis::Left  },
-            ChartChannel { key: ChannelKey::LoadPct,  y_axis: YAxis::Right },
+            ChartChannel::new(ChannelKey::Rpm,     YAxis::Left),
+            ChartChannel::new(ChannelKey::LoadPct,  YAxis::Right),
         ]},
         ChartPanel { id: 1, height: 200.0, channels: vec![
-            ChartChannel { key: ChannelKey::StftB1,  y_axis: YAxis::Left },
-            ChartChannel { key: ChannelKey::StftB2,  y_axis: YAxis::Left },
+            ChartChannel::new(ChannelKey::StftB1,  YAxis::Left),
+            ChartChannel::new(ChannelKey::StftB2,  YAxis::Left),
         ]},
         ChartPanel { id: 2, height: 200.0, channels: vec![
-            ChartChannel { key: ChannelKey::LmbB1,   y_axis: YAxis::Left  },
-            ChartChannel { key: ChannelKey::LmbB2,   y_axis: YAxis::Right },
+            ChartChannel::new(ChannelKey::LmbB1,   YAxis::Left),
+            ChartChannel::new(ChannelKey::LmbB2,   YAxis::Right),
         ]},
     ]
 }
@@ -112,11 +124,11 @@ pub fn show(
     ui: &mut Ui,
     d: &SessionData,
     cfg: &AppConfig,
-    panels:          &mut Vec<ChartPanel>,
-    next_id:         &mut usize,
-    cursor_s:        &mut Option<f64>,
-    is_playing:      &mut bool,
-    playback_speed:  &mut f64,
+    panels:           &mut Vec<ChartPanel>,
+    next_id:          &mut usize,
+    cursor_s:         &mut Option<f64>,
+    is_playing:       &mut bool,
+    playback_speed:   &mut f64,
     _last_frame_time: &mut Option<Instant>,
 ) {
     let rows = &d.rows;
@@ -148,7 +160,6 @@ pub fn show(
 
     // ── Chart area ────────────────────────────────────────────────────────────
     egui::CentralPanel::default().show_inside(ui, |ui| {
-        // Palette + controls bar
         egui::TopBottomPanel::top("ts_palette")
             .frame(egui::Frame::NONE.fill(BG2).inner_margin(egui::Margin::symmetric(6, 4)))
             .exact_height(36.0)
@@ -156,141 +167,224 @@ pub fn show(
                 show_palette_bar(ui, panels, next_id);
             });
 
-        // Chart panels (scrollable)
         egui::CentralPanel::default().show_inside(ui, |ui| {
-            egui::ScrollArea::vertical().id_salt("ts_panels_scroll").show(ui, |ui| {
-                let is_dragging = egui::DragAndDrop::payload::<ChannelKey>(ui.ctx()).is_some();
-                let cs = *cursor_s;
-                let mut to_delete: Option<usize> = None;
-                let n = panels.len();
+            let is_dragging = egui::DragAndDrop::payload::<ChannelKey>(ui.ctx()).is_some();
+            let cs = *cursor_s;
+            let mut to_delete: Option<usize> = None;
+            let n = panels.len();
 
-                for panel_idx in 0..n {
-                    let panel_id = panels[panel_idx].id;
+            // Each panel fills 1/n of available height
+            let avail_h = ui.available_height();
+            let panel_h = if n > 0 { (avail_h / n as f32).max(80.0) } else { avail_h };
 
-                    // Drop zone frame
-                    let drop_frame_fill = if is_dragging { BG3 } else { BG };
-                    let drop_frame = egui::Frame::NONE
-                        .fill(drop_frame_fill)
-                        .stroke(egui::Stroke::new(
-                            if is_dragging { 1.5 } else { 0.0 },
-                            ACCENT.gamma_multiply(0.4),
-                        ))
-                        .corner_radius(4.0)
-                        .inner_margin(egui::Margin::symmetric(0, 2));
+            for panel_idx in 0..n {
+                let panel_id = panels[panel_idx].id;
 
-                    // Available rect center before dnd_drop_zone (for L/R detection)
-                    let avail_center_x = ui.available_rect_before_wrap().center().x;
+                // Compute chart height accounting for header + filter rows
+                let filter_count = panels[panel_idx].channels.iter()
+                    .filter(|ch| ch.show_filter).count();
+                let chart_h = (panel_h - 40.0 - 26.0 * filter_count as f32).max(60.0);
 
-                    let (_, dropped) = ui.dnd_drop_zone::<ChannelKey, _>(drop_frame, |ui| {
-                        // Panel header
-                        ui.horizontal(|ui| {
-                            ui.label(RichText::new(format!("Chart {}", panel_idx + 1))
-                                .color(FG_DIM).size(11.0).strong());
-                            ui.add_space(6.0);
+                let drop_frame = egui::Frame::NONE
+                    .fill(if is_dragging { BG3 } else { BG })
+                    .stroke(egui::Stroke::new(
+                        if is_dragging { 1.5 } else { 0.0 },
+                        ACCENT.gamma_multiply(0.3),
+                    ))
+                    .corner_radius(4.0)
+                    .inner_margin(egui::Margin::symmetric(0, 2));
 
-                            // Channel chips
-                            let n_ch = panels[panel_idx].channels.len();
-                            let mut toggle_idx: Option<usize> = None;
-                            let mut remove_idx: Option<usize> = None;
-                            for ci in 0..n_ch {
+                let avail_center_x = ui.available_rect_before_wrap().center().x;
+
+                let (dnd_resp, dropped) = ui.dnd_drop_zone::<ChannelKey, _>(drop_frame, |ui| {
+                    // ── Panel header ─────────────────────────────────────────
+                    let n_ch = panels[panel_idx].channels.len();
+                    let mut toggle_idx:        Option<usize> = None;
+                    let mut remove_idx:        Option<usize> = None;
+                    let mut toggle_filter_idx: Option<usize> = None;
+
+                    ui.horizontal(|ui| {
+                        ui.label(RichText::new(format!("Chart {}", panel_idx + 1))
+                            .color(FG_DIM).size(11.0).strong());
+                        ui.add_space(6.0);
+
+                        for ci in 0..n_ch {
+                            let (col, label, axis_lbl, has_filter) = {
                                 let ch = &panels[panel_idx].channels[ci];
-                                let col = ch.key.color();
-                                egui::Frame::NONE
-                                    .fill(BG3)
-                                    .stroke(egui::Stroke::new(1.2, col))
-                                    .corner_radius(3.0)
-                                    .inner_margin(egui::Margin { left: 6, right: 4, top: 2, bottom: 2 })
-                                    .show(ui, |ui| {
-                                        ui.horizontal(|ui| {
-                                            let (r, _) = ui.allocate_exact_size(
-                                                egui::vec2(7.0, 7.0), egui::Sense::hover(),
-                                            );
-                                            ui.painter().rect_filled(r, 1.0, col);
-                                            ui.label(RichText::new(ch.key.label()).color(FG).size(11.0));
-                                            // L/R toggle
-                                            let axis_lbl = match ch.y_axis {
-                                                YAxis::Left  => "L",
-                                                YAxis::Right => "R",
-                                            };
-                                            if ui.add(egui::Button::new(
-                                                RichText::new(axis_lbl).size(10.0).color(AMBER)
-                                            ).small().frame(false)).clicked() {
-                                                toggle_idx = Some(ci);
-                                            }
-                                            // Remove
-                                            if ui.add(egui::Button::new(
-                                                RichText::new("×").size(11.0).color(FG_DIM)
-                                            ).small().frame(false)).clicked() {
-                                                remove_idx = Some(ci);
-                                            }
-                                        });
+                                (
+                                    ch.key.color(),
+                                    ch.key.label(),
+                                    match ch.y_axis { YAxis::Left => "L", YAxis::Right => "R" },
+                                    ch.filter_min.is_some() || ch.filter_max.is_some(),
+                                )
+                            };
+
+                            egui::Frame::NONE
+                                .fill(BG3)
+                                .stroke(egui::Stroke::new(1.2, col))
+                                .corner_radius(3.0)
+                                .inner_margin(egui::Margin { left: 6, right: 4, top: 2, bottom: 2 })
+                                .show(ui, |ui| {
+                                    ui.horizontal(|ui| {
+                                        let (r, _) = ui.allocate_exact_size(vec2(7.0, 7.0), egui::Sense::hover());
+                                        ui.painter().rect_filled(r, 1.0, col);
+                                        ui.label(RichText::new(label).color(FG).size(11.0));
+                                        if ui.add(egui::Button::new(
+                                            RichText::new(axis_lbl).size(10.0).color(AMBER)
+                                        ).small().frame(false)).clicked() {
+                                            toggle_idx = Some(ci);
+                                        }
+                                        let filter_col = if has_filter { AMBER } else { FG_DIM };
+                                        if ui.add(egui::Button::new(
+                                            RichText::new("⊘").size(10.0).color(filter_col)
+                                        ).small().frame(false)).on_hover_text("Filtre valeurs").clicked() {
+                                            toggle_filter_idx = Some(ci);
+                                        }
+                                        if ui.add(egui::Button::new(
+                                            RichText::new("×").size(11.0).color(FG_DIM)
+                                        ).small().frame(false)).clicked() {
+                                            remove_idx = Some(ci);
+                                        }
                                     });
-                                ui.add_space(3.0);
-                            }
-
-                            if let Some(ci) = toggle_idx {
-                                let ch = &mut panels[panel_idx].channels[ci];
-                                ch.y_axis = match ch.y_axis {
-                                    YAxis::Left  => YAxis::Right,
-                                    YAxis::Right => YAxis::Left,
-                                };
-                            }
-                            if let Some(ci) = remove_idx {
-                                panels[panel_idx].channels.remove(ci);
-                            }
-
-                            // Drop hint
-                            if panels[panel_idx].channels.is_empty() {
-                                ui.label(RichText::new("← glisser un canal ici").color(FG_DIM).size(10.0).italics());
-                            }
-
-                            // Delete panel
-                            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                                if ui.add(egui::Button::new(
-                                    RichText::new("✕").size(11.0).color(RUST)
-                                ).small().frame(false)).on_hover_text("Supprimer ce graphique").clicked() {
-                                    to_delete = Some(panel_idx);
-                                }
-                            });
-                        });
-
-                        // ── Plot ──────────────────────────────────────────────
-                        let panel = &panels[panel_idx];
-                        if !panel.channels.is_empty() {
-                            render_chart(ui, panel, panel_id, rows, &ts, step, t0, cs, cfg);
-                        } else {
-                            let (rect, _) = ui.allocate_exact_size(
-                                egui::vec2(ui.available_width(), panels[panel_idx].height),
-                                egui::Sense::hover(),
-                            );
-                            ui.painter().rect_filled(rect, 4.0, BG3);
-                            ui.painter().text(
-                                rect.center(), egui::Align2::CENTER_CENTER,
-                                "Glisser un canal depuis la barre du haut",
-                                FontId::proportional(12.0), FG_DIM,
-                            );
+                                });
+                            ui.add_space(3.0);
                         }
+
+                        if panels[panel_idx].channels.is_empty() {
+                            ui.label(RichText::new("← glisser un canal ici")
+                                .color(FG_DIM).size(10.0).italics());
+                        }
+
+                        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                            if ui.add(egui::Button::new(
+                                RichText::new("✕").size(11.0).color(RUST)
+                            ).small().frame(false)).on_hover_text("Supprimer").clicked() {
+                                to_delete = Some(panel_idx);
+                            }
+                        });
                     });
 
-                    // Handle drop
-                    if let Some(key_arc) = dropped {
-                        let key = (*key_arc).clone();
-                        if !panels[panel_idx].channels.iter().any(|c| c.key == key) {
-                            let drop_x = ui.ctx().input(|i| {
-                                i.pointer.interact_pos().map(|p| p.x)
-                            }).unwrap_or(avail_center_x);
-                            let y_axis = if drop_x < avail_center_x { YAxis::Left } else { YAxis::Right };
-                            panels[panel_idx].channels.push(ChartChannel { key, y_axis });
-                        }
+                    // Apply deferred chip mutations
+                    if let Some(ci) = toggle_idx {
+                        let ch = &mut panels[panel_idx].channels[ci];
+                        ch.y_axis = match ch.y_axis { YAxis::Left => YAxis::Right, YAxis::Right => YAxis::Left };
+                    }
+                    if let Some(ci) = remove_idx {
+                        panels[panel_idx].channels.remove(ci);
+                    }
+                    if let Some(ci) = toggle_filter_idx {
+                        let v = &mut panels[panel_idx].channels[ci].show_filter;
+                        *v = !*v;
                     }
 
-                    ui.add_space(4.0);
+                    // ── Filter controls ──────────────────────────────────────
+                    let filter_cis: Vec<usize> = (0..panels[panel_idx].channels.len())
+                        .filter(|&ci| panels[panel_idx].channels[ci].show_filter)
+                        .collect();
+
+                    for &ci in &filter_cis {
+                        let (col, label) = {
+                            let ch = &panels[panel_idx].channels[ci];
+                            (ch.key.color(), ch.key.label())
+                        };
+                        let mut has_min = panels[panel_idx].channels[ci].filter_min.is_some();
+                        let mut min_val = panels[panel_idx].channels[ci].filter_min.unwrap_or(0.0);
+                        let mut has_max = panels[panel_idx].channels[ci].filter_max.is_some();
+                        let mut max_val = panels[panel_idx].channels[ci].filter_max.unwrap_or(100.0);
+
+                        ui.horizontal(|ui| {
+                            ui.add_space(6.0);
+                            let (r, _) = ui.allocate_exact_size(vec2(7.0, 7.0), egui::Sense::hover());
+                            ui.painter().circle_filled(r.center(), 3.5, col);
+                            ui.label(RichText::new(label).color(col).size(10.0));
+                            ui.add_space(8.0);
+                            ui.checkbox(&mut has_min, "");
+                            ui.label(RichText::new("Min").color(FG_DIM).size(10.0));
+                            if has_min {
+                                ui.add(egui::DragValue::new(&mut min_val).speed(0.1));
+                            }
+                            ui.add_space(6.0);
+                            ui.checkbox(&mut has_max, "");
+                            ui.label(RichText::new("Max").color(FG_DIM).size(10.0));
+                            if has_max {
+                                ui.add(egui::DragValue::new(&mut max_val).speed(0.1));
+                            }
+                            ui.add_space(8.0);
+                            if ui.small_button("✕").clicked() {
+                                has_min = false;
+                                has_max = false;
+                            }
+                        });
+
+                        panels[panel_idx].channels[ci].filter_min =
+                            if has_min { Some(min_val) } else { None };
+                        panels[panel_idx].channels[ci].filter_max =
+                            if has_max { Some(max_val) } else { None };
+                    }
+
+                    // ── Plot ─────────────────────────────────────────────────
+                    if !panels[panel_idx].channels.is_empty() {
+                        let panel = &panels[panel_idx];
+                        render_chart(ui, panel, panel_id, rows, &ts, step, cs, cfg, chart_h);
+                    } else {
+                        let (rect, _) = ui.allocate_exact_size(
+                            vec2(ui.available_width(), chart_h), egui::Sense::hover(),
+                        );
+                        ui.painter().rect_filled(rect, 4.0, BG3);
+                        ui.painter().text(
+                            rect.center(), egui::Align2::CENTER_CENTER,
+                            "Glisser un canal depuis la barre du haut",
+                            FontId::proportional(12.0), FG_DIM,
+                        );
+                    }
+                });
+
+                // ── L/R drop indicator overlay ────────────────────────────────
+                if is_dragging {
+                    let zone_rect = dnd_resp.response.rect;
+                    let ptr_in_zone = ui.ctx().input(|i| {
+                        i.pointer.hover_pos().map(|p| zone_rect.contains(p)).unwrap_or(false)
+                    });
+                    if ptr_in_zone {
+                        let px = ui.ctx().input(|i| {
+                            i.pointer.hover_pos().map(|p| p.x).unwrap_or(avail_center_x)
+                        });
+                        let is_left = px < avail_center_x;
+                        let half = if is_left {
+                            egui::Rect::from_min_max(zone_rect.min,
+                                egui::pos2(avail_center_x, zone_rect.max.y))
+                        } else {
+                            egui::Rect::from_min_max(
+                                egui::pos2(avail_center_x, zone_rect.min.y), zone_rect.max)
+                        };
+                        ui.painter().rect_filled(half, 4.0, LGREEN.gamma_multiply(0.18));
+                        ui.painter().rect_stroke(half, 4.0,
+                            egui::Stroke::new(1.5, LGREEN.gamma_multiply(0.7)),
+                            egui::StrokeKind::Middle);
+                        ui.painter().text(
+                            half.center(), egui::Align2::CENTER_CENTER,
+                            if is_left { "← Axe Gauche" } else { "Axe Droit →" },
+                            FontId::proportional(12.0), LGREEN,
+                        );
+                    }
                 }
 
-                if let Some(idx) = to_delete {
-                    panels.remove(idx);
+                // Handle drop
+                if let Some(key_arc) = dropped {
+                    let key = (*key_arc).clone();
+                    if !panels[panel_idx].channels.iter().any(|c| c.key == key) {
+                        let drop_x = ui.ctx().input(|i| {
+                            i.pointer.interact_pos().map(|p| p.x)
+                        }).unwrap_or(avail_center_x);
+                        let y_axis = if drop_x < avail_center_x { YAxis::Left } else { YAxis::Right };
+                        panels[panel_idx].channels.push(ChartChannel::new(key, y_axis));
+                    }
                 }
-            });
+            }
+
+            if let Some(idx) = to_delete {
+                panels.remove(idx);
+            }
         });
     });
 }
@@ -315,9 +409,7 @@ fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usi
                         .inner_margin(egui::Margin { left: 7, right: 7, top: 3, bottom: 3 })
                         .show(ui, |ui| {
                             ui.horizontal(|ui| {
-                                let (r, _) = ui.allocate_exact_size(
-                                    egui::vec2(8.0, 8.0), egui::Sense::hover(),
-                                );
+                                let (r, _) = ui.allocate_exact_size(vec2(8.0, 8.0), egui::Sense::hover());
                                 ui.painter().circle_filled(r.center(), 4.0, col);
                                 ui.label(RichText::new(key.label()).color(FG).size(11.5));
                             });
@@ -336,13 +428,14 @@ fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usi
                 *next_id += 1;
             }
             ui.add_space(8.0);
-            ui.label(RichText::new("← glisser L | glisser R →").color(FG_DIM).size(9.5).italics());
+            ui.label(RichText::new("← L | R →").color(FG_DIM).size(9.5).italics());
         });
     });
 }
 
-// ── Chart rendering with dual Y axis ─────────────────────────────────────────
+// ── Chart rendering ───────────────────────────────────────────────────────────
 
+#[allow(clippy::too_many_arguments)]
 fn render_chart(
     ui: &mut Ui,
     panel: &ChartPanel,
@@ -350,77 +443,68 @@ fn render_chart(
     rows: &[Row],
     ts: &[f64],
     step: usize,
-    t0: f64,
     cursor_s: Option<f64>,
     cfg: &AppConfig,
+    chart_h: f32,
 ) {
     let l_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Left).collect();
     let r_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Right).collect();
 
-    // Build series data
     let l_series: Vec<(Color32, &str, Vec<[f64; 2]>)> = l_channels.iter().map(|ch| {
-        let pts = build_pts(ts, rows, step, &ch.key, cfg);
+        let pts = build_pts(ts, rows, step, &ch.key, cfg, ch.filter_min, ch.filter_max);
         (ch.key.color(), ch.key.label(), pts)
     }).collect();
 
     let r_series: Vec<(Color32, &str, Vec<[f64; 2]>)> = r_channels.iter().map(|ch| {
-        let pts = build_pts(ts, rows, step, &ch.key, cfg);
+        let pts = build_pts(ts, rows, step, &ch.key, cfg, ch.filter_min, ch.filter_max);
         (ch.key.color(), ch.key.label(), pts)
     }).collect();
 
-    // Compute ranges
     let l_range = value_range(l_series.iter().flat_map(|(_, _, pts)| pts.iter().map(|p| p[1])));
     let r_range = value_range(r_series.iter().flat_map(|(_, _, pts)| pts.iter().map(|p| p[1])));
-
-    // For normalized rendering of right channels
     let (l_min, l_max) = l_range.unwrap_or((-1.0, 1.0));
     let (r_min, r_max) = r_range.unwrap_or((l_min, l_max));
-
     let has_right = !r_series.is_empty();
-    let plot_right_margin = if has_right { 52.0 } else { 0.0 };
 
     let mut captured_bounds: Option<PlotBounds> = None;
 
     let plot_resp = Plot::new(format!("chart_{}", panel_id))
-        .height(panel.height)
+        .height(chart_h)
         .legend(egui_plot::Legend::default().position(egui_plot::Corner::LeftTop))
         .show(ui, |plot_ui| {
-            // Left-axis channels (normal scale)
             for (col, name, pts) in &l_series {
                 if !pts.is_empty() {
                     plot_ui.line(Line::new(PlotPoints::new(pts.clone()))
                         .color(*col).width(1.4).name(*name));
                 }
             }
-
-            // Right-axis channels (normalized to L range)
             for (col, name, pts) in &r_series {
                 if !pts.is_empty() {
                     let norm: Vec<[f64; 2]> = pts.iter()
                         .map(|p| [p[0], normalize(p[1], r_min, r_max, l_min, l_max)])
                         .collect();
                     plot_ui.line(Line::new(PlotPoints::new(norm))
-                        .color(*col).width(1.4).style(egui_plot::LineStyle::Dashed { length: 8.0 })
+                        .color(*col).width(1.4)
+                        .style(egui_plot::LineStyle::Dashed { length: 8.0 })
                         .name(format!("{name} (R)")));
                 }
             }
 
-            // STFT-specific overlays
+            // Semantic overlays
             for ch in &panel.channels {
                 match &ch.key {
                     ChannelKey::StftB1 | ChannelKey::StftB2 => {
                         let dashed = egui_plot::LineStyle::Dashed { length: 10.0 };
                         let dotted = egui_plot::LineStyle::Dotted { spacing: 6.0 };
-                        let target_axis = &ch.y_axis;
-                        let hlines: &[(f64, Color32, egui_plot::LineStyle)] = &[
-                            (0.0, FG_DIM, dashed),
-                            ( cfg.stft_warn, ORANGE, dotted),
-                            (-cfg.stft_warn, ORANGE, dotted),
-                            ( cfg.stft_alarm, RED, dotted),
-                            (-cfg.stft_alarm, RED, dotted),
-                        ];
-                        for &(v, col, style) in hlines {
-                            let y = if *target_axis == YAxis::Right && r_range.is_some() {
+                        let ax = &ch.y_axis;
+                        for &(v, col, style) in &[
+                            (0.0,             FG_DIM, dashed),
+                            ( cfg.stft_warn,  ORANGE, dotted),
+                            (-cfg.stft_warn,  ORANGE, dotted),
+                            ( cfg.stft_alarm, RED,    dotted),
+                            (-cfg.stft_alarm, RED,    dotted),
+                        ] {
+                            let y = if *ax == YAxis::Right && r_range.is_some() {
                                 normalize(v, r_min, r_max, l_min, l_max)
                             } else { v };
                             plot_ui.hline(HLine::new(y).color(col).style(style));
@@ -430,14 +514,13 @@ fn render_chart(
                     ChannelKey::LmbB1 | ChannelKey::LmbB2 => {
                         let dashed = egui_plot::LineStyle::Dashed { length: 10.0 };
                         let dotted = egui_plot::LineStyle::Dotted { spacing: 6.0 };
-                        let target_axis = &ch.y_axis;
-                        let hlines: &[(f64, Color32, egui_plot::LineStyle)] = &[
-                            (1.00, GREEN, dashed),
-                            (cfg.lmb_lean_load, RED, dotted),
-                            (cfg.lmb_rich, ORANGE, dotted),
-                        ];
-                        for &(v, col, style) in hlines {
-                            let y = if *target_axis == YAxis::Right && r_range.is_some() {
+                        let ax = &ch.y_axis;
+                        for &(v, col, style) in &[
+                            (1.00,             GREEN,  dashed),
+                            (cfg.lmb_lean_load, RED,   dotted),
+                            (cfg.lmb_rich,     ORANGE, dotted),
+                        ] {
+                            let y = if *ax == YAxis::Right && r_range.is_some() {
                                 normalize(v, r_min, r_max, l_min, l_max)
                             } else { v };
                             plot_ui.hline(HLine::new(y).color(col).style(style));
@@ -448,71 +531,49 @@ fn render_chart(
                 }
             }
 
-            // Cursor line
             if let Some(t) = cursor_s {
                 plot_ui.vline(VLine::new(t).color(CURSOR_COL).width(1.0));
-            }
-
-            // Event markers on STFT panels
-            if panel.channels.iter().any(|c| matches!(c.key, ChannelKey::StftB1 | ChannelKey::StftB2)) {
-                // placeholder — could add event markers here
             }
 
             captured_bounds = Some(plot_ui.plot_bounds());
         });
 
-    // ── Draw right Y axis manually ─────────────────────────────────────────
+    // Right Y axis labels
     if has_right {
-        if let Some(bounds) = captured_bounds {
-            let rect = plot_resp.response.rect;
-            let ax_l = 44.0_f32;
-            let ax_b = 22.0_f32;
-            let data_top    = rect.top()    + 6.0;
-            let data_bottom = rect.bottom() - ax_b;
-            let data_right  = rect.right()  - 6.0;
+        if let Some(_bounds) = captured_bounds {
+            let rect       = plot_resp.response.rect;
+            let data_top   = rect.top()    + 6.0;
+            let data_bot   = rect.bottom() - 22.0;
+            let data_right = rect.right()  - 6.0;
+            let painter    = ui.painter();
 
-            let painter = ui.painter();
             painter.line_segment(
-                [egui::pos2(data_right, data_top), egui::pos2(data_right, data_bottom)],
+                [egui::pos2(data_right, data_top), egui::pos2(data_right, data_bot)],
                 egui::Stroke::new(1.0, FG_DIM),
             );
-
-            let n_ticks = 5usize;
             let font = FontId::proportional(9.0);
-            for i in 0..=n_ticks {
-                let t = i as f32 / n_ticks as f32;
-                let sy = data_top + t * (data_bottom - data_top);
+            for i in 0..=5usize {
+                let t  = i as f32 / 5.0;
+                let sy = data_top + t * (data_bot - data_top);
                 let v  = r_max - t as f64 * (r_max - r_min);
-
                 painter.line_segment(
                     [egui::pos2(data_right, sy), egui::pos2(data_right + 4.0, sy)],
                     egui::Stroke::new(1.0, FG_DIM),
                 );
-                let label = if (r_max - r_min).abs() > 10.0 {
-                    format!("{v:.0}")
-                } else {
-                    format!("{v:.2}")
-                };
+                let label = if (r_max - r_min).abs() > 10.0 { format!("{v:.0}") } else { format!("{v:.2}") };
                 painter.text(
                     egui::pos2(data_right + 5.0, sy),
-                    egui::Align2::LEFT_CENTER,
-                    label,
-                    font.clone(),
-                    FG_DIM,
+                    egui::Align2::LEFT_CENTER, label, font.clone(), FG_DIM,
                 );
             }
-            // Right axis label: show channel names
             let r_label: String = r_channels.iter()
                 .map(|c| format!("{} ({})", c.key.label(), c.key.unit()))
                 .collect::<Vec<_>>().join(", ");
             painter.text(
-                egui::pos2(data_right + plot_right_margin * 0.5, data_top - 2.0),
-                egui::Align2::CENTER_BOTTOM,
-                r_label,
-                FontId::proportional(8.5),
-                FG_DIM,
+                egui::pos2(data_right + 28.0, data_top - 2.0),
+                egui::Align2::CENTER_BOTTOM, r_label,
+                FontId::proportional(8.5), FG_DIM,
             );
-            let _ = (ax_l, bounds);
         }
     }
 }
@@ -545,7 +606,7 @@ fn show_timeline(
     ui.spacing_mut().slider_width = old_sw;
     if slider_r.changed() { *is_playing = false; }
 
-    let btn = egui::vec2(28.0, 28.0);
+    let btn = vec2(28.0, 28.0);
     ui.horizontal(|ui| {
         let (play_text, play_col) = if *is_playing { ("⏸", AMBER) } else { ("▶", LGREEN) };
         if ui.add(egui::Button::new(RichText::new(play_text).size(16.0).color(play_col)).min_size(btn)).clicked() {
@@ -580,7 +641,6 @@ fn show_channel_cards(
     panels: &[ChartPanel],
     cfg: &AppConfig,
 ) {
-    // Collect which channels are currently in any panel
     let active_keys: Vec<&ChannelKey> = panels.iter()
         .flat_map(|p| p.channels.iter().map(|c| &c.key))
         .collect();
@@ -619,10 +679,23 @@ fn channel_card(ui: &mut Ui, key: &ChannelKey, mn: f64, mx: f64, cur: Option<f64
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-fn build_pts(ts: &[f64], rows: &[Row], step: usize, key: &ChannelKey, cfg: &AppConfig) -> Vec<[f64; 2]> {
+fn build_pts(
+    ts: &[f64],
+    rows: &[Row],
+    step: usize,
+    key: &ChannelKey,
+    cfg: &AppConfig,
+    filter_min: Option<f64>,
+    filter_max: Option<f64>,
+) -> Vec<[f64; 2]> {
     ts.iter()
         .zip(rows.iter().step_by(step))
-        .filter_map(|(&t, row)| key.value(row, cfg).map(|y| [t, y]))
+        .filter_map(|(&t, row)| {
+            let y = key.value(row, cfg)?;
+            if filter_min.map(|m| y < m).unwrap_or(false) { return None; }
+            if filter_max.map(|m| y > m).unwrap_or(false) { return None; }
+            Some([t, y])
+        })
         .collect()
 }
 
@@ -634,8 +707,7 @@ fn value_range(iter: impl Iterator<Item = f64>) -> Option<(f64, f64)> {
 
 fn normalize(v: f64, from_min: f64, from_max: f64, to_min: f64, to_max: f64) -> f64 {
     if (from_max - from_min).abs() < 1e-10 { return (to_min + to_max) / 2.0; }
-    let t = (v - from_min) / (from_max - from_min);
-    to_min + t * (to_max - to_min)
+    to_min + (v - from_min) / (from_max - from_min) * (to_max - to_min)
 }
 
 fn ch_minmax(rows: &[Row], key: &ChannelKey, cfg: &AppConfig) -> (f64, f64) {

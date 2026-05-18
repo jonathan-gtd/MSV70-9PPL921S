@@ -301,19 +301,25 @@ impl eframe::App for MSV70App {
                             &mut self.playback_speed,
                             &mut self.last_frame_time,
                         );
-                    } else {
-                        show_empty(ui, ctx);
+                    } else if show_empty(ui, ctx) {
+                        if let Some(path) = rfd::FileDialog::new()
+                            .add_filter("CSV", &["csv"]).pick_file()
+                        {
+                            if !self.log_files.contains(&path) { self.log_files.push(path.clone()); }
+                            self.selected_log = self.log_files.iter().position(|p| p == &path);
+                            self.start_analyze(path);
+                        }
                     }
                 }
                 Nav::Overview => {
                     if let Some(ref d) = session {
                         crate::gui::tab_overview::show(ui, d, &cfg);
-                    } else { show_empty(ui, ctx); }
+                    } else { let _ = show_empty(ui, ctx); }
                 }
                 Nav::StftMap => {
                     if let Some(ref d) = session {
                         crate::gui::tab_stft_map::show(ui, d, &cfg);
-                    } else { show_empty(ui, ctx); }
+                    } else { let _ = show_empty(ui, ctx); }
                 }
             }
         });
@@ -460,55 +466,75 @@ fn show_tip_bar(ui: &mut Ui, app: &mut MSV70App) {
 
 // ── Empty state (UltraLog-style drop zone) ────────────────────────────────────
 
-fn show_empty(ui: &mut Ui, ctx: &Context) {
+fn show_empty(ui: &mut Ui, ctx: &Context) -> bool {
     let is_hovering = ctx.input(|i| !i.raw.hovered_files.is_empty());
-    let border_col  = if is_hovering { OLIVE } else { BG4 };
-    let border_w    = if is_hovering { 2.0_f32 } else { 1.5_f32 };
+    let mut browse_clicked = false;
 
     ui.centered_and_justified(|ui| {
         let avail = ui.available_rect_before_wrap();
-        let zone_w = (avail.width() * 0.55).min(480.0).max(260.0);
-        let zone_h = 200.0_f32;
-        let zone = egui::Rect::from_center_size(avail.center(), egui::vec2(zone_w, zone_h));
+        let card_w = 320.0_f32;
+        let card_h = 290.0_f32;
+        let card   = egui::Rect::from_center_size(avail.center(), egui::vec2(card_w, card_h));
 
-        // Drop zone background
-        ui.painter().rect_filled(zone, 10.0, BG2);
-        ui.painter().rect_stroke(zone, 10.0, egui::Stroke::new(border_w, border_col), egui::StrokeKind::Middle);
+        // Card background + border
+        ui.painter().rect_filled(card, 10.0, BG2);
+        ui.painter().rect_stroke(
+            card, 10.0,
+            egui::Stroke::new(if is_hovering { 2.0 } else { 1.0 },
+                if is_hovering { OLIVE } else { BG4 }),
+            egui::StrokeKind::Middle,
+        );
 
-        // Icon
-        let icon_pos = egui::pos2(zone.center().x, zone.top() + 52.0);
-        ui.painter().text(
-            icon_pos,
-            egui::Align2::CENTER_CENTER,
+        // Upload arrow in circle
+        let icon_c = egui::pos2(card.center().x, card.top() + 78.0);
+        let icon_col = if is_hovering { OLIVE } else { FG_DIM };
+        ui.painter().circle_stroke(icon_c, 28.0, egui::Stroke::new(1.5, icon_col));
+        ui.painter().text(icon_c, egui::Align2::CENTER_CENTER,
             if is_hovering { "↓" } else { "↑" },
-            egui::FontId::proportional(40.0),
-            if is_hovering { OLIVE } else { FG_DIM },
-        );
+            egui::FontId::proportional(26.0), icon_col);
 
-        // Label
-        let msg = if is_hovering {
-            "Release to load CSV"
-        } else {
-            "Drop a CSV log here"
-        };
-        ui.painter().text(
-            egui::pos2(zone.center().x, zone.top() + 98.0),
-            egui::Align2::CENTER_CENTER,
-            msg,
-            egui::FontId::proportional(15.0),
-            if is_hovering { OLIVE } else { FG },
+        // "Sélectionner un fichier" button
+        let btn_rect = egui::Rect::from_center_size(
+            egui::pos2(card.center().x, icon_c.y + 58.0),
+            egui::vec2(210.0, 36.0),
         );
-        ui.painter().text(
-            egui::pos2(zone.center().x, zone.top() + 120.0),
-            egui::Align2::CENTER_CENTER,
-            "or use the sidebar → Browse",
-            egui::FontId::proportional(11.0),
-            FG_DIM,
-        );
+        let btn_resp = ui.allocate_rect(btn_rect, egui::Sense::click());
+        let btn_fill = if btn_resp.hovered() { OLIVE.gamma_multiply(1.15) } else { OLIVE };
+        ui.painter().rect_filled(btn_rect, 6.0, btn_fill);
+        ui.painter().text(btn_rect.center(), egui::Align2::CENTER_CENTER,
+            "Sélectionner un fichier",
+            egui::FontId::proportional(13.0), Color32::WHITE);
+        if btn_resp.hovered() {
+            ctx.set_cursor_icon(egui::CursorIcon::PointingHand);
+        }
+        if btn_resp.clicked() { browse_clicked = true; }
 
-        // Allocate the zone so egui knows about it
-        let _ = ui.allocate_rect(zone, egui::Sense::hover());
+        // "ou" separator
+        ui.painter().text(
+            egui::pos2(card.center().x, btn_rect.bottom() + 14.0),
+            egui::Align2::CENTER_CENTER, "ou",
+            egui::FontId::proportional(11.0), FG_DIM);
+
+        // Drop label
+        ui.painter().text(
+            egui::pos2(card.center().x, btn_rect.bottom() + 32.0),
+            egui::Align2::CENTER_CENTER,
+            if is_hovering { "Relâcher pour charger" } else { "Déposer le fichier ici" },
+            egui::FontId::proportional(14.0),
+            if is_hovering { OLIVE } else { FG });
+
+        // File formats
+        ui.painter().text(
+            egui::pos2(card.center().x, card.bottom() - 16.0),
+            egui::Align2::CENTER_CENTER,
+            "CSV • LOG • TXT • MLG • LLG",
+            egui::FontId::proportional(10.0),
+            FG_DIM.gamma_multiply(0.6));
+
+        let _ = ui.allocate_rect(card, egui::Sense::hover());
     });
+
+    browse_clicked
 }
 
 // ── Tips builder ──────────────────────────────────────────────────────────────
