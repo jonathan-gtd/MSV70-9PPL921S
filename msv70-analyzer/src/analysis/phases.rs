@@ -45,7 +45,9 @@ pub fn detect_phase(row: &Row, cfg: &AppConfig) -> Phase {
 
     if rpm < 50.0   { return Phase::EngineOff; }
     if rpm < 400.0  { return Phase::Cranking; }
-    if pedal < cfg.phase_fuel_cut_pedal && rpm > cfg.phase_fuel_cut_rpm && speed > cfg.phase_fuel_cut_speed {
+    if pedal < cfg.phase_fuel_cut_pedal && load < cfg.phase_fuel_cut_load
+        && rpm > cfg.phase_fuel_cut_rpm && speed > cfg.phase_fuel_cut_speed
+    {
         return Phase::FuelCut;
     }
     if pedal > cfg.phase_wot_pedal || load > cfg.phase_wot_load { return Phase::Wot; }

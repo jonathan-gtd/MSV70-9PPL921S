@@ -95,7 +95,8 @@ pub fn show(ui: &mut Ui, cfg: &mut AppConfig, dirty: &mut bool) {
             .show(ui, |ui| {
                 ui.label(RichText::new(
                     "EngineOff: RPM < 50  |  Cranking: RPM < 400\n\
-                     FuelCut: pedal < fuel_cut_pedal AND rpm > fuel_cut_rpm AND speed > fuel_cut_speed\n\
+                     FuelCut: pedal < fuel_cut_pedal AND load < fuel_cut_load AND rpm > fuel_cut_rpm AND speed > fuel_cut_speed\n\
+                     → load guard prevents misclassifying cruise control (pedal=0 but engine loaded)\n\
                      WOT: pedal > wot_pedal OR load > wot_load\n\
                      Accel: pedal > accel_pedal  |  HotIdle/Warmup: speed < idle_speed AND rpm < idle_rpm\n\
                      Cruise: everything else above hot_coolant threshold"
@@ -109,6 +110,7 @@ pub fn show(ui: &mut Ui, cfg: &mut AppConfig, dirty: &mut bool) {
                     slider(ui, cfg, dirty, "WOT load threshold (%)", &mut |c: &mut AppConfig| &mut c.phase_wot_load, 40.0..=100.0);
                     slider(ui, cfg, dirty, "Accel pedal threshold (%)", &mut |c: &mut AppConfig| &mut c.phase_accel_pedal, 10.0..=80.0);
                     slider(ui, cfg, dirty, "Fuel cut pedal (%)", &mut |c: &mut AppConfig| &mut c.phase_fuel_cut_pedal, 1.0..=15.0);
+                    slider(ui, cfg, dirty, "Fuel cut max load% (guard vs cruise ctrl)", &mut |c: &mut AppConfig| &mut c.phase_fuel_cut_load, 1.0..=30.0);
                     slider(ui, cfg, dirty, "Fuel cut min RPM", &mut |c: &mut AppConfig| &mut c.phase_fuel_cut_rpm, 500.0..=3000.0);
                     slider(ui, cfg, dirty, "Fuel cut min speed (km/h)", &mut |c: &mut AppConfig| &mut c.phase_fuel_cut_speed, 0.0..=30.0);
                     slider(ui, cfg, dirty, "Hot idle coolant boundary (°C)", &mut |c: &mut AppConfig| &mut c.phase_hot_coolant, 50.0..=100.0);

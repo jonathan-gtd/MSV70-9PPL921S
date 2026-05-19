@@ -45,6 +45,7 @@ pub struct AppConfig {
     pub phase_wot_load:         f64,   // WOT threshold load %
     pub phase_accel_pedal:      f64,   // ACCEL threshold
     pub phase_fuel_cut_pedal:   f64,   // fuel-cut: pedal <
+    pub phase_fuel_cut_load:    f64,   // fuel-cut: load% < (guards against cruise control at pedal=0)
     pub phase_fuel_cut_rpm:     f64,   // fuel-cut: rpm >
     pub phase_fuel_cut_speed:   f64,   // fuel-cut: speed > km/h
     pub phase_hot_coolant:      f64,   // HOT_IDLE vs WARMUP boundary
@@ -151,6 +152,7 @@ impl Default for AppConfig {
             phase_wot_load:       72.0,
             phase_accel_pedal:    40.0,
             phase_fuel_cut_pedal: 5.0,
+            phase_fuel_cut_load:  10.0,  // below this load% = real fuel cut (not cruise control)
             phase_fuel_cut_rpm:   1200.0,
             phase_fuel_cut_speed: 5.0,
             phase_hot_coolant:    80.0,
