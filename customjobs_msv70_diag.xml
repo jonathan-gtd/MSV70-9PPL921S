@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<customjobs>
-  <customjob ecu="MSV70">
-    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>MSV70_DIAG</virtualname>
-    <comment>RPM, Load, Pedal, Coolant, STFT B1/B2, LTFT add B1/B2, LTFT mul B1/B2, MAF, Inj Cyl1, VANOS act/set, Ignition Cyl1, Speed km/h, Lambda B1/B2</comment>
-    <argument>3;0x4807;0x5804;0x480B;0x4300;0x5806;0x5808;0x5A83;0x5A84;0x5A85;0x5A86;0x4203;0x5A42;0x4508;0x4505;0x5A49;0x5AB1;0x5A50;0x5A51</argument>
-  </customjob>
-</customjobs>
