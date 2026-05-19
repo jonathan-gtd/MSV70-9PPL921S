@@ -26,12 +26,15 @@ pub struct Row {
     pub iat_c:       f64,
     pub oil_c:       f64,
     // Derived
-    pub phase:     Phase,
-    pub rpm_bin:   usize,
-    pub load_bin:  usize,
-    pub vanos_err: f64,
-    pub cl_b1:     bool,
-    pub cl_b2:     bool,
+    pub phase:        Phase,
+    pub rpm_bin:      usize,
+    pub load_bin:     usize,
+    pub load_mg_stk:  f64,
+    pub lmb_rpm_bin:  usize,
+    pub lmb_load_bin: usize,
+    pub vanos_err:    f64,
+    pub cl_b1:        bool,
+    pub cl_b2:        bool,
 }
 
 impl Default for Row {
@@ -44,8 +47,9 @@ impl Default for Row {
             lmb_b1: 1.0, lmb_b2: 1.0, lmb_tgt_b1: 1.0,
             maf_kgh: 0.0, inj_ms: 0.0, vanos_act: 0.0, vanos_tgt: 0.0,
             ign_deg: 0.0, iat_c: 20.0, oil_c: 0.0,
-            phase: Phase::EngineOff, rpm_bin: 0, load_bin: 0, vanos_err: 0.0,
-            cl_b1: false, cl_b2: false,
+            phase: Phase::EngineOff, rpm_bin: 0, load_bin: 0,
+            load_mg_stk: 0.0, lmb_rpm_bin: 0, lmb_load_bin: 0,
+            vanos_err: 0.0, cl_b1: false, cl_b2: false,
         }
     }
 }
@@ -151,8 +155,15 @@ pub struct SessionData {
     pub has_inj:   bool,
     pub has_lmb:   bool,
     pub has_iat:   bool,
+    pub has_maf:   bool,
 
-    // Bin labels used during analysis (saved so GUI doesn't need the config)
+    // STFT map bin labels
     pub rpm_labels:  Vec<String>,
     pub load_labels: Vec<String>,
+
+    // Lambda actual map (binned by ip_lamb_bas_1 axes)
+    pub cell_lmb_b1:    HashMap<(usize, usize), Vec<f64>>,
+    pub cell_lmb_b2:    HashMap<(usize, usize), Vec<f64>>,
+    pub lmb_rpm_labels: Vec<String>,
+    pub lmb_load_labels: Vec<String>,
 }

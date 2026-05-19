@@ -114,7 +114,7 @@ fn draw_grid(
         let (rect, _) = ui.allocate_exact_size(egui::vec2(label_w, cell_h * 0.7), egui::Sense::hover());
         ui.painter().text(
             egui::pos2(rect.right() - 2.0, rect.bottom() - 2.0),
-            egui::Align2::RIGHT_BOTTOM, "Load →", sfont.clone(), FG_DIM,
+            egui::Align2::RIGHT_BOTTOM, "mg/stk →", sfont.clone(), FG_DIM,
         );
         for lbl in &d.load_labels {
             let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h * 0.7), egui::Sense::hover());

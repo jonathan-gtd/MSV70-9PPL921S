@@ -51,9 +51,20 @@ pub struct AppConfig {
     pub phase_idle_rpm:         f64,   // standing idle: rpm <
     pub phase_idle_speed:       f64,   // standing idle: speed < km/h
 
-    // ── Map bins ─────────────────────────────────────────────────────────────
+    // ── Engine ───────────────────────────────────────────────────────────────
+    pub engine_cyl:               usize,  // number of cylinders (for mg/stk computation)
+    pub load_pct_to_mg_stk_scale: f64,    // fallback when no MAF: load% × scale = mg/stk
+
+    // ── Phase smoothing ──────────────────────────────────────────────────────
+    pub phase_min_duration_s: f64,  // merge phase spans shorter than this
+
+    // ── STFT map bins (RPM in rpm, Load in mg/stk) ───────────────────────────
     pub rpm_bins:  Vec<f64>,
     pub load_bins: Vec<f64>,
+
+    // ── Lambda map bins (matches ip_lamb_bas_1 XDF axes) ────────────────────
+    pub lmb_rpm_bins:  Vec<f64>,
+    pub lmb_load_bins: Vec<f64>,
 
     // ── Analysis engine parameters ───────────────────────────────────────────
     pub near_zero:             f64,    // TestO float noise floor
@@ -146,8 +157,23 @@ impl Default for AppConfig {
             phase_idle_rpm:       1200.0,
             phase_idle_speed:     5.0,
 
-            rpm_bins:  vec![0.0, 800.0, 1200.0, 1600.0, 2000.0, 2500.0, 3000.0, 3800.0, 5000.0, 9999.0],
-            load_bins: vec![0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 75.0, 100.0],
+            engine_cyl:               6,
+            load_pct_to_mg_stk_scale: 7.0,
+            phase_min_duration_s:     0.5,
+
+            // Midpoints of ip_mff_cor_opm_1_1 XDF axes as bin edges
+            rpm_bins: vec![
+                0.0, 752.0, 1056.0, 1328.0, 1520.0, 1808.0, 2256.0, 2752.0,
+                3248.0, 3696.0, 4000.0, 4304.0, 4656.0, 4944.0, 5296.0, 5760.0, 9999.0,
+            ],
+            load_bins: vec![
+                0.0, 53.8, 100.0, 150.0, 212.5, 287.5, 362.5,
+                425.0, 475.0, 525.0, 575.0, 650.0, 9999.0,
+            ],
+
+            // Midpoints of ip_lamb_bas_1 XDF axes as bin edges
+            lmb_rpm_bins:  vec![0.0, 976.0, 1504.0, 1888.0, 2256.0, 2752.0, 3504.0, 4512.0, 9999.0],
+            lmb_load_bins: vec![0.0, 100.0, 150.0, 200.0, 250.0, 325.0, 399.0, 461.5, 9999.0],
 
             near_zero:            1e-5,
             lean_debounce:        3,
@@ -195,13 +221,12 @@ impl AppConfig {
         bin_labels(&self.load_bins)
     }
 
-    pub fn rpm_bin(&self, v: f64) -> usize {
-        bin_idx(&self.rpm_bins, v)
-    }
-
-    pub fn load_bin(&self, v: f64) -> usize {
-        bin_idx(&self.load_bins, v)
-    }
+    pub fn rpm_bin(&self, v: f64) -> usize { bin_idx(&self.rpm_bins, v) }
+    pub fn load_bin(&self, v: f64) -> usize { bin_idx(&self.load_bins, v) }
+    pub fn lmb_rpm_bin(&self, v: f64) -> usize { bin_idx(&self.lmb_rpm_bins, v) }
+    pub fn lmb_load_bin(&self, v: f64) -> usize { bin_idx(&self.lmb_load_bins, v) }
+    pub fn lmb_rpm_labels(&self)  -> Vec<String> { bin_labels(&self.lmb_rpm_bins) }
+    pub fn lmb_load_labels(&self) -> Vec<String> { bin_labels(&self.lmb_load_bins) }
 }
 
 fn bin_idx(bins: &[f64], v: f64) -> usize {

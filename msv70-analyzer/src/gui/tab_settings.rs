@@ -93,7 +93,16 @@ pub fn show(ui: &mut Ui, cfg: &mut AppConfig, dirty: &mut bool) {
         CollapsingHeader::new(RichText::new("Phase Detection").color(FG).strong())
             .default_open(false)
             .show(ui, |ui| {
+                ui.label(RichText::new(
+                    "EngineOff: RPM < 50  |  Cranking: RPM < 400\n\
+                     FuelCut: pedal < fuel_cut_pedal AND rpm > fuel_cut_rpm AND speed > fuel_cut_speed\n\
+                     WOT: pedal > wot_pedal OR load > wot_load\n\
+                     Accel: pedal > accel_pedal  |  HotIdle/Warmup: speed < idle_speed AND rpm < idle_rpm\n\
+                     Cruise: everything else above hot_coolant threshold"
+                ).color(FG_DIM).small());
+                ui.add_space(6.0);
                 Grid::new("phase_grid").num_columns(2).spacing([12.0, 4.0]).show(ui, |ui| {
+                    slider(ui, cfg, dirty, "Min phase duration (s) — merge shorter spans", &mut |c: &mut AppConfig| &mut c.phase_min_duration_s, 0.0..=5.0);
                     slider(ui, cfg, dirty, "CL entry min RPM", &mut |c: &mut AppConfig| &mut c.phase_cl_rpm_min, 200.0..=1500.0);
                     slider(ui, cfg, dirty, "CL entry min load (%)", &mut |c: &mut AppConfig| &mut c.phase_cl_load_min, 0.5..=10.0);
                     slider(ui, cfg, dirty, "WOT pedal threshold (%)", &mut |c: &mut AppConfig| &mut c.phase_wot_pedal, 50.0..=100.0);
@@ -115,6 +124,8 @@ pub fn show(ui: &mut Ui, cfg: &mut AppConfig, dirty: &mut bool) {
             .default_open(false)
             .show(ui, |ui| {
                 Grid::new("analysis_grid").num_columns(2).spacing([12.0, 4.0]).show(ui, |ui| {
+                    slider_usize(ui, cfg, dirty, "Engine cylinders (for mg/stk)", &mut |c: &mut AppConfig| &mut c.engine_cyl, 4..=12);
+                    slider(ui, cfg, dirty, "Load% → mg/stk scale (fallback, no MAF)", &mut |c: &mut AppConfig| &mut c.load_pct_to_mg_stk_scale, 1.0..=15.0);
                     slider_usize(ui, cfg, dirty, "Min cell samples (STFT map)", &mut |c: &mut AppConfig| &mut c.cell_min_samples, 2..=20);
                     slider_usize(ui, cfg, dirty, "Min ign cell samples (knock)", &mut |c: &mut AppConfig| &mut c.ign_cell_min_samples, 3..=30);
                     slider_usize(ui, cfg, dirty, "LEAN debounce (consecutive)", &mut |c: &mut AppConfig| &mut c.lean_debounce, 1..=10);
@@ -130,10 +141,11 @@ pub fn show(ui: &mut Ui, cfg: &mut AppConfig, dirty: &mut bool) {
         ui.add_space(4.0);
 
         // ── Bin Edges ─────────────────────────────────────────────────────────
-        CollapsingHeader::new(RichText::new("RPM & Load Bin Edges").color(FG).strong())
+        CollapsingHeader::new(RichText::new("RPM & Load Bin Edges (STFT map)").color(FG).strong())
             .default_open(false)
             .show(ui, |ui| {
-                ui.label(RichText::new("Space-separated values. Must be strictly increasing. Restart analyze after change.").color(FG_DIM).small());
+                ui.label(RichText::new("RPM in rpm, Load in mg/stk (derived from MAF). Defaults match ip_mff_cor_opm_1_1 XDF axes.").color(FG_DIM).small());
+                ui.label(RichText::new("Space-separated values, strictly increasing. Re-analyze after change.").color(FG_DIM).small());
                 ui.add_space(4.0);
 
                 ui.horizontal(|ui| {

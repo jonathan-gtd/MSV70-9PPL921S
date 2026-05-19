@@ -14,7 +14,7 @@ use crate::jobs::{load_customjobs, load_pid_db};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Nav {
-    TimeSeries, StftMap, Overview, Trend, Rapport, CustomJobs, Settings,
+    TimeSeries, StftMap, LambdaMap, Overview, Trend, Rapport, CustomJobs, Settings,
 }
 
 impl Nav {
@@ -22,6 +22,7 @@ impl Nav {
         match self {
             Nav::TimeSeries => "Time Series",
             Nav::StftMap    => "STFT Map",
+            Nav::LambdaMap  => "Lambda Map",
             Nav::Overview   => "Overview",
             Nav::Trend      => "Trend",
             Nav::Rapport    => "Rapport",
@@ -30,7 +31,7 @@ impl Nav {
         }
     }
     fn is_analysis(&self) -> bool {
-        matches!(self, Nav::TimeSeries | Nav::StftMap | Nav::Overview | Nav::Rapport)
+        matches!(self, Nav::TimeSeries | Nav::StftMap | Nav::LambdaMap | Nav::Overview | Nav::Rapport)
     }
 }
 
@@ -230,7 +231,7 @@ impl eframe::App for MSV70App {
                     ui.label(RichText::new("MSV70").color(OLIVE).strong().size(14.0));
                     ui.add_space(14.0);
                     for item in [
-                        Nav::TimeSeries, Nav::StftMap, Nav::Overview,
+                        Nav::TimeSeries, Nav::StftMap, Nav::LambdaMap, Nav::Overview,
                         Nav::Trend, Nav::Rapport, Nav::CustomJobs, Nav::Settings,
                     ] {
                         if nav_tab(ui, item.label(), current_nav == item) {
@@ -319,6 +320,11 @@ impl eframe::App for MSV70App {
                 Nav::StftMap => {
                     if let Some(ref d) = session {
                         crate::gui::tab_stft_map::show(ui, d, &cfg);
+                    } else { let _ = show_empty(ui, ctx); }
+                }
+                Nav::LambdaMap => {
+                    if let Some(ref d) = session {
+                        crate::gui::tab_lambda_map::show(ui, d, &cfg);
                     } else { let _ = show_empty(ui, ctx); }
                 }
             }

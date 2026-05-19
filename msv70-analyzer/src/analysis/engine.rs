@@ -4,7 +4,7 @@ use std::path::Path;
 use crate::config::AppConfig;
 use crate::data::{load_csv, LoadResult};
 use crate::data::types::*;
-use super::phases::{detect_phase, is_steady};
+use super::phases::{detect_phase, is_steady, smooth_phases};
 
 pub fn percentile(data: &mut Vec<f64>, p: f64) -> f64 {
     if data.is_empty() { return 0.0; }
@@ -57,13 +57,27 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
     let has_inj   = *available.get("inj_ms").unwrap_or(&false);
     let has_lmb   = *available.get("lmb_b1").unwrap_or(&false) && *available.get("lmb_b2").unwrap_or(&false);
     let has_iat   = *available.get("iat_c").unwrap_or(&false);
+    let has_maf   = *available.get("maf_kgh").unwrap_or(&false);
 
+    let n_cyl = cfg.engine_cyl as f64;
     for i in 0..n {
+        // mg/stk: air mass per cylinder per stroke — used for XDF-matching STFT binning
+        let mg_stk = if has_maf && rows[i].maf_kgh > 0.1 && rows[i].rpm > 100.0 {
+            rows[i].maf_kgh * 1e6 / (30.0 * rows[i].rpm * n_cyl)
+        } else if !has_maf {
+            rows[i].load_pct * cfg.load_pct_to_mg_stk_scale
+        } else {
+            0.0
+        };
+        rows[i].load_mg_stk  = mg_stk;
+
         let phase = detect_phase(&rows[i], cfg);
-        rows[i].phase    = phase;
-        rows[i].rpm_bin  = cfg.rpm_bin(rows[i].rpm);
-        rows[i].load_bin = cfg.load_bin(rows[i].load_pct);
-        rows[i].vanos_err = rows[i].vanos_act - rows[i].vanos_tgt;
+        rows[i].phase        = phase;
+        rows[i].rpm_bin      = cfg.rpm_bin(rows[i].rpm);
+        rows[i].load_bin     = cfg.load_bin(mg_stk);
+        rows[i].lmb_rpm_bin  = cfg.lmb_rpm_bin(rows[i].rpm);
+        rows[i].lmb_load_bin = cfg.lmb_load_bin(mg_stk);
+        rows[i].vanos_err    = rows[i].vanos_act - rows[i].vanos_tgt;
         rows[i].cl_b1 = rows[i].rpm > cfg.phase_cl_rpm_min
             && rows[i].coolant_c > cfg.coolant_cl_min
             && rows[i].load_pct > cfg.phase_cl_load_min
@@ -73,6 +87,7 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
             && rows[i].load_pct > cfg.phase_cl_load_min
             && rows[i].stft_b2.abs() > cfg.near_zero;
     }
+    smooth_phases(&mut rows, cfg.phase_min_duration_s);
 
     let dur_s      = rows[n - 1].ts() - rows[0].ts();
     let cool_start = rows[0].coolant_c;
@@ -138,6 +153,23 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
     }
     corrections.sort_by(|a, b| b.avg_delta.abs().partial_cmp(&a.avg_delta.abs()).unwrap());
 
+    // Lambda actual cells (binned by ip_lamb_bas_1 axis breakpoints)
+    let mut cell_lmb_b1: HashMap<(usize, usize), Vec<f64>> = HashMap::new();
+    let mut cell_lmb_b2: HashMap<(usize, usize), Vec<f64>> = HashMap::new();
+    if has_lmb {
+        for i in 0..n {
+            if rows[i].rpm > cfg.phase_cl_rpm_min && rows[i].coolant_c > cfg.coolant_cl_min {
+                let key = (rows[i].lmb_rpm_bin, rows[i].lmb_load_bin);
+                if (0.5..2.5).contains(&rows[i].lmb_b1) {
+                    cell_lmb_b1.entry(key).or_default().push(rows[i].lmb_b1);
+                }
+                if (0.5..2.5).contains(&rows[i].lmb_b2) {
+                    cell_lmb_b2.entry(key).or_default().push(rows[i].lmb_b2);
+                }
+            }
+        }
+    }
+
     let stft_buckets = build_stft_buckets(&rows, &cl_b1_idx, &cl_b2_idx, cfg);
 
     let retard_idx: Vec<usize> = if has_ign {
@@ -155,16 +187,19 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
 
     let events = build_events(&rows, has_lmb, has_vanos, cfg);
 
-    let rpm_labels  = cfg.rpm_labels();
-    let load_labels = cfg.load_labels();
+    let rpm_labels       = cfg.rpm_labels();
+    let load_labels      = cfg.load_labels();
+    let lmb_rpm_labels   = cfg.lmb_rpm_labels();
+    let lmb_load_labels  = cfg.lmb_load_labels();
 
     Ok(SessionData {
         file_name, n_rows: n, dur_s, cool_start, cool_end, cool_max,
         rows, cl_b1_idx, cl_b2_idx, cl_both_idx, run_idx, hot_idx, steady_idx,
         phase_dur, cell_b1, cell_b2, cell_ign_p50,
         corrections, stft_buckets, events, retard_idx,
-        has_ltft, has_vanos, has_ign, has_inj, has_lmb, has_iat,
+        has_ltft, has_vanos, has_ign, has_inj, has_lmb, has_iat, has_maf,
         rpm_labels, load_labels,
+        cell_lmb_b1, cell_lmb_b2, lmb_rpm_labels, lmb_load_labels,
     })
 }
 
