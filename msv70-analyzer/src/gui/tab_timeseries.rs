@@ -167,6 +167,7 @@ pub fn show(
     is_playing:       &mut bool,
     playback_speed:   &mut f64,
     _last_frame_time: &mut Option<Instant>,
+    show_phases:      &mut bool,
 ) {
     let rows = &d.rows;
     if rows.is_empty() { return; }
@@ -205,7 +206,7 @@ pub fn show(
             .frame(egui::Frame::NONE.fill(BG2).inner_margin(egui::Margin::symmetric(6, 4)))
             .exact_height(36.0)
             .show_inside(ui, |ui| {
-                show_palette_bar(ui, panels, next_id);
+                show_palette_bar(ui, panels, next_id, show_phases);
             });
 
         egui::CentralPanel::default().show_inside(ui, |ui| {
@@ -276,7 +277,7 @@ pub fn show(
                                         }
                                         let filter_col = if has_filter { AMBER } else { FG_DIM };
                                         if ui.add(egui::Button::new(
-                                            RichText::new("⊘").size(10.0).color(filter_col)
+                                            RichText::new("f").size(10.0).color(filter_col)
                                         ).small().frame(false)).on_hover_text("Filtre valeurs").clicked() {
                                             toggle_filter_idx = Some(ci);
                                         }
@@ -310,8 +311,8 @@ pub fn show(
                                     panels[panel_idx].y2_zoom = 1.0;
                                 }
                             }
-                            ui.label(RichText::new("⊞").size(11.0).color(FG_DIM))
-                                .on_hover_text("Zoom axe unique — Ctrl+scroll: X · Shift+scroll: Y1 · Alt+scroll: Y2 · double-clic: reset tout");
+                            ui.label(RichText::new("Z").size(10.0).color(FG_DIM))
+                                .on_hover_text("Glisser sur zone axe X (bas) = zoom horizontal · zone Y1 (gauche) = zoom vertical · zone Y2 (droite) = zoom axe droit · double-clic = reset");
                         });
                     });
 
@@ -369,7 +370,7 @@ pub fn show(
                         let mut y2_zoom = panels[panel_idx].y2_zoom;
                         let hover_t = {
                             let panel = &panels[panel_idx];
-                            render_chart(ui, panel, panel_id, rows, &ts, step, t0, cs, cfg, chart_h, &spans, &mut y2_zoom)
+                            render_chart(ui, panel, panel_id, rows, &ts, step, t0, cs, cfg, chart_h, &spans, &mut y2_zoom, *show_phases)
                         };
                         panels[panel_idx].y2_zoom = y2_zoom;
                         if !*is_playing {
@@ -442,7 +443,7 @@ pub fn show(
 
 // ── Palette bar ───────────────────────────────────────────────────────────────
 
-fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usize) {
+fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usize, show_phases: &mut bool) {
     ui.horizontal(|ui| {
         for key in ALL_CHANNELS {
             let col = key.color();
@@ -473,7 +474,7 @@ fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usi
 
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
             if ui.add(
-                egui::Button::new(RichText::new("+ Graphique").color(OLIVE).size(12.0)).fill(BG3)
+                egui::Button::new(RichText::new("+ Chart").color(OLIVE).size(12.0)).fill(BG3)
             ).clicked() {
                 panels.push(ChartPanel { id: *next_id, height: 200.0, y2_zoom: 1.0, channels: vec![] });
                 *next_id += 1;
@@ -481,14 +482,26 @@ fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usi
             ui.add_space(4.0);
             ui.label(RichText::new("← L | R →").color(FG_DIM).size(9.5).italics());
             ui.add_space(4.0);
-            // Phase legend dots
-            for phase in Phase::all() {
-                if matches!(phase, Phase::EngineOff | Phase::Cranking) { continue; }
-                let col = phase_color(phase);
-                let (r, _) = ui.allocate_exact_size(vec2(8.0, 8.0), egui::Sense::hover());
-                ui.painter().circle_filled(r.center(), 4.0, col);
+            // Phase toggle button + legend
+            let phase_col = if *show_phases { ACCENT } else { FG_DIM };
+            if ui.add(
+                egui::Button::new(RichText::new("Phases").size(9.5).color(phase_col)).fill(BG3).small()
+            ).on_hover_text(if *show_phases { "Cacher phases" } else { "Afficher phases" }).clicked() {
+                *show_phases = !*show_phases;
             }
-            ui.label(RichText::new("Phases:").color(FG_DIM).size(9.5));
+            if *show_phases {
+                ui.add_space(2.0);
+                for phase in Phase::all() {
+                    if matches!(phase, Phase::EngineOff | Phase::Cranking) { continue; }
+                    let col = phase_color(phase);
+                    let resp = ui.add(egui::Label::new(
+                        RichText::new(format!(" {} ", phase.as_str())).color(col).size(9.0)
+                    ).sense(egui::Sense::hover()));
+                    let (r, _) = ui.allocate_exact_size(vec2(7.0, 7.0), egui::Sense::hover());
+                    ui.painter().circle_filled(r.center(), 3.5, col);
+                    drop(resp);
+                }
+            }
         });
     });
 }
@@ -509,6 +522,7 @@ fn render_chart(
     chart_h: f32,
     phase_spans: &[(f64, f64, Phase)],
     y2_zoom: &mut f64,
+    show_phases: bool,
 ) -> Option<f64> {
     let l_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Left).collect();
     let r_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Right).collect();
@@ -527,32 +541,78 @@ fn render_chart(
     let (r_min, r_max) = r_range.unwrap_or((l_min, l_max));
     let has_right = !r_series.is_empty();
 
-    // ── Per-axis zoom via modifier keys ───────────────────────────────────────
-    let (zoom_x, zoom_y, alt_y2) = ui.ctx().input(|i| {
-        match (i.modifiers.ctrl, i.modifiers.shift, i.modifiers.alt) {
-            (true,  false, false) => (true,  false, false), // Ctrl  → X only
-            (false, true,  false) => (false, true,  false), // Shift → Y1 only
-            (false, false, true)  => (false, false, true),  // Alt   → Y2 (handled here)
-            _                     => (true,  true,  false), // default: both
-        }
-    });
-
-    // Alt+scroll: independent Y2 zoom using last-frame chart rect
-    let rect_id = egui::Id::new(format!("chart_rect_{}", panel_id));
+    // ── Axis-drag zones (derived from last frame's plot rect) ─────────────────
+    let rect_id   = egui::Id::new(format!("chart_rect_{}", panel_id));
+    let bounds_id = egui::Id::new(format!("chart_bnds_{}", panel_id));
     let last_rect: Option<egui::Rect> = ui.ctx().data(|d| d.get_temp(rect_id));
-    if alt_y2 {
-        let hovered = last_rect.map(|r| {
-            ui.ctx().input(|i| i.pointer.hover_pos().map(|p| r.contains(p)).unwrap_or(false))
-        }).unwrap_or(false);
-        if hovered {
-            let scroll = ui.ctx().input(|i| i.smooth_scroll_delta.y);
-            if scroll.abs() > 0.3 {
-                *y2_zoom = (*y2_zoom * (1.0 - scroll as f64 * 0.003)).clamp(0.05, 20.0);
-            }
-        }
+    let prev_bounds: Option<[f64; 4]>  = ui.ctx().data(|d| d.get_temp(bounds_id));
+
+    let x_zone  = last_rect.map(|r| egui::Rect::from_min_max(
+        egui::pos2(r.left() + 50.0, r.bottom() - 24.0),
+        egui::pos2(r.right(), r.bottom()),
+    ));
+    let y1_zone = last_rect.map(|r| egui::Rect::from_min_max(
+        egui::pos2(r.left(), r.top()),
+        egui::pos2(r.left() + 48.0, r.bottom() - 24.0),
+    ));
+    let y2_zone: Option<egui::Rect> = if has_right {
+        last_rect.map(|r| egui::Rect::from_min_max(
+            egui::pos2(r.right() - 60.0, r.top()),
+            egui::pos2(r.right(), r.bottom() - 24.0),
+        ))
+    } else { None };
+
+    let (ptr_pos, ptr_down, press_origin, drag_delta) = ui.ctx().input(|i| (
+        i.pointer.hover_pos(),
+        i.pointer.primary_down(),
+        i.pointer.press_origin(),
+        i.pointer.delta(),
+    ));
+
+    let in_zone = |z: Option<egui::Rect>, p: egui::Pos2| z.map(|r| r.contains(p)).unwrap_or(false);
+    let drag_on_x  = ptr_down && press_origin.map(|p| in_zone(x_zone,  p)).unwrap_or(false);
+    let drag_on_y1 = ptr_down && press_origin.map(|p| in_zone(y1_zone, p)).unwrap_or(false);
+    let drag_on_y2 = ptr_down && press_origin.map(|p| in_zone(y2_zone, p)).unwrap_or(false);
+    let axis_drag  = drag_on_x || drag_on_y1 || drag_on_y2;
+
+    // Cursor feedback when hovering axis zones
+    if let Some(pos) = ptr_pos {
+        if in_zone(x_zone, pos)        { ui.ctx().set_cursor_icon(egui::CursorIcon::ResizeHorizontal); }
+        else if in_zone(y1_zone, pos)  { ui.ctx().set_cursor_icon(egui::CursorIcon::ResizeVertical); }
+        else if in_zone(y2_zone, pos)  { ui.ctx().set_cursor_icon(egui::CursorIcon::ResizeVertical); }
     }
 
-    // Adjusted right-axis range with Y2 zoom (centre + half-range × zoom)
+    // Y2 drag → adjust y2_zoom
+    if drag_on_y2 && drag_delta.y.abs() > 0.1 {
+        let factor = (-drag_delta.y as f64 * 0.009).exp();
+        *y2_zoom = (*y2_zoom * factor).clamp(0.05, 20.0);
+    }
+
+    // Compute PlotBounds override for X / Y1 drag
+    let bounds_override: Option<PlotBounds> = if (drag_on_x || drag_on_y1) && drag_delta.length() > 0.2 {
+        prev_bounds.map(|[xmin, ymin, xmax, ymax]| {
+            let (mut nxmin, mut nxmax, mut nymin, mut nymax) = (xmin, xmax, ymin, ymax);
+            if drag_on_x {
+                let xctr  = (xmin + xmax) / 2.0;
+                let xhalf = (xmax - xmin) / 2.0;
+                // drag right = zoom out, drag left = zoom in
+                let f = (drag_delta.x as f64 * 0.009).exp();
+                let h = (xhalf * f).max(0.01);
+                nxmin = xctr - h; nxmax = xctr + h;
+            }
+            if drag_on_y1 {
+                let yctr  = (ymin + ymax) / 2.0;
+                let yhalf = (ymax - ymin) / 2.0;
+                // drag up = zoom in, drag down = zoom out
+                let f = (-drag_delta.y as f64 * 0.009).exp();
+                let h = (yhalf * f).max(0.0001);
+                nymin = yctr - h; nymax = yctr + h;
+            }
+            PlotBounds::from_min_max([nxmin, nymin], [nxmax, nymax])
+        })
+    } else { None };
+
+    // Adjusted right-axis range with Y2 zoom
     let y2_ctr  = (r_min + r_max) / 2.0;
     let y2_half = (r_max - r_min) / 2.0 * *y2_zoom;
     let (adj_r_min, adj_r_max) = (y2_ctr - y2_half, y2_ctr + y2_half);
@@ -563,22 +623,29 @@ fn render_chart(
 
     let mut captured_bounds: Option<PlotBounds> = None;
 
-    let plot_resp = Plot::new(format!("chart_{}", panel_id))
-        .allow_zoom(egui::Vec2b::new(zoom_x, zoom_y))
+    let mut plot = Plot::new(format!("chart_{}", panel_id))
         .height(chart_h)
-        .legend(egui_plot::Legend::default().position(egui_plot::Corner::LeftTop))
-        .show(ui, |plot_ui| {
+        .allow_zoom(egui::Vec2b::TRUE)
+        .allow_drag(!axis_drag)
+        .legend(egui_plot::Legend::default().position(egui_plot::Corner::LeftTop));
+    if bounds_override.is_some() {
+        plot = plot.auto_bounds(egui::Vec2b::FALSE);
+    }
+    let plot_resp = plot.show(ui, |plot_ui| {
+        if let Some(b) = bounds_override { plot_ui.set_plot_bounds(b); }
             // ── Phase overlays ────────────────────────────────────────────────
-            for (t_start, t_end, phase) in phase_spans {
-                if matches!(phase, Phase::EngineOff | Phase::Cranking) { continue; }
-                let col = phase_color(phase);
-                let fill = Color32::from_rgba_unmultiplied(col.r(), col.g(), col.b(), 22);
-                let pts = PlotPoints::new(vec![
-                    [*t_start, y_lo], [*t_end, y_lo], [*t_end, y_hi], [*t_start, y_hi],
-                ]);
-                plot_ui.polygon(Polygon::new(pts)
-                    .fill_color(fill)
-                    .stroke(egui::Stroke::new(0.0, Color32::TRANSPARENT)));
+            if show_phases {
+                for (t_start, t_end, phase) in phase_spans {
+                    if matches!(phase, Phase::EngineOff | Phase::Cranking) { continue; }
+                    let col = phase_color(phase);
+                    let fill = Color32::from_rgba_unmultiplied(col.r(), col.g(), col.b(), 22);
+                    let pts = PlotPoints::new(vec![
+                        [*t_start, y_lo], [*t_end, y_lo], [*t_end, y_hi], [*t_start, y_hi],
+                    ]);
+                    plot_ui.polygon(Polygon::new(pts)
+                        .fill_color(fill)
+                        .stroke(egui::Stroke::new(0.0, Color32::TRANSPARENT)));
+                }
             }
 
             // ── Left-axis channels ────────────────────────────────────────────
@@ -650,10 +717,26 @@ fn render_chart(
             captured_bounds = Some(plot_ui.plot_bounds());
         });
 
-    // ── Post-plot: store rect, reset, Y2 indicator ───────────────────────────
+    // ── Post-plot: store rect + bounds, reset, Y2 indicator ──────────────────
     ui.ctx().data_mut(|d| d.insert_temp(rect_id, plot_resp.response.rect));
+    if let Some(b) = captured_bounds {
+        let arr = [b.min()[0], b.min()[1], b.max()[0], b.max()[1]];
+        ui.ctx().data_mut(|d| d.insert_temp(bounds_id, arr));
+    }
     if plot_resp.response.double_clicked() {
         *y2_zoom = 1.0;
+    }
+
+    // Highlight axis zones on hover (painted on top of plot)
+    if let Some(pos) = ptr_pos {
+        let painter = ui.painter();
+        if in_zone(x_zone, pos) {
+            painter.rect_filled(x_zone.unwrap(), 0.0, ACCENT.gamma_multiply(0.10));
+        } else if in_zone(y1_zone, pos) {
+            painter.rect_filled(y1_zone.unwrap(), 0.0, ACCENT.gamma_multiply(0.10));
+        } else if in_zone(y2_zone, pos) {
+            painter.rect_filled(y2_zone.unwrap(), 0.0, AMBER.gamma_multiply(0.10));
+        }
     }
     if (*y2_zoom - 1.0).abs() > 0.05 {
         let r = plot_resp.response.rect;
@@ -843,7 +926,7 @@ fn channel_card(ui: &mut Ui, key: &ChannelKey, mn: f64, mx: f64, mean: f64, sigm
             ui.horizontal(|ui| {
                 ui.label(RichText::new(key.label()).color(key.color()).size(10.0).strong());
                 if key.is_computed() {
-                    ui.label(RichText::new("∿").color(AMBER).size(9.0));
+                    ui.label(RichText::new("~").color(AMBER).size(9.0));
                 }
             });
             // Current value

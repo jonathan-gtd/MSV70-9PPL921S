@@ -64,6 +64,7 @@ pub struct MSV70App {
     // Dynamic chart system
     pub chart_panels:  Vec<ChartPanel>,
     pub next_panel_id: usize,
+    pub show_phases:   bool,
 }
 
 impl MSV70App {
@@ -92,6 +93,7 @@ impl MSV70App {
             cursor_s: None, is_playing: false, playback_speed: 1.0, last_frame_time: None,
             chart_panels: default_panels(),
             next_panel_id: 3,
+            show_phases: true,
         };
 
         if let Some(path) = app.log_files.last().cloned() {
@@ -301,6 +303,7 @@ impl eframe::App for MSV70App {
                             &mut self.is_playing,
                             &mut self.playback_speed,
                             &mut self.last_frame_time,
+                            &mut self.show_phases,
                         );
                     } else if show_empty(ui, ctx) {
                         if let Some(path) = rfd::FileDialog::new()
@@ -403,7 +406,7 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
     // ── Log file list ──────────────────────────────────────────────────────
     ui.horizontal(|ui| {
         ui.label(RichText::new("LOGS").color(FG_DIM).small().strong());
-        if ui.small_button("⟳").on_hover_text("Rescan LOGS folder").clicked() {
+        if ui.small_button("↺").on_hover_text("Rescan LOGS folder").clicked() {
             app.log_files = scan_logs(app.logs_dir.as_deref());
         }
     });
@@ -441,7 +444,7 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
     ui.separator();
     ui.add_space(2.0);
     ui.horizontal(|ui| {
-        if ui.button("⊕ Trend").clicked() && app.pending_all.is_none() {
+        if ui.button("+ Trend").clicked() && app.pending_all.is_none() {
             app.start_load_all();
         }
         if ui.button("📂 Browse").clicked() {
