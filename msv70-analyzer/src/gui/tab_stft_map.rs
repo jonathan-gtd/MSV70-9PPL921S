@@ -5,7 +5,7 @@ use crate::data::types::*;
 use super::palette::*;
 
 pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
-    ScrollArea::vertical().id_salt("stft_map_scroll").show(ui, |ui| {
+    ScrollArea::both().id_salt("stft_map_scroll").auto_shrink([false, false]).show(ui, |ui| {
         let n_rb = d.rpm_labels.len();
         let n_lb = d.load_labels.len();
         if n_rb == 0 || n_lb == 0 { return; }
@@ -14,11 +14,11 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
         ui.label(RichText::new("Negative = rich (–) → reduce ip_mff_cor  |  Positive = lean (+) → add fuel").color(FG_DIM));
         ui.add_space(8.0);
 
-        let label_w: f32 = 72.0;
-        let cell_h:  f32 = 46.0;
+        let label_w: f32 = 60.0;
+        let cell_h:  f32 = 36.0;
         let gap:     f32 = 2.0;
-        let avail_w = ui.available_width();
-        let cell_w  = ((avail_w - label_w - gap * n_lb as f32) / n_lb as f32).max(38.0).min(100.0);
+        let avail_w = ui.available_width().max(300.0);
+        let cell_w  = ((avail_w - label_w - gap * n_lb as f32) / n_lb as f32).max(36.0).min(80.0);
         let font    = FontId::proportional(10.5);
         let sfont   = FontId::proportional(8.5);
 
