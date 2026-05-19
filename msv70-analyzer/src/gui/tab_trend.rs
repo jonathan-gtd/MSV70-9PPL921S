@@ -7,7 +7,7 @@ use super::palette::*;
 
 pub fn show(ui: &mut Ui, sessions: &[SessionData], cfg: &AppConfig) {
     if sessions.is_empty() {
-        ui.label(RichText::new("No logs loaded — click '⊕ All Logs'").color(FG_DIM));
+        ui.label(RichText::new("No logs loaded — click '+ All Logs'").color(FG_DIM));
         return;
     }
 

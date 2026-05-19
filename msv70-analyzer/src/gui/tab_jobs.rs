@@ -85,7 +85,7 @@ pub fn show(ui: &mut Ui, state: &mut JobsState, customjobs_path: &Option<std::pa
                             let desc = if entry.description_en.is_empty() { &entry.description_de } else { &entry.description_en };
                             ui.label(RichText::new(desc).color(FG_DIM).small());
                         }
-                        if ui.small_button(RichText::new("✕").color(RED)).clicked() {
+                        if ui.small_button(RichText::new("x").color(RED)).clicked() {
                             to_remove = Some(idx);
                         }
                     });
@@ -147,7 +147,7 @@ pub fn show(ui: &mut Ui, state: &mut JobsState, customjobs_path: &Option<std::pa
                     state.selected_job = Some(idx);
                 }
                 ui.label(RichText::new(&job.comment).color(FG_DIM).small());
-                if ui.small_button(RichText::new("✕").color(RED)).clicked() {
+                if ui.small_button(RichText::new("x").color(RED)).clicked() {
                     to_delete = Some(idx);
                 }
             });
