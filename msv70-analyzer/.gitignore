@@ -1,1 +1,5 @@
-/target/
+# Ignore all of target/ except the release .exe
+/target/*
+!/target/release
+/target/release/*
+!/target/release/msv70-analyzer.exe
