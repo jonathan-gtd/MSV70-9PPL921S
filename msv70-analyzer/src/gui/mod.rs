@@ -3,6 +3,7 @@ pub mod toolbar;
 pub mod report_panel;
 pub mod tab_overview;
 pub mod tab_stft_map;
+pub mod tab_lambda_map;
 pub mod tab_timeseries;
 pub mod tab_trend;
 pub mod tab_jobs;

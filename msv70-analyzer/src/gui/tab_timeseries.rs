@@ -175,7 +175,8 @@ pub fn show(
     let ts: Vec<f64> = rows.iter().step_by(step).map(|r| r.ts() - t0).collect();
 
     // Precompute phase spans (used by all charts)
-    let spans = phase_spans(rows, t0);
+    let spans  = phase_spans(rows, t0);
+    let t_max2 = t_max; // shadowed for borrow capture below
 
     // ── Timeline (bottom) ─────────────────────────────────────────────────────
     egui::TopBottomPanel::bottom("ts_timeline")
@@ -353,7 +354,12 @@ pub fn show(
                     // ── Plot ─────────────────────────────────────────────────
                     if !panels[panel_idx].channels.is_empty() {
                         let panel = &panels[panel_idx];
-                        render_chart(ui, panel, panel_id, rows, &ts, step, cs, cfg, chart_h, &spans);
+                        let hover_t = render_chart(ui, panel, panel_id, rows, &ts, step, t0, cs, cfg, chart_h, &spans);
+                        if !*is_playing {
+                            if let Some(ht) = hover_t {
+                                *cursor_s = Some(ht.clamp(0.0, t_max2));
+                            }
+                        }
                     } else {
                         let (rect, _) = ui.allocate_exact_size(
                             vec2(ui.available_width(), chart_h), egui::Sense::hover(),
@@ -480,11 +486,12 @@ fn render_chart(
     rows: &[Row],
     ts: &[f64],
     step: usize,
+    t0: f64,
     cursor_s: Option<f64>,
     cfg: &AppConfig,
     chart_h: f32,
     phase_spans: &[(f64, f64, Phase)],
-) {
+) -> Option<f64> {
     let l_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Left).collect();
     let r_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Right).collect();
 
@@ -522,8 +529,7 @@ fn render_chart(
                 ]);
                 plot_ui.polygon(Polygon::new(pts)
                     .fill_color(fill)
-                    .stroke(egui::Stroke::new(0.0, Color32::TRANSPARENT))
-                    .name(phase.as_str()));
+                    .stroke(egui::Stroke::new(0.0, Color32::TRANSPARENT)));
             }
 
             // ── Left-axis channels ────────────────────────────────────────────
@@ -595,6 +601,53 @@ fn render_chart(
             captured_bounds = Some(plot_ui.plot_bounds());
         });
 
+    // ── Hover tooltip (phase + channel values) ────────────────────────────────
+    let hover_t = ui.ctx().input(|i| i.pointer.hover_pos())
+        .filter(|_| plot_resp.response.hovered())
+        .map(|pos| plot_resp.transform.value_from_position(pos).x);
+    if let Some(ht) = hover_t {
+        let rect = plot_resp.response.rect;
+        let cur_phase = phase_spans.iter()
+            .find(|(ts, te, _)| ht >= *ts && ht < *te)
+            .map(|(_, _, p)| *p);
+
+        let t_abs = ht + t0;
+        let row_i = rows.partition_point(|r| r.ts() < t_abs).min(rows.len().saturating_sub(1));
+        let row   = &rows[row_i];
+
+        // Collect channel values
+        let value_lines: Vec<(Color32, String)> = panel.channels.iter()
+            .filter_map(|ch| {
+                ch.key.value(row, cfg).map(|v| {
+                    (ch.key.color(), format!("{}: {:.2}{}", ch.key.label(), v, ch.key.unit()))
+                })
+            })
+            .collect();
+
+        let n_lines = value_lines.len() + cur_phase.is_some() as usize;
+        if n_lines > 0 {
+            let line_h = 15.0_f32;
+            let box_w  = 155.0_f32;
+            let box_h  = n_lines as f32 * line_h + 10.0;
+            let pos    = egui::pos2(rect.left() + 6.0, rect.top() + 4.0);
+            let bx     = egui::Rect::from_min_size(pos, egui::vec2(box_w, box_h));
+            let p      = ui.painter();
+            p.rect_filled(bx, 4.0, super::palette::BG2.gamma_multiply(0.93));
+            let mut y = pos.y + 5.0;
+            if let Some(phase) = cur_phase {
+                p.text(egui::pos2(pos.x + 6.0, y), egui::Align2::LEFT_TOP,
+                    format!("● {}", phase.as_str()),
+                    FontId::proportional(10.5), phase_color(&phase));
+                y += line_h;
+            }
+            for (col, text) in &value_lines {
+                p.text(egui::pos2(pos.x + 6.0, y), egui::Align2::LEFT_TOP,
+                    text, FontId::proportional(10.0), *col);
+                y += line_h;
+            }
+        }
+    }
+
     // ── Right Y axis labels ───────────────────────────────────────────────────
     if has_right {
         if let Some(_bounds) = captured_bounds {
@@ -629,6 +682,8 @@ fn render_chart(
                 FontId::proportional(8.5), FG_DIM);
         }
     }
+
+    hover_t
 }
 
 // ── Timeline ──────────────────────────────────────────────────────────────────
