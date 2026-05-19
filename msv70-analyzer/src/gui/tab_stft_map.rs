@@ -3,6 +3,7 @@ use crate::analysis::percentile;
 use crate::config::AppConfig;
 use crate::data::types::*;
 use super::palette::*;
+use egui::Layout;
 
 pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
     ScrollArea::both().id_salt("stft_map_scroll").auto_shrink([false, false]).show(ui, |ui| {
@@ -10,7 +11,14 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
         let n_lb = d.load_labels.len();
         if n_rb == 0 || n_lb == 0 { return; }
 
-        ui.heading(RichText::new("STFT 2D Map — RPM × Load").color(ACCENT));
+        ui.horizontal(|ui| {
+            ui.heading(RichText::new("STFT 2D Map — RPM × Load").color(ACCENT));
+            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                if ui.add(egui::Button::new(RichText::new("Export CSV").size(11.0).color(OLIVE)).fill(BG3)).clicked() {
+                    export_stft_csv(d, cfg);
+                }
+            });
+        });
         ui.label(RichText::new("Negative = rich (–) → reduce ip_mff_cor  |  Positive = lean (+) → add fuel").color(FG_DIM));
         ui.add_space(8.0);
 
@@ -141,12 +149,7 @@ fn draw_grid(
                     ui.painter().rect_filled(rect.shrink(1.0), 3.0, bg);
                     let sign = if med >= 0.0 { "+" } else { "" };
 
-                    // Value
-                    let value_y = if badge.is_some() {
-                        rect.center().y - 6.0
-                    } else {
-                        rect.center().y - 3.0
-                    };
+                    let value_y = rect.center().y - 3.0;
                     ui.painter().text(
                         egui::pos2(rect.center().x, value_y),
                         egui::Align2::CENTER_CENTER,
@@ -163,19 +166,7 @@ fn draw_grid(
                         fg.gamma_multiply(0.55),
                     );
 
-                    // Badge (B1, B2, B1+B2) for average map
-                    if let Some(b) = badge {
-                        let badge_col = match b {
-                            "B1+B2" => fg.gamma_multiply(0.75),
-                            "B1"    => CHART[1].gamma_multiply(0.85),
-                            _       => CHART[7].gamma_multiply(0.85),
-                        };
-                        ui.painter().text(
-                            egui::pos2(rect.center().x, rect.top() + 5.0),
-                            egui::Align2::CENTER_TOP,
-                            b, sfont.clone(), badge_col,
-                        );
-                    }
+                    // (badge text intentionally omitted)
                 } else {
                     ui.painter().rect_filled(rect.shrink(1.0), 3.0, BG3);
                     ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER,
@@ -212,4 +203,56 @@ fn percentile_of(values: &[f64], p: f64) -> f64 {
     if values.is_empty() { return 0.0; }
     let mut v = values.to_vec();
     percentile(&mut v, p)
+}
+
+fn export_stft_csv(d: &SessionData, cfg: &AppConfig) {
+    let n_rb = d.rpm_labels.len();
+    let n_lb = d.load_labels.len();
+    let path = if let Some(p) = rfd::FileDialog::new()
+        .set_file_name("stft_map.csv")
+        .add_filter("CSV", &["csv"])
+        .save_file()
+    { p } else { return; };
+
+    let mut out = String::new();
+
+    // Write each bank separately
+    for (label, cell_dict) in [("B1", &d.cell_b1), ("B2", &d.cell_b2)] {
+        out.push_str(&format!("# STFT {label} — median (%)\n"));
+        // Header: rpm\load, then load labels
+        out.push_str("RPM \\ Load");
+        for lbl in &d.load_labels { out.push(','); out.push_str(lbl); }
+        out.push('\n');
+        for i in 0..n_rb {
+            out.push_str(&d.rpm_labels[i]);
+            for j in 0..n_lb {
+                out.push(',');
+                if let Some(v) = cell_dict.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples) {
+                    out.push_str(&format!("{:.2}", percentile_of(v, 50.0)));
+                }
+                // empty = no data for that cell
+            }
+            out.push('\n');
+        }
+        out.push('\n');
+
+        // n-samples grid
+        out.push_str(&format!("# STFT {label} — n samples\n"));
+        out.push_str("RPM \\ Load");
+        for lbl in &d.load_labels { out.push(','); out.push_str(lbl); }
+        out.push('\n');
+        for i in 0..n_rb {
+            out.push_str(&d.rpm_labels[i]);
+            for j in 0..n_lb {
+                out.push(',');
+                if let Some(v) = cell_dict.get(&(i, j)) {
+                    out.push_str(&v.len().to_string());
+                }
+            }
+            out.push('\n');
+        }
+        out.push('\n');
+    }
+
+    let _ = std::fs::write(&path, out);
 }
