@@ -1114,6 +1114,222 @@ def analyze(path):
     return "\n".join(lines)
 
 
+# ─── Structured data extraction (used by GUI) ────────────────────────────────────
+def compute_data(path):
+    """Return all computed statistics as a dict — used by analyze_gui.py."""
+    rows, col_map = load_csv(path)
+    available = set(col_map.keys())
+    n = len(rows)
+
+    for row in rows:
+        row["phase"]     = detect_phase(row)
+        row["rb"]        = rpm_bin(row["rpm"])
+        row["lb"]        = load_bin(row["load_pct"])
+        row["vanos_err"] = row["vanos_act"] - row["vanos_tgt"]
+        row["cl_b1"]     = (row["rpm"] > 600 and row["coolant_c"] > 55
+                            and row["load_pct"] > 2 and abs(row["stft_b1"]) > NEAR_ZERO)
+        row["cl_b2"]     = (row["rpm"] > 600 and row["coolant_c"] > 55
+                            and row["load_pct"] > 2 and abs(row["stft_b2"]) > NEAR_ZERO)
+        row["cl_active"] = row["cl_b1"] or row["cl_b2"]
+
+    dur_s      = ts(rows[-1]) - ts(rows[0])
+    cool_start = rows[0]["coolant_c"]
+    cool_end   = rows[-1]["coolant_c"]
+    cool_max   = max(r["coolant_c"] for r in rows)
+
+    phase_rows   = defaultdict(list)
+    for row in rows:
+        phase_rows[row["phase"]].append(row)
+    p_dur = phase_dur_s(rows)
+
+    cl_b1_rows   = [r for r in rows if r["cl_b1"]]
+    cl_b2_rows   = [r for r in rows if r["cl_b2"]]
+    cl_both_rows = [r for r in rows if r["cl_b1"] and r["cl_b2"]]
+    run_rows     = [r for r in rows if r["rpm"] > 600]
+    hot_rows     = [r for r in rows if r["coolant_c"] > THR["knock_hot_coolant"]]
+
+    steady_rows = []
+    for i in range(1, n):
+        dt = (rows[i]["time_ms"] - rows[i-1]["time_ms"]) / 1000.0
+        if is_steady(rows[i], rows[i-1], dt) and rows[i]["rpm"] > 800:
+            steady_rows.append(rows[i])
+
+    has_ltft  = any(abs(r["ltft_mul_b1"]) > NEAR_ZERO or abs(r["ltft_mul_b2"]) > NEAR_ZERO
+                    for r in run_rows)
+    has_vanos = "vanos_act" in available and "vanos_tgt" in available
+    has_ign   = "ign_deg" in available
+    has_inj   = "inj_ms" in available
+    has_lmb   = "lmb_b1" in available and "lmb_b2" in available
+
+    # Knock baseline (hot engine only)
+    ign_cell_hot = defaultdict(list)
+    if has_ign:
+        for r in hot_rows:
+            if abs(r["ign_deg"]) > NEAR_ZERO and r["rpm"] > 600:
+                ign_cell_hot[(r["rb"], r["lb"])].append(r["ign_deg"])
+    cell_ign_p50 = {k: percentile(v, 50) for k, v in ign_cell_hot.items() if len(v) >= 10}
+
+    # Ignition rows
+    ign_run = [r for r in run_rows if has_ign and abs(r["ign_deg"]) > NEAR_ZERO]
+    ign_hot = [r for r in ign_run if r["coolant_c"] > THR["knock_hot_coolant"]]
+
+    # Knock events
+    knock_candidates = [r for r in ign_hot
+                        if r["rpm"] > THR["knock_rpm_min"] and r["load_pct"] > THR["knock_load_min"]
+                        and (r["rb"], r["lb"]) in cell_ign_p50]
+    retard_events = [r for r in knock_candidates
+                     if r["ign_deg"] < cell_ign_p50[(r["rb"], r["lb"])] - THR["knock_delta"]]
+
+    # STFT 2D map
+    n_rb = len(RPM_BINS) - 1
+    n_lb = len(LOAD_BINS) - 1
+    cell_b1 = defaultdict(list)
+    cell_b2 = defaultdict(list)
+    for r in cl_b1_rows:
+        cell_b1[(r["rb"], r["lb"])].append(r["stft_b1"])
+    for r in cl_b2_rows:
+        cell_b2[(r["rb"], r["lb"])].append(r["stft_b2"])
+
+    # Tuning corrections
+    corrections = []
+    for i in range(n_rb):
+        for j in range(n_lb):
+            v1 = cell_b1.get((i, j), [])
+            v2 = cell_b2.get((i, j), [])
+            med1 = percentile(v1, 50) if len(v1) >= 5 else None
+            med2 = percentile(v2, 50) if len(v2) >= 5 else None
+            if med1 is None and med2 is None:
+                continue
+            vals = [v for v in [med1, med2] if v is not None]
+            avg_d = sum(vals) / len(vals)
+            if abs(avg_d) < THR["stft_note"]:
+                continue
+            factor = 1.0 + avg_d / 100.0
+            corrections.append((i, j, med1, med2, avg_d, factor))
+    corrections.sort(key=lambda x: abs(x[4]), reverse=True)
+
+    # STFT time buckets (60s)
+    stft_buckets = []
+    if cl_b1_rows or cl_b2_rows:
+        all_cl = cl_b1_rows + cl_b2_rows
+        t0_bkt = ts(min(all_cl, key=lambda r: r["time_ms"]))
+        BUCKET = 60.0
+        bkt_b1 = defaultdict(list)
+        bkt_b2 = defaultdict(list)
+        for r in cl_b1_rows:
+            bkt_b1[int((ts(r) - t0_bkt) / BUCKET)].append(r)
+        for r in cl_b2_rows:
+            bkt_b2[int((ts(r) - t0_bkt) / BUCKET)].append(r)
+        for b in sorted(set(bkt_b1) | set(bkt_b2)):
+            br1 = bkt_b1.get(b, [])
+            br2 = bkt_b2.get(b, [])
+            if not br1 and not br2:
+                continue
+            all_r = br1 + br2
+            stft_buckets.append({
+                "t":      t0_bkt + b * BUCKET,
+                "p50_b1": percentile([r["stft_b1"] for r in br1], 50) if br1 else None,
+                "p50_b2": percentile([r["stft_b2"] for r in br2], 50) if br2 else None,
+                "n_b1":   len(br1),
+                "n_b2":   len(br2),
+                "rpm":    statistics.mean(r["rpm"]       for r in all_r),
+                "load":   statistics.mean(r["load_pct"]  for r in all_r),
+                "cool":   statistics.mean(r["coolant_c"] for r in all_r),
+            })
+
+    # WOT lambda
+    wot_r1, wot_r2 = [], []
+    if has_lmb:
+        wot_r1 = [r for r in cl_b1_rows if r["phase"] == "WOT"
+                  and 0.3 < r["lmb_b1"] < 2.0 and r["rpm"] > 2500 and r["coolant_c"] > 75]
+        wot_r2 = [r for r in cl_b2_rows if r["phase"] == "WOT"
+                  and 0.3 < r["lmb_b2"] < 2.0 and r["rpm"] > 2500 and r["coolant_c"] > 75]
+
+    # Anomaly events
+    events = []
+    stft_b1_streak = stft_b2_streak = lean_b1_streak = lean_b2_streak = 0
+    LEAN_DEBOUNCE = 3
+    for row in rows:
+        t = ts(row)
+        if row["cl_b1"]:
+            s1 = row["stft_b1"]
+            stft_b1_streak = stft_b1_streak + 1 if abs(s1) > THR["stft_alarm"] else 0
+            if stft_b1_streak == 6:
+                events.append(("STFT_B1", t,
+                               f"B1 sustained {s1:+.1f}% (>{THR['stft_alarm']:.0f}%)  "
+                               f"RPM={row['rpm']:.0f} Load={row['load_pct']:.0f}%"))
+        if row["cl_b2"]:
+            s2 = row["stft_b2"]
+            stft_b2_streak = stft_b2_streak + 1 if abs(s2) > THR["stft_alarm"] else 0
+            if stft_b2_streak == 6:
+                events.append(("STFT_B2", t,
+                               f"B2 sustained {s2:+.1f}% (>{THR['stft_alarm']:.0f}%)  "
+                               f"RPM={row['rpm']:.0f} Load={row['load_pct']:.0f}%"))
+        if has_lmb and row["load_pct"] > 35 and row["coolant_c"] > 60:
+            lean_b1_streak = lean_b1_streak + 1 if row["lmb_b1"] > THR["lmb_lean_load"] else 0
+            if lean_b1_streak == LEAN_DEBOUNCE:
+                events.append(("LEAN_B1", t,
+                               f"λB1={row['lmb_b1']:.3f} LEAN @ Load={row['load_pct']:.0f}% RPM={row['rpm']:.0f}"))
+            lean_b2_streak = lean_b2_streak + 1 if row["lmb_b2"] > THR["lmb_lean_load"] else 0
+            if lean_b2_streak == LEAN_DEBOUNCE:
+                events.append(("LEAN_B2", t,
+                               f"λB2={row['lmb_b2']:.3f} LEAN @ Load={row['load_pct']:.0f}% RPM={row['rpm']:.0f}"))
+        if has_lmb and row["cl_b1"] and row["lmb_b1"] < THR["lmb_rich"] and row["stft_b1"] < -THR["stft_warn"]:
+            events.append(("RICH_B1", t, f"λB1={row['lmb_b1']:.3f}  STFT {row['stft_b1']:+.1f}%"))
+        if has_lmb and row["cl_b2"] and row["lmb_b2"] < THR["lmb_rich"] and row["stft_b2"] < -THR["stft_warn"]:
+            events.append(("RICH_B2", t, f"λB2={row['lmb_b2']:.3f}  STFT {row['stft_b2']:+.1f}%"))
+        if has_vanos and row["rpm"] > 1000 and abs(row["vanos_err"]) > THR["vanos_steady_alarm"] * 2.5:
+            events.append(("VANOS", t,
+                           f"err={row['vanos_err']:+.1f}°  act={row['vanos_act']:.0f}° tgt={row['vanos_tgt']:.0f}°  RPM={row['rpm']:.0f}"))
+        if row["coolant_c"] > THR["coolant_warn"]:
+            events.append(("OVERTEMP", t, f"Coolant {row['coolant_c']:.1f}°C"))
+
+    DEDUP_WINDOW = {"STFT_B1": 15, "STFT_B2": 15, "LEAN_B1": 20, "LEAN_B2": 20,
+                    "RICH_B1": 15, "RICH_B2": 15, "VANOS": 30, "OVERTEMP": 60}
+    seen_ev, deduped = {}, []
+    for ev_type, t, msg in sorted(events, key=lambda e: e[1]):
+        key = (ev_type, int(t / DEDUP_WINDOW.get(ev_type, 15)))
+        if key not in seen_ev:
+            seen_ev[key] = True
+            deduped.append((ev_type, t, msg))
+
+    return {
+        "path": path,
+        "n": n,
+        "dur_s": dur_s,
+        "cool_start": cool_start,
+        "cool_end": cool_end,
+        "cool_max": cool_max,
+        "rows": rows,
+        "run_rows": run_rows,
+        "hot_rows": hot_rows,
+        "cl_b1_rows": cl_b1_rows,
+        "cl_b2_rows": cl_b2_rows,
+        "cl_both_rows": cl_both_rows,
+        "steady_rows": steady_rows,
+        "phase_rows": phase_rows,
+        "p_dur": p_dur,
+        "cell_b1": cell_b1,
+        "cell_b2": cell_b2,
+        "corrections": corrections,
+        "stft_buckets": stft_buckets,
+        "wot_r1": wot_r1,
+        "wot_r2": wot_r2,
+        "ign_run": ign_run,
+        "ign_hot": ign_hot,
+        "knock_candidates": knock_candidates,
+        "retard_events": retard_events,
+        "cell_ign_p50": cell_ign_p50,
+        "events": deduped,
+        "has_ltft": has_ltft,
+        "has_vanos": has_vanos,
+        "has_ign": has_ign,
+        "has_inj": has_inj,
+        "has_lmb": has_lmb,
+        "available": available,
+    }
+
+
 # ─── Entry point ──────────────────────────────────────────────────────────────────
 def find_latest_csv():
     logs_dir = Path(__file__).parent.parent / "LOGS"
