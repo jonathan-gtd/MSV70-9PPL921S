@@ -22,82 +22,40 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
         let font    = FontId::proportional(10.5);
         let sfont   = FontId::proportional(8.5);
 
-        for (bank, cell_dict, label) in [
-            (1usize, &d.cell_b1, "Bank 1"),
-            (2usize, &d.cell_b2, "Bank 2"),
+        // ── Bank 1 and Bank 2 individual maps ────────────────────────────────
+        for (cell_dict, label) in [
+            (&d.cell_b1, "Bank 1"),
+            (&d.cell_b2, "Bank 2"),
         ] {
-            let _ = bank;
             ui.label(RichText::new(format!("STFT {label} — closed-loop rows only")).color(ACCENT).strong());
             ui.add_space(4.0);
-
-            // ── Header row ────────────────────────────────────────────────────
-            ui.horizontal(|ui| {
-                // corner cell
-                let (rect, _) = ui.allocate_exact_size(egui::vec2(label_w, cell_h * 0.7), egui::Sense::hover());
-                ui.painter().text(
-                    egui::pos2(rect.right() - 2.0, rect.bottom() - 2.0),
-                    egui::Align2::RIGHT_BOTTOM,
-                    "Load →",
-                    sfont.clone(),
-                    FG_DIM,
-                );
-                for lbl in &d.load_labels {
-                    let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h * 0.7), egui::Sense::hover());
-                    ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER,
-                        lbl, sfont.clone(), FG_DIM);
-                    ui.add_space(gap);
-                }
+            draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb, |i, j| {
+                cell_dict.get(&(i, j))
+                    .filter(|v| v.len() >= cfg.cell_min_samples)
+                    .map(|v| (percentile_of(v, 50.0), v.len(), None))
             });
-            ui.add_space(gap);
-
-            // ── Data rows ─────────────────────────────────────────────────────
-            for i in 0..n_rb {
-                ui.horizontal(|ui| {
-                    // RPM label
-                    let (rect, _) = ui.allocate_exact_size(egui::vec2(label_w, cell_h), egui::Sense::hover());
-                    ui.painter().text(
-                        egui::pos2(rect.right() - 4.0, rect.center().y),
-                        egui::Align2::RIGHT_CENTER,
-                        &d.rpm_labels[i],
-                        sfont.clone(),
-                        FG_DIM,
-                    );
-
-                    // Cells
-                    for j in 0..n_lb {
-                        let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h), egui::Sense::hover());
-                        let vals = cell_dict.get(&(i, j));
-                        if let Some(v) = vals.filter(|v| v.len() >= cfg.cell_min_samples) {
-                            let med = percentile_of(v, 50.0);
-                            let (bg, fg) = cell_colors(med, cfg);
-                            ui.painter().rect_filled(rect.shrink(1.0), 3.0, bg);
-                            let sign = if med >= 0.0 { "+" } else { "" };
-                            ui.painter().text(
-                                egui::pos2(rect.center().x, rect.center().y - 3.0),
-                                egui::Align2::CENTER_CENTER,
-                                format!("{sign}{med:.1}%"),
-                                font.clone(),
-                                fg,
-                            );
-                            ui.painter().text(
-                                egui::pos2(rect.center().x, rect.bottom() - 3.0),
-                                egui::Align2::CENTER_BOTTOM,
-                                format!("n={}", v.len()),
-                                sfont.clone(),
-                                fg.gamma_multiply(0.55),
-                            );
-                        } else {
-                            ui.painter().rect_filled(rect.shrink(1.0), 3.0, BG3);
-                            ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER,
-                                "—", font.clone(), FG_DIM);
-                        }
-                        ui.add_space(gap);
-                    }
-                });
-                ui.add_space(gap);
-            }
             ui.add_space(12.0);
         }
+
+        // ── Average B1+B2 map ────────────────────────────────────────────────
+        ui.label(RichText::new("STFT Moyenne B1+B2").color(ACCENT).strong());
+        ui.label(RichText::new("(B1 med + B2 med) / 2  —  si une seule banque disponible, sa valeur seule")
+            .color(FG_DIM).size(10.0).italics());
+        ui.add_space(4.0);
+        draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb, |i, j| {
+            let v1 = d.cell_b1.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples);
+            let v2 = d.cell_b2.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples);
+            match (v1, v2) {
+                (Some(a), Some(b)) => {
+                    let med = (percentile_of(a, 50.0) + percentile_of(b, 50.0)) / 2.0;
+                    Some((med, a.len() + b.len(), Some("B1+B2")))
+                }
+                (Some(a), None) => Some((percentile_of(a, 50.0), a.len(), Some("B1"))),
+                (None, Some(b)) => Some((percentile_of(b, 50.0), b.len(), Some("B2"))),
+                (None, None)    => None,
+            }
+        });
+        ui.add_space(12.0);
 
         // ── Corrections table ─────────────────────────────────────────────────
         if !d.corrections.is_empty() {
@@ -137,6 +95,98 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
             });
         }
     });
+}
+
+// ── Grid renderer ─────────────────────────────────────────────────────────────
+// `cell_fn(rpm_idx, load_idx)` → Some((median, n_samples, Option<badge_label>)) or None
+
+fn draw_grid(
+    ui: &mut Ui,
+    d: &SessionData,
+    cfg: &AppConfig,
+    cell_w: f32, cell_h: f32, label_w: f32, gap: f32,
+    font: &FontId, sfont: &FontId,
+    n_rb: usize, n_lb: usize,
+    cell_fn: impl Fn(usize, usize) -> Option<(f64, usize, Option<&'static str>)>,
+) {
+    // Header row
+    ui.horizontal(|ui| {
+        let (rect, _) = ui.allocate_exact_size(egui::vec2(label_w, cell_h * 0.7), egui::Sense::hover());
+        ui.painter().text(
+            egui::pos2(rect.right() - 2.0, rect.bottom() - 2.0),
+            egui::Align2::RIGHT_BOTTOM, "Load →", sfont.clone(), FG_DIM,
+        );
+        for lbl in &d.load_labels {
+            let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h * 0.7), egui::Sense::hover());
+            ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER, lbl, sfont.clone(), FG_DIM);
+            ui.add_space(gap);
+        }
+    });
+    ui.add_space(gap);
+
+    // Data rows
+    for i in 0..n_rb {
+        ui.horizontal(|ui| {
+            let (rect, _) = ui.allocate_exact_size(egui::vec2(label_w, cell_h), egui::Sense::hover());
+            ui.painter().text(
+                egui::pos2(rect.right() - 4.0, rect.center().y),
+                egui::Align2::RIGHT_CENTER, &d.rpm_labels[i], sfont.clone(), FG_DIM,
+            );
+
+            for j in 0..n_lb {
+                let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h), egui::Sense::hover());
+
+                if let Some((med, n, badge)) = cell_fn(i, j) {
+                    let (bg, fg) = cell_colors(med, cfg);
+                    ui.painter().rect_filled(rect.shrink(1.0), 3.0, bg);
+                    let sign = if med >= 0.0 { "+" } else { "" };
+
+                    // Value
+                    let value_y = if badge.is_some() {
+                        rect.center().y - 6.0
+                    } else {
+                        rect.center().y - 3.0
+                    };
+                    ui.painter().text(
+                        egui::pos2(rect.center().x, value_y),
+                        egui::Align2::CENTER_CENTER,
+                        format!("{sign}{med:.1}%"),
+                        font.clone(), fg,
+                    );
+
+                    // Sample count
+                    ui.painter().text(
+                        egui::pos2(rect.center().x, rect.bottom() - 3.0),
+                        egui::Align2::CENTER_BOTTOM,
+                        format!("n={n}"),
+                        sfont.clone(),
+                        fg.gamma_multiply(0.55),
+                    );
+
+                    // Badge (B1, B2, B1+B2) for average map
+                    if let Some(b) = badge {
+                        let badge_col = match b {
+                            "B1+B2" => fg.gamma_multiply(0.75),
+                            "B1"    => CHART[1].gamma_multiply(0.85),
+                            _       => CHART[7].gamma_multiply(0.85),
+                        };
+                        ui.painter().text(
+                            egui::pos2(rect.center().x, rect.top() + 5.0),
+                            egui::Align2::CENTER_TOP,
+                            b, sfont.clone(), badge_col,
+                        );
+                    }
+                } else {
+                    ui.painter().rect_filled(rect.shrink(1.0), 3.0, BG3);
+                    ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER,
+                        "—", font.clone(), FG_DIM);
+                }
+                ui.add_space(gap);
+            }
+        });
+        ui.add_space(gap);
+    }
+    let _ = cfg; // used via cell_fn closure
 }
 
 fn cell_colors(v: f64, cfg: &AppConfig) -> (Color32, Color32) {
