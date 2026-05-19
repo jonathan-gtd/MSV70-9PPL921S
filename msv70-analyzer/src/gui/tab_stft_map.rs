@@ -205,21 +205,14 @@ fn percentile_of(values: &[f64], p: f64) -> f64 {
     percentile(&mut v, p)
 }
 
-fn export_stft_csv(d: &SessionData, cfg: &AppConfig) {
+/// Build the STFT CSV content for a session (used by single export and batch).
+pub fn build_stft_csv(d: &SessionData, cfg: &AppConfig) -> String {
     let n_rb = d.rpm_labels.len();
     let n_lb = d.load_labels.len();
-    let path = if let Some(p) = rfd::FileDialog::new()
-        .set_file_name("stft_map.csv")
-        .add_filter("CSV", &["csv"])
-        .save_file()
-    { p } else { return; };
-
     let mut out = String::new();
-
-    // Write each bank separately
+    out.push_str(&format!("# Log: {}\n", d.file_name));
     for (label, cell_dict) in [("B1", &d.cell_b1), ("B2", &d.cell_b2)] {
         out.push_str(&format!("# STFT {label} — median (%)\n"));
-        // Header: rpm\load, then load labels
         out.push_str("RPM \\ Load");
         for lbl in &d.load_labels { out.push(','); out.push_str(lbl); }
         out.push('\n');
@@ -230,13 +223,10 @@ fn export_stft_csv(d: &SessionData, cfg: &AppConfig) {
                 if let Some(v) = cell_dict.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples) {
                     out.push_str(&format!("{:.2}", percentile_of(v, 50.0)));
                 }
-                // empty = no data for that cell
             }
             out.push('\n');
         }
         out.push('\n');
-
-        // n-samples grid
         out.push_str(&format!("# STFT {label} — n samples\n"));
         out.push_str("RPM \\ Load");
         for lbl in &d.load_labels { out.push(','); out.push_str(lbl); }
@@ -253,6 +243,23 @@ fn export_stft_csv(d: &SessionData, cfg: &AppConfig) {
         }
         out.push('\n');
     }
+    out
+}
 
-    let _ = std::fs::write(&path, out);
+pub fn log_stem_pub(file_name: &str) -> &str {
+    file_name.strip_suffix(".csv").or_else(|| file_name.strip_suffix(".CSV")).unwrap_or(file_name)
+}
+
+fn log_stem(file_name: &str) -> &str { log_stem_pub(file_name) }
+
+fn export_stft_csv(d: &SessionData, cfg: &AppConfig) {
+    let stem = log_stem(&d.file_name);
+    let default_name = format!("{stem}_stft.csv");
+    let path = if let Some(p) = rfd::FileDialog::new()
+        .set_file_name(&default_name)
+        .add_filter("CSV", &["csv"])
+        .save_file()
+    { p } else { return; };
+
+    let _ = std::fs::write(&path, build_stft_csv(d, cfg));
 }

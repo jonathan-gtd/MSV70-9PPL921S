@@ -14,7 +14,7 @@ use crate::jobs::{load_customjobs, load_pid_db};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Nav {
-    TimeSeries, StftMap, LambdaMap, Overview, Trend, Rapport, CustomJobs, Settings,
+    TimeSeries, StftMap, LambdaMap, Overview, Trend, Rapport, CustomJobs, Settings, BatchExport,
 }
 
 impl Nav {
@@ -28,6 +28,7 @@ impl Nav {
             Nav::Rapport    => "Rapport",
             Nav::CustomJobs => "Custom Jobs",
             Nav::Settings   => "Settings",
+            Nav::BatchExport => "Export Masse",
         }
     }
     fn is_analysis(&self) -> bool {
@@ -65,6 +66,7 @@ pub struct MSV70App {
     pub chart_panels:  Vec<ChartPanel>,
     pub next_panel_id: usize,
     pub show_phases:   bool,
+    pub batch_state:   crate::gui::tab_batch::BatchState,
 }
 
 impl MSV70App {
@@ -94,6 +96,7 @@ impl MSV70App {
             chart_panels: default_panels(),
             next_panel_id: 3,
             show_phases: true,
+            batch_state: crate::gui::tab_batch::BatchState::default(),
         };
 
         if let Some(path) = app.log_files.last().cloned() {
@@ -234,7 +237,7 @@ impl eframe::App for MSV70App {
                     ui.add_space(14.0);
                     for item in [
                         Nav::TimeSeries, Nav::StftMap, Nav::LambdaMap, Nav::Overview,
-                        Nav::Trend, Nav::Rapport, Nav::CustomJobs, Nav::Settings,
+                        Nav::Trend, Nav::Rapport, Nav::CustomJobs, Nav::BatchExport, Nav::Settings,
                     ] {
                         if nav_tab(ui, item.label(), current_nav == item) {
                             new_nav = Some(item);
@@ -283,6 +286,9 @@ impl eframe::App for MSV70App {
             match nav {
                 Nav::CustomJobs => {
                     crate::gui::tab_jobs::show(ui, &mut self.jobs_state, &self.customjobs_path);
+                }
+                Nav::BatchExport => {
+                    crate::gui::tab_batch::show(ui, &mut self.batch_state, &cfg);
                 }
                 Nav::Settings => {
                     crate::gui::tab_settings::show(ui, &mut self.config, &mut self.config_dirty);

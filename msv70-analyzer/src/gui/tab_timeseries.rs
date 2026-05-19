@@ -139,18 +139,7 @@ pub struct ChartPanel {
 
 pub fn default_panels() -> Vec<ChartPanel> {
     vec![
-        ChartPanel { id: 0, height: 200.0, y2_zoom: 1.0, channels: vec![
-            ChartChannel::new(ChannelKey::Rpm,     YAxis::Left),
-            ChartChannel::new(ChannelKey::LoadPct,  YAxis::Right),
-        ]},
-        ChartPanel { id: 1, height: 200.0, y2_zoom: 1.0, channels: vec![
-            ChartChannel::new(ChannelKey::StftB1,  YAxis::Left),
-            ChartChannel::new(ChannelKey::StftB2,  YAxis::Left),
-        ]},
-        ChartPanel { id: 2, height: 200.0, y2_zoom: 1.0, channels: vec![
-            ChartChannel::new(ChannelKey::LmbB1,   YAxis::Left),
-            ChartChannel::new(ChannelKey::LmbB2,   YAxis::Right),
-        ]},
+        ChartPanel { id: 0, height: 200.0, y2_zoom: 1.0, channels: vec![] },
     ]
 }
 
@@ -544,8 +533,22 @@ fn render_chart(
     // ── Axis-drag zones (derived from last frame's plot rect) ─────────────────
     let rect_id   = egui::Id::new(format!("chart_rect_{}", panel_id));
     let bounds_id = egui::Id::new(format!("chart_bnds_{}", panel_id));
-    let last_rect: Option<egui::Rect> = ui.ctx().data(|d| d.get_temp(rect_id));
+    let sig_id    = egui::Id::new(format!("chart_sig_{}", panel_id));
+    let last_rect: Option<egui::Rect>  = ui.ctx().data(|d| d.get_temp(rect_id));
     let prev_bounds: Option<[f64; 4]>  = ui.ctx().data(|d| d.get_temp(bounds_id));
+
+    // Channel+filter signature → auto-fit Y when channels or filters change
+    let chan_sig: Vec<(usize, u64, u64)> = panel.channels.iter()
+        .map(|ch| {
+            let ki   = ALL_CHANNELS.iter().position(|k| *k == ch.key).unwrap_or(99);
+            let fmin = ch.filter_min.map(|v: f64| v.to_bits()).unwrap_or(u64::MAX);
+            let fmax = ch.filter_max.map(|v: f64| v.to_bits()).unwrap_or(u64::MAX);
+            (ki, fmin, fmax)
+        })
+        .collect();
+    let prev_sig: Option<Vec<(usize, u64, u64)>> = ui.ctx().data(|d| d.get_temp(sig_id));
+    let sig_changed = prev_sig.map(|ps| ps != chan_sig).unwrap_or(false);
+    ui.ctx().data_mut(|d| d.insert_temp(sig_id, chan_sig));
 
     let x_zone  = last_rect.map(|r| egui::Rect::from_min_max(
         egui::pos2(r.left() + 50.0, r.bottom() - 24.0),
@@ -588,14 +591,21 @@ fn render_chart(
         *y2_zoom = (*y2_zoom * factor).clamp(0.05, 20.0);
     }
 
-    // Compute PlotBounds override for X / Y1 drag
-    let bounds_override: Option<PlotBounds> = if (drag_on_x || drag_on_y1) && drag_delta.length() > 0.2 {
+    // Compute PlotBounds override: auto-fit on sig change, or axis-drag zoom
+    let bounds_override: Option<PlotBounds> = if sig_changed {
+        let x_max = ts.last().copied().unwrap_or(1.0);
+        l_range.map(|(lmin, lmax)| {
+            let lmin = lmin.min(0.0);
+            let lmax = lmax.max(0.0);
+            let pad = ((lmax - lmin).abs() * 0.05).max(0.01);
+            PlotBounds::from_min_max([0.0, lmin - pad], [x_max, lmax + pad])
+        })
+    } else if (drag_on_x || drag_on_y1) && drag_delta.length() > 0.2 {
         prev_bounds.map(|[xmin, ymin, xmax, ymax]| {
             let (mut nxmin, mut nxmax, mut nymin, mut nymax) = (xmin, xmax, ymin, ymax);
             if drag_on_x {
                 let xctr  = (xmin + xmax) / 2.0;
                 let xhalf = (xmax - xmin) / 2.0;
-                // drag right = zoom out, drag left = zoom in
                 let f = (drag_delta.x as f64 * 0.009).exp();
                 let h = (xhalf * f).max(0.01);
                 nxmin = xctr - h; nxmax = xctr + h;
@@ -603,7 +613,6 @@ fn render_chart(
             if drag_on_y1 {
                 let yctr  = (ymin + ymax) / 2.0;
                 let yhalf = (ymax - ymin) / 2.0;
-                // drag up = zoom in, drag down = zoom out
                 let f = (-drag_delta.y as f64 * 0.009).exp();
                 let h = (yhalf * f).max(0.0001);
                 nymin = yctr - h; nymax = yctr + h;
@@ -612,10 +621,36 @@ fn render_chart(
         })
     } else { None };
 
-    // Adjusted right-axis range with Y2 zoom
-    let y2_ctr  = (r_min + r_max) / 2.0;
-    let y2_half = (r_max - r_min) / 2.0 * *y2_zoom;
-    let (adj_r_min, adj_r_max) = (y2_ctr - y2_half, y2_ctr + y2_half);
+    // Adjusted right-axis range: Y2 zoom, zero-inclusive, zero-aligned with left axis
+    let y2_ctr   = (r_min + r_max) / 2.0;
+    let y2_half  = (r_max - r_min) / 2.0 * *y2_zoom;
+    let r_raw_lo = (y2_ctr - y2_half).min(0.0);
+    let r_raw_hi = (y2_ctr + y2_half).max(0.0);
+    let l_lo = prev_bounds.map(|b| b[1]).unwrap_or(l_min.min(0.0));
+    let l_hi = prev_bounds.map(|b| b[3]).unwrap_or(l_max.max(0.0));
+    let (adj_r_min, adj_r_max) = if has_right && l_lo < -1e-10 && l_hi > 1e-10 {
+        let l_zero_frac = -l_lo / (l_hi - l_lo);
+        let r_span_raw  = r_raw_hi - r_raw_lo;
+        let r_zero_frac = if r_span_raw > 1e-10 { -r_raw_lo / r_span_raw } else { l_zero_frac };
+        // Only align when both axes have substantial data on both sides of zero
+        let both_sides  = l_zero_frac > 0.05 && l_zero_frac < 0.95
+                       && r_zero_frac > 0.05 && r_zero_frac < 0.95;
+        if both_sides {
+            if r_zero_frac < l_zero_frac - 1e-4 && l_zero_frac < 1.0 {
+                let rlo = l_zero_frac * r_raw_hi / (l_zero_frac - 1.0);
+                (rlo.min(r_raw_lo), r_raw_hi)
+            } else if r_zero_frac > l_zero_frac + 1e-4 && l_zero_frac > 1e-10 {
+                let rhi = r_raw_lo * (l_zero_frac - 1.0) / l_zero_frac;
+                (r_raw_lo, rhi.max(r_raw_hi))
+            } else {
+                (r_raw_lo, r_raw_hi)
+            }
+        } else {
+            (r_raw_lo, r_raw_hi)
+        }
+    } else {
+        (r_raw_lo, r_raw_hi)
+    };
 
     // Use large Y bounds for phase polygons (plot clips them)
     let y_lo = (l_min - (l_max - l_min).abs()) * 5.0 - 1e3;
@@ -664,51 +699,12 @@ fn render_chart(
                         .collect();
                     plot_ui.line(Line::new(PlotPoints::new(norm))
                         .color(*col).width(1.4)
-                        .style(egui_plot::LineStyle::Dashed { length: 8.0 })
                         .name(format!("{name} (R)")));
                 }
             }
 
-            // ── Semantic overlays ─────────────────────────────────────────────
-            for ch in &panel.channels {
-                match &ch.key {
-                    ChannelKey::StftB1 | ChannelKey::StftB2 | ChannelKey::StftAvg => {
-                        let dashed = egui_plot::LineStyle::Dashed { length: 10.0 };
-                        let dotted = egui_plot::LineStyle::Dotted { spacing: 6.0 };
-                        let ax = &ch.y_axis;
-                        for &(v, col, style) in &[
-                            (0.0,             FG_DIM, dashed),
-                            ( cfg.stft_warn,  ORANGE, dotted),
-                            (-cfg.stft_warn,  ORANGE, dotted),
-                            ( cfg.stft_alarm, RED,    dotted),
-                            (-cfg.stft_alarm, RED,    dotted),
-                        ] {
-                            let y = if *ax == YAxis::Right && r_range.is_some() {
-                                normalize(v, adj_r_min, adj_r_max, l_min, l_max)
-                            } else { v };
-                            plot_ui.hline(HLine::new(y).color(col).style(style));
-                        }
-                        break;
-                    }
-                    ChannelKey::LmbB1 | ChannelKey::LmbB2 => {
-                        let dashed = egui_plot::LineStyle::Dashed { length: 10.0 };
-                        let dotted = egui_plot::LineStyle::Dotted { spacing: 6.0 };
-                        let ax = &ch.y_axis;
-                        for &(v, col, style) in &[
-                            (1.00,              GREEN,  dashed),
-                            (cfg.lmb_lean_load, RED,    dotted),
-                            (cfg.lmb_rich,      ORANGE, dotted),
-                        ] {
-                            let y = if *ax == YAxis::Right && r_range.is_some() {
-                                normalize(v, adj_r_min, adj_r_max, l_min, l_max)
-                            } else { v };
-                            plot_ui.hline(HLine::new(y).color(col).style(style));
-                        }
-                        break;
-                    }
-                    _ => {}
-                }
-            }
+            // ── Zero reference line (also forces auto_bounds to include 0) ────
+            plot_ui.hline(HLine::new(0.0).color(FG_DIM.gamma_multiply(0.25)).width(0.8));
 
             if let Some(t) = cursor_s {
                 plot_ui.vline(VLine::new(t).color(CURSOR_COL).width(1.0));
