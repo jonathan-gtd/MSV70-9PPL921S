@@ -286,7 +286,7 @@ pub fn show(
 
                         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                             if ui.add(egui::Button::new(
-                                RichText::new("✕").size(11.0).color(RUST)
+                                RichText::new("x").size(11.0).color(RUST)
                             ).small().frame(false)).on_hover_text("Supprimer").clicked() {
                                 to_delete = Some(panel_idx);
                             }
@@ -347,7 +347,7 @@ pub fn show(
                             ui.label(RichText::new("Max").color(FG_DIM).size(10.0));
                             if has_max { ui.add(egui::DragValue::new(&mut max_val).speed(0.1)); }
                             ui.add_space(8.0);
-                            if ui.small_button("✕").clicked() { has_min = false; has_max = false; }
+                            if ui.small_button("x").clicked() { has_min = false; has_max = false; }
                         });
 
                         panels[panel_idx].channels[ci].filter_min = if has_min { Some(min_val) } else { None };
