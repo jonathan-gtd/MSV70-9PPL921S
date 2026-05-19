@@ -139,18 +139,7 @@ pub struct ChartPanel {
 
 pub fn default_panels() -> Vec<ChartPanel> {
     vec![
-        ChartPanel { id: 0, height: 200.0, y2_zoom: 1.0, channels: vec![
-            ChartChannel::new(ChannelKey::Rpm,     YAxis::Left),
-            ChartChannel::new(ChannelKey::LoadPct,  YAxis::Right),
-        ]},
-        ChartPanel { id: 1, height: 200.0, y2_zoom: 1.0, channels: vec![
-            ChartChannel::new(ChannelKey::StftB1,  YAxis::Left),
-            ChartChannel::new(ChannelKey::StftB2,  YAxis::Left),
-        ]},
-        ChartPanel { id: 2, height: 200.0, y2_zoom: 1.0, channels: vec![
-            ChartChannel::new(ChannelKey::LmbB1,   YAxis::Left),
-            ChartChannel::new(ChannelKey::LmbB2,   YAxis::Right),
-        ]},
+        ChartPanel { id: 0, height: 200.0, y2_zoom: 1.0, channels: vec![] },
     ]
 }
 
