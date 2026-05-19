@@ -134,19 +134,20 @@ pub struct ChartPanel {
     pub id:       usize,
     pub channels: Vec<ChartChannel>,
     pub height:   f32,
+    pub y2_zoom:  f64,  // independent Y2 amplitude zoom; 1.0 = full range, <1 = zoomed in
 }
 
 pub fn default_panels() -> Vec<ChartPanel> {
     vec![
-        ChartPanel { id: 0, height: 200.0, channels: vec![
+        ChartPanel { id: 0, height: 200.0, y2_zoom: 1.0, channels: vec![
             ChartChannel::new(ChannelKey::Rpm,     YAxis::Left),
             ChartChannel::new(ChannelKey::LoadPct,  YAxis::Right),
         ]},
-        ChartPanel { id: 1, height: 200.0, channels: vec![
+        ChartPanel { id: 1, height: 200.0, y2_zoom: 1.0, channels: vec![
             ChartChannel::new(ChannelKey::StftB1,  YAxis::Left),
             ChartChannel::new(ChannelKey::StftB2,  YAxis::Left),
         ]},
-        ChartPanel { id: 2, height: 200.0, channels: vec![
+        ChartPanel { id: 2, height: 200.0, y2_zoom: 1.0, channels: vec![
             ChartChannel::new(ChannelKey::LmbB1,   YAxis::Left),
             ChartChannel::new(ChannelKey::LmbB2,   YAxis::Right),
         ]},
@@ -299,6 +300,18 @@ pub fn show(
                             ).small().frame(false)).on_hover_text("Supprimer").clicked() {
                                 to_delete = Some(panel_idx);
                             }
+                            ui.add_space(4.0);
+                            let y2z = panels[panel_idx].y2_zoom;
+                            if (y2z - 1.0).abs() > 0.05 {
+                                if ui.add(
+                                    egui::Button::new(RichText::new(format!("Y2 ×{:.1}", 1.0 / y2z))
+                                        .size(9.5).color(AMBER)).small().frame(false)
+                                ).on_hover_text("Clic = reset Y2").clicked() {
+                                    panels[panel_idx].y2_zoom = 1.0;
+                                }
+                            }
+                            ui.label(RichText::new("⊞").size(11.0).color(FG_DIM))
+                                .on_hover_text("Zoom axe unique — Ctrl+scroll: X · Shift+scroll: Y1 · Alt+scroll: Y2 · double-clic: reset tout");
                         });
                     });
 
@@ -353,8 +366,12 @@ pub fn show(
 
                     // ── Plot ─────────────────────────────────────────────────
                     if !panels[panel_idx].channels.is_empty() {
-                        let panel = &panels[panel_idx];
-                        let hover_t = render_chart(ui, panel, panel_id, rows, &ts, step, t0, cs, cfg, chart_h, &spans);
+                        let mut y2_zoom = panels[panel_idx].y2_zoom;
+                        let hover_t = {
+                            let panel = &panels[panel_idx];
+                            render_chart(ui, panel, panel_id, rows, &ts, step, t0, cs, cfg, chart_h, &spans, &mut y2_zoom)
+                        };
+                        panels[panel_idx].y2_zoom = y2_zoom;
                         if !*is_playing {
                             if let Some(ht) = hover_t {
                                 *cursor_s = Some(ht.clamp(0.0, t_max2));
@@ -458,7 +475,7 @@ fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usi
             if ui.add(
                 egui::Button::new(RichText::new("+ Graphique").color(OLIVE).size(12.0)).fill(BG3)
             ).clicked() {
-                panels.push(ChartPanel { id: *next_id, height: 200.0, channels: vec![] });
+                panels.push(ChartPanel { id: *next_id, height: 200.0, y2_zoom: 1.0, channels: vec![] });
                 *next_id += 1;
             }
             ui.add_space(4.0);
@@ -491,6 +508,7 @@ fn render_chart(
     cfg: &AppConfig,
     chart_h: f32,
     phase_spans: &[(f64, f64, Phase)],
+    y2_zoom: &mut f64,
 ) -> Option<f64> {
     let l_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Left).collect();
     let r_channels: Vec<&ChartChannel> = panel.channels.iter().filter(|c| c.y_axis == YAxis::Right).collect();
@@ -509,6 +527,36 @@ fn render_chart(
     let (r_min, r_max) = r_range.unwrap_or((l_min, l_max));
     let has_right = !r_series.is_empty();
 
+    // ── Per-axis zoom via modifier keys ───────────────────────────────────────
+    let (zoom_x, zoom_y, alt_y2) = ui.ctx().input(|i| {
+        match (i.modifiers.ctrl, i.modifiers.shift, i.modifiers.alt) {
+            (true,  false, false) => (true,  false, false), // Ctrl  → X only
+            (false, true,  false) => (false, true,  false), // Shift → Y1 only
+            (false, false, true)  => (false, false, true),  // Alt   → Y2 (handled here)
+            _                     => (true,  true,  false), // default: both
+        }
+    });
+
+    // Alt+scroll: independent Y2 zoom using last-frame chart rect
+    let rect_id = egui::Id::new(format!("chart_rect_{}", panel_id));
+    let last_rect: Option<egui::Rect> = ui.ctx().data(|d| d.get_temp(rect_id));
+    if alt_y2 {
+        let hovered = last_rect.map(|r| {
+            ui.ctx().input(|i| i.pointer.hover_pos().map(|p| r.contains(p)).unwrap_or(false))
+        }).unwrap_or(false);
+        if hovered {
+            let scroll = ui.ctx().input(|i| i.smooth_scroll_delta.y);
+            if scroll.abs() > 0.3 {
+                *y2_zoom = (*y2_zoom * (1.0 - scroll as f64 * 0.003)).clamp(0.05, 20.0);
+            }
+        }
+    }
+
+    // Adjusted right-axis range with Y2 zoom (centre + half-range × zoom)
+    let y2_ctr  = (r_min + r_max) / 2.0;
+    let y2_half = (r_max - r_min) / 2.0 * *y2_zoom;
+    let (adj_r_min, adj_r_max) = (y2_ctr - y2_half, y2_ctr + y2_half);
+
     // Use large Y bounds for phase polygons (plot clips them)
     let y_lo = (l_min - (l_max - l_min).abs()) * 5.0 - 1e3;
     let y_hi = (l_max + (l_max - l_min).abs()) * 5.0 + 1e3;
@@ -516,6 +564,7 @@ fn render_chart(
     let mut captured_bounds: Option<PlotBounds> = None;
 
     let plot_resp = Plot::new(format!("chart_{}", panel_id))
+        .allow_zoom(egui::Vec2b::new(zoom_x, zoom_y))
         .height(chart_h)
         .legend(egui_plot::Legend::default().position(egui_plot::Corner::LeftTop))
         .show(ui, |plot_ui| {
@@ -540,11 +589,11 @@ fn render_chart(
                 }
             }
 
-            // ── Right-axis channels (normalized to L range) ───────────────────
+            // ── Right-axis channels (normalized to L range, Y2-zoom applied) ──
             for (col, name, pts) in &r_series {
                 if !pts.is_empty() {
                     let norm: Vec<[f64; 2]> = pts.iter()
-                        .map(|p| [p[0], normalize(p[1], r_min, r_max, l_min, l_max)])
+                        .map(|p| [p[0], normalize(p[1], adj_r_min, adj_r_max, l_min, l_max)])
                         .collect();
                     plot_ui.line(Line::new(PlotPoints::new(norm))
                         .color(*col).width(1.4)
@@ -568,7 +617,7 @@ fn render_chart(
                             (-cfg.stft_alarm, RED,    dotted),
                         ] {
                             let y = if *ax == YAxis::Right && r_range.is_some() {
-                                normalize(v, r_min, r_max, l_min, l_max)
+                                normalize(v, adj_r_min, adj_r_max, l_min, l_max)
                             } else { v };
                             plot_ui.hline(HLine::new(y).color(col).style(style));
                         }
@@ -584,7 +633,7 @@ fn render_chart(
                             (cfg.lmb_rich,      ORANGE, dotted),
                         ] {
                             let y = if *ax == YAxis::Right && r_range.is_some() {
-                                normalize(v, r_min, r_max, l_min, l_max)
+                                normalize(v, adj_r_min, adj_r_max, l_min, l_max)
                             } else { v };
                             plot_ui.hline(HLine::new(y).color(col).style(style));
                         }
@@ -600,6 +649,21 @@ fn render_chart(
 
             captured_bounds = Some(plot_ui.plot_bounds());
         });
+
+    // ── Post-plot: store rect, reset, Y2 indicator ───────────────────────────
+    ui.ctx().data_mut(|d| d.insert_temp(rect_id, plot_resp.response.rect));
+    if plot_resp.response.double_clicked() {
+        *y2_zoom = 1.0;
+    }
+    if (*y2_zoom - 1.0).abs() > 0.05 {
+        let r = plot_resp.response.rect;
+        ui.painter().text(
+            egui::pos2(r.right() - 6.0, r.top() + 4.0),
+            egui::Align2::RIGHT_TOP,
+            format!("Y2 ×{:.1}", 1.0 / *y2_zoom),
+            FontId::proportional(9.5), AMBER,
+        );
+    }
 
     // ── Hover tooltip (phase + channel values) ────────────────────────────────
     let hover_t = ui.ctx().input(|i| i.pointer.hover_pos())
@@ -665,12 +729,12 @@ fn render_chart(
             for i in 0..=5usize {
                 let t  = i as f32 / 5.0;
                 let sy = data_top + t * (data_bot - data_top);
-                let v  = r_max - t as f64 * (r_max - r_min);
+                let v  = adj_r_max - t as f64 * (adj_r_max - adj_r_min);
                 painter.line_segment(
                     [egui::pos2(data_right, sy), egui::pos2(data_right + 4.0, sy)],
                     egui::Stroke::new(1.0, FG_DIM),
                 );
-                let label = if (r_max - r_min).abs() > 10.0 { format!("{v:.0}") } else { format!("{v:.2}") };
+                let label = if (adj_r_max - adj_r_min).abs() > 10.0 { format!("{v:.0}") } else { format!("{v:.2}") };
                 painter.text(egui::pos2(data_right + 5.0, sy),
                     egui::Align2::LEFT_CENTER, label, font.clone(), FG_DIM);
             }
