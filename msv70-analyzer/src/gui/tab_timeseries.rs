@@ -900,11 +900,11 @@ fn show_timeline(
 
     let btn = vec2(28.0, 28.0);
     ui.horizontal(|ui| {
-        let (play_text, play_col) = if *is_playing { ("⏸", AMBER) } else { ("▶", LGREEN) };
+        let (play_text, play_col) = if *is_playing { ("‖", AMBER) } else { ("▶", LGREEN) };
         if ui.add(egui::Button::new(RichText::new(play_text).size(16.0).color(play_col)).min_size(btn)).clicked() {
             *is_playing = !*is_playing;
         }
-        if ui.add(egui::Button::new(RichText::new("⏹").size(16.0).color(RUST)).min_size(btn)).clicked() {
+        if ui.add(egui::Button::new(RichText::new("■").size(16.0).color(RUST)).min_size(btn)).clicked() {
             *is_playing = false;
             *cur = 0.0;
         }
@@ -919,7 +919,7 @@ fn show_timeline(
                 }
             });
         ui.separator();
-        ui.label(RichText::new(format!("⏱ {}", fmt_time(*cur))).color(CURSOR_COL).size(13.0).strong());
+        ui.label(RichText::new(fmt_time(*cur)).color(CURSOR_COL).size(13.0).strong());
     });
 }
 

@@ -55,6 +55,8 @@ pub struct MSV70App {
     pub customjobs_path: Option<PathBuf>,
     pub pending:     Option<Arc<Mutex<Option<AsyncResult>>>>,
     pub pending_all: Option<Arc<Mutex<Option<Vec<SessionData>>>>>,
+    // Async file dialog — outer Option = dialog running, inner Option = result (None=cancelled)
+    pub file_dialog: Option<Arc<Mutex<Option<Option<PathBuf>>>>>,
     pub logs_dir:     Option<PathBuf>,
     pub log_files:    Vec<PathBuf>,
     pub selected_log: Option<usize>,
@@ -91,7 +93,7 @@ impl MSV70App {
             status: "Ready — select a log from the sidebar".into(),
             tips: vec![], tip_idx: 0,
             jobs_state, customjobs_path,
-            pending: None, pending_all: None,
+            pending: None, pending_all: None, file_dialog: None,
             logs_dir, log_files, selected_log: None,
             cursor_s: None, is_playing: false, playback_speed: 1.0, last_frame_time: None,
             chart_panels: default_panels(),
@@ -105,6 +107,17 @@ impl MSV70App {
             app.start_analyze(path);
         }
         app
+    }
+
+    pub fn open_file_dialog(&mut self) {
+        if self.file_dialog.is_some() { return; } // dialog already open
+        let shared: Arc<Mutex<Option<Option<PathBuf>>>> = Arc::new(Mutex::new(None));
+        let clone = shared.clone();
+        self.file_dialog = Some(shared);
+        std::thread::spawn(move || {
+            let result = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_file();
+            *clone.lock().unwrap() = Some(result); // Some(None)=cancelled, Some(Some(p))=selected
+        });
     }
 
     pub fn start_analyze(&mut self, path: PathBuf) {
@@ -156,6 +169,19 @@ impl MSV70App {
                             self.status  = format!("✓  {name}  ·  {n} rows  ·  {dur:.0}s  ·  {n_corr} cells  ·  {n_ev} events");
                         }
                         Err(e) => { self.status = format!("Error: {e}"); }
+                    }
+                }
+            }
+        }
+        if let Some(ref fd) = self.file_dialog.clone() {
+            if let Ok(mut g) = fd.try_lock() {
+                if let Some(result) = g.take() {
+                    self.file_dialog = None;
+                    if let Some(path) = result {
+                        if !self.log_files.contains(&path) { self.log_files.push(path.clone()); }
+                        self.selected_log = self.log_files.iter().position(|p| p == &path);
+                        self.start_analyze(path);
+                        if !self.nav.is_analysis() { self.nav = Nav::TimeSeries; }
                     }
                 }
             }
@@ -216,7 +242,7 @@ impl eframe::App for MSV70App {
             if !self.nav.is_analysis() { self.nav = Nav::TimeSeries; }
         }
 
-        if self.pending.is_some() || self.pending_all.is_some() || self.is_playing {
+        if self.pending.is_some() || self.pending_all.is_some() || self.is_playing || self.file_dialog.is_some() {
             ctx.request_repaint();
         }
         if self.config_dirty {
@@ -313,13 +339,7 @@ impl eframe::App for MSV70App {
                             &mut self.show_phases,
                         );
                     } else if show_empty(ui, ctx) {
-                        if let Some(path) = rfd::FileDialog::new()
-                            .add_filter("CSV", &["csv"]).pick_file()
-                        {
-                            if !self.log_files.contains(&path) { self.log_files.push(path.clone()); }
-                            self.selected_log = self.log_files.iter().position(|p| p == &path);
-                            self.start_analyze(path);
-                        }
+                        self.open_file_dialog();
                     }
                 }
                 Nav::Overview => {
@@ -418,7 +438,7 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
     // ── Log file list ──────────────────────────────────────────────────────
     ui.horizontal(|ui| {
         ui.label(RichText::new("LOGS").color(FG_DIM).small().strong());
-        if ui.small_button("↺").on_hover_text("Rescan LOGS folder").clicked() {
+        if ui.small_button("↻").on_hover_text("Rescan LOGS folder").clicked() {
             app.log_files = scan_logs(app.logs_dir.as_deref());
         }
     });
@@ -459,13 +479,8 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
         if ui.button("+ Trend").clicked() && app.pending_all.is_none() {
             app.start_load_all();
         }
-        if ui.button("📂 Browse").clicked() {
-            if let Some(path) = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_file() {
-                if !app.log_files.contains(&path) { app.log_files.push(path.clone()); }
-                app.selected_log = app.log_files.iter().position(|p| p == &path);
-                app.start_analyze(path);
-                if !app.nav.is_analysis() { app.nav = Nav::TimeSeries; }
-            }
+        if ui.button("Open…").clicked() {
+            app.open_file_dialog();
         }
     });
 }
@@ -474,12 +489,12 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
 
 fn show_tip_bar(ui: &mut Ui, app: &mut MSV70App) {
     ui.horizontal(|ui| {
-        ui.label(RichText::new("💡").color(YELLOW));
+        ui.label(RichText::new("TIP").color(YELLOW).small().strong());
         let tip = app.tips.get(app.tip_idx)
             .cloned()
             .unwrap_or_else(|| "All systems nominal — no corrections flagged".into());
         ui.label(RichText::new(&tip).color(ORANGE).small());
-        if !app.tips.is_empty() && ui.small_button("▸").clicked() {
+        if !app.tips.is_empty() && ui.small_button("→").clicked() {
             app.tip_idx = (app.tip_idx + 1) % app.tips.len();
         }
     });

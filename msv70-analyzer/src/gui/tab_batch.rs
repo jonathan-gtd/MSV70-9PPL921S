@@ -13,6 +13,9 @@ pub struct BatchState {
     pub out_dir:    Option<PathBuf>,
     pub log:        Vec<String>,
     pub running:    Option<Arc<Mutex<Option<BatchResult>>>>,
+    // Async file dialogs
+    pub file_dlg:   Option<Arc<Mutex<Option<Option<Vec<PathBuf>>>>>>,
+    pub dir_dlg:    Option<Arc<Mutex<Option<Option<PathBuf>>>>>,
 }
 
 struct BatchResult {
@@ -22,7 +25,8 @@ struct BatchResult {
 
 impl Default for BatchState {
     fn default() -> Self {
-        Self { files: vec![], out_dir: None, log: vec![], running: None }
+        Self { files: vec![], out_dir: None, log: vec![], running: None,
+               file_dlg: None, dir_dlg: None }
     }
 }
 
@@ -43,15 +47,14 @@ pub fn show(ui: &mut Ui, state: &mut BatchState, cfg: &AppConfig) {
         // ── File selection ────────────────────────────────────────────────────
         ui.horizontal(|ui| {
             ui.label(RichText::new("Fichiers CSV").color(FG).strong());
-            if ui.button("Ajouter…").clicked() {
-                if let Some(paths) = rfd::FileDialog::new()
-                    .add_filter("CSV", &["csv"])
-                    .pick_files()
-                {
-                    for p in paths {
-                        if !state.files.contains(&p) { state.files.push(p); }
-                    }
-                }
+            if ui.button("Ajouter…").clicked() && state.file_dlg.is_none() {
+                let shared = Arc::new(Mutex::new(None));
+                let clone = shared.clone();
+                state.file_dlg = Some(shared);
+                std::thread::spawn(move || {
+                    let r = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_files();
+                    *clone.lock().unwrap() = Some(r);
+                });
             }
             if !state.files.is_empty() {
                 if ui.add(egui::Button::new(RichText::new("Tout effacer").color(RUST)).small()).clicked() {
@@ -83,10 +86,14 @@ pub fn show(ui: &mut Ui, state: &mut BatchState, cfg: &AppConfig) {
         // ── Output directory ──────────────────────────────────────────────────
         ui.horizontal(|ui| {
             ui.label(RichText::new("Dossier de sortie").color(FG).strong());
-            if ui.button("Choisir…").clicked() {
-                if let Some(dir) = rfd::FileDialog::new().pick_folder() {
-                    state.out_dir = Some(dir);
-                }
+            if ui.button("Choisir…").clicked() && state.dir_dlg.is_none() {
+                let shared = Arc::new(Mutex::new(None));
+                let clone = shared.clone();
+                state.dir_dlg = Some(shared);
+                std::thread::spawn(move || {
+                    let r = rfd::FileDialog::new().pick_folder();
+                    *clone.lock().unwrap() = Some(r);
+                });
             }
         });
         match &state.out_dir {
@@ -174,11 +181,34 @@ fn poll(state: &mut BatchState) {
     let result = if let Some(ref shared) = state.running {
         shared.try_lock().ok().and_then(|mut g| g.take())
     } else { None };
-
     if let Some(r) = result {
         state.running = None;
         for line in r.ok   { state.log.push(line); }
         for line in r.fail { state.log.push(line); }
-        state.log.push(format!("--- Terminé ---"));
+        state.log.push("--- Terminé ---".to_string());
+    }
+
+    // Async file dialog
+    let file_done = if let Some(ref fd) = state.file_dlg {
+        fd.try_lock().ok().and_then(|mut g| g.take())
+    } else { None };
+    if let Some(result) = file_done {
+        state.file_dlg = None;
+        if let Some(paths) = result {
+            for p in paths {
+                if !state.files.contains(&p) { state.files.push(p); }
+            }
+        }
+    }
+
+    // Async dir dialog
+    let dir_done = if let Some(ref dd) = state.dir_dlg {
+        dd.try_lock().ok().and_then(|mut g| g.take())
+    } else { None };
+    if let Some(result) = dir_done {
+        state.dir_dlg = None;
+        if let Some(dir) = result {
+            state.out_dir = Some(dir);
+        }
     }
 }
