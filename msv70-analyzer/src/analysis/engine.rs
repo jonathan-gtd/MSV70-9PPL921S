@@ -45,8 +45,74 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
         .and_then(|n| n.to_str())
         .unwrap_or("?")
         .to_string();
+    let LoadResult { rows, available, extra_cols } = load_csv(path, cfg)?;
+    analyze_rows(file_name, rows, available, extra_cols, cfg)
+}
 
-    let LoadResult { mut rows, available, extra_cols } = load_csv(path, cfg)?;
+/// Merge multiple CSVs (same job, possibly different sessions) and analyze as one.
+/// Timestamps are re-offset so each file follows the previous with a 2-second gap.
+pub fn concat_and_compute(paths: &[std::path::PathBuf], cfg: &AppConfig) -> Result<SessionData, String> {
+    if paths.is_empty() { return Err("No files selected".to_string()); }
+    if paths.len() == 1 { return compute_session(&paths[0], cfg); }
+
+    let mut merged_rows: Vec<Row> = Vec::new();
+    let mut merged_available: std::collections::HashMap<String, bool> = std::collections::HashMap::new();
+    let mut merged_extra_cols: Vec<String> = Vec::new();
+    let mut time_cursor = 0.0f64;
+    let mut file_names: Vec<String> = Vec::new();
+    let mut load_errors: Vec<String> = Vec::new();
+
+    for path in paths {
+        let stem = path.file_stem().and_then(|s| s.to_str()).unwrap_or("?").to_string();
+        match load_csv(path, cfg) {
+            Err(e) => { load_errors.push(format!("{stem}: {e}")); }
+            Ok(LoadResult { mut rows, available, extra_cols }) => {
+                if rows.is_empty() { continue; }
+
+                // OR the available maps (channel present in any file → available)
+                for (k, v) in &available {
+                    let e = merged_available.entry(k.clone()).or_insert(false);
+                    *e = *e || *v;
+                }
+                // Union of extra_cols
+                for col in &extra_cols {
+                    if !merged_extra_cols.contains(col) { merged_extra_cols.push(col.clone()); }
+                }
+
+                // Normalize timestamps: file's t0 → time_cursor
+                let t0   = rows[0].time_ms;
+                let last = rows.last().unwrap().time_ms;
+                let dur  = last - t0;
+                for r in &mut rows { r.time_ms = r.time_ms - t0 + time_cursor; }
+                time_cursor += dur + 2000.0; // 2 s gap between files
+
+                merged_rows.extend(rows);
+                file_names.push(stem);
+            }
+        }
+    }
+
+    if merged_rows.is_empty() {
+        let msg = if load_errors.is_empty() {
+            "All selected CSVs were empty".to_string()
+        } else {
+            format!("Load errors: {}", load_errors.join("; "))
+        };
+        return Err(msg);
+    }
+
+    let n = file_names.len();
+    let file_name = format!("[{n} merged] {}", file_names.join(", "));
+    analyze_rows(file_name, merged_rows, merged_available, merged_extra_cols, cfg)
+}
+
+fn analyze_rows(
+    file_name: String,
+    mut rows: Vec<Row>,
+    available: std::collections::HashMap<String, bool>,
+    extra_cols: Vec<String>,
+    cfg: &AppConfig,
+) -> Result<SessionData, String> {
 
     let n = rows.len();
     if n == 0 { return Err("No rows".to_string()); }

@@ -1,8 +1,9 @@
+use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use egui::{Color32, Context, RichText, Ui};
 
-use crate::analysis::{compute_session, generate_report, percentile};
+use crate::analysis::{compute_session, concat_and_compute, generate_report, percentile};
 use crate::config::AppConfig;
 use crate::data::SessionData;
 use crate::data::types::Phase;
@@ -55,8 +56,8 @@ pub struct MSV70App {
     pub customjobs_path: Option<PathBuf>,
     pub pending:     Option<Arc<Mutex<Option<AsyncResult>>>>,
     pub pending_all: Option<Arc<Mutex<Option<Vec<SessionData>>>>>,
-    // Async file dialog — outer Option = dialog running, inner Option = result (None=cancelled)
-    pub file_dialog: Option<Arc<Mutex<Option<Option<PathBuf>>>>>,
+    // Async file dialog — None outer = dialog open; inner None = cancelled; inner Some = selected
+    pub file_dialog: Option<Arc<Mutex<Option<Option<Vec<PathBuf>>>>>>,
     pub logs_dir:     Option<PathBuf>,
     pub log_files:    Vec<PathBuf>,
     pub selected_log: Option<usize>,
@@ -70,6 +71,7 @@ pub struct MSV70App {
     pub next_panel_id: usize,
     pub show_phases:   bool,
     pub batch_state:   crate::gui::tab_batch::BatchState,
+    pub merge_checked: HashSet<usize>,
 }
 
 impl MSV70App {
@@ -100,6 +102,7 @@ impl MSV70App {
             next_panel_id: 3,
             show_phases: true,
             batch_state: crate::gui::tab_batch::BatchState::default(),
+            merge_checked: HashSet::new(),
         };
 
         if let Some(path) = app.log_files.last().cloned() {
@@ -110,14 +113,34 @@ impl MSV70App {
     }
 
     pub fn open_file_dialog(&mut self) {
-        if self.file_dialog.is_some() { return; } // dialog already open
-        let shared: Arc<Mutex<Option<Option<PathBuf>>>> = Arc::new(Mutex::new(None));
+        if self.file_dialog.is_some() { return; }
+        let shared: Arc<Mutex<Option<Option<Vec<PathBuf>>>>> = Arc::new(Mutex::new(None));
         let clone = shared.clone();
         self.file_dialog = Some(shared);
         std::thread::spawn(move || {
-            let result = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_file();
-            *clone.lock().unwrap() = Some(result); // Some(None)=cancelled, Some(Some(p))=selected
+            // pick_files = multi-select; returns None if cancelled
+            let result = rfd::FileDialog::new().add_filter("CSV", &["csv"]).pick_files();
+            *clone.lock().unwrap() = Some(result);
         });
+    }
+
+    pub fn start_concat_analyze(&mut self, paths: Vec<PathBuf>) {
+        if paths.len() == 1 {
+            return self.start_analyze(paths.into_iter().next().unwrap());
+        }
+        self.status = format!("Merging {} CSV files…", paths.len());
+        self.cursor_s = None;
+        self.is_playing = false;
+        self.last_frame_time = None;
+        let cfg    = self.config.clone();
+        let shared: Arc<Mutex<Option<AsyncResult>>> = Arc::new(Mutex::new(None));
+        let clone  = shared.clone();
+        std::thread::spawn(move || {
+            let res = concat_and_compute(&paths, &cfg)
+                .map(|d| { let r = generate_report(&d, &cfg); (d, r) });
+            *clone.lock().unwrap() = Some(res);
+        });
+        self.pending = Some(shared);
     }
 
     pub fn start_analyze(&mut self, path: PathBuf) {
@@ -166,7 +189,11 @@ impl MSV70App {
                             self.tip_idx = 0;
                             self.report  = report;
                             self.session = Some(d);
-                            self.status  = format!("✓  {name}  ·  {n} rows  ·  {dur:.0}s  ·  {n_corr} cells  ·  {n_ev} events");
+                            // Truncate long merged names in the status bar
+                            let display_name = if name.len() > 60 {
+                                format!("{}…", &name[..57])
+                            } else { name.clone() };
+                            self.status  = format!("OK  {display_name}  ·  {n} rows  ·  {dur:.0}s  ·  {n_corr} cells  ·  {n_ev} events");
                         }
                         Err(e) => { self.status = format!("Error: {e}"); }
                     }
@@ -177,10 +204,19 @@ impl MSV70App {
             if let Ok(mut g) = fd.try_lock() {
                 if let Some(result) = g.take() {
                     self.file_dialog = None;
-                    if let Some(path) = result {
-                        if !self.log_files.contains(&path) { self.log_files.push(path.clone()); }
-                        self.selected_log = self.log_files.iter().position(|p| p == &path);
-                        self.start_analyze(path);
+                    if let Some(paths) = result {
+                        // Register files in the sidebar list
+                        for p in &paths {
+                            if !self.log_files.contains(p) { self.log_files.push(p.clone()); }
+                        }
+                        if paths.len() == 1 {
+                            let path = paths.into_iter().next().unwrap();
+                            self.selected_log = self.log_files.iter().position(|p| p == &path);
+                            self.start_analyze(path);
+                        } else {
+                            self.selected_log = None; // merged — no single selection
+                            self.start_concat_analyze(paths);
+                        }
                         if !self.nav.is_analysis() { self.nav = Nav::TimeSeries; }
                     }
                 }
@@ -444,7 +480,7 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
     });
     ui.add_space(2.0);
 
-    let list_h = ui.available_height() - 58.0;
+    let list_h = ui.available_height() - 80.0;
     let mut clicked_idx: Option<usize> = None;
     egui::ScrollArea::vertical()
         .id_salt("log_list")
@@ -452,12 +488,20 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
         .show(ui, |ui| {
             ui.set_width(ui.available_width());
             for (idx, path) in app.log_files.iter().enumerate() {
-                let name = path.file_stem().and_then(|s| s.to_str()).unwrap_or("?");
-                let sel  = app.selected_log == Some(idx);
-                let color = if sel { ACCENT } else { FG_DIM };
-                if ui.selectable_label(sel, RichText::new(name).color(color).small()).clicked() {
-                    clicked_idx = Some(idx);
-                }
+                let name  = path.file_stem().and_then(|s| s.to_str()).unwrap_or("?");
+                let sel   = app.selected_log == Some(idx);
+                let checked = app.merge_checked.contains(&idx);
+                ui.horizontal(|ui| {
+                    let mut c = checked;
+                    if ui.checkbox(&mut c, "").changed() {
+                        if c { app.merge_checked.insert(idx); }
+                        else { app.merge_checked.remove(&idx); }
+                    }
+                    let color = if sel { ACCENT } else { FG_DIM };
+                    if ui.selectable_label(sel, RichText::new(name).color(color).small()).clicked() {
+                        clicked_idx = Some(idx);
+                    }
+                });
             }
             if app.log_files.is_empty() {
                 ui.label(RichText::new("No CSV files found").color(FG_DIM).small());
@@ -475,6 +519,31 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
 
     ui.separator();
     ui.add_space(2.0);
+
+    // Merge row: shown only when ≥2 files are checked
+    let n_checked = app.merge_checked.len();
+    if n_checked >= 2 {
+        ui.horizontal(|ui| {
+            let label = format!("Merge {} files", n_checked);
+            if ui.add(egui::Button::new(RichText::new(&label).color(Color32::WHITE).size(12.0))
+                .fill(OLIVE)).clicked()
+            {
+                let mut paths: Vec<PathBuf> = app.merge_checked.iter()
+                    .filter_map(|&i| app.log_files.get(i).cloned())
+                    .collect();
+                paths.sort(); // deterministic order
+                app.merge_checked.clear();
+                app.selected_log = None;
+                app.start_concat_analyze(paths);
+                if !app.nav.is_analysis() { app.nav = Nav::TimeSeries; }
+            }
+            if ui.small_button("×").on_hover_text("Clear selection").clicked() {
+                app.merge_checked.clear();
+            }
+        });
+        ui.add_space(2.0);
+    }
+
     ui.horizontal(|ui| {
         if ui.button("+ Trend").clicked() && app.pending_all.is_none() {
             app.start_load_all();
