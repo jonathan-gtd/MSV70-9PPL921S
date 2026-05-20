@@ -11,3 +11,5 @@ xdf-analyzer/exports/
 
 # Rust build artifacts
 tools/UltraLog/target/
+
+msv70-analyzer/target/
