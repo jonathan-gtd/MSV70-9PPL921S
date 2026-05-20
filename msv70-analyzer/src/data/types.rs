@@ -4,6 +4,8 @@ use std::collections::HashMap;
 #[derive(Debug, Clone)]
 pub struct Row {
     pub time_ms:     f64,
+    /// Values for CSV columns not matched by col_aliases (keyed by original column header)
+    pub extra: HashMap<String, f64>,
     pub rpm:         f64,
     pub load_pct:    f64,
     pub pedal_pct:   f64,
@@ -50,6 +52,7 @@ impl Default for Row {
             phase: Phase::EngineOff, rpm_bin: 0, load_bin: 0,
             load_mg_stk: 0.0, lmb_rpm_bin: 0, lmb_load_bin: 0,
             vanos_err: 0.0, cl_b1: false, cl_b2: false,
+            extra: HashMap::new(),
         }
     }
 }
@@ -166,4 +169,7 @@ pub struct SessionData {
     pub cell_lmb_b2:    HashMap<(usize, usize), Vec<f64>>,
     pub lmb_rpm_labels: Vec<String>,
     pub lmb_load_labels: Vec<String>,
+
+    /// CSV columns not matched by any col_alias — available as extra graph channels
+    pub extra_cols: Vec<String>,
 }

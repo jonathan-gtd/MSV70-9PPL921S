@@ -4,8 +4,9 @@ use crate::config::AppConfig;
 use super::types::Row;
 
 pub struct LoadResult {
-    pub rows:      Vec<Row>,
-    pub available: std::collections::HashMap<String, bool>,
+    pub rows:       Vec<Row>,
+    pub available:  std::collections::HashMap<String, bool>,
+    pub extra_cols: Vec<String>,
 }
 
 pub fn load_csv(path: &Path, cfg: &AppConfig) -> Result<LoadResult, String> {
@@ -16,11 +17,12 @@ pub fn load_csv(path: &Path, cfg: &AppConfig) -> Result<LoadResult, String> {
         .from_path(path)
         .map_err(|e| format!("Cannot open CSV: {e}"))?;
 
-    let headers: Vec<String> = rdr.headers()
+    let headers_raw: Vec<String> = rdr.headers()
         .map_err(|e| format!("Cannot read headers: {e}"))?
         .iter()
-        .map(|h| h.to_lowercase())
+        .map(|h| h.to_string())
         .collect();
+    let headers: Vec<String> = headers_raw.iter().map(|h| h.to_lowercase()).collect();
 
     // Map internal name → column index using config aliases
     let mut col_idx: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
@@ -37,6 +39,14 @@ pub fn load_csv(path: &Path, cfg: &AppConfig) -> Result<LoadResult, String> {
     if !col_idx.contains_key("time_ms") || !col_idx.contains_key("rpm") {
         return Err("Missing required column 'time' or 'RPM'".to_string());
     }
+
+    // Identify extra columns (not mapped by any alias)
+    let mapped_indices: std::collections::HashSet<usize> = col_idx.values().cloned().collect();
+    let extra_col_info: Vec<(String, usize)> = headers_raw.iter().enumerate()
+        .filter(|(i, _)| !mapped_indices.contains(i))
+        .map(|(i, h)| (h.clone(), i))
+        .collect();
+    let extra_cols: Vec<String> = extra_col_info.iter().map(|(h, _)| h.clone()).collect();
 
     let get = |record: &csv::StringRecord, name: &str| -> f64 {
         col_idx.get(name)
@@ -84,6 +94,14 @@ pub fn load_csv(path: &Path, cfg: &AppConfig) -> Result<LoadResult, String> {
         row.ltft_mul_b1 = safe(get(&rec, "ltft_mul_b1"));
         row.ltft_mul_b2 = safe(get(&rec, "ltft_mul_b2"));
 
+        for (name, &cidx) in extra_cols.iter().zip(extra_col_info.iter().map(|(_, i)| i)) {
+            if let Some(s) = rec.get(cidx) {
+                if let Ok(v) = s.trim().parse::<f64>() {
+                    row.extra.insert(name.clone(), v);
+                }
+            }
+        }
+
         rows.push(row);
     }
 
@@ -96,5 +114,5 @@ pub fn load_csv(path: &Path, cfg: &AppConfig) -> Result<LoadResult, String> {
         available.insert(internal.clone(), col_idx.contains_key(internal.as_str()));
     }
 
-    Ok(LoadResult { rows, available })
+    Ok(LoadResult { rows, available, extra_cols })
 }
