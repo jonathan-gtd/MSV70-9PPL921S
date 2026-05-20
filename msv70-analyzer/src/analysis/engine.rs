@@ -254,6 +254,21 @@ fn analyze_rows(
         vec![]
     };
 
+    // Knock retard density per STFT cell
+    let mut knock_retard_cell: HashMap<(usize, usize), (usize, usize)> = HashMap::new();
+    if has_ign {
+        for &i in &hot_idx {
+            if rows[i].rpm > cfg.knock_rpm_min && rows[i].load_pct > cfg.knock_load_min {
+                knock_retard_cell.entry((rows[i].rpm_bin, rows[i].load_bin))
+                    .or_insert((0, 0)).1 += 1;
+            }
+        }
+        for &i in &retard_idx {
+            knock_retard_cell.entry((rows[i].rpm_bin, rows[i].load_bin))
+                .or_insert((0, 0)).0 += 1;
+        }
+    }
+
     let events = build_events(&rows, has_lmb, has_vanos, cfg);
 
     let rpm_labels       = cfg.rpm_labels();
@@ -268,6 +283,7 @@ fn analyze_rows(
         corrections, stft_buckets, events, retard_idx,
         has_ltft, has_vanos, has_ign, has_inj, has_lmb, has_iat, has_maf,
         has_knock, has_lmb_trim,
+        knock_retard_cell,
         rpm_labels, load_labels,
         cell_lmb_b1, cell_lmb_b2, lmb_rpm_labels, lmb_load_labels,
         extra_cols,

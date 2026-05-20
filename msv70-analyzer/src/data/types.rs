@@ -170,6 +170,9 @@ pub struct SessionData {
     pub has_knock:    bool,
     pub has_lmb_trim: bool,
 
+    // Knock retard per (rpm_bin, load_bin): (retard_n, hot_candidate_n)
+    pub knock_retard_cell: HashMap<(usize, usize), (usize, usize)>,
+
     // STFT map bin labels
     pub rpm_labels:  Vec<String>,
     pub load_labels: Vec<String>,

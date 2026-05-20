@@ -3,9 +3,11 @@ use crate::analysis::percentile;
 use crate::config::AppConfig;
 use crate::data::types::*;
 use super::palette::*;
-use egui::Layout;
 
-pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
+/// Returns Some(true) = user clicked "Set as ref", Some(false) = "Clear ref", None = no action.
+pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig, ref_session: Option<&SessionData>) -> Option<bool> {
+    let mut action: Option<bool> = None;
+
     ScrollArea::both().id_salt("stft_map_scroll").auto_shrink([false, false]).show(ui, |ui| {
         let n_rb = d.rpm_labels.len();
         let n_lb = d.load_labels.len();
@@ -16,6 +18,19 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if ui.add(egui::Button::new(RichText::new("Export CSV").size(11.0).color(OLIVE)).fill(BG3)).clicked() {
                     export_stft_csv(d, cfg);
+                }
+                ui.add_space(8.0);
+                // Reference session controls
+                if ref_session.is_some() {
+                    if ui.add(egui::Button::new(RichText::new("Clear ref").size(11.0).color(RUST)).fill(BG3)).clicked() {
+                        action = Some(false);
+                    }
+                    ui.add_space(4.0);
+                    ui.label(RichText::new(format!("Ref: {}", ref_session.unwrap().file_name.chars().take(30).collect::<String>())).color(AMBER).size(10.0));
+                } else {
+                    if ui.add(egui::Button::new(RichText::new("Set as ref").size(11.0).color(OLIVE)).fill(BG3)).clicked() {
+                        action = Some(true);
+                    }
                 }
             });
         });
@@ -37,11 +52,16 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
         ] {
             ui.label(RichText::new(format!("STFT {label} — closed-loop rows only")).color(ACCENT).strong());
             ui.add_space(4.0);
-            draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb, |i, j| {
-                cell_dict.get(&(i, j))
-                    .filter(|v| v.len() >= cfg.cell_min_samples)
-                    .map(|v| (percentile_of(v, 50.0), v.len(), None))
-            });
+            draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb,
+                |i, j| {
+                    cell_dict.get(&(i, j))
+                        .filter(|v| v.len() >= cfg.cell_min_samples)
+                        .map(|v| (percentile_of(v, 50.0), v.len(), None))
+                },
+                |i, j| {
+                    cell_dict.get(&(i, j)).filter(|v| !v.is_empty()).map(|v| v.len())
+                },
+            );
             ui.add_space(12.0);
         }
 
@@ -50,20 +70,93 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
         ui.label(RichText::new("(B1 med + B2 med) / 2  —  si une seule banque disponible, sa valeur seule")
             .color(FG_DIM).size(10.0).italics());
         ui.add_space(4.0);
-        draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb, |i, j| {
-            let v1 = d.cell_b1.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples);
-            let v2 = d.cell_b2.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples);
-            match (v1, v2) {
-                (Some(a), Some(b)) => {
-                    let med = (percentile_of(a, 50.0) + percentile_of(b, 50.0)) / 2.0;
-                    Some((med, a.len() + b.len(), Some("B1+B2")))
+        draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb,
+            |i, j| {
+                let v1 = d.cell_b1.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples);
+                let v2 = d.cell_b2.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples);
+                match (v1, v2) {
+                    (Some(a), Some(b)) => {
+                        let med = (percentile_of(a, 50.0) + percentile_of(b, 50.0)) / 2.0;
+                        Some((med, a.len() + b.len(), Some("B1+B2")))
+                    }
+                    (Some(a), None) => Some((percentile_of(a, 50.0), a.len(), Some("B1"))),
+                    (None, Some(b)) => Some((percentile_of(b, 50.0), b.len(), Some("B2"))),
+                    (None, None)    => None,
                 }
-                (Some(a), None) => Some((percentile_of(a, 50.0), a.len(), Some("B1"))),
-                (None, Some(b)) => Some((percentile_of(b, 50.0), b.len(), Some("B2"))),
-                (None, None)    => None,
-            }
-        });
+            },
+            |i, j| {
+                let n1 = d.cell_b1.get(&(i, j)).map(|v| v.len()).unwrap_or(0);
+                let n2 = d.cell_b2.get(&(i, j)).map(|v| v.len()).unwrap_or(0);
+                let n = n1 + n2;
+                if n > 0 && n1.max(n2) < cfg.cell_min_samples { Some(n) } else { None }
+            },
+        );
         ui.add_space(12.0);
+
+        // ── Delta map (current vs reference) ─────────────────────────────────
+        if let Some(ref_d) = ref_session {
+            let ref_n_rb = ref_d.rpm_labels.len();
+            let ref_n_lb = ref_d.load_labels.len();
+            if ref_n_rb == n_rb && ref_n_lb == n_lb {
+                ui.separator();
+                ui.add_space(4.0);
+                ui.horizontal(|ui| {
+                    ui.label(RichText::new("Delta STFT (session - référence)").color(AMBER).strong());
+                    ui.label(RichText::new(format!("  ref: {}", ref_d.file_name.chars().take(40).collect::<String>()))
+                        .color(FG_DIM).size(10.0).italics());
+                });
+                ui.label(RichText::new("Positif = session actuelle plus lean que la référence").color(FG_DIM).size(10.0));
+                ui.add_space(4.0);
+
+                // Delta B1
+                ui.label(RichText::new("Delta B1").color(AMBER).strong());
+                ui.add_space(2.0);
+                draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb,
+                    |i, j| {
+                        let cur = d.cell_b1.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples)
+                            .map(|v| percentile_of(v, 50.0));
+                        let rref = ref_d.cell_b1.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples)
+                            .map(|v| percentile_of(v, 50.0));
+                        match (cur, rref) {
+                            (Some(c), Some(r)) => Some((c - r, 0, Some("Δ"))),
+                            _ => None,
+                        }
+                    },
+                    |_, _| None,
+                );
+                ui.add_space(8.0);
+
+                // Delta B2
+                ui.label(RichText::new("Delta B2").color(AMBER).strong());
+                ui.add_space(2.0);
+                draw_grid(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb,
+                    |i, j| {
+                        let cur = d.cell_b2.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples)
+                            .map(|v| percentile_of(v, 50.0));
+                        let rref = ref_d.cell_b2.get(&(i, j)).filter(|v| v.len() >= cfg.cell_min_samples)
+                            .map(|v| percentile_of(v, 50.0));
+                        match (cur, rref) {
+                            (Some(c), Some(r)) => Some((c - r, 0, Some("Δ"))),
+                            _ => None,
+                        }
+                    },
+                    |_, _| None,
+                );
+                ui.add_space(12.0);
+            }
+        }
+
+        // ── Knock retard density map ──────────────────────────────────────────
+        if d.has_ign && !d.knock_retard_cell.is_empty() {
+            ui.separator();
+            ui.add_space(4.0);
+            ui.label(RichText::new("Knock Retard Density — % rows sous le p50 ignition").color(RUST).strong());
+            ui.label(RichText::new("Rouge intense = fréquent — vérifier qualité carburant et avance")
+                .color(FG_DIM).size(10.0).italics());
+            ui.add_space(4.0);
+            draw_grid_retard(ui, d, cfg, cell_w, cell_h, label_w, gap, &font, &sfont, n_rb, n_lb);
+            ui.add_space(12.0);
+        }
 
         // ── Corrections table ─────────────────────────────────────────────────
         if !d.corrections.is_empty() {
@@ -81,11 +174,11 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
 
                 for c in &d.corrections {
                     let (sev_text, sev_col) = if c.avg_delta.abs() > cfg.stft_alarm {
-                        ("⛔ CRITICAL", RED)
+                        ("CRITICAL", RED)
                     } else if c.avg_delta.abs() > cfg.stft_warn {
-                        ("⚠ HIGH", ORANGE)
+                        ("HIGH", ORANGE)
                     } else {
-                        ("· notable", YELLOW)
+                        ("notable", YELLOW)
                     };
                     let s1 = c.med_b1.map(|v| format!("{v:+.1}%")).unwrap_or_else(|| "—".into());
                     let s2 = c.med_b2.map(|v| format!("{v:+.1}%")).unwrap_or_else(|| "—".into());
@@ -103,10 +196,13 @@ pub fn show(ui: &mut Ui, d: &SessionData, cfg: &AppConfig) {
             });
         }
     });
+
+    action
 }
 
 // ── Grid renderer ─────────────────────────────────────────────────────────────
-// `cell_fn(rpm_idx, load_idx)` → Some((median, n_samples, Option<badge_label>)) or None
+// cell_fn(rpm, load) → Some((median, n_samples, badge)) or None (enough data)
+// low_fn(rpm, load)  → Some(n) when 0 < n < cell_min_samples, else None
 
 fn draw_grid(
     ui: &mut Ui,
@@ -116,6 +212,7 @@ fn draw_grid(
     font: &FontId, sfont: &FontId,
     n_rb: usize, n_lb: usize,
     cell_fn: impl Fn(usize, usize) -> Option<(f64, usize, Option<&'static str>)>,
+    low_fn:  impl Fn(usize, usize) -> Option<usize>,
 ) {
     // Header row
     ui.horizontal(|ui| {
@@ -144,11 +241,10 @@ fn draw_grid(
             for j in 0..n_lb {
                 let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h), egui::Sense::hover());
 
-                if let Some((med, n, badge)) = cell_fn(i, j) {
+                if let Some((med, n, _badge)) = cell_fn(i, j) {
                     let (bg, fg) = cell_colors(med, cfg);
                     ui.painter().rect_filled(rect.shrink(1.0), 3.0, bg);
                     let sign = if med >= 0.0 { "+" } else { "" };
-
                     let value_y = rect.center().y - 3.0;
                     ui.painter().text(
                         egui::pos2(rect.center().x, value_y),
@@ -156,29 +252,114 @@ fn draw_grid(
                         format!("{sign}{med:.1}%"),
                         font.clone(), fg,
                     );
-
-                    // Sample count
+                    if n > 0 {
+                        ui.painter().text(
+                            egui::pos2(rect.center().x, rect.bottom() - 3.0),
+                            egui::Align2::CENTER_BOTTOM,
+                            format!("n={n}"),
+                            sfont.clone(),
+                            fg.gamma_multiply(0.55),
+                        );
+                    }
+                } else if let Some(n_low) = low_fn(i, j) {
+                    // Below-threshold: gray cell with count
+                    ui.painter().rect_filled(rect.shrink(1.0), 3.0, BG3);
+                    ui.painter().text(
+                        egui::pos2(rect.center().x, rect.center().y - 3.0),
+                        egui::Align2::CENTER_CENTER,
+                        "—",
+                        font.clone(), FG_DIM,
+                    );
                     ui.painter().text(
                         egui::pos2(rect.center().x, rect.bottom() - 3.0),
                         egui::Align2::CENTER_BOTTOM,
-                        format!("n={n}"),
+                        format!("n={n_low}"),
                         sfont.clone(),
-                        fg.gamma_multiply(0.55),
+                        FG_DIM.gamma_multiply(0.65),
                     );
-
-                    // (badge text intentionally omitted)
                 } else {
                     ui.painter().rect_filled(rect.shrink(1.0), 3.0, BG3);
                     ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER,
-                        "—", font.clone(), FG_DIM);
+                        "—", font.clone(), FG_DIM.gamma_multiply(0.4));
                 }
                 ui.add_space(gap);
             }
         });
         ui.add_space(gap);
     }
-    let _ = cfg; // used via cell_fn closure
+    let _ = cfg;
 }
+
+// ── Knock retard grid ─────────────────────────────────────────────────────────
+
+fn draw_grid_retard(
+    ui: &mut Ui,
+    d: &SessionData,
+    _cfg: &AppConfig,
+    cell_w: f32, cell_h: f32, label_w: f32, gap: f32,
+    font: &FontId, sfont: &FontId,
+    n_rb: usize, n_lb: usize,
+) {
+    // Header
+    ui.horizontal(|ui| {
+        let (rect, _) = ui.allocate_exact_size(egui::vec2(label_w, cell_h * 0.7), egui::Sense::hover());
+        ui.painter().text(
+            egui::pos2(rect.right() - 2.0, rect.bottom() - 2.0),
+            egui::Align2::RIGHT_BOTTOM, "mg/stk →", sfont.clone(), FG_DIM,
+        );
+        for lbl in &d.load_labels {
+            let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h * 0.7), egui::Sense::hover());
+            ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER, lbl, sfont.clone(), FG_DIM);
+            ui.add_space(gap);
+        }
+    });
+    ui.add_space(gap);
+
+    for i in 0..n_rb {
+        ui.horizontal(|ui| {
+            let (rect, _) = ui.allocate_exact_size(egui::vec2(label_w, cell_h), egui::Sense::hover());
+            ui.painter().text(
+                egui::pos2(rect.right() - 4.0, rect.center().y),
+                egui::Align2::RIGHT_CENTER, &d.rpm_labels[i], sfont.clone(), FG_DIM,
+            );
+
+            for j in 0..n_lb {
+                let (rect, _) = ui.allocate_exact_size(egui::vec2(cell_w, cell_h), egui::Sense::hover());
+                if let Some(&(ret_n, hot_n)) = d.knock_retard_cell.get(&(i, j)) {
+                    let pct = if hot_n > 0 { 100.0 * ret_n as f64 / hot_n as f64 } else { 0.0 };
+                    let intensity = (pct / 25.0).min(1.0);
+                    let bg = Color32::from_rgb(
+                        (37.0 + 207.0 * intensity) as u8,
+                        (37.0 * (1.0 - intensity * 0.7)) as u8,
+                        (38.0 * (1.0 - intensity * 0.7)) as u8,
+                    );
+                    let fg = if intensity > 0.4 { Color32::WHITE } else { FG };
+                    ui.painter().rect_filled(rect.shrink(1.0), 3.0, bg);
+                    ui.painter().text(
+                        egui::pos2(rect.center().x, rect.center().y - 3.0),
+                        egui::Align2::CENTER_CENTER,
+                        format!("{pct:.0}%"),
+                        font.clone(), fg,
+                    );
+                    ui.painter().text(
+                        egui::pos2(rect.center().x, rect.bottom() - 3.0),
+                        egui::Align2::CENTER_BOTTOM,
+                        format!("{ret_n}/{hot_n}"),
+                        sfont.clone(), fg.gamma_multiply(0.6),
+                    );
+                } else {
+                    ui.painter().rect_filled(rect.shrink(1.0), 3.0, BG3);
+                    ui.painter().text(rect.center(), egui::Align2::CENTER_CENTER,
+                        "—", font.clone(), FG_DIM.gamma_multiply(0.4));
+                }
+                ui.add_space(gap);
+            }
+        });
+        ui.add_space(gap);
+    }
+}
+
+// ── Color helpers ─────────────────────────────────────────────────────────────
 
 fn cell_colors(v: f64, cfg: &AppConfig) -> (Color32, Color32) {
     let intensity = (v.abs() / cfg.stft_alarm / 1.15).min(1.0);
