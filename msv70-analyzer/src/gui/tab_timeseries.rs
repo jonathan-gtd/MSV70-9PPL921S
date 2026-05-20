@@ -15,6 +15,8 @@ pub enum ChannelKey {
     Rpm, LoadPct, StftB1, StftB2, LmbB1, LmbB2, IgnDeg, CoolantC,
     // Computed channels
     GearRatio, StftAvg, InjDuty, PedalPct,
+    // Dynamic: extra CSV columns not matched by any col_alias
+    Extra { idx: usize, name: String },
 }
 
 pub const ALL_CHANNELS: &[ChannelKey] = &[
@@ -27,7 +29,7 @@ pub const ALL_CHANNELS: &[ChannelKey] = &[
 ];
 
 impl ChannelKey {
-    pub fn label(&self) -> &'static str {
+    pub fn label(&self) -> &str {
         match self {
             ChannelKey::Rpm       => "RPM",
             ChannelKey::LoadPct   => "Load %",
@@ -41,10 +43,11 @@ impl ChannelKey {
             ChannelKey::StftAvg   => "STFT Avg",
             ChannelKey::InjDuty   => "Inj Duty",
             ChannelKey::PedalPct  => "Pédale",
+            ChannelKey::Extra { name, .. } => name.as_str(),
         }
     }
 
-    pub fn unit(&self) -> &'static str {
+    pub fn unit(&self) -> &str {
         match self {
             ChannelKey::Rpm       => "rpm",
             ChannelKey::LoadPct   => "%",
@@ -55,6 +58,7 @@ impl ChannelKey {
             ChannelKey::GearRatio => "rpm/v",
             ChannelKey::InjDuty   => "%",
             ChannelKey::PedalPct  => "%",
+            ChannelKey::Extra { .. } => "",
         }
     }
 
@@ -72,6 +76,7 @@ impl ChannelKey {
             ChannelKey::StftAvg   => CHART[5],
             ChannelKey::InjDuty   => SAGE,
             ChannelKey::PedalPct  => CORN,
+            ChannelKey::Extra { idx, .. } => CHART[idx % CHART.len()],
         }
     }
 
@@ -105,6 +110,7 @@ impl ChannelKey {
             }
             ChannelKey::InjDuty  => row.inj_duty(),
             ChannelKey::PedalPct => Some(row.pedal_pct),
+            ChannelKey::Extra { name, .. } => row.extra.get(name.as_str()).copied(),
         }
     }
 }
@@ -184,7 +190,7 @@ pub fn show(
         .show_inside(ui, |ui| {
             egui::ScrollArea::horizontal().id_salt("ts_cards_scroll").show(ui, |ui| {
                 ui.horizontal(|ui| {
-                    show_channel_cards(ui, rows, t0, *cursor_s, panels, cfg);
+                    show_channel_cards(ui, rows, t0, *cursor_s, panels, cfg, &d.extra_cols);
                 });
             });
         });
@@ -195,7 +201,7 @@ pub fn show(
             .frame(egui::Frame::NONE.fill(BG2).inner_margin(egui::Margin::symmetric(6, 4)))
             .exact_height(36.0)
             .show_inside(ui, |ui| {
-                show_palette_bar(ui, panels, next_id, show_phases);
+                show_palette_bar(ui, panels, next_id, show_phases, &d.extra_cols);
             });
 
         egui::CentralPanel::default().show_inside(ui, |ui| {
@@ -432,7 +438,7 @@ pub fn show(
 
 // ── Palette bar ───────────────────────────────────────────────────────────────
 
-fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usize, show_phases: &mut bool) {
+fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usize, show_phases: &mut bool, extra_cols: &[String]) {
     ui.horizontal(|ui| {
         for key in ALL_CHANNELS {
             let col = key.color();
@@ -459,6 +465,37 @@ fn show_palette_bar(ui: &mut Ui, panels: &mut Vec<ChartPanel>, next_id: &mut usi
                 },
             );
             ui.add_space(2.0);
+        }
+
+        // Extra CSV columns
+        if !extra_cols.is_empty() {
+            ui.separator();
+            ui.label(RichText::new("CSV:").color(FG_DIM).size(9.5).italics());
+            ui.add_space(2.0);
+            for (idx, col_name) in extra_cols.iter().enumerate() {
+                let key = ChannelKey::Extra { idx, name: col_name.clone() };
+                let col = key.color();
+                let col_name_owned = col_name.clone();
+                let _resp = ui.dnd_drag_source(
+                    egui::Id::new(format!("palette_extra_{}", col_name)),
+                    key,
+                    |ui| {
+                        egui::Frame::NONE
+                            .fill(BG3)
+                            .stroke(egui::Stroke::new(1.2, col))
+                            .corner_radius(4.0)
+                            .inner_margin(egui::Margin { left: 6, right: 6, top: 2, bottom: 2 })
+                            .show(ui, |ui| {
+                                ui.horizontal(|ui| {
+                                    let (r, _) = ui.allocate_exact_size(vec2(7.0, 7.0), egui::Sense::hover());
+                                    ui.painter().circle_filled(r.center(), 3.5, col);
+                                    ui.label(RichText::new(&col_name_owned).color(FG).size(11.0));
+                                });
+                            });
+                    },
+                );
+                ui.add_space(2.0);
+            }
         }
 
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
@@ -538,15 +575,19 @@ fn render_chart(
     let prev_bounds: Option<[f64; 4]>  = ui.ctx().data(|d| d.get_temp(bounds_id));
 
     // Channel+filter signature → auto-fit Y when channels or filters change
-    let chan_sig: Vec<(usize, u64, u64)> = panel.channels.iter()
+    let chan_sig: Vec<(u64, u64, u64)> = panel.channels.iter()
         .map(|ch| {
-            let ki   = ALL_CHANNELS.iter().position(|k| *k == ch.key).unwrap_or(99);
+            use std::collections::hash_map::DefaultHasher;
+            use std::hash::{Hash, Hasher};
+            let mut h = DefaultHasher::new();
+            ch.key.label().hash(&mut h);
+            let ki   = h.finish();
             let fmin = ch.filter_min.map(|v: f64| v.to_bits()).unwrap_or(u64::MAX);
             let fmax = ch.filter_max.map(|v: f64| v.to_bits()).unwrap_or(u64::MAX);
             (ki, fmin, fmax)
         })
         .collect();
-    let prev_sig: Option<Vec<(usize, u64, u64)>> = ui.ctx().data(|d| d.get_temp(sig_id));
+    let prev_sig: Option<Vec<(u64, u64, u64)>> = ui.ctx().data(|d| d.get_temp(sig_id));
     let sig_changed = prev_sig.map(|ps| ps != chan_sig).unwrap_or(false);
     ui.ctx().data_mut(|d| d.insert_temp(sig_id, chan_sig));
 
@@ -891,6 +932,7 @@ fn show_channel_cards(
     cursor_s: Option<f64>,
     panels: &[ChartPanel],
     cfg: &AppConfig,
+    extra_cols: &[String],
 ) {
     let active_keys: Vec<&ChannelKey> = panels.iter()
         .flat_map(|p| p.channels.iter().map(|c| &c.key))
@@ -907,6 +949,15 @@ fn show_channel_cards(
         let (mean, sigma) = compute_stats(rows, key, cfg);
         let cur = cur_i.and_then(|i| key.value(&rows[i], cfg));
         channel_card(ui, key, mn, mx, mean, sigma, cur);
+    }
+
+    for (idx, col_name) in extra_cols.iter().enumerate() {
+        let key = ChannelKey::Extra { idx, name: col_name.clone() };
+        if !active_keys.iter().any(|k| **k == key) { continue; }
+        let (mn, mx) = ch_minmax(rows, &key, cfg);
+        let (mean, sigma) = compute_stats(rows, &key, cfg);
+        let cur = cur_i.and_then(|i| key.value(&rows[i], cfg));
+        channel_card(ui, &key, mn, mx, mean, sigma, cur);
     }
 }
 

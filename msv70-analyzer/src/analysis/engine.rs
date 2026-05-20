@@ -46,7 +46,7 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
         .unwrap_or("?")
         .to_string();
 
-    let LoadResult { mut rows, available } = load_csv(path, cfg)?;
+    let LoadResult { mut rows, available, extra_cols } = load_csv(path, cfg)?;
 
     let n = rows.len();
     if n == 0 { return Err("No rows".to_string()); }
@@ -200,6 +200,7 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
         has_ltft, has_vanos, has_ign, has_inj, has_lmb, has_iat, has_maf,
         rpm_labels, load_labels,
         cell_lmb_b1, cell_lmb_b2, lmb_rpm_labels, lmb_load_labels,
+        extra_cols,
     })
 }
 
