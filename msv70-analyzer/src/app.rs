@@ -72,6 +72,7 @@ pub struct MSV70App {
     pub show_phases:   bool,
     pub batch_state:   crate::gui::tab_batch::BatchState,
     pub merge_checked: HashSet<usize>,
+    pub ref_session:   Option<SessionData>,
 }
 
 impl MSV70App {
@@ -103,6 +104,7 @@ impl MSV70App {
             show_phases: true,
             batch_state: crate::gui::tab_batch::BatchState::default(),
             merge_checked: HashSet::new(),
+            ref_session: None,
         };
 
         if let Some(path) = app.log_files.last().cloned() {
@@ -188,6 +190,10 @@ impl MSV70App {
                             self.tips    = build_tips(&d, &self.config);
                             self.tip_idx = 0;
                             self.report  = report;
+                            // Auto-navigate to the most relevant tab
+                            if matches!(self.nav, Nav::TimeSeries | Nav::KnockTrim) {
+                                self.nav = detect_best_nav(&d);
+                            }
                             self.session = Some(d);
                             // Truncate long merged names in the status bar
                             let display_name = if name.len() > 60 {
@@ -385,7 +391,12 @@ impl eframe::App for MSV70App {
                 }
                 Nav::StftMap => {
                     if let Some(ref d) = session {
-                        crate::gui::tab_stft_map::show(ui, d, &cfg);
+                        let ref_ref = self.ref_session.as_ref();
+                        match crate::gui::tab_stft_map::show(ui, d, &cfg, ref_ref) {
+                            Some(true)  => { self.ref_session = self.session.clone(); }
+                            Some(false) => { self.ref_session = None; }
+                            None        => {}
+                        }
                     } else { let _ = show_empty(ui, ctx); }
                 }
                 Nav::LambdaMap => {
@@ -709,6 +720,13 @@ fn build_tips(d: &SessionData, cfg: &AppConfig) -> Vec<String> {
     }
 
     tips
+}
+
+// ── Auto-nav ──────────────────────────────────────────────────────────────────
+
+fn detect_best_nav(d: &SessionData) -> Nav {
+    if d.has_knock || d.has_lmb_trim { Nav::KnockTrim }
+    else { Nav::TimeSeries }
 }
 
 // ── Discovery ─────────────────────────────────────────────────────────────────

@@ -204,6 +204,15 @@ pub fn show(
                 show_palette_bar(ui, panels, next_id, show_phases, &d.extra_cols);
             });
 
+        if *show_phases && !spans.is_empty() && t_max2 > 0.0 {
+            egui::TopBottomPanel::top("ts_phase_bar")
+                .frame(egui::Frame::NONE.fill(BG).inner_margin(egui::Margin::ZERO))
+                .exact_height(14.0)
+                .show_inside(ui, |ui| {
+                    draw_phase_bar(ui, &spans, t_max2);
+                });
+        }
+
         egui::CentralPanel::default().show_inside(ui, |ui| {
             let is_dragging = egui::DragAndDrop::payload::<ChannelKey>(ui.ctx()).is_some();
             let cs = *cursor_s;
@@ -993,6 +1002,39 @@ fn channel_card(ui: &mut Ui, key: &ChannelKey, mn: f64, mx: f64, mean: f64, sigm
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+
+fn draw_phase_bar(ui: &mut Ui, spans: &[(f64, f64, Phase)], t_max: f64) {
+    let avail = ui.available_rect_before_wrap();
+    let bar_h = 12.0;
+    let (rect, _) = ui.allocate_exact_size(egui::vec2(avail.width(), bar_h), egui::Sense::hover());
+    let painter = ui.painter();
+    painter.rect_filled(rect, 0.0, BG3);
+    for &(t_start, t_end, phase) in spans {
+        if matches!(phase, Phase::EngineOff | Phase::Cranking) { continue; }
+        let col = phase_color(&phase);
+        let x0 = rect.left() + (t_start / t_max) as f32 * rect.width();
+        let x1 = (rect.left() + (t_end / t_max) as f32 * rect.width()).min(rect.right());
+        if x1 <= x0 + 0.5 { continue; }
+        let seg = egui::Rect::from_min_max(egui::pos2(x0, rect.top()), egui::pos2(x1, rect.bottom()));
+        painter.rect_filled(seg, 0.0, col.gamma_multiply(0.65));
+        let seg_w = x1 - x0;
+        if seg_w > 28.0 {
+            let abbr = match phase {
+                Phase::Warmup  => "WRM", Phase::HotIdle => "IDLE",
+                Phase::Cruise  => "CRZ", Phase::Accel   => "ACC",
+                Phase::Wot     => "WOT", Phase::FuelCut => "FC",
+                _ => "",
+            };
+            painter.text(
+                egui::pos2((x0 + x1) / 2.0, rect.center().y),
+                egui::Align2::CENTER_CENTER,
+                abbr,
+                FontId::proportional(8.5),
+                Color32::BLACK,
+            );
+        }
+    }
+}
 
 fn phase_spans(rows: &[Row], t0: f64) -> Vec<(f64, f64, Phase)> {
     if rows.is_empty() { return vec![]; }
