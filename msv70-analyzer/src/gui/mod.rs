@@ -9,3 +9,4 @@ pub mod tab_trend;
 pub mod tab_jobs;
 pub mod tab_settings;
 pub mod tab_batch;
+pub mod tab_knock_trim;

@@ -86,6 +86,12 @@ pub fn load_csv(path: &Path, cfg: &AppConfig) -> Result<LoadResult, String> {
         let lmbt = get(&rec, "lmb_tgt_b1");
         row.lmb_tgt_b1 = if lmbt == 0.0 { 1.0 } else { lmbt };
 
+        row.knock_status  = get(&rec, "knock_status");
+        row.lmb_trim_b1   = get(&rec, "lmb_trim_b1");
+        row.lmb_trim_b2   = get(&rec, "lmb_trim_b2");
+        row.hinterkat_b1  = get(&rec, "hinterkat_b1");
+        row.hinterkat_b2  = get(&rec, "hinterkat_b2");
+
         // Fuel trims: suppress near-zero noise
         row.stft_b1     = safe(get(&rec, "stft_b1"));
         row.stft_b2     = safe(get(&rec, "stft_b2"));

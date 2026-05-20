@@ -51,13 +51,16 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
     let n = rows.len();
     if n == 0 { return Err("No rows".to_string()); }
 
-    let has_ltft  = rows.iter().any(|r| r.ltft_mul_b1.abs() > cfg.near_zero || r.ltft_mul_b2.abs() > cfg.near_zero);
-    let has_vanos = *available.get("vanos_act").unwrap_or(&false) && *available.get("vanos_tgt").unwrap_or(&false);
-    let has_ign   = *available.get("ign_deg").unwrap_or(&false);
-    let has_inj   = *available.get("inj_ms").unwrap_or(&false);
-    let has_lmb   = *available.get("lmb_b1").unwrap_or(&false) && *available.get("lmb_b2").unwrap_or(&false);
-    let has_iat   = *available.get("iat_c").unwrap_or(&false);
-    let has_maf   = *available.get("maf_kgh").unwrap_or(&false);
+    let has_ltft     = rows.iter().any(|r| r.ltft_mul_b1.abs() > cfg.near_zero || r.ltft_mul_b2.abs() > cfg.near_zero);
+    let has_vanos    = *available.get("vanos_act").unwrap_or(&false) && *available.get("vanos_tgt").unwrap_or(&false);
+    let has_ign      = *available.get("ign_deg").unwrap_or(&false);
+    let has_inj      = *available.get("inj_ms").unwrap_or(&false);
+    let has_lmb      = *available.get("lmb_b1").unwrap_or(&false) && *available.get("lmb_b2").unwrap_or(&false);
+    let has_iat      = *available.get("iat_c").unwrap_or(&false);
+    let has_maf      = *available.get("maf_kgh").unwrap_or(&false);
+    let has_knock    = *available.get("knock_status").unwrap_or(&false);
+    let has_lmb_trim = *available.get("lmb_trim_b1").unwrap_or(&false)
+                    || *available.get("lmb_trim_b2").unwrap_or(&false);
 
     let n_cyl = cfg.engine_cyl as f64;
     for i in 0..n {
@@ -198,6 +201,7 @@ pub fn compute_session(path: &Path, cfg: &AppConfig) -> Result<SessionData, Stri
         phase_dur, cell_b1, cell_b2, cell_ign_p50,
         corrections, stft_buckets, events, retard_idx,
         has_ltft, has_vanos, has_ign, has_inj, has_lmb, has_iat, has_maf,
+        has_knock, has_lmb_trim,
         rpm_labels, load_labels,
         cell_lmb_b1, cell_lmb_b2, lmb_rpm_labels, lmb_load_labels,
         extra_cols,

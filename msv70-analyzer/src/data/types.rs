@@ -27,6 +27,12 @@ pub struct Row {
     pub ign_deg:     f64,
     pub iat_c:       f64,
     pub oil_c:       f64,
+    // Knock & post-cat trim
+    pub knock_status:  f64,   // 0x5A36  0=no knock, 1=knock
+    pub lmb_trim_b1:   f64,   // 0x5878  Lambdaverschiebung B1 (±0.05 max)
+    pub lmb_trim_b2:   f64,   // 0x5879  Lambdaverschiebung B2
+    pub hinterkat_b1:  f64,   // 0x5A13  post-cat O2 voltage B1 (V)
+    pub hinterkat_b2:  f64,   // 0x5A14  post-cat O2 voltage B2 (V)
     // Derived
     pub phase:        Phase,
     pub rpm_bin:      usize,
@@ -49,6 +55,8 @@ impl Default for Row {
             lmb_b1: 1.0, lmb_b2: 1.0, lmb_tgt_b1: 1.0,
             maf_kgh: 0.0, inj_ms: 0.0, vanos_act: 0.0, vanos_tgt: 0.0,
             ign_deg: 0.0, iat_c: 20.0, oil_c: 0.0,
+            knock_status: 0.0, lmb_trim_b1: 0.0, lmb_trim_b2: 0.0,
+            hinterkat_b1: 0.0, hinterkat_b2: 0.0,
             phase: Phase::EngineOff, rpm_bin: 0, load_bin: 0,
             load_mg_stk: 0.0, lmb_rpm_bin: 0, lmb_load_bin: 0,
             vanos_err: 0.0, cl_b1: false, cl_b2: false,
@@ -152,13 +160,15 @@ pub struct SessionData {
     pub events:       Vec<AnomalyEvent>,
     pub retard_idx:   Vec<usize>,
 
-    pub has_ltft:  bool,
-    pub has_vanos: bool,
-    pub has_ign:   bool,
-    pub has_inj:   bool,
-    pub has_lmb:   bool,
-    pub has_iat:   bool,
-    pub has_maf:   bool,
+    pub has_ltft:     bool,
+    pub has_vanos:    bool,
+    pub has_ign:      bool,
+    pub has_inj:      bool,
+    pub has_lmb:      bool,
+    pub has_iat:      bool,
+    pub has_maf:      bool,
+    pub has_knock:    bool,
+    pub has_lmb_trim: bool,
 
     // STFT map bin labels
     pub rpm_labels:  Vec<String>,

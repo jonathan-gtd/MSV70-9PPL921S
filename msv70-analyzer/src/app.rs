@@ -14,7 +14,7 @@ use crate::jobs::{load_customjobs, load_pid_db};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Nav {
-    TimeSeries, StftMap, LambdaMap, Overview, Trend, Rapport, CustomJobs, Settings, BatchExport,
+    TimeSeries, StftMap, LambdaMap, Overview, Trend, Rapport, KnockTrim, CustomJobs, Settings, BatchExport,
 }
 
 impl Nav {
@@ -26,13 +26,14 @@ impl Nav {
             Nav::Overview   => "Overview",
             Nav::Trend      => "Trend",
             Nav::Rapport    => "Rapport",
+            Nav::KnockTrim  => "Knock & Trim",
             Nav::CustomJobs => "Custom Jobs",
             Nav::Settings   => "Settings",
             Nav::BatchExport => "Export Masse",
         }
     }
     fn is_analysis(&self) -> bool {
-        matches!(self, Nav::TimeSeries | Nav::StftMap | Nav::LambdaMap | Nav::Overview | Nav::Rapport)
+        matches!(self, Nav::TimeSeries | Nav::StftMap | Nav::LambdaMap | Nav::Overview | Nav::Rapport | Nav::KnockTrim)
     }
 }
 
@@ -237,7 +238,7 @@ impl eframe::App for MSV70App {
                     ui.add_space(14.0);
                     for item in [
                         Nav::TimeSeries, Nav::StftMap, Nav::LambdaMap, Nav::Overview,
-                        Nav::Trend, Nav::Rapport, Nav::CustomJobs, Nav::BatchExport, Nav::Settings,
+                        Nav::Trend, Nav::Rapport, Nav::KnockTrim, Nav::CustomJobs, Nav::BatchExport, Nav::Settings,
                     ] {
                         if nav_tab(ui, item.label(), current_nav == item) {
                             new_nav = Some(item);
@@ -334,6 +335,11 @@ impl eframe::App for MSV70App {
                 Nav::LambdaMap => {
                     if let Some(ref d) = session {
                         crate::gui::tab_lambda_map::show(ui, d, &cfg);
+                    } else { let _ = show_empty(ui, ctx); }
+                }
+                Nav::KnockTrim => {
+                    if let Some(ref d) = session {
+                        crate::gui::tab_knock_trim::show(ui, d);
                     } else { let _ = show_empty(ui, ctx); }
                 }
             }

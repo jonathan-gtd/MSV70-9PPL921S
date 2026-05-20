@@ -113,6 +113,13 @@ impl Default for AppConfig {
             ("ign_deg",     &["Ign Cyl1 deg"]),
             ("iat_c",       &["IAT degC"]),
             ("oil_c",       &["Oil degC"]),
+            // IGN_KNOCK job channels
+            ("knock_status", &["ISKLO", "Status Knock", "Knock Stat", "Klopf Stat", "LV KNK"]),
+            // LAMB_TRIM job channels
+            ("lmb_trim_b1",  &["ILRR1", "Lamb Shift B1", "Lambda shift 1", "Lmb Shift 1", "Lamb Shift Ctrl B1"]),
+            ("lmb_trim_b2",  &["ILRR2", "Lamb Shift B2", "Lambda shift 2", "Lmb Shift 2", "Lamb Shift Ctrl B2"]),
+            ("hinterkat_b1", &["IUSN1", "Post Cat B1", "HK V B1", "Post Cat V B1", "HinterKat B1"]),
+            ("hinterkat_b2", &["IUSN2", "Post Cat B2", "HK V B2", "Post Cat V B2", "HinterKat B2"]),
         ];
         for &(k, v) in aliases {
             col_aliases.insert(k.to_string(), v.iter().map(|s| s.to_string()).collect());
