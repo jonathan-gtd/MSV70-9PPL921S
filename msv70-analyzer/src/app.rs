@@ -89,6 +89,9 @@ impl MSV70App {
         if let Some(ref p) = find_pid_db()   { if let Ok(db)   = load_pid_db(p)    { jobs_state.pid_db = db; } }
         if let Some(ref p) = customjobs_path { if let Ok(jobs) = load_customjobs(p){ jobs_state.jobs = jobs; } }
 
+        let n = log_files.len();
+        let merge_checked: HashSet<usize> = (0..n).collect();
+
         let mut app = MSV70App {
             config, config_dirty: false,
             session: None, report: String::new(), all_sessions: vec![],
@@ -103,13 +106,13 @@ impl MSV70App {
             next_panel_id: 3,
             show_phases: true,
             batch_state: crate::gui::tab_batch::BatchState::default(),
-            merge_checked: HashSet::new(),
+            merge_checked,
             ref_session: None,
         };
 
-        if let Some(path) = app.log_files.last().cloned() {
-            app.selected_log = Some(app.log_files.len() - 1);
-            app.start_analyze(path);
+        if !app.log_files.is_empty() {
+            let paths = checked_paths_of(&app.log_files, &app.merge_checked);
+            app.start_concat_analyze(paths);
         }
         app
     }
@@ -210,19 +213,17 @@ impl MSV70App {
             if let Ok(mut g) = fd.try_lock() {
                 if let Some(result) = g.take() {
                     self.file_dialog = None;
-                    if let Some(paths) = result {
-                        // Register files in the sidebar list
-                        for p in &paths {
-                            if !self.log_files.contains(p) { self.log_files.push(p.clone()); }
+                    if let Some(new_paths) = result {
+                        // Register new files and auto-check them
+                        for p in &new_paths {
+                            if !self.log_files.contains(p) {
+                                self.merge_checked.insert(self.log_files.len());
+                                self.log_files.push(p.clone());
+                            }
                         }
-                        if paths.len() == 1 {
-                            let path = paths.into_iter().next().unwrap();
-                            self.selected_log = self.log_files.iter().position(|p| p == &path);
-                            self.start_analyze(path);
-                        } else {
-                            self.selected_log = None; // merged — no single selection
-                            self.start_concat_analyze(paths);
-                        }
+                        // Trigger analysis on all checked files
+                        let paths = checked_paths_of(&self.log_files, &self.merge_checked);
+                        if !paths.is_empty() { self.start_concat_analyze(paths); }
                         if !self.nav.is_analysis() { self.nav = Nav::TimeSeries; }
                     }
                 }
@@ -487,30 +488,44 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
         ui.label(RichText::new("LOGS").color(FG_DIM).small().strong());
         if ui.small_button("↻").on_hover_text("Rescan LOGS folder").clicked() {
             app.log_files = scan_logs(app.logs_dir.as_deref());
+            // Re-check all after rescan
+            app.merge_checked = (0..app.log_files.len()).collect();
+            let paths = checked_paths_of(&app.log_files, &app.merge_checked);
+            if !paths.is_empty() { app.start_concat_analyze(paths); }
         }
     });
     ui.add_space(2.0);
 
-    let list_h = ui.available_height() - 80.0;
-    let mut clicked_idx: Option<usize> = None;
+    let n_checked = app.merge_checked.len();
+    let n_total   = app.log_files.len();
+    if n_total > 0 {
+        ui.label(RichText::new(format!("{n_checked}/{n_total} sélectionné(s)")).color(FG_DIM).size(9.5).italics());
+        ui.add_space(2.0);
+    }
+
+    let list_h = ui.available_height() - 52.0;
+    let prev_checked = app.merge_checked.clone();
     egui::ScrollArea::vertical()
         .id_salt("log_list")
         .max_height(list_h)
         .show(ui, |ui| {
             ui.set_width(ui.available_width());
             for (idx, path) in app.log_files.iter().enumerate() {
-                let name  = path.file_stem().and_then(|s| s.to_str()).unwrap_or("?");
-                let sel   = app.selected_log == Some(idx);
+                let name    = path.file_stem().and_then(|s| s.to_str()).unwrap_or("?");
                 let checked = app.merge_checked.contains(&idx);
                 ui.horizontal(|ui| {
                     let mut c = checked;
-                    if ui.checkbox(&mut c, "").changed() {
+                    let cb = ui.checkbox(&mut c, "");
+                    let lbl_col = if checked { FG } else { FG_DIM };
+                    let lbl_r = ui.add(
+                        egui::Label::new(RichText::new(name).color(lbl_col).small())
+                            .sense(egui::Sense::click())
+                    );
+                    // Clicking the label also toggles the checkbox
+                    if lbl_r.clicked() { c = !checked; }
+                    if cb.changed() || lbl_r.clicked() {
                         if c { app.merge_checked.insert(idx); }
                         else { app.merge_checked.remove(&idx); }
-                    }
-                    let color = if sel { ACCENT } else { FG_DIM };
-                    if ui.selectable_label(sel, RichText::new(name).color(color).small()).clicked() {
-                        clicked_idx = Some(idx);
                     }
                 });
             }
@@ -519,42 +534,17 @@ fn show_sidebar(ui: &mut Ui, app: &mut MSV70App) {
             }
         });
 
-    if let Some(idx) = clicked_idx {
-        let path = app.log_files[idx].clone();
-        app.selected_log = Some(idx);
-        app.start_analyze(path);
-        if !app.nav.is_analysis() && app.nav != Nav::Trend {
-            app.nav = Nav::TimeSeries;
+    // Auto-trigger analysis whenever the checked set changes
+    if app.merge_checked != prev_checked {
+        let paths = checked_paths_of(&app.log_files, &app.merge_checked);
+        if !paths.is_empty() {
+            app.start_concat_analyze(paths);
+            if !app.nav.is_analysis() { app.nav = Nav::TimeSeries; }
         }
     }
 
     ui.separator();
     ui.add_space(2.0);
-
-    // Merge row: shown only when ≥2 files are checked
-    let n_checked = app.merge_checked.len();
-    if n_checked >= 2 {
-        ui.horizontal(|ui| {
-            let label = format!("Merge {} files", n_checked);
-            if ui.add(egui::Button::new(RichText::new(&label).color(Color32::WHITE).size(12.0))
-                .fill(OLIVE)).clicked()
-            {
-                let mut paths: Vec<PathBuf> = app.merge_checked.iter()
-                    .filter_map(|&i| app.log_files.get(i).cloned())
-                    .collect();
-                paths.sort(); // deterministic order
-                app.merge_checked.clear();
-                app.selected_log = None;
-                app.start_concat_analyze(paths);
-                if !app.nav.is_analysis() { app.nav = Nav::TimeSeries; }
-            }
-            if ui.small_button("×").on_hover_text("Clear selection").clicked() {
-                app.merge_checked.clear();
-            }
-        });
-        ui.add_space(2.0);
-    }
-
     ui.horizontal(|ui| {
         if ui.button("+ Trend").clicked() && app.pending_all.is_none() {
             app.start_load_all();
@@ -720,6 +710,14 @@ fn build_tips(d: &SessionData, cfg: &AppConfig) -> Vec<String> {
     }
 
     tips
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+fn checked_paths_of(log_files: &[PathBuf], checked: &HashSet<usize>) -> Vec<PathBuf> {
+    let mut indices: Vec<usize> = checked.iter().copied().collect();
+    indices.sort_unstable();
+    indices.into_iter().filter_map(|i| log_files.get(i).cloned()).collect()
 }
 
 // ── Auto-nav ──────────────────────────────────────────────────────────────────
