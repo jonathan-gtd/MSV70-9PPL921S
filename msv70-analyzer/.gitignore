@@ -1,5 +1,8 @@
-# Ignore all of target/ except the release .exe
+# Ignore all of target/ except release and debug executables
 /target/*
 !/target/release
 /target/release/*
 !/target/release/msv70-analyzer.exe
+!/target/debug
+/target/debug/*
+!/target/debug/msv70-analyzer.exe
