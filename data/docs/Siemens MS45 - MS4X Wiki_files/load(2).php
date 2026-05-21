@@ -1,0 +1,1 @@
+body.page-Main_Page.action-view h1.firstHeading,body.page-Main_Page.action-submit h1.firstHeading{display:none}.toclimit-2 .toclevel-2,.toclimit-3 .toclevel-3,.toclimit-4 .toclevel-4,.toclimit-5 .toclevel-5,.toclimit-6 .toclevel-6,.toclimit-7 .toclevel-7{display:none}

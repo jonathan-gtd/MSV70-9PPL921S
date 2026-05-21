@@ -1,0 +1,4 @@
+Edit Log for E85_v6.bin created by TunerPro.
+**************************************************************************
+05/21/2026 22:39:35  Scalar:    c_lamb_delta_max_lam_adj_ad changed from 0.050 - (0x0333) to 0.200 - (0x0CCF).
+05/21/2026 22:39:42  Scalar:    c_lamb_delta_min_lam_adj_ad changed from -0.050 - (0xFCCD) to -0.200 - (0xF331).
