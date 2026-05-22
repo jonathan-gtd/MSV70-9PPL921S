@@ -2,50 +2,44 @@
 <customjobs>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>BASE</virtualname>
-    <comment>Base</comment>
-    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1</argument>
-  </customjob>
-  <customjob ecu="MSV70">
-    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>LAMBDA</virtualname>
-    <comment>STFT/LTFT</comment>
-    <argument>3;0x5A50;0x5A51;0x5A81;0x5A82;0x5806;0x5808;0x5A85;0x5A86;0x5A83;0x5A84</argument>
+    <comment>STFT/LTFT mixture complete</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1;0x5A50;0x5A51;0x5A81;0x5A82;0x5806;0x5808;0x5A85;0x5A86;0x5A83;0x5A84</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>POSTCAT</virtualname>
-    <comment>POST-CAT</comment>
-    <argument>3;0x5A13;0x5A14;0x5A11;0x5A12;0x58F5;0x58F6;0x5A87;0x5A88</argument>
-  </customjob>
-  <customjob ecu="MSV70">
-    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>CAT_EFF</virtualname>
-    <comment>Efficacite CAT</comment>
-    <argument>3;0x5A91;0x5A92;0x5896;0x5897</argument>
+    <comment>Sondes post-cat P2096/P2098</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1;0x5A13;0x5A14;0x5A11;0x5A12;0x58F5;0x58F6;0x5A87;0x5A88;0x5A81;0x5A82</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>KNOCK</virtualname>
-    <comment>Allumage</comment>
-    <argument>3;0x5A49;0x5A36;0x5A37;0x5A38;0x5A39;0x5A3A;0x5A3B;0x5A3C;0x58B1;0x4402</argument>
+    <comment>Allumage et knock</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1;0x5A49;0x5A36;0x5A37;0x5A38;0x5A39;0x5A3A;0x5A3B;0x5A3C;0x58B1;0x4402</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>INJ_TIME</virtualname>
-    <comment>Temps injection</comment>
-    <argument>3;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47</argument>
+    <virtualname>CAT_EFF</virtualname>
+    <comment>Efficacite catalyseur P0420/P0430</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1;0x5A13;0x5A14;0x5A91;0x5A92;0x5896;0x5897;0x5A50;0x5A51;0x5A81;0x5A82</argument>
+  </customjob>
+  <customjob ecu="MSV70">
+    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+    <virtualname>INJ</virtualname>
+    <comment>Injection et equilibre cylindres</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47;0x5A50;0x5A51;0x5A49;0x5A36</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>VANOS</virtualname>
-    <comment>VANOS + Valvetronic</comment>
-    <argument>3;0x4500;0x4501;0x4505;0x4508;0x5A94;0x4509</argument>
+    <comment>VANOS et Valvetronic</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1;0x4500;0x4501;0x4505;0x4508;0x5A94;0x4509;0x5A50;0x5A51;0x5A49;0x5A81</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>FUEL_SYS</virtualname>
-    <comment>Carburant</comment>
-    <argument>3;0x580A;0x5ABA;0x58AF;0x583B</argument>
+    <comment>Pression et pompe carburant</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1;0x580A;0x5ABA;0x58AF;0x583B;0x5A50;0x5A51;0x5A81;0x5A82;0x5A83;0x5A42</argument>
   </customjob>
 </customjobs>
