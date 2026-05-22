@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSVFile>
+    <info>
+        <starttime>1779470334745</starttime>
+        <startdate>2026-05-22 19:18:54.745</startdate>
+        <timeformat>0</timeformat>
+        <CSVSeparator><![CDATA[;]]></CSVSeparator>
+        <columns>
+            <column>
+                <number>1</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT add. B1</resultname>
+            </column>
+            <column>
+                <number>2</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT add. B2</resultname>
+            </column>
+            <column>
+                <number>3</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT Mul B1</resultname>
+            </column>
+            <column>
+                <number>4</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT Mul B2</resultname>
+            </column>
+            <column>
+                <number>5</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>IAT degC</resultname>
+            </column>
+            <column>
+                <number>6</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Pedal %</resultname>
+            </column>
+            <column>
+                <number>7</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Speed km/h</resultname>
+            </column>
+            <column>
+                <number>8</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFT B1</resultname>
+            </column>
+            <column>
+                <number>9</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFT B2</resultname>
+            </column>
+            <column>
+                <number>10</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Cool degC</resultname>
+            </column>
+            <column>
+                <number>11</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Lmb Act B1</resultname>
+            </column>
+            <column>
+                <number>12</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Lmb Act B2</resultname>
+            </column>
+            <column>
+                <number>13</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFTGrp1</resultname>
+            </column>
+            <column>
+                <number>14</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFTGrp2</resultname>
+            </column>
+            <column>
+                <number>15</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Load %</resultname>
+            </column>
+            <column>
+                <number>16</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>RPM</resultname>
+            </column>
+        </columns>
+    </info>
+</CSVFile>
