@@ -2,32 +2,50 @@
 <customjobs>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>0MSV70_DIAG</virtualname>
-    <comment>0Ultratool</comment>
-    <argument>3;0x4807;0x5804;0x480B;0x4300;0x5806;0x5808;0x5A83;0x5A84;0x5A85;0x5A86;0x4203;0x5A42;0x4508;0x4505;0x5A49;0x5AB1;0x5A50;0x5A51</argument>
+    <virtualname>BASE</virtualname>
+    <comment>Variables communes a tous les diagnostics. Toujours logger ce job en parallele d'un plugin. RPM, Load calc, Coolant, IAT (air admission), Pedal, Speed.</comment>
+    <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>6IGN_KNOCK</virtualname>
-    <comment>6Ignition angle + knock sensors — pour comparer avec KF_ZW_VT98</comment>
-    <argument>3;0x4807;0x5804;0x480B;0x4300;0x5AB1;0x5A49;0x5A36;0x5A37;0x5A38;0x5A39;0x5A3A;0x5A3B;0x5A3C</argument>
+    <virtualname>LAMBDA</virtualname>
+    <comment>Plugin etat mixture. Lambda upstream B1/B2 + STFT B1/B2 + LTFT mul B1/B2 + LTFT add B1/B2. Combiner avec BASE pour analyse fueling.</comment>
+    <argument>3;0x5A50;0x5A51;0x5A81;0x5A82;0x5A85;0x5A86;0x5A83;0x5A84</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>7LAMB_TRIM</virtualname>
-    <comment>7Post-cat trim P2096/P2098 — Lambdaverschiebung + Eingangssignal + HinterKat</comment>
-    <argument>3;0x4807;0x5804;0x4300;0x5878;0x5879;0x58F5;0x58F6;0x5A13;0x5A14;0x5A50;0x5A51;0x5A81;0x5A82;0x5A85;0x5A86</argument>
+    <virtualname>POSTCAT</virtualname>
+    <comment>Plugin sondes lambda + adaptation post-cat. LSH down B1/B2, LSU up B1/B2, shift input controleur post-cat B1/B2, adaptation post-cat B1/B2. Pour P2096/P2098.</comment>
+    <argument>3;0x5A13;0x5A14;0x5A11;0x5A12;0x58F5;0x58F6;0x5A87;0x5A88</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>8CHECK_LSH</virtualname>
-    <comment>8Diag P2096/P2098 E85 — tensions LSH UP/DOWN + cat diag value + temp post-cat</comment>
-    <argument>3;0x4807;0x5804;0x4300;0x5A50;0x5A51;0x5A11;0x5A12;0x5A13;0x5A14;0x5A85;0x5A86;0x5A91;0x5A92;0x5896;0x5897</argument>
+    <virtualname>CAT_EFF</virtualname>
+    <comment>Plugin efficacite catalyseur. Cat diag value B1/B2 + temperature gaz post-cat B1/B2. Pour P0420/P0430.</comment>
+    <argument>3;0x5A91;0x5A92;0x5896;0x5897</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
-    <virtualname>9IGN_VALID</virtualname>
-    <comment>9Validation avance E85 — RPM/charge/AAT/Oil + avance Cyl1 + Status knock + knock V 6 cyl + spark burn Cyl1</comment>
-    <argument>3;0x4807;0x5A4B;0x4300;0x4200;0x4402;0x480B;0x5A49;0x5A36;0x5A37;0x5A38;0x5A39;0x5A3A;0x5A3B;0x5A3C;0x58B1</argument>
+    <virtualname>KNOCK</virtualname>
+    <comment>Plugin validation allumage. Avance Cyl1 + status knock + knock voltage 6 cylindres + spark burn duration Cyl1 + oil temp. A combiner avec BASE pour baseline avant modification d'avance.</comment>
+    <argument>3;0x5A49;0x5A36;0x5A37;0x5A38;0x5A39;0x5A3A;0x5A3B;0x5A3C;0x58B1;0x4402</argument>
+  </customjob>
+  <customjob ecu="MSV70">
+    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+    <virtualname>INJ_TIME</virtualname>
+    <comment>Plugin temps injection. Duree injection par cylindre 1-6. Detecter desequilibre injecteur ou cylindre defaillant.</comment>
+    <argument>3;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47</argument>
+  </customjob>
+  <customjob ecu="MSV70">
+    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+    <virtualname>VANOS</virtualname>
+    <comment>Plugin VANOS + Valvetronic. Excenter VVT actuel/target + arbre admission target/actuel + arbre echappement target/actuel.</comment>
+    <argument>3;0x4500;0x4501;0x4505;0x4508;0x5A94;0x4509</argument>
+  </customjob>
+  <customjob ecu="MSV70">
+    <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+    <virtualname>FUEL_SYS</virtualname>
+    <comment>Plugin systeme carburant. Pression rail, PWM pompe, debit consigne pompe, niveau tank. Detecter probleme alimentation.</comment>
+    <argument>3;0x580A;0x5ABA;0x58AF;0x583B</argument>
   </customjob>
 </customjobs>
