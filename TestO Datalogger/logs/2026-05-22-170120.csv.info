@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSVFile>
+    <info>
+        <starttime>1779462080645</starttime>
+        <startdate>2026-05-22 17:01:20.645</startdate>
+        <timeformat>0</timeformat>
+        <CSVSeparator><![CDATA[;]]></CSVSeparator>
+        <columns>
+            <column>
+                <number>1</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>BASE</virtualname>
+                <resultname>IAT degC</resultname>
+            </column>
+            <column>
+                <number>2</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>BASE</virtualname>
+                <resultname>Pedal %</resultname>
+            </column>
+            <column>
+                <number>3</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>BASE</virtualname>
+                <resultname>Speed km/h</resultname>
+            </column>
+            <column>
+                <number>4</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>BASE</virtualname>
+                <resultname>Cool degC</resultname>
+            </column>
+            <column>
+                <number>5</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>BASE</virtualname>
+                <resultname>Load %</resultname>
+            </column>
+            <column>
+                <number>6</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>BASE</virtualname>
+                <resultname>RPM</resultname>
+            </column>
+            <column>
+                <number>7</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT add. B1</resultname>
+            </column>
+            <column>
+                <number>8</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT add. B2</resultname>
+            </column>
+            <column>
+                <number>9</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT Mul B1</resultname>
+            </column>
+            <column>
+                <number>10</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>LTFT Mul B2</resultname>
+            </column>
+            <column>
+                <number>11</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFT B1</resultname>
+            </column>
+            <column>
+                <number>12</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFT B2</resultname>
+            </column>
+            <column>
+                <number>13</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Lmb Act B1</resultname>
+            </column>
+            <column>
+                <number>14</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>Lmb Act B2</resultname>
+            </column>
+            <column>
+                <number>15</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFTGrp1</resultname>
+            </column>
+            <column>
+                <number>16</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>LAMBDA</virtualname>
+                <resultname>STFTGrp2</resultname>
+            </column>
+            <column>
+                <number>17</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Val58F5</resultname>
+            </column>
+            <column>
+                <number>18</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Val58F6</resultname>
+            </column>
+            <column>
+                <number>19</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Max Trim B1</resultname>
+            </column>
+            <column>
+                <number>20</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Max Trim B2</resultname>
+            </column>
+            <column>
+                <number>21</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Lam-V NK1</resultname>
+            </column>
+            <column>
+                <number>22</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Lam-V NK2</resultname>
+            </column>
+            <column>
+                <number>23</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Lam-V B1</resultname>
+            </column>
+            <column>
+                <number>24</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>POSTCAT</virtualname>
+                <resultname>Lam-V B2</resultname>
+            </column>
+            <column>
+                <number>25</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>KNOCK</virtualname>
+                <resultname>Ign Cyl1 deg</resultname>
+            </column>
+        </columns>
+    </info>
+</CSVFile>
