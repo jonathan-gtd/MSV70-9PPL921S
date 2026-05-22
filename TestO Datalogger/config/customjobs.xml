@@ -3,49 +3,49 @@
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>BASE</virtualname>
-    <comment>Conditions communes (RPM, Load, Coolant, IAT, Pedal, Speed). A combiner avec un plugin.</comment>
+    <comment>Base</comment>
     <argument>3;0x4807;0x5804;0x4300;0x4200;0x480B;0x5AB1</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>LAMBDA</virtualname>
-    <comment>Mixture: Lambda B1/B2 + STFT Bank + STFT Group + LTFT mul + LTFT add.</comment>
+    <comment>STFT/LTFT</comment>
     <argument>3;0x5A50;0x5A51;0x5A81;0x5A82;0x5806;0x5808;0x5A85;0x5A86;0x5A83;0x5A84</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>POSTCAT</virtualname>
-    <comment>Sondes post-cat (P2096/P2098): LSH down + LSU up + shift input + adaptation post-cat.</comment>
+    <comment>POST-CAT</comment>
     <argument>3;0x5A13;0x5A14;0x5A11;0x5A12;0x58F5;0x58F6;0x5A87;0x5A88</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>CAT_EFF</virtualname>
-    <comment>Efficacite cat (P0420/P0430): cat diag value + T gaz post-cat.</comment>
+    <comment>Efficacite CAT</comment>
     <argument>3;0x5A91;0x5A92;0x5896;0x5897</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>KNOCK</virtualname>
-    <comment>Allumage: avance Cyl1 + status knock + knock V 6 cyl + spark burn + oil T.</comment>
+    <comment>Allumage</comment>
     <argument>3;0x5A49;0x5A36;0x5A37;0x5A38;0x5A39;0x5A3A;0x5A3B;0x5A3C;0x58B1;0x4402</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>INJ_TIME</virtualname>
-    <comment>Temps injection par cylindre 1-6.</comment>
+    <comment>Temps injection</comment>
     <argument>3;0x5A42;0x5A43;0x5A44;0x5A45;0x5A46;0x5A47</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>VANOS</virtualname>
-    <comment>VANOS + Valvetronic: excenter + cames in/ex target vs actuel.</comment>
+    <comment>VANOS + Valvetronic</comment>
     <argument>3;0x4500;0x4501;0x4505;0x4508;0x5A94;0x4509</argument>
   </customjob>
   <customjob ecu="MSV70">
     <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
     <virtualname>FUEL_SYS</virtualname>
-    <comment>Alim: pression rail + PWM pompe + debit consigne + niveau tank.</comment>
+    <comment>Carburant</comment>
     <argument>3;0x580A;0x5ABA;0x58AF;0x583B</argument>
   </customjob>
 </customjobs>
