@@ -1,0 +1,16 @@
+Edit Log for E85_v6.bin created by TunerPro.
+**************************************************************************
+05/23/2026 11:06:31  Scalar:    c_lamb_delta_max_lam_adj_ad changed from 0.050 - (0x0333) to 0.100 - (0x0667).
+05/23/2026 11:06:32  Scalar:    c_lamb_delta_min_lam_adj_ad changed from -0.050 - (0xFCCD) to -0.100 - (0xF999).
+05/23/2026 11:08:12  Table:     KF_ZW_VT98 changed.
+05/23/2026 11:08:24  Table:     KF_ZW_VT98S changed.
+05/24/2026 21:24:10  Table:     KF_ZW_VT98S changed.
+05/24/2026 21:24:11  Table:     KF_ZW_VT98 changed.
+05/24/2026 21:24:27  Table:     KF_ZW_VT98 changed.
+05/24/2026 21:32:57  Table:     KF_ZW_VT98 changed.
+05/24/2026 21:32:58  Table:     KF_ZW_VT98S changed.
+05/24/2026 21:33:20  Table:     KF_ZW_VT98 changed.
+05/24/2026 21:36:24  Table:     KF_ZW_VT98 changed.
+05/24/2026 21:36:27  Table:     KF_ZW_VT98S changed.
+05/24/2026 21:41:30  Scalar:    c_lamb_delta_min_lam_adj_ad changed from -0.100 - (0xF999) to -0.150 - (0xF665).
+05/24/2026 21:41:34  Scalar:    c_lamb_delta_max_lam_adj_ad changed from 0.100 - (0x0667) to 0.150 - (0x099B).
