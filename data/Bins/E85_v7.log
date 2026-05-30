@@ -1,0 +1,23 @@
+Edit Log for E85_v7.bin created by TunerPro.
+**************************************************************************
+05/29/2026 21:53:09  Scalar:    c_ti_as_global changed from 0.999 - (0x1000) to 1.380 - (0x1618).
+05/29/2026 21:53:43  Table:     ip_mff_cor_opm_1_1 changed.
+05/30/2026 19:44:09  Scalar:    c_ti_as_global changed from 1.380 - (0x1618) to 1.350 - (0x159D).
+05/30/2026 19:44:16  Scalar:    c_ti_as_global changed from 1.350 - (0x159D) to 1.857 - (0x1DBB).
+05/30/2026 19:44:29  Scalar:    c_ti_as_global changed from 1.857 - (0x1DBB) to 1.350 - (0x159D).
+05/30/2026 19:58:14  Scalar:    c_lamb_delta_min_lam_adj_ad changed from -0.150 - (0xF665) to -0.050 - (0xFCCC).
+05/30/2026 19:58:16  Scalar:    c_lamb_delta_max_lam_adj_ad changed from 0.150 - (0x099B) to 0.050 - (0x0334).
+05/30/2026 19:58:49  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.200 - (0xF331) to -0.100 - (0xF999).
+05/30/2026 19:58:50  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.200 - (0x0CCF) to 0.100 - (0x0667).
+05/30/2026 19:59:47  Scalar:    c_fac_lam_out_min changed from -40.000 % (0x999C) to -30.000 % (0xB335).
+05/30/2026 19:59:48  Scalar:    c_fac_lam_out_max changed from 40.000 % (0x6664) to 30.000 % (0x4CCB).
+05/30/2026 19:59:49  Scalar:    c_fac_lam_out_max_cp changed from 45.000 % (0x7331) to 35.000 % (0x5998).
+05/30/2026 19:59:49  Scalar:    c_fac_lam_out_min_cp changed from -45.000 % (0x8CCF) to -35.000 % (0xA668).
+05/30/2026 20:05:14  Scalar:    c_ti_as_global changed from 1.350 - (0x159D) to 1.400 - (0x166A).
+05/30/2026 20:05:33  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.100 - (0x0667) to 0.150 - (0x099B).
+05/30/2026 20:05:35  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.100 - (0xF999) to -0.150 - (0xF665).
+05/30/2026 20:05:49  Scalar:    c_lamb_delta_max_lam_adj_ad changed from 0.050 - (0x0334) to 0.100 - (0x0667).
+05/30/2026 20:05:52  Scalar:    c_lamb_delta_max_lam_adj_ad changed from 0.050 - (0x0334) to 0.050 - (0x0334).
+05/30/2026 20:09:03  Scalar:    c_lamb_delta_i_max_lam_adj changed from 0.150 - (0x099B) to 0.100 - (0x0667).
+05/30/2026 20:09:06  Scalar:    c_lamb_delta_i_min_lam_adj changed from -0.150 - (0xF665) to -0.100 - (0xF999).
+05/30/2026 20:10:26  Scalar:    c_ti_as_global changed from 1.400 - (0x166A) to 1.380 - (0x1618).
