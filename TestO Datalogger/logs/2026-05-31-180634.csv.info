@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSVFile>
+    <info>
+        <starttime>1780243594164</starttime>
+        <startdate>2026-05-31 18:06:34.164</startdate>
+        <timeformat>0</timeformat>
+        <CSVSeparator><![CDATA[;]]></CSVSeparator>
+        <columns>
+            <column>
+                <number>1</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>LTFT add. B1</resultname>
+            </column>
+            <column>
+                <number>2</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>IAT degC</resultname>
+            </column>
+            <column>
+                <number>3</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Inj C1 ms</resultname>
+            </column>
+            <column>
+                <number>4</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Pedal %</resultname>
+            </column>
+            <column>
+                <number>5</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Speed km/h</resultname>
+            </column>
+            <column>
+                <number>6</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>STFT B1</resultname>
+            </column>
+            <column>
+                <number>7</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>STFT B2</resultname>
+            </column>
+            <column>
+                <number>8</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Fuel Pres</resultname>
+            </column>
+            <column>
+                <number>9</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Pump %</resultname>
+            </column>
+            <column>
+                <number>10</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Tank L</resultname>
+            </column>
+            <column>
+                <number>11</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Fuel Req</resultname>
+            </column>
+            <column>
+                <number>12</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Cool degC</resultname>
+            </column>
+            <column>
+                <number>13</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Lmb Act B1</resultname>
+            </column>
+            <column>
+                <number>14</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Lmb Act B2</resultname>
+            </column>
+            <column>
+                <number>15</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>Load %</resultname>
+            </column>
+            <column>
+                <number>16</number>
+                <ecu>MSV70</ecu>
+                <jobname>STATUS_MESSWERTBLOCK_LESEN</jobname>
+                <virtualname>FUEL_SYS</virtualname>
+                <resultname>RPM</resultname>
+            </column>
+        </columns>
+    </info>
+</CSVFile>
