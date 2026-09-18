@@ -9,6 +9,7 @@ Reprogrammation et calibration du calculateur Siemens MSV70 pour E85.
 | Dossier / Fichier | Description |
 |---|---|
 | [tutos-reprog/](tutos-reprog/README.md) | Tutoriels de reprogrammation (E85, RPM, VMAX, flash ECU, lexique) |
+| [tutos-coding/](tutos-coding/README.md) | Codage véhicule — NCS Expert / NCS Dummy (FSW/PSW, FA, modules E9x) |
 | [mcp-claude/](mcp-claude/README.md) | Serveur MCP — expose les outils ECU dans Claude Code et Claude Desktop |
 | [xdf-analyzer/](xdf-analyzer/README.md) | Bibliothèques Python — parser XDF, lecture BIN, base de connaissance |
 | [TestO Datalogger/](TestO%20Datalogger/README.md) | Application OBD épurée, traduite et reconfigurée pour le N52 (jobs, jauges, écrans E85) |
