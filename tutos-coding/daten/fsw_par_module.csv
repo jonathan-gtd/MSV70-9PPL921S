@@ -1,0 +1,2283 @@
+module,fsw,traduction,fragments_non_traduits
+6BMOT,OLULCODIERUNG,**OLULCODIERUNG**,1
+6BMOT,VMAXCODIERUNG_MSV70,**VMAXCODIERUNG** · **MSV70**,2
+ABG,AIRBAG_BEIFAHRER_1,airbag · passager · 1,0
+ABG,AIRBAG_FAHRER_1,airbag · conducteur · 1,0
+ABG,AWL_1,**AWL** · 1,1
+ABG,BAUREIHE,**BAUREIHE**,1
+ABG,BEIFAHRERBAG_STUFE2_1,**BEIFAHRERBAG** · niveau 2 · 1,1
+ABG,BPLUS_TRENNUNG1_1,**BPLUS** · **TRENNUNG1** · 1,2
+ABG,CC_GURTWARNUNG_1,Check Control · **GURTWARNUNG** · 1,1
+ABG,CURTAIN_BEIFAHRER_1,**CURTAIN** · passager · 1,1
+ABG,CURTAIN_FAHRER_1,**CURTAIN** · conducteur · 1,1
+ABG,FAHRERBAG_STUFE2_1,**FAHRERBAG** · niveau 2 · 1,1
+ABG,GURTKONTAKT_BEIFAHRER_1,contact de ceinture · passager · 1,0
+ABG,GURTKONTAKT_FAHRER_1,contact de ceinture · conducteur · 1,0
+ABG,GURTKONTAKT_FONDLINKS_1,contact de ceinture · **FONDLINKS** · 1,1
+ABG,GURTKONTAKT_FONDRECHTS_1,contact de ceinture · **FONDRECHTS** · 1,1
+ABG,GURTSTRAFFER_BEIFAHRER_1,**GURTSTRAFFER** · passager · 1,1
+ABG,GURTSTRAFFER_FAHRER_1,**GURTSTRAFFER** · conducteur · 1,1
+ABG,GURTSTRAFFER_FONDLINKS_1,**GURTSTRAFFER** · **FONDLINKS** · 1,2
+ABG,GURTSTRAFFER_FONDRECHTS_1,**GURTSTRAFFER** · **FONDRECHTS** · 1,2
+ABG,GURTSTRAMM_SEITENCRASH_1,**GURTSTRAMM** · **SEITENCRASH** · 1,2
+ABG,GURT_NICHT_AB_GK,ceinture · non · **AB** · **GK**,2
+ABG,ITS_GEGENUEBER_1,**ITS** · **GEGENUEBER** · 1,2
+ABG,ITS_SCHRAEGCRASH_1,**ITS** · **SCHRAEGCRASH** · 1,2
+ABG,KNIEBAG_BEIFAHRER_1,**KNIEBAG** · passager · 1,1
+ABG,KNIEBAG_FAHRER_1,**KNIEBAG** · conducteur · 1,1
+ABG,LANGER_CURTAIN_1,**LANGER** · **CURTAIN** · 1,2
+ABG,LENKSEITE_1,**LENKSEITE** · 1,1
+ABG,MRSA_TUERE_1,**MRSA** · **TUERE** · 1,2
+ABG,OC3_1,**OC3** · 1,1
+ABG,POL_1,**POL** · 1,1
+ABG,POSI_1,**POSI** · 1,1
+ABG,POS_1,position · 1,0
+ABG,ROLLOVER_OPTION_1,**ROLLOVER** · option · 1,1
+ABG,SBE1_1,**SBE1** · 1,1
+ABG,SBE1_STATUS_VERZ_1,**SBE1** · etat · temporisation · 1,1
+ABG,SBE_SCHWELLE_ON,**SBE** · seuil · marche,1
+ABG,SBE_STEP_DOWN,**SBE** · **STEP** · bas,2
+ABG,SBE_STEP_UP,**SBE** · **STEP** · haut,2
+ABG,SBR_BEIFAHRER_1,rappel de ceinture · passager · 1,0
+ABG,SBR_FAHRER_1,rappel de ceinture · conducteur · 1,0
+ABG,SEAT_BELT_DISTANCE,**SEAT** · **BELT** · **DISTANCE**,3
+ABG,SEAT_BELT_MONITOR,**SEAT** · **BELT** · surveillance,2
+ABG,SEAT_BELT_SPEED,**SEAT** · **BELT** · vitesse,2
+ABG,SIDEBAG_FOND_LINKS_1,airbag lateral · places arriere · gauche · 1,0
+ABG,SIDEBAG_FOND_RECHTS_1,airbag lateral · places arriere · droite · 1,0
+ABG,SIDEBAG_LINKS_1,airbag lateral · gauche · 1,0
+ABG,SIDEBAG_RECHTS_1,airbag lateral · droite · 1,0
+ABG,SLV_BEIFAHRER_1,**SLV** · passager · 1,1
+ABG,SLV_FAHRER_1,**SLV** · conducteur · 1,1
+ABG,UPFRONT_LINKS_1,**UPFRONT** · gauche · 1,1
+ABG,UPFRONT_RECHTS_1,**UPFRONT** · droite · 1,1
+ABG,US_SCHWELLEN_1,marche americain · **SCHWELLEN** · 1,1
+CAS,ABZUGSPERRE_PLOCK_C6,**ABZUGSPERRE** · **PLOCK** · **C6**,3
+CAS,ANLASSERSCHUTZ_3SEK,**ANLASSERSCHUTZ** · **3SEK**,2
+CAS,ANLASSERSPERRE_KPS,**ANLASSERSPERRE** · **KPS**,2
+CAS,ANLASSERSPERRE_P,**ANLASSERSPERRE** · P,1
+CAS,ANLASSSPERRE_BLS,blocage du demarreur · **BLS**,1
+CAS,ANLASSSPERRE_KLR,blocage du demarreur · regulation de climatisation,0
+CAS,ANSTEUERZEIT,duree de commande,0
+CAS,AUSWERTUNG_B_DRUCK,**AUSWERTUNG** · B · pression,1
+CAS,AUSWERTUNG_P_CAN,**AUSWERTUNG** · P · bus CAN,1
+CAS,AUSWERTUNG_P_HW,**AUSWERTUNG** · P · **HW**,2
+CAS,AUT_OFFNEN_HK_IN_ENTLPOS,automatique · **OFFNEN** · hayon · **IN** · **ENTLPOS**,3
+CAS,BAUART,type de construction,0
+CAS,BAUREIHE,**BAUREIHE**,1
+CAS,BEDINGUNG_CC_10KM,**BEDINGUNG** · Check Control · **10KM**,2
+CAS,BOS_DATEN_ANFRAGEN,**BOS** · **DATEN** · **ANFRAGEN**,3
+CAS,BREMSE_DRUCK,frein · pression,0
+CAS,CAN_MEHRFACH_SICHERN,bus CAN · **MEHRFACH** · verrouillage,1
+CAS,CBS_VERSION,entretien selon besoin (CBS) · **VERSION**,1
+CAS,CCM_SEND_INVALID,**CCM** · **SEND** · **INVALID**,3
+CAS,CHIPCARD,**CHIPCARD**,1
+CAS,CLASS_PWR,**CLASS** · **PWR**,2
+CAS,CLT_TASTE,**CLT** · **TASTE**,2
+CAS,CRASH_BESCHLEUNIGUNG,choc · **BESCHLEUNIGUNG**,1
+CAS,CRASH_SCHWERE,choc · **SCHWERE**,1
+CAS,DELAY_KL50L,delai · **KL50L**,1
+CAS,DELAY_KLR_AUS,delai · regulation de climatisation · arret,0
+CAS,EE_TRSP_CCM_0CD,**EE** · **TRSP** · **CCM** · **0CD**,4
+CAS,EE_TRSP_DEBUG,**EE** · **TRSP** · deverminage,2
+CAS,EE_TRSP_PERM,**EE** · **TRSP** · **PERM**,3
+CAS,EE_ZEIT_ABFR,**EE** · duree · **ABFR**,2
+CAS,EE_ZEIT_NLF,**EE** · duree · **NLF**,2
+CAS,EINSTIEGSHILFE_DEFAULT,aide a l'acces · **DEFAULT**,1
+CAS,EINSTIEGSHILFE_OHNE_NR,aide a l'acces · sans · numero,0
+CAS,EINSTIEGSHILFE_PORT,aide a l'acces · **PORT**,1
+CAS,EINSTIEGSHILFE_SENDER_1,aide a l'acces · emetteur · 1,0
+CAS,EINSTIEGSHILFE_SENDER_2,aide a l'acces · emetteur · 2,0
+CAS,EINSTIEGSHILFE_SENDER_3,aide a l'acces · emetteur · 3,0
+CAS,EINSTIEGSHILFE_SENDER_4,aide a l'acces · emetteur · 4,0
+CAS,ELV_AUT_FCT,blocage de colonne de direction · automatique · **FCT**,1
+CAS,ELV_RESET_FCT,blocage de colonne de direction · remise a zero · **FCT**,1
+CAS,ELV_TESTER,blocage de colonne de direction · **TESTER**,1
+CAS,ENABLE_CLT_NACH_CRASH,activation · **CLT** · apres · choc,1
+CAS,ERROR_EJECT,**ERROR** · ejection,1
+CAS,ER_KEYOUT_AUTOVR,**ER** · **KEYOUT** · **AUTOVR**,3
+CAS,ER_TANKKLAPPE_SER,**ER** · **TANKKLAPPE** · **SER**,3
+CAS,ER_TANKKLAPPE_VR,**ER** · **TANKKLAPPE** · **VR**,3
+CAS,ES_EINMALIG_CLT,**ES** · **EINMALIG** · **CLT**,3
+CAS,EWS_EGS,**EWS** · calculateur de boite,1
+CAS,EWS_FEHLER_MOTORLAUF,**EWS** · erreur · **MOTORLAUF**,2
+CAS,EWS_NACHLAUF_KLR_AUS,**EWS** · marche a suivre / temporisation · regulation de climatisation · arret,1
+CAS,EWS_SCHRITTWEITE_2,**EWS** · **SCHRITTWEITE** · 2,2
+CAS,FBDIN_9_6_KBAUD,**FBDIN** · 9 · 6 · **KBAUD**,2
+CAS,FBD_AKTIV_KEYIN,telecommande · actif · **KEYIN**,1
+CAS,FBD_AKTIV_KL15AUS,telecommande · actif · **KL15AUS**,1
+CAS,FBD_DISFERTMODE,telecommande · **DISFERTMODE**,1
+CAS,FBD_DISTRANSMODE,telecommande · **DISTRANSMODE**,1
+CAS,FBD_DISWERKSTMODE,telecommande · **DISWERKSTMODE**,1
+CAS,FBD_HECKKLAPPE_TOTZEIT,telecommande · hayon · **TOTZEIT**,1
+CAS,FBD_HKL_NUR_ER,telecommande · hayon · **NUR** · **ER**,2
+CAS,FBD_HSF_0,telecommande · toit ouvrant · 0,0
+CAS,FBD_HSF_1,telecommande · toit ouvrant · 1,0
+CAS,FBD_LOAD_POS_HK_HK,telecommande · charge · position · hayon · hayon,0
+CAS,FBD_MOTORLAUF,telecommande · **MOTORLAUF**,1
+CAS,FBD_MOTORSTART,telecommande · **MOTORSTART**,1
+CAS,FBD_NO_LOAD_POS_C06,telecommande · non · charge · position · [index variante C06],0
+CAS,FBD_PANIKDAUER,telecommande · **PANIKDAUER**,1
+CAS,FBD_PANIK_TOTZEIT,telecommande · **PANIK** · **TOTZEIT**,2
+CAS,FBD_SERVICEFKT_AKTIV,telecommande · **SERVICEFKT** · actif,1
+CAS,FBD_TESTKEY_AKTIV,telecommande · **TESTKEY** · actif,1
+CAS,FHM_CA_OHNE_EKS,**FHM** · **CA** · sans · systeme electronique de cle,2
+CAS,FHM_CA_OHNE_EKS_DELAY,**FHM** · **CA** · sans · systeme electronique de cle · delai,2
+CAS,FH_ABSCHALTKRITERIUM,leve-vitre · **ABSCHALTKRITERIUM**,1
+CAS,FH_CABRIO_VERDECK_MODUL,leve-vitre · **CABRIO** · **VERDECK** · **MODUL**,3
+CAS,FH_DISAKL15,leve-vitre · **DISAKL15**,1
+CAS,FH_DISAKLR,leve-vitre · **DISAKLR**,1
+CAS,FH_DISASHD_KL15,leve-vitre · **DISASHD** · borne 15 (contact),1
+CAS,FH_DISCLSYDEFECT,leve-vitre · **DISCLSYDEFECT**,1
+CAS,FH_DISFBDDEFCT,leve-vitre · **DISFBDDEFCT**,1
+CAS,FH_DISFERTMODE,leve-vitre · **DISFERTMODE**,1
+CAS,FH_DISTGDEFECT,leve-vitre · **DISTGDEFECT**,1
+CAS,FH_DISTRANSMODE,leve-vitre · **DISTRANSMODE**,1
+CAS,FH_DISWERKSTMODE,leve-vitre · **DISWERKSTMODE**,1
+CAS,FH_ECEFIN,leve-vitre · **ECEFIN**,1
+CAS,FH_HINTEN,leve-vitre · arriere,0
+CAS,FH_KINDERSICHERUNG,leve-vitre · **KINDERSICHERUNG**,1
+CAS,FH_KMFRTFBDTIM,leve-vitre · **KMFRTFBDTIM**,1
+CAS,FH_KOMFORTF_MIT_SUBST,leve-vitre · **KOMFORTF** · avec · **SUBST**,2
+CAS,FH_RELEASE_CA_BASIC,leve-vitre · **RELEASE** · **CA** · **BASIC**,3
+CAS,FH_RESETTIMEOUTKL50,leve-vitre · **RESETTIMEOUTKL50**,1
+CAS,FH_SCHLIESSEN_EINSTG,leve-vitre · fermeture · **EINSTG**,1
+CAS,FH_SICHERHEITSFAHRZEUG,leve-vitre · **SICHERHEITSFAHRZEUG**,1
+CAS,FH_TUERBED_EINSTG,leve-vitre · **TUERBED** · **EINSTG**,2
+CAS,FH_UMLSCH,leve-vitre · **UMLSCH**,1
+CAS,FH_USACANADA,leve-vitre · **USACANADA**,1
+CAS,FS_DATEN_ANFRAGEN,**FS** · **DATEN** · **ANFRAGEN**,3
+CAS,GESCHW_REQ_CC,vitesse · **REQ** · Check Control,1
+CAS,GESCHW_SPERRE_TOEHK,vitesse · blocage · _TOEHK_,0
+CAS,GETRIEBE_GAENGE,boite de vitesses · **GAENGE**,1
+CAS,GETRIEBE_TYP_C6,boite de vitesses · type · **C6**,1
+CAS,HECKSCHEIBE_ENTR_SENDER_1,lunette arriere · deverrouillage · emetteur · 1,0
+CAS,HECKSCHEIBE_ENTR_SENDER_2,lunette arriere · deverrouillage · emetteur · 2,0
+CAS,HECKSCHEIBE_ENTR_SENDER_3,lunette arriere · deverrouillage · emetteur · 3,0
+CAS,HECKSCHEIBE_ENTR_SENDER_4,lunette arriere · deverrouillage · emetteur · 4,0
+CAS,HECKSCHEI_ENTR_OHNE_NR,**HECKSCHEI** · deverrouillage · sans · numero,1
+CAS,HKAT_EO_HS_OHNE_NR,catalyseur · _EO_ · **HS** · sans · numero,1
+CAS,HKAT_EO_HS_SCHL_NR01,catalyseur · _EO_ · **HS** · cle / fermeture · **NR01**,2
+CAS,HKAT_EO_HS_SCHL_NR02,catalyseur · _EO_ · **HS** · cle / fermeture · **NR02**,2
+CAS,HKAT_EO_HS_SCHL_NR03,catalyseur · _EO_ · **HS** · cle / fermeture · **NR03**,2
+CAS,HKAT_EO_HS_SCHL_NR04,catalyseur · _EO_ · **HS** · cle / fermeture · **NR04**,2
+CAS,HKL_LIFT_BEI_CA,hayon · **LIFT** · lors de · **CA**,2
+CAS,HK_ENABLE_OPEN,hayon · activation · ouvert,0
+CAS,HK_GESPERRT_IN_GESICHERT,hayon · **GESPERRT** · **IN** · **GESICHERT**,3
+CAS,HS_ENABLE_OPEN,**HS** · activation · ouvert,1
+CAS,KISITMRMAX,**KISITMRMAX**,1
+CAS,KL15HW01_ALLWAYS,**KL15HW01** · **ALLWAYS**,2
+CAS,KL30G_EIN_HKT_AUSSEN,**KL30G** · marche · **HKT** · exterieur,2
+CAS,KL30G_EIN_HKT_FBD,**KL30G** · marche · **HKT** · telecommande,2
+CAS,KL30G_NACHLAUF_NACH_SZ1,**KL30G** · marche a suivre / temporisation · apres · **SZ1**,2
+CAS,KL30G_TIMEOUT,**KL30G** · delai d'attente,1
+CAS,KLASSE_BATTERIE,**KLASSE** · batterie,1
+CAS,KLR_AUS_TIMEOUT,regulation de climatisation · arret · delai d'attente,0
+CAS,KLR_AUS_TKSITZ,regulation de climatisation · arret · **TKSITZ**,1
+CAS,KLR_EIN_GESCHW,regulation de climatisation · marche · vitesse,0
+CAS,KLSTRG_DISFERTMODE,commande de climatisation · **DISFERTMODE**,1
+CAS,KLSTRG_DISTRANSMODE,commande de climatisation · **DISTRANSMODE**,1
+CAS,KLSTRG_DISWERKSTMODE,commande de climatisation · **DISWERKSTMODE**,1
+CAS,KLSTRG_TESTER,commande de climatisation · **TESTER**,1
+CAS,KMFRT_OEFFNEN,confort · ouverture,0
+CAS,KMFRT_OEFF_HINTEN,confort · **OEFF** · arriere,1
+CAS,KMFRT_OEFF_SHD,confort · **OEFF** · toit ouvrant,1
+CAS,KMFRT_SCHLIESSEN,confort · fermeture,0
+CAS,KMFRT_SCHL_VORNE,confort · cle / fermeture · avant,0
+CAS,KOMFORTOEFFNUNG,**KOMFORTOEFFNUNG**,1
+CAS,KOMFORTOEFFNUNG_FB,**KOMFORTOEFFNUNG** · telecommande,1
+CAS,KOMFORTSCHLIESSUNG,fermeture confort,0
+CAS,KOMFORTSCHLIESSUNG_FB,fermeture confort · telecommande,0
+CAS,KOMFORTSCHLIESSUNG_PA,fermeture confort · _PA_,0
+CAS,KOMFORTSTART,**KOMFORTSTART**,1
+CAS,KOMFORT_AUS_IN_50MS,confort · arret · **IN** · **50MS**,2
+CAS,KOMFORT_EIN,confort · marche,0
+CAS,KOMFORT_EJECT,confort · ejection,0
+CAS,KOMFORT_SCHL_SHD,confort · cle / fermeture · toit ouvrant,0
+CAS,LAENDERVARIANTE_BNDB,variante pays · **BNDB**,1
+CAS,MAX_KMFRT_UNTERB,maximum · confort · **UNTERB**,1
+CAS,MAX_KMFRT_UNTERB_FBD,maximum · confort · **UNTERB** · telecommande,1
+CAS,MFS_KEY_PLGD,**MFS** · **KEY** · **PLGD**,3
+CAS,MFS_MIT_TON,**MFS** · avec · **TON**,2
+CAS,MIND_KMFRT_NACH_UNTERB,minimum · confort · apres · **UNTERB**,1
+CAS,MOTORFERNSTART_CAN,**MOTORFERNSTART** · bus CAN,1
+CAS,MOTORFERNSTART_GENERELL,**MOTORFERNSTART** · **GENERELL**,2
+CAS,MOTORHAUBENKONTAKT,**MOTORHAUBENKONTAKT**,1
+CAS,MOTOR_ART,moteur · type,0
+CAS,MOTOR_HUBRAUM,moteur · **HUBRAUM**,1
+CAS,PASSIVE_ACCESS,**PASSIVE** · **ACCESS**,2
+CAS,PA_CHIPCARD_ACTIVE,_PA_ · **CHIPCARD** · actif,1
+CAS,PA_CONFIG_FBDREFCHECK,_PA_ · **CONFIG** · **FBDREFCHECK**,2
+CAS,PA_DISABLE_HK_REV,_PA_ · desactivation · hayon · revision,0
+CAS,PA_FBD_REF,_PA_ · telecommande · reference,0
+CAS,PA_HA_SEARCH_ACTIVE,_PA_ · essieu arriere · recherche · actif,0
+CAS,PA_HK_BACK_IR_SEARCH,_PA_ · hayon · **BACK** · **IR** · recherche,2
+CAS,PA_HK_INTERIOR_SEARCH,_PA_ · hayon · **INTERIOR** · recherche,1
+CAS,PA_HK_PGS_SEARCH,_PA_ · hayon · **PGS** · recherche,1
+CAS,PA_HK_REOPEN_CTL_DEP,_PA_ · hayon · **REOPEN** · **CTL** · **DEP**,3
+CAS,PA_HK_REOPEN_CTR_LOCK,_PA_ · hayon · **REOPEN** · **CTR** · blocage,2
+CAS,PA_HK_RSCR_ACTIVE,_PA_ · hayon · **RSCR** · actif,1
+CAS,PA_ID_GEBER,_PA_ · identifiant · **GEBER**,1
+CAS,PA_SILENTTIMEOUT,_PA_ · **SILENTTIMEOUT**,1
+CAS,PA_TBEREITPE,_PA_ · **TBEREITPE**,1
+CAS,PA_TBEREIT_PG,_PA_ · **TBEREIT** · **PG**,2
+CAS,PA_TRUNK_HIGH,_PA_ · **TRUNK** · haut,1
+CAS,PA_TSPERRVR,_PA_ · **TSPERRVR**,1
+CAS,PA_TVRERFATH,_PA_ · **TVRERFATH**,1
+CAS,PERSONALISIERUNG_AUS,**PERSONALISIERUNG** · arret,1
+CAS,RSSI_THRESHOLD,**RSSI** · **THRESHOLD**,2
+CAS,SCHIEBEHEBEDACH,toit ouvrant relevable,0
+CAS,SEL_ZV_SENDER_1,selection · verrouillage centralise · emetteur · 1,0
+CAS,SEL_ZV_SENDER_2,selection · verrouillage centralise · emetteur · 2,0
+CAS,SEL_ZV_SENDER_3,selection · verrouillage centralise · emetteur · 3,0
+CAS,SEL_ZV_SENDER_4,selection · verrouillage centralise · emetteur · 4,0
+CAS,SEL_ZV_SENDER_DEFAULT,selection · verrouillage centralise · emetteur · **DEFAULT**,1
+CAS,SEL_ZV_SENDER_PORT,selection · verrouillage centralise · emetteur · **PORT**,1
+CAS,SENDMHKCCMLIMIT,**SENDMHKCCMLIMIT**,1
+CAS,SICHERHEITSFAHRZEUG,**SICHERHEITSFAHRZEUG**,1
+CAS,SLEEPTIMER_FH_KLRAUS,**SLEEPTIMER** · leve-vitre · **KLRAUS**,2
+CAS,SONDERTASTE_INNENLICHT,**SONDERTASTE** · **INNENLICHT**,2
+CAS,SONDERTASTE_PANIKALARM,**SONDERTASTE** · **PANIKALARM**,2
+CAS,SPERRE_CRASH_ER,blocage · choc · **ER**,1
+CAS,SPERRE_HECKKLAPPE_KLR,blocage · hayon · regulation de climatisation,0
+CAS,SPERRE_HKL_KEY_VALID,blocage · hayon · **KEY** · **VALID**,2
+CAS,SPERRE_KLRAUS_SST,blocage · **KLRAUS** · _SST_,1
+CAS,SQCNT_UPDATE,**SQCNT** · **UPDATE**,2
+CAS,SS_GETRIEBE,**SS** · boite de vitesses,1
+CAS,STARTABBRUCH_BREMSE,**STARTABBRUCH** · frein,1
+CAS,STARTABBRUCH_P,**STARTABBRUCH** · P,1
+CAS,STARTABBR_KLR,**STARTABBR** · regulation de climatisation,1
+CAS,STARTDELAY_K_START,**STARTDELAY** · K · demarrage,1
+CAS,STARTWUNSCH_KL50,**STARTWUNSCH** · borne 50 (demarreur),1
+CAS,STROM_KS_MAX,courant · **KS** · maximum,1
+CAS,STROM_KS_MIN,courant · **KS** · minimum,1
+CAS,STROM_RUHE,courant · **RUHE**,1
+CAS,TEST_DUTY_CYCLE,**TEST** · rapport cyclique · **CYCLE**,2
+CAS,TEST_LED_KS_AKTIV,**TEST** · LED · **KS** · actif,2
+CAS,TOEHK_EO_HS_OHNE_NR,_TOEHK_ · _EO_ · **HS** · sans · numero,1
+CAS,TOEHK_EO_HS_SCHL_NR01,_TOEHK_ · _EO_ · **HS** · cle / fermeture · **NR01**,2
+CAS,TOEHK_EO_HS_SCHL_NR02,_TOEHK_ · _EO_ · **HS** · cle / fermeture · **NR02**,2
+CAS,TOEHK_EO_HS_SCHL_NR03,_TOEHK_ · _EO_ · **HS** · cle / fermeture · **NR03**,2
+CAS,TOEHK_EO_HS_SCHL_NR04,_TOEHK_ · _EO_ · **HS** · cle / fermeture · **NR04**,2
+CAS,TRANSPONDER,**TRANSPONDER**,1
+CAS,TYP_LENKUNG,type · **LENKUNG**,1
+CAS,VERRIEGELUNGSSCHWELLE,**VERRIEGELUNGSSCHWELLE**,1
+CAS,VER_AUT_X_MIN_DEFAULT,version · automatique · X · minimum · **DEFAULT**,1
+CAS,VER_AUT_X_MIN_OHNE_NR,version · automatique · X · minimum · sans · numero,0
+CAS,VER_AUT_X_MIN_PORT,version · automatique · X · minimum · **PORT**,1
+CAS,VER_AUT_X_MIN_SENDER_1,version · automatique · X · minimum · emetteur · 1,0
+CAS,VER_AUT_X_MIN_SENDER_2,version · automatique · X · minimum · emetteur · 2,0
+CAS,VER_AUT_X_MIN_SENDER_3,version · automatique · X · minimum · emetteur · 3,0
+CAS,VER_AUT_X_MIN_SENDER_4,version · automatique · X · minimum · emetteur · 4,0
+CAS,VR_GESCHW_EINMALIG,**VR** · vitesse · **EINMALIG**,2
+CAS,VR_KLR,**VR** · regulation de climatisation,1
+CAS,VR_KLR_EINMALIG,**VR** · regulation de climatisation · **EINMALIG**,2
+CAS,ZEIT_AUTO_ZV_VR,duree · automatique · verrouillage centralise · **VR**,1
+CAS,ZEIT_BREMSE,duree · frein,0
+CAS,ZEIT_KL50_ANSTRG,duree · borne 50 (demarreur) · **ANSTRG**,1
+CAS,ZV_AUTHENTISIERUNG,verrouillage centralise · **AUTHENTISIERUNG**,1
+CAS,ZV_DISFERTMODE,verrouillage centralise · **DISFERTMODE**,1
+CAS,ZV_DISTRANSMODE,verrouillage centralise · **DISTRANSMODE**,1
+CAS,ZV_DISWERKSTMODE,verrouillage centralise · **DISWERKSTMODE**,1
+CAS,ZV_SELEKTIV,verrouillage centralise · **SELEKTIV**,1
+CAS,ZYLINDER_ZAHL,**ZYLINDER** · **ZAHL**,2
+DSC,AFH_DOA,_AFH_ · **DOA**,1
+DSC,AFS,phares adaptatifs (AFS),0
+DSC,ASL,_ASL_,0
+DSC,AUSSTATTUNG_RPA,**AUSSTATTUNG** · indicateur de crevaison,1
+DSC,AX_REF,**AX** · reference,1
+DSC,AX_REF_DIFF_LOCK,**AX** · reference · differentiel · blocage,1
+DSC,A_MAX_DSC,A · maximum · controle de stabilite,0
+DSC,A_MIN_DSC,A · minimum · controle de stabilite,0
+DSC,BAUART_MK60,type de construction · **MK60**,1
+DSC,BBV_KORR_HA,usure des plaquettes · correction · essieu arriere,0
+DSC,BBV_KORR_VA,usure des plaquettes · correction · essieu avant,0
+DSC,BB_RAB,**BB** · precharge des plaquettes,1
+DSC,BERGABANSATZ,amorce de descente,0
+DSC,BERGABANSATZ_C0F,amorce de descente · [index variante C0F],0
+DSC,BERGAB_GERASTET,descente · crante,0
+DSC,BERGAB_GERASTET_C0E,descente · crante · [index variante C0E],0
+DSC,BERGAB_GERASTET_C0F,descente · crante · [index variante C0F],0
+DSC,BERGAB_KENNEN,descente · reconnaissance,0
+DSC,BERGAB_KENNEN_C0E,descente · reconnaissance · [index variante C0E],0
+DSC,BERGAB_KENNEN_C0F,descente · reconnaissance · [index variante C0F],0
+DSC,BERRGAB_ANSATZ,**BERRGAB** · **ANSATZ**,2
+DSC,BSW,**BSW**,1
+DSC,C02E84_MOTOR_LEISTUNG_MAX,**C02E84** · moteur · puissance · maximum,1
+DSC,C02_E84_BERGAB_GERASTET,[index variante C02] · **E84** · descente · crante,1
+DSC,C02_E84_FZG_MASSE,[index variante C02] · **E84** · vehicule · masse,1
+DSC,C02_E84_SCHUBABSCHALTUNG,[index variante C02] · **E84** · coupure en deceleration,1
+DSC,C03_UNTERSTEUERSCHWELLE_2,[index variante C03] · seuil de sous-virage · 2,0
+DSC,C04_UEBERSTEUERN_MUE_0_2,[index variante C04] · survirage · coefficient d'adherence · 0 · 2,0
+DSC,C04_UEBERSTEUERN_MUE_1_2,[index variante C04] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C04_UNTERSTEUERSCHWELLE_2,[index variante C04] · seuil de sous-virage · 2,0
+DSC,C05_BBV,[index variante C05] · usure des plaquettes,0
+DSC,C05_HSA,[index variante C05] · aide au demarrage en cote,0
+DSC,C06_BBV,[index variante C06] · usure des plaquettes,0
+DSC,C07_BAUART_MK60,[index variante C07] · type de construction · **MK60**,1
+DSC,C07_BBV,[index variante C07] · usure des plaquettes,0
+DSC,C07_BBV_KORR_HA,[index variante C07] · usure des plaquettes · correction · essieu arriere,0
+DSC,C07_BBV_KORR_VA,[index variante C07] · usure des plaquettes · correction · essieu avant,0
+DSC,C07_DELTA_PSI_BETA_LIMIT,[index variante C07] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C07_DF_DIR,[index variante C07] · **DF** · direction,1
+DSC,C07_DRUCKMODELL_HINTERACH,[index variante C07] · modele de pression · **HINTERACH**,1
+DSC,C07_DRUCKMODELL_VORDERACH,[index variante C07] · modele de pression · **VORDERACH**,1
+DSC,C07_GMK_ECBA_HA,[index variante C07] · _GMK_ · _ECBA_ · essieu arriere,0
+DSC,C07_GMK_ECBA_VA,[index variante C07] · _GMK_ · _ECBA_ · essieu avant,0
+DSC,C07_HSA,[index variante C07] · aide au demarrage en cote,0
+DSC,C07_MOTOR_ART_DSC_2,[index variante C07] · moteur · type · controle de stabilite · 2,0
+DSC,C07_UEBERSTEUERN_MUE_0_2,[index variante C07] · survirage · coefficient d'adherence · 0 · 2,0
+DSC,C07_UEBERSTEUERN_MUE_1_2,[index variante C07] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C07_UNTERSTEUERSCHWELLE,[index variante C07] · seuil de sous-virage,0
+DSC,C08_AFH_HSA,[index variante C08] · _AFH_ · aide au demarrage en cote,0
+DSC,C08_AFS,[index variante C08] · phares adaptatifs (AFS),0
+DSC,C08_ASL,[index variante C08] · _ASL_,0
+DSC,C08_BAUART,[index variante C08] · type de construction,0
+DSC,C08_BBV,[index variante C08] · usure des plaquettes,0
+DSC,C08_BBV_KORR_HA,[index variante C08] · usure des plaquettes · correction · essieu arriere,0
+DSC,C08_BBV_KORR_VA,[index variante C08] · usure des plaquettes · correction · essieu avant,0
+DSC,C08_BB_RAB,[index variante C08] · **BB** · precharge des plaquettes,1
+DSC,C08_BERGAB_GERASTET,[index variante C08] · descente · crante,0
+DSC,C08_BERGAB_KENNEN,[index variante C08] · descente · reconnaissance,0
+DSC,C08_CBC,[index variante C08] · controle de freinage en courbe,0
+DSC,C08_CSC_DYNAMIC,[index variante C08] · **CSC** · **DYNAMIC**,2
+DSC,C08_DBC_MIN_AUSLOESEDRUCK,[index variante C08] · _DBC_ · minimum · pression de declenchement,0
+DSC,C08_DELTA_PSI_BETA_LIMIT,[index variante C08] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C08_DF_DIR,[index variante C08] · **DF** · direction,1
+DSC,C08_DRUCKMODELL_HA,[index variante C08] · modele de pression · essieu arriere,0
+DSC,C08_DRUCKMODELL_VA,[index variante C08] · modele de pression · essieu avant,0
+DSC,C08_ECBA_DCC,[index variante C08] · _ECBA_ · _DCC_,0
+DSC,C08_FBS,[index variante C08] · compensation de fading,0
+DSC,C08_FLR,[index variante C08] · reduction de puissance moteur,0
+DSC,C08_FZG_MASSE,[index variante C08] · vehicule · masse,0
+DSC,C08_GETRIEBE,[index variante C08] · boite de vitesses,0
+DSC,C08_GMB,[index variante C08] · _GMB_,0
+DSC,C08_GMK,[index variante C08] · _GMK_,0
+DSC,C08_GMK_ECBA_HA,[index variante C08] · _GMK_ · _ECBA_ · essieu arriere,0
+DSC,C08_GMK_ECBA_VA,[index variante C08] · _GMK_ · _ECBA_ · essieu avant,0
+DSC,C08_GMR_MAX_LIMIT_SCHRAEG,[index variante C08] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C08_GMR_MIN_LIMIT_SCHRAEG,[index variante C08] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C08_HSA,[index variante C08] · aide au demarrage en cote,0
+DSC,C08_IPM_MAX_P_RES,[index variante C08] · _IPM_ · maximum · P · remise a zero,0
+DSC,C08_LENKWINKELKENNLINIE,[index variante C08] · courbe d'angle de braquage,0
+DSC,C08_LUEFTER,[index variante C08] · ventilateur,0
+DSC,C08_MIN_DRUCKAUFBAU_GRAD,[index variante C08] · minimum · montee en pression · degre,0
+DSC,C08_MOTOR_ART,[index variante C08] · moteur · type,0
+DSC,C08_MOTOR_LEISTUNG_MAX,[index variante C08] · moteur · puissance · maximum,0
+DSC,C08_MOTOR_SCHLEPP_P,[index variante C08] · moteur · couple de frein moteur · P,0
+DSC,C08_PRE_MSR,[index variante C08] · pre- · regulation du couple de frein moteur,0
+DSC,C08_PRE_USC,[index variante C08] · pre- · _USC_,0
+DSC,C08_RPA,[index variante C08] · indicateur de crevaison,0
+DSC,C08_RPA_SCHWELLE,[index variante C08] · indicateur de crevaison · seuil,0
+DSC,C08_SCHUBABSCHALTUNG,[index variante C08] · coupure en deceleration,0
+DSC,C08_SDR_CTC,[index variante C08] · _SDR_ · _CTC_,0
+DSC,C08_SETZ_V_MAX,[index variante C08] · positionnement · _V_ · maximum,0
+DSC,C08_SST,[index variante C08] · _SST_,0
+DSC,C08_TB_BDD,[index variante C08] · **TB** · **BDD**,2
+DSC,C08_UEBERSTEUERN_MUE_0,[index variante C08] · survirage · coefficient d'adherence · 0,0
+DSC,C08_UEBERSTEUERN_MUE_1_2,[index variante C08] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C08_UNTERSTEUERN_MUE_0,[index variante C08] · sous-virage · coefficient d'adherence · 0,0
+DSC,C08_UNTERSTEUERN_MUE_1_2,[index variante C08] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C08_UNTERSTEUERSCHWELLE,[index variante C08] · seuil de sous-virage,0
+DSC,C08_VERZOEG_NEG_FEIN,[index variante C08] · temporisation · negatif · fin,0
+DSC,C08_VERZOEG_NEG_GROB,[index variante C08] · temporisation · negatif · grossier,0
+DSC,C08_VERZOEG_POS_FEIN,[index variante C08] · temporisation · position · fin,0
+DSC,C08_VERZOEG_POS_GROB,[index variante C08] · temporisation · position · grossier,0
+DSC,C08_V_EINHEIT,[index variante C08] · _V_ · unite,0
+DSC,C09_ASL,[index variante C09] · _ASL_,0
+DSC,C09_BAUART,[index variante C09] · type de construction,0
+DSC,C09_BBV,[index variante C09] · usure des plaquettes,0
+DSC,C09_BBV_KORR_HA,[index variante C09] · usure des plaquettes · correction · essieu arriere,0
+DSC,C09_BBV_KORR_VA,[index variante C09] · usure des plaquettes · correction · essieu avant,0
+DSC,C09_BTM,[index variante C09] · _BTM_,0
+DSC,C09_C8,[index variante C09] · **C8**,1
+DSC,C09_CBC,[index variante C09] · controle de freinage en courbe,0
+DSC,C09_CF_ESM_HB,[index variante C09] · **CF** · _ESM_ · **HB**,2
+DSC,C09_CF_ESM_LB,[index variante C09] · **CF** · _ESM_ · **LB**,2
+DSC,C09_CR_ESM_HB,[index variante C09] · **CR** · _ESM_ · **HB**,2
+DSC,C09_CR_ESM_LB,[index variante C09] · **CR** · _ESM_ · **LB**,2
+DSC,C09_DBC_MIN_AUSLOESEDRUCK,[index variante C09] · _DBC_ · minimum · pression de declenchement,0
+DSC,C09_DELTA_PSI_BETA_LIMIT,[index variante C09] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C09_DIFF_LOCK,[index variante C09] · differentiel · blocage,0
+DSC,C09_DRUCKMODELL_HA,[index variante C09] · modele de pression · essieu arriere,0
+DSC,C09_DRUCKMODELL_VA,[index variante C09] · modele de pression · essieu avant,0
+DSC,C09_FLR,[index variante C09] · reduction de puissance moteur,0
+DSC,C09_GETRIEBE,[index variante C09] · boite de vitesses,0
+DSC,C09_GMB,[index variante C09] · _GMB_,0
+DSC,C09_GMR_MAX_LIMIT_SCHRAEG,[index variante C09] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C09_GMR_MIN_LIMIT_SCHRAEG,[index variante C09] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C09_KUEHLSCHACHT,[index variante C09] · conduit de refroidissement,0
+DSC,C09_LCL,[index variante C09] · _LCL_,0
+DSC,C09_LENKWINKELKENNLINIE,[index variante C09] · courbe d'angle de braquage,0
+DSC,C09_LF_ESM,[index variante C09] · **LF** · _ESM_,1
+DSC,C09_LR_ESM,[index variante C09] · **LR** · _ESM_,1
+DSC,C09_LUEFTER,[index variante C09] · ventilateur,0
+DSC,C09_LWK_X2,[index variante C09] · angle de braquage · [point d'axe X2],0
+DSC,C09_LWK_X3,[index variante C09] · angle de braquage · [point d'axe X3],0
+DSC,C09_LWK_X4,[index variante C09] · angle de braquage · [point d'axe X4],0
+DSC,C09_LWK_Y1,[index variante C09] · angle de braquage · [point d'axe Y1],0
+DSC,C09_LWK_Y2,[index variante C09] · angle de braquage · [point d'axe Y2],0
+DSC,C09_LWK_Y3,[index variante C09] · angle de braquage · [point d'axe Y3],0
+DSC,C09_LWK_Y4,[index variante C09] · angle de braquage · [point d'axe Y4],0
+DSC,C09_MIN_DRUCKAUFBAU_GRAD,[index variante C09] · minimum · montee en pression · degre,0
+DSC,C09_MOTOR,[index variante C09] · moteur,0
+DSC,C09_M_ESM,[index variante C09] · M · _ESM_,0
+DSC,C09_PRE_MSR,[index variante C09] · pre- · regulation du couple de frein moteur,0
+DSC,C09_PRE_USC,[index variante C09] · pre- · _USC_,0
+DSC,C09_RPA,[index variante C09] · indicateur de crevaison,0
+DSC,C09_RPA_SCHWELLE,[index variante C09] · indicateur de crevaison · seuil,0
+DSC,C09_SC_X_ESM,[index variante C09] · _SC_ · X · _ESM_,0
+DSC,C09_SC_Y_ESM,[index variante C09] · _SC_ · Y · _ESM_,0
+DSC,C09_SDR_CTC,[index variante C09] · _SDR_ · _CTC_,0
+DSC,C09_SPURWEITE,[index variante C09] · voie,0
+DSC,C09_THETA_ESM,[index variante C09] · _THETA_ · _ESM_,0
+DSC,C09_UEBERSTEUERN_MUE_0,[index variante C09] · survirage · coefficient d'adherence · 0,0
+DSC,C09_UEBERSTEUERN_MUE_1_2,[index variante C09] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C09_UNTERSTEUERN_MUE_0,[index variante C09] · sous-virage · coefficient d'adherence · 0,0
+DSC,C09_UNTERSTEUERN_MUE_1_2,[index variante C09] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C09_UNTERSTEUERSCHWELLE,[index variante C09] · seuil de sous-virage,0
+DSC,C09_WLC,[index variante C09] · **WLC**,1
+DSC,C0A_AFS,[index variante C0A] · phares adaptatifs (AFS),0
+DSC,C0A_ASC_AMR_STB,[index variante C0A] · antipatinage · **AMR** · _STB_,1
+DSC,C0A_ASC_BMR_STB,[index variante C0A] · antipatinage · **BMR** · _STB_,1
+DSC,C0A_ASL,[index variante C0A] · _ASL_,0
+DSC,C0A_BAUART,[index variante C0A] · type de construction,0
+DSC,C0A_BBV,[index variante C0A] · usure des plaquettes,0
+DSC,C0A_BBV_KORR_HA,[index variante C0A] · usure des plaquettes · correction · essieu arriere,0
+DSC,C0A_BBV_KORR_VA,[index variante C0A] · usure des plaquettes · correction · essieu avant,0
+DSC,C0A_BERGABANSATZ,[index variante C0A] · amorce de descente,0
+DSC,C0A_BERGAB_GERASTET,[index variante C0A] · descente · crante,0
+DSC,C0A_BERGAB_KENNEN,[index variante C0A] · descente · reconnaissance,0
+DSC,C0A_BTM,[index variante C0A] · _BTM_,0
+DSC,C0A_CBC,[index variante C0A] · controle de freinage en courbe,0
+DSC,C0A_DBC_MIN_AUSLOESEDRUCK,[index variante C0A] · _DBC_ · minimum · pression de declenchement,0
+DSC,C0A_DCC_C_AAT,[index variante C0A] · _DCC_ · C · temperature exterieure,0
+DSC,C0A_DCC_C_ATT_SCHUB_AUS,[index variante C0A] · _DCC_ · C · _ATT_ · pied leve / deceleration · arret,0
+DSC,C0A_DCC_C_ATT_SCHUB_EIN,[index variante C0A] · _DCC_ · C · _ATT_ · pied leve / deceleration · marche,0
+DSC,C0A_DELTA_PSI_BETA_LIMIT,[index variante C0A] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C0A_DF_DIR,[index variante C0A] · **DF** · direction,1
+DSC,C0A_DIFF_LOCK,[index variante C0A] · differentiel · blocage,0
+DSC,C0A_DRUCKMODELL_HA,[index variante C0A] · modele de pression · essieu arriere,0
+DSC,C0A_DRUCKMODELL_VA,[index variante C0A] · modele de pression · essieu avant,0
+DSC,C0A_ECBA_DCC,[index variante C0A] · _ECBA_ · _DCC_,0
+DSC,C0A_FLR,[index variante C0A] · reduction de puissance moteur,0
+DSC,C0A_GETRIEBE,[index variante C0A] · boite de vitesses,0
+DSC,C0A_GMB,[index variante C0A] · _GMB_,0
+DSC,C0A_GMK,[index variante C0A] · _GMK_,0
+DSC,C0A_GMK_ECBA_HA,[index variante C0A] · _GMK_ · _ECBA_ · essieu arriere,0
+DSC,C0A_GMK_ECBA_VA,[index variante C0A] · _GMK_ · _ECBA_ · essieu avant,0
+DSC,C0A_GMR_MAX_LIMIT_SCHRAEG,[index variante C0A] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C0A_GMR_MIN_LIMIT_SCHRAEG,[index variante C0A] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C0A_HSA,[index variante C0A] · aide au demarrage en cote,0
+DSC,C0A_HSA_AFH_AFU,[index variante C0A] · aide au demarrage en cote · _AFH_ · **AFU**,1
+DSC,C0A_IPM_MAX_P_RES,[index variante C0A] · _IPM_ · maximum · P · remise a zero,0
+DSC,C0A_KUEHLSCHACHT,[index variante C0A] · conduit de refroidissement,0
+DSC,C0A_LCL,[index variante C0A] · _LCL_,0
+DSC,C0A_LENKWINKELKENNLINIE,[index variante C0A] · courbe d'angle de braquage,0
+DSC,C0A_LUEFTER,[index variante C0A] · ventilateur,0
+DSC,C0A_MIN_DRUCKAUFBAU_GRAD,[index variante C0A] · minimum · montee en pression · degre,0
+DSC,C0A_MOTOR,[index variante C0A] · moteur,0
+DSC,C0A_MOTOR_LEISTUNG_MAX,[index variante C0A] · moteur · puissance · maximum,0
+DSC,C0A_MOTOR_SCHLEPP_P,[index variante C0A] · moteur · couple de frein moteur · P,0
+DSC,C0A_PRE_MSR,[index variante C0A] · pre- · regulation du couple de frein moteur,0
+DSC,C0A_PRE_USC,[index variante C0A] · pre- · _USC_,0
+DSC,C0A_RPA,[index variante C0A] · indicateur de crevaison,0
+DSC,C0A_RPA_SCHWELLE,[index variante C0A] · indicateur de crevaison · seuil,0
+DSC,C0A_SCHUBABSCHALTUNG,[index variante C0A] · coupure en deceleration,0
+DSC,C0A_SDR_CTC,[index variante C0A] · _SDR_ · _CTC_,0
+DSC,C0A_SETZ_V_MAX,[index variante C0A] · positionnement · _V_ · maximum,0
+DSC,C0A_UEBERSTEUERN_MUE_0,[index variante C0A] · survirage · coefficient d'adherence · 0,0
+DSC,C0A_UEBERSTEUERN_MUE_1_2,[index variante C0A] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C0A_UNTERSTEUERN_MUE_0,[index variante C0A] · sous-virage · coefficient d'adherence · 0,0
+DSC,C0A_UNTERSTEUERN_MUE_1_2,[index variante C0A] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C0A_UNTERSTEUERSCHWELLE,[index variante C0A] · seuil de sous-virage,0
+DSC,C0A_VERZOEG_NEG_FEIN,[index variante C0A] · temporisation · negatif · fin,0
+DSC,C0A_VERZOEG_NEG_GROB,[index variante C0A] · temporisation · negatif · grossier,0
+DSC,C0A_VERZOEG_POS_FEIN,[index variante C0A] · temporisation · position · fin,0
+DSC,C0A_VERZOEG_POS_GROB,[index variante C0A] · temporisation · position · grossier,0
+DSC,C0A_V_EINHEIT,[index variante C0A] · _V_ · unite,0
+DSC,C0A_WLC,[index variante C0A] · **WLC**,1
+DSC,C0B_AFH_HSA,[index variante C0B] · _AFH_ · aide au demarrage en cote,0
+DSC,C0B_AFS,[index variante C0B] · phares adaptatifs (AFS),0
+DSC,C0B_ASC_AMR_STB,[index variante C0B] · antipatinage · **AMR** · _STB_,1
+DSC,C0B_ASC_BMR_STB,[index variante C0B] · antipatinage · **BMR** · _STB_,1
+DSC,C0B_ASL,[index variante C0B] · _ASL_,0
+DSC,C0B_BAUART,[index variante C0B] · type de construction,0
+DSC,C0B_BBV,[index variante C0B] · usure des plaquettes,0
+DSC,C0B_BBV_KORR_HA,[index variante C0B] · usure des plaquettes · correction · essieu arriere,0
+DSC,C0B_BBV_KORR_VA,[index variante C0B] · usure des plaquettes · correction · essieu avant,0
+DSC,C0B_BB_RAB,[index variante C0B] · **BB** · precharge des plaquettes,1
+DSC,C0B_BERGABANSATZ,[index variante C0B] · amorce de descente,0
+DSC,C0B_BERGAB_GERASTET,[index variante C0B] · descente · crante,0
+DSC,C0B_BERGAB_KENNEN,[index variante C0B] · descente · reconnaissance,0
+DSC,C0B_BTM,[index variante C0B] · _BTM_,0
+DSC,C0B_CBC,[index variante C0B] · controle de freinage en courbe,0
+DSC,C0B_CF_ESM_HB,[index variante C0B] · **CF** · _ESM_ · **HB**,2
+DSC,C0B_CF_ESM_LB,[index variante C0B] · **CF** · _ESM_ · **LB**,2
+DSC,C0B_CR_ESM_HB,[index variante C0B] · **CR** · _ESM_ · **HB**,2
+DSC,C0B_CR_ESM_LB,[index variante C0B] · **CR** · _ESM_ · **LB**,2
+DSC,C0B_DBC_MIN_AUSLOESEDRUCK,[index variante C0B] · _DBC_ · minimum · pression de declenchement,0
+DSC,C0B_DCC_C_AAT,[index variante C0B] · _DCC_ · C · temperature exterieure,0
+DSC,C0B_DCC_C_ATT_SCHUB_AUS,[index variante C0B] · _DCC_ · C · _ATT_ · pied leve / deceleration · arret,0
+DSC,C0B_DCC_C_ATT_SCHUB_EIN,[index variante C0B] · _DCC_ · C · _ATT_ · pied leve / deceleration · marche,0
+DSC,C0B_DCC_DTC,[index variante C0B] · _DCC_ · controle de traction dynamique,0
+DSC,C0B_DELTA_PSI_BETA_LIMIT,[index variante C0B] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C0B_DF_DIR,[index variante C0B] · **DF** · direction,1
+DSC,C0B_DIFF_LOCK,[index variante C0B] · differentiel · blocage,0
+DSC,C0B_DRUCKMODELL_HA,[index variante C0B] · modele de pression · essieu arriere,0
+DSC,C0B_DRUCKMODELL_VA,[index variante C0B] · modele de pression · essieu avant,0
+DSC,C0B_ECBA_DCC,[index variante C0B] · _ECBA_ · _DCC_,0
+DSC,C0B_FBS,[index variante C0B] · compensation de fading,0
+DSC,C0B_FLR,[index variante C0B] · reduction de puissance moteur,0
+DSC,C0B_GETRIEBE,[index variante C0B] · boite de vitesses,0
+DSC,C0B_GMB,[index variante C0B] · _GMB_,0
+DSC,C0B_GMK_ECBA_HA,[index variante C0B] · _GMK_ · _ECBA_ · essieu arriere,0
+DSC,C0B_GMK_ECBA_VA,[index variante C0B] · _GMK_ · _ECBA_ · essieu avant,0
+DSC,C0B_GMR_MAX_LIMIT_SCHRAEG,[index variante C0B] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C0B_GMR_MIN_LIMIT_SCHRAEG,[index variante C0B] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C0B_HSA,[index variante C0B] · aide au demarrage en cote,0
+DSC,C0B_HSA_AFH_AFU,[index variante C0B] · aide au demarrage en cote · _AFH_ · **AFU**,1
+DSC,C0B_IPM_MAX_P_RES,[index variante C0B] · _IPM_ · maximum · P · remise a zero,0
+DSC,C0B_KUEHLSCHACHT,[index variante C0B] · conduit de refroidissement,0
+DSC,C0B_LCL,[index variante C0B] · _LCL_,0
+DSC,C0B_LENKWINKELKENNLINIE,[index variante C0B] · courbe d'angle de braquage,0
+DSC,C0B_LF_ESM,[index variante C0B] · **LF** · _ESM_,1
+DSC,C0B_LR_ESM,[index variante C0B] · **LR** · _ESM_,1
+DSC,C0B_LUEFTER,[index variante C0B] · ventilateur,0
+DSC,C0B_LWK_X2,[index variante C0B] · angle de braquage · [point d'axe X2],0
+DSC,C0B_LWK_X3,[index variante C0B] · angle de braquage · [point d'axe X3],0
+DSC,C0B_LWK_X4,[index variante C0B] · angle de braquage · [point d'axe X4],0
+DSC,C0B_LWK_Y1,[index variante C0B] · angle de braquage · [point d'axe Y1],0
+DSC,C0B_LWK_Y2,[index variante C0B] · angle de braquage · [point d'axe Y2],0
+DSC,C0B_LWK_Y3,[index variante C0B] · angle de braquage · [point d'axe Y3],0
+DSC,C0B_LWK_Y4,[index variante C0B] · angle de braquage · [point d'axe Y4],0
+DSC,C0B_MIN_DRUCKAUFBAU_GRAD,[index variante C0B] · minimum · montee en pression · degre,0
+DSC,C0B_MOTOR,[index variante C0B] · moteur,0
+DSC,C0B_MOTOR_LEISTUNG_MAX,[index variante C0B] · moteur · puissance · maximum,0
+DSC,C0B_MOTOR_SCHLEPP_P,[index variante C0B] · moteur · couple de frein moteur · P,0
+DSC,C0B_M_ESM,[index variante C0B] · M · _ESM_,0
+DSC,C0B_PRE_MSR,[index variante C0B] · pre- · regulation du couple de frein moteur,0
+DSC,C0B_PRE_USC,[index variante C0B] · pre- · _USC_,0
+DSC,C0B_RPA,[index variante C0B] · indicateur de crevaison,0
+DSC,C0B_RPA_SCHWELLE,[index variante C0B] · indicateur de crevaison · seuil,0
+DSC,C0B_SCHUBABSCHALTUNG,[index variante C0B] · coupure en deceleration,0
+DSC,C0B_SC_X_ESM,[index variante C0B] · _SC_ · X · _ESM_,0
+DSC,C0B_SC_Y_ESM,[index variante C0B] · _SC_ · Y · _ESM_,0
+DSC,C0B_SDR_CTC,[index variante C0B] · _SDR_ · _CTC_,0
+DSC,C0B_SETZ_V_MAX,[index variante C0B] · positionnement · _V_ · maximum,0
+DSC,C0B_SPURWEITE,[index variante C0B] · voie,0
+DSC,C0B_SST,[index variante C0B] · _SST_,0
+DSC,C0B_TB_BDD,[index variante C0B] · **TB** · **BDD**,2
+DSC,C0B_THETA_ESM,[index variante C0B] · _THETA_ · _ESM_,0
+DSC,C0B_UEBERSTEUERN_MUE_0,[index variante C0B] · survirage · coefficient d'adherence · 0,0
+DSC,C0B_UEBERSTEUERN_MUE_1_2,[index variante C0B] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C0B_UNTERSTEUERN_MUE_0,[index variante C0B] · sous-virage · coefficient d'adherence · 0,0
+DSC,C0B_UNTERSTEUERN_MUE_1_2,[index variante C0B] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C0B_UNTERSTEUERSCHWELLE,[index variante C0B] · seuil de sous-virage,0
+DSC,C0B_VERZOEG_NEG_FEIN,[index variante C0B] · temporisation · negatif · fin,0
+DSC,C0B_VERZOEG_NEG_GROB,[index variante C0B] · temporisation · negatif · grossier,0
+DSC,C0B_VERZOEG_POS_FEIN,[index variante C0B] · temporisation · position · fin,0
+DSC,C0B_VERZOEG_POS_GROB,[index variante C0B] · temporisation · position · grossier,0
+DSC,C0B_V_EINHEIT,[index variante C0B] · _V_ · unite,0
+DSC,C0C_AFH_HSA,[index variante C0C] · _AFH_ · aide au demarrage en cote,0
+DSC,C0C_AFS,[index variante C0C] · phares adaptatifs (AFS),0
+DSC,C0C_ASC_AMR_STB,[index variante C0C] · antipatinage · **AMR** · _STB_,1
+DSC,C0C_ASC_BMR_STB,[index variante C0C] · antipatinage · **BMR** · _STB_,1
+DSC,C0C_ASL,[index variante C0C] · _ASL_,0
+DSC,C0C_BAUART,[index variante C0C] · type de construction,0
+DSC,C0C_BBV,[index variante C0C] · usure des plaquettes,0
+DSC,C0C_BBV_KORR_HA,[index variante C0C] · usure des plaquettes · correction · essieu arriere,0
+DSC,C0C_BBV_KORR_VA,[index variante C0C] · usure des plaquettes · correction · essieu avant,0
+DSC,C0C_BB_RAB,[index variante C0C] · **BB** · precharge des plaquettes,1
+DSC,C0C_BERGABANSATZ,[index variante C0C] · amorce de descente,0
+DSC,C0C_BERGAB_GERASTET,[index variante C0C] · descente · crante,0
+DSC,C0C_BERGAB_KENNEN,[index variante C0C] · descente · reconnaissance,0
+DSC,C0C_BTM,[index variante C0C] · _BTM_,0
+DSC,C0C_CBC,[index variante C0C] · controle de freinage en courbe,0
+DSC,C0C_CF_ESM_HB,[index variante C0C] · **CF** · _ESM_ · **HB**,2
+DSC,C0C_CF_ESM_LB,[index variante C0C] · **CF** · _ESM_ · **LB**,2
+DSC,C0C_CR_ESM_HB,[index variante C0C] · **CR** · _ESM_ · **HB**,2
+DSC,C0C_CR_ESM_LB,[index variante C0C] · **CR** · _ESM_ · **LB**,2
+DSC,C0C_DBC_MIN_AUSLOESEDRUCK,[index variante C0C] · _DBC_ · minimum · pression de declenchement,0
+DSC,C0C_DCC_C_AAT,[index variante C0C] · _DCC_ · C · temperature exterieure,0
+DSC,C0C_DCC_C_ATT_SCHUB_AUS,[index variante C0C] · _DCC_ · C · _ATT_ · pied leve / deceleration · arret,0
+DSC,C0C_DCC_C_ATT_SCHUB_EIN,[index variante C0C] · _DCC_ · C · _ATT_ · pied leve / deceleration · marche,0
+DSC,C0C_DCC_DTC,[index variante C0C] · _DCC_ · controle de traction dynamique,0
+DSC,C0C_DELTA_PSI_BETA_LIMIT,[index variante C0C] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C0C_DF_DIR,[index variante C0C] · **DF** · direction,1
+DSC,C0C_DIFF_LOCK,[index variante C0C] · differentiel · blocage,0
+DSC,C0C_DRUCKMODELL_HA,[index variante C0C] · modele de pression · essieu arriere,0
+DSC,C0C_DRUCKMODELL_VA,[index variante C0C] · modele de pression · essieu avant,0
+DSC,C0C_ECBA_DCC,[index variante C0C] · _ECBA_ · _DCC_,0
+DSC,C0C_FBS,[index variante C0C] · compensation de fading,0
+DSC,C0C_FLR,[index variante C0C] · reduction de puissance moteur,0
+DSC,C0C_GETRIEBE,[index variante C0C] · boite de vitesses,0
+DSC,C0C_GMB,[index variante C0C] · _GMB_,0
+DSC,C0C_GMK_ECBA_HA,[index variante C0C] · _GMK_ · _ECBA_ · essieu arriere,0
+DSC,C0C_GMK_ECBA_VA,[index variante C0C] · _GMK_ · _ECBA_ · essieu avant,0
+DSC,C0C_GMR_MAX_LIMIT_SCHRAEG,[index variante C0C] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C0C_GMR_MIN_LIMIT_SCHRAEG,[index variante C0C] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C0C_HSA,[index variante C0C] · aide au demarrage en cote,0
+DSC,C0C_HSA_AFH_AFU,[index variante C0C] · aide au demarrage en cote · _AFH_ · **AFU**,1
+DSC,C0C_IPM_MAX_P_RES,[index variante C0C] · _IPM_ · maximum · P · remise a zero,0
+DSC,C0C_KUEHLSCHACHT,[index variante C0C] · conduit de refroidissement,0
+DSC,C0C_LCL,[index variante C0C] · _LCL_,0
+DSC,C0C_LENKWINKELKENNLINIE,[index variante C0C] · courbe d'angle de braquage,0
+DSC,C0C_LF_ESM,[index variante C0C] · **LF** · _ESM_,1
+DSC,C0C_LR_ESM,[index variante C0C] · **LR** · _ESM_,1
+DSC,C0C_LUEFTER,[index variante C0C] · ventilateur,0
+DSC,C0C_LWK_X2,[index variante C0C] · angle de braquage · [point d'axe X2],0
+DSC,C0C_LWK_X3,[index variante C0C] · angle de braquage · [point d'axe X3],0
+DSC,C0C_LWK_X4,[index variante C0C] · angle de braquage · [point d'axe X4],0
+DSC,C0C_LWK_Y1,[index variante C0C] · angle de braquage · [point d'axe Y1],0
+DSC,C0C_LWK_Y2,[index variante C0C] · angle de braquage · [point d'axe Y2],0
+DSC,C0C_LWK_Y3,[index variante C0C] · angle de braquage · [point d'axe Y3],0
+DSC,C0C_LWK_Y4,[index variante C0C] · angle de braquage · [point d'axe Y4],0
+DSC,C0C_MIN_DRUCKAUFBAU_GRAD,[index variante C0C] · minimum · montee en pression · degre,0
+DSC,C0C_MOTOR,[index variante C0C] · moteur,0
+DSC,C0C_MOTOR_LEISTUNG_MAX,[index variante C0C] · moteur · puissance · maximum,0
+DSC,C0C_MOTOR_SCHLEPP_P,[index variante C0C] · moteur · couple de frein moteur · P,0
+DSC,C0C_M_ESM,[index variante C0C] · M · _ESM_,0
+DSC,C0C_PRE_MSR,[index variante C0C] · pre- · regulation du couple de frein moteur,0
+DSC,C0C_PRE_USC,[index variante C0C] · pre- · _USC_,0
+DSC,C0C_RPA,[index variante C0C] · indicateur de crevaison,0
+DSC,C0C_RPA_SCHWELLE,[index variante C0C] · indicateur de crevaison · seuil,0
+DSC,C0C_SCHUBABSCHALTUNG,[index variante C0C] · coupure en deceleration,0
+DSC,C0C_SC_X_ESM,[index variante C0C] · _SC_ · X · _ESM_,0
+DSC,C0C_SC_Y_ESM,[index variante C0C] · _SC_ · Y · _ESM_,0
+DSC,C0C_SDR_CTC,[index variante C0C] · _SDR_ · _CTC_,0
+DSC,C0C_SETZ_V_MAX,[index variante C0C] · positionnement · _V_ · maximum,0
+DSC,C0C_SPURWEITE,[index variante C0C] · voie,0
+DSC,C0C_SST,[index variante C0C] · _SST_,0
+DSC,C0C_TB_BDD,[index variante C0C] · **TB** · **BDD**,2
+DSC,C0C_THETA_ESM,[index variante C0C] · _THETA_ · _ESM_,0
+DSC,C0C_UEBERSTEUERN_MUE_0,[index variante C0C] · survirage · coefficient d'adherence · 0,0
+DSC,C0C_UEBERSTEUERN_MUE_1_2,[index variante C0C] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C0C_UNTERSTEUERN_MUE_0,[index variante C0C] · sous-virage · coefficient d'adherence · 0,0
+DSC,C0C_UNTERSTEUERN_MUE_1_2,[index variante C0C] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C0C_UNTERSTEUERSCHWELLE,[index variante C0C] · seuil de sous-virage,0
+DSC,C0C_VERZOEG_NEG_FEIN,[index variante C0C] · temporisation · negatif · fin,0
+DSC,C0C_VERZOEG_NEG_GROB,[index variante C0C] · temporisation · negatif · grossier,0
+DSC,C0C_VERZOEG_POS_FEIN,[index variante C0C] · temporisation · position · fin,0
+DSC,C0C_VERZOEG_POS_GROB,[index variante C0C] · temporisation · position · grossier,0
+DSC,C0C_V_EINHEIT,[index variante C0C] · _V_ · unite,0
+DSC,C0D_ASL,[index variante C0D] · _ASL_,0
+DSC,C0D_BAUART,[index variante C0D] · type de construction,0
+DSC,C0D_BBV,[index variante C0D] · usure des plaquettes,0
+DSC,C0D_BBV_KORR_HA,[index variante C0D] · usure des plaquettes · correction · essieu arriere,0
+DSC,C0D_BBV_KORR_VA,[index variante C0D] · usure des plaquettes · correction · essieu avant,0
+DSC,C0D_BTM,[index variante C0D] · _BTM_,0
+DSC,C0D_CBC,[index variante C0D] · controle de freinage en courbe,0
+DSC,C0D_CF_ESM_HB,[index variante C0D] · **CF** · _ESM_ · **HB**,2
+DSC,C0D_CF_ESM_LB,[index variante C0D] · **CF** · _ESM_ · **LB**,2
+DSC,C0D_CR_ESM_HB,[index variante C0D] · **CR** · _ESM_ · **HB**,2
+DSC,C0D_CR_ESM_LB,[index variante C0D] · **CR** · _ESM_ · **LB**,2
+DSC,C0D_DBC_MIN_AUSLOESEDRUCK,[index variante C0D] · _DBC_ · minimum · pression de declenchement,0
+DSC,C0D_DELTA_PSI_BETA_LIMIT,[index variante C0D] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C0D_DIFF_LOCK,[index variante C0D] · differentiel · blocage,0
+DSC,C0D_DRUCKMODELL_HA,[index variante C0D] · modele de pression · essieu arriere,0
+DSC,C0D_DRUCKMODELL_VA,[index variante C0D] · modele de pression · essieu avant,0
+DSC,C0D_FLR,[index variante C0D] · reduction de puissance moteur,0
+DSC,C0D_GETRIEBE,[index variante C0D] · boite de vitesses,0
+DSC,C0D_GMB,[index variante C0D] · _GMB_,0
+DSC,C0D_GMR_MAX_LIMIT_SCHRAEG,[index variante C0D] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C0D_GMR_MIN_LIMIT_SCHRAEG,[index variante C0D] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C0D_KUEHLSCHACHT,[index variante C0D] · conduit de refroidissement,0
+DSC,C0D_LCL,[index variante C0D] · _LCL_,0
+DSC,C0D_LENKWINKELKENNLINIE,[index variante C0D] · courbe d'angle de braquage,0
+DSC,C0D_LF_ESM,[index variante C0D] · **LF** · _ESM_,1
+DSC,C0D_LR_ESM,[index variante C0D] · **LR** · _ESM_,1
+DSC,C0D_LUEFTER,[index variante C0D] · ventilateur,0
+DSC,C0D_LWK_X2,[index variante C0D] · angle de braquage · [point d'axe X2],0
+DSC,C0D_LWK_X3,[index variante C0D] · angle de braquage · [point d'axe X3],0
+DSC,C0D_LWK_X4,[index variante C0D] · angle de braquage · [point d'axe X4],0
+DSC,C0D_LWK_Y1,[index variante C0D] · angle de braquage · [point d'axe Y1],0
+DSC,C0D_LWK_Y2,[index variante C0D] · angle de braquage · [point d'axe Y2],0
+DSC,C0D_LWK_Y3,[index variante C0D] · angle de braquage · [point d'axe Y3],0
+DSC,C0D_LWK_Y4,[index variante C0D] · angle de braquage · [point d'axe Y4],0
+DSC,C0D_MIN_DRUCKAUFBAU_GRAD,[index variante C0D] · minimum · montee en pression · degre,0
+DSC,C0D_MOTOR,[index variante C0D] · moteur,0
+DSC,C0D_M_ESM,[index variante C0D] · M · _ESM_,0
+DSC,C0D_PRE_MSR,[index variante C0D] · pre- · regulation du couple de frein moteur,0
+DSC,C0D_PRE_USC,[index variante C0D] · pre- · _USC_,0
+DSC,C0D_RPA,[index variante C0D] · indicateur de crevaison,0
+DSC,C0D_RPA_SCHWELLE,[index variante C0D] · indicateur de crevaison · seuil,0
+DSC,C0D_SC_X_ESM,[index variante C0D] · _SC_ · X · _ESM_,0
+DSC,C0D_SC_Y_ESM,[index variante C0D] · _SC_ · Y · _ESM_,0
+DSC,C0D_SDR_CTC,[index variante C0D] · _SDR_ · _CTC_,0
+DSC,C0D_SPURWEITE,[index variante C0D] · voie,0
+DSC,C0D_THETA_ESM,[index variante C0D] · _THETA_ · _ESM_,0
+DSC,C0D_UEBERSTEUERN_MUE_0,[index variante C0D] · survirage · coefficient d'adherence · 0,0
+DSC,C0D_UEBERSTEUERN_MUE_1_2,[index variante C0D] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C0D_UNTERSTEUERN_MUE_0,[index variante C0D] · sous-virage · coefficient d'adherence · 0,0
+DSC,C0D_UNTERSTEUERN_MUE_1_2,[index variante C0D] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C0D_UNTERSTEUERSCHWELLE,[index variante C0D] · seuil de sous-virage,0
+DSC,C0D_WLC,[index variante C0D] · **WLC**,1
+DSC,C0E_ASL,[index variante C0E] · _ASL_,0
+DSC,C0E_BAUART,[index variante C0E] · type de construction,0
+DSC,C0E_BBV,[index variante C0E] · usure des plaquettes,0
+DSC,C0E_BBV_KORR_HA,[index variante C0E] · usure des plaquettes · correction · essieu arriere,0
+DSC,C0E_BBV_KORR_VA,[index variante C0E] · usure des plaquettes · correction · essieu avant,0
+DSC,C0E_BTM,[index variante C0E] · _BTM_,0
+DSC,C0E_CBC,[index variante C0E] · controle de freinage en courbe,0
+DSC,C0E_CF_ESM_HB,[index variante C0E] · **CF** · _ESM_ · **HB**,2
+DSC,C0E_CF_ESM_LB,[index variante C0E] · **CF** · _ESM_ · **LB**,2
+DSC,C0E_CR_ESM_HB,[index variante C0E] · **CR** · _ESM_ · **HB**,2
+DSC,C0E_CR_ESM_LB,[index variante C0E] · **CR** · _ESM_ · **LB**,2
+DSC,C0E_DBC_MIN_AUSLOESEDRUCK,[index variante C0E] · _DBC_ · minimum · pression de declenchement,0
+DSC,C0E_DELTA_PSI_BETA_LIMIT,[index variante C0E] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C0E_DIFF_LOCK,[index variante C0E] · differentiel · blocage,0
+DSC,C0E_DRUCKMODELL_HA,[index variante C0E] · modele de pression · essieu arriere,0
+DSC,C0E_DRUCKMODELL_VA,[index variante C0E] · modele de pression · essieu avant,0
+DSC,C0E_FLR,[index variante C0E] · reduction de puissance moteur,0
+DSC,C0E_GETRIEBE,[index variante C0E] · boite de vitesses,0
+DSC,C0E_GMB,[index variante C0E] · _GMB_,0
+DSC,C0E_GMR_MAX_LIMIT_SCHRAEG,[index variante C0E] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C0E_GMR_MIN_LIMIT_SCHRAEG,[index variante C0E] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C0E_KUEHLSCHACHT,[index variante C0E] · conduit de refroidissement,0
+DSC,C0E_LCL,[index variante C0E] · _LCL_,0
+DSC,C0E_LENKWINKELKENNLINIE,[index variante C0E] · courbe d'angle de braquage,0
+DSC,C0E_LF_ESM,[index variante C0E] · **LF** · _ESM_,1
+DSC,C0E_LR_ESM,[index variante C0E] · **LR** · _ESM_,1
+DSC,C0E_LUEFTER,[index variante C0E] · ventilateur,0
+DSC,C0E_LWK_X2,[index variante C0E] · angle de braquage · [point d'axe X2],0
+DSC,C0E_LWK_X3,[index variante C0E] · angle de braquage · [point d'axe X3],0
+DSC,C0E_LWK_X4,[index variante C0E] · angle de braquage · [point d'axe X4],0
+DSC,C0E_LWK_Y1,[index variante C0E] · angle de braquage · [point d'axe Y1],0
+DSC,C0E_LWK_Y2,[index variante C0E] · angle de braquage · [point d'axe Y2],0
+DSC,C0E_LWK_Y3,[index variante C0E] · angle de braquage · [point d'axe Y3],0
+DSC,C0E_LWK_Y4,[index variante C0E] · angle de braquage · [point d'axe Y4],0
+DSC,C0E_MIN_DRUCKAUFBAU_GRAD,[index variante C0E] · minimum · montee en pression · degre,0
+DSC,C0E_MOTOR,[index variante C0E] · moteur,0
+DSC,C0E_M_ESM,[index variante C0E] · M · _ESM_,0
+DSC,C0E_PRE_MSR,[index variante C0E] · pre- · regulation du couple de frein moteur,0
+DSC,C0E_PRE_USC,[index variante C0E] · pre- · _USC_,0
+DSC,C0E_RPA,[index variante C0E] · indicateur de crevaison,0
+DSC,C0E_RPA_SCHWELLE,[index variante C0E] · indicateur de crevaison · seuil,0
+DSC,C0E_SC_X_ESM,[index variante C0E] · _SC_ · X · _ESM_,0
+DSC,C0E_SC_Y_ESM,[index variante C0E] · _SC_ · Y · _ESM_,0
+DSC,C0E_SDR_CTC,[index variante C0E] · _SDR_ · _CTC_,0
+DSC,C0E_SPURWEITE,[index variante C0E] · voie,0
+DSC,C0E_THETA_ESM,[index variante C0E] · _THETA_ · _ESM_,0
+DSC,C0E_UEBERSTEUERN_MUE_0,[index variante C0E] · survirage · coefficient d'adherence · 0,0
+DSC,C0E_UEBERSTEUERN_MUE_1_2,[index variante C0E] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C0E_UNTERSTEUERN_MUE_0,[index variante C0E] · sous-virage · coefficient d'adherence · 0,0
+DSC,C0E_UNTERSTEUERN_MUE_1_2,[index variante C0E] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C0E_UNTERSTEUERSCHWELLE,[index variante C0E] · seuil de sous-virage,0
+DSC,C0E_WLC,[index variante C0E] · **WLC**,1
+DSC,C0F_AFH_HSA,[index variante C0F] · _AFH_ · aide au demarrage en cote,0
+DSC,C0F_AFS,[index variante C0F] · phares adaptatifs (AFS),0
+DSC,C0F_ASC_AMR_STB,[index variante C0F] · antipatinage · **AMR** · _STB_,1
+DSC,C0F_ASC_BMR_STB,[index variante C0F] · antipatinage · **BMR** · _STB_,1
+DSC,C0F_ASL,[index variante C0F] · _ASL_,0
+DSC,C0F_BAUART,[index variante C0F] · type de construction,0
+DSC,C0F_BBV,[index variante C0F] · usure des plaquettes,0
+DSC,C0F_BBV_KORR_HA,[index variante C0F] · usure des plaquettes · correction · essieu arriere,0
+DSC,C0F_BBV_KORR_VA,[index variante C0F] · usure des plaquettes · correction · essieu avant,0
+DSC,C0F_BB_RAB,[index variante C0F] · **BB** · precharge des plaquettes,1
+DSC,C0F_BERGABANSATZ,[index variante C0F] · amorce de descente,0
+DSC,C0F_BERGAB_GERASTET,[index variante C0F] · descente · crante,0
+DSC,C0F_BERGAB_KENNEN,[index variante C0F] · descente · reconnaissance,0
+DSC,C0F_BTM,[index variante C0F] · _BTM_,0
+DSC,C0F_CBC,[index variante C0F] · controle de freinage en courbe,0
+DSC,C0F_CF_ESM_HB,[index variante C0F] · **CF** · _ESM_ · **HB**,2
+DSC,C0F_CF_ESM_LB,[index variante C0F] · **CF** · _ESM_ · **LB**,2
+DSC,C0F_CR_ESM_HB,[index variante C0F] · **CR** · _ESM_ · **HB**,2
+DSC,C0F_CR_ESM_LB,[index variante C0F] · **CR** · _ESM_ · **LB**,2
+DSC,C0F_DBC_MIN_AUSLOESEDRUCK,[index variante C0F] · _DBC_ · minimum · pression de declenchement,0
+DSC,C0F_DCC_C_AAT,[index variante C0F] · _DCC_ · C · temperature exterieure,0
+DSC,C0F_DCC_C_ATT_SCHUB_AUS,[index variante C0F] · _DCC_ · C · _ATT_ · pied leve / deceleration · arret,0
+DSC,C0F_DCC_C_ATT_SCHUB_EIN,[index variante C0F] · _DCC_ · C · _ATT_ · pied leve / deceleration · marche,0
+DSC,C0F_DCC_DTC,[index variante C0F] · _DCC_ · controle de traction dynamique,0
+DSC,C0F_DELTA_PSI_BETA_LIMIT,[index variante C0F] · ecart · **PSI** · _BETA_ · limite,1
+DSC,C0F_DF_DIR,[index variante C0F] · **DF** · direction,1
+DSC,C0F_DIFF_LOCK,[index variante C0F] · differentiel · blocage,0
+DSC,C0F_DRUCKMODELL_HA,[index variante C0F] · modele de pression · essieu arriere,0
+DSC,C0F_DRUCKMODELL_VA,[index variante C0F] · modele de pression · essieu avant,0
+DSC,C0F_ECBA_DCC,[index variante C0F] · _ECBA_ · _DCC_,0
+DSC,C0F_FBS,[index variante C0F] · compensation de fading,0
+DSC,C0F_FLR,[index variante C0F] · reduction de puissance moteur,0
+DSC,C0F_GETRIEBE,[index variante C0F] · boite de vitesses,0
+DSC,C0F_GMB,[index variante C0F] · _GMB_,0
+DSC,C0F_GMK_ECBA_HA,[index variante C0F] · _GMK_ · _ECBA_ · essieu arriere,0
+DSC,C0F_GMK_ECBA_VA,[index variante C0F] · _GMK_ · _ECBA_ · essieu avant,0
+DSC,C0F_GMR_MAX_LIMIT_SCHRAEG,[index variante C0F] · regulation du moment de lacet · maximum · limite · derive,0
+DSC,C0F_GMR_MIN_LIMIT_SCHRAEG,[index variante C0F] · regulation du moment de lacet · minimum · limite · derive,0
+DSC,C0F_HSA,[index variante C0F] · aide au demarrage en cote,0
+DSC,C0F_HSA_AFH_AFU,[index variante C0F] · aide au demarrage en cote · _AFH_ · **AFU**,1
+DSC,C0F_IPM_MAX_P_RES,[index variante C0F] · _IPM_ · maximum · P · remise a zero,0
+DSC,C0F_KUEHLSCHACHT,[index variante C0F] · conduit de refroidissement,0
+DSC,C0F_LCL,[index variante C0F] · _LCL_,0
+DSC,C0F_LENKWINKELKENNLINIE,[index variante C0F] · courbe d'angle de braquage,0
+DSC,C0F_LF_ESM,[index variante C0F] · **LF** · _ESM_,1
+DSC,C0F_LR_ESM,[index variante C0F] · **LR** · _ESM_,1
+DSC,C0F_LUEFTER,[index variante C0F] · ventilateur,0
+DSC,C0F_LWK_X2,[index variante C0F] · angle de braquage · [point d'axe X2],0
+DSC,C0F_LWK_X3,[index variante C0F] · angle de braquage · [point d'axe X3],0
+DSC,C0F_LWK_X4,[index variante C0F] · angle de braquage · [point d'axe X4],0
+DSC,C0F_LWK_Y1,[index variante C0F] · angle de braquage · [point d'axe Y1],0
+DSC,C0F_LWK_Y2,[index variante C0F] · angle de braquage · [point d'axe Y2],0
+DSC,C0F_LWK_Y3,[index variante C0F] · angle de braquage · [point d'axe Y3],0
+DSC,C0F_LWK_Y4,[index variante C0F] · angle de braquage · [point d'axe Y4],0
+DSC,C0F_MIN_DRUCKAUFBAU_GRAD,[index variante C0F] · minimum · montee en pression · degre,0
+DSC,C0F_MOTOR,[index variante C0F] · moteur,0
+DSC,C0F_MOTOR_LEISTUNG_MAX,[index variante C0F] · moteur · puissance · maximum,0
+DSC,C0F_MOTOR_SCHLEPP_P,[index variante C0F] · moteur · couple de frein moteur · P,0
+DSC,C0F_M_ESM,[index variante C0F] · M · _ESM_,0
+DSC,C0F_PRE_MSR,[index variante C0F] · pre- · regulation du couple de frein moteur,0
+DSC,C0F_PRE_USC,[index variante C0F] · pre- · _USC_,0
+DSC,C0F_RPA,[index variante C0F] · indicateur de crevaison,0
+DSC,C0F_RPA_SCHWELLE,[index variante C0F] · indicateur de crevaison · seuil,0
+DSC,C0F_SCHUBABSCHALTUNG,[index variante C0F] · coupure en deceleration,0
+DSC,C0F_SC_X_ESM,[index variante C0F] · _SC_ · X · _ESM_,0
+DSC,C0F_SC_Y_ESM,[index variante C0F] · _SC_ · Y · _ESM_,0
+DSC,C0F_SDR_CTC,[index variante C0F] · _SDR_ · _CTC_,0
+DSC,C0F_SETZ_V_MAX,[index variante C0F] · positionnement · _V_ · maximum,0
+DSC,C0F_SPURWEITE,[index variante C0F] · voie,0
+DSC,C0F_SST,[index variante C0F] · _SST_,0
+DSC,C0F_TB_BDD,[index variante C0F] · **TB** · **BDD**,2
+DSC,C0F_THETA_ESM,[index variante C0F] · _THETA_ · _ESM_,0
+DSC,C0F_UEBERSTEUERN_MUE_0,[index variante C0F] · survirage · coefficient d'adherence · 0,0
+DSC,C0F_UEBERSTEUERN_MUE_1_2,[index variante C0F] · survirage · coefficient d'adherence · 1 · 2,0
+DSC,C0F_UNTERSTEUERN_MUE_0,[index variante C0F] · sous-virage · coefficient d'adherence · 0,0
+DSC,C0F_UNTERSTEUERN_MUE_1_2,[index variante C0F] · sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,C0F_UNTERSTEUERSCHWELLE,[index variante C0F] · seuil de sous-virage,0
+DSC,C0F_VERZOEG_NEG_FEIN,[index variante C0F] · temporisation · negatif · fin,0
+DSC,C0F_VERZOEG_NEG_GROB,[index variante C0F] · temporisation · negatif · grossier,0
+DSC,C0F_VERZOEG_POS_FEIN,[index variante C0F] · temporisation · position · fin,0
+DSC,C0F_VERZOEG_POS_GROB,[index variante C0F] · temporisation · position · grossier,0
+DSC,C0F_V_EINHEIT,[index variante C0F] · _V_ · unite,0
+DSC,C0X_C8,**C0X** · **C8**,2
+DSC,C10C_AAT_SCHUB_AUS_OFFSET,**C10C** · temperature exterieure · pied leve / deceleration · arret · decalage,1
+DSC,C10C_AAT_SCHUB_EIN_KORR,**C10C** · temperature exterieure · pied leve / deceleration · marche · correction,1
+DSC,C10C_AAT_SCHUB_EIN_OFFSET,**C10C** · temperature exterieure · pied leve / deceleration · marche · decalage,1
+DSC,C10_A_MAX,[index variante C10] · A · maximum,0
+DSC,C10_A_MIN,[index variante C10] · A · minimum,0
+DSC,C10_BERGABANSATZ,[index variante C10] · amorce de descente,0
+DSC,C10_BERGAB_GERASTET,[index variante C10] · descente · crante,0
+DSC,C10_BERGAB_KENNEN,[index variante C10] · descente · reconnaissance,0
+DSC,C10_DTC_DCC,[index variante C10] · controle de traction dynamique · _DCC_,0
+DSC,C10_ECBA_DCC,[index variante C10] · _ECBA_ · _DCC_,0
+DSC,C10_FZG_MASSE,[index variante C10] · vehicule · masse,0
+DSC,C10_IPM_MAX_P_RES,[index variante C10] · _IPM_ · maximum · P · remise a zero,0
+DSC,C10_MOTOR_LEISTUNG_MAX,[index variante C10] · moteur · puissance · maximum,0
+DSC,C10_P_AUSROLL_ANTRIEB,[index variante C10] · P · roue libre · transmission,0
+DSC,C10_R_RAD_DYN_DSC,[index variante C10] · _R_ · roue · dynamique · controle de stabilite,0
+DSC,C10_SCHUBABSCHALTUNG,[index variante C10] · coupure en deceleration,0
+DSC,C10_SETZ_V_MAX_CC,[index variante C10] · positionnement · _V_ · maximum · Check Control,0
+DSC,C10_SETZ_V_MIN,[index variante C10] · positionnement · _V_ · minimum,0
+DSC,C10_VERZOEG_NEG_FEIN,[index variante C10] · temporisation · negatif · fin,0
+DSC,C10_VERZOEG_NEG_GROB,[index variante C10] · temporisation · negatif · grossier,0
+DSC,C10_VERZOEG_POS_FEIN,[index variante C10] · temporisation · position · fin,0
+DSC,C10_VERZOEG_POS_GROB,[index variante C10] · temporisation · position · grossier,0
+DSC,C10_V_ABSCHALT,[index variante C10] · _V_ · coupure,0
+DSC,C10_V_EINHEIT,[index variante C10] · _V_ · unite,0
+DSC,C8,**C8**,1
+DSC,C8_BDSC,**C8** · **BDSC**,2
+DSC,CF_ESM_HB,**CF** · _ESM_ · **HB**,2
+DSC,CF_ESM_LB,**CF** · _ESM_ · **LB**,2
+DSC,CHECKSUM,somme de controle,0
+DSC,CR_ESM_HB,**CR** · _ESM_ · **HB**,2
+DSC,CR_ESM_LB,**CR** · _ESM_ · **LB**,2
+DSC,C_AAT_SCHUB_AUS_OFFSET,C · temperature exterieure · pied leve / deceleration · arret · decalage,0
+DSC,C_AAT_SCHUB_EIN_KORR_05,C · temperature exterieure · pied leve / deceleration · marche · correction · 05,0
+DSC,C_AAT_SCHUB_EIN_KORR_C0F,C · temperature exterieure · pied leve / deceleration · marche · correction · [index variante C0F],0
+DSC,C_AAT_SCHUB_EIN_KORR_SKAL,C · temperature exterieure · pied leve / deceleration · marche · correction · **SKAL**,1
+DSC,C_AAT_SCHUB_EIN_OFFSET,C · temperature exterieure · pied leve / deceleration · marche · decalage,0
+DSC,DBC_MIN_AUFBAUGRADIENT,_DBC_ · minimum · **AUFBAUGRADIENT**,1
+DSC,DBC_MIN_AUSLOESEDRUCK,_DBC_ · minimum · pression de declenchement,0
+DSC,DCC_DTC,_DCC_ · controle de traction dynamique,0
+DSC,DELTA_PSI_BETA_LIMITKORR2,ecart · **PSI** · _BETA_ · **LIMITKORR2**,2
+DSC,DF_DIR,**DF** · direction,1
+DSC,DIFF_LOCK,differentiel · blocage,0
+DSC,DRUCKMODELL_HINTERACHSE,modele de pression · **HINTERACHSE**,1
+DSC,DRUCKMODELL_VORDERACHSE,modele de pression · **VORDERACHSE**,1
+DSC,DSC8_SST,**DSC8** · _SST_,1
+DSC,DTC_DCC,controle de traction dynamique · _DCC_,0
+DSC,DXC_CBS,_DXC_ · entretien selon besoin (CBS),0
+DSC,E84C_AAT_SCHUB_AUS_OFFSET,**E84C** · temperature exterieure · pied leve / deceleration · arret · decalage,1
+DSC,E84C_AAT_SCHUB_EIN_KORR,**E84C** · temperature exterieure · pied leve / deceleration · marche · correction,1
+DSC,E84C_AAT_SCHUB_EIN_OFFSET,**E84C** · temperature exterieure · pied leve / deceleration · marche · decalage,1
+DSC,E84_AAT_SCHUB_AUS_OFFSET,**E84** · temperature exterieure · pied leve / deceleration · arret · decalage,1
+DSC,E84_AAT_SCHUB_EIN_KORR,**E84** · temperature exterieure · pied leve / deceleration · marche · correction,1
+DSC,E84_AAT_SCHUB_EIN_OFFSET,**E84** · temperature exterieure · pied leve / deceleration · marche · decalage,1
+DSC,E84_ASL,**E84** · _ASL_,1
+DSC,E84_AX_REF_DIFF_LOCK,**E84** · **AX** · reference · differentiel · blocage,2
+DSC,E84_A_MAX,**E84** · A · maximum,1
+DSC,E84_A_MAX_DSC,**E84** · A · maximum · controle de stabilite,1
+DSC,E84_A_MIN,**E84** · A · minimum,1
+DSC,E84_A_MIN_DSC,**E84** · A · minimum · controle de stabilite,1
+DSC,E84_BERGABANSATZ,**E84** · amorce de descente,1
+DSC,E84_BERGAB_GERASTET,**E84** · descente · crante,1
+DSC,E84_BERGAB_KENNEN,**E84** · descente · reconnaissance,1
+DSC,E84_BSW,**E84** · **BSW**,2
+DSC,E84_BSW_HO,**E84** · **BSW** · **HO**,3
+DSC,E84_C8_BDSC,**E84** · **C8** · **BDSC**,3
+DSC,E84_CBS,**E84** · entretien selon besoin (CBS),1
+DSC,E84_DCDC,**E84** · **DCDC**,2
+DSC,E84_DTC_DCC,**E84** · controle de traction dynamique · _DCC_,1
+DSC,E84_ECBA_DCC,**E84** · _ECBA_ · _DCC_,1
+DSC,E84_EVB,**E84** · **EVB**,2
+DSC,E84_FDB,**E84** · **FDB**,2
+DSC,E84_FLR,**E84** · reduction de puissance moteur,1
+DSC,E84_FZG_MASSE,**E84** · vehicule · masse,1
+DSC,E84_FZG_VARIANTEN,**E84** · vehicule · **VARIANTEN**,2
+DSC,E84_HBA,**E84** · assistance de freinage,1
+DSC,E84_HHC,**E84** · **HHC**,2
+DSC,E84_HILLDESC,**E84** · assistance en descente,1
+DSC,E84_HILLDESC_DXC_8,**E84** · assistance en descente · _DXC_ · 8,1
+DSC,E84_HPS,**E84** · **HPS**,2
+DSC,E84_HVV,**E84** · **HVV**,2
+DSC,E84_IPM_MAX_P_RES,**E84** · _IPM_ · maximum · P · remise a zero,1
+DSC,E84_MOTOR_LEISTUNG_MAX,**E84** · moteur · puissance · maximum,1
+DSC,E84_P_AUSROLL_ANTRIEB,**E84** · P · roue libre · transmission,1
+DSC,E84_R_RAD_DYN_DSC,**E84** · _R_ · roue · dynamique · controle de stabilite,1
+DSC,E84_SCHUBABSCHALTUNG,**E84** · coupure en deceleration,1
+DSC,E84_SETZ_V_MAX_CC,**E84** · positionnement · _V_ · maximum · Check Control,1
+DSC,E84_SETZ_V_MIN,**E84** · positionnement · _V_ · minimum,1
+DSC,E84_SST,**E84** · _SST_,1
+DSC,E84_VCH,**E84** · **VCH**,2
+DSC,E84_VERZOEG_NEG_FEIN,**E84** · temporisation · negatif · fin,1
+DSC,E84_VERZOEG_NEG_GROB,**E84** · temporisation · negatif · grossier,1
+DSC,E84_VERZOEG_POS_FEIN,**E84** · temporisation · position · fin,1
+DSC,E84_VERZOEG_POS_GROB,**E84** · temporisation · position · grossier,1
+DSC,E84_V_ABSCHALT,**E84** · _V_ · coupure,1
+DSC,E84_V_EINHEIT,**E84** · _V_ · unite,1
+DSC,E89_ASL,**E89** · _ASL_,1
+DSC,E89_BERGAB_GERASTET,**E89** · descente · crante,1
+DSC,E89_BERGAB_KENNEN,**E89** · descente · reconnaissance,1
+DSC,E89_BSW,**E89** · **BSW**,2
+DSC,E89_C8,**E89** · **C8**,2
+DSC,E89_ECBA_DCC,**E89** · _ECBA_ · _DCC_,1
+DSC,E89_EVB,**E89** · **EVB**,2
+DSC,E89_FLR,**E89** · reduction de puissance moteur,1
+DSC,E89_HHC,**E89** · **HHC**,2
+DSC,E89_HILLDESC_DXC_8,**E89** · assistance en descente · _DXC_ · 8,1
+DSC,E89_HPS,**E89** · **HPS**,2
+DSC,E89_MOTOR_LEISTUNG_MAX,**E89** · moteur · puissance · maximum,1
+DSC,E89_P_AUSROLL_ANTRIEB,**E89** · P · roue libre · transmission,1
+DSC,E89_R_RAD_DYN_DSC,**E89** · _R_ · roue · dynamique · controle de stabilite,1
+DSC,E89_SCHUBABSCHALTUNG,**E89** · coupure en deceleration,1
+DSC,E89_SST,**E89** · _SST_,1
+DSC,E89_SZL,**E89** · **SZL**,2
+DSC,E90_FZG_VARIANTEN,**E90** · vehicule · **VARIANTEN**,2
+DSC,ECBA,_ECBA_,0
+DSC,ECBA_DCC,_ECBA_ · _DCC_,0
+DSC,ECBA_DCC_C0F,_ECBA_ · _DCC_ · [index variante C0F],0
+DSC,ECD,**ECD**,1
+DSC,EVB,**EVB**,1
+DSC,FBS,compensation de fading,0
+DSC,FDB,**FDB**,1
+DSC,FDB_0F,**FDB** · **0F**,2
+DSC,FLR,reduction de puissance moteur,0
+DSC,FLR_C0D,reduction de puissance moteur · [index variante C0D],0
+DSC,FLR_C0E,reduction de puissance moteur · [index variante C0E],0
+DSC,FLR_C0F,reduction de puissance moteur · [index variante C0F],0
+DSC,FZG_MASSE,vehicule · masse,0
+DSC,FZG_MASSE_C03,vehicule · masse · [index variante C03],0
+DSC,FZG_VARIANTEN,vehicule · **VARIANTEN**,1
+DSC,GEARMOMENTREGLER_MAX_HA_2,**GEARMOMENTREGLER** · maximum · essieu arriere · 2,1
+DSC,GEARMOMENTREGLER_MIN_HA_2,**GEARMOMENTREGLER** · minimum · essieu arriere · 2,1
+DSC,GETRIEBE,boite de vitesses,0
+DSC,GMB,_GMB_,0
+DSC,GMK,_GMK_,0
+DSC,GMK_ECBA_HA,_GMK_ · _ECBA_ · essieu arriere,0
+DSC,GMK_ECBA_VA,_GMK_ · _ECBA_ · essieu avant,0
+DSC,HBA_DXC_8,assistance de freinage · _DXC_ · 8,0
+DSC,HHC,**HHC**,1
+DSC,HILLDESC_DXC_8,assistance en descente · _DXC_ · 8,0
+DSC,HILLDESC_DXC_8_C0F,assistance en descente · _DXC_ · 8 · [index variante C0F],0
+DSC,HPS,**HPS**,1
+DSC,HVV,**HVV**,1
+DSC,IPM_MAX_P_RES,_IPM_ · maximum · P · remise a zero,0
+DSC,LENKWINKELKENNLINIE_2,courbe d'angle de braquage · 2,0
+DSC,LF_ESM,**LF** · _ESM_,1
+DSC,LR_ESM,**LR** · _ESM_,1
+DSC,LUEFTER,ventilateur,0
+DSC,LWK_X2,angle de braquage · [point d'axe X2],0
+DSC,LWK_X3,angle de braquage · [point d'axe X3],0
+DSC,LWK_X4,angle de braquage · [point d'axe X4],0
+DSC,LWK_Y1,angle de braquage · [point d'axe Y1],0
+DSC,LWK_Y2,angle de braquage · [point d'axe Y2],0
+DSC,LWK_Y3,angle de braquage · [point d'axe Y3],0
+DSC,LWK_Y4,angle de braquage · [point d'axe Y4],0
+DSC,MOTOR_ART_DSC_2,moteur · type · controle de stabilite · 2,0
+DSC,MOTOR_LEISTUNG_MAX,moteur · puissance · maximum,0
+DSC,MOTOR_LEISTUNG_MAX_C0F,moteur · puissance · maximum · [index variante C0F],0
+DSC,M_ESM,M · _ESM_,0
+DSC,PRE_MSR,pre- · regulation du couple de frein moteur,0
+DSC,P_AUSROLL_ANTRIEB,P · roue libre · transmission,0
+DSC,P_AUSROLL_ANTRIEB_C0E,P · roue libre · transmission · [index variante C0E],0
+DSC,P_AUSROLL_ANTRIEB_C0F,P · roue libre · transmission · [index variante C0F],0
+DSC,RPA,indicateur de crevaison,0
+DSC,RPA_SCHWELLE,indicateur de crevaison · seuil,0
+DSC,R_RAD_DYN_DSC,_R_ · roue · dynamique · controle de stabilite,0
+DSC,R_RAD_DYN_DSC_C0F,_R_ · roue · dynamique · controle de stabilite · [index variante C0F],0
+DSC,SCHUBABSCHALTUNG,coupure en deceleration,0
+DSC,SCHUBABSCHALTUNG_C0E,coupure en deceleration · [index variante C0E],0
+DSC,SCHUBABSCHALTUNG_C0F,coupure en deceleration · [index variante C0F],0
+DSC,SC_X_ESM,_SC_ · X · _ESM_,0
+DSC,SC_Y_ESM,_SC_ · Y · _ESM_,0
+DSC,SETZ_V_MAX_CC,positionnement · _V_ · maximum · Check Control,0
+DSC,SETZ_V_MIN,positionnement · _V_ · minimum,0
+DSC,SPURWEITE,voie,0
+DSC,SST,_SST_,0
+DSC,SZL,**SZL**,1
+DSC,SZL_BDSC,**SZL** · **BDSC**,2
+DSC,TB_BDD,**TB** · **BDD**,2
+DSC,THETA_ESM,_THETA_ · _ESM_,0
+DSC,UEBERSTEUERN_MUE_0_2,survirage · coefficient d'adherence · 0 · 2,0
+DSC,UEBERSTEUERN_MUE_1_2,survirage · coefficient d'adherence · 1 · 2,0
+DSC,UNTERSTEUERN_MUE_0_2,sous-virage · coefficient d'adherence · 0 · 2,0
+DSC,UNTERSTEUERN_MUE_1_2,sous-virage · coefficient d'adherence · 1 · 2,0
+DSC,US_VARIANTE,marche americain · variante,0
+DSC,VCH,**VCH**,1
+DSC,VCH_C0E,**VCH** · [index variante C0E],1
+DSC,VCH_C0F,**VCH** · [index variante C0F],1
+DSC,VERZOEG_NEG_FEIN,temporisation · negatif · fin,0
+DSC,VERZOEG_NEG_GROB,temporisation · negatif · grossier,0
+DSC,VERZOEG_POS_FEIN,temporisation · position · fin,0
+DSC,VERZOEG_POS_GROB,temporisation · position · grossier,0
+DSC,VOLUMENDURCHFLUSSPARA_2,**VOLUMENDURCHFLUSSPARA** · 2,1
+DSC,V_ABSCHALT,_V_ · coupure,0
+DSC,V_EINHEIT,_V_ · unite,0
+DSC,V_EINHEIT_C0F,_V_ · unite · [index variante C0F],0
+EKP,AMS_R1_SRON,_AMS_ · **R1** · **SRON**,2
+EKP,AMS_R2_SRON_STAT,_AMS_ · **R2** · **SRON** · etat,2
+EKP,AMS_R3_R5_SRON_MIN,_AMS_ · **R3** · **R5** · **SRON** · minimum,3
+EKP,AMS_R4_SROFF,_AMS_ · **R4** · **SROFF**,2
+EKP,AMS_R6_R8_ACU_ON,_AMS_ · **R6** · **R8** · **ACU** · marche,3
+EKP,AMS_R7_AV_TRIMM,_AMS_ · **R7** · **AV** · **TRIMM**,3
+EKP,AMS_R9_R10_OVERC,_AMS_ · **R9** · **R10** · **OVERC**,3
+EKP,DATUM_MONAT,date · **MONAT**,1
+EKP,DATUM_TAG,date · **TAG**,1
+EKP,DEBUG_BYTE1,deverminage · **BYTE1**,1
+EKP,DEBUG_BYTE2,deverminage · **BYTE2**,1
+EKP,DEBUG_BYTE3,deverminage · **BYTE3**,1
+EKP,KEINE_SPANNUNG_KL30,aucun · tension · borne 30 (permanent),0
+EKP,LIMIT_M_DREHZAHL,limite · M · regime,0
+EKP,MIN_SPANNUNG_KL30,minimum · tension · borne 30 (permanent),0
+EKP,MOTORPOLE,**MOTORPOLE**,1
+EKP,PUMPEN_ID,**PUMPEN** · identifiant,1
+EKP,RIPPLEFILTER_LP_1,**RIPPLEFILTER** · **LP** · 1,2
+EKP,RIPPLEFILTER_LP_2,**RIPPLEFILTER** · **LP** · 2,2
+EKP,RIPPLEFILTER_NO,**RIPPLEFILTER** · non,1
+EKP,SPARE_1,reserve · 1,0
+EKP,SPARE_2,reserve · 2,0
+EKP,SPARE_3,reserve · 3,0
+EKP,SPARE_4,reserve · 4,0
+EKP,SPARE_5,reserve · 5,0
+EKP,SPARE_6,reserve · 6,0
+EKP,UEBERTEMP_LEVEL1,**UEBERTEMP** · **LEVEL1**,2
+EKP,UEBERTEMP_LEVEL2,**UEBERTEMP** · **LEVEL2**,2
+FRM,ABSCHALTUNG_RFS,coupure · feu de recul,0
+FRM,ABSCHWAECH_D_TAU,**ABSCHWAECH** · D · _TAU_,1
+FRM,ABSCHW_D_TAU_HI,attenuation · D · _TAU_ · haut,0
+FRM,ABSCHW_D_TAU_LO,attenuation · D · _TAU_ · bas,0
+FRM,ABSTELLPOS_CUSTOM,**ABSTELLPOS** · **CUSTOM**,2
+FRM,ABSTELLPOS_SMC,**ABSTELLPOS** · **SMC**,2
+FRM,AEND_V_SCHWENK_N_AUSSEN,**AEND** · _V_ · pivotement · N · exterieur,1
+FRM,ALC_ABTASTRATE_DYN,phares directionnels (ALC) · **ABTASTRATE** · dynamique,1
+FRM,ALC_ABTASTRATE_TREND,phares directionnels (ALC) · **ABTASTRATE** · **TREND**,2
+FRM,ALC_ABWEICHUNG_TREND,phares directionnels (ALC) · **ABWEICHUNG** · **TREND**,2
+FRM,ALC_AUSWERT_GRADIENT,phares directionnels (ALC) · **AUSWERT** · **GRADIENT**,2
+FRM,ALC_AUSWERT_PROP_ABWEICH,phares directionnels (ALC) · **AUSWERT** · **PROP** · **ABWEICH**,3
+FRM,ALC_CC_ALC_ERR_OFF,phares directionnels (ALC) · Check Control · phares directionnels (ALC) · erreur · arret,0
+FRM,ALC_DAUER_DYN_NACHFUEHR,phares directionnels (ALC) · duree · dynamique · **NACHFUEHR**,1
+FRM,ALC_DEF_LWR_SENSOR_HI,phares directionnels (ALC) · defaut · correcteur de site des phares · capteur · haut,0
+FRM,ALC_DIFFERENZ_MSP_DYN_STA,phares directionnels (ALC) · **DIFFERENZ** · **MSP** · dynamique · **STA**,3
+FRM,ALC_DISABLE_AUSGL_NICK_GW,phares directionnels (ALC) · desactivation · **AUSGL** · **NICK** · **GW**,3
+FRM,ALC_EINSCHALTBEDINGUNG,phares directionnels (ALC) · **EINSCHALTBEDINGUNG**,1
+FRM,ALC_EPSILON_DELTA_A,phares directionnels (ALC) · **EPSILON** · ecart · A,1
+FRM,ALC_EPSILON_DELTA_AV,phares directionnels (ALC) · **EPSILON** · ecart · **AV**,2
+FRM,ALC_ERR_BLK_FREQ,phares directionnels (ALC) · erreur · clignotant · frequence,0
+FRM,ALC_FAHRZEUG,phares directionnels (ALC) · **FAHRZEUG**,1
+FRM,ALC_GRADIENT_SCHLECHTWEG,phares directionnels (ALC) · **GRADIENT** · **SCHLECHTWEG**,2
+FRM,ALC_HOEHENWEG,phares directionnels (ALC) · **HOEHENWEG**,1
+FRM,ALC_KLS_ENABLE,phares directionnels (ALC) · **KLS** · activation,1
+FRM,ALC_LWR_NEIGUNG_KONSTANTE,phares directionnels (ALC) · correcteur de site des phares · inclinaison · **KONSTANTE**,1
+FRM,ALC_LWR_VORZEICHEN,phares directionnels (ALC) · correcteur de site des phares · **VORZEICHEN**,1
+FRM,ALC_MINDESTANZAHL_VZ_WECH,phares directionnels (ALC) · **MINDESTANZAHL** · **VZ** · **WECH**,3
+FRM,ALC_MIN_STEIGUNG_VZ_WECHS,phares directionnels (ALC) · minimum · **STEIGUNG** · **VZ** · **WECHS**,3
+FRM,ALC_MITTELUNGSINTERV_DYN,phares directionnels (ALC) · **MITTELUNGSINTERV** · dynamique,1
+FRM,ALC_MITTELUNGSINTERV_TREN,phares directionnels (ALC) · **MITTELUNGSINTERV** · **TREN**,2
+FRM,ALC_MITTELUNGSINT_VZ_WECH,phares directionnels (ALC) · **MITTELUNGSINT** · **VZ** · **WECH**,3
+FRM,ALC_NACHLAUF_SCHLECHTWEG,phares directionnels (ALC) · marche a suivre / temporisation · **SCHLECHTWEG**,1
+FRM,ALC_OFFSET_LWR,phares directionnels (ALC) · decalage · correcteur de site des phares,0
+FRM,ALC_SAETT_TIMER_SCHLECHTW,phares directionnels (ALC) · **SAETT** · minuterie · **SCHLECHTW**,2
+FRM,ALC_SCHWENK_LATCH,phares directionnels (ALC) · pivotement · **LATCH**,1
+FRM,ALC_SCHW_GRAD_BESCHLEUNIG,phares directionnels (ALC) · seuil · degre · **BESCHLEUNIG**,1
+FRM,ALC_SCHW_GRAD_BREMSEN,phares directionnels (ALC) · seuil · degre · **BREMSEN**,1
+FRM,ALC_SCHW_GRAD_SCHLECHTWEG,phares directionnels (ALC) · seuil · degre · **SCHLECHTWEG**,1
+FRM,ALC_SCHW_PROP_ABWEICHUNG,phares directionnels (ALC) · seuil · **PROP** · **ABWEICHUNG**,2
+FRM,ALC_SCHW_TREND,phares directionnels (ALC) · seuil · **TREND**,1
+FRM,ALC_VMAX_BESCHLEUNIGUNG,phares directionnels (ALC) · **VMAX** · **BESCHLEUNIGUNG**,2
+FRM,ALC_VMAX_BREMSEN,phares directionnels (ALC) · **VMAX** · **BREMSEN**,2
+FRM,ALC_VMIN_BESCHLEUNIGUNG,phares directionnels (ALC) · **VMIN** · **BESCHLEUNIGUNG**,2
+FRM,ALC_VMIN_BREMSEN,phares directionnels (ALC) · **VMIN** · **BREMSEN**,2
+FRM,AL_KL50_SCHUTZ,feux de croisement · borne 50 (demarreur) · protection,0
+FRM,ASP_KEY_MEM_OHNE_MASTER,retroviseur exterieur · **KEY** · **MEM** · sans · **MASTER**,3
+FRM,ASP_LIN_VERBAUT,retroviseur exterieur · bus LIN · installe,0
+FRM,AUTOM_LICHT_ABSCHALTUNG,automatique · lumiere · coupure,0
+FRM,AUTOM_LICHT_KONTROLLE,automatique · lumiere · **KONTROLLE**,1
+FRM,AUTO_LWR_ENABLE,automatique · correcteur de site des phares · activation,0
+FRM,BEHOERDENFZG,vehicule administratif,0
+FRM,BEHOERDFZG_FL_ASYNCHR,**BEHOERDFZG** · feux de route · **ASYNCHR**,2
+FRM,BFD_1_ALGORITHMUS,feux stop adaptatifs (Brake Force Display) · 1 · **ALGORITHMUS**,1
+FRM,BFD_1_BFD_AUSG_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 1 · feux stop adaptatifs (Brake Force Display) · **AUSG** · apparition · image,1
+FRM,BFD_1_BLINK_FREQ_AUS,feux stop adaptatifs (Brake Force Display) · 1 · clignotant · frequence · arret,0
+FRM,BFD_1_BLINK_FREQ_EIN,feux stop adaptatifs (Brake Force Display) · 1 · clignotant · frequence · marche,0
+FRM,BFD_1_BL_M_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 1 · feu stop · M · apparition · image,0
+FRM,BFD_1_ENTPRELL_ABS,feux stop adaptatifs (Brake Force Display) · 1 · anti-rebond · ABS,0
+FRM,BFD_1_ENTPRELL_AX,feux stop adaptatifs (Brake Force Display) · 1 · anti-rebond · **AX**,1
+FRM,BFD_1_MIN_GESCHW,feux stop adaptatifs (Brake Force Display) · 1 · minimum · vitesse,0
+FRM,BFD_1_NSL_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 1 · antibrouillard arriere · apparition · image,0
+FRM,BFD_1_RL_BL_1_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 1 · feu arriere · feu stop · 1 · apparition · image,0
+FRM,BFD_1_RL_BL_2_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 1 · feu arriere · feu stop · 2 · apparition · image,0
+FRM,BFD_1_RL_BL_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 1 · feu arriere · feu stop · apparition · image,0
+FRM,BFD_1_STUFE_DELAY,feux stop adaptatifs (Brake Force Display) · 1 · niveau · delai,0
+FRM,BFD_1_THERM_TIMEOUT,feux stop adaptatifs (Brake Force Display) · 1 · **THERM** · delai d'attente,1
+FRM,BFD_1_WEGFALL,feux stop adaptatifs (Brake Force Display) · 1 · **WEGFALL**,1
+FRM,BFD_2_ALGORITHMUS,feux stop adaptatifs (Brake Force Display) · 2 · **ALGORITHMUS**,1
+FRM,BFD_2_BFD_AUSG_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 2 · feux stop adaptatifs (Brake Force Display) · **AUSG** · apparition · image,1
+FRM,BFD_2_BLINK_FREQ_AUS,feux stop adaptatifs (Brake Force Display) · 2 · clignotant · frequence · arret,0
+FRM,BFD_2_BLINK_FREQ_EIN,feux stop adaptatifs (Brake Force Display) · 2 · clignotant · frequence · marche,0
+FRM,BFD_2_BL_M_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 2 · feu stop · M · apparition · image,0
+FRM,BFD_2_ENTPRELL_ABS,feux stop adaptatifs (Brake Force Display) · 2 · anti-rebond · ABS,0
+FRM,BFD_2_ENTPRELL_AX,feux stop adaptatifs (Brake Force Display) · 2 · anti-rebond · **AX**,1
+FRM,BFD_2_MIN_GESCHW,feux stop adaptatifs (Brake Force Display) · 2 · minimum · vitesse,0
+FRM,BFD_2_NSL_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 2 · antibrouillard arriere · apparition · image,0
+FRM,BFD_2_RL_BL_1_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 2 · feu arriere · feu stop · 1 · apparition · image,0
+FRM,BFD_2_RL_BL_2_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 2 · feu arriere · feu stop · 2 · apparition · image,0
+FRM,BFD_2_RL_BL_ERSCH_BILD,feux stop adaptatifs (Brake Force Display) · 2 · feu arriere · feu stop · apparition · image,0
+FRM,BFD_2_STUFE_DELAY,feux stop adaptatifs (Brake Force Display) · 2 · niveau · delai,0
+FRM,BFD_2_THERM_TIMEOUT,feux stop adaptatifs (Brake Force Display) · 2 · **THERM** · delai d'attente,1
+FRM,BFD_2_WEGFALL,feux stop adaptatifs (Brake Force Display) · 2 · **WEGFALL**,1
+FRM,BFD_BREMSL_FKT,feux stop adaptatifs (Brake Force Display) · feu stop · fonction,0
+FRM,BFD_ERS_DEF_RL_BL,feux stop adaptatifs (Brake Force Display) · **ERS** · defaut · feu arriere · feu stop,1
+FRM,BFD_ERS_DEF_RL_BL_1,feux stop adaptatifs (Brake Force Display) · **ERS** · defaut · feu arriere · feu stop · 1,1
+FRM,BI_XENON_BEI_LH,**BI** · xenon · lors de · **LH**,2
+FRM,BI_XENON_FL_ABSCHALT_OPT,**BI** · xenon · feux de route · coupure · option,1
+FRM,BI_XENON_VERBAUT,**BI** · xenon · installe,1
+FRM,BLEND_CHECK_IST_WINKEL,**BLEND** · controle · **IST** · **WINKEL**,3
+FRM,BLEND_CHECK_SOLL_WINKEL,**BLEND** · controle · **SOLL** · **WINKEL**,3
+FRM,BLINKIMPULS_CRASHBLK,**BLINKIMPULS** · **CRASHBLK**,2
+FRM,BLINKIMPULS_WARNBLK,**BLINKIMPULS** · **WARNBLK**,2
+FRM,CAN_11H,bus CAN · [0x11],0
+FRM,CBD_ZEICHN_INDEX,[index variante CBD] · **ZEICHN** · **INDEX**,2
+FRM,CC_MELD_BFD_BL,Check Control · message · feux stop adaptatifs (Brake Force Display) · feu stop,0
+FRM,CC_MELD_NSL_BFD,Check Control · message · antibrouillard arriere · feux stop adaptatifs (Brake Force Display),0
+FRM,CC_MELD_NSL_SL,Check Control · message · antibrouillard arriere · feux de position,0
+FRM,CHECK_FGN_SMC_ALC_OFF,controle · **FGN** · **SMC** · phares directionnels (ALC) · arret,2
+FRM,CHECK_SMC_ERROR,controle · **SMC** · **ERROR**,2
+FRM,CKM_ALC,memoire par cle (Car Key Memory) · phares directionnels (ALC),0
+FRM,CKM_ALC_DEF,memoire par cle (Car Key Memory) · phares directionnels (ALC) · defaut,0
+FRM,COMFORT_ACCESS_LICHT,**COMFORT** · **ACCESS** · lumiere,2
+FRM,CRASH_58G_EIN,choc · **58G** · marche,1
+FRM,CRASH_WARNBLINKEN,choc · **WARNBLINKEN**,1
+FRM,C_METER_NACH_INNEN_HI,C · **METER** · apres · interieur · haut,1
+FRM,DEF_HEIMLEUCHTEN_CKM,defaut · eclairage d'accompagnement · memoire par cle (Car Key Memory),0
+FRM,DEF_QUITT_BLK_ENTSI_CKM,defaut · acquittement sonore · clignotant · **ENTSI** · memoire par cle (Car Key Memory),1
+FRM,DEF_QUITT_BLK_SICH_CKM,defaut · acquittement sonore · clignotant · **SICH** · memoire par cle (Car Key Memory),1
+FRM,DEF_TAGFAHRLICHT_ECE_CKM,defaut · feux de jour · norme europeenne · memoire par cle (Car Key Memory),0
+FRM,DEF_ZYKL_TIPP_BLK_CKM,defaut · cycle · impulsion · clignotant · memoire par cle (Car Key Memory),0
+FRM,DRIFT_DEKR,derive · **DEKR**,1
+FRM,DRIFT_INKR,derive · **INKR**,1
+FRM,DRIFT_SCHWELLE,derive · seuil,0
+FRM,DRL_V_GEDIMMT,feux de jour · _V_ · **GEDIMMT**,1
+FRM,DUAL_SP__AL_L,bi-zone · point de passage de rapport · feux de croisement · _L_,0
+FRM,DUAL_SP__AL_R,bi-zone · point de passage de rapport · feux de croisement · _R_,0
+FRM,DUAL_SP__BLK_H_L,bi-zone · point de passage de rapport · clignotant · _H_ · _L_,0
+FRM,DUAL_SP__BLK_H_R,bi-zone · point de passage de rapport · clignotant · _H_ · _R_,0
+FRM,DUAL_SP__BLK_V_L,bi-zone · point de passage de rapport · clignotant · _V_ · _L_,0
+FRM,DUAL_SP__BLK_V_R,bi-zone · point de passage de rapport · clignotant · _V_ · _R_,0
+FRM,DUAL_SP__BL_L,bi-zone · point de passage de rapport · feu stop · _L_,0
+FRM,DUAL_SP__BL_M_1,bi-zone · point de passage de rapport · feu stop · M · 1,0
+FRM,DUAL_SP__BL_R,bi-zone · point de passage de rapport · feu stop · _R_,0
+FRM,DUAL_SP__FL_L,bi-zone · point de passage de rapport · feux de route · _L_,0
+FRM,DUAL_SP__FL_R,bi-zone · point de passage de rapport · feux de route · _R_,0
+FRM,DUAL_SP__KZL,bi-zone · point de passage de rapport · eclairage de plaque,0
+FRM,DUAL_SP__NSL_L,bi-zone · point de passage de rapport · antibrouillard arriere · _L_,0
+FRM,DUAL_SP__NSL_R,bi-zone · point de passage de rapport · antibrouillard arriere · _R_,0
+FRM,DUAL_SP__NSW_L,bi-zone · point de passage de rapport · antibrouillard avant · _L_,0
+FRM,DUAL_SP__NSW_R,bi-zone · point de passage de rapport · antibrouillard avant · _R_,0
+FRM,DUAL_SP__RFS_L,bi-zone · point de passage de rapport · feu de recul · _L_,0
+FRM,DUAL_SP__RFS_R,bi-zone · point de passage de rapport · feu de recul · _R_,0
+FRM,DUAL_SP__RL_BL_1_L,bi-zone · point de passage de rapport · feu arriere · feu stop · 1 · _L_,0
+FRM,DUAL_SP__RL_BL_1_R,bi-zone · point de passage de rapport · feu arriere · feu stop · 1 · _R_,0
+FRM,DUAL_SP__RL_BL_2_L,bi-zone · point de passage de rapport · feu arriere · feu stop · 2 · _L_,0
+FRM,DUAL_SP__RL_BL_2_R,bi-zone · point de passage de rapport · feu arriere · feu stop · 2 · _R_,0
+FRM,DUAL_SP__SL_V_L,bi-zone · point de passage de rapport · feux de position · _V_ · _L_,0
+FRM,DUAL_SP__SL_V_R,bi-zone · point de passage de rapport · feux de position · _V_ · _R_,0
+FRM,DUAL_SP___BFD_L,bi-zone · point de passage de rapport · feux stop adaptatifs (Brake Force Display) · _L_,0
+FRM,DUAL_SP___BFD_R,bi-zone · point de passage de rapport · feux stop adaptatifs (Brake Force Display) · _R_,0
+FRM,DYNAM_LWR_ENABLE,**DYNAM** · correcteur de site des phares · activation,1
+FRM,D_TAU_MITTEL_GIERR,D · _TAU_ · moyen · **GIERR**,1
+FRM,D_TAU_MITTEL_LENKW,D · _TAU_ · moyen · **LENKW**,1
+FRM,ENABLE_GURTBRINGER,activation · avance-ceinture,0
+FRM,ERR_LWR_L_IGNORIEREN,erreur · correcteur de site des phares · _L_ · **IGNORIEREN**,1
+FRM,ERR_LWR_R_IGNORIEREN,erreur · correcteur de site des phares · _R_ · **IGNORIEREN**,1
+FRM,ERR_SCHWENK_L_IGNORIEREN,erreur · pivotement · _L_ · **IGNORIEREN**,1
+FRM,ERR_SCHWENK_R_IGNORIEREN,erreur · pivotement · _R_ · **IGNORIEREN**,1
+FRM,FAHRWEG_BORDSTEIN_AUTOM,**FAHRWEG** · bordure de trottoir · automatique,1
+FRM,FEHLERMELDUNG_CC_AL_L,message d'erreur · Check Control · feux de croisement · _L_,0
+FRM,FEHLERMELDUNG_CC_AL_R,message d'erreur · Check Control · feux de croisement · _R_,0
+FRM,FEHLERMELDUNG_CC_BFD_L,message d'erreur · Check Control · feux stop adaptatifs (Brake Force Display) · _L_,0
+FRM,FEHLERMELDUNG_CC_BFD_R,message d'erreur · Check Control · feux stop adaptatifs (Brake Force Display) · _R_,0
+FRM,FEHLERMELDUNG_CC_BLK_H_L,message d'erreur · Check Control · clignotant · _H_ · _L_,0
+FRM,FEHLERMELDUNG_CC_BLK_H_R,message d'erreur · Check Control · clignotant · _H_ · _R_,0
+FRM,FEHLERMELDUNG_CC_BLK_V_L,message d'erreur · Check Control · clignotant · _V_ · _L_,0
+FRM,FEHLERMELDUNG_CC_BLK_V_R,message d'erreur · Check Control · clignotant · _V_ · _R_,0
+FRM,FEHLERMELDUNG_CC_BL_L,message d'erreur · Check Control · feu stop · _L_,0
+FRM,FEHLERMELDUNG_CC_BL_M_1,message d'erreur · Check Control · feu stop · M · 1,0
+FRM,FEHLERMELDUNG_CC_BL_R,message d'erreur · Check Control · feu stop · _R_,0
+FRM,FEHLERMELDUNG_CC_FL_L,message d'erreur · Check Control · feux de route · _L_,0
+FRM,FEHLERMELDUNG_CC_FL_R,message d'erreur · Check Control · feux de route · _R_,0
+FRM,FEHLERMELDUNG_CC_KZL,message d'erreur · Check Control · eclairage de plaque,0
+FRM,FEHLERMELDUNG_CC_NSL_L,message d'erreur · Check Control · antibrouillard arriere · _L_,0
+FRM,FEHLERMELDUNG_CC_NSL_R,message d'erreur · Check Control · antibrouillard arriere · _R_,0
+FRM,FEHLERMELDUNG_CC_NSW_L,message d'erreur · Check Control · antibrouillard avant · _L_,0
+FRM,FEHLERMELDUNG_CC_NSW_R,message d'erreur · Check Control · antibrouillard avant · _R_,0
+FRM,FEHLERMELDUNG_CC_RFS_L,message d'erreur · Check Control · feu de recul · _L_,0
+FRM,FEHLERMELDUNG_CC_RFS_R,message d'erreur · Check Control · feu de recul · _R_,0
+FRM,FEHLERMELDUNG_CC_SL_V_L,message d'erreur · Check Control · feux de position · _V_ · _L_,0
+FRM,FEHLERMELDUNG_CC_SL_V_R,message d'erreur · Check Control · feux de position · _V_ · _R_,0
+FRM,FEHLERMELD_CC_RL_BL_1_L,**FEHLERMELD** · Check Control · feu arriere · feu stop · 1 · _L_,1
+FRM,FEHLERMELD_CC_RL_BL_1_R,**FEHLERMELD** · Check Control · feu arriere · feu stop · 1 · _R_,1
+FRM,FEHLERMELD_CC_RL_BL_2_L,**FEHLERMELD** · Check Control · feu arriere · feu stop · 2 · _L_,1
+FRM,FEHLERMELD_CC_RL_BL_2_R,**FEHLERMELD** · Check Control · feu arriere · feu stop · 2 · _R_,1
+FRM,FH_CC_MELDUNGEN,leve-vitre · Check Control · **MELDUNGEN**,1
+FRM,FH_FAHRERTUER_TIPP_AUF,leve-vitre · **FAHRERTUER** · impulsion · ouverture,1
+FRM,FH_FAHRERTUER_TIPP_ZU,leve-vitre · **FAHRERTUER** · impulsion · fermeture,1
+FRM,FL_ABSCHALT_OPT,feux de route · coupure · option,0
+FRM,FL_UND_NSW_NICHT_GLEICHZ,feux de route · **UND** · antibrouillard avant · non · **GLEICHZ**,2
+FRM,FSP_ISP_SPERREN,**FSP** · **ISP** · **SPERREN**,3
+FRM,FZG_RADSTAND,vehicule · **RADSTAND**,1
+FRM,GB_DELTA_POS,**GB** · ecart · position,1
+FRM,GB_GESCHW,**GB** · vitesse,1
+FRM,GB_POS_AUS,**GB** · position · arret,1
+FRM,GB_T_EINFAHREN,**GB** · T · **EINFAHREN**,2
+FRM,GB_T_NOTLAUF,**GB** · T · mode degrade,1
+FRM,GB_USE_SBE,**GB** · **USE** · **SBE**,3
+FRM,GESCHW_ASP_AUTO_AUSKLAPP,vitesse · retroviseur exterieur · automatique · **AUSKLAPP**,1
+FRM,GESCHW_DOWN,vitesse · bas,0
+FRM,GESCHW_UP,vitesse · haut,0
+FRM,GETRIEBE_HANDSCHALTER,boite de vitesses · **HANDSCHALTER**,1
+FRM,HECKDECK_REVERS_BLK,**HECKDECK** · **REVERS** · clignotant,2
+FRM,HECKD_REV_BLK_DOPPELB,**HECKD** · revision · clignotant · **DOPPELB**,2
+FRM,HEIMLEUCHTEN,eclairage d'accompagnement,0
+FRM,HEIMLEUCHTEN_ABBRUCH,eclairage d'accompagnement · **ABBRUCH**,1
+FRM,HEIMLEUCHTEN_ENABLE,eclairage d'accompagnement · activation,0
+FRM,HEIMLEUCHTEN_VERLAENG,eclairage d'accompagnement · **VERLAENG**,1
+FRM,IBUS_R_GANG,**IBUS** · _R_ · **GANG**,2
+FRM,IB_2MIN_OPTION,**IB** · **2MIN** · option,2
+FRM,IB_SOFTON_OPTION,**IB** · **SOFTON** · option,2
+FRM,IK_BUS_TEILNEMER,**IK** · bus · **TEILNEMER**,2
+FRM,KALTUEBERWACHUNG_AL_L,surveillance a froid · feux de croisement · _L_,0
+FRM,KALTUEBERWACHUNG_AL_R,surveillance a froid · feux de croisement · _R_,0
+FRM,KALTUEBERWACHUNG_BFD_L,surveillance a froid · feux stop adaptatifs (Brake Force Display) · _L_,0
+FRM,KALTUEBERWACHUNG_BFD_R,surveillance a froid · feux stop adaptatifs (Brake Force Display) · _R_,0
+FRM,KALTUEBERWACHUNG_BLK_H_L,surveillance a froid · clignotant · _H_ · _L_,0
+FRM,KALTUEBERWACHUNG_BLK_H_R,surveillance a froid · clignotant · _H_ · _R_,0
+FRM,KALTUEBERWACHUNG_BLK_V_L,surveillance a froid · clignotant · _V_ · _L_,0
+FRM,KALTUEBERWACHUNG_BLK_V_R,surveillance a froid · clignotant · _V_ · _R_,0
+FRM,KALTUEBERWACHUNG_BL_L,surveillance a froid · feu stop · _L_,0
+FRM,KALTUEBERWACHUNG_BL_M_1,surveillance a froid · feu stop · M · 1,0
+FRM,KALTUEBERWACHUNG_BL_R,surveillance a froid · feu stop · _R_,0
+FRM,KALTUEBERWACHUNG_FL_L,surveillance a froid · feux de route · _L_,0
+FRM,KALTUEBERWACHUNG_FL_R,surveillance a froid · feux de route · _R_,0
+FRM,KALTUEBERWACHUNG_KZL,surveillance a froid · eclairage de plaque,0
+FRM,KALTUEBERWACHUNG_NSL_L,surveillance a froid · antibrouillard arriere · _L_,0
+FRM,KALTUEBERWACHUNG_NSL_R,surveillance a froid · antibrouillard arriere · _R_,0
+FRM,KALTUEBERWACHUNG_NSW_L,surveillance a froid · antibrouillard avant · _L_,0
+FRM,KALTUEBERWACHUNG_NSW_R,surveillance a froid · antibrouillard avant · _R_,0
+FRM,KALTUEBERWACHUNG_RFS_L,surveillance a froid · feu de recul · _L_,0
+FRM,KALTUEBERWACHUNG_RFS_R,surveillance a froid · feu de recul · _R_,0
+FRM,KALTUEBERWACHUNG_SL_V_L,surveillance a froid · feux de position · _V_ · _L_,0
+FRM,KALTUEBERWACHUNG_SL_V_R,surveillance a froid · feux de position · _V_ · _R_,0
+FRM,KALTUEBERW_RL_BL_1_L,**KALTUEBERW** · feu arriere · feu stop · 1 · _L_,1
+FRM,KALTUEBERW_RL_BL_1_R,**KALTUEBERW** · feu arriere · feu stop · 1 · _R_,1
+FRM,KALTUEBERW_RL_BL_2_L,**KALTUEBERW** · feu arriere · feu stop · 2 · _L_,1
+FRM,KALTUEBERW_RL_BL_2_R,**KALTUEBERW** · feu arriere · feu stop · 2 · _R_,1
+FRM,KEINE_ENTRFLANKE_4_IB,aucun · **ENTRFLANKE** · 4 · **IB**,2
+FRM,KEINE_L_R_SYNCHRONISATION,aucun · _L_ · _R_ · **SYNCHRONISATION**,1
+FRM,KEINE_PARKLICHT_FUNKT,aucun · feu de stationnement · **FUNKT**,1
+FRM,KENNL_MAX_UEBERST,courbe caracteristique · maximum · survirage,0
+FRM,KENNL_REDUZ_MAX_SCHWENK,courbe caracteristique · **REDUZ** · maximum · pivotement,1
+FRM,KLASSIF_DRIFT_ENA,**KLASSIF** · derive · activation,1
+FRM,KLASSIF_LENKM_ENA,**KLASSIF** · **LENKM** · activation,2
+FRM,KLASSIF_UEBERST_ENA,**KLASSIF** · survirage · activation,1
+FRM,KLS_BEI_AL_AKTIV,**KLS** · lors de · feux de croisement · actif,1
+FRM,KL_VA_EIN_BEI_ENTRIEGELN,borne · essieu avant · marche · lors de · **ENTRIEGELN**,1
+FRM,KURZSCHLUSS_CHECK_TIME,court-circuit · controle · duree,0
+FRM,KURZSCHLUSS_DIAGNOSE_OPT,court-circuit · **DIAGNOSE** · option,1
+FRM,KURZSCHLUSS_ENTPRELL,court-circuit · anti-rebond,0
+FRM,KURZSCHL_WIERHOL_ZAEHLER,**KURZSCHL** · **WIERHOL** · compteur,2
+FRM,LENKSTOCK_UMSCHALT_VERZ,**LENKSTOCK** · **UMSCHALT** · temporisation,2
+FRM,LENKWINKEL_BEI_KLR,angle de braquage · lors de · regulation de climatisation,0
+FRM,LENKWINKEL_UEBERSCHREITEN,angle de braquage · **UEBERSCHREITEN**,1
+FRM,LENKWINKEL_UNTERSCHREITEN,angle de braquage · **UNTERSCHREITEN**,1
+FRM,LENK_UEBERSETZUNG,direction · **UEBERSETZUNG**,1
+FRM,LENK_UEBERSETZUNG_LO,direction · **UEBERSETZUNG** · bas,1
+FRM,LEUCHTDICHTE_EXPO,**LEUCHTDICHTE** · **EXPO**,2
+FRM,LICHTZ_R_L_FAKTOR,**LICHTZ** · _R_ · _L_ · facteur,1
+FRM,LICHT_AN_LED,lumiere · **AN** · LED,1
+FRM,LICHT_AN_WARNUNG,lumiere · **AN** · alerte,1
+FRM,LICHT_AN_WARN_KL_R,lumiere · **AN** · alerte · borne · _R_,1
+FRM,LINKSVERKEHR,**LINKSVERKEHR**,1
+FRM,LOAD_DUMP_DIMM_WERL_BLK,charge · extraction memoire · gradation · **WERL** · clignotant,1
+FRM,LOAD_DUMP_MAX_TIME,charge · extraction memoire · maximum · duree,0
+FRM,LOAD_DUMP_PRELL,charge · extraction memoire · **PRELL**,1
+FRM,LOAD_DUMP_SCHUTZ_AKTIV,charge · extraction memoire · protection · actif,0
+FRM,LOAD_DUMP_SCHUTZ_BLK_Z,charge · extraction memoire · protection · clignotant · Z,0
+FRM,LOAD_DUMP_SCHUTZ_FL,charge · extraction memoire · protection · feux de route,0
+FRM,LOAD_DUMP_SCHUTZ_KL58G,charge · extraction memoire · protection · **KL58G**,1
+FRM,LOAD_DUMP_SCHUTZ_KZL,charge · extraction memoire · protection · eclairage de plaque,0
+FRM,LOAD_DUMP_SCHUTZ_NSL,charge · extraction memoire · protection · antibrouillard arriere,0
+FRM,LOAD_DUMP_SCHUTZ_NSW,charge · extraction memoire · protection · antibrouillard avant,0
+FRM,LOAD_DUMP_SCHUTZ_RFS,charge · extraction memoire · protection · feu de recul,0
+FRM,LOAD_DUMP_SCHUTZ_RL_BL_2,charge · extraction memoire · protection · feu arriere · feu stop · 2,0
+FRM,LOAD_DUMP_SCHUTZ_SL_V,charge · extraction memoire · protection · feux de position · _V_,0
+FRM,LWR_ABSTELLPOS,correcteur de site des phares · **ABSTELLPOS**,1
+FRM,LWR_ABS_MIN_STELLUNG_2,correcteur de site des phares · ABS · minimum · position · 2,0
+FRM,LWR_ANSTEUERN,correcteur de site des phares · **ANSTEUERN**,1
+FRM,LWR_DIAG_PARAM,correcteur de site des phares · **DIAG** · **PARAM**,2
+FRM,LWR_FEHLER_BEWERTUNG,correcteur de site des phares · erreur · **BEWERTUNG**,1
+FRM,LWR_HEBEL,correcteur de site des phares · **HEBEL**,1
+FRM,LWR_HYSTERESE_START,correcteur de site des phares · **HYSTERESE** · demarrage,1
+FRM,LWR_SCHRITTABSTAND_GRENZE,correcteur de site des phares · **SCHRITTABSTAND** · limite,1
+FRM,LWR_SCHRITTE_STELLUNG_0,correcteur de site des phares · **SCHRITTE** · position · 0,1
+FRM,LWR_SCHRITTE_STELLUNG_1,correcteur de site des phares · **SCHRITTE** · position · 1,1
+FRM,LWR_SCHRITTE_STELLUNG_2,correcteur de site des phares · **SCHRITTE** · position · 2,1
+FRM,LWR_TEMPERATUR_GRENZE,correcteur de site des phares · temperature · limite,0
+FRM,LWR_TERMO_MODEL_EIN,correcteur de site des phares · **TERMO** · **MODEL** · marche,2
+FRM,LWR_TESTBETRIEB,correcteur de site des phares · **TESTBETRIEB**,1
+FRM,LWR_VORBESTROMUNG,correcteur de site des phares · **VORBESTROMUNG**,1
+FRM,MAX_DELTA_KEINE_VERR,maximum · ecart · aucun · verrouillage,0
+FRM,MAX_GESCHW_EINKLAPPEN_2,maximum · vitesse · rabattement · 2,0
+FRM,MAX_SW_SCHWENK_V_HORIZ,maximum · logiciel · pivotement · _V_ · **HORIZ**,1
+FRM,MAX_SW_SCHWENK_V_VERTI,maximum · logiciel · pivotement · _V_ · **VERTI**,1
+FRM,MAX_SW_SCHWENK_W_AUSSEN,maximum · logiciel · pivotement · W · exterieur,0
+FRM,MAX_SW_SCHWENK_W_INNEN,maximum · logiciel · pivotement · W · interieur,0
+FRM,MAX_VERRINGERUNG_V_SCHW,maximum · **VERRINGERUNG** · _V_ · seuil,1
+FRM,MELDUNG_AENDERUNG_DIMMER,message · **AENDERUNG** · **DIMMER**,2
+FRM,MEM_POS_ANFAHREN,**MEM** · position · **ANFAHREN**,2
+FRM,MERKM_1_BEGR,caracteristique · 1 · **BEGR**,1
+FRM,MERKM_1_DEKR,caracteristique · 1 · **DEKR**,1
+FRM,MERKM_1_INKR,caracteristique · 1 · **INKR**,1
+FRM,MERKM_1_MAX,caracteristique · 1 · maximum,0
+FRM,MIND_ANZ_ZYKL_TIPP_BLK,minimum · nombre · cycle · impulsion · clignotant,0
+FRM,MIN_DELTA_MAX_VERR,minimum · ecart · maximum · verrouillage,0
+FRM,MIN_SW_SCHWENK_V_HORIZ,minimum · logiciel · pivotement · _V_ · **HORIZ**,1
+FRM,MIN_SW_SCHWENK_V_VERTI,minimum · logiciel · pivotement · _V_ · **VERTI**,1
+FRM,NACHLAUF_KLEMME_VA,marche a suivre / temporisation · **KLEMME** · essieu avant,1
+FRM,NORM_LEUCHTWEITE,norme · **LEUCHTWEITE**,1
+FRM,NOTLAUF_FKT_GESCHW,mode degrade · fonction · vitesse,0
+FRM,NOTLAUF_FKT_SCHALTERSTELL,mode degrade · fonction · **SCHALTERSTELL**,1
+FRM,NOTLAUF_FKT_TIMER,mode degrade · fonction · minuterie,0
+FRM,NSL_ERS_DEF_RL_BL_1,antibrouillard arriere · **ERS** · defaut · feu arriere · feu stop · 1,1
+FRM,NSL_VERBAU_OTP,antibrouillard arriere · **VERBAU** · **OTP**,2
+FRM,OHNE_GIERRATE,sans · vitesse de lacet,0
+FRM,OPTIONEN_SL_ABSCH,**OPTIONEN** · feux de position · coupure,1
+FRM,PANIKMODUS_EKS,mode panique · systeme electronique de cle,0
+FRM,POTI_DIMM_INVERS,potentiometre · gradation · **INVERS**,1
+FRM,POTI_LWR_INVERS,potentiometre · correcteur de site des phares · **INVERS**,1
+FRM,PRE_SLEEP_ZEIT,pre- · **SLEEP** · duree,1
+FRM,PROZENT_EE,pourcentage · **EE**,1
+FRM,QUITT_BLK_ENTSICHERN,acquittement sonore · clignotant · deverrouillage,0
+FRM,QUITT_BLK_IGNORE_MOTORH,acquittement sonore · clignotant · **IGNORE** · **MOTORH**,2
+FRM,QUITT_BLK_SICHERN,acquittement sonore · clignotant · verrouillage,0
+FRM,QUITT_BLK_ZU_CHECK,acquittement sonore · clignotant · fermeture · controle,0
+FRM,RAUSCH,**RAUSCH**,1
+FRM,RECHTSVERKEHR,**RECHTSVERKEHR**,1
+FRM,RECHTS_LENKER_ASP,droite · volant · retroviseur exterieur,0
+FRM,RECHTS_LENKER_FH_H,droite · volant · leve-vitre · _H_,0
+FRM,RECHTS_LENKER_FH_V,droite · volant · leve-vitre · _V_,0
+FRM,REDUZIERUNG_V_SCHWENK_HI,reduction · _V_ · pivotement · haut,0
+FRM,REDUZIERUNG_V_SCHWENK_LO,reduction · _V_ · pivotement · bas,0
+FRM,RL_BL_1_BREMSL_FKT,feu arriere · feu stop · 1 · feu stop · fonction,0
+FRM,RL_BL_1_PARKL_FKT,feu arriere · feu stop · 1 · feu de stationnement · fonction,0
+FRM,RL_BL_1_PO_RL_FKT,feu arriere · feu stop · 1 · **PO** · feu arriere · fonction,1
+FRM,RL_BL_2_BREMSL_FKT,feu arriere · feu stop · 2 · feu stop · fonction,0
+FRM,RL_BL_2_PARKL_FKT,feu arriere · feu stop · 2 · feu de stationnement · fonction,0
+FRM,RL_BL_2_PO_RL_FKT,feu arriere · feu stop · 2 · **PO** · feu arriere · fonction,1
+FRM,RL_BL_BREMSL_FKT,feu arriere · feu stop · feu stop · fonction,0
+FRM,RL_BL_PARKL_FKT,feu arriere · feu stop · feu de stationnement · fonction,0
+FRM,RL_BL_PO_RL_FKT,feu arriere · feu stop · **PO** · feu arriere · fonction,1
+FRM,SCHALTER_R_GANG,**SCHALTER** · _R_ · **GANG**,2
+FRM,SCHW_TAU_LW_GR,seuil · _TAU_ · **LW** · **GR**,2
+FRM,SICHERHEITS_FZG_LM,**SICHERHEITS** · vehicule · **LM**,2
+FRM,SIDEMARKER_US,feu lateral (US) · marche americain,0
+FRM,SL_BL_CC_MELD_E8X,feux de position · feu stop · Check Control · message · **E8X**,1
+FRM,SL_BL_ERS_DEF_RL_BL_1,feux de position · feu stop · **ERS** · defaut · feu arriere · feu stop · 1,1
+FRM,SL_PARKL_UNTERSP_ABSCHALT,feux de position · feu de stationnement · **UNTERSP** · coupure,1
+FRM,SL_V_PARKL_FKT,feux de position · _V_ · feu de stationnement · fonction,0
+FRM,SL_V_PO_RL_FKT,feux de position · _V_ · **PO** · feu arriere · fonction,1
+FRM,SPIEGEL_BORDSTEIN_AUTOM,retroviseur · bordure de trottoir · automatique,0
+FRM,SPIEGEL_EINKLAPPEN,retroviseur · rabattement,0
+FRM,SPIEGEL_ELEKTROCHROM,retroviseur · **ELEKTROCHROM**,1
+FRM,SPIEGEL_HEIZUNG,retroviseur · **HEIZUNG**,1
+FRM,SPIEGEL_KOMFORT_EINKLAPP,retroviseur · confort · rabattement,0
+FRM,SPIEGEL_MEMORY,retroviseur · memoire,0
+FRM,SPIEGEL_STAND_HEIZUNG,retroviseur · etat · **HEIZUNG**,1
+FRM,SP_GRENZE,point de passage de rapport · limite,0
+FRM,SP_NACHREG_LANGSAM,point de passage de rapport · **NACHREG** · **LANGSAM**,2
+FRM,STANDVERBRAUCHER_ANMELDEN,**STANDVERBRAUCHER** · **ANMELDEN**,2
+FRM,SW_NULL_BEREICH,logiciel · **NULL** · plage,1
+FRM,TAGFAHRLICHT_ECE,feux de jour · norme europeenne,0
+FRM,TASTVERH_BEL_FLC_LED,rapport cyclique · **BEL** · _FLC_ · LED,1
+FRM,TASTVERH_BEL_WBL_MIN,rapport cyclique · **BEL** · **WBL** · minimum,2
+FRM,TASTVERH_KL_58G_MIN,rapport cyclique · borne · **58G** · minimum,1
+FRM,TAU_ABSCHWAECHUNG,_TAU_ · **ABSCHWAECHUNG**,1
+FRM,TIPP_BLK_ABBRUCH,impulsion · clignotant · **ABBRUCH**,1
+FRM,TIPP_BLK_LOESCHT_IMMER,impulsion · clignotant · **LOESCHT** · toujours,1
+FRM,TUERAUF_STOP_MAUT,porte ouverte · arret · peage,0
+FRM,TYP_FH_BEDIENBLOCK,type · leve-vitre · **BEDIENBLOCK**,1
+FRM,T_FILTER_DYN_LZ,T · filtre · dynamique · **LZ**,1
+FRM,T_FILTER_GIERRATE,T · filtre · vitesse de lacet,0
+FRM,T_FILTER_LENKWINKEL,T · filtre · angle de braquage,0
+FRM,T_FILTER_TAU_LW,T · filtre · _TAU_ · **LW**,1
+FRM,T_FILTER_UEBERST,T · filtre · survirage,0
+FRM,T_FILTER_V_VEH,T · filtre · _V_ · **VEH**,1
+FRM,T_F_GIERRATE_DEF,T · F · vitesse de lacet · defaut,0
+FRM,UMSCHALTOPT_LICHTSCHALTER,**UMSCHALTOPT** · **LICHTSCHALTER**,2
+FRM,UNP_HEIMLEUCHTEN_CKM,_UNP_ · eclairage d'accompagnement · memoire par cle (Car Key Memory),0
+FRM,UNP_QUITT_BLK_ENTSI_CKM,_UNP_ · acquittement sonore · clignotant · **ENTSI** · memoire par cle (Car Key Memory),1
+FRM,UNP_QUITT_BLK_SICH_CKM,_UNP_ · acquittement sonore · clignotant · **SICH** · memoire par cle (Car Key Memory),1
+FRM,UNP_TAGFAHRLICHT_ECE_CKM,_UNP_ · feux de jour · norme europeenne · memoire par cle (Car Key Memory),0
+FRM,UNP_ZYKL_TIPP_BLK_CKM,_UNP_ · cycle · impulsion · clignotant · memoire par cle (Car Key Memory),0
+FRM,USA_REVERSE,marche americain · **REVERSE**,1
+FRM,U_LWR_POTI_STELLUNG_0,U · correcteur de site des phares · potentiometre · position · 0,0
+FRM,U_LWR_POTI_STELLUNG_1,U · correcteur de site des phares · potentiometre · position · 1,0
+FRM,U_LWR_POTI_STELLUNG_2,U · correcteur de site des phares · potentiometre · position · 2,0
+FRM,U_POTI_DIMM_DELTA,U · potentiometre · gradation · ecart,0
+FRM,U_POTI_DIMM_MIN,U · potentiometre · gradation · minimum,0
+FRM,VIER_TUERER,**VIER** · **TUERER**,2
+FRM,VORFELD_BEL_GEDIMMT,**VORFELD** · **BEL** · **GEDIMMT**,3
+FRM,V_HI_ABSCHW_D_TAU,_V_ · haut · attenuation · D · _TAU_,0
+FRM,V_HI_AENDER_LENK_UEBERS,_V_ · haut · **AENDER** · direction · **UEBERS**,2
+FRM,V_HI_REDUZIER_V_SCHWENK,_V_ · haut · reduction · _V_ · pivotement,0
+FRM,V_HI_RED_SCHWENK_W,_V_ · haut · reduction · pivotement · W,0
+FRM,V_HI_SW_MITLENKEN,_V_ · haut · logiciel · suivi de direction,0
+FRM,V_HI_SW_NACH_INNEN,_V_ · haut · logiciel · apres · interieur,0
+FRM,V_HI_TAU_GIERRATE,_V_ · haut · _TAU_ · vitesse de lacet,0
+FRM,V_LO_ABSCHW_D_TAU,_V_ · bas · attenuation · D · _TAU_,0
+FRM,V_LO_AENDER_LENK_UEBERS,_V_ · bas · **AENDER** · direction · **UEBERS**,2
+FRM,V_LO_REDUZIER_V_SCHWENK,_V_ · bas · reduction · _V_ · pivotement,0
+FRM,V_LO_RED_SCHWENK_W,_V_ · bas · reduction · pivotement · W,0
+FRM,V_LO_SW_MITLENKEN,_V_ · bas · logiciel · suivi de direction,0
+FRM,V_LO_SW_NACH_INNEN,_V_ · bas · logiciel · apres · interieur,0
+FRM,V_LO_TAU_GIERRATE,_V_ · bas · _TAU_ · vitesse de lacet,0
+FRM,V_M_HI_REDUZIER_V_SCHWENK,_V_ · M · haut · reduction · _V_ · pivotement,0
+FRM,V_M_LO_REDUZIER_V_SCHWENK,_V_ · M · bas · reduction · _V_ · pivotement,0
+FRM,V_REFERENZLAUF_EN,_V_ · **REFERENZLAUF** · **EN**,2
+FRM,WARMUEBERWACHUNG_AL_L,surveillance a chaud · feux de croisement · _L_,0
+FRM,WARMUEBERWACHUNG_AL_R,surveillance a chaud · feux de croisement · _R_,0
+FRM,WARMUEBERWACHUNG_BFD_L,surveillance a chaud · feux stop adaptatifs (Brake Force Display) · _L_,0
+FRM,WARMUEBERWACHUNG_BFD_R,surveillance a chaud · feux stop adaptatifs (Brake Force Display) · _R_,0
+FRM,WARMUEBERWACHUNG_BLK_H_L,surveillance a chaud · clignotant · _H_ · _L_,0
+FRM,WARMUEBERWACHUNG_BLK_H_R,surveillance a chaud · clignotant · _H_ · _R_,0
+FRM,WARMUEBERWACHUNG_BLK_V_L,surveillance a chaud · clignotant · _V_ · _L_,0
+FRM,WARMUEBERWACHUNG_BLK_V_R,surveillance a chaud · clignotant · _V_ · _R_,0
+FRM,WARMUEBERWACHUNG_BL_L,surveillance a chaud · feu stop · _L_,0
+FRM,WARMUEBERWACHUNG_BL_M_1,surveillance a chaud · feu stop · M · 1,0
+FRM,WARMUEBERWACHUNG_BL_R,surveillance a chaud · feu stop · _R_,0
+FRM,WARMUEBERWACHUNG_FL_L,surveillance a chaud · feux de route · _L_,0
+FRM,WARMUEBERWACHUNG_FL_R,surveillance a chaud · feux de route · _R_,0
+FRM,WARMUEBERWACHUNG_KZL,surveillance a chaud · eclairage de plaque,0
+FRM,WARMUEBERWACHUNG_NSL_L,surveillance a chaud · antibrouillard arriere · _L_,0
+FRM,WARMUEBERWACHUNG_NSL_R,surveillance a chaud · antibrouillard arriere · _R_,0
+FRM,WARMUEBERWACHUNG_NSW_L,surveillance a chaud · antibrouillard avant · _L_,0
+FRM,WARMUEBERWACHUNG_NSW_R,surveillance a chaud · antibrouillard avant · _R_,0
+FRM,WARMUEBERWACHUNG_RFS_L,surveillance a chaud · feu de recul · _L_,0
+FRM,WARMUEBERWACHUNG_RFS_R,surveillance a chaud · feu de recul · _R_,0
+FRM,WARMUEBERWACHUNG_SL_V_L,surveillance a chaud · feux de position · _V_ · _L_,0
+FRM,WARMUEBERWACHUNG_SL_V_R,surveillance a chaud · feux de position · _V_ · _R_,0
+FRM,WARMUEBERW_RL_BL_1_L,**WARMUEBERW** · feu arriere · feu stop · 1 · _L_,1
+FRM,WARMUEBERW_RL_BL_1_R,**WARMUEBERW** · feu arriere · feu stop · 1 · _R_,1
+FRM,WARMUEBERW_RL_BL_2_L,**WARMUEBERW** · feu arriere · feu stop · 2 · _L_,1
+FRM,WARMUEBERW_RL_BL_2_R,**WARMUEBERW** · feu arriere · feu stop · 2 · _R_,1
+FRM,WARNBLK_ENERGY_SAVE_MODE,**WARNBLK** · **ENERGY** · **SAVE** · mode,3
+FRM,WERT_CRASHVERHALTEN,valeur · **CRASHVERHALTEN**,1
+FRM,XENON_AL_VERBAUT,xenon · feux de croisement · installe,0
+FRM,XENON_LI,xenon · **LI**,1
+FRM,XENON_WIEDERHOL_Z_OPT,xenon · **WIEDERHOL** · Z · option,1
+FRM,XENON_WIEDER_ZUEND,xenon · **WIEDER** · **ZUEND**,2
+FRM,XENON_WIEDER_Z_AUS_PHASE,xenon · **WIEDER** · Z · arret · **PHASE**,2
+FRM,ZEITK_TRIGGER1,**ZEITK** · **TRIGGER1**,2
+FRM,ZUWACHS_TASTVERH_FLC_LED,**ZUWACHS** · rapport cyclique · _FLC_ · LED,1
+FRM,ZUWACHS_TASTVERH_KL_58G,**ZUWACHS** · rapport cyclique · borne · **58G**,2
+FRM,ZUWACHS_TASTVERH_WBL_BEL,**ZUWACHS** · rapport cyclique · **WBL** · **BEL**,3
+JBBF,ANZ_EIN_N_BLOCK_WI_HECK,nombre · marche · N · blocage · **WI** · arriere,1
+JBBF,AUC_SENSOR,**AUC** · capteur,1
+JBBF,BISTABILES_RELAIS_ALT,**BISTABILES** · **RELAIS** · **ALT**,3
+JBBF,BLOCKERKENNUNG_WISCH_FRON,**BLOCKERKENNUNG** · essuyage · **FRON**,2
+JBBF,BLOCKERKENNUNG_WISCH_HECK,**BLOCKERKENNUNG** · essuyage · arriere,1
+JBBF,CCM_PANIC_MODE,**CCM** · alarme panique · mode,1
+JBBF,DRUCKSENSOR,**DRUCKSENSOR**,1
+JBBF,ENTSICHERN_CENTERLOCK,deverrouillage · **CENTERLOCK**,1
+JBBF,FENSTERHEBER_ELEKTRISCH,leve-vitre · **ELEKTRISCH**,1
+JBBF,FENSTERHEBER_MIT_EKS,leve-vitre · avec · systeme electronique de cle,0
+JBBF,FOND_SCHICHT_POT,places arriere · **SCHICHT** · **POT**,2
+JBBF,HECKSCHEIBE_VERBAUT,lunette arriere · installe,0
+JBBF,HECKWISCHER_EIN_RUECKWGAN,**HECKWISCHER** · marche · **RUECKWGAN**,2
+JBBF,HECKWI_STOP_NACH_KLR_EIN,**HECKWI** · arret · apres · regulation de climatisation · marche,1
+JBBF,INTERVAL_HECKWISCHER,**INTERVAL** · **HECKWISCHER**,2
+JBBF,JBBFE_TUERAUF_STOP_MAUT,**JBBFE** · porte ouverte · arret · peage,1
+JBBF,KOMPRESSORVENTIL,**KOMPRESSORVENTIL**,1
+JBBF,KOMPRESSOR_GROSS,compresseur · **GROSS**,1
+JBBF,KURZ_REVERSIERWEG_EKS,**KURZ** · **REVERSIERWEG** · systeme electronique de cle,2
+JBBF,LADERAUMABDK_BEI_OFFN_HKK,**LADERAUMABDK** · lors de · **OFFN** · **HKK**,3
+JBBF,PANIC_MODE,alarme panique · mode,0
+JBBF,REGENSENSOR,**REGENSENSOR**,1
+JBBF,SCHEINWERFERREININUNG,lave-phares,0
+JBBF,SITZHEIZUNG_LOW,siege chauffant · bas,0
+JBBF,SONNENROLLO_LADERAUMABDEC,**SONNENROLLO** · **LADERAUMABDEC**,2
+JBBF,SPERRZ_N_BLOCK_WI_HECK,**SPERRZ** · N · blocage · **WI** · arriere,2
+JBBF,SPRITZDUESEN_SPIEGEL_HEIZ,**SPRITZDUESEN** · retroviseur · chauffage,1
+JBBF,STANDHEIZUNG,**STANDHEIZUNG**,1
+JBBF,STANDHEIZUNG_TIMEOUT,**STANDHEIZUNG** · delai d'attente,1
+JBBF,TAKTWASCHEN_HECK,**TAKTWASCHEN** · arriere,1
+JBBF,WASSER_VENTIL,eau · valve,0
+JBBF,WISHENINTERVALL_STILL,**WISHENINTERVALL** · **STILL**,2
+JBBF,ZUSATZWASSERPUMPE,**ZUSATZWASSERPUMPE**,1
+JBBF,ZWP_EGS_STEUERN,pompe a eau additionnelle · calculateur de boite · **STEUERN**,1
+DWAS,ALARMTYP,**ALARMTYP**,1
+DWAS,ALARM_LEVEL_X,alarme · niveau · X,0
+DWAS,ALARM_LEVEL_Y,alarme · niveau · Y,0
+DWAS,ALARM_PAUSE_TIME,alarme · **PAUSE** · duree,1
+DWAS,ALARM_TIME_EXT_SUPPLY,alarme · duree · **EXT** · alimentation,1
+DWAS,ALARM_TIME_SELF_SUPPLY,alarme · duree · **SELF** · alimentation,1
+DWAS,BACK_UP_BATTERY_CAPACITY,**BACK** · haut · **BATTERY** · **CAPACITY**,3
+DWAS,BACK_UP_BATTERY_DATA,**BACK** · haut · **BATTERY** · **DATA**,3
+DWAS,BUZZER_HIGH_LEVEL,avertisseur · haut · niveau,0
+DWAS,BUZZER_LOW_LEVEL,avertisseur · bas · niveau,0
+DWAS,BUZZER_SEMIPERIOD,avertisseur · **SEMIPERIOD**,1
+DWAS,BUZZER_TIME,avertisseur · duree,0
+DWAS,CODIERUNG_ERFOLGT,codage · effectue,0
+DWAS,CONTROL_BYTE,**CONTROL** · **BYTE**,2
+DWAS,DUTY_CICLE_EXT_SUPPLY,rapport cyclique · **CICLE** · **EXT** · alimentation,2
+DWAS,ECE_MODULATION,norme europeenne · **MODULATION**,1
+DWAS,ECE_SEMIPERIOD,norme europeenne · **SEMIPERIOD**,1
+DWAS,MAX_ALARM_TEMP,maximum · alarme · temperature,0
+DWAS,MAX_CHARGING_TEMP,maximum · **CHARGING** · temperature,1
+DWAS,MIN_ALARM_TEMP,minimum · alarme · temperature,0
+DWAS,MIN_CHARGING_TEMP,minimum · **CHARGING** · temperature,1
+DWAS,POWER_REDUCTION_DUTY,**POWER** · **REDUCTION** · rapport cyclique,2
+DWAS,POWER_REDUCTION_TEMP,**POWER** · **REDUCTION** · temperature,2
+DWAS,USA_MAX_SEMIPERIOD,marche americain · maximum · **SEMIPERIOD**,1
+DWAS,USA_MIN_SEMIPERIOD,marche americain · minimum · **SEMIPERIOD**,1
+DWAS,USA_SWEEP,marche americain · **SWEEP**,1
+DWAY,ALARM_OPT_FERNLICHT,alarme · option · **FERNLICHT**,1
+DWAY,ALARM_OPT_WARNBLINKER,alarme · option · **WARNBLINKER**,1
+DWAY,ANFRAGE_FENSTERPOSITIONEN,**ANFRAGE** · **FENSTERPOSITIONEN**,2
+DWAY,CHECKSUM_0,somme de controle · 0,0
+DWAY,CHECKSUM_1,somme de controle · 1,0
+DWAY,CHECKSUM_2,somme de controle · 2,0
+DWAY,CHECKSUM_3,somme de controle · 3,0
+DWAY,CODIERUNG_ERFOLGT,codage · effectue,0
+DWAY,CODIERUNG_ERFOLGT_1,codage · effectue · 1,0
+DWAY,DEF_QUIT_AKUST_ENTSCH,defaut · acquittement sonore · sonore · desarmement,0
+DWAY,DEF_QUIT_AKUST_SCHAERF,defaut · acquittement sonore · sonore · armement,0
+DWAY,DEF_QUIT_AKUST_SCHAERF_KL,defaut · acquittement sonore · sonore · armement · borne,0
+DWAY,DEF_QUIT_OPT_ENTSCH,defaut · acquittement sonore · option · desarmement,0
+DWAY,DEF_QUIT_OPT_SCHAERF,defaut · acquittement sonore · option · armement,0
+DWAY,DEF_QUIT_OPT_SCHAERF_KLAP,defaut · acquittement sonore · option · armement · **KLAP**,1
+DWAY,FUNK_INNENRAUMSCHUTZ,**FUNK** · **INNENRAUMSCHUTZ**,2
+DWAY,HOTELSTELLUNG,**HOTELSTELLUNG**,1
+DWAY,LADEEINRICHTUNG,**LADEEINRICHTUNG**,1
+DWAY,LAUTSTAERKE,**LAUTSTAERKE**,1
+DWAY,MOTORFERNSTART,**MOTORFERNSTART**,1
+DWAY,NEIGUNGSGEBER,**NEIGUNGSGEBER**,1
+DWAY,NOTLAUFFUNKTION_HUPE,**NOTLAUFFUNKTION** · **HUPE**,2
+DWAY,PANIK_ALARM,**PANIK** · alarme,1
+DWAY,PIAU_AKUST_ENTSCH,_PIAU_ · sonore · desarmement,0
+DWAY,PIAU_AKUST_SCHAERF_KLAPPE,_PIAU_ · sonore · armement · trappe,0
+DWAY,QUIT_AKUST_ENTSCH,acquittement sonore · sonore · desarmement,0
+DWAY,QUIT_AKUST_SCHAERF,acquittement sonore · sonore · armement,0
+DWAY,QUIT_AKUST_SCHAERF_KLAPPE,acquittement sonore · sonore · armement · trappe,0
+DWAY,QUIT_OPT_ENTSCH,acquittement sonore · option · desarmement,0
+DWAY,QUIT_OPT_SCHAERF,acquittement sonore · option · armement,0
+DWAY,QUIT_OPT_SCHAERF_KLAPPE,acquittement sonore · option · armement · trappe,0
+DWAY,SCHIEBEHEBEDACH,toit ouvrant relevable,0
+DWAY,SIGNAL_HK,**SIGNAL** · hayon,1
+DWAY,TIMEOUT_DEAKT_IRNE,delai d'attente · **DEAKT** · **IRNE**,2
+DWAY,TRIGGERANZAHL_KLAPPEN,**TRIGGERANZAHL** · **KLAPPEN**,2
+DWAY,TRIGGERANZAHL_SENSOREN,**TRIGGERANZAHL** · **SENSOREN**,2
+CHOST,AEREA_CODE_DVD,**AEREA** · **CODE** · DVD,2
+CHOST,AMBANDS_HST,**AMBANDS** · **HST**,2
+CHOST,BAUART,type de construction,0
+CHOST,BAUREIHE,**BAUREIHE**,1
+CHOST,CDC,[index variante CDC],0
+CHOST,CID_CCC,ecran central · systeme multimedia CCC,0
+CHOST,CID_EXT_CCC_H,ecran central · **EXT** · systeme multimedia CCC · _H_,1
+CHOST,CID_TYPE,ecran central · type,0
+CHOST,CODIERUNG_ERFOLGT,codage · effectue,0
+CHOST,DIGITAL_AUDIO_SOURCE,numerique · audio · **SOURCE**,1
+CHOST,FOND_HIGH_HST,places arriere · haut · **HST**,1
+CHOST,FOND_LOW,places arriere · bas,0
+CHOST,LAENDERVARIANTE_GT,variante pays · **GT**,1
+CHOST,MMC,**MMC**,1
+CHOST,PDC,radars,0
+CHOST,PDC_TYPE,radars · type,0
+CHOST,TRF,**TRF**,1
+CHOST,WEATHERBAND_HST,**WEATHERBAND** · **HST**,2
+CGATE,AUDIO_SYSTEM,audio · **SYSTEM**,1
+CGATE,DIM_MODE,**DIM** · mode,1
+CGATE,PDC,radars,0
+CGATE,PDC_SIGNAL,radars · **SIGNAL**,1
+CGATE,PDC_TYPE,radars · type,0
+CGATE,REVERSE_GONG,**REVERSE** · gong,1
+CGATE,RING_CCC,**RING** · systeme multimedia CCC,1
+CGATE,SPEED_MODE,vitesse · mode,0
+CAPPL,ACC,regulateur adaptatif,0
+CAPPL,ACOUSTIC,**ACOUSTIC**,1
+CAPPL,ADRBOOK,**ADRBOOK**,1
+CAPPL,AEREA_CODE_DVD,**AEREA** · **CODE** · DVD,2
+CAPPL,ALLOW_GPS,**ALLOW** · **GPS**,2
+CAPPL,AMBANDS,**AMBANDS**,1
+CAPPL,AUDIO_SYSTEM,audio · **SYSTEM**,1
+CAPPL,AUTO_DRV_LIGHT,automatique · **DRV** · lumiere,1
+CAPPL,AUX_CONFIG,**AUX** · **CONFIG**,2
+CAPPL,BACKDOOR,**BACKDOOR**,1
+CAPPL,BAUART,type de construction,0
+CAPPL,BAUREIHE,**BAUREIHE**,1
+CAPPL,BA_LAENDER_VARIANTE,**BA** · **LAENDER** · variante,2
+CAPPL,BLUETOOTH_NODES_CCC,Bluetooth · **NODES** · systeme multimedia CCC,1
+CAPPL,BMW_ASSIST,BMW · assistance,0
+CAPPL,BMW_DEALER_CCC,BMW · **DEALER** · systeme multimedia CCC,1
+CAPPL,BMW_HOTLINE_CCC,BMW · **HOTLINE** · systeme multimedia CCC,1
+CAPPL,BMW_MOBILE_CCC,BMW · **MOBILE** · systeme multimedia CCC,1
+CAPPL,BMW_N_DEALER,BMW · N · **DEALER**,1
+CAPPL,C7501_TAGFAHRLICHT,**C7501** · feux de jour,1
+CAPPL,C750A_SCHWELLWERT_EMPFIN,**C750A** · valeur de seuil · **EMPFIN**,2
+CAPPL,C750A_SCHWELLWERT_NORMAL,**C750A** · valeur de seuil · **NORMAL**,2
+CAPPL,C750A_SCHWELLWERT_SEHR_E,**C750A** · valeur de seuil · **SEHR** · E,2
+CAPPL,C940A_QUITT_OPT_ENTSCH,**C940A** · acquittement sonore · option · desarmement,1
+CAPPL,C940C_QUITT_OPT_ENTSCH,**C940C** · acquittement sonore · option · desarmement,1
+CAPPL,C940D_QUITT_OPT_SCHAERF,**C940D** · acquittement sonore · option · armement,1
+CAPPL,C9410_QUITT_OPT_SCHAERF,**C9410** · acquittement sonore · option · armement,1
+CAPPL,C9413_QUITT_AKUST_SCHAERF,**C9413** · acquittement sonore · sonore · armement,1
+CAPPL,C9419_QUITT_OPT_KLAPPE,**C9419** · acquittement sonore · option · trappe,1
+CAPPL,C941C_QUITT_AKUST_KLAPPE,**C941C** · acquittement sonore · sonore · trappe,1
+CAPPL,C9C01_HKL_TASTE,**C9C01** · hayon · **TASTE**,2
+CAPPL,CA107_AUT_VERST_DEAKT,**CA107** · automatique · amplification · **DEAKT**,2
+CAPPL,CA107_AUT_VERST_ENTR,**CA107** · automatique · amplification · deverrouillage,1
+CAPPL,CA107_AUT_VERST_ENT_T,**CA107** · automatique · amplification · des- · T,1
+CAPPL,CAR_COLOR,vehicule · **COLOR**,1
+CAPPL,CBS,entretien selon besoin (CBS),0
+CAPPL,CDC,[index variante CDC],0
+CAPPL,CID_CCC,ecran central · systeme multimedia CCC,0
+CAPPL,CID_COLOUR,ecran central · **COLOUR**,1
+CAPPL,CID_TYPE,ecran central · type,0
+CAPPL,CODIERUNG_ERFOLGT,codage · effectue,0
+CAPPL,CRUISE_CTRL_CCC,**CRUISE** · **CTRL** · systeme multimedia CCC,2
+CAPPL,DATUM_EINHEIT,date · unite,0
+CAPPL,DAY_RUN_LIGHT_CCC,**DAY** · **RUN** · lumiere · systeme multimedia CCC,2
+CAPPL,DEF_BALANCE_VOLUME,defaut · **BALANCE** · volume,1
+CAPPL,DEF_BASS_VOLUME,defaut · **BASS** · volume,1
+CAPPL,DEF_DATUM_EINHEIT,defaut · date · unite,0
+CAPPL,DEF_DRUCK_EINHEIT,defaut · pression · unite,0
+CAPPL,DEF_EQUALIZER_VALUE,defaut · **EQUALIZER** · valeur,1
+CAPPL,DEF_FADER_VOLUME,defaut · **FADER** · volume,1
+CAPPL,DEF_GAL_VALUE,defaut · _GAL_ · valeur,0
+CAPPL,DEF_LAST_SPEECH,defaut · charge · **SPEECH**,1
+CAPPL,DEF_REVERB_VALUE,defaut · **REVERB** · valeur,1
+CAPPL,DEF_TEMPERATUR_EINHEIT,defaut · temperature · unite,0
+CAPPL,DEF_TREMBLE_VOLUME,defaut · **TREMBLE** · volume,1
+CAPPL,DEF_VERBRAUCH,defaut · consommation,0
+CAPPL,DEF_WEG_EINHEIT,defaut · course · unite,0
+CAPPL,DEF_ZEIT_EINHEIT,defaut · duree · unite,0
+CAPPL,DIGITAL_AUDIO_SOURCE,numerique · audio · **SOURCE**,1
+CAPPL,DRUCK_EINHEIT,pression · unite,0
+CAPPL,DSC,controle de stabilite,0
+CAPPL,DWS,**DWS**,1
+CAPPL,EINH_MASTER_KOMBI,unite · **MASTER** · combine,1
+CAPPL,ELDRVSEAT,**ELDRVSEAT**,1
+CAPPL,FOND_HIGH,places arriere · haut,0
+CAPPL,FOND_LOW,places arriere · bas,0
+CAPPL,GAL_VALUE,_GAL_ · valeur,0
+CAPPL,HDC,assistance en descente,0
+CAPPL,HELPNET,**HELPNET**,1
+CAPPL,HIP,**HIP**,1
+CAPPL,HUD,**HUD**,1
+CAPPL,HUD_M,**HUD** · M,1
+CAPPL,IBOC_CCC,**IBOC** · systeme multimedia CCC,1
+CAPPL,JAPAN,**JAPAN**,1
+CAPPL,K2407_PDC_MONITORBILD,[K-Wort K2407] · radars · **MONITORBILD**,1
+CAPPL,K410D_EINHEITEN_WEG,[K-Wort K410D] · **EINHEITEN** · course,1
+CAPPL,K4110_VERBR_MPG_UK,[K-Wort K4110] · **VERBR** · **MPG** · **UK**,3
+CAPPL,K4110_VERBR_MPG_US,[K-Wort K4110] · **VERBR** · **MPG** · marche americain,2
+CAPPL,K4113_ZEIT_STD_DARST,[K-Wort K4113] · duree · **STD** · **DARST**,2
+CAPPL,K4116_EINH_TEMPERATUR,[K-Wort K4116] · unite · temperature,0
+CAPPL,K4119_DRUCK_BAR,[K-Wort K4119] · pression · **BAR**,1
+CAPPL,K4119_DRUCK_KPA,[K-Wort K4119] · pression · **KPA**,1
+CAPPL,K4119_DRUCK_PSI,[K-Wort K4119] · pression · **PSI**,1
+CAPPL,K430C_DATUM_FORMAT,[K-Wort K430C] · date · **FORMAT**,1
+CAPPL,K4310_ANZ_SPRACHE_1,[K-Wort K4310] · nombre · langue · 1,0
+CAPPL,K4310_ANZ_SPRACHE_2,[K-Wort K4310] · nombre · langue · 2,0
+CAPPL,K4310_ANZ_SPRACHE_3,[K-Wort K4310] · nombre · langue · 3,0
+CAPPL,K4328_BLINKEN_TIPPBET,[K-Wort K4328] · **BLINKEN** · **TIPPBET**,2
+CAPPL,K4D03_ANZEIGE_ACC,[K-Wort K4D03] · affichage · regulateur adaptatif,0
+CAPPL,K4D03_ANZEIGE_CHECKCONTRL,[K-Wort K4D03] · affichage · **CHECKCONTRL**,1
+CAPPL,K4D03_ANZEIGE_GESCHWNDGKT,[K-Wort K4D03] · affichage · **GESCHWNDGKT**,1
+CAPPL,K4D03_ANZEIGE_NAVIGATION,[K-Wort K4D03] · affichage · navigation,0
+CAPPL,K4D03_ANZEIGE_TEMPOMAT,[K-Wort K4D03] · affichage · **TEMPOMAT**,1
+CAPPL,K5303_GAL_GERING,[K-Wort K5303] · _GAL_ · **GERING**,1
+CAPPL,K5303_GAL_KEINE_ANHEB,[K-Wort K5303] · _GAL_ · aucun · **ANHEB**,1
+CAPPL,K5303_GAL_MITTEL,[K-Wort K5303] · _GAL_ · moyen,0
+CAPPL,K5303_GAL_SEHR_GERING,[K-Wort K5303] · _GAL_ · **SEHR** · **GERING**,2
+CAPPL,K5303_GAL_SEHR_STARK,[K-Wort K5303] · _GAL_ · **SEHR** · **STARK**,2
+CAPPL,K5303_GAL_STARK,[K-Wort K5303] · _GAL_ · **STARK**,1
+CAPPL,K5305_KLANG_BALANCE,[K-Wort K5305] · sonorite · **BALANCE**,1
+CAPPL,K5305_KLANG_BASS,[K-Wort K5305] · sonorite · **BASS**,1
+CAPPL,K5305_KLANG_EQULIZER,[K-Wort K5305] · sonorite · **EQULIZER**,1
+CAPPL,K5305_KLANG_FADER,[K-Wort K5305] · sonorite · **FADER**,1
+CAPPL,K5305_KLANG_REVERB,[K-Wort K5305] · sonorite · **REVERB**,1
+CAPPL,K5305_KLANG_TREBLE,[K-Wort K5305] · sonorite · **TREBLE**,1
+CAPPL,K531A_LAUTST_NAV,[K-Wort K531A] · volume sonore · **NAV**,1
+CAPPL,K531A_LAUTST_PDC,[K-Wort K531A] · volume sonore · radars,0
+CAPPL,K531A_LAUTST_SVS,[K-Wort K531A] · volume sonore · **SVS**,1
+CAPPL,K531A_LAUTST_TELEFON,[K-Wort K531A] · volume sonore · telephone,0
+CAPPL,K531A_LAUTST_VERKEHR,[K-Wort K531A] · volume sonore · **VERKEHR**,1
+CAPPL,K7504_HEIMLEUCHTEN_150S,[K-Wort K7504] · eclairage d'accompagnement · **150S**,1
+CAPPL,K7504_HEIMLEUCHTEN_240S,[K-Wort K7504] · eclairage d'accompagnement · **240S**,1
+CAPPL,K7504_HEIMLEUCHTEN_40S,[K-Wort K7504] · eclairage d'accompagnement · **40S**,1
+CAPPL,K7504_HEIMLEUCHTEN_90S,[K-Wort K7504] · eclairage d'accompagnement · **90S**,1
+CAPPL,K7504_HEIMLEUCHTEN_AUS,[K-Wort K7504] · eclairage d'accompagnement · arret,0
+CAPPL,K8116_KLAPPENAUTOMATIK,[K-Wort K8116] · **KLAPPENAUTOMATIK**,1
+CAPPL,K8119_PRG_AC,[K-Wort K8119] · programme · **AC**,1
+CAPPL,K8119_PRG_AUTOMATIK,[K-Wort K8119] · programme · **AUTOMATIK**,1
+CAPPL,K8119_PRG_GEBL_AKTUELL,[K-Wort K8119] · programme · **GEBL** · **AKTUELL**,2
+CAPPL,K8119_PRG_LUFTVERTEILUNG,[K-Wort K8119] · programme · **LUFTVERTEILUNG**,1
+CAPPL,K8119_PRG_SCHICHTUNG,[K-Wort K8119] · programme · **SCHICHTUNG**,1
+CAPPL,K8125_KLAPPENPROGRAMM_BO,[K-Wort K8125] · **KLAPPENPROGRAMM** · **BO**,2
+CAPPL,K8127_KLAPPENPROGRAMM_BO,[K-Wort K8127] · **KLAPPENPROGRAMM** · **BO**,2
+CAPPL,K8129_ZWAKO_AC_EIN_AUTO,[K-Wort K8129] · **ZWAKO** · **AC** · marche · automatique,2
+CAPPL,K8313_GEBLAESE_0,[K-Wort K8313] · pulseur · 0,0
+CAPPL,K8313_GEBLAESE_M10,[K-Wort K8313] · pulseur · **M10**,1
+CAPPL,K8313_GEBLAESE_P10,[K-Wort K8313] · pulseur · **P10**,1
+CAPPL,K8601_SOLLWERT_0,[K-Wort K8601] · consigne · 0,0
+CAPPL,K8601_SOLLWERT_M1,[K-Wort K8601] · consigne · **M1**,1
+CAPPL,K8601_SOLLWERT_M2,[K-Wort K8601] · consigne · **M2**,1
+CAPPL,K8601_SOLLWERT_M3,[K-Wort K8601] · consigne · **M3**,1
+CAPPL,K8601_SOLLWERT_P1,[K-Wort K8601] · consigne · **P1**,1
+CAPPL,K8601_SOLLWERT_P2,[K-Wort K8601] · consigne · **P2**,1
+CAPPL,K8601_SOLLWERT_P3,[K-Wort K8601] · consigne · **P3**,1
+CAPPL,K930E_ZV_VER_N_XMIN_FB,[K-Wort K930E] · verrouillage centralise · version · N · **XMIN** · telecommande,1
+CAPPL,K931D_SCHEIBENABSENKUNG,[K-Wort K931D] · **SCHEIBENABSENKUNG**,1
+CAPPL,K931D_ZV_ALLE_TUEREN,[K-Wort K931D] · verrouillage centralise · **ALLE** · portes,1
+CAPPL,K931D_ZV_SELEKTIV,[K-Wort K931D] · verrouillage centralise · **SELEKTIV**,1
+CAPPL,K9416_QUITT_AKUST_ENTSCH,[K-Wort K9416] · acquittement sonore · sonore · desarmement,0
+CAPPL,K9901_HUPE,[K-Wort K9901] · **HUPE**,1
+CAPPL,K9901_KOMFORT_PARKBREMSE,[K-Wort K9901] · confort · **PARKBREMSE**,1
+CAPPL,K9901_LENKRADHEIZUNG,[K-Wort K9901] · **LENKRADHEIZUNG**,1
+CAPPL,K9901_MONITOR_EIN,[K-Wort K9901] · surveillance · marche,0
+CAPPL,K9901_MUTE_EIN,[K-Wort K9901] · **MUTE** · marche,1
+CAPPL,K9901_NAV_LETZER_HINWEIS,[K-Wort K9901] · **NAV** · **LETZER** · **HINWEIS**,3
+CAPPL,K9901_SWR,[K-Wort K9901] · **SWR**,1
+CAPPL,K9901_UMLUFT_EIN,[K-Wort K9901] · recyclage d'air · marche,0
+CAPPL,K9901_WARNBLINKEN,[K-Wort K9901] · **WARNBLINKEN**,1
+CAPPL,KANA_WRITER,**KANA** · **WRITER**,2
+CAPPL,KLIMA_SG_ART_CCC,climatisation · **SG** · type · systeme multimedia CCC,1
+CAPPL,LAENDERVARIANTE_TUNER,variante pays · **TUNER**,1
+CAPPL,LAST_BALANCE_VOLUME,charge · **BALANCE** · volume,1
+CAPPL,LAST_BASS_VOLUME,charge · **BASS** · volume,1
+CAPPL,LAST_EQUALIZER_VALUE,charge · **EQUALIZER** · valeur,1
+CAPPL,LAST_FADER_VOLUME,charge · **FADER** · volume,1
+CAPPL,LAST_REVERB_VALUE,charge · **REVERB** · valeur,1
+CAPPL,LAST_SPEECH,charge · **SPEECH**,1
+CAPPL,LAST_TREMBLE_VOLUME,charge · **TREMBLE** · volume,1
+CAPPL,LEGAL_DISCL,mention legale · avertissement,0
+CAPPL,MAX_PHONE_VOL,maximum · **PHONE** · **VOL**,2
+CAPPL,MDRIVE,M Drive,0
+CAPPL,MDRIVE_ALBV,M Drive · **ALBV**,1
+CAPPL,MDRIVE_SMG,M Drive · **SMG**,1
+CAPPL,MFL_CLEAN,volant multifonction · **CLEAN**,1
+CAPPL,MFL_HAZARD,volant multifonction · **HAZARD**,1
+CAPPL,MFL_HORN,volant multifonction · **HORN**,1
+CAPPL,MFL_MENU,volant multifonction · **MENU**,1
+CAPPL,MMC,**MMC**,1
+CAPPL,MP3_CCC,**MP3** · systeme multimedia CCC,1
+CAPPL,MULTIPARTY,**MULTIPARTY**,1
+CAPPL,NAVIGATION,navigation,0
+CAPPL,NAVIGATION_TYPE,navigation · type,0
+CAPPL,NIVI,**NIVI**,1
+CAPPL,NIVI_DISPLAY_OPTIONS,**NIVI** · **DISPLAY** · **OPTIONS**,3
+CAPPL,NOTEPAD,**NOTEPAD**,1
+CAPPL,OIL_LEVEL,huile · niveau,0
+CAPPL,ONLINE,en ligne,0
+CAPPL,ONLINE_CALLSTRATEGY,en ligne · **CALLSTRATEGY**,1
+CAPPL,ONLINE_DAR_TYPE,en ligne · **DAR** · type,1
+CAPPL,ONLINE_DISABLE_CONTENT,en ligne · desactivation · **CONTENT**,1
+CAPPL,ONLINE_DISABLE_VMAX,en ligne · desactivation · **VMAX**,1
+CAPPL,PDC,radars,0
+CAPPL,PDC_SIGNAL,radars · **SIGNAL**,1
+CAPPL,PDC_TYPE,radars · type,0
+CAPPL,PHONE_VERSION,**PHONE** · **VERSION**,2
+CAPPL,PIA,**PIA**,1
+CAPPL,RAIN_LIGHT_SENSOR,pluie · lumiere · capteur,0
+CAPPL,RDC_CCC,pression des pneus · systeme multimedia CCC,0
+CAPPL,RDS_AF_FUNKTION_CCC,**RDS** · **AF** · fonction · systeme multimedia CCC,2
+CAPPL,REVERSE_GONG,**REVERSE** · gong,1
+CAPPL,REV_INPUT,revision · entree,0
+CAPPL,ROLLER_COVER,**ROLLER** · **COVER**,2
+CAPPL,RVC,**RVC**,1
+CAPPL,RVC_CONNECTED_TO_VM,**RVC** · **CONNECTED** · **TO** · **VM**,4
+CAPPL,RVC_DISPLAY_OPTIONS,**RVC** · **DISPLAY** · **OPTIONS**,3
+CAPPL,SDARS,**SDARS**,1
+CAPPL,SIM,**SIM**,1
+CAPPL,SITZHEIZUNG,siege chauffant,0
+CAPPL,SMS,**SMS**,1
+CAPPL,SPRECHER_AKTIVE_SPRACHE,**SPRECHER** · **AKTIVE** · langue,2
+CAPPL,SPRECHER_ALTERNATIVE_2,**SPRECHER** · **ALTERNATIVE** · 2,2
+CAPPL,SPRECHER_ALTERNATIVE_3,**SPRECHER** · **ALTERNATIVE** · 3,2
+CAPPL,STANDHEIZUNG,**STANDHEIZUNG**,1
+CAPPL,STANDLUEFTUNG_CCC,**STANDLUEFTUNG** · systeme multimedia CCC,1
+CAPPL,SVS,**SVS**,1
+CAPPL,SVS_MICROPHONE_PATH,**SVS** · **MICROPHONE** · **PATH**,3
+CAPPL,TELEFON_TYPE,telephone · type,0
+CAPPL,TEMPERATUR_EINHEIT,temperature · unite,0
+CAPPL,TMC,info trafic,0
+CAPPL,TOWBAR,**TOWBAR**,1
+CAPPL,TP,**TP**,1
+CAPPL,TP_FUNKTION,**TP** · fonction,1
+CAPPL,TRF,**TRF**,1
+CAPPL,TWO_MICROPHONES,**TWO** · **MICROPHONES**,2
+CAPPL,TYP_LENKUNG,type · **LENKUNG**,1
+CAPPL,UNIT_FEET,**UNIT** · **FEET**,2
+CAPPL,VA_BPI,essieu avant · **BPI**,1
+CAPPL,VA_FLAP_CC,essieu avant · **FLAP** · Check Control,1
+CAPPL,VA_FLAP_DISPLAY_CONFIG,essieu avant · **FLAP** · **DISPLAY** · **CONFIG**,3
+CAPPL,VA_FLAP_HMISTART,essieu avant · **FLAP** · **HMISTART**,2
+CAPPL,VA_FLAP_NAVI,essieu avant · **FLAP** · navigation,1
+CAPPL,VA_FLAP_PHONE,essieu avant · **FLAP** · **PHONE**,2
+CAPPL,VA_FLAP_SVS,essieu avant · **FLAP** · **SVS**,2
+CAPPL,VERBRAUCH,consommation,0
+CAPPL,VIDEOMODUL_CCC,**VIDEOMODUL** · systeme multimedia CCC,1
+CAPPL,VIDEO_DENY,video · **DENY**,1
+CAPPL,WAEHLBARE_SPRACHE_1,**WAEHLBARE** · langue · 1,1
+CAPPL,WAEHLBARE_SPRACHE_2,**WAEHLBARE** · langue · 2,1
+CAPPL,WAEHLBARE_SPRACHE_3,**WAEHLBARE** · langue · 3,1
+CAPPL,WEATHERBAND,**WEATHERBAND**,1
+CAPPL,WEG_EINHEIT,course · unite,0
+CAPPL,ZBE,**ZBE**,1
+CAPPL,ZEIT_EINHEIT,duree · unite,0
+CAUDI,AUDIO_SYSTEM,audio · **SYSTEM**,1
+CAUDI,CODIERUNG_ERFOLGT,codage · effectue,0
+CAUDI,DIGITAL_AUDIO_SOURCE,numerique · audio · **SOURCE**,1
+CAUDI,INPUT_SCALING_SUB2,entree · **SCALING** · **SUB2**,2
+CAUDI,PHONE_VERSION,**PHONE** · **VERSION**,2
+CAUDI,VOICE_PRE_PROC_MIC_DIST,**VOICE** · pre- · **PROC** · **MIC** · **DIST**,4
+CAUDI,VOICE_PRE_PROC_STEER_SIDE,**VOICE** · pre- · **PROC** · **STEER** · **SIDE**,4
+CTUNE,LAENDERVARIANTE_TUNER_ANT,variante pays · **TUNER** · **ANT**,2
+CTUNE,RDS_AF_FUNKTION_CCC,**RDS** · **AF** · fonction · systeme multimedia CCC,2
+CTUNE,REGIONALISIERUNG,**REGIONALISIERUNG**,1
+CTUNE,TP_FUNKTION_ANT,**TP** · fonction · **ANT**,2
+KOMBI,ACC_ALIVE_ZAEHLER,regulateur adaptatif · signal de presence · compteur,0
+KOMBI,ACC_AUSSTATTUNG,regulateur adaptatif · **AUSSTATTUNG**,1
+KOMBI,ACC_CSUM_MONITOR,regulateur adaptatif · somme de controle · surveillance,0
+KOMBI,ACC_FILTER_FALLEND,regulateur adaptatif · filtre · **FALLEND**,1
+KOMBI,ACC_FILTER_STEIGEND,regulateur adaptatif · filtre · **STEIGEND**,1
+KOMBI,ACC_ID_MONITOR,regulateur adaptatif · identifiant · surveillance,0
+KOMBI,ACC_ZEIGER_AUF_NULL,regulateur adaptatif · **ZEIGER** · ouverture · **NULL**,2
+KOMBI,AFS_ALIVE_ZAEHLER,phares adaptatifs (AFS) · signal de presence · compteur,0
+KOMBI,AFS_ID_MONITOR,phares adaptatifs (AFS) · identifiant · surveillance,0
+KOMBI,AHM_ALIVE,**AHM** · signal de presence,1
+KOMBI,ARS_ALIVE_ZAEHLER,**ARS** · signal de presence · compteur,1
+KOMBI,ARS_ID_MONITOR,**ARS** · identifiant · surveillance,1
+KOMBI,AUSSENTEMP_ANZ_FEHLER_1,temperature exterieure · nombre · erreur · 1,0
+KOMBI,AUSSENTEMP_ANZ_FEHLER_2,temperature exterieure · nombre · erreur · 2,0
+KOMBI,AUSSENTEMP_DELTA_K1,temperature exterieure · ecart · **K1**,1
+KOMBI,AUSSENTEMP_DELTA_K2,temperature exterieure · ecart · **K2**,1
+KOMBI,AUSSENTEMP_SPERR_FAKTOR,temperature exterieure · blocage · facteur,0
+KOMBI,AUSSENTEMP_SPERR_OFFSET,temperature exterieure · blocage · decalage,0
+KOMBI,BC_2_ENABLE,ordinateur de bord · 2 · activation,0
+KOMBI,BC_DIGITAL_V,ordinateur de bord · numerique · _V_,0
+KOMBI,BC_DIGITAL_V_KORREKTUR,ordinateur de bord · numerique · _V_ · correction,0
+KOMBI,BC_LEERZEILE,ordinateur de bord · **LEERZEILE**,1
+KOMBI,BC_LIMIT_ENABLE,ordinateur de bord · limite · activation,0
+KOMBI,BC_V_KORREKTUR,ordinateur de bord · _V_ · correction,0
+KOMBI,CAS_ALIVE,**CAS** · signal de presence,1
+KOMBI,CBS_AVKM_START,entretien selon besoin (CBS) · **AVKM** · demarrage,1
+KOMBI,CBS_EINH_01H,entretien selon besoin (CBS) · unite · [0x01],0
+KOMBI,CBS_EINH_02H,entretien selon besoin (CBS) · unite · [0x02],0
+KOMBI,CBS_EINH_03H,entretien selon besoin (CBS) · unite · [0x03],0
+KOMBI,CBS_EINH_04H,entretien selon besoin (CBS) · unite · [0x04],0
+KOMBI,CBS_EINH_06H,entretien selon besoin (CBS) · unite · [0x06],0
+KOMBI,CBS_EINH_07H,entretien selon besoin (CBS) · unite · [0x07],0
+KOMBI,CBS_EINH_08H,entretien selon besoin (CBS) · unite · [0x08],0
+KOMBI,CBS_EINH_10H,entretien selon besoin (CBS) · unite · [0x10],0
+KOMBI,CBS_EINH_11H,entretien selon besoin (CBS) · unite · [0x11],0
+KOMBI,CBS_EINH_12H,entretien selon besoin (CBS) · unite · [0x12],0
+KOMBI,CBS_EINH_13H,entretien selon besoin (CBS) · unite · [0x13],0
+KOMBI,CBS_EINH_14H,entretien selon besoin (CBS) · unite · [0x14],0
+KOMBI,CBS_EINH_20H,entretien selon besoin (CBS) · unite · [0x20],0
+KOMBI,CBS_EINH_21H,entretien selon besoin (CBS) · unite · [0x21],0
+KOMBI,CBS_GELB,entretien selon besoin (CBS) · **GELB**,1
+KOMBI,CBS_GELB_HUAU,entretien selon besoin (CBS) · **GELB** · **HUAU**,2
+KOMBI,CBS_GELB_KM_MIN,entretien selon besoin (CBS) · **GELB** · **KM** · minimum,2
+KOMBI,CBS_INTD_03H,entretien selon besoin (CBS) · **INTD** · [0x03],1
+KOMBI,CBS_INTD_11H,entretien selon besoin (CBS) · **INTD** · [0x11],1
+KOMBI,CBS_INTD_13H,entretien selon besoin (CBS) · **INTD** · [0x13],1
+KOMBI,CBS_INTD_14H,entretien selon besoin (CBS) · **INTD** · [0x14],1
+KOMBI,CBS_INTW_10H,entretien selon besoin (CBS) · **INTW** · [0x10],1
+KOMBI,CBS_INTW_11H,entretien selon besoin (CBS) · **INTW** · [0x11],1
+KOMBI,CBS_INTW_12H,entretien selon besoin (CBS) · **INTW** · [0x12],1
+KOMBI,CBS_RES_SPERR,entretien selon besoin (CBS) · remise a zero · blocage,0
+KOMBI,CBS_SCEN_01H,entretien selon besoin (CBS) · scenario · [0x01],0
+KOMBI,CBS_SCEN_02H,entretien selon besoin (CBS) · scenario · [0x02],0
+KOMBI,CBS_SCEN_03H,entretien selon besoin (CBS) · scenario · [0x03],0
+KOMBI,CBS_SCEN_04H,entretien selon besoin (CBS) · scenario · [0x04],0
+KOMBI,CBS_SCEN_06H,entretien selon besoin (CBS) · scenario · [0x06],0
+KOMBI,CBS_SCEN_07H,entretien selon besoin (CBS) · scenario · [0x07],0
+KOMBI,CBS_SCEN_08H,entretien selon besoin (CBS) · scenario · [0x08],0
+KOMBI,CBS_SCEN_10H,entretien selon besoin (CBS) · scenario · [0x10],0
+KOMBI,CBS_SCEN_11H,entretien selon besoin (CBS) · scenario · [0x11],0
+KOMBI,CBS_SCEN_12H,entretien selon besoin (CBS) · scenario · [0x12],0
+KOMBI,CBS_SCEN_13H,entretien selon besoin (CBS) · scenario · [0x13],0
+KOMBI,CBS_SCEN_14H,entretien selon besoin (CBS) · scenario · [0x14],0
+KOMBI,CBS_SCEN_20H,entretien selon besoin (CBS) · scenario · [0x20],0
+KOMBI,CBS_SCEN_21H,entretien selon besoin (CBS) · scenario · [0x21],0
+KOMBI,CBS_STAT_01H,entretien selon besoin (CBS) · etat · [0x01],0
+KOMBI,CBS_STAT_02H,entretien selon besoin (CBS) · etat · [0x02],0
+KOMBI,CBS_STAT_03H,entretien selon besoin (CBS) · etat · [0x03],0
+KOMBI,CBS_STAT_04H,entretien selon besoin (CBS) · etat · [0x04],0
+KOMBI,CBS_STAT_06H,entretien selon besoin (CBS) · etat · [0x06],0
+KOMBI,CBS_STAT_07H,entretien selon besoin (CBS) · etat · [0x07],0
+KOMBI,CBS_STAT_08H,entretien selon besoin (CBS) · etat · [0x08],0
+KOMBI,CBS_STAT_10H,entretien selon besoin (CBS) · etat · [0x10],0
+KOMBI,CBS_STAT_11H,entretien selon besoin (CBS) · etat · [0x11],0
+KOMBI,CBS_STAT_12H,entretien selon besoin (CBS) · etat · [0x12],0
+KOMBI,CBS_STAT_13H,entretien selon besoin (CBS) · etat · [0x13],0
+KOMBI,CBS_STAT_14H,entretien selon besoin (CBS) · etat · [0x14],0
+KOMBI,CBS_STAT_20H,entretien selon besoin (CBS) · etat · [0x20],0
+KOMBI,CBS_STAT_21H,entretien selon besoin (CBS) · etat · [0x21],0
+KOMBI,CBS_TZ_SCHALTER,entretien selon besoin (CBS) · **TZ** · **SCHALTER**,2
+KOMBI,CC_15_AUS,Check Control · 15 · arret,0
+KOMBI,CC_15_EIN,Check Control · 15 · marche,0
+KOMBI,CC_BLINKFREQUENZ_LANGSAM,Check Control · **BLINKFREQUENZ** · **LANGSAM**,2
+KOMBI,CC_BLINKFREQUENZ_SCHNELL,Check Control · **BLINKFREQUENZ** · **SCHNELL**,2
+KOMBI,CC_BREMSWARNL_NUR_ROT,Check Control · **BREMSWARNL** · **NUR** · **ROT**,3
+KOMBI,CC_CSUM,Check Control · somme de controle,0
+KOMBI,CC_ML,Check Control · **ML**,1
+KOMBI,CC_NR_ROLLE,Check Control · numero · **ROLLE**,1
+KOMBI,CC_R_AUS,Check Control · _R_ · arret,0
+KOMBI,CC_R_EIN,Check Control · _R_ · marche,0
+KOMBI,CC_TEMPERATURWARNUNG,Check Control · **TEMPERATURWARNUNG**,1
+KOMBI,CC_ZUENDSCHLUESSEL,Check Control · **ZUENDSCHLUESSEL**,1
+KOMBI,CODING_VALID_BMW,**CODING** · **VALID** · BMW,2
+KOMBI,CRASH_TH_DIMMUNG,choc · **TH** · **DIMMUNG**,2
+KOMBI,CSUM_ACC,somme de controle · regulateur adaptatif,0
+KOMBI,CSUM_AKUSTIK_KLANG,somme de controle · **AKUSTIK** · sonorite,1
+KOMBI,CSUM_ATEMP,somme de controle · **ATEMP**,1
+KOMBI,CSUM_AUSSTATTUNG_1,somme de controle · **AUSSTATTUNG** · 1,1
+KOMBI,CSUM_AUSSTATTUNG_PL2,somme de controle · **AUSSTATTUNG** · **PL2**,2
+KOMBI,CSUM_CBS_01,somme de controle · entretien selon besoin (CBS) · 01,0
+KOMBI,CSUM_CC_ALIVE,somme de controle · Check Control · signal de presence,0
+KOMBI,CSUM_KODIERUNG_VALID,somme de controle · **KODIERUNG** · **VALID**,2
+KOMBI,CSUM_ST_ANZEIGE_1,somme de controle · **ST** · affichage · 1,1
+KOMBI,CSUM_TANK_INPUT,somme de controle · reservoir · entree,0
+KOMBI,CSUM_TANK_PROZESS,somme de controle · reservoir · **PROZESS**,1
+KOMBI,CSUM_WEG,somme de controle · course,0
+KOMBI,DIMM_MN_MAX,gradation · **MN** · maximum,1
+KOMBI,DIMM_MN_MIN,gradation · **MN** · minimum,1
+KOMBI,DME_ALIVE_ZAEHLER,**DME** · signal de presence · compteur,1
+KOMBI,DME_ID_MONITOR,**DME** · identifiant · surveillance,1
+KOMBI,DSC_ALIVE_ZAEHLER,controle de stabilite · signal de presence · compteur,0
+KOMBI,DSC_ALLRAD_CC_WAHL,controle de stabilite · **ALLRAD** · Check Control · **WAHL**,2
+KOMBI,DSC_ID_MONITOR,controle de stabilite · identifiant · surveillance,0
+KOMBI,DSC_MIT_RPA_CC,controle de stabilite · avec · indicateur de crevaison · Check Control,0
+KOMBI,DWA_VERBAUT,alarme antivol · installe,0
+KOMBI,EGS_ALIVE_ZAEHLER,calculateur de boite · signal de presence · compteur,0
+KOMBI,EGS_CSUM_MONITOR,calculateur de boite · somme de controle · surveillance,0
+KOMBI,EGS_ID_MONITOR,calculateur de boite · identifiant · surveillance,0
+KOMBI,EHC_ALIVE,**EHC** · signal de presence,1
+KOMBI,EKP_ALIVE_ZAEHLER,pompe a carburant · signal de presence · compteur,0
+KOMBI,EKP_ID_MONITOR,pompe a carburant · identifiant · surveillance,0
+KOMBI,EPS_ALIVE_MONITOR,**EPS** · signal de presence · surveillance,1
+KOMBI,EPS_ID_MONITOR,**EPS** · identifiant · surveillance,1
+KOMBI,FB_ALLE_TUEREN,telecommande · **ALLE** · portes,1
+KOMBI,FB_FA_TUER,telecommande · conducteur · porte,0
+KOMBI,FDC_ID_MONITOR,**FDC** · identifiant · surveillance,1
+KOMBI,FDC_VERBAUT,**FDC** · installe,1
+KOMBI,GETRIEBE_ART,boite de vitesses · type,0
+KOMBI,GPS_UHR,**GPS** · heure,1
+KOMBI,HDC_ID_MONITOR,assistance en descente · identifiant · surveillance,0
+KOMBI,HDC_VERBAUT,assistance en descente · installe,0
+KOMBI,HEIMLEUCHTEN_10S,eclairage d'accompagnement · **10S**,1
+KOMBI,HEIMLEUCHTEN_150S,eclairage d'accompagnement · **150S**,1
+KOMBI,HEIMLEUCHTEN_240S,eclairage d'accompagnement · **240S**,1
+KOMBI,HEIMLEUCHTEN_40S,eclairage d'accompagnement · **40S**,1
+KOMBI,HEIMLEUCHTEN_90S,eclairage d'accompagnement · **90S**,1
+KOMBI,HEIMLEUCHTEN_AUS,eclairage d'accompagnement · arret,0
+KOMBI,HU_VERBAUT,**HU** · installe,1
+KOMBI,K410D_C_WEG_1,[K-Wort K410D] · C · course · 1,0
+KOMBI,K410D_C_WEG_2,[K-Wort K410D] · C · course · 2,0
+KOMBI,K410D_C_WEG_3,[K-Wort K410D] · C · course · 3,0
+KOMBI,K410D_C_WEG_4,[K-Wort K410D] · C · course · 4,0
+KOMBI,K410D_D_WEG,[K-Wort K410D] · D · course,0
+KOMBI,K4110_C_VERBRAUCH_1,[K-Wort K4110] · C · consommation · 1,0
+KOMBI,K4110_C_VERBRAUCH_2,[K-Wort K4110] · C · consommation · 2,0
+KOMBI,K4110_C_VERBRAUCH_3,[K-Wort K4110] · C · consommation · 3,0
+KOMBI,K4110_C_VERBRAUCH_4,[K-Wort K4110] · C · consommation · 4,0
+KOMBI,K4110_D_VERBRAUCH,[K-Wort K4110] · D · consommation,0
+KOMBI,K4113_C_ZEIT_1,[K-Wort K4113] · C · duree · 1,0
+KOMBI,K4113_C_ZEIT_2,[K-Wort K4113] · C · duree · 2,0
+KOMBI,K4113_C_ZEIT_3,[K-Wort K4113] · C · duree · 3,0
+KOMBI,K4113_C_ZEIT_4,[K-Wort K4113] · C · duree · 4,0
+KOMBI,K4113_D_ZEIT,[K-Wort K4113] · D · duree,0
+KOMBI,K4116_C_TEMPERATUR_1,[K-Wort K4116] · C · temperature · 1,0
+KOMBI,K4116_C_TEMPERATUR_2,[K-Wort K4116] · C · temperature · 2,0
+KOMBI,K4116_C_TEMPERATUR_3,[K-Wort K4116] · C · temperature · 3,0
+KOMBI,K4116_C_TEMPERATUR_4,[K-Wort K4116] · C · temperature · 4,0
+KOMBI,K4116_D_TEMPERATUR,[K-Wort K4116] · D · temperature,0
+KOMBI,K4119_C_DRUCK_1,[K-Wort K4119] · C · pression · 1,0
+KOMBI,K4119_C_DRUCK_2,[K-Wort K4119] · C · pression · 2,0
+KOMBI,K4119_C_DRUCK_3,[K-Wort K4119] · C · pression · 3,0
+KOMBI,K4119_C_DRUCK_4,[K-Wort K4119] · C · pression · 4,0
+KOMBI,K4119_D_DRUCK,[K-Wort K4119] · D · pression,0
+KOMBI,K430C_C_DATUM_1,[K-Wort K430C] · C · date · 1,0
+KOMBI,K430C_C_DATUM_2,[K-Wort K430C] · C · date · 2,0
+KOMBI,K430C_C_DATUM_3,[K-Wort K430C] · C · date · 3,0
+KOMBI,K430C_C_DATUM_4,[K-Wort K430C] · C · date · 4,0
+KOMBI,K430C_D_DATUM,[K-Wort K430C] · D · date,0
+KOMBI,K4310_C_SPRACHE_1,[K-Wort K4310] · C · langue · 1,0
+KOMBI,K4310_C_SPRACHE_2,[K-Wort K4310] · C · langue · 2,0
+KOMBI,K4310_C_SPRACHE_3,[K-Wort K4310] · C · langue · 3,0
+KOMBI,K4310_C_SPRACHE_4,[K-Wort K4310] · C · langue · 4,0
+KOMBI,K4310_D_SPRACHE,[K-Wort K4310] · D · langue,0
+KOMBI,KL_PREDRIVE_AUSWAHL_1,borne · avant roulage · **AUSWAHL** · 1,1
+KOMBI,KL_PREDRIVE_AUSWAHL_2,borne · avant roulage · **AUSWAHL** · 2,1
+KOMBI,KUEHL_MTL_AKTIV,refroidissement · **MTL** · actif,1
+KOMBI,LEHNE_BF_ALIVE_ZAEHLER,dossier · passager · signal de presence · compteur,0
+KOMBI,LEHNE_BF_ID_MONITOR,dossier · passager · identifiant · surveillance,0
+KOMBI,LEHNE_FA_ALIVE_ZAEHLER,dossier · conducteur · signal de presence · compteur,0
+KOMBI,LEHNE_FA_ID_MONITOR,dossier · conducteur · identifiant · surveillance,0
+KOMBI,LICHT_AUT_WERT_1,lumiere · automatique · valeur · 1,0
+KOMBI,LICHT_AUT_WERT_2,lumiere · automatique · valeur · 2,0
+KOMBI,LICHT_AUT_WERT_3,lumiere · automatique · valeur · 3,0
+KOMBI,LL_RL_FZG,**LL** · feu arriere · vehicule,1
+KOMBI,LM_ALIVE,**LM** · signal de presence,1
+KOMBI,MMI_ENA_PIA,interface homme-machine · activation · **PIA**,1
+KOMBI,MMI_ENA_RPA_RDC,interface homme-machine · activation · indicateur de crevaison · pression des pneus,0
+KOMBI,MMI_ENA_UHR_DATUM,interface homme-machine · activation · heure · date,0
+KOMBI,MOTORKONSTANTE,**MOTORKONSTANTE**,1
+KOMBI,OHNE_QUITT_ENT,sans · acquittement sonore · des-,0
+KOMBI,OHNE_QUITT_VER,sans · acquittement sonore · version,0
+KOMBI,PREDRIVE_ABB_MOT,avant roulage · **ABB** · **MOT**,2
+KOMBI,PREDRIVE_PERIODENDAUER,avant roulage · **PERIODENDAUER**,1
+KOMBI,PREDRIVE_START_MIT_OBD,avant roulage · demarrage · avec · **OBD**,1
+KOMBI,QUITT_AKUST_ENT,acquittement sonore · sonore · des-,0
+KOMBI,QUITT_AKUST_VER,acquittement sonore · sonore · version,0
+KOMBI,QUITT_OPT_AKUST_ENT,acquittement sonore · option · sonore · des-,0
+KOMBI,QUITT_OPT_AKUST_VER,acquittement sonore · option · sonore · version,0
+KOMBI,QUITT_OPT_ENT,acquittement sonore · option · des-,0
+KOMBI,QUITT_OPT_VER,acquittement sonore · option · version,0
+KOMBI,RDC_ALIVE,pression des pneus · signal de presence,0
+KOMBI,RDC_VERBAUT,pression des pneus · installe,0
+KOMBI,SFY_ALIVE_ZAEHLER,**SFY** · signal de presence · compteur,1
+KOMBI,SFY_ID_MONITOR,**SFY** · identifiant · surveillance,1
+KOMBI,SHOW_CC_MSG_NR,**SHOW** · Check Control · **MSG** · numero,2
+KOMBI,SHOW_OEL_STAND,**SHOW** · huile · etat,1
+KOMBI,SITZ_AUT_VERST_AUS,siege · automatique · amplification · arret,0
+KOMBI,SITZ_AUT_VERST_ENT,siege · automatique · amplification · des-,0
+KOMBI,SITZ_AUT_VERST_ENT_T,siege · automatique · amplification · des- · T,0
+KOMBI,SITZ_L_UEBERWACHUNG,siege · _L_ · surveillance,0
+KOMBI,TAG_LICHT_AN,**TAG** · lumiere · **AN**,2
+KOMBI,TAG_LICHT_AUS,**TAG** · lumiere · arret,1
+KOMBI,TANK_BERUHIGUNGSZEIT,reservoir · **BERUHIGUNGSZEIT**,1
+KOMBI,TANK_FILTER_FALLEND,reservoir · filtre · **FALLEND**,1
+KOMBI,TANK_FILTER_STEIGEND,reservoir · filtre · **STEIGEND**,1
+KOMBI,TANK_MITTLUNGSZEIT,reservoir · **MITTLUNGSZEIT**,1
+KOMBI,TANK_OHM_FEHLER_OG,reservoir · **OHM** · erreur · **OG**,2
+KOMBI,TANK_OHM_FEHLER_UG,reservoir · **OHM** · erreur · **UG**,2
+KOMBI,TANK_RED_REICHWEITE,reservoir · reduction · **REICHWEITE**,1
+KOMBI,TANK_RW_WARNUNG,reservoir · **RW** · alerte,1
+KOMBI,TANK_SCHWELLE_AUF_AB,reservoir · seuil · ouverture · **AB**,1
+KOMBI,TANK_SCHWELLE_RESERVE,reservoir · seuil · **RESERVE**,1
+KOMBI,TANK_SICHERHEITSFAKTOR,reservoir · **SICHERHEITSFAKTOR**,1
+KOMBI,TANK_VOLL_ERKENNUNG,reservoir · **VOLL** · **ERKENNUNG**,2
+KOMBI,TCM_ALIVE_MONITOR,**TCM** · signal de presence · surveillance,1
+KOMBI,TCM_ID_MONITOR,**TCM** · identifiant · surveillance,1
+KOMBI,TEMPOMAT_SETZ_ANZ_DAUER,**TEMPOMAT** · positionnement · nombre · duree,1
+KOMBI,TIPP_BLINKEN_1X,impulsion · **BLINKEN** · **1X**,2
+KOMBI,TIPP_BLINKEN_3X,impulsion · **BLINKEN** · **3X**,2
+KOMBI,WARNFELD_INFO_DME,**WARNFELD** · **INFO** · **DME**,3
+KOMBI,WARNUNG_GESCHW_LIMIT,alerte · vitesse · limite,0
+KOMBI,ZGM_ALIVE_ZAEHLER,**ZGM** · signal de presence · compteur,1
+KOMBI,ZGM_ID_MONITOR,**ZGM** · identifiant · surveillance,1
+KOMBI,ZV_VER_AUS,verrouillage centralise · version · arret,0
+KOMBI,ZV_VER_FAHRT,verrouillage centralise · version · roulage,0
+KOMBI,ZV_VER_FAHRT_ZEIT,verrouillage centralise · version · roulage · duree,0
+KOMBI,ZV_VER_ZEIT,verrouillage centralise · version · duree,0
+IHK,ABK_KLIMASTIL,**ABK** · **KLIMASTIL**,2
+IHK,ALKS,**ALKS**,1
+IHK,ANZEIGE_TIMER_STHZ_SA,affichage · minuterie · **STHZ** · **SA**,2
+IHK,AUTO_BEI_KL15_EIN_0,automatique · lors de · borne 15 (contact) · marche · 0,0
+IHK,AUTO_BEI_KL15_EIN_1,automatique · lors de · borne 15 (contact) · marche · 1,0
+IHK,AUTO_BEI_KL15_EIN_2,automatique · lors de · borne 15 (contact) · marche · 2,0
+IHK,BAUKASTEN_PTC,**BAUKASTEN** · **PTC**,2
+IHK,BAUREIHE,**BAUREIHE**,1
+IHK,CC_MELDUNG_SH,Check Control · message · **SH**,1
+IHK,C_CKM_D_AUTO_BEI_KL15_EIN,C · memoire par cle (Car Key Memory) · D · automatique · lors de · borne 15 (contact) · marche,0
+IHK,C_CKM_D_GEBLAESE_OFFSET,C · memoire par cle (Car Key Memory) · D · pulseur · decalage,0
+IHK,C_CKM_D_KLIMA_MIT_AUTO,C · memoire par cle (Car Key Memory) · D · climatisation · avec · automatique,0
+IHK,C_CKM_D_TEMPERATUR_OFFSET,C · memoire par cle (Car Key Memory) · D · temperature · decalage,0
+IHK,DEFROST_LEITSCHAUFELN,**DEFROST** · **LEITSCHAUFELN**,2
+IHK,DELAY_SH_LED,delai · **SH** · LED,1
+IHK,ECO_PRO_DEFAULT_START,economie · **PRO** · **DEFAULT** · demarrage,2
+IHK,ECO_PRO_LAST_FU,economie · **PRO** · charge · **FU**,2
+IHK,ECO_PRO_MODE,economie · **PRO** · mode,1
+IHK,EINBAUORT,**EINBAUORT**,1
+IHK,EL_ZUHEIZER_PTC,**EL** · **ZUHEIZER** · **PTC**,3
+IHK,ERSTE_HEIZZEIT_HHS_A,premier · duree de chauffage · _HHS_ · A,0
+IHK,ERSTE_HEIZZEIT_HHS_B,premier · duree de chauffage · _HHS_ · B,0
+IHK,F25_BESCHL_VERM,**F25** · **BESCHL** · **VERM**,3
+IHK,GBL_OFF,**GBL** · arret,1
+IHK,GEBLAESE_AUTO_MIT_A,pulseur · automatique · avec · A,0
+IHK,GEBLAESE_AUTO_MIT_BALKEN,pulseur · automatique · avec · **BALKEN**,1
+IHK,GEBLAESE_MIT_LUEFTER_SYMB,pulseur · avec · ventilateur · **SYMB**,1
+IHK,GEBLAESE_MIT_RAHMEN,pulseur · avec · **RAHMEN**,1
+IHK,GEBLAESE_OFFSET_0,pulseur · decalage · 0,0
+IHK,GEBLAESE_OFFSET_1,pulseur · decalage · 1,0
+IHK,GEBLAESE_OFFSET_2,pulseur · decalage · 2,0
+IHK,HDC_ZYKLISCH,assistance en descente · **ZYKLISCH**,1
+IHK,IGR,**IGR**,1
+IHK,IHX_CBS,**IHX** · entretien selon besoin (CBS),1
+IHK,KLIMAGERAET_MIT_SCHICHTNG,**KLIMAGERAET** · avec · **SCHICHTNG**,2
+IHK,KLIMA_MIT_AUTO_0,climatisation · avec · automatique · 0,0
+IHK,KLIMA_MIT_AUTO_1,climatisation · avec · automatique · 1,0
+IHK,KLIMA_MIT_AUTO_2,climatisation · avec · automatique · 2,0
+IHK,KLIMA_SPERREN,climatisation · **SPERREN**,1
+IHK,KMK_ZUSCHALTSCHWELLE,**KMK** · **ZUSCHALTSCHWELLE**,2
+IHK,KOMPRESSOR,compresseur,0
+IHK,KOMPRESSOR_KUPPLUNG,compresseur · embrayage,0
+IHK,KOMPRESSOR_MITTEL,compresseur · moyen,0
+IHK,KOMP_AKUSTIK,compensation · **AKUSTIK**,1
+IHK,KOREA_SYMBOL,**KOREA** · **SYMBOL**,2
+IHK,LAENDERVARANTE,**LAENDERVARANTE**,1
+IHK,MANUELLES_VERDECK_E88,**MANUELLES** · **VERDECK** · **E88**,3
+IHK,MOTOR_IHX,moteur · **IHX**,1
+IHK,MSA,Start & Stop,0
+IHK,MSA_ANSTEUERLOGIK,Start & Stop · **ANSTEUERLOGIK**,1
+IHK,MSA_KENNLINIENSATZ_US,Start & Stop · **KENNLINIENSATZ** · marche americain,1
+IHK,MSA_MEMORY,Start & Stop · memoire,0
+IHK,MSA_NOTSTRATEGIE,Start & Stop · **NOTSTRATEGIE**,1
+IHK,NACHLAUFZEIT_UM_VENTIL,**NACHLAUFZEIT** · **UM** · valve,2
+IHK,OFF_MEMORY,arret · memoire,0
+IHK,PIA_PORTIERUNG,**PIA** · **PORTIERUNG**,2
+IHK,PSEUDOZUHEIZEN,**PSEUDOZUHEIZEN**,1
+IHK,REST_TASTE_VERBAUT,chaleur residuelle · **TASTE** · installe,1
+IHK,RL_LL,feu arriere · **LL**,1
+IHK,SH_ZUHEIZEN,**SH** · **ZUHEIZEN**,2
+IHK,SOLARSENSORKENNLINIE,**SOLARSENSORKENNLINIE**,1
+IHK,STANDHEIZUNG,**STANDHEIZUNG**,1
+IHK,STANDHEIZUNG_SZ,**STANDHEIZUNG** · **SZ**,2
+IHK,TAKTUNGSDAUER_HHS,**TAKTUNGSDAUER** · _HHS_,1
+IHK,TEILLASTBETRIEB_SH,**TEILLASTBETRIEB** · **SH**,2
+IHK,TEMPERATUR_OFFSET_0,temperature · decalage · 0,0
+IHK,TEMPERATUR_OFFSET_1,temperature · decalage · 1,0
+IHK,TEMPERATUR_OFFSET_2,temperature · decalage · 2,0
+IHK,UEBERSETZUNG_KOMPRESSOR,**UEBERSETZUNG** · compresseur,1
+IHK,UMLUFT_MEMORY,recyclage d'air · memoire,0
+IHK,VERBRAUCHSOPTIMIERUNG,**VERBRAUCHSOPTIMIERUNG**,1
+IHK,WARTUNGSINTERVALL_FZE,**WARTUNGSINTERVALL** · **FZE**,2
+IHK,ZWEITE_HEIZZEIT_HHS,**ZWEITE** · duree de chauffage · _HHS_,1
+IHK,ZYLINDER_ZAHL,**ZYLINDER** · **ZAHL**,2
+PDC,ABSCHALTWEG,**ABSCHALTWEG**,1
+PDC,ABSCHALT_GESCHWINDIGKEIT,coupure · **GESCHWINDIGKEIT**,1
+PDC,ABSTAND_ECKE_MIT_VO,distance · coin · avec · **VO**,1
+PDC,ABSTAND_ECK_MIT_HI,distance · **ECK** · avec · haut,1
+PDC,ABSTAND_MIT_MIT_HI,distance · avec · avec · haut,0
+PDC,ABSTAND_MIT_MIT_VO,distance · avec · avec · **VO**,1
+PDC,AHK_OFFSET_FRONT,**AHK** · decalage · avant,1
+PDC,AHK_OFFSET_HINTEN,**AHK** · decalage · arriere,1
+PDC,AKUSTIK_RECHTS_LINKS,**AKUSTIK** · droite · gauche,1
+PDC,AKUSTISCHE_FEHLERMELDUNG,**AKUSTISCHE** · message d'erreur,1
+PDC,ANHAENGERKUPPLUNG,**ANHAENGERKUPPLUNG**,1
+PDC,ANZAHL_WANDLER,nombre · **WANDLER**,1
+PDC,DAUERTON,**DAUERTON**,1
+PDC,DAUERTON_BEREICH_HINTEN,**DAUERTON** · plage · arriere,1
+PDC,DAUERTON_BEREICH_VORNE,**DAUERTON** · plage · avant,1
+PDC,EINSCHALTMELDUNG_IMMER,**EINSCHALTMELDUNG** · toujours,1
+PDC,EINSCHALTVEROEGERUNG_ZEIT,**EINSCHALTVEROEGERUNG** · duree,1
+PDC,EINSCHALTVERZOEGERUNG,**EINSCHALTVERZOEGERUNG**,1
+PDC,FAHRZEUG_STILLSTAND,**FAHRZEUG** · **STILLSTAND**,2
+PDC,LAUTSTAERKE_HINTEN,**LAUTSTAERKE** · arriere,1
+PDC,LAUTSTAERKE_VORN,**LAUTSTAERKE** · **VORN**,2
+PDC,MESSBEREICHE_ECKE_VORNE,**MESSBEREICHE** · coin · avant,1
+PDC,MESSBEREICHE_MITTE_HINTEN,**MESSBEREICHE** · **MITTE** · arriere,2
+PDC,MESSBEREICHE_MITTE_VORNE,**MESSBEREICHE** · **MITTE** · avant,2
+PDC,MESSBEREICH_ECKE_HINTEN,**MESSBEREICH** · coin · arriere,1
+PDC,OFFSET_ECKE_HINTEN,decalage · coin · arriere,0
+PDC,OFFSET_ECKE_VORNE,decalage · coin · avant,0
+PDC,OFFSET_MITTE_VORNE,decalage · **MITTE** · avant,1
+PDC,OFFSET_MIT_HINTEN,decalage · avec · arriere,0
+PDC,PDC_DEAKTIVIERUNG,radars · **DEAKTIVIERUNG**,1
+PDC,PDC_SCHALTER,radars · **SCHALTER**,1
+PDC,SC_FLAG_DT_FRONT,_SC_ · indicateur · **DT** · avant,1
+PDC,SC_FLAG_DT_REAR,_SC_ · indicateur · **DT** · arriere,1
+PDC,SC_FLAG_LP_FRONT,_SC_ · indicateur · **LP** · avant,1
+PDC,SC_FLAG_LP_REAR,_SC_ · indicateur · **LP** · arriere,1
+PDC,SC_FLAG_OE_FRONT,_SC_ · indicateur · **OE** · avant,1
+PDC,SC_FLAG_OE_REAR,_SC_ · indicateur · **OE** · arriere,1
+PDC,SC_FLAG_WD_FRONT,_SC_ · indicateur · **WD** · avant,1
+PDC,SC_FLAG_WD_REAR,_SC_ · indicateur · **WD** · arriere,1
+PDC,STILLSTAND_ZEIT,**STILLSTAND** · duree,1
+PDC,TONAUSGABE_CAN,**TONAUSGABE** · bus CAN,1
+PDC,TONAUSGABE_LSP,**TONAUSGABE** · **LSP**,2
+PDC,TON_ANZEIGEDAUER,**TON** · **ANZEIGEDAUER**,2
+PDC,WANDERKENNUNG,**WANDERKENNUNG**,1
+PDC,WANDLER_STOERUNG,**WANDLER** · **STOERUNG**,2
+RLS,DEF_FLC_SCHWELLWERT_SATZ,defaut · _FLC_ · valeur de seuil · **SATZ**,1
+RLS,EMPF_OHNE_RAENDELRAD,**EMPF** · sans · **RAENDELRAD**,2
+RLS,FLC_SCHWELLWERT_SATZ,_FLC_ · valeur de seuil · **SATZ**,1
+RLS,KONFIG_NACHL_REGEN,configuration · **NACHL** · pluie,1
+RLS,KONFIG_RLS_GESCHW,configuration · capteur pluie/lumiere · vitesse,0
+RLS,KONFIG_RLS_RAENDELRAD,configuration · capteur pluie/lumiere · **RAENDELRAD**,1
+RLS,KONFIG_RLS_REGEN,configuration · capteur pluie/lumiere · pluie,0
+RLS,TYP_FRONTSCHEIBE,type · **FRONTSCHEIBE**,1
+RLS,WISCHEN_STUFE2,essuyage · niveau 2,0
+RLS,WISCHERMOTOR_RSK,**WISCHERMOTOR** · **RSK**,2
+FZD,ANTIWUMMER,**ANTIWUMMER**,1
+FZD,BSS,**BSS**,1
+FZD,DATA_TRANSFER,**DATA** · **TRANSFER**,2
+FZD,E9X_CAR,**E9X** · vehicule,1
+FZD,EC_SPIEGEL,**EC** · retroviseur,1
+FZD,EC_SPIEGEL_KOMPASS_CABRIO,**EC** · retroviseur · **KOMPASS** · **CABRIO**,3
+FZD,FZD_IGR,module de toit · **IGR**,1
+FZD,FZD_KOMFORT_POS_AUF,module de toit · confort · position · ouverture,0
+FZD,FZD_KOMFORT_POS_ZU,module de toit · confort · position · fermeture,0
+FZD,FZD_MSA,module de toit · Start & Stop,0
+FZD,HEBEN_AUS_GEOEFFNET,**HEBEN** · arret · **GEOEFFNET**,2
+FZD,INNENLICHT,**INNENLICHT**,1
+FZD,KLEMME_15_NOTWENDIG,**KLEMME** · 15 · **NOTWENDIG**,2
+FZD,KOMFORT_HEBEN_FZD,confort · **HEBEN** · module de toit,1
+FZD,KOMFORT_OEFFNEN_FZD,confort · ouverture · module de toit,0
+FZD,KOMFORT_SCHLIESSEN_FZD,confort · fermeture · module de toit,0
+FZD,LENGTH_NO_STOP,**LENGTH** · non · arret,1
+FZD,LENGTH_NO_STOP_TILT,**LENGTH** · non · arret · **TILT**,2
+FZD,MDS_CAR,**MDS** · vehicule,1
+FZD,MOTOR_DIRECTION,moteur · **DIRECTION**,1
+FZD,NO_RAIN_INTENSITY,non · pluie · **INTENSITY**,1
+FZD,NO_SHD,non · toit ouvrant,0
+FZD,OEFFNEN_AUS_GEHOBEN,ouverture · arret · **GEHOBEN**,1
+FZD,PANIC_CLOSE,alarme panique · fermeture,0
+FZD,PANIC_CLOSE_TILT,alarme panique · fermeture · **TILT**,1
+FZD,PANIC_FREIGABE_CAS,alarme panique · **FREIGABE** · **CAS**,2
+FZD,PANIC_FREIGABE_KL15,alarme panique · **FREIGABE** · borne 15 (contact),1
+FZD,POS_DIRECTION,position · **DIRECTION**,1
+FZD,QUARTERTURN,**QUARTERTURN**,1
+FZD,RAIN_CLOSE_INTENSITY,pluie · fermeture · **INTENSITY**,1
+FZD,REGENSCHLIESSEN,fermeture sous la pluie,0
+FZD,REGENSCHLIESSENTILT,**REGENSCHLIESSENTILT**,1
+FZD,RLS,capteur pluie/lumiere,0
+FZD,SCHIEBEHEBEDACH_TIPP_AUF,toit ouvrant relevable · impulsion · ouverture,0
+FZD,SCHIEBEHEBEDACH_TIPP_HEB,toit ouvrant relevable · impulsion · **HEB**,1
+FZD,SCHIEBEHEBEDACH_TIPP_SENK,toit ouvrant relevable · impulsion · **SENK**,1
+FZD,SCHIEBEHEBEDACH_TIPP_ZU,toit ouvrant relevable · impulsion · fermeture,0
+FZD,SHD_POS_QUARTERTURN,toit ouvrant · position · **QUARTERTURN**,1
+FZD,TOLERANCE,**TOLERANCE**,1
+FZD,T_PANIC1,T · **PANIC1**,1
+FZD,T_PANIC2,T · **PANIC2**,1
