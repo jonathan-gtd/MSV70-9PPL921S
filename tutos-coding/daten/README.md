@@ -1,162 +1,144 @@
-# Catalogue des DATEN — traduit et expliqué
+# Catalogue des DATEN — ciblé sur ce véhicule
 
-Le contenu réel de tes SP-Daten E89, module par module, en français.
+Uniquement les fonctions que **ta** voiture expose réellement, traduites.
 
-> **Source :** `C:\NCSEXPER\DATEN\E89` — 433 fichiers, contenu daté du 23/07/2014
-> **2 282 fonctions codables** sur les 19 modules du véhicule
-> **2 256 avec leurs valeurs possibles** (98,9 %) · **160 avec une explication rédigée**
+> **Source :** `C:\NCSEXPER\DATEN\E89` croisé avec les 19 traces `.TRC` lues sur le véhicule
+> **1 779 fonctions codables** · **1 732 avec leurs valeurs** (97 %) · **127 avec explication rédigée**
+> **787 fragments allemands traduits** · 58 % des lignes entièrement traduites
 
 ---
 
-## 1. Ce qu'est le codage, concrètement
+## 1. Comment le ciblage a été fait
 
-Un calculateur BMW contient deux choses distinctes :
+C'est le point qui change tout par rapport à une liste de forum.
 
-| | Le programme | Les données de codage |
+Chaque fonction, dans les DATEN, porte l'adresse du bloc de codage où elle vit. Chaque `.TRC` lu sur la voiture liste les blocs que le module a **réellement renvoyés**. En croisant les deux :
+
+```
+fonction dans un bloc présent dans le TRC   →   elle existe sur ta voiture
+fonction dans un bloc absent du TRC         →   écartée
+```
+
+### Bénéfice inattendu : l'identification des variantes
+
+En testant **chaque variante** de chaque module contre son `.TRC`, celle dont 100 % des fonctions tombent dans les blocs observés est la bonne. **18 modules sur 19 identifiés de façon certaine.**
+
+| Module | Variante réelle | Ce que supposait `E89SGET.000` |
 |---|---|---|
-| **Quoi** | Le firmware — la logique | Une table de réglages |
-| **Change avec** | La reprogrammation (WinKFP, flash) | Le codage (NCS Expert) |
-| **Risque** | Module briqué | Module mal configuré |
+| FRM | **`FRMFA.C12`** | C10 |
+| KOMBI | **`KMBI_PL2.C08`** | C06 |
+| CAS | **`CAS3.C09`** | C06 |
+| ABG | **`MRS5CD.C22`** | MRS5.C06 |
+| JBBF | **`JBBFE.C07`** | C05 |
+| PDC | **`PDC_E87.C05`** | C03 |
+| RLS | **`RLS_PL2.C08`** | C07 |
+| DSC | **`MK60_87.C0A`** | indéterminé |
+| DWAY | **`DWA_IRS.C05`** | indéterminé |
 
-Le codage ne modifie **que la seconde**. Le programme sait déjà faire rabattre les rétroviseurs — la donnée de codage dit simplement s'il doit le faire. C'est pour ça que le codage est réversible : la logique n'a pas bougé.
+Deux mystères résolus au passage :
 
-### La paire FSW / PSW
+**`DWAY` est bien `DWA_IRS`** — la protection volumétrique de l'habitacle (*Innenraumschutz*). 36 fonctions, correspondance exacte.
 
-Chaque réglage est un couple :
+**Le DSC passe de 761 à 86 fonctions.** Et ses préfixes réels sont `C0A` (60 fonctions), `C0B` (5) et `C09` (1). **`C0C_` n'existe pas sur ce véhicule** : tous les codes DSC des listes PDF sont inapplicables tels quels — il faut lire `C0A_DIFF_LOCK` et non `C0C_DIFF_LOCK`.
 
-```
-FSW  =  Funktionsschlüsselwort  =  LA QUESTION   SPIEGEL_KOMFORT_EINKLAPP
-PSW  =  Parameterschlüsselwort  =  LA RÉPONSE    aktiv  /  nicht_aktiv
-```
+---
 
-Ce catalogue donne **les deux** : la question et les réponses autorisées.
+## 2. Comment lire une ligne
 
-### Comment lire une ligne
-
-| FSW | Traduction | Valeurs possibles | Explication |
+| FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
 | `TUERAUF_STOP_MAUT` | porte ouverte · arrêt · péage | `aktiv` · `nicht_aktiv` | Interrompt la remontée automatique de vitre (fonction péage) dès qu'une portière est ouverte. |
 
-- **Traduction** — décomposition mot à mot du nom allemand
-- **Valeurs possibles** — ce que le module accepte réellement, extrait des DATEN
-- **Explication** — rédigée seulement pour les fonctions identifiées avec certitude
+- **Traduction** — décomposition du nom allemand, fragment par fragment
+- **Valeurs** — ce que le module accepte, extrait des DATEN
+- **Explication** — rédigée seulement quand l'effet est établi de source sûre
 
-Trois formes de valeurs reviennent :
+Trois formes de valeurs :
 
 | Forme | Sens |
 |---|---|
 | `aktiv` / `nicht_aktiv` | Interrupteur |
-| `wert_01` … `wert_08` | Valeur numérique dans une plage |
-| `ece` / `us` / `gb` | Choix nommé — souvent une variante de marché |
-
-### Ce qui circule entre les outils
-
-```
-Voiture ──lecture──▶  FSW_PSW.TRC   (état actuel, en hexadécimal)
-                            │
-                   NCS Dummy + DATEN  (traduit en noms lisibles)
-                            │
-                      FSW_PSW.MAN   (uniquement les lignes à changer)
-                            │
-Voiture ◀──écriture── SG_CODIEREN
-```
-
-Les DATEN sont le dictionnaire qui rend ces fichiers intelligibles. C'est lui qui est extrait ici.
+| `wert_00` … `wert_08` | Valeur dans une plage |
+| `ece` / `us` / `gb` | Choix nommé, souvent une variante de marché |
 
 ---
 
-## 2. Les catalogues par module
+## 3. Les catalogues
 
-| Module | Rôle | Fonctions | Avec valeurs | Expliquées | |
-|---|---|---:|---:|---:|---|
-| [DSC](DSC.md) | Contrôle de stabilité / ABS | 761 | 761 | 47 | 🔴 |
-| [FRM](FRM.md) | Éclairage, vitres, rétroviseurs | 438 | 437 | 75 | 🟠 |
-| [KOMBI](KOMBI.md) | Combiné | 237 | 237 | 6 | 🟢 |
-| [CAPPL](CAPPL.md) | CCC — applications iDrive | 233 | 231 | 7 | 🟠 |
-| [CAS](CAS.md) | Accès et antidémarrage | 229 | 227 | 7 | 🔴 |
-| [IHK](IHK.md) | Climatisation | 74 | 72 | 6 | 🟢 |
-| [ABG](ABG.md) | Airbags | 51 | 51 | 2 | 🔴 |
-| [PDC](PDC.md) | Radars de recul | 45 | 44 | 0 | 🟢 |
-| [FZD](FZD.md) | Module de toit | 41 | 41 | 2 | 🟢 |
-| [DWAY](DWAY.md) | Alarme — composant à confirmer | 36 | 36 | 2 | 🟠 |
-| [JBBF](JBBF.md) | Boîtier de jonction | 34 | 30 | 1 | 🟠 |
-| [EKP](EKP.md) | Pompe à carburant | 28 | 28 | 0 | 🔴 |
-| [DWAS](DWAS.md) | Sirène d'alarme | 26 | 15 | 5 | 🟠 |
-| [CHOST](CHOST.md) | CCC — unité centrale | 18 | 17 | 0 | 🟠 |
-| [RLS](RLS.md) | Capteur pluie / luminosité | 10 | 10 | 0 | 🟢 |
-| [CGATE](CGATE.md) | CCC — passerelle | 8 | 8 | 0 | 🟠 |
-| [CAUDI](CAUDI.md) | CCC — audio | 7 | 5 | 0 | 🟠 |
-| [CTUNE](CTUNE.md) | CCC — tuner | 4 | 4 | 0 | 🟠 |
-| [6BMOT](6BMOT.md) | **Calculateur moteur** | 2 | 2 | 0 | 🔴 |
+| Module | Rôle | Variante | Fonctions | Valeurs | Expliquées | |
+|---|---|---|---:|---:|---:|---|
+| [FRM](FRM.md) | Éclairage, vitres, rétroviseurs | `FRMFA.C12` | 449 | 448 | 75 | 🟠 |
+| [KOMBI](KOMBI.md) | Combiné | `KMBI_PL2.C08` | 295 | 295 | 9 | 🟢 |
+| [CAS](CAS.md) | Accès et antidémarrage | `CAS3.C09` | 255 | 253 | 7 | 🔴 |
+| [CAPPL](CAPPL.md) | CCC — applications iDrive | `CCC_APP.C0B` | 216 | 214 | 7 | 🟠 |
+| [JBBF](JBBF.md) | Boîtier de jonction | `JBBFE.C07` | 97 | 72 | 1 | 🟠 |
+| [DSC](DSC.md) | Contrôle de stabilité / ABS | `MK60_87.C0A` | 86 | 86 | 8 | 🔴 |
+| [IHK](IHK.md) | Climatisation | `IHXXPL2.C02` | 74 | 72 | 6 | 🟢 |
+| [ABG](ABG.md) | Airbags | `MRS5CD.C22` | 67 | 67 | 5 | 🔴 |
+| [PDC](PDC.md) | Radars de recul | `PDC_E87.C05` | 48 | 47 | 0 | 🟢 |
+| [FZD](FZD.md) | Module de toit | `FZD.C06` | 41 | 41 | 2 | 🟢 |
+| [DWAY](DWAY.md) | Alarme — protection volumétrique | `DWA_IRS.C05` | 36 | 36 | 2 | 🟠 |
+| [EKP](EKP.md) | Pompe à carburant | `EKPM60_2.C03` | 28 | 28 | 0 | 🔴 |
+| [DWAS](DWAS.md) | Sirène d'alarme | `DWASINE.C02` | 26 | 15 | 5 | 🟠 |
+| [CHOST](CHOST.md) | CCC — unité centrale | `CCC_HST.C05` | 19 | 18 | 0 | 🟠 |
+| [CAUDI](CAUDI.md) | CCC — audio | `CCC_ASK.C04` | 13 | 11 | 0 | 🟠 |
+| [RLS](RLS.md) | Capteur pluie / luminosité | `RLS_PL2.C08` | 12 | 12 | 0 | 🟢 |
+| [CGATE](CGATE.md) | CCC — passerelle | `CCC_GW.C03` | 8 | 8 | 0 | 🟠 |
+| [CTUNE](CTUNE.md) | CCC — tuner | `CCC_ANT.C07` | 5 | 5 | 0 | 🟠 |
+| [6BMOT](6BMOT.md) | **Calculateur moteur** | `MSV70.C01` | 4 | 4 | 0 | 🔴 |
 
 Plus :
 
-- **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — les 499 fragments allemands traduits, la clé de lecture
-- **[fsw_par_module.csv](fsw_par_module.csv)** — les 2 282 lignes exploitables : `module, fsw, traduction, valeurs, explication`
-
-> 💡 `DSC` affiche 761 fonctions parce que sa variante exacte n'a pas pu être déterminée : c'est l'union de 26 fichiers. Ta vraie liste est bien plus courte.
+- **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — les 787 fragments traduits
+- **[fsw_par_module.csv](fsw_par_module.csv)** — `module, variante, fsw, bloc, traduction, valeurs, explication`
 
 ---
 
-## 3. Comment ce catalogue a été construit
+## 4. Le seul module incertain : CAPPL
 
-Il ne vient pas d'un forum. Il est extrait de **tes** fichiers DATEN, par rétro-ingénierie de deux formats binaires.
+**89 fonctions écartées sur 305.** C'est le seul module où aucune variante n'atteint 100 % — `CCC_APP.C0B` plafonne à 71 %.
 
-### Les dictionnaires
+Deux explications possibles : la lecture du `.TRC` était partielle, ou la variante exacte du CCC n'est pas dans les DATEN E89. Les 216 fonctions retenues sont fiables (leur bloc est bien présent) ; ce sont les 89 écartées qui méritent une relecture du module si tu veux en avoir le cœur net.
 
-```
-SWTFSW03.DAT   9 429 mots-clés FSW de la série E89
-SWTPSW03.DAT   2 229 valeurs PSW
-```
-
-Même structure d'enregistrement dans les deux :
-
-```
-<identifiant:2> 01 00 <clé:2> NOM \0
-```
-
-### Les références dans chaque module
-
-Les `.C0x` ne contiennent pas les noms, seulement des clés numériques :
-
-```
-12 00 01 ?? ?? 00 00 ?? 00 00 00 01 00 <clé FSW:2>   ← début d'enregistrement
-                                  10 00 <clé PSW:2>   ← une par valeur autorisée
-```
-
-Chaque clé est résolue via le dictionnaire correspondant.
-
-**Taux de résolution : 98,5 %** pour les FSW, **98,9 %** des fonctions ont leurs valeurs.
-
-### La traduction
-
-Les noms BMW sont des assemblages de fragments allemands séparés par `_`. Un dictionnaire de 499 fragments traduit chaque composant. Voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
+Tous les autres modules sont à 0 écartée.
 
 ---
 
-## 4. Ce que ce catalogue ne fait pas
+## 5. Méthode d'extraction
 
-**La traduction est morphologique, pas sémantique.** Elle décompose le nom, elle n'explique pas l'effet. `TUERAUF_STOP_MAUT` se lit *porte ouverte · arrêt · péage* : il faut savoir que BMW appelle « fonction péage » la remontée de vitre d'une impulsion pour comprendre ce que fait ce code. C'est précisément pour ça que la colonne **Explication** existe — mais elle ne couvre que 160 lignes sur 2 282.
+Rétro-ingénierie de deux formats binaires des DATEN.
 
-**Une case Explication vide ne veut pas dire que la fonction est sans intérêt.** Elle veut dire que son effet n'a pas été établi de source sûre. Mieux vaut une case vide qu'une invention.
+```
+SWTFSW03.DAT   9 429 mots-clés FSW      <id:2> 01 00 <clé:2> NOM \0
+SWTPSW03.DAT   2 229 valeurs PSW        même structure
+```
 
-**La variante retenue peut ne pas être la tienne.** Chaque module existe en plusieurs versions (`.C06`, `.C08`…). Celle indiquée en tête de fichier est déduite de `E89SGET.000`. Si NCS Dummy en annonce une autre en ouvrant ton `.TRC`, **c'est NCS Dummy qui a raison**.
+Dans les `.C0x`, les noms sont absents — seulement des clés numériques :
 
-**Les valeurs sont celles que le module accepte, pas la tienne.** Savoir que `TUERAUF_STOP_MAUT` accepte `aktiv` et `nicht_aktiv` ne dit pas laquelle est active sur ta voiture. Ça, seule la lecture du module le dit.
+```
+12 00 01 <adr_lo> <adr_hi> 00 00 <offset> 00 00 00 01 00 <clé FSW:2>
+                                                   10 00 <clé PSW:2>   ← une par valeur
+```
+
+L'adresse du bloc se reconstruit en `0x00<adr_hi><adr_lo>00`. C'est elle qui permet le croisement avec les `.TRC`.
+
+Taux de résolution : **98,5 %** des références FSW, **97 %** des fonctions ont leurs valeurs.
 
 ---
 
-## 5. Méthode de travail
+## 6. Ce que ce catalogue ne fait pas
 
-1. **Ici**, au calme : trouver la fonction, noter le FSW et les valeurs possibles
-2. **NCS Dummy** : ouvrir le `.TRC`, vérifier que le FSW existe dans ta variante et voir sa valeur actuelle
-3. **NCS Expert** : coder, relire, vérifier
+**La traduction est morphologique, pas sémantique.** Elle décompose le nom, elle n'explique pas l'effet. D'où la colonne Explication — qui ne couvre que 127 lignes sur 1 779.
 
-Un FSW présent ici mais absent de ton `.TRC` signifie simplement que ta variante ne l'expose pas. C'est normal et fréquent.
+**Une case Explication vide n'est pas un désaveu de la fonction.** Elle veut dire que son effet n'est pas établi. Mieux vaut vide qu'inventé.
+
+**Environ 760 fragments restent non traduits** (en **gras**), pour 930 occurrences. Ce sont majoritairement des sigles internes BMW apparaissant une ou deux fois. 58 % des lignes sont entièrement traduites ; sur le reste, le fragment manquant est généralement un suffixe technique, pas le cœur du sens.
+
+**Les valeurs listées sont celles que le module accepte, pas la tienne.** Savoir que `TUERAUF_STOP_MAUT` accepte `aktiv` et `nicht_aktiv` ne dit pas laquelle est active chez toi. Seul NCS Dummy, en ouvrant le `.TRC`, le dit.
 
 ---
 
-## 6. Avant toute écriture
+## 7. Avant toute écriture
 
 | | |
 |---|---|

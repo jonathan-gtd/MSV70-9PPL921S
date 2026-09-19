@@ -6,38 +6,37 @@
 
 ---
 
-## Source
+## Identification
 
 | | |
 |---|---|
-| Variante retenue | `MSV70.C02` |
-| Fonctions codables | **2** |
-| Avec valeurs extraites | 2 (100 %) |
+| Variante | **`MSV70.C01`** |
+| Identifiée par | recoupement avec `6BMOT.TRC` lu sur le véhicule |
+| Fonctions retenues | **4** |
+| Écartées (hors blocs du TRC) | 0 |
+| Avec valeurs | 4 |
 | Avec explication rédigée | 0 |
-| Fichiers DATEN analysés | 4 |
+| Blocs d'adresses du TRC | 5 |
 
-Variantes disponibles : `MSV70.C01`, `MSV70.C02`, `MSV70.C03`, `MSV70.C04`
-
-> La variante réellement installée est identifiée par NCS Dummy à l'ouverture du `.TRC`.
-> Si elle diffère de celle retenue ici, la liste change.
+> Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
+> le module sont listées. Ce sont celles que **ta** voiture expose.
 
 ---
 
-## Les 2 fonctions codables
+## Les 4 fonctions codables
 
-| FSW | Traduction | Valeurs possibles | Explication |
+| FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
+| `KATENTFALLCODIERUNG` | **KATENTFALLCODIERUNG** | `wert_00` · `wert_01` |  |
+| `MILANSTEUERUNG` | **MILANSTEUERUNG** | `wert_01` · `wert_02` |  |
 | `OLULCODIERUNG` | **OLULCODIERUNG** | `wert_00` · `wert_01` · `wert_02` |  |
 | `VMAXCODIERUNG_MSV70` | **VMAXCODIERUNG** · **MSV70** | `wert_00` · `wert_01` · `wert_02` · `wert_03` |  |
 
 ---
 
-**Traduction** : décomposition du nom allemand — voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
-Les fragments en **gras** n'ont pas de traduction établie, ceux entre `_underscores_` sont ambigus.
+**Traduction** — décomposition du nom allemand, voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
+Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigus.
 
-**Valeurs possibles** : extraites des DATEN. `aktiv`/`nicht_aktiv` = interrupteur,
-`wert_xx` = valeur numérique, autres = choix nommés.
+**Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Explication** : rédigée uniquement pour les fonctions identifiées avec certitude.
-Une case vide ne veut pas dire que la fonction est sans intérêt — seulement que son effet
-n'a pas été établi de source sûre.
+**Explication** — rédigée seulement quand l'effet est établi de source sûre.

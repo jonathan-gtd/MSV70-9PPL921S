@@ -6,40 +6,38 @@
 
 ---
 
-## Source
+## Identification
 
 | | |
 |---|---|
-| Variante retenue | `CCC_ANT.C05` |
-| Fonctions codables | **4** |
-| Avec valeurs extraites | 4 (100 %) |
+| Variante | **`CCC_ANT.C07`** |
+| Identifiée par | recoupement avec `CTUNE.TRC` lu sur le véhicule |
+| Fonctions retenues | **5** |
+| Écartées (hors blocs du TRC) | 0 |
+| Avec valeurs | 5 |
 | Avec explication rédigée | 0 |
-| Fichiers DATEN analysés | 9 |
+| Blocs d'adresses du TRC | 1 |
 
-Variantes disponibles : `CCC_ANT.C04`, `CCC_ANT.C05`, `CCC_ANT.C06`, `CCC_ANT.C07`, `CCC_ANT.C08`, `CCC_ANT.C09`, `CCC_ANT.C0A`, `CCC_ANT.C0B`, `CCC_ANT.C0C`
-
-> La variante réellement installée est identifiée par NCS Dummy à l'ouverture du `.TRC`.
-> Si elle diffère de celle retenue ici, la liste change.
+> Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
+> le module sont listées. Ce sont celles que **ta** voiture expose.
 
 ---
 
-## Les 4 fonctions codables
+## Les 5 fonctions codables
 
-| FSW | Traduction | Valeurs possibles | Explication |
+| FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `LAENDERVARIANTE_TUNER_ANT` | variante pays · **TUNER** · **ANT** | `no_area` · `ece` · `us` · `japan` · `oceanien` |  |
+| `IBOC_CCC` | **IBOC** · systeme multimedia CCC | `nicht_aktiv` · `aktiv` |  |
+| `LAENDERVARIANTE_TUNER_ANT` | variante pays · tuner · antenne | `no_area` · `ece` · `us` · `japan` · `oceanien` |  |
 | `RDS_AF_FUNKTION_CCC` | **RDS** · **AF** · fonction · systeme multimedia CCC | `rds_aus` · `rds_ein_af_aus` · `rds_ein_af_manuell` · `rds_ein_af_automatisch` |  |
 | `REGIONALISIERUNG` | **REGIONALISIERUNG** | `reg_aus` · `reg_ein` |  |
-| `TP_FUNKTION_ANT` | **TP** · fonction · **ANT** | `nicht_aktiv` · `tp` |  |
+| `TP_FUNKTION_ANT` | **TP** · fonction · antenne | `nicht_aktiv` · `tp` |  |
 
 ---
 
-**Traduction** : décomposition du nom allemand — voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
-Les fragments en **gras** n'ont pas de traduction établie, ceux entre `_underscores_` sont ambigus.
+**Traduction** — décomposition du nom allemand, voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
+Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigus.
 
-**Valeurs possibles** : extraites des DATEN. `aktiv`/`nicht_aktiv` = interrupteur,
-`wert_xx` = valeur numérique, autres = choix nommés.
+**Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Explication** : rédigée uniquement pour les fonctions identifiées avec certitude.
-Une case vide ne veut pas dire que la fonction est sans intérêt — seulement que son effet
-n'a pas été établi de source sûre.
+**Explication** — rédigée seulement quand l'effet est établi de source sûre.

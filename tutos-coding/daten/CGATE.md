@@ -6,44 +6,41 @@
 
 ---
 
-## Source
+## Identification
 
 | | |
 |---|---|
-| Variante retenue | `CCC_GW.C03` |
-| Fonctions codables | **8** |
-| Avec valeurs extraites | 8 (100 %) |
+| Variante | **`CCC_GW.C03`** |
+| Identifiée par | recoupement avec `CGATE.TRC` lu sur le véhicule |
+| Fonctions retenues | **8** |
+| Écartées (hors blocs du TRC) | 0 |
+| Avec valeurs | 8 |
 | Avec explication rédigée | 0 |
-| Fichiers DATEN analysés | 7 |
+| Blocs d'adresses du TRC | 5 |
 
-Variantes disponibles : `CCC_GW.C02`, `CCC_GW.C03`, `CCC_GW.C04`, `CCC_GW.C05`, `CCC_GW.C06`, `CCC_GW.C07`, `CCC_GW.C08`
-
-> La variante réellement installée est identifiée par NCS Dummy à l'ouverture du `.TRC`.
-> Si elle diffère de celle retenue ici, la liste change.
+> Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
+> le module sont listées. Ce sont celles que **ta** voiture expose.
 
 ---
 
 ## Les 8 fonctions codables
 
-| FSW | Traduction | Valeurs possibles | Explication |
+| FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
 | `AUDIO_SYSTEM` | audio · **SYSTEM** | `e60_stereo` · `e60_hifi` · `e60_top_hifi` · `pl2_stereo` · `pl2_hifi` · `pl2_top_hifi` · `e70_stereo` · `e70_hifi` … *(+39)* |  |
 | `DIM_MODE` | **DIM** · mode | `standard` · `use_last` |  |
 | `PDC` | radars | `nicht_aktiv` · `aktiv` |  |
-| `PDC_SIGNAL` | radars · **SIGNAL** | `pdc_no` · `pdc_rear` · `pdc_front` · `pdc_front_rear` |  |
+| `PDC_SIGNAL` | radars · signal | `pdc_no` · `pdc_rear` · `pdc_front` · `pdc_front_rear` |  |
 | `PDC_TYPE` | radars · type | `rear` · `full` |  |
-| `REVERSE_GONG` | **REVERSE** · gong | `nicht_aktiv` · `aktiv` |  |
+| `REVERSE_GONG` | inversion · gong | `nicht_aktiv` · `aktiv` |  |
 | `RING_CCC` | **RING** · systeme multimedia CCC | `aktiv` · `nicht_aktiv` |  |
 | `SPEED_MODE` | vitesse · mode | `speed_mode_intern` · `speed_mode_extern` |  |
 
 ---
 
-**Traduction** : décomposition du nom allemand — voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
-Les fragments en **gras** n'ont pas de traduction établie, ceux entre `_underscores_` sont ambigus.
+**Traduction** — décomposition du nom allemand, voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
+Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigus.
 
-**Valeurs possibles** : extraites des DATEN. `aktiv`/`nicht_aktiv` = interrupteur,
-`wert_xx` = valeur numérique, autres = choix nommés.
+**Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Explication** : rédigée uniquement pour les fonctions identifiées avec certitude.
-Une case vide ne veut pas dire que la fonction est sans intérêt — seulement que son effet
-n'a pas été établi de source sûre.
+**Explication** — rédigée seulement quand l'effet est établi de source sûre.

@@ -6,46 +6,45 @@
 
 ---
 
-## Source
+## Identification
 
 | | |
 |---|---|
-| Variante retenue | `RLS_PL2.C07` |
-| Fonctions codables | **10** |
-| Avec valeurs extraites | 10 (100 %) |
+| Variante | **`RLS_PL2.C08`** |
+| Identifiée par | recoupement avec `RLS.TRC` lu sur le véhicule |
+| Fonctions retenues | **12** |
+| Écartées (hors blocs du TRC) | 0 |
+| Avec valeurs | 12 |
 | Avec explication rédigée | 0 |
-| Fichiers DATEN analysés | 3 |
+| Blocs d'adresses du TRC | 4 |
 
-Variantes disponibles : `RLS_PL2.C07`, `RLS_PL2.C08`, `RLS_E65.C06`
-
-> La variante réellement installée est identifiée par NCS Dummy à l'ouverture du `.TRC`.
-> Si elle diffère de celle retenue ici, la liste change.
+> Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
+> le module sont listées. Ce sont celles que **ta** voiture expose.
 
 ---
 
-## Les 10 fonctions codables
+## Les 12 fonctions codables
 
-| FSW | Traduction | Valeurs possibles | Explication |
+| FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `DEF_FLC_SCHWELLWERT_SATZ` | defaut · _FLC_ · valeur de seuil · **SATZ** | `wert_01` · `wert_02` · `wert_03` |  |
-| `EMPF_OHNE_RAENDELRAD` | **EMPF** · sans · **RAENDELRAD** | `empfindlichkeitsstufe_1` · `empfindlichkeitsstufe_2` · `empfindlichkeitsstufe_3` · `empfindlichkeitsstufe_4` |  |
-| `FLC_SCHWELLWERT_SATZ` | _FLC_ · valeur de seuil · **SATZ** | `wert_01` · `wert_02` · `wert_03` |  |
-| `KONFIG_NACHL_REGEN` | configuration · **NACHL** · pluie | `wert_01` |  |
+| `DEF_FLC_SCHWELLWERT_SATZ` | defaut · _FLC_ · valeur de seuil · jeu | `wert_01` · `wert_02` · `wert_03` |  |
+| `EMPF_OHNE_RAENDELRAD` | **EMPF** · sans · molette | `empfindlichkeitsstufe_1` · `empfindlichkeitsstufe_2` · `empfindlichkeitsstufe_3` · `empfindlichkeitsstufe_4` |  |
+| `FLC_SCHWELLWERT_SATZ` | _FLC_ · valeur de seuil · jeu | `wert_01` · `wert_02` · `wert_03` |  |
+| `KONFIG_NACHL_REGEN` | configuration · temporisation · pluie | `wert_01` |  |
 | `KONFIG_RLS_GESCHW` | configuration · capteur pluie/lumiere · vitesse | `aktiv` · `nicht_aktiv` |  |
-| `KONFIG_RLS_RAENDELRAD` | configuration · capteur pluie/lumiere · **RAENDELRAD** | `aktiv` · `nicht_aktiv` |  |
+| `KONFIG_RLS_RAENDELRAD` | configuration · capteur pluie/lumiere · molette | `aktiv` · `nicht_aktiv` |  |
 | `KONFIG_RLS_REGEN` | configuration · capteur pluie/lumiere · pluie | `aktiv` · `nicht_aktiv` |  |
 | `TYP_FRONTSCHEIBE` | type · **FRONTSCHEIBE** | `serienscheibe` · `klimakomfort` |  |
+| `UEBERWISCHZEIT_1` | duree de balayage supplementaire · 1 | `wert_01` · `wert_02` |  |
+| `UEBERWISCHZEIT_2` | duree de balayage supplementaire · 2 | `wert_01` · `wert_02` |  |
 | `WISCHEN_STUFE2` | essuyage · niveau 2 | `aktiv` · `nicht_aktiv` |  |
 | `WISCHERMOTOR_RSK` | **WISCHERMOTOR** · **RSK** | `aktiv` · `nicht_aktiv` |  |
 
 ---
 
-**Traduction** : décomposition du nom allemand — voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
-Les fragments en **gras** n'ont pas de traduction établie, ceux entre `_underscores_` sont ambigus.
+**Traduction** — décomposition du nom allemand, voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
+Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigus.
 
-**Valeurs possibles** : extraites des DATEN. `aktiv`/`nicht_aktiv` = interrupteur,
-`wert_xx` = valeur numérique, autres = choix nommés.
+**Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Explication** : rédigée uniquement pour les fonctions identifiées avec certitude.
-Une case vide ne veut pas dire que la fonction est sans intérêt — seulement que son effet
-n'a pas été établi de source sûre.
+**Explication** — rédigée seulement quand l'effet est établi de source sûre.
