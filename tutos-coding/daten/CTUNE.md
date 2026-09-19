@@ -15,7 +15,8 @@
 | Fonctions retenues | **5** |
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 5 |
-| Avec explication rédigée | 5 |
+| Signification (EN) | 5 |
+| Explication (FR) | 5 |
 | Blocs d'adresses du TRC | 1 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -25,13 +26,13 @@
 
 ## Les 5 fonctions codables
 
-| FSW | Décomposition | Valeurs | Signification |
-|---|---|---|---|
-| `IBOC_CCC` | radio numerique HD · systeme multimedia CCC | `nicht_aktiv` · `aktiv` | *In-band on-channel (IBOC) digital radio (HD radio)* |
-| `LAENDERVARIANTE_TUNER_ANT` | variante pays · tuner · antenne | `ece` · `us` · `japan` · `oceanien` · `no_area` | *Country variant tuner* |
-| `RDS_AF_FUNKTION_CCC` | RDS · frequences alternatives · fonction · systeme multimedia CCC | `rds_aus` · `rds_ein_af_aus` · `rds_ein_af_manuell` · `rds_ein_af_automatisch` | *Radio valeur system (RDS) alternative frequencies (AF) (switch to alternative frequency for the same station when the signal becomes to weak)* |
-| `REGIONALISIERUNG` | regionalisation | `reg_aus` · `reg_ein` | *Radio valeur system (RDS) regional (REG)* |
-| `TP_FUNKTION_ANT` | point de test (?) · fonction · antenne | `nicht_aktiv` · `tp` | *Radio valeur system (RDS) traffic programme (TP)* |
+| FSW | Décomposition | Valeurs | Signification (EN) | Explication (FR) |
+|---|---|---|---|---|
+| `IBOC_CCC` | radio numerique HD · systeme multimedia CCC | `nicht_aktiv` · `aktiv` | In-band on-channel (IBOC) digital radio (HD radio) | Radio numerique IBOC (HD Radio) |
+| `LAENDERVARIANTE_TUNER_ANT` | variante pays · tuner · antenne | `ece` · `us` · `japan` · `oceanien` · `no_area` | Country variant tuner | Variante pays du tuner |
+| `RDS_AF_FUNKTION_CCC` | RDS · frequences alternatives · fonction · systeme multimedia CCC | `rds_aus` · `rds_ein_af_aus` · `rds_ein_af_manuell` · `rds_ein_af_automatisch` | Radio data system (RDS) alternative frequencies (AF) (switch to alternative frequency for the same station when the signal becomes to weak) | Frequences alternatives (AF) du RDS : bascule sur une autre frequence de la meme station quand le signal faiblit |
+| `REGIONALISIERUNG` | regionalisation | `reg_aus` · `reg_ein` | Radio data system (RDS) regional (REG) | Mode regional (REG) du RDS |
+| `TP_FUNKTION_ANT` | point de test (?) · fonction · antenne | `nicht_aktiv` · `tp` | Radio data system (RDS) traffic programme (TP) | Programme trafic (TP) du RDS |
 
 ---
 
@@ -40,6 +41,7 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Signification** — texte en clair. En romain : rédigé à la main. *En italique* : description
-de la base communautaire NCS Dummy, en anglais, non encore traduite.
-Les notations d'unités (`[durée s = valeur / 10]`) sont traduites.
+**Signification (EN)** — description issue de la base communautaire NCS Dummy, verbatim.
+
+**Explication (FR)** — traduction française. Un tiret signifie que la ligne n'est pas
+encore traduite. Les notations d'unités sont converties : `[durée s = valeur / 10]`.

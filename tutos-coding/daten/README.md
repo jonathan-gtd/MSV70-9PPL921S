@@ -3,7 +3,8 @@
 Les fonctions codables des 19 calculateurs de la voiture, dans leurs variantes réelles, traduites.
 
 > **Variantes :** relevées par NCS Expert sur le véhicule
-> **1 738 fonctions codables** · **1 692 avec leurs valeurs** (97,4 %) · **1 366 avec une signification** (78,6 %)
+> **1 738 fonctions codables** · **1 692 avec leurs valeurs** (97,4 %)
+> **1 365 avec une signification en anglais** (78,5 %) · **851 traduites en français** (49 %)
 > **100 % des lignes traduites** — 1 294 fragments établis + 130 lectures probables
 
 ---
@@ -87,16 +88,17 @@ Le DSC connaît le `n52b30` et la `handschaltung` — cohérent avec le moteur e
 
 ## 3. Comment lire une ligne
 
-| FSW | Décomposition | Valeurs | Signification |
-|---|---|---|---|
-| `TUERAUF_STOP_MAUT` | porte ouverte · arrêt · péage | `aktiv` · `nicht_aktiv` | Interrompt la remontée automatique de vitre (fonction péage) dès qu'une portière est ouverte. |
+| FSW | Décomposition | Valeurs | Signification (EN) | Explication (FR) |
+|---|---|---|---|---|
+| `TUERAUF_STOP_MAUT` | porte ouverte · arrêt · péage | `aktiv` · `nicht_aktiv` | Opening door aborts power window one-touch movement | Interrompt la remontée automatique de vitre (fonction péage) dès qu'une portière est ouverte. |
 
 | Colonne | Ce que c'est |
 |---|---|
 | **FSW** | Le nom du réglage, tel qu'il apparaît dans NCS Dummy |
 | **Décomposition** | Le nom allemand, fragment par fragment |
 | **Valeurs** | Ce que le module accepte, extrait des DATEN |
-| **Signification** | Le texte en clair. Romain = rédigé à la main, *italique* = base NCS Dummy (anglais) |
+| **Signification (EN)** | Description NCS Dummy, verbatim |
+| **Explication (FR)** | Traduction française, ou `—` si pas encore traduite |
 
 Trois formes de valeurs :
 
@@ -108,34 +110,35 @@ Trois formes de valeurs :
 
 ---
 
-## 4. D'où vient la colonne Signification
+## 4. Les deux colonnes de sens
 
-Deux sources, distinguées visuellement.
-
-| Rendu | Source | Lignes |
+| Colonne | Contenu | Lignes |
 |---|---|---:|
-| Texte romain | Rédigé à la main, en français | 114 |
-| *Texte italique* | Base communautaire **NCS Dummy**, en anglais | 1 252 |
-| *(vide)* | Aucune source | 372 |
+| **Signification (EN)** | Description verbatim de la base NCS Dummy | 1 365 |
+| **Explication (FR)** | Traduction française | 851 |
 
-Le fichier `Translations.csv` livré avec NCS Dummy contient **14 823 descriptions** de fonctions et de valeurs, écrites par la communauté — crédits inscrits dans le fichier : *revtor, IcemanBHE, joako, lolo, rdl, StefanL, rondo, LPCapital*. Le recoupement avec les FSW du véhicule donne **1 252 correspondances exactes**.
+Les deux sont indépendantes : l'anglais reste toujours affiché, le français vient à côté.
 
-Ces descriptions sont souvent plus précises que ce que j'aurais écrit. Exemple :
+### La source anglaise
+
+Le fichier `Translations.csv` livré avec NCS Dummy contient **14 823 descriptions** de fonctions et de valeurs, écrites par la communauté — crédits inscrits dans le fichier : *revtor, IcemanBHE, joako, lolo, rdl, StefanL, rondo, LPCapital*. Le recoupement avec les FSW du véhicule donne **1 365 correspondances**.
+
+Ces descriptions sont souvent plus précises que ce que j'aurais écrit, et détaillent parfois chaque valeur :
 
 ```
-KATENTFALLCODIERUNG
-  Catalytic converter elimination
-  [wert_00: with catalytic converter, wert_01: without catalytic converter]
-  (changes may require STAT_BSZ_WERT=0)
+Alarm type [ece: 1 cycle Europe sound, us: 8 cycles USA sound,
+            gb: 8 cycles Europe sound (United Kingdom)]
 ```
 
-Les notations d'unités sont traduites (`[duree s = valeur / 10]`), le corps du texte ne l'est pas encore.
+### La traduction française
 
-### Pourquoi ces 1 252 lignes sont encore en anglais
+**851 lignes sur 1 738**, dont 114 rédigées directement en français et 737 traduites depuis l'anglais.
 
-Une traduction automatique mot à mot a été testée, puis rejetée : elle produisait « Catalyseur elimination », « Cornering feux », « Automatique ceinture de securite hand-over uses ». L'ordre des mots diffère trop entre les deux langues pour une substitution terme à terme — la couverture lexicale plafonnait à 54 % et le résultat était moins lisible que l'anglais d'origine.
+La traduction est faite **à la main**. Une substitution automatique mot à mot a été implémentée puis rejetée : couverture lexicale 54 %, et des sorties comme « Catalyseur elimination », « Cornering feux », « Automatique ceinture de securite hand-over uses ». L'ordre des mots diffère trop entre les deux langues.
 
-La traduction correcte suppose de réécrire **1 280 descriptions distinctes** à la main. C'est le travail restant. En attendant, l'anglais d'origine est conservé intact plutôt que dégradé.
+Les notations d'unités sont converties dans les deux colonnes : `[time_s=data/10]` devient `[durée s = valeur / 10]`.
+
+**Reste à traduire : 514 lignes**, correspondant à 543 descriptions distinctes. Un tiret dans la colonne FR signale une ligne non encore traduite — l'anglais reste disponible juste à côté.
 
 ---
 
@@ -166,7 +169,7 @@ La traduction correcte suppose de réécrire **1 280 descriptions distinctes** �
 Plus :
 
 - **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — 1 294 fragments traduits + 130 lectures probables
-- **[fsw_par_module.csv](fsw_par_module.csv)** — `module, variante, fsw, bloc, traduction, valeurs, explication, source`
+- **[fsw_par_module.csv](fsw_par_module.csv)** — `module, variante, fsw, bloc, traduction, valeurs, signification_en, explication_fr, source`
 
 ---
 
@@ -194,9 +197,11 @@ Taux de résolution : **98,5 %** des références FSW.
 
 ## 7. Ce que ce catalogue ne fait pas
 
-**La colonne Décomposition est morphologique, pas sémantique.** Elle découpe le nom allemand, elle n'explique pas l'effet. C'est le rôle de la colonne Signification, qui couvre 1 366 lignes sur 1 738.
+**La colonne Décomposition est morphologique, pas sémantique.** Elle découpe le nom allemand, elle n'explique pas l'effet. C'est le rôle des colonnes Signification et Explication.
 
-**372 lignes restent sans signification.** Ni source communautaire, ni certitude de ma part. Mieux vaut vide qu'inventé.
+**373 lignes n'ont aucune signification**, en anglais comme en français : ni source communautaire, ni certitude de ma part. Mieux vaut vide qu'inventé.
+
+**514 lignes ont l'anglais mais pas encore le français.** La traduction est en cours.
 
 **La traduction est complète mais à deux niveaux.** 1 294 fragments ont une traduction établie ; 130 sont des abréviations BMW sans documentation publique, rendues avec la lecture la plus probable **suivie de `(?)`**. Ce marqueur signale une déduction, pas une source.
 
