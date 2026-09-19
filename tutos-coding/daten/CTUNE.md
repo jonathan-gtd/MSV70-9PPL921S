@@ -27,11 +27,11 @@
 
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `IBOC_CCC` | **IBOC** · systeme multimedia CCC | `nicht_aktiv` · `aktiv` |  |
+| `IBOC_CCC` | radio numerique HD · systeme multimedia CCC | `nicht_aktiv` · `aktiv` |  |
 | `LAENDERVARIANTE_TUNER_ANT` | variante pays · tuner · antenne | `no_area` · `ece` · `us` · `japan` · `oceanien` |  |
-| `RDS_AF_FUNKTION_CCC` | **RDS** · **AF** · fonction · systeme multimedia CCC | `rds_aus` · `rds_ein_af_aus` · `rds_ein_af_manuell` · `rds_ein_af_automatisch` |  |
-| `REGIONALISIERUNG` | **REGIONALISIERUNG** | `reg_aus` · `reg_ein` |  |
-| `TP_FUNKTION_ANT` | **TP** · fonction · antenne | `nicht_aktiv` · `tp` |  |
+| `RDS_AF_FUNKTION_CCC` | RDS · frequences alternatives · fonction · systeme multimedia CCC | `rds_aus` · `rds_ein_af_aus` · `rds_ein_af_manuell` · `rds_ein_af_automatisch` |  |
+| `REGIONALISIERUNG` | regionalisation | `reg_aus` · `reg_ein` |  |
+| `TP_FUNKTION_ANT` | point de test (?) · fonction · antenne | `nicht_aktiv` · `tp` |  |
 
 ---
 

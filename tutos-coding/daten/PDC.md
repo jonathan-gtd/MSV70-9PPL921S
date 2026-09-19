@@ -16,7 +16,7 @@
 | Écartées (hors blocs du TRC) | 0 |
 | Avec valeurs | 47 |
 | Avec explication rédigée | 0 |
-| Blocs d'adresses du TRC | 12 |
+| Blocs d'adresses du TRC | 10 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
 > le module sont listées. Ce sont celles que **ta** voiture expose.
@@ -27,54 +27,54 @@
 
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `ABSCHALTWEG` | **ABSCHALTWEG** | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSCHALT_GESCHWINDIGKEIT` | coupure · **GESCHWINDIGKEIT** | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSTAND_DAUERTON_KOPPLUNG` | distance · son continu · **KOPPLUNG** | `nicht_aktiv` · `aktiv` |  |
-| `ABSTAND_ECKE_MIT_VO` | distance · coin · avec · **VO** | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSTAND_ECK_MIT_HI` | distance · **ECK** · avec · haut | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `ABSCHALTWEG` | course de coupure | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `ABSCHALT_GESCHWINDIGKEIT` | coupure · vitesse | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `ABSTAND_DAUERTON_KOPPLUNG` | distance · son continu · couplage | `nicht_aktiv` · `aktiv` |  |
+| `ABSTAND_ECKE_MIT_VO` | distance · coin · avec · bon de commande (?) | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `ABSTAND_ECK_MIT_HI` | distance · coin · avec · haut | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `ABSTAND_MIT_MIT_HI` | distance · avec · avec · haut | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSTAND_MIT_MIT_VO` | distance · avec · avec · **VO** | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `ABSTAND_MIT_MIT_VO` | distance · avec · avec · bon de commande (?) | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `AHK_OFFSET_FRONT` | attelage · decalage · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `AHK_OFFSET_HINTEN` | attelage · decalage · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `AKUSTIK_RECHTS_LINKS` | acoustique · droite · gauche | `nicht_aktiv` · `aktiv` |  |
 | `AKUSTISCHE_FEHLERMELDUNG` | sonore · message d'erreur | `nicht_aktiv` · `aktiv` |  |
-| `ANHAENGERKUPPLUNG` | **ANHAENGERKUPPLUNG** | `nicht_aktiv` · `aktiv` |  |
+| `ANHAENGERKUPPLUNG` | attelage | `nicht_aktiv` · `aktiv` |  |
 | `ANZAHL_WANDLER` | nombre · convertisseur | — |  |
 | `DAUERTON` | son continu | `nicht_aktiv` · `aktiv` |  |
 | `DAUERTON_BEREICH_HINTEN` | son continu · plage · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `DAUERTON_BEREICH_VORNE` | son continu · plage · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `EINSCHALTMELDUNG_IMMER` | **EINSCHALTMELDUNG** · toujours | `nicht_aktiv` · `aktiv` |  |
-| `EINSCHALTVEROEGERUNG_ZEIT` | **EINSCHALTVEROEGERUNG** · duree | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `EINSCHALTVERZOEGERUNG` | **EINSCHALTVERZOEGERUNG** | `nicht_aktiv` · `aktiv` |  |
-| `FAHRZEUG_STILLSTAND` | **FAHRZEUG** · arret | `nicht_aktiv` · `aktiv` |  |
+| `EINSCHALTMELDUNG_IMMER` | message de mise en marche · toujours | `nicht_aktiv` · `aktiv` |  |
+| `EINSCHALTVEROEGERUNG_ZEIT` | temporisation d'activation · duree | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `EINSCHALTVERZOEGERUNG` | temporisation d'activation | `nicht_aktiv` · `aktiv` |  |
+| `FAHRZEUG_STILLSTAND` | vehicule · arret | `nicht_aktiv` · `aktiv` |  |
 | `FREQUENZ_TONGEBER_HINTEN` | frequence · avertisseur sonore · arriere | `wert_01` |  |
 | `FREQUENZ_TONGEBER_VORNE` | frequence · avertisseur sonore · avant | `wert_01` · `wert_02` |  |
 | `LAUTSTAERKE_HINTEN` | volume sonore · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+50)* |  |
-| `LAUTSTAERKE_VORN` | volume sonore · **VORN** | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `LAUTSTAERKE_VORN` | volume sonore · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `MESSBEREICHE_ECKE_VORNE` | plages de mesure · coin · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `MESSBEREICHE_MITTE_HINTEN` | plages de mesure · milieu · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `MESSBEREICHE_MITTE_VORNE` | plages de mesure · milieu · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `MESSBEREICH_ECKE_HINTEN` | **MESSBEREICH** · coin · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `MESSBEREICH_ECKE_HINTEN` | plage de mesure · coin · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `OFFSET_ECKE_HINTEN` | decalage · coin · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `OFFSET_ECKE_VORNE` | decalage · coin · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `OFFSET_MITTE_VORNE` | decalage · milieu · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `OFFSET_MIT_HINTEN` | decalage · avec · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `PDC_DEAKTIVIERUNG` | radars · **DEAKTIVIERUNG** | `nicht_aktiv` · `aktiv` |  |
+| `PDC_DEAKTIVIERUNG` | radars · desactivation | `nicht_aktiv` · `aktiv` |  |
 | `PDC_SCHALTER` | radars · interrupteur | `nicht_aktiv` · `aktiv` |  |
-| `SC_FLAG_DT_FRONT` | _SC_ · indicateur · **DT** · avant | `nicht_aktiv` · `aktiv` · `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` … *(+63)* |  |
-| `SC_FLAG_DT_REAR` | _SC_ · indicateur · **DT** · arriere | `nicht_aktiv` · `aktiv` · `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` … *(+52)* |  |
-| `SC_FLAG_LP_FRONT` | _SC_ · indicateur · **LP** · avant | `nicht_aktiv` · `aktiv` |  |
-| `SC_FLAG_LP_REAR` | _SC_ · indicateur · **LP** · arriere | `nicht_aktiv` · `aktiv` |  |
-| `SC_FLAG_OE_FRONT` | _SC_ · indicateur · **OE** · avant | `nicht_aktiv` · `aktiv` |  |
-| `SC_FLAG_OE_REAR` | _SC_ · indicateur · **OE** · arriere | `nicht_aktiv` · `aktiv` |  |
-| `SC_FLAG_WD_FRONT` | _SC_ · indicateur · **WD** · avant | `nicht_aktiv` · `aktiv` |  |
-| `SC_FLAG_WD_REAR` | _SC_ · indicateur · **WD** · arriere | `nicht_aktiv` · `aktiv` |  |
+| `SC_FLAG_DT_FRONT` | _SC_ · indicateur · donnees (?) · avant | `nicht_aktiv` · `aktiv` · `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` … *(+63)* |  |
+| `SC_FLAG_DT_REAR` | _SC_ · indicateur · donnees (?) · arriere | `nicht_aktiv` · `aktiv` · `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` … *(+52)* |  |
+| `SC_FLAG_LP_FRONT` | _SC_ · indicateur · haut-parleur (?) · avant | `nicht_aktiv` · `aktiv` |  |
+| `SC_FLAG_LP_REAR` | _SC_ · indicateur · haut-parleur (?) · arriere | `nicht_aktiv` · `aktiv` |  |
+| `SC_FLAG_OE_FRONT` | _SC_ · indicateur · ouverture (?) · avant | `nicht_aktiv` · `aktiv` |  |
+| `SC_FLAG_OE_REAR` | _SC_ · indicateur · ouverture (?) · arriere | `nicht_aktiv` · `aktiv` |  |
+| `SC_FLAG_WD_FRONT` | _SC_ · indicateur · chien de garde (?) · avant | `nicht_aktiv` · `aktiv` |  |
+| `SC_FLAG_WD_REAR` | _SC_ · indicateur · chien de garde (?) · arriere | `nicht_aktiv` · `aktiv` |  |
 | `STILLSTAND_ZEIT` | arret · duree | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `TONAUSGABE_CAN` | sortie audio · bus CAN | `nicht_aktiv` · `aktiv` |  |
-| `TONAUSGABE_LSP` | sortie audio · **LSP** | `nicht_aktiv` · `aktiv` |  |
+| `TONAUSGABE_LSP` | sortie audio · haut-parleur | `nicht_aktiv` · `aktiv` |  |
 | `TON_ANZEIGEDAUER` | son · duree d'affichage | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `WANDERKENNUNG` | **WANDERKENNUNG** | `nicht_aktiv` · `aktiv` |  |
-| `WANDLER_STOERUNG` | convertisseur · **STOERUNG** | `nicht_aktiv` · `aktiv` |  |
+| `WANDERKENNUNG` | detection de derive | `nicht_aktiv` · `aktiv` |  |
+| `WANDLER_STOERUNG` | convertisseur · perturbation | `nicht_aktiv` · `aktiv` |  |
 
 ---
 

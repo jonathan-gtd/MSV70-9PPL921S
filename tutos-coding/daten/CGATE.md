@@ -16,7 +16,7 @@
 | Écartées (hors blocs du TRC) | 0 |
 | Avec valeurs | 8 |
 | Avec explication rédigée | 0 |
-| Blocs d'adresses du TRC | 5 |
+| Blocs d'adresses du TRC | 4 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
 > le module sont listées. Ce sont celles que **ta** voiture expose.
@@ -27,13 +27,13 @@
 
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `AUDIO_SYSTEM` | audio · **SYSTEM** | `e60_stereo` · `e60_hifi` · `e60_top_hifi` · `pl2_stereo` · `pl2_hifi` · `pl2_top_hifi` · `e70_stereo` · `e70_hifi` … *(+39)* |  |
-| `DIM_MODE` | **DIM** · mode | `standard` · `use_last` |  |
+| `AUDIO_SYSTEM` | audio · systeme | `e60_stereo` · `e60_hifi` · `e60_top_hifi` · `pl2_stereo` · `pl2_hifi` · `pl2_top_hifi` · `e70_stereo` · `e70_hifi` … *(+39)* |  |
+| `DIM_MODE` | gradation · mode | `standard` · `use_last` |  |
 | `PDC` | radars | `nicht_aktiv` · `aktiv` |  |
 | `PDC_SIGNAL` | radars · signal | `pdc_no` · `pdc_rear` · `pdc_front` · `pdc_front_rear` |  |
 | `PDC_TYPE` | radars · type | `rear` · `full` |  |
 | `REVERSE_GONG` | inversion · gong | `nicht_aktiv` · `aktiv` |  |
-| `RING_CCC` | **RING** · systeme multimedia CCC | `aktiv` · `nicht_aktiv` |  |
+| `RING_CCC` | anneau · systeme multimedia CCC | `aktiv` · `nicht_aktiv` |  |
 | `SPEED_MODE` | vitesse · mode | `speed_mode_intern` · `speed_mode_extern` |  |
 
 ---

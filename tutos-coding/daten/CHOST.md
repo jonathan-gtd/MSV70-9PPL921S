@@ -40,11 +40,11 @@
 | `DISPLAY_TYPE` | affichage · type | `siemens_8_8_fixed_old` · `siemens_8_8_fixed_new` · `borg_optrex_8_8_fixed` · `alpine_sharp_8_8_fixed` · `siemens_6_5_flap_old` · `siemens_6_5_flap_new` · `alpine_sharp_6_5_fixed` · `invalid` |  |
 | `FOND_HIGH_HST` | places arriere · haut · unite centrale | `nicht_aktiv` · `aktiv` |  |
 | `FOND_LOW` | places arriere · bas | `nicht_aktiv` · `aktiv` |  |
-| `LAENDERVARIANTE_GT` | variante pays · **GT** | `ece` · `us` · `australien` · `japan` |  |
-| `MMC` | **MMC** | `nicht_aktiv` · `aktiv` |  |
+| `LAENDERVARIANTE_GT` | variante pays · type (?) | `ece` · `us` · `australien` · `japan` |  |
+| `MMC` | carte memoire | `nicht_aktiv` · `aktiv` |  |
 | `PDC` | radars | `nicht_aktiv` · `aktiv` |  |
 | `PDC_TYPE` | radars · type | `rear` · `full` |  |
-| `TRF` | **TRF** | `nicht_aktiv` · `aktiv` |  |
+| `TRF` | trafic | `nicht_aktiv` · `aktiv` |  |
 | `WEATHERBAND_HST` | bande meteo · unite centrale | `nicht_aktiv` · `aktiv` |  |
 
 ---

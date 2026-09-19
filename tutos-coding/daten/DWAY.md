@@ -16,7 +16,7 @@
 | Écartées (hors blocs du TRC) | 0 |
 | Avec valeurs | 36 |
 | Avec explication rédigée | 2 |
-| Blocs d'adresses du TRC | 8 |
+| Blocs d'adresses du TRC | 4 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
 > le module sont listées. Ce sont celles que **ta** voiture expose.
@@ -27,9 +27,9 @@
 
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `ALARM_OPT_FERNLICHT` | alarme · option · **FERNLICHT** | `nicht_aktiv` · `aktiv` |  |
+| `ALARM_OPT_FERNLICHT` | alarme · option · feux de route | `nicht_aktiv` · `aktiv` |  |
 | `ALARM_OPT_WARNBLINKER` | alarme · option · feux de detresse | `nicht_aktiv` · `aktiv` |  |
-| `ANFRAGE_FENSTERPOSITIONEN` | **ANFRAGE** · **FENSTERPOSITIONEN** | `nicht_aktiv` · `aktiv` |  |
+| `ANFRAGE_FENSTERPOSITIONEN` | requete · positions de vitre | `nicht_aktiv` · `aktiv` |  |
 | `CHECKSUM_0` | somme de controle · 0 | `grundcode_var` · `wert_01` · `ewp` · `wert_02` · `wert_03` · `wert_04` · `e92_m` · `instanceid_0x12` … *(+12)* |  |
 | `CHECKSUM_1` | somme de controle · 1 | `grundcode_var` |  |
 | `CHECKSUM_2` | somme de controle · 2 | `grundcode_var` |  |
@@ -41,14 +41,14 @@
 | `DEF_QUIT_AKUST_SCHAERF_KL` | defaut · acquittement sonore · sonore · armement · borne | `nicht_aktiv` · `aktiv` |  |
 | `DEF_QUIT_OPT_ENTSCH` | defaut · acquittement sonore · option · desarmement | `nicht_aktiv` · `aktiv` |  |
 | `DEF_QUIT_OPT_SCHAERF` | defaut · acquittement sonore · option · armement | `nicht_aktiv` · `aktiv` |  |
-| `DEF_QUIT_OPT_SCHAERF_KLAP` | defaut · acquittement sonore · option · armement · **KLAP** | `nicht_aktiv` · `aktiv` |  |
-| `FUNK_INNENRAUMSCHUTZ` | **FUNK** · **INNENRAUMSCHUTZ** | `aktiv` · `nicht_aktiv` |  |
-| `HOTELSTELLUNG` | **HOTELSTELLUNG** | `nicht_aktiv` · `aktiv` |  |
-| `LADEEINRICHTUNG` | **LADEEINRICHTUNG** | `nicht_aktiv` · `aktiv` |  |
+| `DEF_QUIT_OPT_SCHAERF_KLAP` | defaut · acquittement sonore · option · armement · volet | `nicht_aktiv` · `aktiv` |  |
+| `FUNK_INNENRAUMSCHUTZ` | radiofrequence · protection volumetrique | `aktiv` · `nicht_aktiv` |  |
+| `HOTELSTELLUNG` | position hotel | `nicht_aktiv` · `aktiv` |  |
+| `LADEEINRICHTUNG` | dispositif de charge | `nicht_aktiv` · `aktiv` |  |
 | `LAUTSTAERKE` | volume sonore | `nicht_aktiv` · `aktiv` |  |
 | `MOTORFERNSTART` | demarrage moteur a distance | `nicht_aktiv` · `aktiv` |  |
-| `NEIGUNGSGEBER` | **NEIGUNGSGEBER** | `aktiv` · `nicht_aktiv` |  |
-| `NOTLAUFFUNKTION_HUPE` | **NOTLAUFFUNKTION** · **HUPE** | `nicht_aktiv` · `aktiv` |  |
+| `NEIGUNGSGEBER` | capteur d'inclinaison | `aktiv` · `nicht_aktiv` |  |
+| `NOTLAUFFUNKTION_HUPE` | fonction de secours · avertisseur sonore | `nicht_aktiv` · `aktiv` |  |
 | `PANIK_ALARM` | mode panique · alarme | `nicht_aktiv` · `aktiv` |  |
 | `PIAU_AKUST_ENTSCH` | _PIAU_ · sonore · desarmement | `nicht_aktiv` · `aktiv` |  |
 | `PIAU_AKUST_SCHAERF_KLAPPE` | _PIAU_ · sonore · armement · trappe | `nicht_aktiv` · `aktiv` |  |
@@ -60,9 +60,9 @@
 | `QUIT_OPT_SCHAERF_KLAPPE` | acquittement sonore · option · armement · trappe | `nicht_aktiv` · `aktiv` |  |
 | `SCHIEBEHEBEDACH` | toit ouvrant relevable | `nicht_aktiv` · `aktiv` |  |
 | `SIGNAL_HK` | signal · hayon | `nicht_aktiv` · `aktiv` |  |
-| `TIMEOUT_DEAKT_IRNE` | delai d'attente · **DEAKT** · **IRNE** | `wert_01` · `wert_02` · `wert_03` · `wert_05` · `wert_10` · `wert_15` |  |
-| `TRIGGERANZAHL_KLAPPEN` | nombre de declenchements · **KLAPPEN** | `wert_01` · `wert_02` |  |
-| `TRIGGERANZAHL_SENSOREN` | nombre de declenchements · **SENSOREN** | `wert_01` · `wert_02` |  |
+| `TIMEOUT_DEAKT_IRNE` | delai d'attente · desactivation · infrarouge (?) | `wert_01` · `wert_02` · `wert_03` · `wert_05` · `wert_10` · `wert_15` |  |
+| `TRIGGERANZAHL_KLAPPEN` | nombre de declenchements · volets | `wert_01` · `wert_02` |  |
+| `TRIGGERANZAHL_SENSOREN` | nombre de declenchements · capteurs | `wert_01` · `wert_02` |  |
 
 ---
 

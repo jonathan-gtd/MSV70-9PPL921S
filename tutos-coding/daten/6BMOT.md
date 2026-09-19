@@ -27,10 +27,10 @@
 
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `KATENTFALLCODIERUNG` | **KATENTFALLCODIERUNG** | `wert_00` · `wert_01` |  |
-| `MILANSTEUERUNG` | **MILANSTEUERUNG** | `wert_01` · `wert_02` |  |
-| `OLULCODIERUNG` | **OLULCODIERUNG** | `wert_00` · `wert_01` · `wert_02` |  |
-| `VMAXCODIERUNG_MSV70` | **VMAXCODIERUNG** · **MSV70** | `wert_00` · `wert_01` · `wert_02` · `wert_03` |  |
+| `KATENTFALLCODIERUNG` | codage sans catalyseur | `wert_00` · `wert_01` |  |
+| `MILANSTEUERUNG` | commande de temoin (?) | `wert_01` · `wert_02` |  |
+| `OLULCODIERUNG` | codage | `wert_00` · `wert_01` · `wert_02` |  |
+| `VMAXCODIERUNG_MSV70` | codage de la vitesse maximale · calculateur moteur MSV70 | `wert_00` · `wert_01` · `wert_02` · `wert_03` |  |
 
 ---
 

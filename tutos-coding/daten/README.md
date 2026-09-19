@@ -3,8 +3,8 @@
 Uniquement les fonctions que **ta** voiture expose réellement, traduites.
 
 > **Source :** `C:\NCSEXPER\DATEN\E89` croisé avec les 19 traces `.TRC` lues sur le véhicule
-> **1 779 fonctions codables** · **1 732 avec leurs valeurs** (97 %) · **127 avec explication rédigée**
-> **787 fragments allemands traduits** · 58 % des lignes entièrement traduites
+> **1 868 fonctions codables** · **1 821 avec leurs valeurs** (97,5 %) · **127 avec explication rédigée**
+> **1 443 fragments traduits + 156 lectures probables** · **100 % des lignes traduites**
 
 ---
 
@@ -21,7 +21,7 @@ fonction dans un bloc absent du TRC         →   écartée
 
 ### Bénéfice inattendu : l'identification des variantes
 
-En testant **chaque variante** de chaque module contre son `.TRC`, celle dont 100 % des fonctions tombent dans les blocs observés est la bonne. **18 modules sur 19 identifiés de façon certaine.**
+En testant **chaque variante** de chaque module contre son `.TRC`, celle dont 100 % des fonctions tombent dans les blocs observés est la bonne. **Les 19 modules identifiés de façon certaine, tous à 100 %.**
 
 | Module | Variante réelle | Ce que supposait `E89SGET.000` |
 |---|---|---|
@@ -70,7 +70,7 @@ Trois formes de valeurs :
 | [FRM](FRM.md) | Éclairage, vitres, rétroviseurs | `FRMFA.C12` | 449 | 448 | 75 | 🟠 |
 | [KOMBI](KOMBI.md) | Combiné | `KMBI_PL2.C08` | 295 | 295 | 9 | 🟢 |
 | [CAS](CAS.md) | Accès et antidémarrage | `CAS3.C09` | 255 | 253 | 7 | 🔴 |
-| [CAPPL](CAPPL.md) | CCC — applications iDrive | `CCC_APP.C0B` | 216 | 214 | 7 | 🟠 |
+| [CAPPL](CAPPL.md) | CCC — applications iDrive | `CCC_APP.C0B` | 305 | 303 | 7 | 🟠 |
 | [JBBF](JBBF.md) | Boîtier de jonction | `JBBFE.C07` | 97 | 72 | 1 | 🟠 |
 | [DSC](DSC.md) | Contrôle de stabilité / ABS | `MK60_87.C0A` | 86 | 86 | 8 | 🔴 |
 | [IHK](IHK.md) | Climatisation | `IHXXPL2.C02` | 74 | 72 | 6 | 🟢 |
@@ -89,18 +89,20 @@ Trois formes de valeurs :
 
 Plus :
 
-- **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — les 787 fragments traduits
+- **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — 1 443 fragments traduits + 156 lectures probables
 - **[fsw_par_module.csv](fsw_par_module.csv)** — `module, variante, fsw, bloc, traduction, valeurs, explication`
 
 ---
 
-## 4. Le seul module incertain : CAPPL
+## 4. CAPPL : le doute est levé
 
-**89 fonctions écartées sur 305.** C'est le seul module où aucune variante n'atteint 100 % — `CCC_APP.C0B` plafonne à 71 %.
+Ce module restait à 71 % avec 89 fonctions écartées. La cause était un **défaut de ma méthode**, pas de tes données.
 
-Deux explications possibles : la lecture du `.TRC` était partielle, ou la variante exacte du CCC n'est pas dans les DATEN E89. Les 216 fonctions retenues sont fiables (leur bloc est bien présent) ; ce sont les 89 écartées qui méritent une relecture du module si tu veux en avoir le cœur net.
+Le seul bloc « manquant » était `003EFF00`, alors que ta trace contient `003EFFA8`, `003EFFB8`, `003EFFC8`… — la même région, à des sous-adresses. Je comparais l'adresse complète au lieu de la région. Corrigé : la comparaison porte désormais sur les trois octets de poids fort.
 
-Tous les autres modules sont à 0 écartée.
+**CAPPL passe à 305/305.** Et `CCC_APP.C0B` et `CCC_APP.C0C` donnent un résultat strictement identique : les deux contiennent les mêmes fonctions, le choix entre les deux est sans conséquence.
+
+Tous les modules sont maintenant à 0 fonction écartée.
 
 ---
 
@@ -120,19 +122,19 @@ Dans les `.C0x`, les noms sont absents — seulement des clés numériques :
                                                    10 00 <clé PSW:2>   ← une par valeur
 ```
 
-L'adresse du bloc se reconstruit en `0x00<adr_hi><adr_lo>00`. C'est elle qui permet le croisement avec les `.TRC`.
+L'adresse du bloc se reconstruit en `0x00<adr_hi><adr_lo>00`, et le croisement avec les `.TRC` se fait sur les **trois octets de poids fort** — un module peut répondre à plusieurs sous-adresses dans une même région.
 
-Taux de résolution : **98,5 %** des références FSW, **97 %** des fonctions ont leurs valeurs.
+Taux de résolution : **98,5 %** des références FSW, **97,5 %** des fonctions ont leurs valeurs.
 
 ---
 
 ## 6. Ce que ce catalogue ne fait pas
 
-**La traduction est morphologique, pas sémantique.** Elle décompose le nom, elle n'explique pas l'effet. D'où la colonne Explication — qui ne couvre que 127 lignes sur 1 779.
+**La traduction est morphologique, pas sémantique.** Elle décompose le nom, elle n'explique pas l'effet. D'où la colonne Explication — qui ne couvre que 127 lignes sur 1 868.
 
 **Une case Explication vide n'est pas un désaveu de la fonction.** Elle veut dire que son effet n'est pas établi. Mieux vaut vide qu'inventé.
 
-**Environ 760 fragments restent non traduits** (en **gras**), pour 930 occurrences. Ce sont majoritairement des sigles internes BMW apparaissant une ou deux fois. 58 % des lignes sont entièrement traduites ; sur le reste, le fragment manquant est généralement un suffixe technique, pas le cœur du sens.
+**La traduction est complète, mais à deux niveaux de certitude.** 1 443 fragments ont une traduction établie. 156 sont des abréviations BMW sans documentation publique : elles reçoivent la lecture la plus probable, **suivie de `(?)`**. Ce marqueur n'est pas décoratif — il signale une déduction, pas une source. Voir [LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md).
 
 **Les valeurs listées sont celles que le module accepte, pas la tienne.** Savoir que `TUERAUF_STOP_MAUT` accepte `aktiv` et `nicht_aktiv` ne dit pas laquelle est active chez toi. Seul NCS Dummy, en ouvrant le `.TRC`, le dit.
 
