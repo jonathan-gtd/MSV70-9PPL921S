@@ -11,9 +11,9 @@
 | | |
 |---|---|
 | Variante | **`EKPM60_2.C03`** |
-| Identifiée par | recoupement avec `EKP.TRC` lu sur le véhicule |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **28** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 28 |
 | Avec explication rédigée | 0 |
 | Blocs d'adresses du TRC | 3 |

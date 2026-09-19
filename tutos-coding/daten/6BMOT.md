@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| Variante | **`MSV70.C01`** |
-| Identifiée par | recoupement avec `6BMOT.TRC` lu sur le véhicule |
+| Variante | **`MSV70.C03`** |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **4** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 4 |
 | Avec explication rédigée | 0 |
 | Blocs d'adresses du TRC | 5 |
@@ -29,7 +29,7 @@
 |---|---|---|---|
 | `KATENTFALLCODIERUNG` | codage sans catalyseur | `wert_00` · `wert_01` |  |
 | `MILANSTEUERUNG` | commande de temoin (?) | `wert_01` · `wert_02` |  |
-| `OLULCODIERUNG` | codage | `wert_00` · `wert_01` · `wert_02` |  |
+| `OLULCODIERUNG` | codage | `wert_00` · `wert_01` · `wert_02` · `wert_03` · `wert_04` |  |
 | `VMAXCODIERUNG_MSV70` | codage de la vitesse maximale · calculateur moteur MSV70 | `wert_00` · `wert_01` · `wert_02` · `wert_03` |  |
 
 ---

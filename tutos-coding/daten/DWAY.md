@@ -11,9 +11,9 @@
 | | |
 |---|---|
 | Variante | **`DWA_IRS.C05`** |
-| Identifiée par | recoupement avec `DWAY.TRC` lu sur le véhicule |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **36** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 36 |
 | Avec explication rédigée | 2 |
 | Blocs d'adresses du TRC | 4 |

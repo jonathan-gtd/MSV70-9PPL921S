@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| Variante | **`CCC_ANT.C07`** |
-| Identifiée par | recoupement avec `CTUNE.TRC` lu sur le véhicule |
+| Variante | **`CCC_ANT.C0B`** |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **5** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 5 |
 | Avec explication rédigée | 0 |
 | Blocs d'adresses du TRC | 1 |
@@ -28,7 +28,7 @@
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
 | `IBOC_CCC` | radio numerique HD · systeme multimedia CCC | `nicht_aktiv` · `aktiv` |  |
-| `LAENDERVARIANTE_TUNER_ANT` | variante pays · tuner · antenne | `no_area` · `ece` · `us` · `japan` · `oceanien` |  |
+| `LAENDERVARIANTE_TUNER_ANT` | variante pays · tuner · antenne | `ece` · `us` · `japan` · `oceanien` · `no_area` |  |
 | `RDS_AF_FUNKTION_CCC` | RDS · frequences alternatives · fonction · systeme multimedia CCC | `rds_aus` · `rds_ein_af_aus` · `rds_ein_af_manuell` · `rds_ein_af_automatisch` |  |
 | `REGIONALISIERUNG` | regionalisation | `reg_aus` · `reg_ein` |  |
 | `TP_FUNKTION_ANT` | point de test (?) · fonction · antenne | `nicht_aktiv` · `tp` |  |

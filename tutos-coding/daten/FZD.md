@@ -11,9 +11,9 @@
 | | |
 |---|---|
 | Variante | **`FZD.C06`** |
-| Identifiée par | recoupement avec `FZD.TRC` lu sur le véhicule |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **41** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 41 |
 | Avec explication rédigée | 2 |
 | Blocs d'adresses du TRC | 7 |

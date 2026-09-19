@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| Variante | **`RLS_PL2.C08`** |
-| Identifiée par | recoupement avec `RLS.TRC` lu sur le véhicule |
+| Variante | **`RLS_E65.C06`** |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **12** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 12 |
 | Avec explication rédigée | 0 |
 | Blocs d'adresses du TRC | 2 |
@@ -27,16 +27,16 @@
 
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `DEF_FLC_SCHWELLWERT_SATZ` | defaut · _FLC_ · valeur de seuil · jeu | `wert_01` · `wert_02` · `wert_03` |  |
+| `DEF_FLC_SCHWELLWERT_SATZ` | defaut · _FLC_ · valeur de seuil · jeu | `wert_01` · `wert_02` · `wert_03` · `wert_04` |  |
 | `EMPF_OHNE_RAENDELRAD` | sensibilite · sans · molette | `empfindlichkeitsstufe_1` · `empfindlichkeitsstufe_2` · `empfindlichkeitsstufe_3` · `empfindlichkeitsstufe_4` |  |
-| `FLC_SCHWELLWERT_SATZ` | _FLC_ · valeur de seuil · jeu | `wert_01` · `wert_02` · `wert_03` |  |
+| `FLC_SCHWELLWERT_SATZ` | _FLC_ · valeur de seuil · jeu | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `l4` |  |
 | `KONFIG_NACHL_REGEN` | configuration · temporisation · pluie | `wert_01` |  |
 | `KONFIG_RLS_GESCHW` | configuration · capteur pluie/lumiere · vitesse | `aktiv` · `nicht_aktiv` |  |
 | `KONFIG_RLS_RAENDELRAD` | configuration · capteur pluie/lumiere · molette | `aktiv` · `nicht_aktiv` |  |
 | `KONFIG_RLS_REGEN` | configuration · capteur pluie/lumiere · pluie | `aktiv` · `nicht_aktiv` |  |
 | `TYP_FRONTSCHEIBE` | type · pare-brise | `serienscheibe` · `klimakomfort` |  |
-| `UEBERWISCHZEIT_1` | duree de balayage supplementaire · 1 | `wert_01` · `wert_02` |  |
-| `UEBERWISCHZEIT_2` | duree de balayage supplementaire · 2 | `wert_01` · `wert_02` |  |
+| `TYP_RLS_OPTIK` | type · capteur pluie/lumiere · optique | `aktiv` · `nicht_aktiv` |  |
+| `V_HIGH_SPEED_WISCHEN` | _V_ · haut · vitesse · essuyage | `wert_01` · `l2` · `wert_02` · `e70_e70m` · `wert_03` |  |
 | `WISCHEN_STUFE2` | essuyage · niveau 2 | `aktiv` · `nicht_aktiv` |  |
 | `WISCHERMOTOR_RSK` | moteur d'essuie-glace · capteur (?) | `aktiv` · `nicht_aktiv` |  |
 

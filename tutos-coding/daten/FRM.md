@@ -11,9 +11,9 @@
 | | |
 |---|---|
 | Variante | **`FRMFA.C12`** |
-| Identifiée par | recoupement avec `FRM.TRC` lu sur le véhicule |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **449** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 448 |
 | Avec explication rédigée | 75 |
 | Blocs d'adresses du TRC | 46 |

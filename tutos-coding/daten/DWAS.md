@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| Variante | **`DWASINE.C02`** |
-| Identifiée par | recoupement avec `DWAS.TRC` lu sur le véhicule |
+| Variante | **`DWASINE.C04`** |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **26** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 15 |
 | Avec explication rédigée | 5 |
 | Blocs d'adresses du TRC | 2 |
@@ -34,7 +34,7 @@
 | `ALARM_TIME_EXT_SUPPLY` | alarme · duree · externe · alimentation | — |  |
 | `ALARM_TIME_SELF_SUPPLY` | alarme · duree · auto · alimentation | — |  |
 | `BACK_UP_BATTERY_CAPACITY` | retour · haut · batterie · capacite | `wert_02` |  |
-| `BACK_UP_BATTERY_DATA` | retour · haut · batterie · donnees | `rechargeable_battery` · `primary_battery` |  |
+| `BACK_UP_BATTERY_DATA` | retour · haut · batterie · donnees | `primary_battery` · `rechargeable_battery` |  |
 | `BUZZER_HIGH_LEVEL` | avertisseur · haut · niveau | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` · `wert_07` · `wert_08` | Niveau sonore haut du bip d'alarme — wert_01 est le maximum. |
 | `BUZZER_LOW_LEVEL` | avertisseur · bas · niveau | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` · `wert_07` · `wert_08` | Niveau sonore bas du bip d'alarme — wert_01 est le maximum. |
 | `BUZZER_SEMIPERIOD` | avertisseur · demi-periode | `wert_01` | Niveau sonore de l'avertisseur d'alarme. |
@@ -46,10 +46,10 @@
 | `ECE_SEMIPERIOD` | norme europeenne · demi-periode | — |  |
 | `MAX_ALARM_TEMP` | maximum · alarme · temperature | `wert_02` · `wert_03` |  |
 | `MAX_CHARGING_TEMP` | maximum · charge · temperature | `wert_02` |  |
-| `MIN_ALARM_TEMP` | minimum · alarme · temperature | `minus20c` · `wert_02` |  |
-| `MIN_CHARGING_TEMP` | minimum · charge · temperature | `minus5c` · `wert_02` |  |
+| `MIN_ALARM_TEMP` | minimum · alarme · temperature | `wert_02` · `minus20c` |  |
+| `MIN_CHARGING_TEMP` | minimum · charge · temperature | `wert_02` · `minus5c` |  |
 | `POWER_REDUCTION_DUTY` | puissance · reduction · rapport cyclique | — |  |
-| `POWER_REDUCTION_TEMP` | puissance · reduction · temperature | `minus5c` · `wert_02` |  |
+| `POWER_REDUCTION_TEMP` | puissance · reduction · temperature | `wert_02` · `minus5c` |  |
 | `USA_MAX_SEMIPERIOD` | marche americain · maximum · demi-periode | — |  |
 | `USA_MIN_SEMIPERIOD` | marche americain · minimum · demi-periode | — |  |
 | `USA_SWEEP` | marche americain · balayage | — |  |

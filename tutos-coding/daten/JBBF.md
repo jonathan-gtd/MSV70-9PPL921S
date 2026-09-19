@@ -11,9 +11,9 @@
 | | |
 |---|---|
 | Variante | **`JBBFE.C07`** |
-| Identifiée par | recoupement avec `JBBF.TRC` lu sur le véhicule |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **97** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 72 |
 | Avec explication rédigée | 1 |
 | Blocs d'adresses du TRC | 2 |

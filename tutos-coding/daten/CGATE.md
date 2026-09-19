@@ -10,11 +10,11 @@
 
 | | |
 |---|---|
-| Variante | **`CCC_GW.C03`** |
-| Identifiée par | recoupement avec `CGATE.TRC` lu sur le véhicule |
-| Fonctions retenues | **8** |
-| Écartées (hors blocs du TRC) | 0 |
-| Avec valeurs | 8 |
+| Variante | **`CCC_GW.C02`** |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
+| Fonctions retenues | **7** |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
+| Avec valeurs | 7 |
 | Avec explication rédigée | 0 |
 | Blocs d'adresses du TRC | 4 |
 
@@ -23,12 +23,11 @@
 
 ---
 
-## Les 8 fonctions codables
+## Les 7 fonctions codables
 
 | FSW | Traduction | Valeurs | Explication |
 |---|---|---|---|
-| `AUDIO_SYSTEM` | audio · systeme | `e60_stereo` · `e60_hifi` · `e60_top_hifi` · `pl2_stereo` · `pl2_hifi` · `pl2_top_hifi` · `e70_stereo` · `e70_hifi` … *(+39)* |  |
-| `DIM_MODE` | gradation · mode | `standard` · `use_last` |  |
+| `AUDIO_SYSTEM` | audio · systeme | `e60_stereo` · `e60_hifi` · `e60_top_hifi` · `pl2_stereo` · `pl2_hifi` · `pl2_top_hifi` · `e70_stereo` · `e70_hifi` … *(+37)* |  |
 | `PDC` | radars | `nicht_aktiv` · `aktiv` |  |
 | `PDC_SIGNAL` | radars · signal | `pdc_no` · `pdc_rear` · `pdc_front` · `pdc_front_rear` |  |
 | `PDC_TYPE` | radars · type | `rear` · `full` |  |

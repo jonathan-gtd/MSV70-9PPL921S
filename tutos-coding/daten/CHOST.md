@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| Variante | **`CCC_HST.C05`** |
-| Identifiée par | recoupement avec `CHOST.TRC` lu sur le véhicule |
+| Variante | **`CCC_HST.C06`** |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **19** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 18 |
 | Avec explication rédigée | 0 |
 | Blocs d'adresses du TRC | 5 |

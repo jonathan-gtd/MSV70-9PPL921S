@@ -11,9 +11,9 @@
 | | |
 |---|---|
 | Variante | **`KMBI_PL2.C08`** |
-| Identifiée par | recoupement avec `KOMBI.TRC` lu sur le véhicule |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **295** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 295 |
 | Avec explication rédigée | 9 |
 | Blocs d'adresses du TRC | 16 |

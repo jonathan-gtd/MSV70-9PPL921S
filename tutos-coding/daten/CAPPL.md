@@ -11,9 +11,9 @@
 | | |
 |---|---|
 | Variante | **`CCC_APP.C0B`** |
-| Identifiée par | recoupement avec `CAPPL.TRC` lu sur le véhicule |
+| Identifiée par | **lecture NCS Expert sur le véhicule** |
 | Fonctions retenues | **305** |
-| Écartées (hors blocs du TRC) | 0 |
+| Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 303 |
 | Avec explication rédigée | 7 |
 | Blocs d'adresses du TRC | 13 |
