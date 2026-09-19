@@ -4,7 +4,7 @@ Les fonctions codables des 19 calculateurs de la voiture, dans leurs variantes r
 
 > **Variantes :** relevées par NCS Expert sur le véhicule
 > **1 738 fonctions codables** · **1 692 avec leurs valeurs** (97,4 %)
-> **1 365 avec une signification en anglais** (78,5 %) · **851 traduites en français** (49 %)
+> **1 365 avec une signification en anglais** · **1 366 traduites en français** — couverture complète
 > **100 % des lignes traduites** — 1 294 fragments établis + 130 lectures probables
 
 ---
@@ -98,7 +98,7 @@ Le DSC connaît le `n52b30` et la `handschaltung` — cohérent avec le moteur e
 | **Décomposition** | Le nom allemand, fragment par fragment |
 | **Valeurs** | Ce que le module accepte, extrait des DATEN |
 | **Signification (EN)** | Description NCS Dummy, verbatim |
-| **Explication (FR)** | Traduction française, ou `—` si pas encore traduite |
+| **Explication (FR)** | Traduction française |
 
 Trois formes de valeurs :
 
@@ -115,7 +115,7 @@ Trois formes de valeurs :
 | Colonne | Contenu | Lignes |
 |---|---|---:|
 | **Signification (EN)** | Description verbatim de la base NCS Dummy | 1 365 |
-| **Explication (FR)** | Traduction française | 851 |
+| **Explication (FR)** | Traduction française | 1 366 |
 
 Les deux sont indépendantes : l'anglais reste toujours affiché, le français vient à côté.
 
@@ -132,13 +132,13 @@ Alarm type [ece: 1 cycle Europe sound, us: 8 cycles USA sound,
 
 ### La traduction française
 
-**851 lignes sur 1 738**, dont 114 rédigées directement en français et 737 traduites depuis l'anglais.
+**1 366 lignes traduites : toute description anglaise disponible a sa traduction française.** 114 ont été rédigées directement en français, 1 252 traduites depuis l'anglais.
 
-La traduction est faite **à la main**. Une substitution automatique mot à mot a été implémentée puis rejetée : couverture lexicale 54 %, et des sorties comme « Catalyseur elimination », « Cornering feux », « Automatique ceinture de securite hand-over uses ». L'ordre des mots diffère trop entre les deux langues.
+La traduction est faite **à la main**, en quatre passes. Une substitution automatique mot à mot avait été implémentée puis mesurée et rejetée : couverture lexicale 54 %, et des sorties comme « Catalyseur elimination », « Cornering feux », « Automatique ceinture de securite hand-over uses ». L'ordre des mots diffère trop entre les deux langues pour une substitution terme à terme.
 
-Les notations d'unités sont converties dans les deux colonnes : `[time_s=data/10]` devient `[durée s = valeur / 10]`.
+Les notations d'unités sont converties dans les deux colonnes : `[time_s=data/10]` devient `[durée s = valeur / 10]`, `[angle_°=data/50]` devient `[angle degrés = valeur / 50]`.
 
-**Reste à traduire : 514 lignes**, correspondant à 543 descriptions distinctes. Un tiret dans la colonne FR signale une ligne non encore traduite — l'anglais reste disponible juste à côté.
+**Les 372 lignes restantes n'ont de description dans aucune des deux langues** : la base NCS Dummy ne les couvre pas et je n'ai pas de source fiable. Elles affichent `—` dans les deux colonnes.
 
 ---
 
@@ -199,9 +199,9 @@ Taux de résolution : **98,5 %** des références FSW.
 
 **La colonne Décomposition est morphologique, pas sémantique.** Elle découpe le nom allemand, elle n'explique pas l'effet. C'est le rôle des colonnes Signification et Explication.
 
-**373 lignes n'ont aucune signification**, en anglais comme en français : ni source communautaire, ni certitude de ma part. Mieux vaut vide qu'inventé.
+**372 lignes n'ont aucune signification**, en anglais comme en français : ni source communautaire, ni certitude de ma part. Mieux vaut vide qu'inventé.
 
-**514 lignes ont l'anglais mais pas encore le français.** La traduction est en cours.
+**Toute ligne disposant d'une description anglaise a sa traduction française.** Il n'y a plus d'écart entre les deux colonnes.
 
 **La traduction est complète mais à deux niveaux.** 1 294 fragments ont une traduction établie ; 130 sont des abréviations BMW sans documentation publique, rendues avec la lecture la plus probable **suivie de `(?)`**. Ce marqueur signale une déduction, pas une source.
 

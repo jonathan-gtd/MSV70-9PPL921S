@@ -16,7 +16,7 @@
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 227 |
 | Signification (EN) | 176 |
-| Explication (FR) | 175 |
+| Explication (FR) | 176 |
 | Blocs d'adresses du TRC | 10 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -119,7 +119,7 @@
 | `FH_RESETTIMEOUTKL50` | leve-vitre · delai de reinitialisation borne 50 | `aktiv` · `nicht_aktiv` | — | — |
 | `FH_SCHLIESSEN_EINSTG` | leve-vitre · fermeture · acces | `aktiv` · `nicht_aktiv` | Easy entry opened driver power window closes when locking vehicle | La vitre conducteur ouverte par l'aide a l'acces se referme au verrouillage |
 | `FH_SICHERHEITSFAHRZEUG` | leve-vitre · vehicule de securite | `aktiv` · `nicht_aktiv` | Power windows controlled by security vehicle module | Leve-vitres pilotes par le module vehicule de securite |
-| `FH_TUERBED_EINSTG` | leve-vitre · commande de porte · acces | `aktiv` · `nicht_aktiv` | Open power window only after opening door (easy entry for frameless coup� door in narrow spaces) | — |
+| `FH_TUERBED_EINSTG` | leve-vitre · commande de porte · acces | `aktiv` · `nicht_aktiv` | Open power window only after opening door (easy entry for frameless coup� door in narrow spaces) | Descente de vitre seulement apres ouverture de porte (acces facilite pour portes sans encadrement en espace etroit) |
 | `FH_UMLSCH` | leve-vitre · commutation | `aktiv` · `nicht_aktiv` | — | — |
 | `FH_USACANADA` | leve-vitre · USA / Canada | `aktiv` · `nicht_aktiv` | — | — |
 | `FS_DATEN_ANFRAGEN` | siege conducteur (?) · donnees · requetes | `aktiv` · `nicht_aktiv` | — | — |

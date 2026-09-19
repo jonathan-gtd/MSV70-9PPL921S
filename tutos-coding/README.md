@@ -31,7 +31,7 @@ Deux mondes distincts, à ne jamais confondre :
 | [03 — Dépannage](03_DEPANNAGE.md) | COAPI-1085 et les autres erreurs, lecture des traces |
 | [04 — Modules](04_MODULES.md) | Modules de l'E90, niveaux de risque, codages courants |
 | [Lexique](LEXIQUE_CODING.md) | FSW, PSW, FA, ZCS, Salapa, SG, DATEN… |
-| [daten/](daten/README.md) | **Catalogue des DATEN de ce véhicule** — 1 738 fonctions, 1 365 avec signification, 851 traduites en français |
+| [daten/](daten/README.md) | **Catalogue des DATEN de ce véhicule** — 1 738 fonctions, 1 365 avec signification, 1 366 traduites en français |
 | [Sauvegardes](../data/Coding/README.md) | Convention de nommage des backups `.TRC` / `.MAN` |
 
 ---

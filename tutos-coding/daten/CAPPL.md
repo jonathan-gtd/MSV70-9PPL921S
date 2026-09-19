@@ -16,7 +16,7 @@
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 303 |
 | Signification (EN) | 289 |
-| Explication (FR) | 281 |
+| Explication (FR) | 289 |
 | Blocs d'adresses du TRC | 13 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -174,15 +174,15 @@
 | `K8313_GEBLAESE_0` | [identifiant BMW K8313] · pulseur · 0 | `par_frei` · `par_gesperrt` | Climate control blower speed offset 0% | Decalage de vitesse du pulseur : 0 % |
 | `K8313_GEBLAESE_M10` | [identifiant BMW K8313] · pulseur · parametre M10 (?) | `par_frei` · `par_gesperrt` | Climate control blower speed offset -10% | Decalage de vitesse du pulseur : -10 % |
 | `K8313_GEBLAESE_P10` | [identifiant BMW K8313] · pulseur · parametre 10 | `par_frei` · `par_gesperrt` | Climate control blower speed offset +10% | Decalage de vitesse du pulseur : +10 % |
-| `K8601_SOLLWERT_0` | [identifiant BMW K8601] · consigne · 0 | `par_frei` · `par_gesperrt` | Climate control set temperature offset 0 �C | — |
-| `K8601_SOLLWERT_M1` | [identifiant BMW K8601] · consigne · parametre M1 | `par_frei` · `par_gesperrt` | Climate control set temperature offset -1 �C | — |
-| `K8601_SOLLWERT_M2` | [identifiant BMW K8601] · consigne · parametre M2 | `par_frei` · `par_gesperrt` | Climate control set temperature offset -2 �C | — |
-| `K8601_SOLLWERT_M3` | [identifiant BMW K8601] · consigne · parametre M3 | `par_frei` · `par_gesperrt` | Climate control set temperature offset -3 �C | — |
-| `K8601_SOLLWERT_P1` | [identifiant BMW K8601] · consigne · parametre 1 | `par_frei` · `par_gesperrt` | Climate control set temperature offset +1 �C | — |
-| `K8601_SOLLWERT_P2` | [identifiant BMW K8601] · consigne · parametre 2 | `par_frei` · `par_gesperrt` | Climate control set temperature offset +2 �C | — |
-| `K8601_SOLLWERT_P3` | [identifiant BMW K8601] · consigne · parametre 3 | `par_frei` · `par_gesperrt` | Climate control set temperature offset +3 �C | — |
+| `K8601_SOLLWERT_0` | [identifiant BMW K8601] · consigne · 0 | `par_frei` · `par_gesperrt` | Climate control set temperature offset 0 �C | Decalage de temperature de consigne : 0 C |
+| `K8601_SOLLWERT_M1` | [identifiant BMW K8601] · consigne · parametre M1 | `par_frei` · `par_gesperrt` | Climate control set temperature offset -1 �C | Decalage de temperature de consigne : -1 C |
+| `K8601_SOLLWERT_M2` | [identifiant BMW K8601] · consigne · parametre M2 | `par_frei` · `par_gesperrt` | Climate control set temperature offset -2 �C | Decalage de temperature de consigne : -2 C |
+| `K8601_SOLLWERT_M3` | [identifiant BMW K8601] · consigne · parametre M3 | `par_frei` · `par_gesperrt` | Climate control set temperature offset -3 �C | Decalage de temperature de consigne : -3 C |
+| `K8601_SOLLWERT_P1` | [identifiant BMW K8601] · consigne · parametre 1 | `par_frei` · `par_gesperrt` | Climate control set temperature offset +1 �C | Decalage de temperature de consigne : +1 C |
+| `K8601_SOLLWERT_P2` | [identifiant BMW K8601] · consigne · parametre 2 | `par_frei` · `par_gesperrt` | Climate control set temperature offset +2 �C | Decalage de temperature de consigne : +2 C |
+| `K8601_SOLLWERT_P3` | [identifiant BMW K8601] · consigne · parametre 3 | `par_frei` · `par_gesperrt` | Climate control set temperature offset +3 �C | Decalage de temperature de consigne : +3 C |
 | `K930E_ZV_VER_N_XMIN_FB` | [identifiant BMW K930E] · verrouillage centralise · version · N · minimum · telecommande | `fkt_frei` · `fkt_gesperrt` | Automatically re-lock after being unlocked for a certain time without opening a door | Reverrouillage automatique apres un certain temps sans ouverture de porte |
-| `K931D_SCHEIBENABSENKUNG` | [identifiant BMW K931D] · abaissement de vitre | `par_frei` · `par_gesperrt` | Pressing remote control unlock button once unlocks all doors, twice opens driver power window (easy entry for frameless coup� door in narrow spaces) | — |
+| `K931D_SCHEIBENABSENKUNG` | [identifiant BMW K931D] · abaissement de vitre | `par_frei` · `par_gesperrt` | Pressing remote control unlock button once unlocks all doors, twice opens driver power window (easy entry for frameless coup� door in narrow spaces) | Une pression ouvre toutes les portes, deux pressions descendent la vitre conducteur (acces facilite pour portes sans encadrement en espace etroit) |
 | `K931D_ZV_ALLE_TUEREN` | [identifiant BMW K931D] · verrouillage centralise · tous · portes | `par_frei` · `par_gesperrt` | Pressing remote control unlock button once unlocks all doors | Une seule pression sur le bouton de deverrouillage ouvre toutes les portes |
 | `K931D_ZV_SELEKTIV` | [identifiant BMW K931D] · verrouillage centralise · selectif | `par_frei` · `par_gesperrt` | Pressing remote control unlock button once unlocks only driver door, twice unlocks all doors | Une pression sur le bouton de deverrouillage n'ouvre que la porte conducteur, deux pressions ouvrent toutes les portes |
 | `K9416_QUITT_AKUST_ENTSCH` | [identifiant BMW K9416] · acquittement sonore · sonore · desarmement | `fkt_frei` · `fkt_gesperrt` | Acoustic unlocking acknowledge (two alarm beeps) | Acquittement sonore au deverrouillage (deux bips d'alarme) |
