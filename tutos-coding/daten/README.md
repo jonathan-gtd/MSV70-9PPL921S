@@ -3,7 +3,7 @@
 Les fonctions codables des 19 calculateurs de la voiture, dans leurs variantes réelles, traduites.
 
 > **Variantes :** relevées par NCS Expert sur le véhicule
-> **1 738 fonctions codables** · **1 692 avec leurs valeurs** (97,4 %) · **114 avec explication rédigée**
+> **1 738 fonctions codables** · **1 692 avec leurs valeurs** (97,4 %) · **1 366 avec une signification** (78,6 %)
 > **100 % des lignes traduites** — 1 294 fragments établis + 130 lectures probables
 
 ---
@@ -87,16 +87,16 @@ Le DSC connaît le `n52b30` et la `handschaltung` — cohérent avec le moteur e
 
 ## 3. Comment lire une ligne
 
-| FSW | Traduction | Valeurs | Explication |
+| FSW | Décomposition | Valeurs | Signification |
 |---|---|---|---|
 | `TUERAUF_STOP_MAUT` | porte ouverte · arrêt · péage | `aktiv` · `nicht_aktiv` | Interrompt la remontée automatique de vitre (fonction péage) dès qu'une portière est ouverte. |
 
 | Colonne | Ce que c'est |
 |---|---|
 | **FSW** | Le nom du réglage, tel qu'il apparaît dans NCS Dummy |
-| **Traduction** | Décomposition du nom allemand, fragment par fragment |
+| **Décomposition** | Le nom allemand, fragment par fragment |
 | **Valeurs** | Ce que le module accepte, extrait des DATEN |
-| **Explication** | Rédigée seulement quand l'effet est établi de source sûre |
+| **Signification** | Le texte en clair. Romain = rédigé à la main, *italique* = base NCS Dummy (anglais) |
 
 Trois formes de valeurs :
 
@@ -108,7 +108,38 @@ Trois formes de valeurs :
 
 ---
 
-## 4. Les catalogues
+## 4. D'où vient la colonne Signification
+
+Deux sources, distinguées visuellement.
+
+| Rendu | Source | Lignes |
+|---|---|---:|
+| Texte romain | Rédigé à la main, en français | 114 |
+| *Texte italique* | Base communautaire **NCS Dummy**, en anglais | 1 252 |
+| *(vide)* | Aucune source | 372 |
+
+Le fichier `Translations.csv` livré avec NCS Dummy contient **14 823 descriptions** de fonctions et de valeurs, écrites par la communauté — crédits inscrits dans le fichier : *revtor, IcemanBHE, joako, lolo, rdl, StefanL, rondo, LPCapital*. Le recoupement avec les FSW du véhicule donne **1 252 correspondances exactes**.
+
+Ces descriptions sont souvent plus précises que ce que j'aurais écrit. Exemple :
+
+```
+KATENTFALLCODIERUNG
+  Catalytic converter elimination
+  [wert_00: with catalytic converter, wert_01: without catalytic converter]
+  (changes may require STAT_BSZ_WERT=0)
+```
+
+Les notations d'unités sont traduites (`[duree s = valeur / 10]`), le corps du texte ne l'est pas encore.
+
+### Pourquoi ces 1 252 lignes sont encore en anglais
+
+Une traduction automatique mot à mot a été testée, puis rejetée : elle produisait « Catalyseur elimination », « Cornering feux », « Automatique ceinture de securite hand-over uses ». L'ordre des mots diffère trop entre les deux langues pour une substitution terme à terme — la couverture lexicale plafonnait à 54 % et le résultat était moins lisible que l'anglais d'origine.
+
+La traduction correcte suppose de réécrire **1 280 descriptions distinctes** à la main. C'est le travail restant. En attendant, l'anglais d'origine est conservé intact plutôt que dégradé.
+
+---
+
+## 5. Les catalogues
 
 | Module | Rôle | Fonctions | Valeurs | Expliquées | |
 |---|---|---:|---:|---:|---|
@@ -135,11 +166,11 @@ Trois formes de valeurs :
 Plus :
 
 - **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — 1 294 fragments traduits + 130 lectures probables
-- **[fsw_par_module.csv](fsw_par_module.csv)** — `module, variante, fsw, bloc, traduction, valeurs, explication`
+- **[fsw_par_module.csv](fsw_par_module.csv)** — `module, variante, fsw, bloc, traduction, valeurs, explication, source`
 
 ---
 
-## 5. Méthode d'extraction
+## 6. Méthode d'extraction
 
 Rétro-ingénierie de deux formats binaires des DATEN.
 
@@ -161,11 +192,11 @@ Taux de résolution : **98,5 %** des références FSW.
 
 ---
 
-## 6. Ce que ce catalogue ne fait pas
+## 7. Ce que ce catalogue ne fait pas
 
-**La traduction est morphologique, pas sémantique.** Elle décompose le nom, elle n'explique pas l'effet. D'où la colonne Explication — qui ne couvre que 114 lignes sur 1 738.
+**La colonne Décomposition est morphologique, pas sémantique.** Elle découpe le nom allemand, elle n'explique pas l'effet. C'est le rôle de la colonne Signification, qui couvre 1 366 lignes sur 1 738.
 
-**Une case Explication vide n'est pas un désaveu.** Elle signifie que l'effet n'est pas établi. Mieux vaut vide qu'inventé.
+**372 lignes restent sans signification.** Ni source communautaire, ni certitude de ma part. Mieux vaut vide qu'inventé.
 
 **La traduction est complète mais à deux niveaux.** 1 294 fragments ont une traduction établie ; 130 sont des abréviations BMW sans documentation publique, rendues avec la lecture la plus probable **suivie de `(?)`**. Ce marqueur signale une déduction, pas une source.
 
@@ -173,7 +204,7 @@ Taux de résolution : **98,5 %** des références FSW.
 
 ---
 
-## 7. Avant toute écriture
+## 8. Avant toute écriture
 
 | | |
 |---|---|

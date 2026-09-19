@@ -15,7 +15,7 @@
 | Fonctions retenues | **4** |
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 4 |
-| Avec explication rédigée | 0 |
+| Avec explication rédigée | 4 |
 | Blocs d'adresses du TRC | 5 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -25,12 +25,12 @@
 
 ## Les 4 fonctions codables
 
-| FSW | Traduction | Valeurs | Explication |
+| FSW | Décomposition | Valeurs | Signification |
 |---|---|---|---|
-| `KATENTFALLCODIERUNG` | codage sans catalyseur | `wert_00` · `wert_01` |  |
-| `MILANSTEUERUNG` | commande de temoin (?) | `wert_01` · `wert_02` |  |
-| `OLULCODIERUNG` | codage | `wert_00` · `wert_01` · `wert_02` · `wert_03` · `wert_04` |  |
-| `VMAXCODIERUNG_MSV70` | codage de la vitesse maximale · calculateur moteur MSV70 | `wert_00` · `wert_01` · `wert_02` · `wert_03` |  |
+| `KATENTFALLCODIERUNG` | codage sans catalyseur | `wert_00` · `wert_01` | *Catalytic converter elimination [wert_00: with catalytic converter, wert_01: without catalytic converter] (changes may require STAT_BSZ_WERT=0)* |
+| `MILANSTEUERUNG` | commande de temoin (?) | `wert_01` · `wert_02` | *Check engine light (MIL) control [wert_01: enabled, wert_02: disabled] (changes may require STAT_BSZ_WERT=0)* |
+| `OLULCODIERUNG` | codage | `wert_00` · `wert_01` · `wert_02` · `wert_03` · `wert_04` | *Low/high-power class coding [wert_00: low-power class, wert_01: medium-power class, wert_02: high-power class] (changes may require STAT_BSZ_WERT=0)* |
+| `VMAXCODIERUNG_MSV70` | codage de la vitesse maximale · calculateur moteur MSV70 | `wert_00` · `wert_01` · `wert_02` · `wert_03` | *Speed governor coding (changes may require STAT_BSZ_WERT=0)* |
 
 ---
 
@@ -39,4 +39,6 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Explication** — rédigée seulement quand l'effet est établi de source sûre.
+**Signification** — texte en clair. En romain : rédigé à la main. *En italique* : description
+de la base communautaire NCS Dummy, en anglais, non encore traduite.
+Les notations d'unités (`[durée s = valeur / 10]`) sont traduites.

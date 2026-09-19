@@ -15,7 +15,7 @@
 | Fonctions retenues | **7** |
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 5 |
-| Avec explication rédigée | 0 |
+| Avec explication rédigée | 7 |
 | Blocs d'adresses du TRC | 5 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -25,15 +25,15 @@
 
 ## Les 7 fonctions codables
 
-| FSW | Traduction | Valeurs | Explication |
+| FSW | Décomposition | Valeurs | Signification |
 |---|---|---|---|
-| `AUDIO_SYSTEM` | audio · systeme | `e60_stereo` · `e60_hifi` · `e60_top_hifi` · `pl2_stereo` · `pl2_hifi` · `pl2_top_hifi` · `e70_stereo` · `e70_hifi` … *(+3)* |  |
-| `CODIERUNG_ERFOLGT` | codage · effectue | `wert_01` · `codierung_erfolgt` |  |
-| `DIGITAL_AUDIO_SOURCE` | numerique · audio · source | — |  |
-| `INPUT_SCALING_SUB2` | entree · mise a l'echelle · sous-ensemble 2 | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `deny_never` · `e87` · `no_aux` · `e6x_hifi` … *(+32)* |  |
-| `PHONE_VERSION` | telephone · version | — |  |
-| `VOICE_PRE_PROC_MIC_DIST` | voix · pre- · processus · microphone · distance | `par_vpp_144mm` · `par_vpp_210mm` |  |
-| `VOICE_PRE_PROC_STEER_SIDE` | voix · pre- · processus · direction · lateral | `par_vpp_left_steering` · `par_vpp_right_steering` |  |
+| `AUDIO_SYSTEM` | audio · systeme | `e60_stereo` · `e60_hifi` · `e60_top_hifi` · `pl2_stereo` · `pl2_hifi` · `pl2_top_hifi` · `e70_stereo` · `e70_hifi` … *(+3)* | *Audio system* |
+| `CODIERUNG_ERFOLGT` | codage · effectue | `wert_01` · `codierung_erfolgt` | *Coding completed* |
+| `DIGITAL_AUDIO_SOURCE` | numerique · audio · source | — | *Digital audio source* |
+| `INPUT_SCALING_SUB2` | entree · mise a l'echelle · sous-ensemble 2 | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `deny_never` · `e87` · `no_aux` · `e6x_hifi` … *(+32)* | *Auxiliary input gain [valeur<128 ? gain_dB=valeur : gain_dB=valeur-256]* |
+| `PHONE_VERSION` | telephone · version | — | *Telephone type* |
+| `VOICE_PRE_PROC_MIC_DIST` | voix · pre- · processus · microphone · distance | `par_vpp_144mm` · `par_vpp_210mm` | *Microphone distance for voice pre-processing* |
+| `VOICE_PRE_PROC_STEER_SIDE` | voix · pre- · processus · direction · lateral | `par_vpp_left_steering` · `par_vpp_right_steering` | *Steering type for voice pre-processing* |
 
 ---
 
@@ -42,4 +42,6 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Explication** — rédigée seulement quand l'effet est établi de source sûre.
+**Signification** — texte en clair. En romain : rédigé à la main. *En italique* : description
+de la base communautaire NCS Dummy, en anglais, non encore traduite.
+Les notations d'unités (`[durée s = valeur / 10]`) sont traduites.

@@ -15,7 +15,7 @@
 | Fonctions retenues | **48** |
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 47 |
-| Avec explication rédigée | 0 |
+| Avec explication rédigée | 27 |
 | Blocs d'adresses du TRC | 10 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -25,42 +25,42 @@
 
 ## Les 48 fonctions codables
 
-| FSW | Traduction | Valeurs | Explication |
+| FSW | Décomposition | Valeurs | Signification |
 |---|---|---|---|
-| `ABSCHALTWEG` | course de coupure | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSCHALT_GESCHWINDIGKEIT` | coupure · vitesse | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSTAND_DAUERTON_KOPPLUNG` | distance · son continu · couplage | `nicht_aktiv` · `aktiv` |  |
-| `ABSTAND_ECKE_MIT_VO` | distance · coin · avec · bon de commande (?) | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSTAND_ECK_MIT_HI` | distance · coin · avec · haut | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSTAND_MIT_MIT_HI` | distance · avec · avec · haut | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `ABSTAND_MIT_MIT_VO` | distance · avec · avec · bon de commande (?) | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `AHK_OFFSET_FRONT` | attelage · decalage · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `AHK_OFFSET_HINTEN` | attelage · decalage · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `AKUSTIK_RECHTS_LINKS` | acoustique · droite · gauche | `nicht_aktiv` · `aktiv` |  |
-| `AKUSTISCHE_FEHLERMELDUNG` | sonore · message d'erreur | `nicht_aktiv` · `aktiv` |  |
-| `ANHAENGERKUPPLUNG` | attelage | `nicht_aktiv` · `aktiv` |  |
-| `ANZAHL_WANDLER` | nombre · convertisseur | — |  |
-| `DAUERTON` | son continu | `nicht_aktiv` · `aktiv` |  |
-| `DAUERTON_BEREICH_HINTEN` | son continu · plage · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `DAUERTON_BEREICH_VORNE` | son continu · plage · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `EINSCHALTMELDUNG_IMMER` | message de mise en marche · toujours | `nicht_aktiv` · `aktiv` |  |
-| `EINSCHALTVEROEGERUNG_ZEIT` | temporisation d'activation · duree | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `EINSCHALTVERZOEGERUNG` | temporisation d'activation | `nicht_aktiv` · `aktiv` |  |
+| `ABSCHALTWEG` | course de coupure | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Switch-off distance* |
+| `ABSCHALT_GESCHWINDIGKEIT` | coupure · vitesse | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Switch-off speed* |
+| `ABSTAND_DAUERTON_KOPPLUNG` | distance · son continu · couplage | `nicht_aktiv` · `aktiv` | *Distance continuous tone coupling* |
+| `ABSTAND_ECKE_MIT_VO` | distance · coin · avec · bon de commande (?) | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Distance corner center front* |
+| `ABSTAND_ECK_MIT_HI` | distance · coin · avec · haut | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Distance corner center rear* |
+| `ABSTAND_MIT_MIT_HI` | distance · avec · avec · haut | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Distance center center rear* |
+| `ABSTAND_MIT_MIT_VO` | distance · avec · avec · bon de commande (?) | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Distance center center front* |
+| `AHK_OFFSET_FRONT` | attelage · decalage · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Trailer tow hitch offset front* |
+| `AHK_OFFSET_HINTEN` | attelage · decalage · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Trailer tow hitch offset rear* |
+| `AKUSTIK_RECHTS_LINKS` | acoustique · droite · gauche | `nicht_aktiv` · `aktiv` | *Acoustic right-left* |
+| `AKUSTISCHE_FEHLERMELDUNG` | sonore · message d'erreur | `nicht_aktiv` · `aktiv` | *Acoustic fault notification* |
+| `ANHAENGERKUPPLUNG` | attelage | `nicht_aktiv` · `aktiv` | *Trailer tow hitch installed* |
+| `ANZAHL_WANDLER` | nombre · convertisseur | — | *Number of sensors* |
+| `DAUERTON` | son continu | `nicht_aktiv` · `aktiv` | *Continuous tone* |
+| `DAUERTON_BEREICH_HINTEN` | son continu · plage · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Continuous tone measuring range rear* |
+| `DAUERTON_BEREICH_VORNE` | son continu · plage · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Continuous tone measuring range front* |
+| `EINSCHALTMELDUNG_IMMER` | message de mise en marche · toujours | `nicht_aktiv` · `aktiv` | *Switch-on notification each time* |
+| `EINSCHALTVEROEGERUNG_ZEIT` | temporisation d'activation · duree | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Switch-on delay time* |
+| `EINSCHALTVERZOEGERUNG` | temporisation d'activation | `nicht_aktiv` · `aktiv` | *Switch-on delay* |
 | `FAHRZEUG_STILLSTAND` | vehicule · arret | `nicht_aktiv` · `aktiv` |  |
 | `FREQUENZ_TONGEBER_HINTEN` | frequence · avertisseur sonore · arriere | `wert_01` |  |
 | `FREQUENZ_TONGEBER_VORNE` | frequence · avertisseur sonore · avant | `wert_01` · `wert_02` |  |
-| `LAUTSTAERKE_HINTEN` | volume sonore · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+50)* |  |
-| `LAUTSTAERKE_VORN` | volume sonore · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `MESSBEREICHE_ECKE_VORNE` | plages de mesure · coin · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `MESSBEREICHE_MITTE_HINTEN` | plages de mesure · milieu · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `MESSBEREICHE_MITTE_VORNE` | plages de mesure · milieu · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `MESSBEREICH_ECKE_HINTEN` | plage de mesure · coin · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
+| `LAUTSTAERKE_HINTEN` | volume sonore · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+50)* | *Sound volume rear* |
+| `LAUTSTAERKE_VORN` | volume sonore · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Sound volume front* |
+| `MESSBEREICHE_ECKE_VORNE` | plages de mesure · coin · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Measuring ranges front corners* |
+| `MESSBEREICHE_MITTE_HINTEN` | plages de mesure · milieu · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Measuring ranges rear center* |
+| `MESSBEREICHE_MITTE_VORNE` | plages de mesure · milieu · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Measuring ranges front center* |
+| `MESSBEREICH_ECKE_HINTEN` | plage de mesure · coin · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* | *Measuring range rear corners* |
 | `OFFSET_ECKE_HINTEN` | decalage · coin · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `OFFSET_ECKE_VORNE` | decalage · coin · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `OFFSET_MITTE_VORNE` | decalage · milieu · avant | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
 | `OFFSET_MIT_HINTEN` | decalage · avec · arriere | `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` · `e87` · `e87_sport` … *(+48)* |  |
-| `PDC_DEAKTIVIERUNG` | radars · desactivation | `nicht_aktiv` · `aktiv` |  |
-| `PDC_SCHALTER` | radars · interrupteur | `nicht_aktiv` · `aktiv` |  |
+| `PDC_DEAKTIVIERUNG` | radars · desactivation | `nicht_aktiv` · `aktiv` | *Park distance control (PDC) deactivation* |
+| `PDC_SCHALTER` | radars · interrupteur | `nicht_aktiv` · `aktiv` | *Park distance control (PDC) button* |
 | `SC_FLAG_DT_FRONT` | _SC_ · indicateur · donnees (?) · avant | `nicht_aktiv` · `aktiv` · `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` … *(+63)* |  |
 | `SC_FLAG_DT_REAR` | _SC_ · indicateur · donnees (?) · arriere | `nicht_aktiv` · `aktiv` · `e81` · `e82` · `e82_lci` · `e82_m` · `e84` · `e87_mue` … *(+52)* |  |
 | `SC_FLAG_LP_FRONT` | _SC_ · indicateur · haut-parleur (?) · avant | `nicht_aktiv` · `aktiv` |  |
@@ -83,4 +83,6 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Valeurs** — ce que le module accepte, extrait des DATEN.
 
-**Explication** — rédigée seulement quand l'effet est établi de source sûre.
+**Signification** — texte en clair. En romain : rédigé à la main. *En italique* : description
+de la base communautaire NCS Dummy, en anglais, non encore traduite.
+Les notations d'unités (`[durée s = valeur / 10]`) sont traduites.
