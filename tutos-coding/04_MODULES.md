@@ -11,7 +11,9 @@ Cette liste est celle des modules **que les DATEN savent coder pour la famille E
 
 **La liste réelle de ta voiture s'affiche dans NCS Expert après `F4 Process ECU`**, une fois le FA chargé. C'est elle qui fait foi.
 
-Plusieurs modules existent en variantes (`CAS2` / `CAS3`, `FRM2_E89` / `FRM3_E89`…) selon la date de production. **Ne devine pas** : la lecture du `.TRC` par NCS Dummy identifie la bonne variante toute seule.
+Plusieurs modules existent en variantes (`CAS2` / `CAS3`, `FRM2_E89` / `FRM3_E89`…).
+Utiliser la variante relevée sur le véhicule dans le [catalogue](daten/README.md) :
+le filtrage d'une trace par NCS Dummy peut laisser plusieurs candidats compatibles.
 
 ---
 

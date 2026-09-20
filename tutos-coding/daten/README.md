@@ -4,8 +4,8 @@ Les fonctions codables des 19 calculateurs de la voiture, dans leurs variantes r
 
 > **Variantes :** relevées par NCS Expert sur le véhicule
 > **1 738 fonctions codables** · **1 692 avec leurs valeurs** (97,4 %)
-> **1 365 avec une signification en anglais** · **1 366 traduites en français** — couverture complète
-> **100 % des lignes traduites** — 1 294 fragments établis + 130 lectures probables
+> **1 365 avec une signification en anglais** · **1 479 avec une explication française**, dont **113 déductions du libellé**
+> **259 fonctions sans explication** · décomposition disponible pour chaque ligne, avec des fragments encore ambigus
 
 ---
 
@@ -24,7 +24,7 @@ Liste relevée sur la voiture. C'est elle qui fait foi — rien n'est déduit ic
 | ABG | `MRS5.C08` | 53 |
 | PDC | `PDC_E87.C05` | 48 |
 | FZD | `FZD.C06` | 41 |
-| DWAY | `DWA_IRS.C05` | 36 |
+| DWAI | `DWA_IRS.C05` | 36 |
 | EKP | `EKPM60_2.C03` | 28 |
 | DWAS | `DWASINE.C04` | 26 |
 | DSC | `MK60_87.C03` | 19 |
@@ -98,7 +98,7 @@ Le DSC connaît le `n52b30` et la `handschaltung` — cohérent avec le moteur e
 | **Décomposition** | Le nom allemand, fragment par fragment |
 | **Valeurs** | Ce que le module accepte, extrait des DATEN |
 | **Signification (EN)** | Description NCS Dummy, verbatim |
-| **Explication (FR)** | Traduction française |
+| **Explication (FR)** | Traduction française ou déduction explicitement signalée |
 
 Trois formes de valeurs :
 
@@ -115,7 +115,7 @@ Trois formes de valeurs :
 | Colonne | Contenu | Lignes |
 |---|---|---:|
 | **Signification (EN)** | Description verbatim de la base NCS Dummy | 1 365 |
-| **Explication (FR)** | Traduction française | 1 366 |
+| **Explication (FR)** | Traduction française ou déduction signalée | 1 479 |
 
 Les deux sont indépendantes : l'anglais reste toujours affiché, le français vient à côté.
 
@@ -132,13 +132,13 @@ Alarm type [ece: 1 cycle Europe sound, us: 8 cycles USA sound,
 
 ### La traduction française
 
-**1 366 lignes traduites : toute description anglaise disponible a sa traduction française.** 114 ont été rédigées directement en français, 1 252 traduites depuis l'anglais.
+**1 479 lignes expliquées en français : toute description anglaise disponible a sa traduction française.** 114 explications préexistantes ont le statut `maison`, 1 252 le statut `traduit`. La passe du 20/09/2026 ajoute **113 interprétations** au statut `deduction_libelle`, préfixées « Déduction du libellé : ».
 
 La traduction est faite **à la main**, en quatre passes. Une substitution automatique mot à mot avait été implémentée puis mesurée et rejetée : couverture lexicale 54 %, et des sorties comme « Catalyseur elimination », « Cornering feux », « Automatique ceinture de securite hand-over uses ». L'ordre des mots diffère trop entre les deux langues pour une substitution terme à terme.
 
 Les notations d'unités sont converties dans les deux colonnes : `[time_s=data/10]` devient `[durée s = valeur / 10]`, `[angle_°=data/50]` devient `[angle degrés = valeur / 50]`.
 
-**Les 372 lignes restantes n'ont de description dans aucune des deux langues** : la base NCS Dummy ne les couvre pas et je n'ai pas de source fiable. Elles affichent `—` dans les deux colonnes.
+**Les 259 lignes restantes n'ont de description dans aucune des deux langues.** Elles affichent `—` dans les deux colonnes. Les nouvelles déductions ne remplissent pas la colonne anglaise et ne constituent pas des effets validés sur le véhicule. Voir [la méthode et les sources](TRADUCTIONS.md).
 
 ---
 
@@ -146,30 +146,32 @@ Les notations d'unités sont converties dans les deux colonnes : `[time_s=data/1
 
 | Module | Rôle | Fonctions | Valeurs | Expliquées | |
 |---|---|---:|---:|---:|---|
-| [FRM](FRM.md) | Éclairage, vitres, rétroviseurs | 449 | 448 | 75 | 🟠 |
-| [CAPPL](CAPPL.md) | CCC — applications iDrive | 305 | 303 | 7 | 🟠 |
-| [KOMBI](KOMBI.md) | Combiné | 295 | 295 | 9 | 🟢 |
-| [CAS](CAS.md) | Accès et antidémarrage | 229 | 227 | 7 | 🔴 |
-| [JBBF](JBBF.md) | Boîtier de jonction | 97 | 72 | 1 | 🟠 |
-| [IHK](IHK.md) | Climatisation | 58 | 57 | 4 | 🟢 |
-| [ABG](ABG.md) | Airbags | 53 | 53 | 2 | 🔴 |
-| [PDC](PDC.md) | Radars de recul | 48 | 47 | 0 | 🟢 |
-| [FZD](FZD.md) | Module de toit | 41 | 41 | 2 | 🟢 |
-| [DWAY](DWAY.md) | Alarme — protection volumétrique | 36 | 36 | 2 | 🟠 |
-| [EKP](EKP.md) | Pompe à carburant | 28 | 28 | 0 | 🔴 |
-| [DWAS](DWAS.md) | Sirène d'alarme | 26 | 15 | 5 | 🟠 |
-| [DSC](DSC.md) | Contrôle de stabilité / ABS | 19 | 19 | 0 | 🔴 |
-| [CHOST](CHOST.md) | CCC — unité centrale | 19 | 18 | 0 | 🟠 |
-| [RLS](RLS.md) | Capteur pluie / luminosité | 12 | 12 | 0 | 🟢 |
-| [CAUDI](CAUDI.md) | CCC — audio | 7 | 5 | 0 | 🟠 |
-| [CGATE](CGATE.md) | CCC — passerelle | 7 | 7 | 0 | 🟠 |
-| [CTUNE](CTUNE.md) | CCC — tuner | 5 | 5 | 0 | 🟠 |
-| [6BMOT](6BMOT.md) | **Calculateur moteur** | 4 | 4 | 0 | 🔴 |
+| [FRM](FRM.md) | Éclairage, vitres, rétroviseurs | 449 | 448 | 409 | 🟠 |
+| [CAPPL](CAPPL.md) | CCC — applications iDrive | 305 | 303 | 293 | 🟠 |
+| [KOMBI](KOMBI.md) | Combiné | 295 | 295 | 216 | 🟢 |
+| [CAS](CAS.md) | Accès et antidémarrage | 229 | 227 | 185 | 🔴 |
+| [JBBF](JBBF.md) | Boîtier de jonction | 97 | 72 | 71 | 🟠 |
+| [IHK](IHK.md) | Climatisation | 58 | 57 | 43 | 🟢 |
+| [ABG](ABG.md) | Airbags | 53 | 53 | 43 | 🔴 |
+| [PDC](PDC.md) | Radars de recul | 48 | 47 | 37 | 🟢 |
+| [FZD](FZD.md) | Module de toit | 41 | 41 | 33 | 🟢 |
+| [DWAI](DWAI.md) | Alarme — protection volumétrique | 36 | 36 | 35 | 🟠 |
+| [EKP](EKP.md) | Pompe à carburant | 28 | 28 | 17 | 🔴 |
+| [DWAS](DWAS.md) | Sirène d'alarme | 26 | 15 | 26 | 🟠 |
+| [DSC](DSC.md) | Contrôle de stabilité / ABS | 19 | 19 | 18 | 🔴 |
+| [CHOST](CHOST.md) | CCC — unité centrale | 19 | 18 | 19 | 🟠 |
+| [RLS](RLS.md) | Capteur pluie / luminosité | 12 | 12 | 12 | 🟢 |
+| [CAUDI](CAUDI.md) | CCC — audio | 7 | 5 | 7 | 🟠 |
+| [CGATE](CGATE.md) | CCC — passerelle | 7 | 7 | 6 | 🟠 |
+| [CTUNE](CTUNE.md) | CCC — tuner | 5 | 5 | 5 | 🟠 |
+| [6BMOT](6BMOT.md) | **Calculateur moteur** | 4 | 4 | 4 | 🔴 |
 
 Plus :
 
-- **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — 1 294 fragments traduits + 130 lectures probables
+- **[LEXIQUE_FRAGMENTS.md](LEXIQUE_FRAGMENTS.md)** — 1 298 fragments traduits ou contextualisés + 126 lectures probables ; des fragments restent non résolus
 - **[fsw_par_module.csv](fsw_par_module.csv)** — `module, variante, fsw, bloc, traduction, valeurs, signification_en, explication_fr, source`
+- **[TRADUCTIONS.md](TRADUCTIONS.md)** — provenance des corrections et limites des déductions
+- **[verifier_catalogue.py](verifier_catalogue.py)** — contrôle de cohérence du CSV, des fiches et des liens
 
 ---
 
@@ -199,11 +201,11 @@ Taux de résolution : **98,5 %** des références FSW.
 
 **La colonne Décomposition est morphologique, pas sémantique.** Elle découpe le nom allemand, elle n'explique pas l'effet. C'est le rôle des colonnes Signification et Explication.
 
-**372 lignes n'ont aucune signification**, en anglais comme en français : ni source communautaire, ni certitude de ma part. Mieux vaut vide qu'inventé.
+**259 lignes n'ont aucune explication**, en anglais comme en français. Les **113 nouvelles déductions** sont distinguées des traductions de descriptions existantes.
 
 **Toute ligne disposant d'une description anglaise a sa traduction française.** Il n'y a plus d'écart entre les deux colonnes.
 
-**La traduction est complète mais à deux niveaux.** 1 294 fragments ont une traduction établie ; 130 sont des abréviations BMW sans documentation publique, rendues avec la lecture la plus probable **suivie de `(?)`**. Ce marqueur signale une déduction, pas une source.
+**La décomposition n'est pas une garantie de compréhension complète.** Le lexique contient 1 298 fragments traduits ou contextualisés et 126 lectures probables. Le marqueur `(?)` signale une hypothèse ; les fragments entre underscores restent ambigus ou non résolus. Le contexte du module prime sur une substitution mot à mot.
 
 **Les valeurs listées sont celles que le module accepte, pas la tienne.** Savoir que `TUERAUF_STOP_MAUT` accepte `aktiv` et `nicht_aktiv` ne dit pas laquelle est active chez toi. Seul NCS Dummy, en ouvrant le `.TRC`, le dit.
 

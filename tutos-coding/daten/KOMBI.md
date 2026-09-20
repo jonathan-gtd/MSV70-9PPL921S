@@ -16,7 +16,7 @@
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 295 |
 | Signification (EN) | 184 |
-| Explication (FR) | 184 |
+| Explication (FR) | 216 |
 | Blocs d'adresses du TRC | 16 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -49,7 +49,7 @@
 | `BC_2_ENABLE` | ordinateur de bord · 2 · activation | `nicht_aktiv` · `aktiv` | On-board computer (OBC) 2 enabled | Ordinateur de bord 2 actif |
 | `BC_DIGITAL_V` | ordinateur de bord · numerique · _V_ | `nicht_aktiv` · `aktiv` | On-board computer (OBC) digital speed display | Affichage de la vitesse en chiffres sur l'ordinateur de bord. |
 | `BC_DIGITAL_V_KORREKTUR` | ordinateur de bord · numerique · _V_ · correction | `nicht_aktiv` · `aktiv` | On-board computer (OBC) digital speed display correction [aktiv: corrected speed, nicht_aktiv: true speed] | Correction optimiste du compteur. Desactiver pour afficher la vitesse reelle. |
-| `BC_DIG_GESCHW_BEI_KL_R` | ordinateur de bord · numerique · vitesse · lors de · borne · _R_ | `nicht_aktiv` · `aktiv` | — | — |
+| `BC_DIG_GESCHW_BEI_KL_R` | ordinateur de bord · numerique · vitesse · lors de · borne · _R_ | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Affichage numérique de la vitesse dans l’ordinateur de bord lorsque la borne accessoires R est active. |
 | `BC_LEERZEILE` | ordinateur de bord · ligne vide | `nicht_aktiv` · `aktiv` | On-board computer (OBC) include blank information display when cycling through the information displays with BC switch on turn signal stalk | Inclure un ecran vide dans le defilement des informations de l'ordinateur de bord |
 | `BC_LIMIT_ENABLE` | ordinateur de bord · limite · activation | `nicht_aktiv` · `aktiv` | On-board computer (OBC) speed limit enabled | Limiteur de vitesse de l'ordinateur de bord actif |
 | `BC_V_KORREKTUR` | ordinateur de bord · _V_ · correction | `nicht_aktiv` · `aktiv` | On-board computer (OBC) speed correction [aktiv: corrected speed, nicht_aktiv: true speed] | Correction de vitesse de l'ordinateur de bord [aktiv : vitesse corrigee, nicht_aktiv : vitesse reelle] |
@@ -62,24 +62,24 @@
 | `CBS_EINH_04H` | entretien selon besoin (CBS) · unite · [0x04] | `prozent` · `wegbas` · `zeitbas` · `wegzeit` | Condition based service (CBS) unit for microfilter | CBS : unite pour le filtre d'habitacle |
 | `CBS_EINH_06H` | entretien selon besoin (CBS) · unite · [0x06] | `prozent` · `wegbas` · `zeitbas` | Condition based service (CBS) unit for rear brake pad wear | CBS : unite pour l'usure des plaquettes arriere |
 | `CBS_EINH_07H` | entretien selon besoin (CBS) · unite · [0x07] | `prozent` · `wegbas` · `zeitbas` | Condition based service (CBS) unit for diesel particle filter | CBS : unite pour le filtre a particules |
-| `CBS_EINH_0AH` | entretien selon besoin (CBS) · unite · [0x0A] | `prozent` · `wegbas` · `zeitbas` · `wegzeit` | — | — |
+| `CBS_EINH_0AH` | entretien selon besoin (CBS) · unite · [0x0A] | `prozent` · `wegbas` · `zeitbas` · `wegzeit` | — | Déduction du libellé : Unité de l’élément d’entretien CBS identifié par 0x0A ; opération d’entretien non identifiée. |
 | `CBS_EINH_10H` | entretien selon besoin (CBS) · unite · [0x10] | `prozent` · `wegbas` · `zeitbas` | Condition based service (CBS) unit for spark plugs | CBS : unite pour les bougies |
 | `CBS_EINH_11H` | entretien selon besoin (CBS) · unite · [0x11] | `prozent` · `wegbas` · `zeitbas` · `wegzeit` | Condition based service (CBS) unit for vehicle inspection | CBS : unite pour la revision du vehicule |
-| `CBS_EINH_12H` | entretien selon besoin (CBS) · unite · [0x12] | `prozent` · `wegbas` · `zeitbas` | — | — |
-| `CBS_EINH_13H` | entretien selon besoin (CBS) · unite · [0x13] | `prozent` · `wegbas` · `zeitbas` · `wegzeit` | — | — |
+| `CBS_EINH_12H` | entretien selon besoin (CBS) · unite · [0x12] | `prozent` · `wegbas` · `zeitbas` | — | Déduction du libellé : Unité de l’élément d’entretien CBS identifié par 0x12 ; opération d’entretien non identifiée. |
+| `CBS_EINH_13H` | entretien selon besoin (CBS) · unite · [0x13] | `prozent` · `wegbas` · `zeitbas` · `wegzeit` | — | Déduction du libellé : Unité de l’élément d’entretien CBS identifié par 0x13 ; opération d’entretien non identifiée. |
 | `CBS_EINH_14H` | entretien selon besoin (CBS) · unite · [0x14] | `prozent` · `wegbas` · `zeitbas` · `wegzeit` | Condition based service (CBS) unit for pre-delivery inspection | CBS : unite pour la preparation avant livraison |
 | `CBS_EINH_20H` | entretien selon besoin (CBS) · unite · [0x20] | `prozent` · `wegbas` · `zeitbas` | Condition based service (CBS) unit for statutory vehicle inspection (MOT) | CBS : unite pour le controle technique |
 | `CBS_EINH_21H` | entretien selon besoin (CBS) · unite · [0x21] | `prozent` · `wegbas` · `zeitbas` | Condition based service (CBS) unit for emission inspection (smog test) | CBS : unite pour le controle antipollution |
 | `CBS_GELB` | entretien selon besoin (CBS) · jaune | `wert_01` · `wert_02` | Condition based service (CBS) display time for yellow warning [weeks=data] | CBS : delai d'affichage de l'alerte jaune [semaines = valeur] |
 | `CBS_GELB_HUAU` | entretien selon besoin (CBS) · jaune · sortie (?) | `wert_01` | Condition based service (CBS) display time for statutory vehicle inspection (MOT) / emission inspection (smog test) [months=data] | CBS : delai d'affichage pour le controle technique et antipollution [mois = valeur] |
 | `CBS_GELB_KM_MIN` | entretien selon besoin (CBS) · jaune · kilometres · minimum | `wert_01` | Condition based service (CBS) display distance for yellow warning [distance_km=data*100] | CBS : distance d'affichage de l'alerte jaune [distance km = valeur x 100] |
-| `CBS_INTD_03H` | entretien selon besoin (CBS) · intervalle d'essuyage · [0x03] | `wert_01` | Condition based service (CBS) interval time for brake fluid [months=data] | CBS : intervalle de remplacement du liquide de frein [mois = valeur] |
-| `CBS_INTD_11H` | entretien selon besoin (CBS) · intervalle d'essuyage · [0x11] | `wert_01` · `wert_02` · `wert_03` | — | — |
-| `CBS_INTD_13H` | entretien selon besoin (CBS) · intervalle d'essuyage · [0x13] | `wert_01` | — | — |
-| `CBS_INTD_14H` | entretien selon besoin (CBS) · intervalle d'essuyage · [0x14] | `wert_01` | Condition based service (CBS) interval time for pre-delivery inspection [months=data] | CBS : intervalle de preparation avant livraison [mois = valeur] |
-| `CBS_INTW_10H` | entretien selon besoin (CBS) · intervalle d'essuyage · [0x10] | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` | Condition based service (CBS) interval distance for spark plugs [distance_km=data*1000] | CBS : intervalle de remplacement des bougies [distance km = valeur x 1000] |
-| `CBS_INTW_11H` | entretien selon besoin (CBS) · intervalle d'essuyage · [0x11] | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` | Condition based service (CBS) interval distance for vehicle check [distance_km=data*1000] | CBS : intervalle de revision du vehicule [distance km = valeur x 1000] |
-| `CBS_INTW_12H` | entretien selon besoin (CBS) · intervalle d'essuyage · [0x12] | `wert_01` | — | — |
+| `CBS_INTD_03H` | entretien selon besoin (CBS) · intervalle temporel · [0x03] | `wert_01` | Condition based service (CBS) interval time for brake fluid [months=data] | CBS : intervalle de remplacement du liquide de frein [mois = valeur] |
+| `CBS_INTD_11H` | entretien selon besoin (CBS) · intervalle temporel · [0x11] | `wert_01` · `wert_02` · `wert_03` | — | Déduction du libellé : Intervalle temporel de l’élément d’entretien CBS 0x11, par analogie avec les autres CBS_INTD ; unité et conversion à confirmer. |
+| `CBS_INTD_13H` | entretien selon besoin (CBS) · intervalle temporel · [0x13] | `wert_01` | — | Déduction du libellé : Intervalle temporel de l’élément d’entretien CBS 0x13, par analogie avec les autres CBS_INTD ; unité et conversion à confirmer. |
+| `CBS_INTD_14H` | entretien selon besoin (CBS) · intervalle temporel · [0x14] | `wert_01` | Condition based service (CBS) interval time for pre-delivery inspection [months=data] | CBS : intervalle de preparation avant livraison [mois = valeur] |
+| `CBS_INTW_10H` | entretien selon besoin (CBS) · intervalle de distance · [0x10] | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` | Condition based service (CBS) interval distance for spark plugs [distance_km=data*1000] | CBS : intervalle de remplacement des bougies [distance km = valeur x 1000] |
+| `CBS_INTW_11H` | entretien selon besoin (CBS) · intervalle de distance · [0x11] | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` | Condition based service (CBS) interval distance for vehicle check [distance_km=data*1000] | CBS : intervalle de revision du vehicule [distance km = valeur x 1000] |
+| `CBS_INTW_12H` | entretien selon besoin (CBS) · intervalle de distance · [0x12] | `wert_01` | — | Déduction du libellé : Intervalle de distance de l’élément d’entretien CBS 0x12, par analogie avec les autres CBS_INTW ; unité et conversion à confirmer. |
 | `CBS_RES_SPERR` | entretien selon besoin (CBS) · remise a zero · blocage | `wert_01` | Condition based service (CBS) reset lock [percentage_%=data] | CBS : blocage de la remise a zero [pourcentage = valeur] |
 | `CBS_SCEN_01H` | entretien selon besoin (CBS) · scenario · [0x01] | `aktiv` · `nicht_aktiv` | Condition based service (CBS) telematics service call for engine oil | CBS : appel telematique d'entretien pour l'huile moteur |
 | `CBS_SCEN_02H` | entretien selon besoin (CBS) · scenario · [0x02] | `aktiv` · `nicht_aktiv` | Condition based service (CBS) telematics service call for front brake pad wear | CBS : appel telematique d'entretien pour les plaquettes avant |
@@ -101,11 +101,11 @@
 | `CBS_STAT_04H` | entretien selon besoin (CBS) · etat · [0x04] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for microfilter | CBS : etat du filtre d'habitacle |
 | `CBS_STAT_06H` | entretien selon besoin (CBS) · etat · [0x06] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for rear brake pad wear | CBS : etat d'usure des plaquettes arriere |
 | `CBS_STAT_07H` | entretien selon besoin (CBS) · etat · [0x07] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for diesel particle filter | CBS : etat du filtre a particules |
-| `CBS_STAT_0AH` | entretien selon besoin (CBS) · etat · [0x0A] | `anzeige` · `sperre` · `erprobung` | — | — |
+| `CBS_STAT_0AH` | entretien selon besoin (CBS) · etat · [0x0A] | `anzeige` · `sperre` · `erprobung` | — | Déduction du libellé : État de l’élément d’entretien CBS identifié par 0x0A ; opération d’entretien non identifiée. |
 | `CBS_STAT_10H` | entretien selon besoin (CBS) · etat · [0x10] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for spark plugs | CBS : etat des bougies |
 | `CBS_STAT_11H` | entretien selon besoin (CBS) · etat · [0x11] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for vehicle check | CBS : etat de la revision du vehicule |
-| `CBS_STAT_12H` | entretien selon besoin (CBS) · etat · [0x12] | `anzeige` · `sperre` · `erprobung` | — | — |
-| `CBS_STAT_13H` | entretien selon besoin (CBS) · etat · [0x13] | `anzeige` · `sperre` · `erprobung` | — | — |
+| `CBS_STAT_12H` | entretien selon besoin (CBS) · etat · [0x12] | `anzeige` · `sperre` · `erprobung` | — | Déduction du libellé : État de l’élément d’entretien CBS identifié par 0x12 ; opération d’entretien non identifiée. |
+| `CBS_STAT_13H` | entretien selon besoin (CBS) · etat · [0x13] | `anzeige` · `sperre` · `erprobung` | — | Déduction du libellé : État de l’élément d’entretien CBS identifié par 0x13 ; opération d’entretien non identifiée. |
 | `CBS_STAT_14H` | entretien selon besoin (CBS) · etat · [0x14] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for pre-delivery inspection | CBS : etat de la preparation avant livraison |
 | `CBS_STAT_20H` | entretien selon besoin (CBS) · etat · [0x20] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for statutory vehicle inspection (MOT) | CBS : etat du controle technique |
 | `CBS_STAT_21H` | entretien selon besoin (CBS) · etat · [0x21] | `anzeige` · `sperre` · `erprobung` | Condition based service (CBS) status for emission inspection (smog test) | CBS : etat du controle antipollution |
@@ -123,8 +123,8 @@
 | `CC_TEMPERATURWARNUNG` | Check Control · alerte de temperature | `nicht_aktiv` · `aktiv` | Check control notification for temperature warning | Message Check Control pour l'alerte de temperature |
 | `CC_ZUENDSCHLUESSEL` | Check Control · cle de contact | `nicht_aktiv` · `aktiv` | Check control notification for key left in ignition warning when opening door | Alerte de portiere ouverte lorsque la cle est en contact. |
 | `CODING_VALID_BMW` | codage · valide · BMW | `wert_01` | Coding valid BMW | Codage BMW valide |
-| `COMBOX_ALIVE_MONITOR` | module telematique · signal de presence · surveillance | `nicht_aktiv` · `aktiv` | — | — |
-| `COMBOX_ID_MONITOR` | module telematique · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | — |
+| `COMBOX_ALIVE_MONITOR` | module telematique · signal de presence · surveillance | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Surveillance du signal de présence du module COMBOX par le combiné ; cela ne prouve pas que cet équipement est installé. |
+| `COMBOX_ID_MONITOR` | module telematique · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Surveillance de l’identifiant du module COMBOX par le combiné ; cela ne prouve pas que cet équipement est installé. |
 | `CRASH_TH_DIMMUNG` | choc · seuil (?) · gradation | `wert_01` | — | — |
 | `CSUM_ACC` | somme de controle · regulateur adaptatif | `grundcode_var` | Checksum active cruise control (ACC) | Somme de controle du regulateur actif (ACC) |
 | `CSUM_AKUSTIK_KLANG` | somme de controle · acoustique · sonorite | `grundcode_var` · `wert_01` · `wert_02` | Checksum acoustic sound | Somme de controle des signaux sonores |
@@ -151,10 +151,10 @@
 | `DSC_ALLRAD_CC_WAHL` | controle de stabilite · transmission integrale · Check Control · selection | `nicht_aktiv` · `aktiv` | Check control for dynamic stability control (DSC) xDrive [nicht_aktiv: rear-wheel drive, aktiv: 4-wheel drive] | Check Control du DSC xDrive [nicht_aktiv : propulsion, aktiv : transmission integrale] |
 | `DSC_ID_MONITOR` | controle de stabilite · identifiant · surveillance | `nicht_aktiv` · `aktiv` | Identification timeout for dynamic stability control (DSC) | Delai d'identification du controle de stabilite (DSC) |
 | `DSC_MIT_RPA_CC` | controle de stabilite · avec · indicateur de crevaison · Check Control | `nicht_aktiv` · `aktiv` | — | — |
-| `DSC_VARIANTE` | controle de stabilite · variante | `wert_01` · `wert_02` | — | — |
+| `DSC_VARIANTE` | controle de stabilite · variante | `wert_01` · `wert_02` | — | Déduction du libellé : Sélection de la variante de DSC prise en compte par le combiné. |
 | `DWA_VERBAUT` | alarme antivol · installe | `nicht_aktiv` · `aktiv` | Antitheft alarm system (DWA) installed | Alarme antivol (DWA) installee |
 | `DZM_DISP_RPM` | compte-tours · affichage · regime moteur | `wert_01` · `wert_02` | Tachometer (RPM) signal source | Source du signal de compte-tours |
-| `DZM_UMRECHNUNG` | compte-tours · conversion | `wert_01` · `wert_02` · `wert_03` | — | — |
+| `DZM_UMRECHNUNG` | compte-tours · conversion | `wert_01` · `wert_02` · `wert_03` | — | Déduction du libellé : Conversion du signal utilisé par le compte-tours ; le facteur exact dépend des valeurs du module. |
 | `E89_FDS_COMFORT` | serie E89 · _FDS_ · confort | `wert_01` · `wert_02` | — | — |
 | `E92_E93_FZG` | serie E92 · serie E93 · vehicule | `nicht_aktiv` · `aktiv` | — | — |
 | `EDCK_ALIVE_ZAEHLER` | amortissement pilote (?) · signal de presence · compteur | `nicht_aktiv` · `aktiv` | Alive counter for electronic damper control (EDCK) | Compteur de presence de l'amortissement pilote (EDC) |
@@ -168,8 +168,8 @@
 | `EKP_ID_MONITOR` | pompe a carburant · identifiant · surveillance | `nicht_aktiv` · `aktiv` | Identification timeout for electronically controlled fuel pump (EKP) | Delai d'identification de la pompe a carburant pilotee (EKP) |
 | `EMF_ALIVE_ZAEHLER` | frein de stationnement electromecanique · signal de presence · compteur | `nicht_aktiv` · `aktiv` | Alive counter for electronic parking brake | Compteur de presence du frein de stationnement electrique |
 | `EMF_ID_MONITOR` | frein de stationnement electromecanique · identifiant · surveillance | `nicht_aktiv` · `aktiv` | Identification timeout for electronic parking brake | Delai d'identification du frein de stationnement electrique |
-| `EPS_ALIVE_MONITOR` | direction assistee · signal de presence · surveillance | `nicht_aktiv` · `aktiv` | — | — |
-| `EPS_ID_MONITOR` | direction assistee · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | — |
+| `EPS_ALIVE_MONITOR` | direction assistee · signal de presence · surveillance | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Surveillance du signal de présence de la direction assistée électrique par le combiné ; cela ne prouve pas que cet équipement est installé. |
+| `EPS_ID_MONITOR` | direction assistee · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Surveillance de l’identifiant de la direction assistée électrique par le combiné ; cela ne prouve pas que cet équipement est installé. |
 | `FB_ALLE_TUEREN` | telecommande · tous · portes | `nicht_aktiv` · `aktiv` | Pressing remote control unlock button once unlocks all doors | Une seule pression sur le bouton de deverrouillage ouvre toutes les portes |
 | `FB_FA_TUER` | telecommande · conducteur · porte | `nicht_aktiv` · `aktiv` | Pressing remote control unlock button once unlocks only driver door, twice unlocks all doors | Une pression sur le bouton de deverrouillage n'ouvre que la porte conducteur, deux pressions ouvrent toutes les portes |
 | `FDC_ID_MONITOR` | commande de conduite (?) · identifiant · surveillance | `nicht_aktiv` · `aktiv` | Identification timeout for dynamic driving control (FDC) | Delai d'identification de la commande de conduite dynamique (FDC) |
@@ -178,7 +178,7 @@
 | `FDS_ENABLE` | _FDS_ · activation | `nicht_aktiv` · `aktiv` | — | — |
 | `FDS_ID_MONITOR` | _FDS_ · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | — |
 | `FDS_TIME_OUT` | _FDS_ · duree · sortie | `wert_00` · `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` · `wert_07` … *(+3)* | — | — |
-| `FLA_VERBAUT` | assistant feux de route · installe | `nicht_aktiv` · `aktiv` | — | — |
+| `FLA_VERBAUT` | assistant feux de route · installe | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Déclaration de la présence de l’assistant de feux de route. |
 | `GETRIEBE_ART` | boite de vitesses · type | `automatik` · `ssg` · `handschalter` | Transmission type | Type de boite de vitesses |
 | `GPS_UHR` | GPS · heure | `nicht_aktiv` · `aktiv` | Use time from GPS | Utiliser l'heure fournie par le GPS |
 | `HDC_ID_MONITOR` | assistance en descente · identifiant · surveillance | `nicht_aktiv` · `aktiv` | Identification timeout for hill descent control (HDC) | Delai d'identification de l'assistance en descente (HDC) |
@@ -237,10 +237,10 @@
 | `LICHT_AUT_WERT_3` | lumiere · automatique · valeur · 3 | `nicht_aktiv` · `aktiv` | Control auto headlight sensitivity from OBC button (linked to [LICHT_AUT_WERT_1], [LICHT_AUT_WERT_2] all to aktiv) | Seuil de declenchement de l'allumage automatique des feux. Les trois valeurs se modifient ensemble. |
 | `LL_RL_FZG` | ralenti (?) · feu arriere · vehicule | `nicht_aktiv` · `aktiv` | Left-hand drive / right-hand drive vehicle | Vehicule conduite a gauche / conduite a droite |
 | `LM_ALIVE` | module d'eclairage (?) · signal de presence | `nicht_aktiv` · `aktiv` | Alive monitoring for light module (LM) | Surveillance de presence du module d'eclairage (LM) |
-| `MMI_ENA_PIA` | interface homme-machine · activation · interface d'affichage (?) | `nicht_aktiv` · `aktiv` | — | — |
-| `MMI_ENA_RPA_RDC` | interface homme-machine · activation · indicateur de crevaison · pression des pneus | `nicht_aktiv` · `aktiv` | — | — |
-| `MMI_ENA_SHIFTLIGHTS` | interface homme-machine · activation · temoins de passage de rapport | `nicht_aktiv` · `aktiv` | — | — |
-| `MMI_ENA_UHR_DATUM` | interface homme-machine · activation · heure · date | `nicht_aktiv` · `aktiv` | — | — |
+| `MMI_ENA_PIA` | interface homme-machine · activation · gestion des profils personnels | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Activation de l’accès à la gestion des profils personnels dans l’interface utilisateur. |
+| `MMI_ENA_RPA_RDC` | interface homme-machine · activation · indicateur de crevaison · pression des pneus | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Activation de l’interface relative à l’indicateur de crevaison ou au contrôle de pression des pneus. |
+| `MMI_ENA_SHIFTLIGHTS` | interface homme-machine · activation · temoins de passage de rapport | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Activation de l’interface des témoins de changement de rapport. |
+| `MMI_ENA_UHR_DATUM` | interface homme-machine · activation · heure · date | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Activation de l’interface de réglage de l’heure et de la date. |
 | `MOTORKONSTANTE` | constante moteur | `wert_01` | Engine constant | Constante moteur |
 | `MOTORSPORT` | sport automobile | `wert_01` · `wert_02` | BMW M (Motorsport) [wert_01: BMW M, wert_02: BMW AG] | BMW M (Motorsport) [wert_01 : BMW M, wert_02 : BMW AG] |
 | `MSA_ALIVE_MONITOR` | Start & Stop · signal de presence · surveillance | `nicht_aktiv` · `aktiv` | — | — |
@@ -250,17 +250,17 @@
 | `MSA_N_VERFUEGBAR` | Start & Stop · N · disponible | `nicht_aktiv` · `aktiv` | — | — |
 | `MSA_SWITCH_ON_OFF_ENABLE` | Start & Stop · commutateur · marche · arret · activation | `nicht_aktiv` · `aktiv` | Automatic start/stop (MSA) button enabled | Bouton Start & Stop (MSA) actif |
 | `M_TAG_SKALENBELEUCHTUNG` | M · jour · eclairage des cadrans | `nicht_aktiv` · `aktiv` | Instrument lights on with daytime running lights | Eclairage du combine allume avec les feux de jour |
-| `OHNE_QUITT_ENT` | sans · acquittement sonore · des- | `nicht_aktiv` · `aktiv` | — | — |
-| `OHNE_QUITT_VER` | sans · acquittement sonore · version | `nicht_aktiv` · `aktiv` | — | — |
+| `OHNE_QUITT_ENT` | sans · acquittement · deverrouillage | `nicht_aktiv` · `aktiv` | — | — |
+| `OHNE_QUITT_VER` | sans · acquittement · verrouillage | `nicht_aktiv` · `aktiv` | — | — |
 | `PREDRIVE_ABB_MOT` | avant roulage · attenuation (?) · moteur | `nicht_aktiv` · `aktiv` | Pre-drive checks cancelled when starting engine | Controles avant depart annules au demarrage du moteur |
 | `PREDRIVE_PERIODENDAUER` | avant roulage · duree de periode | `wert_01` | Pre-drive check duration [time_ms=data*100] | Duree des controles avant depart [duree ms = valeur x 100] |
 | `PREDRIVE_START_MIT_OBD` | avant roulage · demarrage · avec · diagnostic OBD | `nicht_aktiv` · `aktiv` | — | — |
-| `QUITT_AKUST_ENT` | acquittement sonore · sonore · des- | `nicht_aktiv` · `aktiv` | Acoustic unlocking acknowledge (two alarm beeps) | Acquittement sonore au deverrouillage (deux bips d'alarme) |
-| `QUITT_AKUST_VER` | acquittement sonore · sonore · version | `nicht_aktiv` · `aktiv` | Acoustic locking acknowledge (single alarm beep) | Acquittement sonore au verrouillage (un bip d'alarme) |
-| `QUITT_OPT_AKUST_ENT` | acquittement sonore · option · sonore · des- | `nicht_aktiv` · `aktiv` | Acoustic and visual unlocking acknowledge (two alarm beeps and turn signal flashes) | Acquittement sonore et visuel au deverrouillage (deux bips et deux flashs) |
-| `QUITT_OPT_AKUST_VER` | acquittement sonore · option · sonore · version | `nicht_aktiv` · `aktiv` | Acoustic and visual locking acknowledge (single alarm beep and turn signal flash) | Acquittement sonore et visuel au verrouillage (un bip et un flash) |
-| `QUITT_OPT_ENT` | acquittement sonore · option · des- | `nicht_aktiv` · `aktiv` | Visual unlocking acknowledge (two turn signal flashes) | Acquittement visuel au deverrouillage (deux flashs de clignotants) |
-| `QUITT_OPT_VER` | acquittement sonore · option · version | `nicht_aktiv` · `aktiv` | Visual locking acknowledge (single turn signal flash) | Acquittement visuel au verrouillage (un flash de clignotants) |
+| `QUITT_AKUST_ENT` | acquittement · sonore · deverrouillage | `nicht_aktiv` · `aktiv` | Acoustic unlocking acknowledge (two alarm beeps) | Acquittement sonore au deverrouillage (deux bips d'alarme) |
+| `QUITT_AKUST_VER` | acquittement · sonore · verrouillage | `nicht_aktiv` · `aktiv` | Acoustic locking acknowledge (single alarm beep) | Acquittement sonore au verrouillage (un bip d'alarme) |
+| `QUITT_OPT_AKUST_ENT` | acquittement · optique (visuel) · sonore · deverrouillage | `nicht_aktiv` · `aktiv` | Acoustic and visual unlocking acknowledge (two alarm beeps and turn signal flashes) | Acquittement sonore et visuel au deverrouillage (deux bips et deux flashs) |
+| `QUITT_OPT_AKUST_VER` | acquittement · optique (visuel) · sonore · verrouillage | `nicht_aktiv` · `aktiv` | Acoustic and visual locking acknowledge (single alarm beep and turn signal flash) | Acquittement sonore et visuel au verrouillage (un bip et un flash) |
+| `QUITT_OPT_ENT` | acquittement · optique (visuel) · deverrouillage | `nicht_aktiv` · `aktiv` | Visual unlocking acknowledge (two turn signal flashes) | Acquittement visuel au deverrouillage (deux flashs de clignotants) |
+| `QUITT_OPT_VER` | acquittement · optique (visuel) · verrouillage | `nicht_aktiv` · `aktiv` | Visual locking acknowledge (single turn signal flash) | Acquittement visuel au verrouillage (un flash de clignotants) |
 | `RDC_ALIVE` | pression des pneus · signal de presence | `nicht_aktiv` · `aktiv` | Alive monitoring for tire pressure control (RDC) | Surveillance de presence du controle de pression des pneus (RDC) |
 | `RDC_DISP_SWITCH` | pression des pneus · affichage · commutateur | `aktiv` · `nicht_aktiv` | — | — |
 | `RDC_VERBAUT` | pression des pneus · installe | `nicht_aktiv` · `aktiv` | Tire pressure control (RDC) installed | Controle de pression des pneus (RDC) installe |
@@ -276,11 +276,11 @@
 | `SHIFTLIGHTS_2` | temoins de passage de rapport · 2 | `wert_01` | — | — |
 | `SHIFTLIGHTS_3` | temoins de passage de rapport · 3 | `wert_01` | — | — |
 | `SHIFTLIGHTS_4` | temoins de passage de rapport · 4 | `wert_01` | — | — |
-| `SHOW_CC_MSG_NR` | affichage · Check Control · message · numero | `nicht_aktiv` · `aktiv` | — | — |
-| `SHOW_OEL_STAND` | affichage · huile · etat | `nicht_aktiv` · `aktiv` | — | — |
-| `SITZ_AUT_VERST_AUS` | siege · automatique · amplification · arret | `nicht_aktiv` · `aktiv` | — | — |
-| `SITZ_AUT_VERST_ENT` | siege · automatique · amplification · des- | `nicht_aktiv` · `aktiv` | — | — |
-| `SITZ_AUT_VERST_ENT_T` | siege · automatique · amplification · des- · T | `nicht_aktiv` · `aktiv` | — | — |
+| `SHOW_CC_MSG_NR` | affichage · Check Control · message · numero | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Affichage du numéro des messages Check Control. |
+| `SHOW_OEL_STAND` | affichage · huile · niveau | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Affichage du niveau d’huile. |
+| `SITZ_AUT_VERST_AUS` | siege · automatique · reglage de position · arret | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Désactivation du déplacement automatique du siège ; interprétation par analogie avec les réglages CA107 du CAPPL. |
+| `SITZ_AUT_VERST_ENT` | siege · automatique · reglage de position · deverrouillage | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Déplacement automatique du siège au déverrouillage ; interprétation par analogie avec CA107_AUT_VERST_ENTR dans le CAPPL. |
+| `SITZ_AUT_VERST_ENT_T` | siege · automatique · reglage de position · deverrouillage · T | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Déplacement automatique du siège après déverrouillage et ouverture de porte ; interprétation par analogie avec CA107_AUT_VERST_ENT_T dans le CAPPL. |
 | `SITZ_L_UEBERWACHUNG` | siege · _L_ · surveillance | `nicht_aktiv` · `aktiv` | Display flip-forward seat backrest lock warning | Afficher l'alerte de verrou de dossier rabattable |
 | `SPA_IST_GANG_ENABLE` | assistant de stationnement (?) · reel · rapport · activation | `wert_01` · `wert_02` | — | — |
 | `SPORT_ANZEIGE` | sport · affichage | `nicht_aktiv` · `aktiv` | Sport display | Affichage sport |
@@ -300,29 +300,29 @@
 | `TANK_FILTER_FALLEND` | reservoir · filtre · decroissant | `wert_01` · `wert_02` · `wert_03` | Fuel tank damping when decreasing | Amortissement de la jauge a la baisse |
 | `TANK_FILTER_STEIGEND` | reservoir · filtre · croissant | `wert_01` · `wert_02` · `wert_03` | Fuel tank damping when increasing | Amortissement de la jauge a la hausse |
 | `TANK_MITTLUNGSZEIT` | reservoir · duree de moyennage | `wert_01` | Fuel tank averaging period | Periode de moyennage de la jauge a carburant |
-| `TANK_OHM_FEHLER_OG` | reservoir · ohm · erreur · superieur (?) | `wert_01` · `wert_02` | — | — |
-| `TANK_OHM_FEHLER_UG` | reservoir · ohm · erreur · limite inferieure (?) | `wert_01` · `wert_02` | — | — |
+| `TANK_OHM_FEHLER_OG` | reservoir · ohm · erreur · superieur (?) | `wert_01` · `wert_02` | — | Déduction du libellé : Limite supérieure de résistance utilisée pour détecter un défaut de jauge à carburant. |
+| `TANK_OHM_FEHLER_UG` | reservoir · ohm · erreur · limite inferieure (?) | `wert_01` · `wert_02` | — | Déduction du libellé : Limite inférieure de résistance utilisée pour détecter un défaut de jauge à carburant. |
 | `TANK_RED_REICHWEITE` | reservoir · reduction · autonomie | `wert_01` · `anlieferung_01` · `anlieferung_02` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` · `wert_07` | Fuel tank range reduction factor [factor=data/255] | Facteur de reduction de l'autonomie [facteur = valeur / 255] |
 | `TANK_RW_WARNUNG` | reservoir · conduite a droite (?) · alerte | `wert_01` | Fuel tank low range warning threshold [distance_km=data] | Seuil d'alerte d'autonomie faible [distance km = valeur] |
 | `TANK_SCHWELLE_AUF_AB` | reservoir · seuil · ouverture · a partir de | `wert_01` · `wert_02` | — | — |
 | `TANK_SICHERHEITSFAKTOR` | reservoir · facteur de securite | `wert_01` | Fuel tank safety factor | Facteur de securite de la jauge a carburant |
 | `TANK_VOLL_ERKENNUNG` | reservoir · plein · detection | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` · `wert_07` · `anlieferung_01` · `anlieferung_02` | Fuel tank refilled detection | Detection de remplissage du reservoir |
-| `TCM_ALIVE_MONITOR` | module de boite · signal de presence · surveillance | `nicht_aktiv` · `aktiv` | — | — |
-| `TCM_ID_MONITOR` | module de boite · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | — |
+| `TCM_ALIVE_MONITOR` | module de boite · signal de presence · surveillance | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Surveillance du signal de présence du module TCM par le combiné ; cela ne prouve pas que cet équipement est installé. |
+| `TCM_ID_MONITOR` | module de boite · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Surveillance de l’identifiant du module TCM par le combiné ; cela ne prouve pas que cet équipement est installé. |
 | `TELEX_STATUS_SC` | telex · etat · _SC_ | `wert_01` · `wert_02` | — | — |
 | `TEMPOMAT_SETZ_ANZ_DAUER` | regulateur de vitesse · positionnement · nombre · duree | `wert_01` · `wert_02` | Display duration of cruise control target speed [time_s=data/2] | Duree d'affichage de la vitesse de consigne du regulateur [duree s = valeur / 2] |
-| `TIPP_BLINKEN_1X` | impulsion · clignotement · une fois | `nicht_aktiv` · `aktiv` | — | — |
-| `TIPP_BLINKEN_3X` | impulsion · clignotement · trois fois | `nicht_aktiv` · `aktiv` | — | — |
+| `TIPP_BLINKEN_1X` | impulsion · clignotement · une fois | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Réglage relatif à un seul clignotement lors d’une impulsion sur le commodo. |
+| `TIPP_BLINKEN_3X` | impulsion · clignotement · trois fois | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Réglage relatif à trois clignotements lors d’une impulsion sur le commodo. |
 | `TORQUE_3_ID_MONITOR` | couple · 3 · identifiant · surveillance | `nicht_aktiv` · `aktiv` | — | — |
 | `VERDECKVARIANTE` | variante de capote | `wert_00` · `wert_01` · `wert_02` | Convertible top variant | Variante de capote |
 | `WARNFELD_INFO_DME` | zone d'alerte · information · calculateur moteur | `nicht_aktiv` · `aktiv` | — | — |
 | `WARNUNG_GESCHW_LIMIT` | alerte · vitesse · limite | `nicht_aktiv` | Speed limit warning [CCM,EKM,KMB_E32,LCM ? speed_km/h=data+50 : speed_km/h=data] | Alerte de limite de vitesse [vitesse km/h = valeur, ou valeur + 50 selon le module] |
 | `ZGM_ALIVE_ZAEHLER` | module passerelle central · signal de presence · compteur | `nicht_aktiv` · `aktiv` | Alive counter for central gateway module (ZGM) | Compteur de presence du module passerelle central (ZGM) |
 | `ZGM_ID_MONITOR` | module passerelle central · identifiant · surveillance | `nicht_aktiv` · `aktiv` | Identification timeout for central gateway module (ZGM) | Delai d'identification du module passerelle central (ZGM) |
-| `ZV_VER_AUS` | verrouillage centralise · version · arret | `nicht_aktiv` · `aktiv` | — | — |
-| `ZV_VER_FAHRT` | verrouillage centralise · version · roulage | `nicht_aktiv` · `aktiv` | — | — |
-| `ZV_VER_FAHRT_ZEIT` | verrouillage centralise · version · roulage · duree | `nicht_aktiv` · `aktiv` | — | — |
-| `ZV_VER_ZEIT` | verrouillage centralise · version · duree | `nicht_aktiv` · `aktiv` | — | — |
+| `ZV_VER_AUS` | verrouillage centralise · verrouillage · arret | `nicht_aktiv` · `aktiv` | — | — |
+| `ZV_VER_FAHRT` | verrouillage centralise · verrouillage · roulage | `nicht_aktiv` · `aktiv` | — | — |
+| `ZV_VER_FAHRT_ZEIT` | verrouillage centralise · verrouillage · roulage · duree | `nicht_aktiv` · `aktiv` | — | — |
+| `ZV_VER_ZEIT` | verrouillage centralise · verrouillage · duree | `nicht_aktiv` · `aktiv` | — | — |
 
 ---
 
@@ -333,5 +333,7 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Signification (EN)** — description issue de la base communautaire NCS Dummy, verbatim.
 
-**Explication (FR)** — traduction française. Un tiret signifie que la ligne n'est pas
-encore traduite. Les notations d'unités sont converties : `[durée s = valeur / 10]`.
+**Explication (FR)** — traduction française ou interprétation explicitement marquée
+« Déduction du libellé ». Cette dernière reste à confirmer ; elle ne documente pas
+les valeurs ni un effet testé sur le véhicule. Un tiret signifie qu’aucune explication
+n’est établie. Voir [la méthode et les sources](TRADUCTIONS.md). Les notations d'unités sont converties : `[durée s = valeur / 10]`.

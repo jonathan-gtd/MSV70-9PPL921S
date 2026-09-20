@@ -91,5 +91,7 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Signification (EN)** — description issue de la base communautaire NCS Dummy, verbatim.
 
-**Explication (FR)** — traduction française. Un tiret signifie que la ligne n'est pas
-encore traduite. Les notations d'unités sont converties : `[durée s = valeur / 10]`.
+**Explication (FR)** — traduction française ou interprétation explicitement marquée
+« Déduction du libellé ». Cette dernière reste à confirmer ; elle ne documente pas
+les valeurs ni un effet testé sur le véhicule. Un tiret signifie qu’aucune explication
+n’est établie. Voir [la méthode et les sources](TRADUCTIONS.md). Les notations d'unités sont converties : `[durée s = valeur / 10]`.

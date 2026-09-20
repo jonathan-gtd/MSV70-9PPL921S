@@ -16,7 +16,7 @@
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 303 |
 | Signification (EN) | 289 |
-| Explication (FR) | 289 |
+| Explication (FR) | 293 |
 | Blocs d'adresses du TRC | 13 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -54,17 +54,17 @@
 | `C750A_SCHWELLWERT_EMPFIN` | [identifiant BMW C750A] · valeur de seuil · sensibilite | `par_frei` · `par_gesperrt` | Normal sensitivity for automatic light control (FLC) | Sensibilite normale de l'allumage automatique des feux (FLC) |
 | `C750A_SCHWELLWERT_NORMAL` | [identifiant BMW C750A] · valeur de seuil · normal | `par_frei` · `par_gesperrt` | High sensitivity for automatic light control (FLC) | Sensibilite elevee de l'allumage automatique des feux (FLC) |
 | `C750A_SCHWELLWERT_SEHR_E` | [identifiant BMW C750A] · valeur de seuil · tres · E | `par_frei` · `par_gesperrt` | Very high sensitivity for automatic light control (FLC) | Sensibilite tres elevee de l'allumage automatique des feux (FLC) |
-| `C940A_QUITT_OPT_ENTSCH` | [identifiant BMW C940A] · acquittement sonore · option · desarmement | `fkt_frei` · `fkt_gesperrt` | Visual unlocking acknowledge (two turn signal flashes) | Acquittement visuel au deverrouillage (deux flashs de clignotants) |
-| `C940C_QUITT_OPT_ENTSCH` | [identifiant BMW C940C] · acquittement sonore · option · desarmement | `fkt_frei` · `fkt_gesperrt` | Visual unlocking acknowledge without anti-theft alarm system (two turn signal flashes) | Acquittement visuel au deverrouillage sans alarme antivol (deux flashs de clignotants) |
-| `C940D_QUITT_OPT_SCHAERF` | [identifiant BMW C940D] · acquittement sonore · option · armement | `fkt_frei` · `fkt_gesperrt` | Visual locking acknowledge without anti-theft alarm system (single turn signal flash) | Acquittement visuel au verrouillage sans alarme antivol (un flash de clignotants) |
-| `C9410_QUITT_OPT_SCHAERF` | [identifiant BMW C9410] · acquittement sonore · option · armement | `fkt_frei` · `fkt_gesperrt` | Visual locking acknowledge (single turn signal flash) | Acquittement visuel au verrouillage (un flash de clignotants) |
-| `C9413_QUITT_AKUST_SCHAERF` | [identifiant BMW C9413] · acquittement sonore · sonore · armement | `fkt_frei` · `fkt_gesperrt` | Acoustic locking acknowledge (single alarm beep) | Acquittement sonore au verrouillage (un bip d'alarme) |
-| `C9419_QUITT_OPT_KLAPPE` | [identifiant BMW C9419] · acquittement sonore · option · trappe | `fkt_frei` · `fkt_gesperrt` | Visual locking acknowledge only when all doors and lids closed | Acquittement visuel au verrouillage uniquement si toutes les portes et trappes sont fermees |
-| `C941C_QUITT_AKUST_KLAPPE` | [identifiant BMW C941C] · acquittement sonore · sonore · trappe | `fkt_frei` · `fkt_gesperrt` | Acoustic locking acknowledge only when all doors and lids closed | Acquittement sonore au verrouillage uniquement si toutes les portes et trappes sont fermees |
+| `C940A_QUITT_OPT_ENTSCH` | [identifiant BMW C940A] · acquittement · optique (visuel) · desarmement | `fkt_frei` · `fkt_gesperrt` | Visual unlocking acknowledge (two turn signal flashes) | Acquittement visuel au deverrouillage (deux flashs de clignotants) |
+| `C940C_QUITT_OPT_ENTSCH` | [identifiant BMW C940C] · acquittement · optique (visuel) · desarmement | `fkt_frei` · `fkt_gesperrt` | Visual unlocking acknowledge without anti-theft alarm system (two turn signal flashes) | Acquittement visuel au deverrouillage sans alarme antivol (deux flashs de clignotants) |
+| `C940D_QUITT_OPT_SCHAERF` | [identifiant BMW C940D] · acquittement · optique (visuel) · armement | `fkt_frei` · `fkt_gesperrt` | Visual locking acknowledge without anti-theft alarm system (single turn signal flash) | Acquittement visuel au verrouillage sans alarme antivol (un flash de clignotants) |
+| `C9410_QUITT_OPT_SCHAERF` | [identifiant BMW C9410] · acquittement · optique (visuel) · armement | `fkt_frei` · `fkt_gesperrt` | Visual locking acknowledge (single turn signal flash) | Acquittement visuel au verrouillage (un flash de clignotants) |
+| `C9413_QUITT_AKUST_SCHAERF` | [identifiant BMW C9413] · acquittement · sonore · armement | `fkt_frei` · `fkt_gesperrt` | Acoustic locking acknowledge (single alarm beep) | Acquittement sonore au verrouillage (un bip d'alarme) |
+| `C9419_QUITT_OPT_KLAPPE` | [identifiant BMW C9419] · acquittement · optique (visuel) · trappe | `fkt_frei` · `fkt_gesperrt` | Visual locking acknowledge only when all doors and lids closed | Acquittement visuel au verrouillage uniquement si toutes les portes et trappes sont fermees |
+| `C941C_QUITT_AKUST_KLAPPE` | [identifiant BMW C941C] · acquittement · sonore · trappe | `fkt_frei` · `fkt_gesperrt` | Acoustic locking acknowledge only when all doors and lids closed | Acquittement sonore au verrouillage uniquement si toutes les portes et trappes sont fermees |
 | `C9C01_HKL_TASTE` | [identifiant BMW C9C01] · hayon · touche | `fkt_frei` · `fkt_gesperrt` | Remote control trunk lid button function | Fonction du bouton de coffre sur la telecommande |
-| `CA107_AUT_VERST_DEAKT` | identifiant interne (?) · automatique · amplification · desactivation | `par_frei` · `par_gesperrt` | Automatic seat adjustment disabled | Reglage automatique du siege desactive |
-| `CA107_AUT_VERST_ENTR` | identifiant interne (?) · automatique · amplification · deverrouillage | `par_frei` · `par_gesperrt` | Automatic seat adjustment after unlocking with remote control | Reglage automatique du siege apres deverrouillage par la telecommande |
-| `CA107_AUT_VERST_ENT_T` | identifiant interne (?) · automatique · amplification · des- · T | `par_frei` · `par_gesperrt` | Automatic seat adjustment after unlocking and opening door | Reglage automatique du siege apres deverrouillage et ouverture de porte |
+| `CA107_AUT_VERST_DEAKT` | identifiant interne (?) · automatique · reglage de position · desactivation | `par_frei` · `par_gesperrt` | Automatic seat adjustment disabled | Reglage automatique du siege desactive |
+| `CA107_AUT_VERST_ENTR` | identifiant interne (?) · automatique · reglage de position · deverrouillage | `par_frei` · `par_gesperrt` | Automatic seat adjustment after unlocking with remote control | Reglage automatique du siege apres deverrouillage par la telecommande |
+| `CA107_AUT_VERST_ENT_T` | identifiant interne (?) · automatique · reglage de position · deverrouillage · T | `par_frei` · `par_gesperrt` | Automatic seat adjustment after unlocking and opening door | Reglage automatique du siege apres deverrouillage et ouverture de porte |
 | `CAR_COLOR_CHAMP` | vehicule · couleur · champ | `nicht_aktiv` · `aktiv` | Display car color | Affichage de la couleur du vehicule |
 | `CA_TMC` | acces confort (?) · info trafic | `nicht_aktiv` · `aktiv` | Conditional access for traffic message channel (TMC) | Informations trafic — canal complementaire. |
 | `CBS` | entretien selon besoin (CBS) | `cbs_3` · `cbs_4` | Condition based service (CBS) version | Version de l'entretien selon besoin (CBS) |
@@ -75,7 +75,7 @@
 | `CID_CCC` | ecran central · systeme multimedia CCC | `cid_high` · `cid_low` | Central information display (CID) | Ecran central (CID) |
 | `CID_COLOUR` | ecran central · couleur | `table_1` · `table_2` · `table_3` · `table_4` | Central information display (CID) color | Couleur de l'ecran central (CID) |
 | `CID_TYPE` | ecran central · type | `static` · `flap` | Central information display (CID) type | Type d'ecran central (CID) |
-| `CLIMATE_WO_PREVIEW` | climatisation · ou · apercu | `nicht_aktiv` · `aktiv` | — | — |
+| `CLIMATE_WO_PREVIEW` | climatisation · sans · apercu | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Configuration de l’interface de climatisation sans aperçu ; le libellé ne précise pas quel aperçu est concerné. |
 | `CODIERUNG_ERFOLGT` | codage · effectue | `wert_01` · `codierung_erfolgt` | Coding completed | Codage termine |
 | `CRUISE_CTRL_CCC` | regulateur de vitesse · commande · systeme multimedia CCC | `nicht_aktiv` · `aktiv` | Cruise Control | Regulateur de vitesse |
 | `DAB` | radio numerique DAB | `nicht_aktiv` · `aktiv` | Digital audio broadcast (DAB) | Radio numerique DAB |
@@ -185,7 +185,7 @@
 | `K931D_SCHEIBENABSENKUNG` | [identifiant BMW K931D] · abaissement de vitre | `par_frei` · `par_gesperrt` | Pressing remote control unlock button once unlocks all doors, twice opens driver power window (easy entry for frameless coup� door in narrow spaces) | Une pression ouvre toutes les portes, deux pressions descendent la vitre conducteur (acces facilite pour portes sans encadrement en espace etroit) |
 | `K931D_ZV_ALLE_TUEREN` | [identifiant BMW K931D] · verrouillage centralise · tous · portes | `par_frei` · `par_gesperrt` | Pressing remote control unlock button once unlocks all doors | Une seule pression sur le bouton de deverrouillage ouvre toutes les portes |
 | `K931D_ZV_SELEKTIV` | [identifiant BMW K931D] · verrouillage centralise · selectif | `par_frei` · `par_gesperrt` | Pressing remote control unlock button once unlocks only driver door, twice unlocks all doors | Une pression sur le bouton de deverrouillage n'ouvre que la porte conducteur, deux pressions ouvrent toutes les portes |
-| `K9416_QUITT_AKUST_ENTSCH` | [identifiant BMW K9416] · acquittement sonore · sonore · desarmement | `fkt_frei` · `fkt_gesperrt` | Acoustic unlocking acknowledge (two alarm beeps) | Acquittement sonore au deverrouillage (deux bips d'alarme) |
+| `K9416_QUITT_AKUST_ENTSCH` | [identifiant BMW K9416] · acquittement · sonore · desarmement | `fkt_frei` · `fkt_gesperrt` | Acoustic unlocking acknowledge (two alarm beeps) | Acquittement sonore au deverrouillage (deux bips d'alarme) |
 | `K9901_HUPE` | [identifiant BMW K9901] · avertisseur sonore | `par_frei` · `par_gesperrt` | Programmable button for horn | Bouton programmable : avertisseur sonore |
 | `K9901_KOMFORT_PARKBREMSE` | [identifiant BMW K9901] · confort · frein de stationnement | `par_frei` · `par_gesperrt` | Programmable button for automatic parking brake | Bouton programmable : frein de stationnement automatique |
 | `K9901_LENKRADHEIZUNG` | [identifiant BMW K9901] · volant chauffant | `par_frei` · `par_gesperrt` | Programmable button for steering wheel heating | Bouton programmable : volant chauffant |
@@ -211,7 +211,7 @@
 | `MDRIVE` | M Drive | `nicht_aktiv` · `aktiv` | BMW M Drive (linked to [HUD_M] and [M_SPORT_HUD]) | BMW M Drive (lie a HUD_M et M_SPORT_HUD) |
 | `MDRIVE_ALBV` | M Drive · reglage de site | `nicht_aktiv` · `aktiv` | BMW M Drive active seat backrest width adjustment | M Drive : reglage actif de largeur du dossier |
 | `MDRIVE_LOW_CCC` | M Drive · bas · systeme multimedia CCC | `nicht_aktiv` · `aktiv` | BMW M Drive low | M Drive : niveau bas |
-| `MDRIVE_MENU` | M Drive · menu | `nicht_aktiv` · `aktiv` | — | — |
+| `MDRIVE_MENU` | M Drive · menu | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Présence du menu M Drive dans l’interface du CCC ; cela ne prouve pas la présence de cet équipement sur la voiture. |
 | `MDRIVE_SMG` | M Drive · boite sequentielle | `nicht_aktiv` · `aktiv` | BMW M Drive sequential manual gearbox (SMG) | M Drive : boite sequentielle (SMG) |
 | `MFL_CLEAN` | volant multifonction · propre | `nicht_aktiv` · `aktiv` | Headlight cleaning with multifunction steering wheel button | Lave-phares via une touche du volant multifonction |
 | `MFL_HAZARD` | volant multifonction · feux de detresse | `nicht_aktiv` · `aktiv` | Hazard lights with multifunction steering wheel button | Feux de detresse via une touche du volant multifonction |
@@ -241,11 +241,11 @@
 | `PDC_SIGNAL` | radars · signal | `pdc_no` · `pdc_rear` · `pdc_front` · `pdc_front_rear` | Park distance control (PDC) acoustic signal generation | Generation du signal sonore des radars de stationnement |
 | `PDC_TYPE` | radars · type | `rear` · `full` | Park distance control (PDC) type | Type de radars de stationnement (PDC) |
 | `PHONE_VERSION` | telephone · version | — | Telephone type | Type de telephone |
-| `PIA` | interface d'affichage (?) | `ckm` · `pia_low` | Personal profile manager | Gestionnaire de profils personnels |
+| `PIA` | gestion des profils personnels | `ckm` · `pia_low` | Personal profile manager | Gestionnaire de profils personnels |
 | `RAIN_LIGHT_SENSOR` | pluie · lumiere · capteur | `nicht_aktiv` · `aktiv` | Control light and rain sensor in iDrive (additional changes required to [C750A_SCHWELLWERT_EMPFIN], [C750A_SCHWELLWERT_NORMAL], and [C750A_SCHWELLWERT_SEHR_E] from [par_gesperrt] to [par_frei]) | Reglage de la sensibilite pluie/lumiere depuis l'iDrive. |
 | `RDC_CCC` | pression des pneus · systeme multimedia CCC | `nicht_aktiv` · `aktiv` | Tire pressure control (RDC) | Controle de pression des pneus (RDC) |
 | `RDS_AF_FUNKTION_CCC` | RDS · frequences alternatives · fonction · systeme multimedia CCC | `rds_aus` · `rds_ein_af_aus` · `rds_ein_af_manuell` · `rds_ein_af_automatisch` | Radio data system (RDS) alternative frequencies (AF) (switch to alternative frequency for the same station when the signal becomes to weak) | Frequences alternatives (AF) du RDS : bascule sur une autre frequence de la meme station quand le signal faiblit |
-| `REAR_HEAD_UNIT` | arriere · tete · unite | `nicht_aktiv` · `aktiv` | — | — |
+| `REAR_HEAD_UNIT` | arriere · tete · unite | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Configuration relative à une unité multimédia arrière. |
 | `REVERSE_GONG` | inversion · gong | `nicht_aktiv` · `aktiv` | Reverse gear warning | Alerte de marche arriere engagee |
 | `REV_INPUT` | revision · entree | `nicht_aktiv` · `aktiv` | Reversed navigation input [nicht_aktiv: first place then street, aktiv: first street then place] | Ordre de saisie de la navigation [nicht_aktiv : ville puis rue, aktiv : rue puis ville] |
 | `ROLLER_COVER` | store · couvercle | `nicht_aktiv` · `aktiv` | Automatic cargo bay roll-up cover | Cache-bagages enroulable automatique |
@@ -289,7 +289,7 @@
 | `TP` | point de test (?) | `nicht_aktiv` · `aktiv` | Radio data system (RDS) traffic programme (TP) | Programme trafic (TP) du RDS |
 | `TP_FUNKTION` | point de test (?) · fonction | `nicht_aktiv` · `tp` | Radio data system (RDS) traffic programme (TP) | Programme trafic (TP) du RDS |
 | `TRF` | trafic | `nicht_aktiv` · `aktiv` | Traffic channel in source selection | Canal trafic propose dans le choix des sources |
-| `TV_FRONT_ENABLED` | television · avant · active | `nicht_aktiv` · `aktiv` | — | — |
+| `TV_FRONT_ENABLED` | television · avant · active | `nicht_aktiv` · `aktiv` | — | Déduction du libellé : Activation de la fonction télévision pour l’affichage avant ; les conditions d’affichage ne sont pas précisées. |
 | `TWO_MICROPHONES` | deux · microphones | `wert_02` · `wert_01` | Two microphones [wert_01: 1 microphone, wert_02: 2 microphones] | Deux microphones [wert_01 : 1 micro, wert_02 : 2 micros] |
 | `TYP_LENKUNG` | type · direction | `linkslenker` · `rechtslenker` | Steering type | Type de direction |
 | `UNIT_FEET` | unite · pieds | `nicht_aktiv` · `aktiv` | Display short distances in feet | Affichage des courtes distances en pieds |
@@ -343,5 +343,7 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Signification (EN)** — description issue de la base communautaire NCS Dummy, verbatim.
 
-**Explication (FR)** — traduction française. Un tiret signifie que la ligne n'est pas
-encore traduite. Les notations d'unités sont converties : `[durée s = valeur / 10]`.
+**Explication (FR)** — traduction française ou interprétation explicitement marquée
+« Déduction du libellé ». Cette dernière reste à confirmer ; elle ne documente pas
+les valeurs ni un effet testé sur le véhicule. Un tiret signifie qu’aucune explication
+n’est établie. Voir [la méthode et les sources](TRADUCTIONS.md). Les notations d'unités sont converties : `[durée s = valeur / 10]`.

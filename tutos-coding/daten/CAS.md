@@ -16,7 +16,7 @@
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 227 |
 | Signification (EN) | 176 |
-| Explication (FR) | 176 |
+| Explication (FR) | 185 |
 | Blocs d'adresses du TRC | 10 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -33,7 +33,7 @@
 | `ANLASSERSPERRE_KPS` | blocage du demarreur · capteur de position (?) | `aktiv` · `nicht_aktiv` | Engine start only with clutch pedal depressed | Demarrage moteur uniquement pedale d'embrayage enfoncee |
 | `ANLASSERSPERRE_P` | blocage du demarreur · P | `aktiv` · `nicht_aktiv` | Engine start only with transmission in park/neutral | Demarrage moteur uniquement boite sur P ou N |
 | `ANLASSSPERRE_BLS` | blocage du demarreur · contacteur de feu stop | `aktiv` · `nicht_aktiv` | Engine start only with brake pedal depressed | Autorise le demarrage sans appuyer sur la pedale de frein. |
-| `ANLASSSPERRE_KLR` | blocage du demarreur · regulation de climatisation | `aktiv` · `nicht_aktiv` | New engine start (when stalled) only after switching off ignition | Nouveau demarrage apres calage uniquement apres coupure du contact |
+| `ANLASSSPERRE_KLR` | blocage du demarreur · borne R (accessoires) | `aktiv` · `nicht_aktiv` | New engine start (when stalled) only after switching off ignition | Nouveau demarrage apres calage uniquement apres coupure du contact |
 | `ANSTEUERZEIT` | duree de commande | `wert_01` | Control time | Duree de commande |
 | `AUSWERTUNG_B_DRUCK` | evaluation · B · pression | `aktiv` · `nicht_aktiv` | Evaluate brake pressure signal when brake light switch defective (linked to [BREMSE_DRUCK]) | Exploiter le signal de pression de frein si le contacteur de feu stop est defaillant (lie a BREMSE_DRUCK) |
 | `AUSWERTUNG_P_CAN` | evaluation · P · bus CAN | `aktiv` · `nicht_aktiv` | Evaluate transmission park/neutral signal from CAN-bus | Exploiter le signal P/N de la boite via le bus CAN |
@@ -50,10 +50,10 @@
 | `CHIPCARD` | carte a puce | `aktiv` · `nicht_aktiv` | Enable transponder data | Activer les donnees du transpondeur |
 | `CLASS_PWR` | classe · alimentation | `keine` · `klasse_1` · `klasse_2` · `invalid` · `e92_m` | Power class | Classe de puissance |
 | `CLT_TASTE` | climatisation (?) · touche | `aktiv` · `nicht_aktiv` | Center lock button | Bouton de verrouillage central |
-| `CRASH_BESCHLEUNIGUNG` | choc · acceleration | `wert_01` · `wert_02` | — | — |
-| `CRASH_SCHWERE` | choc · gravite | `wert_01` · `wert_02` | — | — |
+| `CRASH_BESCHLEUNIGUNG` | choc · acceleration | `wert_01` · `wert_02` | — | Déduction du libellé : Paramètre d’accélération utilisé pour la détection d’un choc ; seuil et unité non établis ici. |
+| `CRASH_SCHWERE` | choc · gravite | `wert_01` · `wert_02` | — | Déduction du libellé : Paramètre relatif à la gravité d’un choc ; la correspondance des valeurs reste à vérifier. |
 | `DELAY_KL50L` | delai · borne 50L | `wert_01` · `wert_02` · `wert_03` · `wert_04` | Start delay for engines with Valvetronic variable valve timing [time_ms=data*5] | Temporisation de demarrage pour moteurs Valvetronic [duree ms = valeur x 5] |
-| `DELAY_KLR_AUS` | delai · regulation de climatisation · arret | `wert_01` · `wert_02` | Accessories switch-off delay (prevents false ) [time_ms=data*5] | Temporisation de coupure des accessoires [duree ms = valeur x 5] |
+| `DELAY_KLR_AUS` | delai · borne R (accessoires) · arret | `wert_01` · `wert_02` | Accessories switch-off delay (prevents false ) [time_ms=data*5] | Temporisation de coupure des accessoires [duree ms = valeur x 5] |
 | `EE_TRSP_CCM_0CD` | memoire EEPROM · transport · message Check Control · identifiant (?) | `aktiv` · `nicht_aktiv` | — | — |
 | `EE_TRSP_DEBUG` | memoire EEPROM · transport · deverminage | `aktiv` · `nicht_aktiv` | — | — |
 | `EE_TRSP_PERM` | memoire EEPROM · transport · permanent | `aktiv` · `nicht_aktiv` | — | — |
@@ -77,7 +77,7 @@
 | `ES_EINMALIG_CLT` | unite de commande (?) · une seule fois · climatisation (?) | `aktiv` · `nicht_aktiv` | — | — |
 | `EWS_EGS` | antidemarrage electronique · calculateur de boite | `nicht_aktiv` · `aktiv` | Electronic immobilizer system (EWS) for electronic transmission control (EGS) | Antidemarrage electronique (EWS) pour le calculateur de boite (EGS) |
 | `EWS_FEHLER_MOTORLAUF` | antidemarrage electronique · erreur · moteur tournant | `nicht_aktiv` · `aktiv` | — | — |
-| `EWS_NACHLAUF_KLR_AUS` | antidemarrage electronique · temporisation · regulation de climatisation · arret | `aktiv` · `nicht_aktiv` | — | — |
+| `EWS_NACHLAUF_KLR_AUS` | antidemarrage electronique · temporisation · borne R (accessoires) · arret | `aktiv` · `nicht_aktiv` | — | Déduction du libellé : Temporisation de l’antidémarrage électronique après coupure de la borne accessoires R. |
 | `EWS_SCHRITTWEITE_2` | antidemarrage electronique · pas · 2 | `nicht_aktiv` · `aktiv` | — | — |
 | `FBDIN_9_6_KBAUD` | entree telecommande · 9 · 6 · kBaud | `aktiv` · `nicht_aktiv` | Remote control receiver with 9600 baud communication rate | Recepteur de telecommande a 9600 bauds |
 | `FBD_AKTIV_KEYIN` | telecommande · actif · cle inseree | `aktiv` · `nicht_aktiv` | Remote control buttons enabled with inserted key | Boutons de telecommande actifs cle inseree |
@@ -97,8 +97,8 @@
 | `FBD_PANIK_TOTZEIT` | telecommande · mode panique · temps mort | `wert_01` | Time to hold remote control lock button to trigger panic mode [time_s=data/10] (linked to [SONDERTASTE_PANIKALARM]) | Duree d'appui sur le bouton de verrouillage pour declencher le mode panique [duree s = valeur / 10] (lie a SONDERTASTE_PANIKALARM) |
 | `FBD_SERVICEFKT_AKTIV` | telecommande · fonction d'entretien · actif | `aktiv` · `nicht_aktiv` | Activate unpersonalized car/key memory for workshop mode after unlocking with key in door lock until next unlock with remote control | Activer la memoire par cle non personnalisee en mode atelier apres ouverture a la cle, jusqu'au prochain deverrouillage par telecommande |
 | `FBD_TESTKEY_AKTIV` | telecommande · cle de test · actif | `aktiv` · `nicht_aktiv` | Special remote control for range measuring | Telecommande speciale pour mesure de portee |
-| `FHM_CA_OHNE_EKS` | module leve-vitre · acces confort (?) · sans · systeme electronique de cle | `aktiv` · `nicht_aktiv` | — | — |
-| `FHM_CA_OHNE_EKS_DELAY` | module leve-vitre · acces confort (?) · sans · systeme electronique de cle · delai | `wert_01` · `wert_02` · `wert_03` · `wert_04` | — | — |
+| `FHM_CA_OHNE_EKS` | module leve-vitre · acces confort (?) · sans · protection antipincement | `aktiv` · `nicht_aktiv` | — | Déduction du libellé : Configuration des lève-vitres avec accès confort sans protection antipincement ; ce libellé décrit une fonction, pas une recommandation de codage. |
+| `FHM_CA_OHNE_EKS_DELAY` | module leve-vitre · acces confort (?) · sans · protection antipincement · delai | `wert_01` · `wert_02` · `wert_03` · `wert_04` | — | Déduction du libellé : Délai associé à la configuration des lève-vitres avec accès confort sans protection antipincement. |
 | `FH_ABSCHALTKRITERIUM` | leve-vitre · critere de coupure | `aktiv` · `nicht_aktiv` | Power windows behavior after ignition switched off and door opened [us: disabled, ece: enabled until door closed, aktiv: disabled, nicht_aktiv: enabled until door closed] | Comportement des leve-vitres apres coupure du contact et ouverture de porte [us : desactives, ece : actifs jusqu'a fermeture de la porte, aktiv : desactives, nicht_aktiv : actifs jusqu'a fermeture] |
 | `FH_CABRIO_VERDECK_MODUL` | leve-vitre · cabriolet · capote · module | `aktiv` · `nicht_aktiv` | Power windows controlled by convertible top module | Leve-vitres pilotes par le module de capote |
 | `FH_DISAKL15` | leve-vitre · desactivation borne 15 | `aktiv` · `nicht_aktiv` | Disable power windows without ignition switched on (stops movement immediatly after switching off accessories regardless of switch-off conditions) | Desactiver les leve-vitres sans contact mis (arret immediat du mouvement des la coupure des accessoires) |
@@ -148,9 +148,9 @@
 | `KL30G_NACHLAUF_NACH_SZ1` | borne 30G · temporisation · apres · centre de commande 1 (?) | `wert_00` · `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` · `wert_06` · `wert_07` · `wert_08` | — | — |
 | `KL30G_TIMEOUT` | borne 30G · delai d'attente | `wert_01` · `wert_02` · `wert_03` | Automatically switch off terminal 30g (battery supply with time-based switch-off) after timeout [time_min=data] | Coupure automatique de la borne 30g apres temporisation [duree min = valeur] |
 | `KLASSE_BATTERIE` | classe · batterie | `wert_00` | Battery type | Type de batterie |
-| `KLR_AUS_TIMEOUT` | regulation de climatisation · arret · delai d'attente | `wert_01` · `wert_02` · `wert_03` | Automatically switch off accessories after timeout [time_min=data] | Coupure automatique des accessoires apres temporisation [duree min = valeur] |
-| `KLR_AUS_TKSITZ` | regulation de climatisation · arret · siege climatise (?) | `aktiv` · `nicht_aktiv` | Automatically switch off accessories when opening door | Coupure automatique des accessoires a l'ouverture d'une porte |
-| `KLR_EIN_GESCHW` | regulation de climatisation · marche · vitesse | `nicht_aktiv` · `aktiv` | Automatically switch on accessories for rolling vehicle (engine not running) | Mise sous tension automatique des accessoires vehicule roulant moteur eteint |
+| `KLR_AUS_TIMEOUT` | borne R (accessoires) · arret · delai d'attente | `wert_01` · `wert_02` · `wert_03` | Automatically switch off accessories after timeout [time_min=data] | Coupure automatique des accessoires apres temporisation [duree min = valeur] |
+| `KLR_AUS_TKSITZ` | borne R (accessoires) · arret · siege climatise (?) | `aktiv` · `nicht_aktiv` | Automatically switch off accessories when opening door | Coupure automatique des accessoires a l'ouverture d'une porte |
+| `KLR_EIN_GESCHW` | borne R (accessoires) · marche · vitesse | `nicht_aktiv` · `aktiv` | Automatically switch on accessories for rolling vehicle (engine not running) | Mise sous tension automatique des accessoires vehicule roulant moteur eteint |
 | `KLSTRG_DISFERTMODE` | commande de climatisation · mode fin de chaine | `aktiv` · `nicht_aktiv` | Disable manufacturing mode for terminal control | Desactiver le mode fin de chaine pour la gestion des bornes |
 | `KLSTRG_DISTRANSMODE` | commande de climatisation · mode transport | `aktiv` · `nicht_aktiv` | Disable transport mode for terminal control | Desactiver le mode transport pour la gestion des bornes |
 | `KLSTRG_DISWERKSTMODE` | commande de climatisation · mode atelier | `aktiv` · `nicht_aktiv` | Disable workshop mode for terminal control | Desactiver le mode atelier pour la gestion des bornes |
@@ -201,7 +201,7 @@
 | `PA_TSPERRVR` | _PA_ · blocage de porte (?) | `wert_01` | — | — |
 | `PA_TVRERFATH` | _PA_ · reconnaissance (?) | `wert_01` | — | — |
 | `PERSONALISIERUNG_AUS` | personnalisation · arret | `aktiv` · `nicht_aktiv` | Disable car/key memory personalization for individual keys | Desactiver la personnalisation de la memoire par cle pour chaque cle |
-| `RSSI_THRESHOLD` | puissance du signal · seuil | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` | — | — |
+| `RSSI_THRESHOLD` | puissance du signal · seuil | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` | — | Déduction du libellé : Seuil de puissance du signal radio reçu ; unité et conversion des valeurs non établies. |
 | `SCHIEBEHEBEDACH` | toit ouvrant relevable | `aktiv` · `nicht_aktiv` | Sliding/tilting sunroof | Toit ouvrant coulissant/entrebaillant |
 | `SEL_ZV_SENDER_1` | selection · verrouillage centralise · emetteur · 1 | `aktiv` · `nicht_aktiv` | Car/key memory 1 for pressing remote control unlock button once unlocks only driver door, twice unlocks all doors | Memoire par cle 1 : une pression ouvre la porte conducteur, deux pressions ouvrent tout |
 | `SEL_ZV_SENDER_2` | selection · verrouillage centralise · emetteur · 2 | `aktiv` · `nicht_aktiv` | Car/key memory 2 for pressing remote control unlock button once unlocks only driver door, twice unlocks all doors | Memoire par cle 2 : une pression ouvre la porte conducteur, deux pressions ouvrent tout |
@@ -211,24 +211,24 @@
 | `SEL_ZV_SENDER_PORT` | selection · verrouillage centralise · emetteur · port | `aktiv` · `nicht_aktiv` | — | — |
 | `SENDMHKCCMLIMIT` | limite d'envoi de message Check Control (?) | `wert_01` · `wert_02` | Check control notification for engine hood open warning when exceeding certain speed [data>0 ? speed_km/h=data*5 : disabled] | Message Check Control de capot ouvert au-dela d'une certaine vitesse [valeur > 0 : vitesse km/h = valeur x 5, sinon desactive] |
 | `SICHERHEITSFAHRZEUG` | vehicule de securite | `aktiv` · `nicht_aktiv` | Security vehicle | Vehicule de securite |
-| `SLEEPTIMER_FH_KLRAUS` | minuterie de veille · leve-vitre · climatisation coupee (?) | `wert_01` · `wert_02` · `wert_03` | Time power windows can be operated after switching off accessories without opening/closing door or locking vehicle [time_s=data*6] | Duree pendant laquelle les leve-vitres restent utilisables apres coupure des accessoires [duree s = valeur x 6] |
+| `SLEEPTIMER_FH_KLRAUS` | minuterie de veille · leve-vitre · borne R coupee (accessoires) | `wert_01` · `wert_02` · `wert_03` | Time power windows can be operated after switching off accessories without opening/closing door or locking vehicle [time_s=data*6] | Duree pendant laquelle les leve-vitres restent utilisables apres coupure des accessoires [duree s = valeur x 6] |
 | `SONDERTASTE_INNENLICHT` | touche speciale · eclairage interieur | `innenlicht_ein` · `nicht_aktiv` | Find vehicle functionality (interior lights switch on after pressing remote control lock button with vehicle locked) | Fonction retrouver le vehicule : l'eclairage interieur s'allume a l'appui sur verrouillage, vehicule deja verrouille |
 | `SONDERTASTE_PANIKALARM` | touche speciale · alarme panique | `panikalarm` · `nicht_aktiv` | Panic mode (trigger alarm and close power windows by holding remote control button 3) (linked to [FBD_PANIK_TOTZEIT]) | Mode panique : declenche l'alarme et ferme les vitres par appui maintenu sur le bouton 3 (lie a FBD_PANIK_TOTZEIT) |
 | `SPERRE_CRASH_ER` | blocage · choc · deverrouillage (?) | `aktiv` · `nicht_aktiv` | Unlock vehicle after crash | Deverrouillage du vehicule apres un choc |
-| `SPERRE_HECKKLAPPE_KLR` | blocage · hayon · regulation de climatisation | `aktiv` · `nicht_aktiv` | Disable opening trunk lid with accessories switched on | Interdire l'ouverture du coffre accessoires sous tension |
+| `SPERRE_HECKKLAPPE_KLR` | blocage · hayon · borne R (accessoires) | `aktiv` · `nicht_aktiv` | Disable opening trunk lid with accessories switched on | Interdire l'ouverture du coffre accessoires sous tension |
 | `SPERRE_HKL_KEY_VALID` | blocage · hayon · cle · valide | `aktiv` · `nicht_aktiv` | Disable remote control trunk lid button after inserting key | Desactiver le bouton de coffre de la telecommande une fois la cle inseree |
-| `SPERRE_KLRAUS_SST` | blocage · climatisation coupee (?) · _SST_ | `aktiv` · `nicht_aktiv` | Disable switching off accessories with start/stop button (accessories switch off after ejecting key or locking vehicle) | Interdire la coupure des accessoires par le bouton start/stop (coupure a l'ejection de la cle ou au verrouillage) |
+| `SPERRE_KLRAUS_SST` | blocage · borne R coupee (accessoires) · _SST_ | `aktiv` · `nicht_aktiv` | Disable switching off accessories with start/stop button (accessories switch off after ejecting key or locking vehicle) | Interdire la coupure des accessoires par le bouton start/stop (coupure a l'ejection de la cle ou au verrouillage) |
 | `SQCNT_UPDATE` | compteur de sequence · mise a jour | `aktiv` · `nicht_aktiv` | — | — |
 | `SS_GETRIEBE` | capteur (?) · boite de vitesses | `aktiv` · `nicht_aktiv` | Fault memory handling for sport sequential gearbox (SSG) | Gestion de la memoire de defauts de la boite sequentielle sport (SSG) |
 | `STARTABBRUCH_BREMSE` | interruption de demarrage · frein | `aktiv` · `nicht_aktiv` | Abort engine start when releasing brake pedal | Interrompre le demarrage si la pedale de frein est relachee |
 | `STARTABBRUCH_P` | interruption de demarrage · P | `aktiv` · `nicht_aktiv` | Abort engine start when exiting transmission park/neutral | Interrompre le demarrage si la boite quitte P ou N |
-| `STARTABBR_KLR` | interruption de demarrage · regulation de climatisation | `aktiv` · `nicht_aktiv` | Abort engine start when releasing clutch pedal | Interrompre le demarrage si la pedale d'embrayage est relachee |
+| `STARTABBR_KLR` | interruption de demarrage · borne R (accessoires) | `aktiv` · `nicht_aktiv` | Abort engine start when releasing clutch pedal | Interrompre le demarrage si la pedale d'embrayage est relachee |
 | `STARTDELAY_K_START` | delai de demarrage · K · demarrage | `aktiv` · `nicht_aktiv` | Temperature-dependent start delay for diesel engine pre-glowing | Temporisation de demarrage selon la temperature pour le prechauffage diesel |
-| `STARTWUNSCH_KL50` | demande de demarrage · borne 50 (demarreur) | `aktiv` · `nicht_aktiv` | — | — |
+| `STARTWUNSCH_KL50` | demande de demarrage · borne 50 (demarreur) | `aktiv` · `nicht_aktiv` | — | Déduction du libellé : Prise en compte de la demande de démarrage liée à la borne 50 du démarreur. |
 | `STROM_KS_MAX` | courant · court-circuit (?) · maximum | `wert_01` · `ewp` · `dynamik_2` · `hifi_mulf_e91` · `mit_fl_und_tfl` · `e92_m` · `tvm_isdb_t` · `wert_02` · `wert_03` | Maximum current for short circuit detection [current_A=data*10] | Courant maximal de detection de court-circuit [courant A = valeur x 10] |
 | `STROM_KS_MIN` | courant · court-circuit (?) · minimum | `wert_01` | Minimum current for short circuit detection [current_A=data*10] | Courant minimal de detection de court-circuit [courant A = valeur x 10] |
 | `STROM_RUHE` | courant · repos | `wert_01` | Maximum permitted current in sleep mode [current_mA=data*20] | Courant maximal admis en veille [courant mA = valeur x 20] |
-| `TEST_DUTY_CYCLE` | test · rapport cyclique · cycle | `aktiv` · `nicht_aktiv` | — | — |
+| `TEST_DUTY_CYCLE` | test · rapport cyclique | `aktiv` · `nicht_aktiv` | — | Déduction du libellé : Rapport cyclique utilisé pour un test ; le signal testé n’est pas identifié par ce seul nom. |
 | `TEST_LED_KS_AKTIV` | test · LED · court-circuit (?) · actif | `nicht_aktiv` · `aktiv` | Short circuit detection for start/stop button LED | Detection de court-circuit sur la LED du bouton start/stop |
 | `TOEHK_EO_HS_OHNE_NR` | _TOEHK_ · _EO_ · lunette arriere (?) · sans · numero | `aktiv` · `nicht_aktiv` | Unpersonalized car/key memory for footwell trunk lid button opens touring rear window instead of trunk lid | Memoire par cle non personnalisee : le bouton de plancher ouvre la lunette arriere au lieu du hayon |
 | `TOEHK_EO_HS_SCHL_NR01` | _TOEHK_ · _EO_ · lunette arriere (?) · cle / fermeture · [NR01] | `aktiv` · `nicht_aktiv` | Car/key memory 1 for footwell trunk lid button opens touring rear window instead of trunk lid | Memoire par cle 1 : le bouton de plancher ouvre la lunette arriere au lieu du hayon |
@@ -246,11 +246,11 @@
 | `VER_AUT_X_MIN_SENDER_3` | version · automatique · X · minimum · emetteur · 3 | `aktiv` · `nicht_aktiv` | Car/key memory 3 for Automatically re-lock after being unlocked for a certain time without opening a door (linked to [ZEIT_AUTO_ZV_VR]) | Memoire par cle 3 pour le reverrouillage automatique sans ouverture de porte (lie a ZEIT_AUTO_ZV_VR) |
 | `VER_AUT_X_MIN_SENDER_4` | version · automatique · X · minimum · emetteur · 4 | `aktiv` · `nicht_aktiv` | Car/key memory 4 for Automatically re-lock after being unlocked for a certain time without opening a door (linked to [ZEIT_AUTO_ZV_VR]) | Memoire par cle 4 pour le reverrouillage automatique sans ouverture de porte (lie a ZEIT_AUTO_ZV_VR) |
 | `VR_GESCHW_EINMALIG` | avant droit · vitesse · une seule fois | `aktiv` · `nicht_aktiv` | Automatically lock once when exceeding a certain speed | Verrouillage automatique unique au franchissement d'une certaine vitesse |
-| `VR_KLR` | avant droit · regulation de climatisation | `aktiv` · `nicht_aktiv` | Automatically lock after switching on accessories | Verrouillage automatique a la mise sous tension des accessoires |
-| `VR_KLR_EINMALIG` | avant droit · regulation de climatisation · une seule fois | `aktiv` · `nicht_aktiv` | Automatically lock once after switching on accessories | Verrouillage automatique unique a la mise sous tension des accessoires |
+| `VR_KLR` | avant droit · borne R (accessoires) | `aktiv` · `nicht_aktiv` | Automatically lock after switching on accessories | Verrouillage automatique a la mise sous tension des accessoires |
+| `VR_KLR_EINMALIG` | avant droit · borne R (accessoires) · une seule fois | `aktiv` · `nicht_aktiv` | Automatically lock once after switching on accessories | Verrouillage automatique unique a la mise sous tension des accessoires |
 | `ZEIT_AUTO_ZV_VR` | duree · automatique · verrouillage centralise · avant droit | `wert_01` | Time until automatically re-lock after being unlocked without opening a door [time_s=data*5] | Delai avant reverrouillage automatique sans ouverture de porte [duree s = valeur x 5] |
 | `ZEIT_BREMSE` | duree · frein | `wert_01` · `wert_02` · `wert_03` · `wert_04` | Time brake or clutch pedal must be depressed before engine can be started [time_ms=data*5] | Duree d'appui requise sur le frein ou l'embrayage avant autorisation de demarrage [duree ms = valeur x 5] |
-| `ZEIT_KL50_ANSTRG` | duree · borne 50 (demarreur) · commande | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` | — | — |
+| `ZEIT_KL50_ANSTRG` | duree · borne 50 (demarreur) · commande | `wert_01` · `wert_02` · `wert_03` · `wert_04` · `wert_05` | — | Déduction du libellé : Durée de commande de la borne 50 du démarreur ; unité à vérifier dans les données du module. |
 | `ZV_AUTHENTISIERUNG` | verrouillage centralise · authentification | `aktiv` · `nicht_aktiv` | Central locking authentification | Authentification du verrouillage centralise |
 | `ZV_DISFERTMODE` | verrouillage centralise · mode fin de chaine | `aktiv` · `nicht_aktiv` | Disable manufacturing mode for central locking | Desactiver le mode fin de chaine pour le verrouillage centralise |
 | `ZV_DISTRANSMODE` | verrouillage centralise · mode transport | `aktiv` · `nicht_aktiv` | Disable transport mode for central locking | Desactiver le mode transport pour le verrouillage centralise |
@@ -267,5 +267,7 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Signification (EN)** — description issue de la base communautaire NCS Dummy, verbatim.
 
-**Explication (FR)** — traduction française. Un tiret signifie que la ligne n'est pas
-encore traduite. Les notations d'unités sont converties : `[durée s = valeur / 10]`.
+**Explication (FR)** — traduction française ou interprétation explicitement marquée
+« Déduction du libellé ». Cette dernière reste à confirmer ; elle ne documente pas
+les valeurs ni un effet testé sur le véhicule. Un tiret signifie qu’aucune explication
+n’est établie. Voir [la méthode et les sources](TRADUCTIONS.md). Les notations d'unités sont converties : `[durée s = valeur / 10]`.

@@ -3,9 +3,10 @@
 Cle de lecture des catalogues. Les mots-cles BMW sont des assemblages de fragments
 allemands separes par `_`.
 
-**1294 fragments traduits** · **130 lectures probables** (marquees `(?)`)
+**1 298 fragments traduits ou contextualisés** · **126 lectures probables** (marquées `(?)`).
 
-Couverture : **100 % des 1 738 fonctions** du perimetre vehicule.
+Les **1 738 fonctions** disposent d'une décomposition, mais certains fragments restent
+ambigus ou non résolus (`_IRNE_`, `_PA_`, `_SC_`…). Cela ne représente pas une traduction certaine à 100 %.
 
 ---
 
@@ -33,6 +34,11 @@ SPIEGEL_KOMFORT_EINKLAPP
 | `[variante C03]` | Index de variante de codage |
 
 Le `(?)` signale une deduction, pas une source.
+
+Un même fragment peut changer de sens selon le module. `OPT` désigne un signal
+optique dans les acquittements d'alarme, mais une option dans d'autres fonctions.
+Les sens corrigés sont justifiés dans [TRADUCTIONS.md](TRADUCTIONS.md).
+`IRNE` reste non résolu : l'ancienne lecture « infrarouge » n'était pas étayée.
 
 ---
 
@@ -112,7 +118,7 @@ Le `(?)` signale une deduction, pas une source.
 | `AMBANDS` | bandes AM | 2 |
 | `AMPL` | amplitude | 1 |
 | `AN` | marche | 4 |
-| `ANFAHREN` | demarrage | 1 |
+| `ANFAHREN` | déplacement vers une position (MEM_POS_ANFAHREN) | 1 |
 | `ANFRAGE` | requete | 1 |
 | `ANFRAGEN` | requetes | 2 |
 | `ANHAENGERKUPPLUNG` | attelage | 1 |
@@ -382,7 +388,7 @@ Le `(?)` signale une deduction, pas une source.
 | `EINSTIEGSHILFE` | aide a l'acces | 7 |
 | `EJECT` | ejection | 3 |
 | `EKP` | pompe a carburant | 2 |
-| `EKS` | systeme electronique de cle | 6 |
+| `EKS` | protection antipincement | 6 |
 | `EL` | electrique | 1 |
 | `ELDRVSEAT` | siege conducteur electrique | 1 |
 | `ELEKTRISCH` | electrique | 1 |
@@ -398,7 +404,7 @@ Le `(?)` signale une deduction, pas une source.
 | `ENDABSCHALTUNG` | coupure finale | 1 |
 | `ENERGY` | energie | 1 |
 | `ENGDAT` | donnees moteur | 2 |
-| `ENT` | des- | 7 |
+| `ENT` | déverrouillage dans les acquittements et réglages de siège ; sinon selon contexte | 7 |
 | `ENTERTAINMENT` | divertissement | 1 |
 | `ENTLPOS` | position de decharge | 1 |
 | `ENTPRELL` | anti-rebond | 6 |
@@ -543,7 +549,7 @@ Le `(?)` signale une deduction, pas une source.
 | `HEIZUNG` | chauffage | 2 |
 | `HEIZZEIT` | duree de chauffage | 3 |
 | `HELPNET` | appel d'urgence | 1 |
-| `HI` | haut | 14 |
+| `HI` | haut ; arrière dans les distances PDC | 14 |
 | `HIGH` | haut | 5 |
 | `HILFE` | aide | 1 |
 | `HINTEN` | arriere | 10 |
@@ -583,11 +589,11 @@ Le `(?)` signale une deduction, pas une source.
 | `INNENLICHT` | eclairage interieur | 2 |
 | `INNENRAUMSCHUTZ` | protection volumetrique | 1 |
 | `INPUT` | entree | 3 |
-| `INTD` | intervalle d'essuyage | 4 |
+| `INTD` | intervalle temporel (CBS) | 4 |
 | `INTENSITY` | intensite | 2 |
 | `INTERIOR` | interieur | 1 |
 | `INTERVAL` | intervalle | 1 |
-| `INTW` | intervalle d'essuyage | 3 |
+| `INTW` | intervalle de distance (CBS) | 3 |
 | `INVALID` | invalide | 1 |
 | `INVERS` | inverse | 2 |
 | `IR` | infrarouge | 1 |
@@ -631,7 +637,8 @@ Le `(?)` signale une deduction, pas une source.
 | `KLEMME` | borne | 2 |
 | `KLIMA` | climatisation | 6 |
 | `KLIMAGERAET` | groupe de climatisation | 1 |
-| `KLR` | regulation de climatisation | 13 |
+| `KLR` | borne R (accessoires) | 13 |
+| `KLRAUS` | borne R coupée (accessoires) | 2 |
 | `KLSTRG` | commande de climatisation | 4 |
 | `KM` | kilometres | 1 |
 | `KMFRT` | confort | 8 |
@@ -752,7 +759,7 @@ Le `(?)` signale une deduction, pas une source.
 | `MIN` | minimum | 29 |
 | `MIND` | minimum | 2 |
 | `MINDESTANZAHL` | nombre minimal | 1 |
-| `MIT` | avec | 21 |
+| `MIT` | avec ; centre dans les distances PDC (abréviation de Mitte) | 21 |
 | `MITLENKEN` | suivi de direction | 2 |
 | `MITTE` | milieu | 3 |
 | `MITTEL` | moyen | 4 |
@@ -839,7 +846,7 @@ Le `(?)` signale une deduction, pas une source.
 | `ON` | marche | 3 |
 | `ONLINE` | en ligne | 5 |
 | `OPEN` | ouvert | 2 |
-| `OPT` | option | 21 |
+| `OPT` | optique (visuel) pour les acquittements et alarmes ; option selon contexte | 21 |
 | `OPTIK` | optique | 1 |
 | `OPTION` | option | 3 |
 | `OPTIONEN` | options | 1 |
@@ -874,6 +881,8 @@ Le `(?)` signale une deduction, pas une source.
 | `PGS` | detection de place de stationnement | 1 |
 | `PHASE` | phase | 1 |
 | `PHONE` | telephone | 4 |
+| `PIA` | gestion des profils personnels | 3 |
+| `PIAU` | mémoire personnelle non personnalisée (alarme) | 2 |
 | `PKT` | point | 2 |
 | `PL2` | plateforme 2 | 1 |
 | `PLOCK` | verrouillage | 1 |
@@ -902,8 +911,8 @@ Le `(?)` signale une deduction, pas une source.
 | `PWR` | alimentation | 1 |
 | `PWRDWN` | mise hors tension | 1 |
 | `QUARTERTURN` | quart de tour | 2 |
-| `QUIT` | acquittement sonore | 12 |
-| `QUITT` | acquittement sonore | 24 |
+| `QUIT` | acquittement (visuel ou sonore selon le fragment associé) | 12 |
+| `QUITT` | acquittement (visuel ou sonore selon le fragment associé) | 24 |
 | `R1` | parametre R1 | 1 |
 | `R10` | parametre R10 | 1 |
 | `R3` | parametre R3 | 1 |
@@ -1173,7 +1182,7 @@ Le `(?)` signale une deduction, pas une source.
 | `TRANSPONDER` | transpondeur | 1 |
 | `TREBLE` | aigus | 1 |
 | `TREMBLE` | aigus | 2 |
-| `TREN` | separation | 1 |
+| `TREN` | tendance (abréviation de Trend dans ALC_MITTELUNGSINTERV_TREN) | 1 |
 | `TREND` | tendance | 3 |
 | `TRENNUNG1` | separation 1 | 1 |
 | `TRF` | trafic | 2 |
@@ -1231,7 +1240,7 @@ Le `(?)` signale une deduction, pas une source.
 | `VEH` | vehicule | 1 |
 | `VEHICLE` | vehicule | 2 |
 | `VENTIL` | valve | 2 |
-| `VER` | version | 16 |
+| `VER` | verrouillage dans ZV_VER et QUITT_VER ; version ou autre sens selon contexte | 16 |
 | `VERBAU` | montage | 1 |
 | `VERBAUT` | installe | 10 |
 | `VERBR` | consommation | 2 |
@@ -1245,7 +1254,7 @@ Le `(?)` signale une deduction, pas une source.
 | `VERRIEGELUNGSSCHWELLE` | seuil de verrouillage | 1 |
 | `VERRINGERUNG` | reduction | 1 |
 | `VERSION` | version | 3 |
-| `VERST` | amplification | 6 |
+| `VERST` | réglage de position (sièges, CAPPL/KOMBI) | 6 |
 | `VERTI` | vertical | 2 |
 | `VERZ` | temporisation | 2 |
 | `VERZOEGERUNG` | temporisation | 3 |
@@ -1256,6 +1265,7 @@ Le `(?)` signale une deduction, pas une source.
 | `VMAXCODIERUNG` | codage de la vitesse maximale | 1 |
 | `VMIN` | vitesse minimale | 2 |
 | `VOICE` | voix | 2 |
+| `VO` | avant (distances PDC) | 2 |
 | `VOL` | volume | 1 |
 | `VOLL` | plein | 1 |
 | `VOLLEND` | achevement | 1 |
@@ -1270,7 +1280,7 @@ Le `(?)` signale une deduction, pas une source.
 | `WAEHLBARE` | selectionnable | 3 |
 | `WAHL` | selection | 1 |
 | `WANDERKENNUNG` | detection de derive | 1 |
-| `WANDLER` | convertisseur | 2 |
+| `WANDLER` | transducteur ultrasonique (PDC) | 2 |
 | `WARMUEBERW` | surveillance a chaud | 4 |
 | `WARMUEBERWACHUNG` | surveillance a chaud | 22 |
 | `WARN` | alerte | 1 |
@@ -1304,7 +1314,7 @@ Le `(?)` signale une deduction, pas une source.
 | `WISCHEN` | essuyage | 2 |
 | `WISCHERMOTOR` | moteur d'essuie-glace | 1 |
 | `WISHENINTERVALL` | intervalle d'essuyage | 1 |
-| `WO` | ou | 1 |
+| `WO` | sans (anglais without dans CLIMATE_WO_PREVIEW) | 1 |
 | `WRITER` | saisie | 1 |
 | `XENON` | xenon | 8 |
 | `XMIN` | minimum | 1 |
@@ -1390,12 +1400,10 @@ Le `(?)` signale une deduction, pas une source.
 | `IGR` | regulation | 2 |
 | `IHX` | climatisation | 2 |
 | `IK` | circuit | 1 |
-| `IRNE` | infrarouge | 1 |
 | `ISP` | traitement du signal | 1 |
 | `K1` | canal 1 | 1 |
 | `K2` | canal 2 | 1 |
 | `KISITMRMAX` | duree maximale siege | 1 |
-| `KLRAUS` | climatisation coupee | 2 |
 | `KLS` | commande de climatisation | 2 |
 | `KMK` | constante | 1 |
 | `KPS` | capteur de position | 1 |
@@ -1423,7 +1431,6 @@ Le `(?)` signale une deduction, pas une source.
 | `OG` | superieur | 1 |
 | `PDM` | module de puissance | 1 |
 | `PG` | groupe de parametres | 1 |
-| `PIA` | interface d'affichage | 3 |
 | `PLGD` | diagnostic | 1 |
 | `PO` | position | 4 |
 | `PSI` | psi | 2 |
@@ -1465,7 +1472,6 @@ Le `(?)` signale une deduction, pas une source.
 | `UEBERS` | vue d'ensemble | 2 |
 | `UG` | limite inferieure | 1 |
 | `VM` | gestion du vehicule | 1 |
-| `VO` | bon de commande | 2 |
 | `VZ` | temporisation | 3 |
 | `WD` | chien de garde | 2 |
 | `WERL` | valeur | 1 |

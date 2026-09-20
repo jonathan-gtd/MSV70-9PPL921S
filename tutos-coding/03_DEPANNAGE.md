@@ -110,7 +110,7 @@ Contrôle : le nom du profil s'affiche **en bas de la fenêtre**.
 
 | Cause | Vérification |
 |---|---|
-| Profil en lecture seule | Le profil **Default** a `FswPswManipulieren=0` → charger « NCS Dummy profile » |
+| Manipulation du `.MAN` désactivée | Le profil **Default** a `FswPswManipulieren=0` ; pour appliquer un `.MAN`, charger « NCS Dummy profile ». Ce réglage ne signifie pas « lecture seule ». |
 | `.MAN` absent ou mal placé | Doit être `C:\NCSEXPER\WORK\FSW_PSW.MAN` |
 | `.MAN` destiné à un autre module | Toujours régénérer le `.MAN` depuis le `.TRC` du module en cours |
 | Tension insuffisante | Chargeur branché |

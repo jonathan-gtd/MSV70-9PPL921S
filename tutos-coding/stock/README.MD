@@ -3,7 +3,13 @@
 > Lectures `CODIERDATEN_LESEN` faites au premier passage.  
 > **Ces fichiers ne s'écrasent jamais** : ce sont les références de retour en arrière.
 
-Identification croisée avec `C:\NCSEXPER\DATEN\E89\E89SGET.000` et `E89SGFAM.DAT` — les noms de fichiers DATEN ci-dessous viennent de la table officielle, pas d'une supposition.
+Les variantes de l'inventaire ci-dessous sont celles relevées sur le véhicule dans
+[le catalogue](../daten/README.md). Les anciennes correspondances génériques issues
+de `E89SGET.000` et `E89SGFAM.DAT` ne suffisaient pas à établir l'index de codage réel.
+
+Les 19 sauvegardes de modules sont des traces **NETTODAT** (lignes `B adresse,...`),
+malgré leurs noms `<MODULE>.TRC`. Le fichier `fa.trc` contient le FA et n'est pas une
+trace de codage FSW/PSW. Conserver ces contenus tels quels.
 
 ---
 
@@ -11,7 +17,7 @@ Identification croisée avec `C:\NCSEXPER\DATEN\E89\E89SGET.000` et `E89SGFAM.DA
 
 **`6BMOT.TRC` est ta DME MSV70.**
 
-`E89SGET.000` donne la correspondance : `6BMOT → MSV70.C02`. Et `E89AEDOC.000` documente le découpage historique de la famille moteur : *« Familie MOT in 4DMOT, 4BMOT und 6BMOT aufgespalten »* — **6B**MOT = 6 cylindres **B**enzin (essence).
+`E89SGET.000` donne la correspondance générique `6BMOT → MSV70.C02` ; la variante relevée sur ce véhicule est `MSV70.C03`. Et `E89AEDOC.000` documente le découpage historique de la famille moteur : *« Familie MOT in 4DMOT, 4BMOT und 6BMOT aufgespalten »* — **6B**MOT = 6 cylindres **B**enzin (essence).
 
 | | |
 |---|---|
@@ -28,41 +34,43 @@ Identification croisée avec `C:\NCSEXPER\DATEN\E89\E89SGET.000` et `E89SGFAM.DA
 
 | Fichier | DATEN | Nom allemand | Fonction |
 |---|---|---|---|
-| `6BMOT.TRC` | `MSV70.C02` | *Motor 6-Zylinder Benzin* | **La DME.** Voir l'encadré ci-dessus |
-| `ABG.TRC` | `MRS5.C06/C07` | *Airbag — Multiple Restraint System* | Airbags, prétensionneurs de ceinture |
-| `CAS.TRC` | `CAS3.C06/C08` | *Car Access System* | Accès, antidémarrage, clés. Erreur = ne démarre plus |
-| `DSC.TRC` | `DSC_87` | *Dynamische Stabilitäts-Control* | ESP / ABS |
-| `EKP.TRC` | `EKP` | *Elektrische Kraftstoffpumpe* | Pilotage de la pompe à carburant. Sur une voiture convertie E85, le dernier endroit où improviser |
+| `6BMOT.TRC` | `MSV70.C03` | *Motor 6-Zylinder Benzin* | **La DME.** Voir l'encadré ci-dessus |
+| `ABG.TRC` | `MRS5.C08` | *Airbag — Multiple Restraint System* | Airbags, prétensionneurs de ceinture |
+| `CAS.TRC` | `CAS3.C06` | *Car Access System* | Accès, antidémarrage, clés. Erreur = ne démarre plus |
+| `DSC.TRC` | `MK60_87.C03` | *Dynamische Stabilitäts-Control* | ESP / ABS |
+| `EKP.TRC` | `EKPM60_2.C03` | *Elektrische Kraftstoffpumpe* | Pilotage de la pompe à carburant. Sur une voiture convertie E85, le dernier endroit où improviser |
 
 ### 🟠 Codables, mais sensibles
 
 | Fichier | DATEN | Nom allemand | Fonction |
 |---|---|---|---|
-| `FRM.TRC` | `FRMFA.C10` | *Fußraummodul* | Éclairage, vitres, rétroviseurs, verrouillage. **80 % des codages intéressants sont ici** |
-| `JBBF.TRC` | `JBBFE.C05` | *Junction Box Bordnetz* | Boîtier de jonction — centralise beaucoup de fonctions carrosserie |
-| `DWAS.TRC` | `DWASINE.C03` | *DWA Sirene* | Sirène d'alarme autoalimentée |
-| `DWAY.TRC` | *(voir note)* | *Diebstahlwarnanlage* | Alarme — second composant |
-| `CHOST.TRC` | `CCC_HST.C02` | *CCC Host* | Unité centrale nav/multimédia |
-| `CGATE.TRC` | `CCC_GW.C03` | *CCC Gateway* | Passerelle entre le CCC et les bus véhicule |
-| `CAPPL.TRC` | `CCC_APP.C07` | *CCC Application* | Applications : navigation, menus, réglages |
-| `CAUDI.TRC` | `CCC_ASK.C05` | *Audio-System-Kontroller* | Partie audio / amplification |
-| `CTUNE.TRC` | `CCC_ANT.C05` | *Antenne / Tuner* | Tuner radio et antenne |
+| `FRM.TRC` | `FRMFA.C12` | *Fußraummodul* | Éclairage, vitres, rétroviseurs, verrouillage. **80 % des codages intéressants sont ici** |
+| `JBBF.TRC` | `JBBFE.C07` | *Junction Box Bordnetz* | Boîtier de jonction — centralise beaucoup de fonctions carrosserie |
+| `DWAS.TRC` | `DWASINE.C04` | *DWA Sirene* | Sirène d'alarme autoalimentée |
+| `DWAI.TRC` | `DWA_IRS.C05` | *Diebstahlwarnanlage — Innenraumschutz* | Alarme — protection volumétrique |
+| `CHOST.TRC` | `CCC_HST.C06` | *CCC Host* | Unité centrale nav/multimédia |
+| `CGATE.TRC` | `CCC_GW.C02` | *CCC Gateway* | Passerelle entre le CCC et les bus véhicule |
+| `CAPPL.TRC` | `CCC_APP.C0B` | *CCC Application* | Applications : navigation, menus, réglages |
+| `CAUDI.TRC` | `CCC_ASK.C09` | *Audio-System-Kontroller* | Partie audio / amplification |
+| `CTUNE.TRC` | `CCC_ANT.C0B` | *Antenne / Tuner* | Tuner radio et antenne |
 
 ### 🟢 Terrain d'apprentissage
 
 | Fichier | DATEN | Nom allemand | Fonction |
 |---|---|---|---|
-| `KOMBI.TRC` | `KMBI_PL2.C06` | *Kombiinstrument* | **Combiné. Commence par celui-là** — aucune fonction de sécurité |
-| `IHK.TRC` | `IHXXPL2.C02` | *Integrierte Heizungs- und Klimaanlage* | Climatisation automatique |
-| `PDC.TRC` | `PDC_E87.C03/C04` | *Park Distance Control* | Radars de recul |
-| `RLS.TRC` | `RLS_E65.C06` / `RLS_PL2.C07` | *Regen-Licht-Sensor* | Capteur de pluie et de luminosité |
+| `KOMBI.TRC` | `KMBI_PL2.C08` | *Kombiinstrument* | **Combiné. Commence par celui-là** — aucune fonction de sécurité |
+| `IHK.TRC` | `IHXXPL2.C01` | *Integrierte Heizungs- und Klimaanlage* | Climatisation automatique |
+| `PDC.TRC` | `PDC_E87.C05` | *Park Distance Control* | Radars de recul |
+| `RLS.TRC` | `RLS_E65.C06` | *Regen-Licht-Sensor* | Capteur de pluie et de luminosité |
 | `FZD.TRC` | `FZD.C06` | *Funktionszentrum Dach* | Module de toit — plafonnier, éclairage intérieur, toit ouvrant |
 
 ---
 
-### Note sur `DWAY.TRC`
+### Identification de `DWAI.TRC`
 
-Le nom `DWAY` **n'existe pas** dans les DATEN E89. Les trois composants d'alarme déclarés dans `E89SGFAM.DAT` sont :
+Le nom de la sauvegarde a été corrigé en **`DWAI.TRC`**, sans modification de son
+contenu. Le catalogue relevé sur le véhicule identifie la variante **`DWA_IRS.C05`**.
+Les composants d'alarme sont distincts :
 
 | Nom SG | DATEN | Rôle |
 |---|---|---|
@@ -70,7 +78,9 @@ Le nom `DWAY` **n'existe pas** dans les DATEN E89. Les trois composants d'alarme
 | `DWAI` | `DWA_IRS.C05` | *Innenraumschutz* — protection volumétrique habitacle |
 | `DWA_63` | `DWA_63.C07` | Module d'alarme principal |
 
-C'est donc soit une faute de frappe pour `DWAI`, soit le module principal renommé. **Ouvrir `DWAY.TRC` dans NCS Dummy tranchera** : il identifie la variante tout seul à partir du contenu.
+Le filtrage d'une trace dans NCS Dummy peut donner plusieurs variantes compatibles.
+Il faut conserver la variante relevée sur le véhicule ; le seul contenu du fichier
+ne garantit pas une identification unique.
 
 ---
 
@@ -83,7 +93,7 @@ C'est donc soit une faute de frappe pour `DWAI`, soit le module principal renomm
 | `PDC` présent | Radars de recul — `$507` |
 | `RLS` présent | Capteur pluie + allumage auto — `$521` |
 | `IHK` présent | Climatisation automatique — `$534` |
-| `DWAS` + `DWAY` présents | Alarme — `$302` |
+| `DWAS` + `DWAI` présents | Alarme — `$302` |
 
 Le FA et les modules lus se confirment mutuellement.
 
@@ -116,7 +126,7 @@ $4AE$4AG$507$520$521$534$544$548$563$609$694$7RS$854$863$877$881$8S3-B070
 
 | Code | Signification | Corroboré |
 |---|---|---|
-| `$302` | Alarme antivol | ✅ DWAS + DWAY |
+| `$302` | Alarme antivol | ✅ DWAS + DWAI |
 | `$507` | Park Distance Control | ✅ PDC |
 | `$521` | Capteur de pluie + allumage automatique | ✅ RLS |
 | `$534` | Climatisation automatique | ✅ IHK |

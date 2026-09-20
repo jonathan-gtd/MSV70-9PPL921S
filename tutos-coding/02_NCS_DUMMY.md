@@ -7,7 +7,8 @@
 
 ## 1. À quoi il sert
 
-NCS Expert sait lire et écrire dans les modules, mais affiche tout en **hexadécimal brut** : des paires `FSW / PSW` illisibles.
+NCS Expert produit des traces **FSW/PSW** en mots-clés et des traces **NETTODAT**
+en octets hexadécimaux. Les sauvegardes de modules dans `stock/` sont des NETTODAT.
 
 NCS Dummy fait la traduction. Il lit les mêmes fichiers DATEN que NCS Expert et donne :
 
@@ -59,7 +60,9 @@ On charge le `.TRC` produit par NCS Expert (`F4 Read ECU`) :
 data/Coding/backup/KOMBI_stock_20260918.TRC
 ```
 
-NCS Dummy identifie alors **la bonne version du module** et affiche la valeur réellement en place pour chaque fonction. C'est la seule vue fiable.
+Choisir la variante relevée sur le véhicule, puis charger la trace. Le filtre
+« Filter Modules by Trace File » peut proposer plusieurs variantes compatibles :
+il ne garantit pas une identification unique. Voir le [catalogue des variantes](daten/README.md).
 
 ---
 
@@ -99,11 +102,13 @@ Les libellés d'origine sont en **allemand**, souvent abrégés. Quelques clés 
 C:\NCSEXPER\WORK\FSW_PSW.MAN
 ```
 
-### ⚠️ Le `.MAN` ne doit contenir que les lignes modifiées
+### Contrôler le contenu du `.MAN`
 
-`SG_CODIEREN` applique **tout** ce que contient le `.MAN`. Un `.MAN` contenant l'intégralité du module réécrit l'intégralité du module — inutilement risqué.
+L'export peut contenir toutes les fonctions sélectionnées, y compris celles dont la
+valeur n'a pas changé. Un fichier de plusieurs centaines de lignes n'est donc pas
+une erreur en soi. Vérifier les différences avec la trace d'origine.
 
-**Un bon `.MAN` fait quelques lignes.** S'il en fait des centaines, il y a une erreur d'export.
+Source : [manuel NCS Dummy, sections 3.2 et 3.6](https://revtor.be/ncsdummy/ncsdummy.pdf).
 
 ---
 
@@ -135,6 +140,7 @@ Coder et découvrir en même temps, contact mis, est la meilleure façon de fair
 
 ## 8. Ordre de grandeur
 
-Un module comme le JBBF expose **plusieurs centaines de FSW**. Le catalogue complet de la voiture se compte en milliers de lignes.
+La variante JBBFE.C07 de cette voiture expose **97 fonctions** dans le catalogue,
+sur **1 738 fonctions** pour les 19 modules. Les quantités dépendent de la variante.
 
 N'essaie pas de tout lire. Pars d'une fonction que tu veux obtenir, cherche-la, ignore le reste.

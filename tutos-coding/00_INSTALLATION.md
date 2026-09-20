@@ -45,15 +45,18 @@ Les profils sont dans `C:\NCSEXPER\PFL\`. La liste affichée par NCS Expert mont
 | Affiché dans NCS Expert | Fichier | Usage |
 |---|---|---|
 | **NCS Dummy profile** | `NCSDUMMY4.PFL` | ✅ **codage manuel FSW/PSW** — celui de tous les jours |
-| Default Profil | `01_Default.pfl` | 🔶 lecture seule, et **retour usine depuis le FA** |
+| Default Profil | `01_Default.pfl` | 🔶 manipulation FSW/PSW désactivée ; peut coder depuis le FA |
 
 Toute la différence tient à une ligne :
 
 ```ini
 [FSWPSW]
 FswPswManipulieren=1    ← NCSDUMMY4  : écriture depuis FSW_PSW.MAN autorisée
-FswPswManipulieren=0    ← Default    : lecture seule
+FswPswManipulieren=0    ← Default    : manipulation du .MAN désactivée
 ```
+
+`FswPswManipulieren=0` ne rend pas le profil « lecture seule » : il désactive
+l'utilisation du `.MAN`. Le job choisi détermine si l'on lit ou si l'on code.
 
 ⚠️ **NCS Expert ne charge aucun profil au démarrage.** C'est à refaire **à chaque lancement**, via la barre de menus en haut (`File → Load Profile`), pas via les boutons F1–F6. Sans profil chargé, les boutons restent grisés.
 

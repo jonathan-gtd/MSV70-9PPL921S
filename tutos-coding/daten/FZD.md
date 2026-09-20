@@ -16,7 +16,7 @@
 | Vérification | 100 % des fonctions dans les blocs du `.TRC` |
 | Avec valeurs | 41 |
 | Signification (EN) | 31 |
-| Explication (FR) | 31 |
+| Explication (FR) | 33 |
 | Blocs d'adresses du TRC | 7 |
 
 > Seules les fonctions dont l'adresse tombe dans un bloc réellement renvoyé par
@@ -30,7 +30,7 @@
 |---|---|---|---|---|
 | `ANTIWUMMER` | anti-bourdonnement | `aktiv` · `nicht_aktiv` | Comfort position (reduces wind noise) enabled | Position confort active (reduit le bruit aerodynamique) |
 | `BSS` | capteur (?) | `aktiv` · `nicht_aktiv` | — | — |
-| `DATA_TRANSFER` | donnees · transfert | `aktiv` · `nicht_aktiv` | — | — |
+| `DATA_TRANSFER` | donnees · transfert | `aktiv` · `nicht_aktiv` | — | Déduction du libellé : Configuration du transfert de données du module de toit ; le contenu transféré n’est pas précisé. |
 | `E9X_CAR` | serie E9x · vehicule | `aktiv` · `nicht_aktiv` | E9x (3 Series) | E9x (Serie 3) |
 | `EC_SPIEGEL` | electrochrome (?) · retroviseur | `aktiv` · `nicht_aktiv` | Automatic electrochromatic dimming mirror | Retroviseur photosensible automatique |
 | `EC_SPIEGEL_KOMPASS_CABRIO` | electrochrome (?) · retroviseur · boussole · cabriolet | `aktiv` · `nicht_aktiv` | Automatic electrochromatic dimming mirror with compass (convertible) | Retroviseur photosensible automatique avec boussole (cabriolet) |
@@ -49,7 +49,7 @@
 | `MDS_CAR` | systeme de diagnostic (?) · vehicule | `aktiv` · `nicht_aktiv` | — | — |
 | `MOTOR_DIRECTION` | moteur · direction | `aktiv` · `nicht_aktiv` | Engine direction | Sens de rotation du moteur |
 | `NO_RAIN_INTENSITY` | non · pluie · intensite | `wert_01` | Rain intensity lower limit | Seuil bas d'intensite de pluie |
-| `NO_SHD` | non · toit ouvrant | `aktiv` · `nicht_aktiv` | — | — |
+| `NO_SHD` | non · toit ouvrant | `aktiv` · `nicht_aktiv` | — | Déduction du libellé : Configuration correspondant à l’absence de toit ouvrant. |
 | `OEFFNEN_AUS_GEHOBEN` | ouverture · arret · haut de gamme | `aktiv` · `nicht_aktiv` | Allow opening sunroof from raised position | Autoriser l'ouverture du toit depuis la position entrebaillee |
 | `PANIC_CLOSE` | alarme panique · fermeture | `aktiv_2p` · `aktiv_1p` · `nicht_aktiv` | Panic close | Fermeture panique |
 | `PANIC_CLOSE_TILT` | alarme panique · fermeture · entrebaillement | `aktiv_2p` · `aktiv_1p` · `nicht_aktiv` | Panic close tilted sunroof | Fermeture panique du toit entrebaille |
@@ -79,5 +79,7 @@ Fragments en **gras** : sans traduction établie. Entre `_underscores_` : ambigu
 
 **Signification (EN)** — description issue de la base communautaire NCS Dummy, verbatim.
 
-**Explication (FR)** — traduction française. Un tiret signifie que la ligne n'est pas
-encore traduite. Les notations d'unités sont converties : `[durée s = valeur / 10]`.
+**Explication (FR)** — traduction française ou interprétation explicitement marquée
+« Déduction du libellé ». Cette dernière reste à confirmer ; elle ne documente pas
+les valeurs ni un effet testé sur le véhicule. Un tiret signifie qu’aucune explication
+n’est établie. Voir [la méthode et les sources](TRADUCTIONS.md). Les notations d'unités sont converties : `[durée s = valeur / 10]`.

@@ -132,7 +132,9 @@ Convention complète : [data/Coding/README.md](../data/Coding/README.md).
 
 Voir [02 — NCS Dummy](02_NCS_DUMMY.md).
 
-Sortie attendue : un fichier `FSW_PSW.MAN` déposé dans `C:\NCSEXPER\WORK\`, **ne contenant que les lignes à modifier**.
+Sortie attendue : un fichier `FSW_PSW.MAN` exporté par NCS Dummy dans
+`C:\NCSEXPER\WORK\`, dont les différences avec la trace d'origine correspondent
+uniquement aux changements voulus. Il peut aussi contenir des valeurs inchangées.
 
 ---
 
