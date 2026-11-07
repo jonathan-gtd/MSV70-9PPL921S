@@ -1,0 +1,302 @@
+Generated with NCS Dummy version 0.6.0.4 — copyright © 2014 revtor
+
+
+Output       : Module Functions
+Chassis      : E89  (E81,E82,E84,E87,E88,E89,E90,E91,E92,E93)
+Module       : IHXXPL2.C01
+
+
+FUNCTION KEYWORD              ADDRESS (LENGTH)   MASK         FUNCTION KEYWORD TRANSLATION                                                  OPTIONS
+    PARAMETER KEYWORD             DATA               MASKED       PARAMETER KEYWORD TRANSLATION                                             
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+
+IHKA_Codierdaten              00300000 (10)                   Automatic climate control (IHKA) coding data                                  
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+STANDHEIZER_ALS_ZUHEIZER      00300000 (01)      01           INDEPENDENT PARK HEATING AS AUXILIARY HEATING                                 
+    nicht_aktiv                   00                 00           not enabled                                                               !(DIESEL+STANDHEIZUNG+PU07+!MIT_PTC+!OHNE_ZUHEIZER)
+    aktiv                         01                 01           enabled                                                                   DIESEL+STANDHEIZUNG+PU07+!MIT_PTC+!OHNE_ZUHEIZER
+OFF_MEMORY                    00300000 (01)      02           CAR/KEY MEMORY FOR CLIMATE CONTROL OFF                                        
+    aktiv                         01                 02           enabled                                                                   PL2
+    nicht_aktiv                   00                 00           not enabled                                                               
+UMLUFT_MEMORY                 00300000 (01)      04           RECALL LAST STATE OF RECIRCULATING AIR AFTER SWITCHING ON IGNITION            
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+    aktiv                         01                 04           enabled                                                                   
+STANDHEIZUNG_SZ               00300000 (01)      08                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               !(KLIMA_HIGH+SONDERSTANDHEIZ)
+    aktiv                         01                 08           enabled                                                                   KLIMA_HIGH+SONDERSTANDHEIZ
+KOMPRESSOR                    00300000 (01)      10           AIR CONDITIONING COMPRESSOR                                                   
+    klein                         00                 00           small                                                                     M47,N43,N45,N46,N20+E89
+    gross                         01                 10           large                                                                     !(M47,N43,N45,N46,N20+E89)
+RL_LL                         00300000 (01)      20           RIGHT-HAND DRIVE / LEFT-HAND DRIVE                                            
+    rl                            01                 20           right-hand drive                                                          RL
+    ll                            00                 00           left-hand drive                                                           LL
+SOLARSENSORKENNLINIE          00300000 (01)      40                                                                                         
+    kennlinie_02                  01                 40           characteristic curve 02                                                   K_KLIMAGLAS
+    kennlinie_01                  00                 00           characteristic curve 01                                                   !K_KLIMAGLAS
+MOTOR_IHX                     00300000 (01)      80                                                                                         
+    benzin_normal                 00                 00           gasoline indirect injection                                               !DIESEL
+    diesel_normal                 01                 80           diesel indirect injection                                                 DIESEL
+ZYLINDER_ZAHL                 00300001 (01)      03           CYLINDER COUNT                                                                
+    4_zylinder                    00                 00           4-cylinder                                                                ZYL4,EL_MOTOR
+    6_zylinder                    01                 01           6-cylinder                                                                ZYL6
+    8_zylinder                    02                 02           8-cylinder                                                                ZYL8
+EINBAUORT                     00300001 (01)      04           INSTALLATION LOCATION                                                         
+    unten                         00                 00           under                                                                     !(NAVIGATION,LOW_NAVIGATION,BORDMONITOR,M_DRIVE+!IHK_CI_02)
+    oben                          01                 04           above                                                                     NAVIGATION,LOW_NAVIGATION,BORDMONITOR,M_DRIVE+!IHK_CI_02
+BAUREIHE                      00300001 (01)      38           CHASSIS                                                                       
+    e81                           00                 00           e81 (1 series 3-door hatchback)                                           E81
+    e82                           01                 08           e82 (1 series coupé)                                                      E82
+    e84                           01                 08           e84 (x1)                                                                  E84
+    e87                           02                 10           e87 (1 series 5-door hatchback)                                           E87
+    e90                           03                 18           e90 (3 series)                                                            E90
+    e91                           04                 20           e91 (3 series touring)                                                    E91
+    e92                           05                 28           e92 (3 series coupé)                                                      E92
+    e93                           06                 30           e93 (3 series convertible)                                                E93
+    e88                           07                 38           e88 (1 series convertible)                                                E88
+    e89                           06                 30           e89 (z4 roadster)                                                         E89
+PIA_PORTIERUNG                00300001 (01)      40                                                                                         
+    datenportierung_aktiv         01                 40                                                                                     PL2
+    datenportierung_inaktiv       00                 00                                                                                     
+DEFROST_LEITSCHAUFELN         00300001 (01)      80                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               I_TAFEL_ALT
+    aktiv                         01                 80           enabled                                                                   !I_TAFEL_ALT
+LAENDERVARANTE                00300002 (01)      07           COUNTRY VARIANT                                                               
+    heissland                     00                 00           tropical/hot country                                                      
+    ece                           01                 01           europe                                                                    !(US+M3)
+    us                            02                 02           usa                                                                       US+M3
+    japan                         03                 03           japan                                                                     
+MANUELLES_VERDECK_E88         00300002 (01)      08           MANUAL CONVERTIBLE TOP E88 (1 SERIES CONVERTIBLE)                             
+    verbaut                       01                 08           installed                                                                 
+    nicht_verbaut                 00                 00           not installed                                                             PL2
+KLIMA_SPERREN                 00300002 (01)      10           DISABLE AIR CONDITIONING COMPRESSOR                                           
+    aktiv                         01                 10           enabled                                                                   
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+ZWP/EWP                       00300002 (01)      60           AUXILIARY WATER PUMP / ELECTRIC WATER PUMP                                    
+    nicht_verbaut                 00                 00           not installed                                                             DIESEL+DEZ09+!STANDHEIZUNG
+    zwp                           02                 40           auxiliary water pump                                                      S65B40,S65B44,N45,N46,DIESEL+(!DEZ09,DEZ09+STANDHEIZUNG)
+    ewp                           01                 20           electric water pump                                                       !(S65B40,S65B44,N45,N46,DIESEL)
+EL_ZUHEIZER_PTC               00300002 (01)      80           ELECTRIC AUXILIARY HEATER WITH POSITIVE TEMPERATURE COEFFICIENT (PTC)         
+    verbaut                       01                 80           installed                                                                 (DIESEL+(!PU07,!STANDHEIZUNG+PU07,STANDHEIZUNG+OSTH+PU07),MIT_PTC)+!(DIESEL+STANDHEIZUNG+PU09)
+    nicht_verbaut                 00                 00           not installed                                                             !((DIESEL+(!PU07,!STANDHEIZUNG+PU07,STANDHEIZUNG+OSTH+PU07),MIT_PTC)+!(DIESEL+STANDHEIZUNG+PU09))
+GEBLAESE_AUTO_MIT_A           00300003 (01)      01           DISPLAY "AUTO" IN AUTOMATIC MODE                                              
+    aktiv                         01                 01           enabled                                                                   PU09
+    nicht_aktiv                   00                 00           not enabled                                                               !PU09
+GEBLAESE_AUTO_MIT_BALKEN      00300003 (01)      02           DISPLAY BLOWER SPEED BARS IN AUTOMATIC MODE                                   
+    aktiv                         01                 02           enabled                                                                   PL2
+    nicht_aktiv                   00                 00           not enabled                                                               
+GEBLAESE_MIT_RAHMEN           00300003 (01)      04                                                                                         
+    aktiv                         01                 04           enabled                                                                   PL2
+    nicht_aktiv                   00                 00           not enabled                                                               
+GEBLAESE_MIT_LUEFTER_SYMB     00300003 (01)      08           DISPLAY BLOWER SYMBOL IN AUTOMATIC MODE                                       
+    aktiv                         01                 08           enabled                                                                   !(IHK_CI_02,EL_MOTOR)
+    nicht_aktiv                   00                 00           not enabled                                                               IHK_CI_02,EL_MOTOR
+KOMPRESSOR_MITTEL             00300003 (01)      10           AIR CONDITIONING COMPRESSOR MEDIUM                                            
+    aktiv                         01                 10           enabled                                                                   N47,N57
+    nicht_aktiv                   00                 00           not enabled                                                               !(N47,N57)
+WARTUNGSINTERVALL_FZE         00300003 (01)      E0                                                                                         
+    wert_01                       00                 00           value 01                                                                  !(SIA_INTERVALL2+MAERZ07)+!M3
+    wert_02                       01                 20           value 02                                                                  SIA_INTERVALL2+MAERZ07+!M3
+    wert_03                       02                 40           value 03                                                                  M3
+    wert_04                       03                 60           value 04                                                                  
+    wert_05                       04                 80           value 05                                                                  
+    wert_06                       05                 A0           value 06                                                                  
+    wert_07                       06                 C0           value 07                                                                  
+    wert_08                       07                 E0           value 08                                                                  
+UEBERSETZUNG_KOMPRESSOR       00300004 (01)      FF                                                                                         
+    wert_01                       A5                 A5           value 01                                                                  M47D20,M57D30,M57D30Y
+    wert_02                       7D                 7D           value 02                                                                  N43B20,N43B16,N45B16,N45B20,N46B20,N20,EL_MOTOR
+    wert_03                       80                 80           value 03                                                                  N51B30,N52B25,N52B25K,N52B30,N52B30K,N53B25,N53B30,N54B30,N55B30
+    wert_04                       97                 97           value 04                                                                  N47D20,N57D30
+    wert_05                       6E                 6E           value 05                                                                  S65B40,S65B44
+KLIMA_MIT_AUTO_0              00300005 (01)      01           AIR CONDITIONING COMPRESSOR ON IN AUTOMATIC MODE                              
+    nicht_aktiv                   00                 00           not enabled                                                               EL_MOTOR
+    aktiv                         01                 01           enabled                                                                   !EL_MOTOR
+AUTO_BEI_KL15_EIN_0           00300005 (01)      02                                                                                         
+    aktiv                         01                 02           enabled                                                                   
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+GEBLAESE_OFFSET_0             00300005 (01)      0C                                                                                         
+    geblaese_p_verringern         02                 08                                                                                     
+    kein_geblaese_offset          00                 00                                                                                     PL2
+    geblaese_p_erhoehen           01                 04                                                                                     
+TEMPERATUR_OFFSET_0           00300005 (01)      70                                                                                         
+    offset_plus_1k                01                 10                                                                                     
+    kein_offset                   00                 00           no offset                                                                 PL2
+    offset_plus_2k                02                 20                                                                                     
+    offset_plus_3k                03                 30                                                                                     
+    offset_minus_1k               05                 50                                                                                     
+    offset_minus_2k               06                 60                                                                                     
+    offset_minus_3k               07                 70                                                                                     
+<UNBELEGT>                    00300005 (01)      80           <UNOCCUPIED>                                                                  
+    <initwert>                    00                 00           <initvalue>                                                               
+KLIMA_MIT_AUTO_1              00300006 (01)      01           AIR CONDITIONING COMPRESSOR ON IN AUTOMATIC MODE                              
+    nicht_aktiv                   00                 00           not enabled                                                               EL_MOTOR
+    aktiv                         01                 01           enabled                                                                   !EL_MOTOR
+AUTO_BEI_KL15_EIN_1           00300006 (01)      02                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+    aktiv                         01                 02           enabled                                                                   
+GEBLAESE_OFFSET_1             00300006 (01)      0C                                                                                         
+    kein_geblaese_offset          00                 00                                                                                     PL2
+    geblaese_p_verringern         02                 08                                                                                     
+    geblaese_p_erhoehen           01                 04                                                                                     
+TEMPERATUR_OFFSET_1           00300006 (01)      70                                                                                         
+    kein_offset                   00                 00           no offset                                                                 PL2
+    offset_plus_1k                01                 10                                                                                     
+    offset_plus_2k                02                 20                                                                                     
+    offset_plus_3k                03                 30                                                                                     
+    offset_minus_1k               05                 50                                                                                     
+    offset_minus_2k               06                 60                                                                                     
+    offset_minus_3k               07                 70                                                                                     
+<UNBELEGT>                    00300006 (01)      80           <UNOCCUPIED>                                                                  
+    <initwert>                    00                 00           <initvalue>                                                               
+KLIMA_MIT_AUTO_2              00300007 (01)      01           AIR CONDITIONING COMPRESSOR ON IN AUTOMATIC MODE                              
+    aktiv                         01                 01           enabled                                                                   !EL_MOTOR
+    nicht_aktiv                   00                 00           not enabled                                                               EL_MOTOR
+AUTO_BEI_KL15_EIN_2           00300007 (01)      02                                                                                         
+    aktiv                         01                 02           enabled                                                                   
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+GEBLAESE_OFFSET_2             00300007 (01)      0C                                                                                         
+    kein_geblaese_offset          00                 00                                                                                     PL2
+    geblaese_p_verringern         02                 08                                                                                     
+    geblaese_p_erhoehen           01                 04                                                                                     
+TEMPERATUR_OFFSET_2           00300007 (01)      70                                                                                         
+    offset_plus_1k                01                 10                                                                                     
+    offset_plus_3k                03                 30                                                                                     
+    offset_plus_2k                02                 20                                                                                     
+    offset_minus_1k               05                 50                                                                                     
+    offset_minus_2k               06                 60                                                                                     
+    offset_minus_3k               07                 70                                                                                     
+    kein_offset                   00                 00           no offset                                                                 PL2
+<UNBELEGT>                    00300007 (01)      80           <UNOCCUPIED>                                                                  
+    <initwert>                    00                 00           <initvalue>                                                               
+KLIMA_MIT_AUTO_10/15          00300008 (01)      01           AIR CONDITIONING COMPRESSOR ON IN AUTOMATIC MODE                              
+    aktiv                         01                 01           enabled                                                                   !EL_MOTOR
+    nicht_aktiv                   00                 00           not enabled                                                               EL_MOTOR
+AUTO_BEI_KL15_EIN_10/15       00300008 (01)      02                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+    aktiv                         01                 02           enabled                                                                   
+GEBLAESE_OFFSET_10/15         00300008 (01)      0C                                                                                         
+    kein_offset                   00                 00           no offset                                                                 PL2
+    geblaese_p_erhoehen           01                 04                                                                                     
+    geblaese_p_verringern         02                 08                                                                                     
+TEMPERATUR_OFFSET_10/15       00300008 (01)      70                                                                                         
+    kein_offset                   00                 00           no offset                                                                 PL2
+    offset_plus_1k                01                 10                                                                                     
+    offset_plus_2k                02                 20                                                                                     
+    offset_plus_3k                03                 30                                                                                     
+    offset_minus_1k               05                 50                                                                                     
+    offset_minus_2k               06                 60                                                                                     
+    offset_minus_3k               07                 70                                                                                     
+<UNBELEGT>                    00300008 (01)      80           <UNOCCUPIED>                                                                  
+    <initwert>                    00                 00           <initvalue>                                                               
+C_CKM_D_KLIMA_MIT_AUTO        00300009 (01)      01                                                                                         
+    aktiv                         01                 01           enabled                                                                   !EL_MOTOR
+    nicht_aktiv                   00                 00           not enabled                                                               EL_MOTOR
+C_CKM_D_AUTO_BEI_KL15_EIN     00300009 (01)      02                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+    aktiv                         01                 02           enabled                                                                   
+C_CKM_D_GEBLAESE_OFFSET       00300009 (01)      0C                                                                                         
+    kein_offset                   00                 00           no offset                                                                 PL2
+    geblaese_p_erhoehen           01                 04                                                                                     
+    geblaese_p_verringern         02                 08                                                                                     
+C_CKM_D_TEMPERATUR_OFFSET     00300009 (01)      70                                                                                         
+    kein_offset                   00                 00           no offset                                                                 PL2
+    offset_plus_1k                01                 10                                                                                     
+    offset_plus_2k                02                 20                                                                                     
+    offset_plus_3k                03                 30                                                                                     
+    offset_minus_2k               06                 60                                                                                     
+    offset_minus_3k               07                 70                                                                                     
+    offset_minus_1k               05                 50                                                                                     
+<UNBELEGT>                    00300009 (01)      80           <UNOCCUPIED>                                                                  
+    <initwert>                    00                 00           <initvalue>                                                               
+ERSTE_HEIZZEIT_HHS_A          0030000A (01)      FF                                                                                         
+    e81                           14                 14           e81 (1 series 3-door hatchback)                                           E81
+    e82                           0F                 0F           e82 (1 series coupé)                                                      E82,E88+!IHK_CI_02
+    e84                           14                 14           e84 (x1)                                                                  E84+IHK_CI_02
+    e87                           14                 14           e87 (1 series 5-door hatchback)                                           E87,E84+!IHK_CI_02
+    e88                           0F                 0F           e88 (1 series convertible)                                                E88+IHK_CI_02
+    e90                           0D                 0D           e90 (3 series)                                                            E90+!(KURZ_HEIZ,JUNI06)
+    e90b                          0A                 0A                                                                                     E90+(KURZ_HEIZ,JUNI06)
+    e91                           0F                 0F           e91 (3 series touring)                                                    E91
+    e92                           0F                 0F           e92 (3 series coupé)                                                      E92
+    e93                           0F                 0F           e93 (3 series convertible)                                                E93,E89
+ERSTE_HEIZZEIT_HHS_B          0030000B (01)      FF                                                                                         
+    e81                           1E                 1E           e81 (1 series 3-door hatchback)                                           E81
+    e82                           19                 19           e82 (1 series coupé)                                                      E82,E88+!IHK_CI_02
+    e84                           1E                 1E           e84 (x1)                                                                  E84+IHK_CI_02
+    e87                           1E                 1E           e87 (1 series 5-door hatchback)                                           E87,E84+!IHK_CI_02
+    e88                           19                 19           e88 (1 series convertible)                                                E88+IHK_CI_02
+    e90                           14                 14           e90 (3 series)                                                            E90+!(KURZ_HEIZ,JUNI06)
+    e90b                          0F                 0F                                                                                     E90+(KURZ_HEIZ,JUNI06)
+    e91                           19                 19           e91 (3 series touring)                                                    E91
+    e92                           19                 19           e92 (3 series coupé)                                                      E92
+    e93                           19                 19           e93 (3 series convertible)                                                E93,E89
+ZWEITE_HEIZZEIT_HHS           0030000C (01)      FF                                                                                         
+    e81                           1E                 1E           e81 (1 series 3-door hatchback)                                           E81
+    e82                           19                 19           e82 (1 series coupé)                                                      E82,E88+!IHK_CI_02
+    e84                           1E                 1E           e84 (x1)                                                                  E84+IHK_CI_02
+    e87                           1E                 1E           e87 (1 series 5-door hatchback)                                           E87,E84+!IHK_CI_02
+    e88                           19                 19           e88 (1 series convertible)                                                E88+IHK_CI_02
+    e90                           19                 19           e90 (3 series)                                                            E90+!(KURZ_HEIZ,JUNI06)
+    e90b                          0F                 0F                                                                                     E90+(KURZ_HEIZ,JUNI06)
+    e91                           19                 19           e91 (3 series touring)                                                    E91
+    e92                           19                 19           e92 (3 series coupé)                                                      E92
+    e93                           19                 19           e93 (3 series convertible)                                                E93,E89
+TAKTUNGSDAUER_HHS             0030000D (01)      FF           DUTY CYCLE OF REAR WINDOW DEFROSTER                                           
+    e81                           1E                 1E           e81 (1 series 3-door hatchback)                                           E81
+    e82                           1E                 1E           e82 (1 series coupé)                                                      E82,E88+!IHK_CI_02
+    e84                           1E                 1E           e84 (x1)                                                                  E84+IHK_CI_02
+    e87                           1E                 1E           e87 (1 series 5-door hatchback)                                           E87,E84+!IHK_CI_02
+    e88                           1E                 1E           e88 (1 series convertible)                                                E88+IHK_CI_02
+    e90                           1E                 1E           e90 (3 series)                                                            E90+!(KURZ_HEIZ,JUNI06)
+    e90b                          16                 16                                                                                     E90+(KURZ_HEIZ,JUNI06)
+    e91                           1E                 1E           e91 (3 series touring)                                                    E91
+    e93                           1E                 1E           e93 (3 series convertible)                                                E93,E89
+    e92                           1E                 1E           e92 (3 series coupé)                                                      E92
+STANDHEIZUNG                  0030000E (01)      01           INDEPENDENT PARK HEATING (NOTE: AKTIV/NICHT_AKTIV INVERTED FOR CHASSIS E31)   
+    nicht_aktiv                   00                 00           not enabled                                                               !STANDHEIZUNG
+    aktiv                         01                 01           enabled                                                                   STANDHEIZUNG
+ANZEIGE_TIMER_STHZ_SA         0030000E (01)      02                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               
+    aktiv                         01                 02           enabled                                                                   STANDHEIZUNG,!STANDHEIZUNG
+PSEUDOZUHEIZEN                0030000E (01)      04           PSEUDO HEATER FOR INDEPENDENT PARK HEATING                                    
+    aktiv                         01                 04           enabled                                                                   STANDHEIZUNG
+    nicht_aktiv                   00                 00           not enabled                                                               !STANDHEIZUNG
+NACHLAUFZEIT_UM_VENTIL        0030000E (01)      38                                                                                         
+    wert_00                       00                 00           value 00                                                                  !STANDHEIZUNG
+    wert_01                       01                 08           value 01                                                                  
+    wert_02                       02                 10           value 02                                                                  
+    wert_03                       03                 18           value 03                                                                  
+    wert_04                       04                 20           value 04                                                                  
+    wert_05                       05                 28           value 05                                                                  
+    wert_06                       06                 30           value 06                                                                  
+    wert_07                       07                 38           value 07                                                                  STANDHEIZUNG
+IHX_CBS                       0030000E (01)      40                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               MAERZ07
+    aktiv                         01                 40           enabled                                                                   !MAERZ07
+KLIMAGERAET_MIT_SCHICHTUN     0030000E (01)      80                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               !((E81,E82,E87)+PU07)
+    aktiv                         01                 80           enabled                                                                   (E81,E82,E87)+PU07
+ALKS                          0030000F (01)      01           RADIATOR SHUTTER FLAPS                                                        
+    nicht_aktiv                   00                 00           not enabled                                                               ACEA_CO2+ANH_KUPPLUNG+PU08+!E84,!ACEA_CO2,E89,(ACEA_CO2+PU09,DIESEL+MAERZ09)+!(E84,E90+LC2,E91+LCI2),ACEA_CO2+E84+!((N43,N52,N20)+!(ANH_KUPPLUNG,HEISSLAND,M_SPORTPAKET)),!(ACEA_CO2+PU09)+!(DIESEL+MAERZ09)+!(ANH_KUPPLUNG+PU08)+ACEA_CO2+(E81,E82,E87,E88)+!((N43,N52B25K,N52B30K,N47)+!(AFS,M_SPORTPAKET)),!(ACEA_CO2+PU09)+!(DIESEL+MAERZ09)+!(ANH_KUPPLUNG+PU08)+ACEA_CO2+(E90,E91,E92)+!((N43,N53,N54,N47,M57,N57)+!ALLRAD+!(AFS,ACC,M_SPORTPAKET)),!(ACEA_CO2+PU09)+!(DIESEL+MAERZ09)+!(ANH_KUPPLUNG+PU08)+ACEA_CO2+E93+!((N43,N53+PU07,N47,M57,N57,N54)+!(AFS,ACC,M_SPORTPAKET))
+    aktiv                         01                 01           enabled                                                                   ACEA_CO2+(E90+LC2,E91+LCI2)+!ANH_KUPPLUNG,ACEA_CO2+E84+(N43,N52,N20)+!(ANH_KUPPLUNG,HEISSLAND,M_SPORTPAKET),!(ACEA_CO2+PU09)+!(DIESEL+MAERZ09)+!(ANH_KUPPLUNG+PU08)+ACEA_CO2+(E81,E82,E87,E88)+(N43,N52B25K,N52B30K,N47)+!(AFS,M_SPORTPAKET),!(ACEA_CO2+PU09)+!(DIESEL+MAERZ09)+!(ANH_KUPPLUNG+PU08)+ACEA_CO2+(E90,E91,E92)+(N43,N53,N54,N47,M57,N57)+!ALLRAD+!(AFS,ACC,M_SPORTPAKET),!(ACEA_CO2+PU09)+!(DIESEL+MAERZ09)+!(ANH_KUPPLUNG+PU08)+ACEA_CO2+E93+(N43,N53+PU07,N47,M57,N57,N54)+!(AFS,ACC,M_SPORTPAKET)
+KOMPRESSOR_KUPPLUNG           0030000F (01)      02           AIR CONDITIONING COMPRESSOR CLUTCH                                            
+    nicht_aktiv                   00                 00           not enabled                                                               E89+!UMKLIKOMP,(E81,E87,E82,E88)+!((N43,N47,N52B25K,N52B30K)+ACEA_CO2+(KLIMA_BASIS,KLIMA_HIGH))+!UMKLIKOMP,E90+!((N43,N53,N47,N57,M57+T2,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E91+!((N43,N53,N47,N57,M57+T2,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E92+!((N43,N53,N47,N57,M57+T2,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E93+!((N43,N53+PU07,N47,N57,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E84+!((N20,N47)+(KLIMA_BASIS,KLIMA_HIGH))+!UMKLIKOMP
+    aktiv                         01                 02           enabled                                                                   (E81,E87,E82,E88)+(N43,N47,N52B25K,N52B30K)+ACEA_CO2+(KLIMA_BASIS,KLIMA_HIGH)+!UMKLIKOMP,E90+((N43,N53,N47,N57,M57+T2,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E91+((N43,N53,N47,N57,M57+T2,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E92+((N43,N53,N47,N57,M57+T2,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E93+((N43,N53+PU07,N47,N57,N52+PU10+!(US,KOREA))+ACEA_CO2,(N47+!MAERZ10,N57)+PU08)+!UMKLIKOMP,E84+(N20,N47)+(KLIMA_BASIS,KLIMA_HIGH)+!UMKLIKOMP,UMKLIKOMP
+MSA                           0030000F (01)      04           AUTOMATIC START/STOP (MSA)                                                    
+    nicht_aktiv                   00                 00           not enabled                                                               !CO2_MSA
+    aktiv                         01                 04           enabled                                                                   CO2_MSA
+IGR                           0030000F (01)      08           INTELLIGENT ALTERNATOR CONTROL (IGR)                                          
+    nicht_aktiv                   00                 00           not enabled                                                               !(CO2_IGR+!(ZUSATZENERGIE,WARN_KOM_ANL,DACHOSIG,DACHANTENNE,OFFENE_AUSFUEHR,GETARN_AUSFUEHR))
+    aktiv                         01                 08           enabled                                                                   CO2_IGR+!(ZUSATZENERGIE,WARN_KOM_ANL,DACHOSIG,DACHANTENNE,OFFENE_AUSFUEHR,GETARN_AUSFUEHR)
+MSA_NOTSTRATEGIE              0030000F (01)      10                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               PL2
+    aktiv                         01                 10           enabled                                                                   
+MSA_ANSTEUERLOGIK             0030000F (01)      20                                                                                         
+    ihxx                          00                 00                                                                                     PL2
+    can                           01                 20           can-bus                                                                   
+KMK_ZUSCHALTSCHWELLE          0030000F (01)      40                                                                                         
+    hoch                          00                 00           high                                                                      !DIESEL
+    niedrig                       01                 40                                                                                     DIESEL
+MSA_MEMORY                    0030000F (01)      80                                                                                         
+    nicht_aktiv                   00                 00           not enabled                                                               !(OHNE_MSA,(E84,E89)+US+MAERZ13)
+    aktiv                         01                 80           enabled                                                                   OHNE_MSA,(E84,E89)+US+MAERZ13

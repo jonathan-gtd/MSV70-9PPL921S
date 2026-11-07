@@ -1,0 +1,126 @@
+BAUREIHE
+	e90
+OFF_MEMORY
+	aktiv
+KLIMA_SPERREN
+	nicht_aktiv
+EL_ZUHEIZER_PTC
+	nicht_verbaut
+RL_LL
+	ll
+EINBAUORT
+	oben
+ZYLINDER_ZAHL
+	6_zylinder
+STANDHEIZUNG
+	nicht_aktiv
+GEBLAESE_AUTO_MIT_A
+	aktiv
+GEBLAESE_AUTO_MIT_BALKEN
+	aktiv
+GEBLAESE_MIT_LUEFTER_SYMB
+	aktiv
+GEBLAESE_MIT_RAHMEN
+	aktiv
+KOMPRESSOR
+	gross
+LAENDERVARANTE
+	ece
+SOLARSENSORKENNLINIE
+	kennlinie_01
+UEBERSETZUNG_KOMPRESSOR
+	wert_03
+UMLUFT_MEMORY
+	aktiv
+AUTO_BEI_KL15_EIN_0
+	nicht_aktiv
+AUTO_BEI_KL15_EIN_1
+	nicht_aktiv
+AUTO_BEI_KL15_EIN_10/15
+	nicht_aktiv
+AUTO_BEI_KL15_EIN_2
+	nicht_aktiv
+C_CKM_D_AUTO_BEI_KL15_EIN
+	nicht_aktiv
+C_CKM_D_GEBLAESE_OFFSET
+	kein_offset
+C_CKM_D_KLIMA_MIT_AUTO
+	aktiv
+C_CKM_D_TEMPERATUR_OFFSET
+	kein_offset
+GEBLAESE_OFFSET_0
+	kein_geblaese_offset
+GEBLAESE_OFFSET_1
+	kein_geblaese_offset
+GEBLAESE_OFFSET_10/15
+	kein_offset
+GEBLAESE_OFFSET_2
+	kein_geblaese_offset
+KLIMA_MIT_AUTO_0
+	nicht_aktiv
+KLIMA_MIT_AUTO_1
+	nicht_aktiv
+KLIMA_MIT_AUTO_10/15
+	nicht_aktiv
+KLIMA_MIT_AUTO_2
+	nicht_aktiv
+TEMPERATUR_OFFSET_0
+	kein_offset
+TEMPERATUR_OFFSET_1
+	kein_offset
+TEMPERATUR_OFFSET_10/15
+	kein_offset
+TEMPERATUR_OFFSET_2
+	kein_offset
+ERSTE_HEIZZEIT_HHS_A
+	e90b
+ERSTE_HEIZZEIT_HHS_B
+	e90b
+TAKTUNGSDAUER_HHS
+	e90b
+ZWEITE_HEIZZEIT_HHS
+	e90b
+ZWP/EWP
+	ewp
+MOTOR_IHX
+	benzin_normal
+PIA_PORTIERUNG
+	datenportierung_aktiv
+STANDHEIZUNG_SZ
+	nicht_aktiv
+ANZEIGE_TIMER_STHZ_SA
+	aktiv
+NACHLAUFZEIT_UM_VENTIL
+	wert_00
+PSEUDOZUHEIZEN
+	nicht_aktiv
+MSA
+	nicht_aktiv
+ALKS
+	nicht_aktiv
+KOMPRESSOR_KUPPLUNG
+	nicht_aktiv
+IGR
+	nicht_aktiv
+DEFROST_LEITSCHAUFELN
+	aktiv
+KOMPRESSOR_MITTEL
+	nicht_aktiv
+MANUELLES_VERDECK_E88
+	nicht_verbaut
+MSA_NOTSTRATEGIE
+	nicht_aktiv
+WARTUNGSINTERVALL_FZE
+	wert_01
+MSA_ANSTEUERLOGIK
+	ihxx
+KMK_ZUSCHALTSCHWELLE
+	hoch
+IHX_CBS
+	aktiv
+KLIMAGERAET_MIT_SCHICHTUN
+	nicht_aktiv
+MSA_MEMORY
+	nicht_aktiv
+STANDHEIZER_ALS_ZUHEIZER
+	nicht_aktiv

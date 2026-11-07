@@ -1,0 +1,642 @@
+CC_BLINKFREQUENZ_LANGSAM
+	wert_01
+CC_BLINKFREQUENZ_SCHNELL
+	wert_01
+TANK_FILTER_FALLEND
+	wert_02
+CC_15_EIN
+	benzin
+CC_15_AUS
+	wert_01
+CC_R_EIN
+	wert_01
+CC_ML
+	wert_01
+PREDRIVE_PERIODENDAUER
+	wert_01
+TANK_FILTER_STEIGEND
+	wert_02
+TANK_MITTLUNGSZEIT
+	wert_01
+TANK_BERUHIGUNGSZEIT
+	wert_01
+TANK_SICHERHEITSFAKTOR
+	wert_01
+TANK_RED_REICHWEITE
+	wert_01
+AUSSENTEMP_ZEITKONST_Z4
+	wert_01
+AUSSENTEMP_ZEITKONST_Z5
+	wert_01
+AUSSENTEMP_ZEITKONST_Z6
+	wert_01
+AUSSENTEMP_DELTA_K2
+	wert_01
+AUSSENTEMP_ZEITKONST_Z1
+	wert_01
+AUSSENTEMP_ZEITKONST_Z2
+	wert_01
+AUSSENTEMP_ZEITKONST_Z3
+	wert_01
+AUSSENTEMP_DELTA_K1
+	wert_01
+AUSSENTEMP_ANZ_FEHLER_1
+	wert_01
+AUSSENTEMP_ANZ_FEHLER_2
+	wert_01
+PREDRIVE_ABB_MOT
+	nicht_aktiv
+BC_V_KORREKTUR
+	aktiv
+WARNFELD_INFO_DME
+	aktiv
+DSC_ALIVE_ZAEHLER
+	aktiv
+DME_ALIVE_ZAEHLER
+	aktiv
+CAS_ALIVE
+	aktiv
+LM_ALIVE
+	aktiv
+BC_DIGITAL_V
+	aktiv
+BC_DIGITAL_V_KORREKTUR
+	nicht_aktiv
+ZGM_ALIVE_ZAEHLER
+	aktiv
+TNK_LITER_RECHTS
+	wert_02
+	wert_07
+TNK_LITER_LINKS
+	wert_02
+	wert_07
+TNK_OHM_RECHTS
+	wert_02
+	wert_07
+TNK_OHM_LINKS
+	wert_02
+	wert_07
+TANK_RW_WARNUNG
+	wert_01
+ACC_FILTER_FALLEND
+	wert_01
+ACC_FILTER_STEIGEND
+	wert_01
+ACC_ZEIGER_AUF_NULL
+	aktiv
+AUSSENTEMP_SPERR_FAKTOR
+	wert_01
+AUSSENTEMP_SPERR_OFFSET
+	wert_01
+CC_R_AUS
+	wert_01
+CBS_STAT_01H
+	anzeige
+CBS_STAT_02H
+	anzeige
+CBS_STAT_04H
+	anzeige
+CBS_STAT_03H
+	anzeige
+CBS_STAT_10H
+	anzeige
+CBS_STAT_11H
+	anzeige
+CBS_STAT_20H
+	anzeige
+CBS_STAT_21H
+	sperre
+CBS_GELB_HUAU
+	wert_01
+CBS_RES_SPERR
+	wert_01
+CBS_AVKM_START
+	wert_01
+CBS_GELB
+	wert_01
+CBS_STAT_12H
+	sperre
+CBS_STAT_06H
+	anzeige
+CBS_STAT_07H
+	sperre
+CBS_STAT_13H
+	sperre
+CBS_STAT_14H
+	sperre
+CBS_EINH_01H
+	wegzeit
+CBS_EINH_02H
+	wegbas
+CBS_EINH_04H
+	wegzeit
+CBS_EINH_06H
+	wegbas
+CBS_EINH_07H
+	wegbas
+CBS_EINH_03H
+	zeitbas
+CBS_EINH_10H
+	wegbas
+CBS_EINH_11H
+	wegzeit
+CBS_EINH_12H
+	wegbas
+CBS_EINH_13H
+	zeitbas
+CBS_EINH_14H
+	zeitbas
+CBS_EINH_20H
+	zeitbas
+CBS_EINH_21H
+	zeitbas
+SFY_ALIVE_ZAEHLER
+	aktiv
+CSUM_WEG
+	grundcode_var
+CODING_VALID_BMW
+	wert_01
+ACC_ALIVE_ZAEHLER
+	aktiv
+ACC_AUSSTATTUNG
+	wert_03
+AFS_ALIVE_ZAEHLER
+	nicht_aktiv
+BC_2_ENABLE
+	aktiv
+BC_LIMIT_ENABLE
+	aktiv
+CC_TEMPERATURWARNUNG
+	aktiv
+WARNUNG_GESCHW_LIMIT
+	nicht_aktiv
+CC_BREMSWARNL_NUR_ROT
+	nicht_aktiv
+CC_ZUENDSCHLUESSEL
+	aktiv
+KUEHL_MTL_AKTIV
+	aktiv_high
+GPS_UHR
+	aktiv
+AHM_ALIVE
+	nicht_aktiv
+ARS_ALIVE_ZAEHLER
+	nicht_aktiv
+RDC_ALIVE
+	nicht_aktiv
+GETRIEBE_ART
+	handschalter
+EGS_ALIVE_ZAEHLER
+	nicht_aktiv
+ACC_CSUM_MONITOR
+	nicht_aktiv
+ACC_ID_MONITOR
+	aktiv
+AFS_ID_MONITOR
+	nicht_aktiv
+ARS_ID_MONITOR
+	nicht_aktiv
+BC_LEERZEILE
+	aktiv
+CBS_GELB_KM_MIN
+	wert_01
+CBS_INTD_03H
+	wert_01
+CBS_INTW_10H
+	wert_02
+CBS_INTW_11H
+	wert_01
+CBS_INTW_12H
+	wert_01
+CBS_SCEN_01H
+	nicht_aktiv
+CBS_SCEN_02H
+	nicht_aktiv
+CBS_SCEN_03H
+	nicht_aktiv
+CBS_SCEN_04H
+	nicht_aktiv
+CBS_SCEN_06H
+	nicht_aktiv
+CBS_SCEN_07H
+	nicht_aktiv
+CBS_SCEN_10H
+	nicht_aktiv
+CBS_SCEN_11H
+	nicht_aktiv
+CBS_SCEN_12H
+	nicht_aktiv
+CBS_SCEN_13H
+	nicht_aktiv
+CBS_SCEN_14H
+	nicht_aktiv
+CBS_SCEN_20H
+	nicht_aktiv
+CBS_SCEN_21H
+	nicht_aktiv
+CBS_TZ_SCHALTER
+	borddatum
+DATEN_INDEX
+	wert_01
+DME_ID_MONITOR
+	aktiv
+DSC_ID_MONITOR
+	aktiv
+EGS_CSUM_MONITOR
+	nicht_aktiv
+EGS_ID_MONITOR
+	nicht_aktiv
+EHC_ALIVE
+	nicht_aktiv
+EKP_ALIVE_ZAEHLER
+	nicht_aktiv
+EKP_ID_MONITOR
+	nicht_aktiv
+EPS_ALIVE_MONITOR
+	nicht_aktiv
+EPS_ID_MONITOR
+	nicht_aktiv
+LEHNE_BF_ALIVE_ZAEHLER
+	nicht_aktiv
+LEHNE_BF_ID_MONITOR
+	nicht_aktiv
+LEHNE_FA_ALIVE_ZAEHLER
+	nicht_aktiv
+LEHNE_FA_ID_MONITOR
+	nicht_aktiv
+MOTORKONSTANTE
+	wert_01
+PREDRIVE_START_MIT_OBD
+	aktiv
+SFY_ID_MONITOR
+	aktiv
+TANK_OHM_FEHLER_OG
+	wert_01
+TANK_OHM_FEHLER_UG
+	wert_01
+TANK_VOLL_ERKENNUNG
+	wert_03
+	wert_04
+TCM_ALIVE_MONITOR
+	nicht_aktiv
+TCM_ID_MONITOR
+	nicht_aktiv
+TEMPOMAT_SETZ_ANZ_DAUER
+	wert_02
+ZGM_ID_MONITOR
+	aktiv
+AKUSTIK_V_X
+	wert_01
+CBS_INTD_11H
+	wert_01
+CBS_INTD_13H
+	wert_01
+CBS_INTD_14H
+	wert_01
+KLACK_AMP
+	wert_01
+KLACK_FRE
+	wert_01
+KLACK_TON
+	wert_01
+KLICK_AMP
+	wert_01
+KLICK_FRE
+	wert_01
+KLICK_TON
+	wert_01
+SHOW_CC_MSG_NR
+	aktiv
+SHOW_OEL_STAND
+	aktiv
+HDC_VERBAUT
+	nicht_aktiv
+MMI_ENA_PIA
+	aktiv
+MMI_ENA_RPA_RDC
+	aktiv
+MMI_ENA_UHR_DATUM
+	aktiv
+RDC_VERBAUT
+	nicht_aktiv
+K410D_C_WEG_1
+	wert_01
+K410D_C_WEG_2
+	wert_01
+K410D_C_WEG_3
+	wert_01
+K410D_C_WEG_4
+	wert_01
+K410D_D_WEG
+	wert_01
+K4110_C_VERBRAUCH_1
+	wert_01
+K4110_C_VERBRAUCH_2
+	wert_01
+K4110_C_VERBRAUCH_3
+	wert_01
+K4110_C_VERBRAUCH_4
+	wert_01
+K4110_D_VERBRAUCH
+	wert_01
+K4113_C_ZEIT_1
+	wert_01
+K4113_C_ZEIT_2
+	wert_01
+K4113_C_ZEIT_3
+	wert_01
+K4113_C_ZEIT_4
+	wert_01
+K4113_D_ZEIT
+	wert_01
+K4116_C_TEMPERATUR_1
+	wert_01
+K4116_C_TEMPERATUR_2
+	wert_01
+K4116_C_TEMPERATUR_3
+	wert_01
+K4116_C_TEMPERATUR_4
+	wert_01
+K4116_D_TEMPERATUR
+	wert_01
+K4119_C_DRUCK_1
+	wert_01
+K4119_C_DRUCK_2
+	wert_01
+K4119_C_DRUCK_3
+	wert_01
+K4119_C_DRUCK_4
+	wert_01
+K4119_D_DRUCK
+	wert_01
+K430C_C_DATUM_1
+	wert_01
+K430C_C_DATUM_2
+	wert_01
+K430C_C_DATUM_3
+	wert_01
+K430C_C_DATUM_4
+	wert_01
+K430C_D_DATUM
+	wert_01
+K4310_C_SPRACHE_1
+	wert_06
+K4310_C_SPRACHE_2
+	wert_06
+K4310_C_SPRACHE_3
+	wert_06
+K4310_C_SPRACHE_4
+	wert_06
+K4310_D_SPRACHE
+	wert_06
+SITZ_L_UEBERWACHUNG
+	nicht_aktiv
+CC_NR_ROLLE
+	aktiv
+HDC_ID_MONITOR
+	nicht_aktiv
+DSC_ALLRAD_CC_WAHL
+	nicht_aktiv
+FDC_ID_MONITOR
+	nicht_aktiv
+DIMM_MN_MAX
+	wert_01
+DIMM_MN_MIN
+	wert_01
+CRASH_TH_DIMMUNG
+	wert_01
+DSC_MIT_RPA_CC
+	aktiv
+DWA_VERBAUT
+	aktiv
+FB_ALLE_TUEREN
+	aktiv
+FB_FA_TUER
+	aktiv
+HEIMLEUCHTEN_10S
+	aktiv
+HEIMLEUCHTEN_150S
+	aktiv
+HEIMLEUCHTEN_240S
+	aktiv
+HEIMLEUCHTEN_40S
+	aktiv
+HEIMLEUCHTEN_90S
+	aktiv
+HEIMLEUCHTEN_AUS
+	aktiv
+LICHT_AUT_WERT_1
+	aktiv
+LICHT_AUT_WERT_2
+	aktiv
+LICHT_AUT_WERT_3
+	aktiv
+LL_RL_FZG
+	aktiv
+OHNE_QUITT_ENT
+	aktiv
+OHNE_QUITT_VER
+	aktiv
+QUITT_AKUST_ENT
+	nicht_aktiv
+QUITT_AKUST_VER
+	nicht_aktiv
+QUITT_OPT_AKUST_ENT
+	nicht_aktiv
+QUITT_OPT_AKUST_VER
+	nicht_aktiv
+QUITT_OPT_ENT
+	aktiv
+QUITT_OPT_VER
+	aktiv
+SITZ_AUT_VERST_AUS
+	nicht_aktiv
+SITZ_AUT_VERST_ENT
+	nicht_aktiv
+SITZ_AUT_VERST_ENT_T
+	nicht_aktiv
+TAG_LICHT_AN
+	aktiv
+TAG_LICHT_AUS
+	aktiv
+TIPP_BLINKEN_1X
+	aktiv
+TIPP_BLINKEN_3X
+	aktiv
+ZV_VER_AUS
+	aktiv
+ZV_VER_FAHRT
+	aktiv
+ZV_VER_FAHRT_ZEIT
+	aktiv
+ZV_VER_ZEIT
+	aktiv
+KL_PREDRIVE_AUSWAHL_2
+	wert_04
+KL_PREDRIVE_AUSWAHL_1
+	wert_01
+CBS_EINH_0AH
+	wegbas
+CBS_SCEN_0AH
+	nicht_aktiv
+CBS_STAT_0AH
+	sperre
+CC_ID_AKTIV_01
+	wert_02
+CC_ID_AKTIV_02
+	wert_02
+CC_ID_AKTIV_06
+	wert_01
+CC_ID_AKTIV_07
+	wert_01
+	wert_02
+CC_ID_AKTIV_09
+	wert_01
+	wert_03
+CC_ID_AKTIV_10
+	wert_01
+	wert_02
+CC_ID_AKTIV_11
+	wert_04
+CC_ID_AKTIV_14
+	wert_01
+DIGITAL_KVA
+	aktiv
+SCHALT_HINW_ID_MONITOR
+	nicht_aktiv
+SCHALT_PKT_BC
+	aktiv
+SCHALT_PKT_DAUERHAFT
+	aktiv
+SPORT_ANZEIGE
+	aktiv
+E92_E93_FZG
+	nicht_aktiv
+EINST_HILFE
+	nicht_aktiv
+SCHALT_HINW_CSUM_MONITOR
+	nicht_aktiv
+MSA_ALIVE_MONITOR
+	nicht_aktiv
+MSA_CSUM_MONITOR
+	nicht_aktiv
+MSA_ENABLE
+	wert_01
+MSA_ID_MONITOR
+	nicht_aktiv
+CC_ID_AKTIV_05
+	wert_02
+EDCK_ALIVE_ZAEHLER
+	nicht_aktiv
+EDCK_ID_MONITOR
+	nicht_aktiv
+M_TAG_SKALENBELEUCHTUNG
+	aktiv
+MMI_ENA_SHIFTLIGHTS
+	nicht_aktiv
+MOTORSPORT
+	wert_02
+MSA_SWITCH_ON_OFF_ENABLE
+	nicht_aktiv
+SCHALT_HINW_ALIVE_MONITOR
+	nicht_aktiv
+SHIFTLIGHTS
+	wert_01
+SHIFTLIGHTS_2
+	wert_01
+SHIFTLIGHTS_3
+	wert_01
+SHIFTLIGHTS_4
+	wert_01
+TELEX_STATUS_SC
+	wert_02
+TANK_SCHWELLE_AUF_AB
+	wert_01
+DZM_UMRECHNUNG
+	wert_02
+RDC_DISP_SWITCH
+	nicht_aktiv
+DISP_ENGDAT_ALIVE_ZAEHLER
+	nicht_aktiv
+DISP_ENGDAT_ID_MONITOR
+	nicht_aktiv
+DZM_DISP_RPM
+	wert_01
+HU_VERBAUT_C08
+	radiostufe_3_4
+SZ_ANSTEUERUNG
+	aktiv
+TORQUE_3_ID_MONITOR
+	aktiv
+VERDECKVARIANTE
+	wert_00
+CC_ID_AKTIV_13
+	wert_02
+CVS_ALIVE_ZAEHLER
+	nicht_aktiv
+CVS_ID_MONITOR
+	nicht_aktiv
+EMF_ALIVE_ZAEHLER
+	nicht_aktiv
+EMF_ID_MONITOR
+	nicht_aktiv
+FDS_ALIVE_ZAEHLER
+	nicht_aktiv
+FDS_CSUM_MONITOR
+	nicht_aktiv
+FDS_ENABLE
+	nicht_aktiv
+FDS_ID_MONITOR
+	nicht_aktiv
+SP_ANZEIGE
+	aktiv
+SP_ANZEIGE_1
+	aktiv
+SP_ANZEIGE_2
+	aktiv
+SP_ANZEIGE_3
+	aktiv
+SP_ANZEIGE_4
+	aktiv
+C08_K_ZAHL_TACHO
+	wert_02
+	wert_07
+C08_K_ZAHL_TACHO_KOMPL
+	wert_02
+	wert_07
+C08_K_ZAHL_WEG
+	wert_02
+C08_K_ZAHL_WEG_KOMPL
+	wert_02
+C08_TANK_SCHWELLE_RESERVE
+	wert_01
+FDS_TIME_OUT
+	wert_03
+FLA_VERBAUT
+	nicht_aktiv
+SZ_LED_VERBAUT
+	nicht_verbaut
+BC_DIG_GESCHW_BEI_KL_R
+	nicht_aktiv
+COMBOX_ALIVE_MONITOR
+	nicht_aktiv
+COMBOX_ID_MONITOR
+	nicht_aktiv
+CC_ID_AKTIV_03
+	wert_02
+DSC_VARIANTE
+	wert_02
+E89_FDS_COMFORT
+	wert_01
+ST_MDRV_ALIVE_MONITOR
+	nicht_aktiv
+ST_MDRV_CSUM_MONITOR
+	nicht_aktiv
+ST_MDRV_ID_MONITOR
+	nicht_aktiv
+AKUSTIK_V_Y_C08
+	wert_01
+MSA_N_VERFUEGBAR
+	nicht_aktiv
+SPA_IST_GANG_ENABLE
+	wert_01

@@ -1,0 +1,724 @@
+BAUREIHE
+	e90
+	e91
+	e92
+	e93
+BAUART
+	limousine
+CODIERUNG_ERFOLGT
+	codierung_erfolgt
+JAPAN
+	nicht_aktiv
+WEG_EINHEIT
+	km
+TEMPERATUR_EINHEIT
+	grad_c
+ZEIT_EINHEIT
+	24_stunden
+VERBRAUCH
+	l/100km
+TYP_LENKUNG
+	linkslenker
+CDC
+	nicht_aktiv
+MMC
+	nicht_aktiv
+AUDIO_SYSTEM
+	e60_stereo
+	pl2_stereo
+	e70_stereo
+	pl3_stereo
+SVS
+	nicht_aktiv
+NOTEPAD
+	aktiv
+SDARS
+	nicht_aktiv
+BMW_ASSIST
+	nicht_aktiv
+HELPNET
+	nicht_aktiv
+PDC
+	aktiv
+HUD
+	nicht_aktiv
+ELDRVSEAT
+	nicht_aktiv
+MFL_HORN
+	nicht_aktiv
+MFL_HAZARD
+	nicht_aktiv
+MFL_CLEAN
+	nicht_aktiv
+FOND_HIGH
+	nicht_aktiv
+FOND_LOW
+	nicht_aktiv
+LAENDERVARIANTE_TUNER
+	ece
+TP_FUNKTION
+	tp
+TP
+	aktiv
+TMC
+	aktiv
+AMBANDS
+	aktiv
+NIVI
+	nicht_aktiv
+ACC
+	nicht_aktiv
+ADRBOOK
+	aktiv
+BACKDOOR
+	nicht_aktiv
+DATUM_EINHEIT
+	tt_mm_jj
+DRUCK_EINHEIT
+	bar
+DWS
+	aktiv
+TRF
+	nicht_aktiv
+KANA_WRITER
+	nicht_aktiv
+NAVIGATION
+	aktiv
+WEATHERBAND
+	nicht_aktiv
+LEGAL_DISCL
+	nicht_aktiv
+REV_INPUT
+	nicht_aktiv
+UNIT_FEET
+	nicht_aktiv
+ACOUSTIC
+	aktiv
+WAEHLBARE_SPRACHE_1
+	franzoesisch
+WAEHLBARE_SPRACHE_2
+	spanisch
+WAEHLBARE_SPRACHE_3
+	englisch
+SMS
+	nicht_aktiv
+STANDHEIZUNG
+	nicht_aktiv
+K931D_ZV_ALLE_TUEREN
+	par_frei
+K931D_ZV_SELEKTIV
+	par_frei
+K931D_SCHEIBENABSENKUNG
+	par_gesperrt
+K930E_ZV_VER_N_XMIN_FB
+	fkt_frei
+K9323_ZV_VER_AB_X_KM/H
+	fkt_frei
+K4D01_OFF_CID_DISPL_HELL
+	fkt_frei
+C940A_QUITT_OPT_ENTSCH
+	fkt_frei
+C9419_QUITT_OPT_KLAPPE
+	fkt_frei
+C941C_QUITT_AKUST_KLAPPE
+	fkt_frei
+K9416_QUITT_AKUST_ENTSCH
+	fkt_frei
+C9410_QUITT_OPT_SCHAERF
+	fkt_frei
+C9413_QUITT_AKUST_SCHAERF
+	fkt_frei
+C9C03_KLAPPENWINKEL
+	fkt_gesperrt
+C9C01_HKL_TASTE
+	fkt_gesperrt
+K4D01_OFF_HUD_DISPL_HELL
+	fkt_gesperrt
+K4D03_ANZEIGE_GESCHWNDGKT
+	par_gesperrt
+K4D03_ANZEIGE_ACC
+	par_gesperrt
+K4D03_ANZEIGE_TEMPOMAT
+	par_gesperrt
+K4D03_ANZEIGE_CHECKCONTRL
+	par_gesperrt
+K4D03_ANZEIGE_NAVIGATION
+	par_gesperrt
+K8116_KLAPPENAUTOMATIK
+	fkt_gesperrt
+K8119_PRG_AUTOMATIK
+	par_gesperrt
+K8119_PRG_LUFTVERTEILUNG
+	par_gesperrt
+K8119_PRG_GEBL_AKTUELL
+	par_gesperrt
+K8119_PRG_SCHICHTUNG
+	par_gesperrt
+K8119_PRG_AC
+	par_gesperrt
+K8313_GEBLAESE_M10
+	par_gesperrt
+K8313_GEBLAESE_0
+	par_gesperrt
+K8313_GEBLAESE_P10
+	par_gesperrt
+K8601_SOLLWERT_M3
+	par_gesperrt
+K8601_SOLLWERT_M2
+	par_gesperrt
+K8601_SOLLWERT_M1
+	par_gesperrt
+K8601_SOLLWERT_0
+	par_gesperrt
+K8601_SOLLWERT_P1
+	par_gesperrt
+K8601_SOLLWERT_P2
+	par_gesperrt
+K8601_SOLLWERT_P3
+	par_gesperrt
+K8125_KLAPPENPROGRAMM_BO
+	fkt_frei
+K8127_KLAPPENPROGRAMM_BO
+	fkt_frei
+K8129_ZWAKO_AC_EIN_AUTO
+	fkt_gesperrt
+K7504_HEIMLEUCHTEN_AUS
+	par_frei
+K7504_HEIMLEUCHTEN_40S
+	par_frei
+K7504_HEIMLEUCHTEN_90S
+	par_frei
+K7504_HEIMLEUCHTEN_150S
+	par_frei
+K7504_HEIMLEUCHTEN_240S
+	par_frei
+C940D_QUITT_OPT_SCHAERF
+	fkt_gesperrt
+K4328_BLINKEN_TIPPBET
+	fkt_frei
+C940C_QUITT_OPT_ENTSCH
+	fkt_gesperrt
+K532F_SENDERLISTE_AUDIO
+	fkt_frei
+K5303_GAL_SEHR_STARK
+	par_frei
+K5303_GAL_STARK
+	par_frei
+K5303_GAL_MITTEL
+	par_frei
+K5303_GAL_GERING
+	par_frei
+K5303_GAL_SEHR_GERING
+	par_frei
+K5303_GAL_KEINE_ANHEB
+	par_frei
+K5305_KLANG_BASS
+	par_frei
+K5305_KLANG_TREBLE
+	par_frei
+K5305_KLANG_BALANCE
+	par_frei
+K5305_KLANG_FADER
+	par_frei
+K5305_KLANG_REVERB
+	par_frei
+K5305_KLANG_EQULIZER
+	par_frei
+K531A_LAUTST_NAV
+	par_frei
+K531A_LAUTST_VERKEHR
+	par_frei
+K531A_LAUTST_TELEFON
+	par_frei
+K531A_LAUTST_SVS
+	par_frei
+K531A_LAUTST_PDC
+	par_frei
+K4119_DRUCK_BAR
+	par_frei
+K4119_DRUCK_PSI
+	par_frei
+K4119_DRUCK_KPA
+	par_frei
+K4310_ANZ_SPRACHE_1
+	par_frei
+K4310_ANZ_SPRACHE_2
+	par_frei
+K4310_ANZ_SPRACHE_3
+	par_frei
+K4110_VERBR_L/100KM
+	par_frei
+K4110_VERBR_MPG_US
+	par_frei
+K4110_VERBR_MPG_UK
+	par_frei
+K4110_VERBR_KM/L
+	par_frei
+K410D_EINHEITEN_WEG
+	fkt_frei
+K4113_ZEIT_STD_DARST
+	fkt_frei
+K4116_EINH_TEMPERATUR
+	fkt_frei
+K9901_UMLUFT_EIN
+	par_frei
+K9901_NAV_LETZER_HINWEIS
+	par_frei
+K9901_KOMFORT_PARKBREMSE
+	par_frei
+K9901_MUTE_EIN
+	par_frei
+K9901_MONITOR_EIN
+	par_frei
+K9901_LENKRADHEIZUNG
+	par_frei
+K9901_RADIO/TELEFON
+	par_frei
+K9901_SWR
+	par_gesperrt
+K9901_HUPE
+	par_gesperrt
+K9901_WARNBLINKEN
+	par_gesperrt
+K430C_DATUM_FORMAT
+	fkt_frei
+K2407_PDC_MONITORBILD
+	fkt_frei
+C750A_SCHWELLWERT_NORMAL
+	par_frei
+C750A_SCHWELLWERT_EMPFIN
+	par_frei
+C750A_SCHWELLWERT_SEHR_E
+	par_frei
+CA107_AUT_VERST_DEAKT
+	par_gesperrt
+CA107_AUT_VERST_ENTR
+	par_gesperrt
+CA107_AUT_VERST_ENT_T
+	par_gesperrt
+TWO_MICROPHONES
+	wert_01
+BMW_N_DEALER
+	aktiv
+PIA
+	pia_low
+DIGITAL_AUDIO_SOURCE
+	cd-player
+PHONE_VERSION
+	no-phone
+BA_LAENDER_VARIANTE
+	wert_01
+DEF_BALANCE_VOLUME
+	standard
+DEF_BASS_VOLUME
+	standard
+DEF_DATUM_EINHEIT
+	tt_mm_jj
+DEF_DRUCK_EINHEIT
+	bar
+DEF_ENTERTAIN_VOL
+	standard
+DEF_EQUALIZER_VALUE
+	standard
+DEF_FADER_VOLUME
+	standard
+DEF_GAL_VALUE
+	keine_anhebung
+DEF_GONG_VOLUME
+	e90_stereo
+	e91_stereo
+	e92_stereo
+DEF_JPGONG_VOL
+	e90_stereo
+	e91_stereo
+	e92_stereo
+DEF_LAST_SPEECH
+	franzoesisch
+DEF_NAVI_VOLUME
+	standard
+DEF_PDC_VOLUME
+	e90_stereo
+	e90_hifi
+	e91_stereo
+	e91_hifi
+	e92_stereo
+	e92_hifi
+DEF_REVERB_VALUE
+	standard
+DEF_SEC_VOLUME
+	standard
+DEF_SPEECH_VOLUME
+	standard
+DEF_TEL_VOLUME
+	standard
+DEF_TEMPERATUR_EINHEIT
+	grad_c
+DEF_TM_VOLUME
+	standard
+DEF_TREMBLE_VOLUME
+	standard
+DEF_VERBRAUCH
+	l/100km
+DEF_WEG_EINHEIT
+	km
+DEF_ZEIT_EINHEIT
+	24_stunden
+GAL_VALUE
+	keine_anhebung
+LAST_BALANCE_VOLUME
+	standard
+LAST_BASS_VOLUME
+	standard
+LAST_ENTERTAIN_VOL
+	standard
+LAST_EQUALIZER_VALUE
+	standard
+LAST_FADER_VOLUME
+	standard
+LAST_GONG_VOLUME
+	e90_stereo
+	e91_stereo
+	e92_stereo
+LAST_JPGONG_VOL
+	e90_stereo
+	e91_stereo
+	e92_stereo
+LAST_PDC_VOLUME
+	e90_stereo
+	e90_hifi
+	e91_stereo
+	e91_hifi
+	e92_stereo
+	e92_hifi
+LAST_REVERB_VALUE
+	standard
+LAST_SEC_VOLUME
+	standard
+LAST_SPEECH
+	franzoesisch
+LAST_SPEECH_VOLUME
+	standard
+LAST_TEL_VOLUME
+	standard
+LAST_TREMBLE_VOLUME
+	standard
+MULTIPARTY
+	nicht_aktiv
+NAVIGATION_TYPE
+	navi_sv
+ONLINE
+	nicht_aktiv
+REVERSE_GONG
+	nicht_aktiv
+SIM
+	nicht_aktiv
+SPRECHER_AKTIVE_SPRACHE
+	sprecher_weiblich
+SPRECHER_ALTERNATIVE_2
+	sprecher_weiblich
+SPRECHER_ALTERNATIVE_3
+	sprecher_weiblich
+AEREA_CODE_DVD
+	wert_02
+CRUISE_CTRL_CCC
+	nicht_aktiv
+EINH_MASTER_KOMBI
+	aktiv
+ONLINE_CALLSTRATEGY
+	use_csd_paketdata
+ONLINE_DISABLE_CONTENT
+	content_enable
+ONLINE_DISABLE_VMAX
+	standard
+PDC_SIGNAL
+	pdc_no
+PDC_TYPE
+	rear
+OIL_LEVEL
+	aktiv
+CID_CCC
+	cid_high
+CID_TYPE
+	static
+CBS
+	cbs_4
+CID_COLOUR
+	table_1
+KLIMA_SG_ART_CCC
+	low_vent
+RDC_CCC
+	nicht_aktiv
+VA_FLAP_CC
+	nicht_aktiv
+VA_FLAP_DISPLAY_CONFIG
+	nicht_aktiv
+VA_FLAP_HMISTART
+	nicht_aktiv
+VA_FLAP_NAVI
+	nicht_aktiv
+VA_FLAP_PHONE
+	nicht_aktiv
+VA_FLAP_SVS
+	nicht_aktiv
+AUTO_DRV_LIGHT
+	aktiv
+C7501_TAGFAHRLICHT
+	fkt_frei
+HDC
+	nicht_aktiv
+RAIN_LIGHT_SENSOR
+	aktiv
+STANDLUEFTUNG_CCC
+	aktiv
+BLUETOOTH_NODES_CCC
+	nicht_aktiv
+HUD_M
+	nicht_aktiv
+MAX_PHONE_VOL
+	standard
+	e60_stereo
+	e60_hifi
+	e60_top_hifi
+	e61_stereo
+	e61_hifi
+	e61_top_hifi
+	e63_stereo
+	e63_hifi
+	e63_top_hifi
+	e64_stereo
+	e64_hifi
+	e64_top_hifi
+	e87_stereo
+	e87_hifi
+	e87_top_hifi
+	r56_stereo
+	r56_hifi
+	e90_stereo
+	e90_hifi
+	e90_top_hifi
+	e91_stereo
+	e91_hifi
+	e91_top_hifi
+	e70_stereo
+	e70_hifi
+	e70_top_hifi
+	e92_stereo
+	e92_hifi
+	e92_top_hifi
+	e88_stereo
+	e88_hifi
+	e88_top_hifi
+	e82_stereo
+	e82_hifi
+	e82_top_hifi
+MDRIVE
+	nicht_aktiv
+MDRIVE_ALBV
+	nicht_aktiv
+MDRIVE_SMG
+	nicht_aktiv
+MFL_MENU
+	nicht_aktiv
+AUX_CONFIG
+	mounted
+VA_BPI
+	nicht_aktiv
+RDS_AF_FUNKTION_CCC
+	rds_ein_af_automatisch
+HIP
+	aktiv
+MP3_CCC
+	full
+IBOC_CCC
+	nicht_aktiv
+NIVI_DISPLAY_OPTIONS
+	main_or_fullscreen
+RVC
+	nicht_aktiv
+RVC_CONNECTED_TO_VM
+	nicht_aktiv
+RVC_DISPLAY_OPTIONS
+	main_or_fullscreen
+TOWBAR
+	nicht_aktiv
+SVS_MICROPHONE_PATH
+	analog
+ALLOW_GPS
+	aktiv
+BMW_DEALER_CCC
+	aktiv
+BMW_HOTLINE_CCC
+	nicht_aktiv
+BMW_MOBILE_CCC
+	aktiv
+DSC
+	nicht_aktiv
+ROLLER_COVER
+	nicht_aktiv
+ZBE
+	high
+DAB
+	nicht_aktiv
+DAB_BAND_SETTINGS
+	nicht_aktiv
+DAB_FM_SWITCH
+	nicht_aktiv
+DAY_RUN_LIGHT_CCC
+	aktiv
+REAR_HEAD_UNIT
+	nicht_aktiv
+VA_MP3_DISCLAIMER
+	nicht_aktiv
+CA_TMC
+	nicht_aktiv
+JAP_SIDEVIEW_CAM
+	nicht_aktiv
+LEGAL_DISCL_TIMOUT
+	standard
+TOP_AMPL_TYPE
+	nicht_aktiv
+VA_ADAPTIVEHEADLIGHT
+	nicht_aktiv
+VA_CORNERINGLIGHT
+	aktiv
+VA_FB
+	nicht_aktiv
+VA_FB_COMMUNICATION
+	nicht_aktiv
+VA_FB_ENTERTAINMENT
+	nicht_aktiv
+VA_FB_NAVIGATION
+	nicht_aktiv
+VA_FM_AM_TOGGLE
+	nicht_aktiv
+VA_FOND_CLIMATE
+	nicht_aktiv
+VA_LONGDISTANCELIGHT
+	nicht_aktiv
+VA_MANUAL_SHIFT
+	nicht_aktiv
+VA_MODE_TOGGLE
+	nicht_aktiv
+VA_NOAIRVENT_FINETUNING
+	nicht_aktiv
+VA_SEATVENTILATION
+	nicht_aktiv
+VA_WELCOMELIGHT
+	nicht_aktiv
+FOND_MID
+	nicht_aktiv
+CAR_COLOR_CHAMP
+	nicht_aktiv
+TELEFON_TYPE_C08
+	no_phone
+VA_AIRVENT_SHORTCUT
+	nicht_aktiv
+VA_AUTOMATIC_SHORTCUT
+	nicht_aktiv
+VA_PDC_LOW
+	nicht_aktiv
+VA_SEATCLIMA_SHORTCUT
+	aktiv
+VA_SEATHEAT_SLIDER
+	aktiv
+DVD_EJECT_LOCKED
+	free
+AUDIO_VOLUME_STEPS
+	e60_stereo
+	e61_stereo
+	e87_stereo
+	e90_stereo
+	e91_stereo
+	e81_stereo
+FULLWORD_RECOG
+	aktiv
+TMC_REGIONAL
+	nicht_aktiv
+CC_LIST
+	aktiv
+DKG
+	nicht_aktiv
+EDC
+	nicht_aktiv
+CBS_STATUS
+	aktiv
+CLIMATE_WO_PREVIEW
+	nicht_aktiv
+NO_DETOUR
+	nicht_aktiv
+ALBV_TOGGLE_APP
+	nicht_aktiv
+BGSCREEN_JUMP
+	aktiv
+DAB_FROM_FM
+	wert_01
+DAB_TO_FM
+	wert_01
+MDRIVE_LOW_CCC
+	nicht_aktiv
+MEDIA_CHAR_ENCODING
+	iso
+MM_DEVICE
+	nicht_aktiv
+MM_DEVICE2
+	nicht_aktiv
+NEXT_SOURCE
+	nicht_aktiv
+OLD_TELEMAT_STRUCT
+	aktiv
+TDA_ASC_STATUS
+	nicht_aktiv
+TDA_BDA_STATUS
+	nicht_aktiv
+TDA_CFG_AUTO_TRIG
+	nicht_aktiv
+TDA_CFG_CUST_MOBILE_USE
+	aktiv
+TDA_CFG_HLC_DATA
+	nicht_aktiv
+TDA_CFG_IND_PDM_GR_NBR
+	file0
+TDA_CFG_SER_ERR_SINK
+	aktiv
+TDA_CFG_VEHICLE_SER
+	nicht_aktiv
+TDA_DEACTIVATE_STATUS
+	aktiv
+TDA_HLC_STATUS
+	nicht_aktiv
+TDA_MSC_STATUS
+	nicht_aktiv
+TDA_SERVICE_STATUS
+	nicht_aktiv
+TDA_TDC_STATUS
+	nicht_aktiv
+TLC
+	nicht_aktiv
+VA_HANGUL_TYPEWRITER
+	nicht_aktiv
+VA_KANJI_TYPEWRITER
+	nicht_aktiv
+SITZHEIZUNG_APP_9
+	nicht_aktiv
+NAVI_PFEIL
+	aktiv
+TELESERVICE
+	nicht_aktiv
+CCC_E71
+	nicht_aktiv
+MDRIVE_MENU
+	nicht_aktiv
+RSEMIDPLUS_AVAILABLE
+	nicht_aktiv
+SVR
+	nicht_aktiv
+TV_FRONT_ENABLED
+	nicht_aktiv
+VEHICLE_FINDER
+	nicht_aktiv
+VIDEO_DENY_C0B
+	deny_never
+ONLINE_DAR_TYPE_B
+	dar_ece
+VIDEOMODUL_CCC_B
+	nicht_aktiv
